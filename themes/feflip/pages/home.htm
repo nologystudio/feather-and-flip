@@ -1,6 +1,8 @@
-title = "Demonstration"
+title = "Home"
 url = "/"
 layout = "default"
+meta_title = "meta home title"
+meta_description = "meta home description"
 ==
 <div class="jumbotron">
     <div class="container">
@@ -26,7 +28,7 @@ layout = "default"
         Layouts define the page scaffold.
     </p>
     <p>
-        The layout file <code>layouts/default.htm</code> defines the page scaffold &mdash;
+        The layout file <code>layouts/default.htm</code> defines the page scaffold —
         everything that repeats on each page, such as the HTML, HEAD and BODY tags, StyleSheet and JavaScript references.
     </p>
     <p>
@@ -45,7 +47,7 @@ layout = "default"
         The page file <code>pages/home.htm</code> defines the page URL (<code>/</code> for this page) and the page content.
         Pages are rendered inside layouts with this function that should be called in the layout code:
         <pre>{{ "{% page %}" }}</pre>
-        Using a layout for pages is optional &mdash; you can define everything right in the page file.
+        Using a layout for pages is optional — you can define everything right in the page file.
     </p>
 
     <hr />

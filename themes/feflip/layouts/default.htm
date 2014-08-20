@@ -3,9 +3,13 @@ description = "Default layout"
 <!DOCTYPE html>
 <html>
     <head>
-        <title>October CMS - {{ this.page.title }}</title>
-        <meta name="author" content="October CMS">
+        <title>Feather & Flip | {{ this.page.title }}</title>
+        <meta name="author" content="NOLOGY.">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="{{ this.page.meta_description }}">
+		<meta name="og:title" content="{{ this.page.meta_title }}">
+		<meta name="og:description" content="{{ this.page.meta_description }}">
+		<meta name="og:url" content="http://54.164.51.183{{ this.page.url }}">
         <link rel="icon" type="image/png" href="{{ 'assets/images/october.png'|theme }}" />
         {% styles %}
         <link href="{{ [
