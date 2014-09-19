@@ -1,0 +1,20 @@
+description = "Main interactive navigation bar"
+==
+<div id="main-nav">
+    <div class="container">
+        <div id="search-form"></div>
+        <div id="nav-items">
+        	<ul class="nav">
+        		<li>HOTEL REVIEWS</li>
+        		<li>ITINERARIES</li>
+        		<li>HOTEL REVIEWS</li>
+        		<li>TRAVEL JOURNAL</li>
+				{% if user %}
+				    <li>Hi {{ user.name }}</li>
+				{% else %}
+				    <li>JOIN NOW / SIGN IN</li>
+				{% endif %}
+        	</ul>
+        </div>
+    </div>
+</div>
