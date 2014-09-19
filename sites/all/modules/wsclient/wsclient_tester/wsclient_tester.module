@@ -33,7 +33,7 @@
 function wsclient_tester_form_wsclient_service_form_alter(&$form, &$form_state) {
   $service = $form_state['build_info']['args'][0];
   foreach ($form['operations']['#rows'] as $operation => $row) {
-    $name = $row[0]['data']['#name'];
+    $name = @$row[0]['data']['#name'];
     $form['operations']['#rows'][$operation][] = l(t('Test'), WSCLIENT_UI_PATH . '/manage/' . $service->name . '/operation/' . $name . '/test');
   }
   $form['operations']['#header'][1]['colspan'] += 1;
