@@ -1,0 +1,108 @@
+<?php
+
+/*
+*
+*	Sabre Services Connection
+*
+*
+*/
+
+if (empty(arg(0)))
+	module_invoke_all('test');
+/**
+ * Tests wsclient connections
+ *
+ *
+ */
+function sabre_services_test()
+{
+	if (module_exists('wsclient')):
+		$cid = base64_encode('V1:ff06skusw6cvjpsn:DEVCENTER:EXT');
+		$cs  = base64_encode('l7x7MrWB');
+		$service = wsclient_service_load('sabre__rest');
+		$service->settings['http_headers'] = array(
+			'Content-Type' => array('application/x-www-form-urlencoded'),
+		//	'Authorization' => array('Basic '.base64_encode($cid.':'.$cs))
+		);
+		$service->settings['authentication']['oauth2'] = array(
+			'token_endpoint' => 'https://api.sabre.com/v1/auth/token',
+			'auth_flow'		 => 'client-credentials',
+			'client_id'		 => base64_encode('V1:ff06skusw6cvjpsn:DEVCENTER:EXT'),
+			'client_secret'	 => base64_encode('l7x7MrWB')
+		);
+
+
+		dpm($service->instaflights_search());
+	endif;
+}
+
+/**
+ * Implements hook_menu().
+ */
+function sabre_services_menu() {
+	$items = array();
+	$items['admin/config/services/sabre'] = array(
+		'title' => 'Sabre Services Configuration',
+		'description' => 'Configuration sabre services connection',
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('sabre_services_form'),
+		'access arguments' => array('access administration pages'),
+		'type' => MENU_NORMAL_ITEM,
+	);
+
+	return $items;
+}
+
+/**
+ * Page callback: Sabre Services settings
+ *
+ * @see sabre_services_menu()
+ */
+function sabre_services_form($form, &$form_state) {
+
+	// Sabre API group data
+	$form['apidata'] = array(
+		'#type' => 'fieldset',
+		'#title' => t('Api Data'),
+		'#collapsible' => FALSE,
+		'#collapsed' => FALSE,
+	);
+	$form['apidata']['sabre_app_name'] = array(
+		'#type'          => 'textfield',
+		'#title'         => t('Sabre: Application name'),
+		'#default_value' => variable_get('sabre_app_name'),
+		'#description'   => t("Sabre app name."),
+		'#required' => TRUE
+	);
+	$form['apidata']['sabre_client_id'] = array(
+		'#type'          => 'textfield',
+		'#title'         => t('Sabre: Client ID'),
+		'#default_value' => variable_get('sabre_client_id'),
+		'#description'   => t("Sabre app client ID."),
+		'#required' => TRUE
+	);
+	$form['apidata']['sabre_client_secret'] = array(
+		'#type'          => 'textfield',
+		'#title'         => t('Sabre: Client secret'),
+		'#default_value' => variable_get('sabre_client_secret'),
+		'#description'   => t("Sabre app client secret."),
+		'#required' => TRUE
+	);
+	// PCC & ARC codes
+	$form['sabre_pcc_code'] = array(
+		'#type'          => 'textfield',
+		'#title'         => t('Sabre: PCC code'),
+		'#default_value' => variable_get('sabre_pcc_code'),
+		'#description'   => t("Sabre PCC code."),
+		'#required' => TRUE
+	);
+	$form['sabre_arc_code'] = array(
+		'#type'          => 'textfield',
+		'#title'         => t('Sabre: ARC code'),
+		'#default_value' => variable_get('sabre_arc_code'),
+		'#description'   => t("Sabre ARC code."),
+		'#required' => TRUE
+	);
+
+  return system_settings_form($form);
+}

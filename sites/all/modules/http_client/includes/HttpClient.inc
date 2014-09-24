@@ -232,13 +232,28 @@ abstract class HttpClientDelegate {
    */
   protected function interpretResponse(HttpClient $client, $response) {
     $client->rawResponse = $response;
-    $split = preg_split('/\r\n\r\n/', $response, 2);
-    if (!isset($split[1])) {
-      throw new HttpClientException('Error interpreting response', 0, (object) array(
-        'rawResponse' => $response,
-      ));
+    if (preg_match('/\nProxy-agent: .*\r?\n\r?\nHTTP/', $response)) {
+      $split = preg_split('/\r?\n\r?\n/', $response, 3);
+      if (!isset($split[2])) {
+	throw new HttpClientException(
+          'Error interpreting response', 0,
+          (object) array('rawResponse' => $response)
+        );
+      }
+      $headers = $split[1];
+      $body = $split[2];
     }
-    list($headers, $body) = $split;
+    else {
+      $split = preg_split('/\r?\n\r?\n/', $response, 2);
+      if (!isset($split[1])) {
+	throw new HttpClientException(
+          'Error interpreting response', 0,
+          (object) array('rawResponse' => $response)
+        );
+      }
+      $headers = $split[0];
+      $body = $split[1];
+    }
 
     $obj = (object) array(
       'headers' => $headers,
@@ -353,7 +368,7 @@ class HttpClientBaseFormatter implements HttpClientFormatter {
         break;
       case self::FORMAT_JSON:
         $response = drupal_json_decode($data);
-        if ($response === NULL) {
+        if ($response === NULL && json_last_error() != JSON_ERROR_NONE) {
           throw new Exception(t('Unserialization of response body failed.'), 1);
         }
         return $response;
