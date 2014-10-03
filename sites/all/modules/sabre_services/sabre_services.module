@@ -24,15 +24,20 @@ function sabre_services_test()
 			'Content-Type' => array('application/x-www-form-urlencoded'),
 		//	'Authorization' => array('Basic '.base64_encode($cid.':'.$cs))
 		);
-		$service->settings['authentication']['oauth2'] = array(
-			'token_endpoint' => 'https://api.sabre.com/v1/auth/token',
-			'auth_flow'		 => 'client-credentials',
-			'client_id'		 => base64_encode('V1:ff06skusw6cvjpsn:DEVCENTER:EXT'),
-			'client_secret'	 => base64_encode('l7x7MrWB')
-		);
+		// $service->settings['authentication']['oauth2'] = array(
+		// 	'token_endpoint' => 'https://api.sabre.com/v1/auth/token',
+		// 	'auth_flow'		 => 'client-credentials',
+		// 	'client_id'		 => base64_encode('V1:ff06skusw6cvjpsn:DEVCENTER:EXT'),
+		// 	'client_secret'	 => base64_encode('l7x7MrWB')
+		// );
 
+		$cid = base64_encode('V1:ff06skusw6cvjpsn:DEVCENTER:EXT');
+		$cse = base64_encode('l7x7MrWB');
+		$tok = base64_encode($cid.':'.$cse);
 
-		dpm($service->instaflights_search());
+		dpm($cid);
+		dpm($cse);
+		dpm($tok);
 	endif;
 }
 
