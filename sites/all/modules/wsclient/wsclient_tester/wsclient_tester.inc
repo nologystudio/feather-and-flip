@@ -35,9 +35,8 @@ function wsclient_tester_operation_test($form, $form_state, $service, $operation
   // and these may be nested.
   $datatypes = $service->datatypes;
   foreach ($operation['parameter'] as $param => $info) {
-    $form['parameters'][$param] = @wsclient_tester_data_entry_form($param, $info['type'], $form_values['parameters'], $datatypes);
+    $form['parameters'][$param] = wsclient_tester_data_entry_form($param, $info['type'], @$info['description'], @$form_state['values']['parameters'], $datatypes);
   }
-
   $form['execute'] = array(
     '#type' => 'submit',
     '#value' => 'Execute request',
@@ -102,7 +101,6 @@ function wsclient_tester_operation_test($form, $form_state, $service, $operation
  * Callback for the test from 'prepare' button.
  */
 function wsclient_tester_prepare_request_callback($form, $form_state) {
-
   $service = $form_state['build_info']['args'][0];
   $operation = $form_state['build_info']['args'][1];
 
@@ -110,61 +108,58 @@ function wsclient_tester_prepare_request_callback($form, $form_state) {
   // Magic?
   // service::invoke will cast this array into the correct paramaterized objects
   // According to the $operation['parameter'] schema. Nifty.
-  $args = $form_state['values']['parameters'];
+  $args = array();
+  if (!empty($form_state['values']['parameters'])) {
+    $args = $form_state['values']['parameters'];
+  }
 
-  // The service will have an endpoint that will have a SOAPClient.
-  // Settings on the service->options may be passed to the SOAPClient.
-  // @see WSClientSOAPEndpoint::client()
-  // @see http://www.php.net/manual/en/soapclient.soapclient.php
-  $service->settings['options']['trace'] = TRUE;
+  if ($service->type == 'soap') {
+    // The service will have an endpoint that will have a SOAPClient.
+    // Settings on the service->options may be passed to the SOAPClient.
+    // @see WSClientSOAPEndpoint::client()
+    // @see http://www.php.net/manual/en/soapclient.soapclient.php
+    $service->settings['options']['trace'] = TRUE;
+    // disable cache when testing!
+    $service->settings['options']['cache_wsdl'] = WSDL_CACHE_NONE;
+  }
 
   // Ready to actually invoke the call
   $timer_before = microtime();
   try {
     $response = $service->invoke($operation['name'], $args);
-    $return = print_r($response, 1);
   }
   catch (Exception $e) {
-    $return = $e->getMessage();
+    $response = $e->getMessage();
   }
   $timer_duration = $timer_before - microtime();
 
   $element = $form['transaction'];
 
-  /*
-   dpm($service);
-   dpm($service->endpoint());
-   dpm($service->endpoint()->client());
-   dpm($service->endpoint()->client()->__getLastRequest());
-   dpm($response);
-   */
-
   // Place the trace data into the display.
-  // WARNING!! hardcoded for work with rest
-  if($service->type=='rest') {
+  if ($service->type == 'rest') {
     $operation = $service->operations[$operation['name']];
-    foreach($args as $para_name=>$para_value){
-      $parameters.=$para_name.'='.$para_value.'<br>';
+    $parameters = '';
+    foreach ($args as $para_name => $para_value) {
+      $parameters .= $para_name . '=' . $para_value . '<br>';
     }
-    $reqInfo = 'Uri:'.$service->url.$operation['url'].'<br>'.
-      'Method:'.(isset($operation['type']) ? $operation['type'] : 'GET').'<br>'.
-      'Parameter:'.$parameters;
+    $reqInfo = 'Uri:' . $service->url . $operation['url'] . '<br>' .
+      'Method:' . (isset($operation['type']) ? $operation['type'] : 'GET') . '<br>' .
+      'Parameter:' . $parameters;
     $element['request']['packet']['#markup'] = $reqInfo;
     $element['response']['header']['#markup'] = $service->endpoint()->client()->lastResponse->headers;
     $element['response']['packet']['#markup'] = $service->endpoint()->client()->lastResponse->body;
-  } else if ($service->type=='soap') {
+  }
+  elseif ($service->type == 'soap') {
     $element['request']['header']['#markup'] = $service->endpoint()->client()->__getLastRequestHeaders();
     $element['request']['packet']['#markup'] = htmlspecialchars(wsclient_tester_prettify_xml($service->endpoint()->client()->__getLastRequest()));
     $element['response']['header']['#markup'] = $service->endpoint()->client()->__getLastResponseHeaders();
     $element['response']['packet']['#markup'] = htmlspecialchars(wsclient_tester_prettify_xml($service->endpoint()->client()->__getLastResponse()));
   }
+
   if (module_exists('devel')) {
     $element['request']['data']['#markup'] = kpr($args, 1);
-  }
-  if (module_exists('devel')) {
     $element['response']['data']['#markup'] = kpr($response, 1);
-  }
-
+   }
 
   $element['#value'] = t("Ran at %time, took %duration to execute", array(
     '%time' => time(),
@@ -194,7 +189,7 @@ function wsclient_tester_prettify_xml($xml) {
  *
  * @return a FAPI form fragment.
  */
-function wsclient_tester_data_entry_form($label, $type, $data, $datatypes) {
+function wsclient_tester_data_entry_form($label, $type, $description, $data, $datatypes) {
   if (isset($datatypes[$type])) {
     // Build a complex type.
     $datatype = $datatypes[$type];
@@ -205,7 +200,7 @@ function wsclient_tester_data_entry_form($label, $type, $data, $datatypes) {
     );
     foreach ($datatype['property info'] as $field_id => $field_info) {
       // Recurse and get each bit to render its own input element.
-      $element[$field_id] = wsclient_tester_data_entry_form($field_id, $field_info['type'], $data[$field_id], $datatypes);
+      $element[$field_id] = wsclient_tester_data_entry_form($field_id, $field_info['type'], @$field_info['description'], $data[$field_id], $datatypes);
     }
     return $element;
   }
@@ -222,18 +217,37 @@ function wsclient_tester_data_entry_form($label, $type, $data, $datatypes) {
     );
     for ($field_id = 0; $field_id < 3; $field_id++) {
       // Recurse and get each bit to render its own input element
-      $element[$field_id] = wsclient_tester_data_entry_form($field_id, $actual_type, $data[$field_id], $datatypes);
+      $element[$field_id] = wsclient_tester_data_entry_form($field_id, $actual_type, NULL, $data[$field_id], $datatypes);
       $element[$field_id]['#collapsed'] = TRUE;
     }
     return $element;
   }
+  elseif ($type == 'text_formatted') {
+    return array(
+      '#type' => 'textarea',
+      '#title' => t("%label (%type)", array('%label' => $label, '%type' => $type)),
+      '#default_value' => $data,
+      '#description' => $description,
+    );
+  }
+  elseif ($type == 'boolean') {
+    return array(
+      '#type' => 'select',
+      '#title' => t("%label (%type)", array('%label' => $label, '%type' => $type)),
+      '#default_value' => $data,
+      // Defining false first so it's the default when setting up a form.
+      '#options' => array('false' => 'false', 'true' => 'true'),
+      '#description' => $description,
+    );
+  }
   else {
-    // A textfield will normally do for primitives.
+    // A textfield will normally do for any other primitives.
     return array(
       '#type' => 'textfield',
       '#title' => t("%label (%type)", array('%label' => $label, '%type' => $type)),
       '#default_value' => $data,
       '#size' => 20,
+      '#description' => $description,
     );
   }
 }
