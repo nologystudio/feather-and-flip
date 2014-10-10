@@ -7,8 +7,8 @@
 *
 */
 
-if (empty(arg(0)))
-	expedia_services_test();
+// if (empty(arg(0)))
+// 	expedia_services_test();
 /**
  * Tests wsclient connections
  *
