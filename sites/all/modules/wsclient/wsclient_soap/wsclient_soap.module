@@ -74,6 +74,13 @@ class WSClientSOAPEndpoint extends WSClientEndpoint {
    */
   public function call($operation, $arguments) {
     $client = $this->client();
+    
+    //Patch para poder tener headers en el mensaje soap
+    if (isset($this->service->settings['soap_headers']))
+    {
+      $client->__setSoapHeaders($this->service->settings['soap_headers']);
+    }
+    
     try {
       $response = $client->__soapCall($operation, $arguments);
       return $response;

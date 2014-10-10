@@ -23,6 +23,18 @@ function wsclient_tester_operation_test($form, $form_state, $service, $operation
     '#disabled' => TRUE,
     '#value' => $service->url,
   );
+  $form['securitytoken'] = array(
+    '#title' => 'Security Token',
+    '#type' => 'textfield',
+    '#disabled' => FALSE,
+    '#value' => '',
+  );
+  $form['conversationid'] = array(
+    '#title' => 'Conversation Id',
+    '#type' => 'textfield',
+    '#disabled' => FALSE,
+    '#value' => '',
+  );  
   $form['parameters'] = array(
     '#title' => 'parameters',
     '#type' => 'container',
@@ -121,6 +133,79 @@ function wsclient_tester_prepare_request_callback($form, $form_state) {
     $service->settings['options']['trace'] = TRUE;
     // disable cache when testing!
     $service->settings['options']['cache_wsdl'] = WSDL_CACHE_NONE;
+    
+    //dpm($service);
+    //dpm($form_state);
+    
+    //Metemos con calzo las headers
+    $serverProperties = array ();
+    $serverProperties['USERNAME'] = '7971';
+    $serverProperties['PASSWORD'] = 'WS072514';
+    $serverProperties['PCC'] = 'O58H';
+    
+    $toDate = new DateTime();
+    $timestamp = $toDate->format('Y-m-d\Th:i:sP');
+    $timetolive = $toDate->add(new DateInterval('PT1H'))->format('Y-m-d\Th:i:sP');
+    $messageID = uniqid();
+    $conversationID;
+    
+    if (strtolower($operation['name']) == "sessioncreaterq")
+        $conversationID = uniqid();
+    else
+        $conversationID = $form_state['input']['conversationid'];
+    
+    $action = $operation['name'];
+    if ($action == "OTA_HotelAvailRQ")
+        $action = "OTA_HotelAvailLLSRQ";
+
+    $bodyMessageHeader = array(
+                  'From'    => array('PartyId' => ''),
+                  'To'      => array('PartyId' => ''),
+                  'CPAId'   => $serverProperties['PCC'],
+                  'ConversationId' => $conversationID,
+                  'Service' => $action,
+                  'Action'  => $action, 
+                  'MessageData' => array(
+                                    'MessageId'       => $messageID,
+                                    'Timestamp'       => $timestamp ,
+                                    'TimeToLive'      => $timetolive
+                                         )
+                                       
+                        );
+    
+    $bodySecurity = array(
+                    'UsernameToken' => array(
+                                        'Username'      => $serverProperties['USERNAME'],
+                                        'Password'      => $serverProperties['PASSWORD'],
+                                        'Organization'  => $serverProperties['PCC'],
+                                        'Domain'        => 'DEFAULT'
+                                            )
+                          );
+    
+    $bodySecurityToken = array(
+                          'BinarySecurityToken' => $form_state['input']['securitytoken']
+                               );
+
+
+    if (strtolower($operation['name']) == "sessioncreaterq")
+    {
+          $headers = array(
+                           new SoapHeader('http://www.ebxml.org/namespaces/messageHeader','MessageHeader',$bodyMessageHeader),
+                           new SoapHeader('http://schemas.xmlsoap.org/ws/2002/12/secext','Security',$bodySecurity)
+                          );     
+    }
+    else
+    {
+          $headers = array(
+                           new SoapHeader('http://www.ebxml.org/namespaces/messageHeader','MessageHeader',$bodyMessageHeader),
+                           new SoapHeader('http://schemas.xmlsoap.org/ws/2002/12/secext','Security',$bodySecurityToken)
+                          );      
+    }
+    
+    //dpm($headers);
+  
+    $service->settings['soap_headers'] = $headers;
+     
   }
 
   // Ready to actually invoke the call
