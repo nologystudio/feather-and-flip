@@ -1,0 +1,93 @@
+<?php
+
+/*
+*
+*	Expedia Services Connection
+*
+*
+*/
+
+if (empty(arg(0)))
+	expedia_services_test();
+/**
+ * Tests wsclient connections
+ *
+ *
+ */
+function expedia_services_test()
+{
+	if (module_exists('wsclient')):
+		$res = Expedia::CityHotels('bangkok');
+		if (isset($res['HotelListResponse']) && isset($res['HotelListResponse']['EanWsError'])){
+			$err = Expedia::GetErrorMessage($res);
+		}
+		else {
+			dpm($res);
+		}
+		if (isset($err))
+			dpm($err);
+	endif;
+}
+
+/**
+ * Implements hook_menu().
+ */
+function expedia_services_menu() {
+	$items = array();
+	$items['admin/config/services/expedia'] = array(
+		'title' => 'Expedia Services Configuration',
+		'description' => 'Configuration expedia services connection',
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('expedia_services_form'),
+		'access arguments' => array('access administration pages'),
+		'type' => MENU_NORMAL_ITEM,
+	);
+
+	return $items;
+}
+
+/**
+ * Page callback: Expedia Services settings
+ *
+ * @see expedia_services_menu()
+ */
+function expedia_services_form($form, &$form_state) {
+
+	// Sabre API group data
+	$form['apidata'] = array(
+		'#type' => 'fieldset',
+		'#title' => t('Api Data'),
+		'#collapsible' => FALSE,
+		'#collapsed' => FALSE,
+	);
+	$form['apidata']['expedia_app_name'] = array(
+		'#type'          => 'textfield',
+		'#title'         => t('Expedia: Application name'),
+		'#default_value' => variable_get('expedia_app_name'),
+		'#description'   => t("Expedia app name."),
+		'#required' => TRUE
+	);
+	$form['apidata']['expedia_client_id'] = array(
+		'#type'          => 'textfield',
+		'#title'         => t('Expedia: Client ID (CID)'),
+		'#default_value' => variable_get('expedia_client_id'),
+		'#description'   => t("Expedia client id."),
+		'#required' => TRUE
+	);
+	$form['apidata']['expedia_key'] = array(
+		'#type'          => 'textfield',
+		'#title'         => t('Expedia: Key'),
+		'#default_value' => variable_get('expedia_key'),
+		'#description'   => t("Expedia app key."),
+		'#required' => TRUE
+	);
+	$form['apidata']['expedia_shared_secret'] = array(
+		'#type'          => 'textfield',
+		'#title'         => t('Expedia: Shared secret'),
+		'#default_value' => variable_get('expedia_shared_secret'),
+		'#description'   => t("Expedia app shared secret."),
+		'#required' => TRUE
+	);
+
+  return system_settings_form($form);
+}

@@ -26,6 +26,9 @@ function sabre_services_test()
 			'Content-Type' => array('application/x-www-form-urlencoded'),
 			'Authorization' => array('Basic '.$tok)
 		);
+		$service->settings['curl options'] = array(
+			CURLOPT_POSTFIELDS => 'grant_type=client_credentials'
+		);
 		// $service->operations['sabre__rest_get_token']['parameter']['grant_type']['value'] = 'client_credentials';
 		// $service->global_parameters = array(
 		// 	'grant_type' => array(
@@ -47,7 +50,8 @@ function sabre_services_test()
 		//$service = wsclient_service_load('CreateSession');
 
 		try {
-			$token_res = $service->sabre__rest_get_token('client_credentials');			
+			$token_res = $service->sabre__rest_get_token();
+			dpm($token_res);		
 		} catch (Exception $e) {
 			dpm($e->getMessage());
 			dpm($service);
