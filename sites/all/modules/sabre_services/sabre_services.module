@@ -17,39 +17,40 @@ if (empty(arg(0)))
 function sabre_services_test()
 {
 	if (module_exists('wsclient')):
-		$cid = base64_encode('V1:ff06skusw6cvjpsn:DEVCENTER:EXT');
-		$cse = base64_encode('l7x7MrWB');
+		$cid = base64_encode(variable_get('sabre_client_id'));
+		$cse = base64_encode(variable_get('sabre_client_secret'));
 		$tok = base64_encode($cid.':'.$cse);
 
 		$service = wsclient_service_load('sabre__rest');
 		$service->settings['http_headers'] = array(
-			'Content-Type' => 'application/x-www-form-urlencoded',
-			'Authorization' => 'Basic '.$tok
+			'Content-Type' => array('application/x-www-form-urlencoded'),
+			'Authorization' => array('Basic '.$tok)
 		);
-		$service->global_parameters = array(
-			'grant_type' => array(
-				'default value' => 'client_credentials')
-		);
+		// $service->operations['sabre__rest_get_token']['parameter']['grant_type']['value'] = 'client_credentials';
+		// $service->global_parameters = array(
+		// 	'grant_type' => array(
+		// 		'type' => 'text',
+		// 		'default value' => array('client_credentials'))
+		// );
+
 		// $service->settings['authentication']['basic'] = array(
 		// 	'username'		 => 'V1:ff06skusw6cvjpsn:DEVCENTER:EXT',
 		// 	'password'	 => 'l7x7MrWB'
 		// );
-
-		// $service->authentication['oauth2'] = array(
+		// $service->settings['authentication']['oauth2'] = array(
 		// 	'token_endpoint' => 'https://api.sabre.com/v1/auth/token',
 		// 	'auth_flow'		 => 'client-credentials',
-		// 	'client_id'		 => base64_encode('V1:ff06skusw6cvjpsn:DEVCENTER:EXT'),
-		// 	'client_secret'	 => base64_encode('l7x7MrWB')
+		// 	'client_id'		 => $cid,
+		// 	'client_secret'	 => $cse
 		// );
 
 		//$service = wsclient_service_load('CreateSession');
 
-
-dpm($service);
 		try {
 			$token_res = $service->sabre__rest_get_token();			
 		} catch (Exception $e) {
 			dpm($e->getMessage());
+			dpm($service);
 		}
 
 

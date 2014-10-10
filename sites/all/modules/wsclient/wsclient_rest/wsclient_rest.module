@@ -58,12 +58,23 @@ class WSClientRESTEndpoint extends WSClientEndpoint {
       }
       // Determine which formatter to use.
       $formatter = NULL;
-      if (isset($this->service->settings['formatter'])) {
-        $formatter = new $this->service->settings['formatter']();
+      if (isset($this->service->settings['formatter_type'])) {
+        if($this->service->settings['formatter_type'] === HttpClientBaseFormatter::FORMAT_PHP) {
+          $formatter = new HttpClientBaseFormatter(HttpClientBaseFormatter::FORMAT_PHP);
+        }
+        else if($this->service->settings['formatter_type'] === HttpClientBaseFormatter::FORMAT_FORM) {
+          $formatter = new HttpClientBaseFormatter(HttpClientBaseFormatter::FORMAT_FORM);
+        }
+        else if($this->service->settings['formatter_type'] === HttpClientBaseFormatter::FORMAT_JSON) {
+          $formatter = new HttpClientBaseFormatter(HttpClientBaseFormatter::FORMAT_JSON);
+        }
+      } else {
+          if (isset($this->service->settings['formatter'])) {
+            $formatter = new $this->service->settings['formatter']();
+          } else 
+            $formatter = new HttpClientBaseFormatter(HttpClientBaseFormatter::FORMAT_JSON);
       }
-      else {
-        $formatter = new HttpClientBaseFormatter(HttpClientBaseFormatter::FORMAT_JSON);
-      }
+   
       $this->client = new HttpClient($authentication, $formatter);
       // Pass through additional curl options.
       if (!empty($this->service->settings['curl options'])) {
@@ -84,6 +95,7 @@ class WSClientRESTEndpoint extends WSClientEndpoint {
   public function call($operation_name, $arguments) {
     $operation = $this->service->operations[$operation_name];
     $operation_url = isset($operation['url']) ? $operation['url'] : '';
+    $headers = isset($this->service->settings['http_headers']) ? $this->service->settings['http_headers'] : array();
     // Replace argument patterns in the operation URL.
     foreach ($arguments as $key => $value) {
       if (strpos($operation_url, '@' . $key) !== FALSE) {
@@ -96,6 +108,12 @@ class WSClientRESTEndpoint extends WSClientEndpoint {
     $data = NULL;
     if (isset($operation['data'])) {
       $data = $arguments[$operation['data']];
+      if (isset($this->service->settings['formatter_type'])) {
+        if($this->service->settings['formatter_type'] === HttpClientBaseFormatter::FORMAT_FORM) {
+          $data = array($operation['data'] => $arguments[$operation['data']]);
+        }
+      }
+
       unset($arguments[$operation['data']]);
     }
     try {
@@ -103,6 +121,7 @@ class WSClientRESTEndpoint extends WSClientEndpoint {
         'method' => $type,
         'parameters' => $arguments,
         'data' => $data,
+        'headers' => $headers,
       )));
       return $response;
     }
