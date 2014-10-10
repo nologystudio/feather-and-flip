@@ -47,7 +47,7 @@ function sabre_services_test()
 		//$service = wsclient_service_load('CreateSession');
 
 		try {
-			$token_res = $service->sabre__rest_get_token();			
+			$token_res = $service->sabre__rest_get_token('client_credentials');			
 		} catch (Exception $e) {
 			dpm($e->getMessage());
 			dpm($service);
