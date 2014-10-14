@@ -157,13 +157,21 @@ function wsclient_tester_prepare_request_callback($form, $form_state) {
     $action = $operation['name'];
     if ($action == "OTA_HotelAvailRQ")
         $action = "OTA_HotelAvailLLSRQ";
+    else if ($action == "HotelPropertyDescriptionRQ")
+        $action = "HotelPropertyDescriptionLLSRQ";
+    else if ( $action = "HotelRateDescriptionRQ")
+        $action = "HotelRateDescriptionLLSRQ";
 
     $bodyMessageHeader = array(
                   'From'    => array('PartyId' => ''),
                   'To'      => array('PartyId' => ''),
                   'CPAId'   => $serverProperties['PCC'],
                   'ConversationId' => $conversationID,
-                  'Service' => $action,
+                  'Service'        => array(
+                                        '_' => 'Session',
+                                        'type' => 'sabreXML',
+                                            ),
+                  'type'    => 'sabreXml',
                   'Action'  => $action, 
                   'MessageData' => array(
                                     'MessageId'       => $messageID,
@@ -182,7 +190,7 @@ function wsclient_tester_prepare_request_callback($form, $form_state) {
                                             )
                           );
     
-    $bodySecurityToken = array(
+    $bodySecurityToken = array( 
                           'BinarySecurityToken' => $form_state['input']['securitytoken']
                                );
 
