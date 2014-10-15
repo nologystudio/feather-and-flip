@@ -2,10 +2,16 @@
 
 class Sabre
 {
-    
-     const IPCC      = 'O58H';
-     const USERNAME  = '7971';
-     const PASSWORD  = 'WS072514';
+     private $IPCC;
+     private $USERNAME;
+     private $PASSWORD;
+     
+     function __construct ()
+     {
+        this->IPCC = variable_get('sabre_ipcc');
+        this->USERNAME = variable_get('sabre_username');
+        this->PASSEORD = variable_get('sabre_passw');
+     }
      
      private function Header_MessageHeader($action, $conversationID)
      {
@@ -17,7 +23,7 @@ class Sabre
         $messageHeader = array(
                   'From'    => array('PartyId' => ''),
                   'To'      => array('PartyId' => ''),
-                  'CPAId'   => self::IPCC,
+                  'CPAId'   => this->IPCC,
                   'ConversationId' => $conversationID,
                   'Service'        => array(
                                         '_' => $action,
@@ -42,9 +48,9 @@ class Sabre
      {
         $usernameToken = array(
                     'UsernameToken' => array(
-                                        'Username'      => self::USERNAME,
-                                        'Password'      => self::PASSWORD,
-                                        'Organization'  => self::IPCC,
+                                        'Username'      => this->USERNAME,
+                                        'Password'      => this->PASSWORD,
+                                        'Organization'  => this->IPCC,
                                         'Domain'        => 'DEFAULT'
                                             )
                           );
