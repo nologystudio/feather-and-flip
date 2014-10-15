@@ -93,8 +93,8 @@ function sabre_services_form($form, &$form_state) {
 	$form['apidata'] = array(
 		'#type' => 'fieldset',
 		'#title' => t('Api Data'),
-		'#collapsible' => FALSE,
-		'#collapsed' => FALSE,
+		'#collapsible' => TRUE,
+		'#collapsed' => TRUE,
 	);
 	$form['apidata']['sabre_app_name'] = array(
 		'#type'          => 'textfield',
@@ -115,6 +115,34 @@ function sabre_services_form($form, &$form_state) {
 		'#title'         => t('Sabre: Client secret'),
 		'#default_value' => variable_get('sabre_client_secret'),
 		'#description'   => t("Sabre app client secret."),
+		'#required' => TRUE
+	);
+	// Sabre Authentication group data
+	$form['authdata'] = array(
+		'#type' => 'fieldset',
+		'#title' => t('Authentication Data'),
+		'#collapsible' => TRUE,
+		'#collapsed' => TRUE,
+	);
+	$form['authdata']['sabre_ipcc'] = array(
+		'#type'          => 'textfield',
+		'#title'         => t('Sabre: IPCC code'),
+		'#default_value' => variable_get('sabre_ipcc'),
+		'#description'   => t("Sabre IPCC code."),
+		'#required' => TRUE
+	);
+	$form['authdata']['sabre_username'] = array(
+		'#type'          => 'textfield',
+		'#title'         => t('Sabre: Username'),
+		'#default_value' => variable_get('sabre_username'),
+		'#description'   => t("Sabre Username."),
+		'#required' => TRUE
+	);
+	$form['authdata']['sabre_passw'] = array(
+		'#type'          => 'textfield',
+		'#title'         => t('Sabre: Password'),
+		'#default_value' => variable_get('sabre_passw'),
+		'#description'   => t("Sabre Password."),
 		'#required' => TRUE
 	);
 	// PCC & ARC codes
