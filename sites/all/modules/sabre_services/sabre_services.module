@@ -7,8 +7,9 @@
 *
 */
 
-// if (empty(arg(0)))
-// 	module_invoke_all('test');
+ //if (empty(arg(0)))
+ //      sabre_services_soap_test();
+ 	//module_invoke_all('test');
 /**
  * Tests wsclient connections
  *
@@ -63,6 +64,15 @@ function sabre_services_test()
 		dpm($cse);
 		dpm($tok);
 	endif;
+}
+
+function sabre_services_soap_test()
+{
+	if (module_exists('wsclient'))
+	{
+		$sabreService = new Sabre;
+		$sabreService->HotelDescription();
+	}
 }
 
 /**

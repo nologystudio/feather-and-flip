@@ -2,15 +2,15 @@
 
 class Sabre
 {
-     private $IPCC;
-     private $USERNAME;
-     private $PASSWORD;
+     var $IPCC = '';
+     var $USERNAME = '';
+     var $PASSWORD = '';
      
-     function __construct ()
+     function Sabre()
      {
-        this->IPCC = variable_get('sabre_ipcc');
-        this->USERNAME = variable_get('sabre_username');
-        this->PASSEORD = variable_get('sabre_passw');
+        $this->IPCC = variable_get('sabre_ipcc');
+        $this->USERNAME = variable_get('sabre_username');
+        $this->PASSWORD = variable_get('sabre_passw');
      }
      
      private function Header_MessageHeader($action, $conversationID)
@@ -23,7 +23,7 @@ class Sabre
         $messageHeader = array(
                   'From'    => array('PartyId' => ''),
                   'To'      => array('PartyId' => ''),
-                  'CPAId'   => this->IPCC,
+                  'CPAId'   => $this->IPCC,
                   'ConversationId' => $conversationID,
                   'Service'        => array(
                                         '_' => $action,
@@ -48,9 +48,9 @@ class Sabre
      {
         $usernameToken = array(
                     'UsernameToken' => array(
-                                        'Username'      => this->USERNAME,
-                                        'Password'      => this->PASSWORD,
-                                        'Organization'  => this->IPCC,
+                                        'Username'      => $this->USERNAME,
+                                        'Password'      => $this->PASSWORD,
+                                        'Organization'  => $this->IPCC,
                                         'Domain'        => 'DEFAULT'
                                             )
                           );
@@ -73,50 +73,102 @@ class Sabre
      
      
      /*
-      * Create a session with sabre service and get security token and cersation id
+      * Create a session with sabre service and get security token and conversation id
       */
      private function CreateSession()
      {
         $service = wsclient_service_load('createsession');
         
         $headers = array(
-            self::Header_MessageHeader('SessionCreateRQ', uniqid()),
-            self::Header_UserNameToken()
+            $this->Header_MessageHeader('SessionCreateRQ', uniqid()),
+            $this->Header_UserNameToken()
                          );
         
+        $service->settings['options']['trace'] = TRUE;
+        $service->settings['options']['cache_wsdl'] = WSDL_CACHE_NONE;
         $service->settings['soap_headers'] = $headers;
+        
+        try
+        {  
+            $response = $service->SessionCreateRQ($this->IPCC);
+            //$args['body']['POS']['Source']['PseudoCityCode'] = $this->IPCC;
+            //$response = $service->invoke('SessionCreateRQ', $args);
+            $xmlstr = $service->endpoint()->client()->__getLastResponse();
+            //dpm($this->ReadXML($xmlstr ));
+            $xml = simplexml_load_string($xmlstr); 
+            $securityToken = (string)$xml->children('soap-env',true)->Header->children('wsse',true)->Security->BinarySecurityToken;
+            $result = array(
+                            'SecurityToken' => (string)$xml->children('soap-env',true)->Header->children('wsse',true)->Security->BinarySecurityToken,
+                            'ConversationId'    => $response->ConversationId
+                            );
+        }
+        catch (Exception $e)
+        {
+            $response = $e->getMessage();
+            $result = array();
+        }        
+        
+        return $result;
      }
      
      /*
       * Close a session 
       */
-     private function CloseSession($securityToken)
+     private function CloseSession($securityToken, $conversationId)
      {
         $service = wsclient_service_load('closesession');
         
         $headers = array(
-            self::Header_MessageHeader('SessionCloseRQ ', uniqid()),
-            self::Header_SecurityToken($securityToken)
+            $this->Header_MessageHeader('SessionCloseRQ', $conversationId),
+            $this->Header_SecurityToken($securityToken)
                          );
         
-        $service->settings['soap_headers'] = $headers;        
+        $service->settings['options']['trace'] = TRUE;
+        $service->settings['options']['cache_wsdl'] = WSDL_CACHE_NONE;        
+        $service->settings['soap_headers'] = $headers;
+        
+        try
+        {  
+            $response = $service->SessionCloseRQ($this->IPCC);
+            
+            //$xmlstr = $service->endpoint()->client()->__getLastResponse();
+            //dpm($this->ReadXML($xmlstr ));
+        }
+        catch (Exception $e)
+        {
+            $response = $e->getMessage();
+            //dpm($response);
+        }         
      }
      
+     /*
+      * Format XML for print
+      */
+     private function ReadXML($xml)
+     {
+        $dom = new DOMDocument;
+        $dom->preserveWhiteSpace = FALSE;
+        $dom->loadXML($xml);
+        $dom->formatOutput = TRUE;
+        return $dom->saveXml();
+     }
+     
+         
      public function HotelAvail()
      {
-        $securityToken = CreateSession();
+        $sessionInfo = $this->CreateSession();
         
         //TODO: Code for to complete function here
         
-        CloseSession($securityToken);
+        $this->CloseSession($sessionInfo['SecurityToken'], $sessionInfo['ConversationId']);
      }
      
      public function HotelDescription()
      {
-        $securityToken = CreateSession();
+        $sessionInfo = $this->CreateSession();
         
         //TODO: Code for to complete function here
         
-        CloseSession($securityToken); 
+        $this->CloseSession($sessionInfo['SecurityToken'], $sessionInfo['ConversationId']);
      }
 }
