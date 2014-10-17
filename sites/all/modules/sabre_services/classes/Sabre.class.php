@@ -156,19 +156,105 @@ class Sabre
          
      public function HotelAvail()
      {
+        //Open session with sabre
         $sessionInfo = $this->CreateSession();
+        $securityToken = $sessionInfo['SecurityToken'];
+        $conversationId = $sessionInfo['ConversationId'];        
         
-        //TODO: Code for to complete function here
+        //Load service
+        $service = wsclient_service_load('hoteldescription');
         
-        $this->CloseSession($sessionInfo['SecurityToken'], $sessionInfo['ConversationId']);
+        //Create headers and settings
+        $headers = array(
+            $this->Header_MessageHeader('OTA_HotelAvailLLSRQ', $conversationId),
+            $this->Header_SecurityToken($securityToken)
+                         );
+        
+        $service->settings['options']['trace'] = TRUE;
+        $service->settings['options']['cache_wsdl'] = WSDL_CACHE_NONE;        
+        $service->settings['soap_headers'] = $headers;
+        
+        //Execute operation
+        try
+        {  
+            $args['AvailRequestSegment']['GuestCounts']['Count'] = 1;
+            $args['AvailRequestSegment']['HotelSearchCriteria']['Criterion']['HotelRef']['HotelCode'] = $hotelCode;
+            $args['AvailRequestSegment']['TimeSpan']['End'] = '11-28';
+            $args['AvailRequestSegment']['TimeSpan']['Start'] = '11-20';
+            $args['Version'] = '2.1.0';
+            
+            $response = $service->HotelPropertyDescriptionRQ($args);
+            
+            $xmlRequest = $service->endpoint()->client()->__getLastRequest();
+            dpm($this->ReadXML($xmlRequest));
+            //$xmlResponse = $service->endpoint()->client()->__getLastResponse();
+            //dpm($this->ReadXML($xmlResponse));
+            
+            dpm($response);
+        }
+        catch (Exception $e)
+        {
+            $response = $e->getMessage();
+            dpm($response);
+        }   
+        finally
+        {
+            //Close sabre session
+            $this->CloseSession($securityToken, $conversationId);
+        }
      }
      
-     public function HotelDescription()
+     public function HotelDescription($hotelCode)
      {
+        //Open session with sabre
         $sessionInfo = $this->CreateSession();
+        $securityToken = $sessionInfo['SecurityToken'];
+        $conversationId = $sessionInfo['ConversationId'];
         
-        //TODO: Code for to complete function here
+        //Load service
+        $service = wsclient_service_load('hoteldescription');
         
-        $this->CloseSession($sessionInfo['SecurityToken'], $sessionInfo['ConversationId']);
+        //Create headers and settings
+        $headers = array(
+            $this->Header_MessageHeader('HotelPropertyDescriptionLLSRQ', $conversationId),
+            $this->Header_SecurityToken($securityToken)
+                         );
+        
+        $service->settings['options']['trace'] = TRUE;
+        $service->settings['options']['cache_wsdl'] = WSDL_CACHE_NONE;        
+        $service->settings['soap_headers'] = $headers;
+        
+        //Execute operation
+        try
+        {  
+            $args['AvailRequestSegment']['GuestCounts']['Count'] = 1;
+            $args['AvailRequestSegment']['HotelSearchCriteria']['Criterion']['HotelRef']['HotelCode'] = $hotelCode;
+            $args['AvailRequestSegment']['TimeSpan']['End'] = '11-28';
+            $args['AvailRequestSegment']['TimeSpan']['Start'] = '11-20';
+            $args['Version'] = '2.1.0';
+            
+            //$prueba = $service->load($service->datatypes['HotelPropertyDescriptionRQ'],'HotelPropertyDescriptionRQ');
+            //dpm($prueba);
+            dpm($service);
+            
+            $response = $service->HotelPropertyDescriptionRQ($args);
+            
+            $xmlRequest = $service->endpoint()->client()->__getLastRequest();
+            dpm($this->ReadXML($xmlRequest));
+            //$xmlResponse = $service->endpoint()->client()->__getLastResponse();
+            //dpm($this->ReadXML($xmlResponse));
+            
+            dpm($response);
+        }
+        catch (Exception $e)
+        {
+            $response = $e->getMessage();
+            dpm($response);
+        }           
+        finally
+        {
+            //Close sabre session
+            $this->CloseSession($securityToken, $conversationId);
+        }
      }
 }
