@@ -1,0 +1,212 @@
+		
+		
+			
+		/* ----------------------------------------------------------------------------------------------------------------
+		    
+	    * Project     : F+F
+	    * Document    : less/style
+	    * Created on  : Oct 08, 2.014
+	    * Version     : 1.0 
+	    * Author      : Aday Henriquez
+	    * Description : user interface style
+	    
+	    -------------------------------------------------------------------------------------------------------------------
+	       *          This code has been developed by NOLOGY. in the awesome Canaries - www.nologystudio.com           *
+	    -------------------------------------------------------------------------------------------------------------------
+	   
+	    * Log * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+        -------------------------------------------------------------------------------------------------------------------
+        *  
+        ---------------------------------------------------------------------------------------------------------------- */
+		
+		/* ------------------------------------------------------------------------------------------------------------- */
+		/* ~ Social media nav ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+		
+		.ui-set-social-media-nav(@color:white,@btn-size:28px)
+		{
+			& > a
+			{
+				.set-size();
+				.set-opacity(1);
+				.animate-opacity();
+				#set-font-style > .ic(@btn-size,@color,@btn-size);
+				#align > .left;
+				display: block;
+				margin: 0 @unit;
+				
+				.set-icon(@icon)
+				{
+					&:before
+					{
+						content: '\@{icon}';
+					}
+				}
+				
+				&[rel="facebook"]   { .set-icon('e0aa'); }
+				&[rel="twitter"]    { .set-icon('e0ab'); }
+				&[rel="pinterest"]  { .set-icon(''); }
+				&[rel="instagram"]  { .set-icon(''); }
+				&[rel="google-plus"]{ .set-icon('e0ad'); }
+				
+				&:hover
+				{
+					.set-opacity(0.5);
+				}
+			}
+		}
+		
+		/* ------------------------------------------------------------------------------------------------------------- */
+		/* ~ Button style ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+	
+		#ui-set-button
+		{
+			.rounded(@color,@font-size)
+			{
+				font-size: @font-size;
+				background-color: @color;
+				padding: 0 20px;
+			}
+		}
+		
+		/* ------------------------------------------------------------------------------------------------------------- */
+		/* ~ Slideshow ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+		
+		.ui-set-slideshow(@height:@header-height)
+		{
+			& > *[class$="-wrapper"]
+			{
+				.set-size(100%,100%);
+				#align > .left;
+				display: block;
+			
+				*[class$="-item"]
+				{
+					.set-size(100%,@height);
+					.hide();
+					#align > .left;
+					display: block;
+					overflow: hidden;
+					
+					&:first-child
+					{
+						.show();
+					}
+					
+					& > figure
+					{
+						.set-size(100%,100%);
+						.set-pos(absolute);
+						.set-bg(transparent);
+						.set-coord(0,0);
+						.z(0);
+						padding: 0;
+						margin: 0;
+						overflow: hidden;
+						
+						img
+						{
+							.set-size(100%);
+							border: 0;
+						}
+					}
+					
+					& > div.info-wrapper
+					{
+						@w: @global-wrapper-width/2;
+						@h: @header-height/2;
+						
+						.set-size(@w,@h);
+						.set-pos(absolute);
+						.set-bg(yellow);
+						#align > .absolute-center(@h,@w);
+						.z(1);
+						display: block;
+						
+						h1,h2,h3,h4,h5,h6
+						{
+							text-align: center;
+						}
+						
+						a
+						{
+							text-align: center;
+						}
+					}
+				}
+			}
+			
+			& > button[rel]
+			{
+				@arrow-size: 30px;
+				@margin: 50px;
+				
+				.reset(); 
+				.set-size(@arrow-size,@arrow-size);
+				.set-pos(absolute);
+				.set-opacity(0.75);
+				.animate-opacity();
+				#set-font-style > .ic(@arrow-size,white,@arrow-size);
+				top: 50%;
+				margin-top: -@arrow-size/2;
+				cursor: pointer;
+				z-index: 1;
+				
+				&[rel="left"]
+				{
+					left: @margin;
+					
+					&:before
+					{
+						content: "";
+					}
+				}
+				
+				&[rel="right"]
+				{
+					right: @margin;
+					
+					&:before
+					{
+						content: "";
+					}
+				}
+				
+				&:hover
+				{
+					.set-opacity(1);
+				}
+			}
+			
+			& > div[id$="-state-bar"]
+			{	
+				@ref-size: 30px;
+				@width: 3 * @ref-size;
+				
+				.set-size(@width,@ref-size);
+				.set-pos(absolute);
+				left: 50%;
+				bottom: 0;
+				margin-left: -@width/2;
+				padding: 40px 0px 20px 0px;
+				z-index: 1;
+				
+				button
+				{
+					.reset();
+					.set-size(@ref-size,@ref-size);
+					#align > .left;
+					display: block;
+					cursor: pointer;
+					color: white;
+					
+					&.on
+					{
+						color: red;
+					}
+				}
+			}
+		}
+		

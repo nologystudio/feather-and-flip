@@ -1,0 +1,77 @@
+		
+		
+			
+		/* ----------------------------------------------------------------------------------------------------------------
+		    
+	    * Project     : F+F
+	    * Document    : less/style
+	    * Created on  : Oct 08, 2.014
+	    * Version     : 1.0 
+	    * Author      : Aday Henriquez
+	    * Description : Contains all the global styles and importers for required fonts.
+	    
+	    -------------------------------------------------------------------------------------------------------------------
+	       *          This code has been developed by NOLOGY. in the awesome Canaries - www.nologystudio.com           *
+	    -------------------------------------------------------------------------------------------------------------------
+	   
+	    * Log * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+        -------------------------------------------------------------------------------------------------------------------
+        *  
+        ---------------------------------------------------------------------------------------------------------------- */
+		
+		/* ------------------------------------------------------------------------------------------------------------- */
+		/* Font-face */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+		
+		@path: '../fonts/';
+		
+		@font-face {
+		    font-family: 'i-set';
+		    src: url('@{path}icon-webfont.eot');
+		    src: url('@{path}icon-webfont.eot?#iefix') format('embedded-opentype'),
+		         url('@{path}icon-webfont.woff') format('woff'),
+		         url('@{path}icon-webfont.ttf') format('truetype'),
+		         url('@{path}icon-webfont.svg#i-set') format('svg');
+		    font-weight: normal;
+		    font-style: normal;
+		}		
+		
+		#set-font-style
+		{
+			// | i | Set fonts...
+			/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+			
+			.browser-fixes()
+			{
+				-webkit-font-smoothing: antialiased;
+				text-shadow: 1px 1px 1px rgba(0,0,0,0.001);
+			}
+			
+			.icon()
+			{
+				font-family: 'i-set';
+			}
+			
+			// | i | Styles
+			/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+			
+			.set-up(@size,@color,@lineheight)
+			{
+				color: @color;
+				font-size: @size;
+				line-height: @lineheight;
+			}
+			
+			.ic(@size,@color,@lineheight:'auto')
+			{
+				.icon();
+				.set-up(@size,@color,@lineheight);
+				.browser-fixes();
+			}
+		}
+		
+		
+		
+		
+		
+		

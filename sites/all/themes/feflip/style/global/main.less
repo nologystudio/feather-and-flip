@@ -1,0 +1,302 @@
+		
+		
+			
+		/* ----------------------------------------------------------------------------------------------------------------
+		    
+	    * Project     : F+F
+	    * Document    : less/style
+	    * Created on  : Oct 08, 2.014
+	    * Version     : 1.0 
+	    * Author      : Aday Henriquez
+	    * Description : Global less/css style
+	    
+	    -------------------------------------------------------------------------------------------------------------------
+	       *          This code has been developed by NOLOGY. in the awesome Canaries - www.nologystudio.com           *
+	    -------------------------------------------------------------------------------------------------------------------
+	   
+	    * Log * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+        -------------------------------------------------------------------------------------------------------------------
+        *  
+        ---------------------------------------------------------------------------------------------------------------- */
+		
+		/* ------------------------------------------------------------------------------------------------------------- */
+		/* ~ Global Variables and Importers ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */	
+		
+		@global-width: 100%;
+		@global-wrapper-width: 1040px;
+		@media-url: '../media/';
+		@section-url: '../sections/';
+		@ref-padding: 30px;
+		@unit: 5px;
+		
+		/* ~ Grid ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */	
+		
+		@gutter: 10px;
+		@row-height: 10px;
+		@grid-3-col: @global-wrapper-width/3;
+		@grid-5-col: @global-wrapper-width/5;
+		
+		/* ~ Color swatches ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */	
+		
+		@color-1: red;
+		@color-2: blue;
+		@color-3: black;
+		
+		/* ~ Header ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+		
+		@header-height: 400px;
+			
+		/* ~ Navigation ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+		
+		@nav-height: 100px;
+		
+		/* ~ Section ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+			
+		/* ~ Footer ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+			
+		/* ~ Importers ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+		
+		@import 'fonts';
+		@import '../tools/user-interface';
+		@import '../tools/tools';
+		
+		/* ------------------------------------------------------------------------------------------------------------- */
+		/* ~ Main style ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+		
+		html, 
+		body
+		{}
+		
+		html
+		{}
+		
+		body
+		{
+		}
+		
+		body
+		{
+			& > header,
+			& > nav,
+			& > div,
+			& > aside,
+			& > main,
+			& > section,
+			& > footer
+			{
+				width: 100%;
+				#align > .left;
+			}
+		}
+		
+		*
+		{
+			outline: none;
+		}
+		
+		ul, 
+		a, 
+		h1, 
+		h2, 
+		h3, 
+		h4,
+		h5,
+		h6
+		{
+			.reset();
+			list-style: none;
+		}
+
+		/* ------------------------------------------------------------------------------------------------------------- */
+		/* ~ [H] Header ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+			
+		body > header
+		{
+			.set-size(@global-width,@header-height);
+			.set-bg();
+			.z(0);
+			
+			a[id="brand"]
+			{
+				.set-size();
+				.set-pos(absolute);
+			}
+			
+			div.slideshow-gallery
+			{
+				.ui-set-slideshow();
+			}
+			
+			nav[id="social-media"]
+			{
+				.set-pos(absolute);
+				.ui-set-social-media-nav();
+				top: @ref-padding;
+				right: @ref-padding;
+			}
+		}	
+
+		/* ------------------------------------------------------------------------------------------------------------- */
+		/* ~ [N] Navigation ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+			
+		body > nav[role="main-navigation"]
+		{
+			.set-size(100%,@nav-height);
+			.set-bg(fadeout(black,50%));
+			.z(1);
+			margin-top: -@nav-height;
+			
+			div.wrapper
+			{
+				.set-size(@global-wrapper-width);
+				#align > .center;
+				display: block;
+				
+				& > form[id="search"]
+				{
+					.reset();
+					#align > .left;
+					
+					input
+					{
+						.reset();
+						.set-bg(fadeout(white,50%));
+						#align > .left;
+						padding: @ref-padding;
+						margin: 2 * @unit 0;
+						
+						&[type="text"]
+						{}
+						
+						&[type="submit"]
+						{	
+							.set-bg();
+						}
+					}
+				}
+				
+				& > ul
+				{
+					.set-size(auto);
+					#align > .left;
+					
+					li
+					{
+						.set-size();
+						#align > .left;
+						
+						a
+						{}
+						
+						& > a + *
+						{
+							.hide();
+						}
+					}
+				}
+			}
+		}
+		
+		/* ------------------------------------------------------------------------------------------------------------- */
+		/* ~ Content ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+		
+		body > main[id],
+		body > section[id]
+		{
+			& > div.wrapper
+			{
+				.set-size(@global-wrapper-width);
+				#align > .center;
+				display: block;
+			}
+			
+			& > header
+			{
+				.set-size();
+				#align > .center;
+				display: table;
+				padding: @ref-padding 0;
+			}
+			
+			&[id="start-your-journey"]
+			{
+				*[class$="-wrapper"]
+				{
+					.set-size(@global-wrapper-width,100%);
+					#align > .center;
+					display: block;
+					
+					a
+					{
+						.set-size(@grid-5-col);
+						.box-sizing();
+						#align > .left;
+					}
+				}
+			}
+			
+			&[id="map-it"]
+			{
+				aside
+				{
+					.hide();
+				}
+			}
+			
+			&[id="travel-journal"]
+			{}
+			
+			&[id="itinerary"]
+			{}
+			
+			&[id="hotel"]
+			{}
+			
+			&[id="destination"]
+			{}
+			
+			&[id="booking-engine"]
+			{}
+		}
+		
+		/* ------------------------------------------------------------------------------------------------------------- */
+		/* ~ [F] Footer ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+		body > footer
+		{
+			.set-bg(black);
+			
+			& > div.wrapper
+			{
+				.set-size(@global-wrapper-width);
+				#align > .center;
+				display: block;
+				
+				ul
+				{
+					.set-size();
+					#align > .left;
+				}
+			}
+		}
+		
+		
+		
+		
+		
+		
+		
+		
