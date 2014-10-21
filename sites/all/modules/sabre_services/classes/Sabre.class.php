@@ -154,7 +154,7 @@ class Sabre
      }
      
          
-     public function HotelAvail()
+     public function HotelAvail($hotelCityCode)
      {
         //Open session with sabre
         $sessionInfo = $this->CreateSession();
@@ -162,7 +162,7 @@ class Sabre
         $conversationId = $sessionInfo['ConversationId'];        
         
         //Load service
-        $service = wsclient_service_load('hoteldescription');
+        $service = wsclient_service_load('hotelavail');
         
         //Create headers and settings
         $headers = array(
@@ -178,12 +178,14 @@ class Sabre
         try
         {  
             $args['AvailRequestSegment']['GuestCounts']['Count'] = 1;
-            $args['AvailRequestSegment']['HotelSearchCriteria']['Criterion']['HotelRef']['HotelCode'] = $hotelCode;
+            $args['AvailRequestSegment']['HotelSearchCriteria']['Criterion']['HotelRef']['HotelCityCode'] = $hotelCityCode;
+            //$args['AvailRequestSegment']['HotelSearchCriteria']['Criterion']['HotelRef']['HotelCode'] = $hotelCode;
+            //$args['AvailRequestSegment']['HotelSearchCriteria']['Criterion']['HotelRef']['HotelName'] = 'Park Hyatt New York';
             $args['AvailRequestSegment']['TimeSpan']['End'] = '11-28';
             $args['AvailRequestSegment']['TimeSpan']['Start'] = '11-20';
             $args['Version'] = '2.1.0';
             
-            $response = $service->HotelPropertyDescriptionRQ($args);
+            $response = $service->OTA_HotelAvailRQ($args);
             
             $xmlRequest = $service->endpoint()->client()->__getLastRequest();
             dpm($this->ReadXML($xmlRequest));
