@@ -72,7 +72,7 @@ function sabre_services_soap_test()
 	{
 		$sabreService = new Sabre;
 		//$sabreService->HotelDescription('0219730');
-		$sabreService->HotelAvail('LGA');
+		//$sabreService->HotelAvail('LGA');
 	}
 }
 

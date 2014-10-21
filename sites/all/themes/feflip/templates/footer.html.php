@@ -50,7 +50,7 @@
 				</ul>
 			</nav>
 			<div class="fixed-bar">
-				<a id="brand" href=""><img src="media/brand/feather-and-flip.png" alt="Feather+flip"/></a>
+				<a id="brand" href=""><img src="<?php echo $relativePath; ?>media/brand/feather-and-flip.png" alt="Feather+flip"/></a>
 				<nav id="social-media" class="black">
 					<a href="" rel="twitter"></a>
 					<a href="" rel="facebook"></a>
