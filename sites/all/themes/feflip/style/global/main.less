@@ -48,7 +48,7 @@
 		/* ~ Header ~ */
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 		
-		@header-height: 400px;
+		@header-height: 600px;
 			
 		/* ~ Navigation ~ */
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
@@ -128,8 +128,15 @@
 			
 			a[id="brand"]
 			{
-				.set-size();
+				@w: 200px;
+				@h: 100px;
+				
+				.set-size(@w,@h);
 				.set-pos(absolute);
+				.z(1);
+				top: @ref-padding;
+				left: 50%;
+				margin-left: -@w/2;
 			}
 			
 			div.slideshow-gallery
@@ -188,16 +195,26 @@
 				
 				& > ul
 				{
-					.set-size(auto);
-					#align > .left;
+					@options: 4;
+					
+					.set-size(auto,100%);
+					#align > .right;
+					background-color: white;
+					padding: @ref-padding;
+					margin: 10px 0;
 					
 					li
 					{
 						.set-size();
+						.box-sizing();
 						#align > .left;
+						overflow: hidden;
 						
 						a
-						{}
+						{
+							.reset();
+							text-transform: uppercase;
+						}
 						
 						& > a + *
 						{
@@ -224,9 +241,9 @@
 			
 			& > header
 			{
-				.set-size();
-				#align > .center;
-				display: table;
+				.set-size(100%);
+				#align > .left;
+				text-align: center;
 				padding: @ref-padding 0;
 			}
 			
@@ -243,20 +260,188 @@
 						.set-size(@grid-5-col);
 						.box-sizing();
 						#align > .left;
+						display: block;
+						padding-bottom: @ref-padding;
+						
+						figure
+						{
+							.ui-set-circle-mask(@grid-5-col);
+						}
+						
+						h1,h2,h3,h4,h5,h6
+						{
+							.set-size(100%);
+							#align > .left;
+							text-align: center;
+							text-transform: uppercase;
+							display: block;
+							margin: @ref-padding/2 0;
+						}
 					}
 				}
 			}
 			
 			&[id="map-it"]
 			{
+				height: 600px;
+				display: block;
+				
+				& > header
+				{
+					.z(2);
+					
+					img
+					{
+						.set-size(100px);
+						#align > .center;
+						display: block;
+					}
+				}
+				
+				div[id="map"]
+				{
+					.set-size(100%,100%);
+					.set-pos(absolute);
+					.set-bg(green);
+					.set-coord(0,0);
+					.z(0);
+					
+					div.pin
+					{
+						.hide();
+					}
+				}
+				
 				aside
 				{
-					.hide();
+					@width: 200px;
+					@increment: 40px;
+					
+					.set-size(@width,100%);
+					.set-bg(black);
+					.set-pos(absolute);
+					.set-coord(-@width + @increment,0);
+					.z(1);
+					
+					&.on
+					{
+						left: 0;
+					}
 				}
 			}
 			
 			&[id="travel-journal"]
-			{}
+			{
+				& > header
+				{
+					.set-size(@global-wrapper-width);
+					#align > .center;
+					overflow: hidden;
+					
+					button
+					{
+						.reset();
+						#ui-set-button > .rounded(black,12px,30px);
+						#align > .right;
+					}
+					
+					ul
+					{
+						.hide();
+					}
+				}
+				
+				*.quick-entry
+				{
+					@block-margin: @ref-padding;
+					
+					.set-size(@grid-3-col);
+					.box-sizing();
+					.set-bg(#333);
+					.set-box-shadow(grey,0,0,10px);
+					#align > .left;
+					margin: @gutter;
+					overflow: hidden;
+					
+					figure
+					{
+						.reset();
+						.set-size(100%,200px);
+						.set-bg(pink);
+						#align > .left;
+						
+						img
+						{
+							.set-size(100%);
+						}
+					}
+					
+					figure + footer
+					{
+						.set-size(100%);
+						.set-pos(absolute);
+						.box-sizing();
+						background-color: fadeout(@color-1,50%);
+						bottom: 0;
+						padding: @block-margin;
+						text-align: center;
+					}
+					
+					h3,h4,time
+					{
+						.set-size();
+						#align > .left;
+						clear: both;
+						text-align: center;
+					}
+					
+					// ---------------------------------------------------------
+					// | i | Specific styling
+					// - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+					
+					&.review
+					{
+						padding: @block-margin;
+					}
+					
+					&[id="newsletter-signup"]
+					{
+						padding: @block-margin;
+						
+						form
+						{
+							.set-size(100%);
+							#align > .left;
+							
+							input
+							{
+								.reset();
+								.set-size(100%);
+								#align > .left;
+								
+								&[type="email"],
+								&[type="text"]
+								{
+									.box-sizing();
+									background-color: white;
+									padding: @block-margin;
+								}
+								
+								&[type="submit"]
+								{
+									text-transform: uppercase;
+								}
+							}
+						}
+					}
+					
+					&[id="instagram-feed"]
+					{}
+					
+					&[id="twitter-feed"]
+					{}
+				}
+			}
 			
 			&[id="itinerary"]
 			{}
@@ -279,16 +464,67 @@
 		{
 			.set-bg(black);
 			
-			& > div.wrapper
+			& > nav
 			{
 				.set-size(@global-wrapper-width);
+				.box-sizing();
 				#align > .center;
 				display: block;
+				padding: @ref-padding 0;
+				overflow: hidden;
 				
 				ul
 				{
-					.set-size();
+					.set-size(@grid-3-col);
+					.box-sizing();
 					#align > .left;
+					padding: @gutter;
+					
+					li
+					{
+						.set-size(100%);
+						.box-sizing();
+						#align > .left;
+						padding-top: @gutter;
+						
+						&:first-child
+						{
+							border-bottom: solid 1px white;
+							text-transform: uppercase;
+							padding: @gutter @gutter @gutter 60px;
+						}
+					}
+				}
+			}
+			
+			& > div.fixed-bar
+			{
+				.set-size(100%,100px);
+				.box-sizing();
+				#align > .left;
+				background-color: white;
+				padding: @ref-padding;
+				
+				a[id="brand"]
+				{
+					.set-pos(absolute);
+					left: @ref-padding;
+				}
+				
+				nav[id="social-media"]
+				{
+					.set-size();
+					.ui-set-social-media-nav(black);
+					#align > .center;
+					display: table;
+				}
+				
+				small
+				{
+					.set-size(100%);
+					#align > .left;
+					text-align: center;
+					padding: @ref-padding/2 0;
 				}
 			}
 		}

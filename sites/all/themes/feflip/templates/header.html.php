@@ -5,7 +5,7 @@
         /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */ ?>
         
         <header>
-                <a id="brand" href=""><img src="<?php echo $relativePath; ?>media/brand/feather-and-flip.png" alt="Feather+flip"/></a>
+                <a id="brand" href=""><img src="<?php echo variable_get('relativePath'); ?>media/brand/feather-and-flip.png" alt="Feather+flip"/></a>
                 <nav id="social-media" class="white">
                         <a href="" rel="twitter"></a>
                         <a href="" rel="facebook"></a>
@@ -25,7 +25,7 @@
                                 <?php for($i=0;$i<4;$i++): ?>
                                 <article class="slideshow-item">
                                         <figure>
-                                                <img src="<?php echo $relativePath; ?>media/destination/barcelona-by-feather-and-flip.jpg" alt="City, Country"/>
+                                                <img src="<?php echo variable_get('relativePath'); ?>media/destination/barcelona-by-feather-and-flip.jpg" alt="City, Country"/>
                                         </figure>
                                         <div class="info-wrapper">
                                                 <h1>city,country</h1>

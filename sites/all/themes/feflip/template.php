@@ -4,20 +4,23 @@
  * Add body classes if certain regions have content.
  */
 function feflip_preprocess_html(&$variables) {
+        $productionURL  = 'feather+flip.com';
+        $uriSplitter    = explode('/',$_SERVER['REQUEST_URI']);
+        $url            = ($_SERVER['HTTP_HOST'] == $productionURL) ? '' : $uriSplitter[1].'/sites/all/themes/feflip'; 
+        $relativePath   = $url.'/';  
+  
+        variable_set('relativePath', $relativePath);
+        
+        variable_set('pageID', 'global');
 	if (drupal_is_front_page())
-	    $variables['pageID'] = 'home';
-        else
-            $variables['pageID'] = 'global';
+	    variable_set('pageID', 'home');
 }
 
 /**
  * Override or insert variables into the page template for HTML output.
  */
 function feflip_process_html(&$variables) {
-  // Hook into color.module.
-  if (module_exists('color')) {
-    _color_html_alter($variables);
-  }
+
 }
 
 /**
@@ -64,22 +67,6 @@ function feflip_preprocess_views_view(&$variables) {
  
 }
 
-/**
- * Override or insert variables into the block template.
- */
-function feflip_preprocess_block(&$variables) {
-  // In the header region visually hide block titles.
-  if ($variables['block']->region == 'header') {
-    $variables['title_attributes_array']['class'][] = 'element-invisible';
-  }
-}
-
-/**
- * Implements theme_menu_tree().
- */
-function feflip_menu_tree($variables) {
-  return '<ul class="menu clearfix">' . $variables['tree'] . '</ul>';
-}
 
 /**
  * Implements theme_field__field_type().

@@ -13,7 +13,7 @@
 </section>  
 <section id="map-it">
         <header>
-                <img src="" alt="MAP IT. Where to go now"/>
+                <img src="<?php echo variable_get('relativePath'); ?>media/map/map-it-where-to-go-now.png" alt="MAP IT. Where to go now"/>
         </header>
         <aside>
                 <nav>
@@ -29,7 +29,7 @@
                         </figure>
                 </nav>
         </aside>
-        <div id="map">
+        <div id="map" ng-controller="MapCtrl">
                 <div class="pin" data-lat="" data-lon="">
                         <a href="" class="info">
                                 <div class="wrapper">
@@ -43,7 +43,7 @@
                 </div>
         </div>
 </section>
-<section id="blog">
+<section id="travel-journal">
         <header>
                 <button class="rounded-btn icon arrow-down">Filter by category</button>
                 <ul>
@@ -52,14 +52,15 @@
                         <li>category</li>
                 </ul>
         </header>
-        <div class="quick-entry">
+        <div id="newsletter-signup" class="quick-entry">
                 <h3>Join the adventure</h3>
                 <h4>Sign up for our newsletter</h4>
-                <form id="newsletter-signup">
-                        <input type="email" placeholder="" value=""/>
+                <form>
+                        <input type="email" placeholder="Your email address" value=""/>
                         <input type="submit" value="submit"/>
                 </form>
         </div>
+        <?php for($i=0;$i<5;$i++): ?>
         <article class="quick-entry">
                 <figure>
                         <img src="" alt=""/>
@@ -69,9 +70,10 @@
                         <time datetime="2008-02-14 20:00">Date</time>
                 </footer>
         </article>
-        <article class="quick-entry">
+        <?php endfor; ?>
+        <article class="quick-entry review">
                 <h3>hotel le panam</h3>
                 <h4>Sign up for our newsletter</h4>
                 <time datetime="2008-02-14 20:00">Date</time>
         </article>
-</section>   
+</section>  

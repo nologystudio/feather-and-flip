@@ -20,6 +20,27 @@
         ---------------------------------------------------------------------------------------------------------------- */
 		
 		/* ------------------------------------------------------------------------------------------------------------- */
+		/* ~ Circle mask ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+	
+		.ui-set-circle-mask(@size)
+		{
+			&
+			{
+				.reset();
+				.set-size(@size,@size);
+				border-radius: 2 * @size;
+				overflow: hidden;
+				
+				img
+				{
+					.set-size(100%,100%);
+					#align > .left;
+				}
+			}
+		}
+		
+		/* ------------------------------------------------------------------------------------------------------------- */
 		/* ~ Social media nav ~ */
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 		
@@ -62,11 +83,13 @@
 	
 		#ui-set-button
 		{
-			.rounded(@color,@font-size)
+			.rounded(@color,@font-size,@padding:@ref-padding)
 			{
 				font-size: @font-size;
 				background-color: @color;
-				padding: 0 20px;
+				padding: @unit @padding;
+				border-radius: 100px;
+				text-transform: uppercase;
 			}
 		}
 		
@@ -121,18 +144,28 @@
 						.set-size(@w,@h);
 						.set-pos(absolute);
 						.set-bg(yellow);
-						#align > .absolute-center(@h,@w);
 						.z(1);
+						#align > .absolute-center(@h,@w);
 						display: block;
 						
 						h1,h2,h3,h4,h5,h6
 						{
 							text-align: center;
+							text-transform: uppercase;
+							text-shadow: 1px 1px 0px black;
 						}
 						
 						a
 						{
-							text-align: center;
+							.set-size();
+							.box-sizing();
+							margin: @unit auto;
+							display: table;
+							
+							&.rounded-btn
+							{
+								#ui-set-button > .rounded(black,12px,30px);
+							}
 						}
 					}
 				}

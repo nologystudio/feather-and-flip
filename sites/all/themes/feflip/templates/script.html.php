@@ -22,8 +22,8 @@
         ---------------------------------------------------------------------------------------------------------------- */ ?>
 	
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-		<script src="<?php echo $relativePath; ?>library/vendors/raphael-min.js" type="text/javascript" charset="utf-8"></script>
-		<script src="<?php echo $relativePath; ?>library/f+f-app.js" type="text/javascript" charset="utf-8"></script>
+		<script src="<?php echo variable_get('relativePath'); ?>library/vendors/raphael.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="<?php echo variable_get('relativePath'); ?>library/ffApp.js" type="text/javascript" charset="utf-8"></script>
 				
 		<script>
 		    var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];

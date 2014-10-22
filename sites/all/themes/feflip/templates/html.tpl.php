@@ -43,16 +43,12 @@
         $jsTrigger      = (isset($_GET['js']) ? $_GET['js'] : '');
         // | i | Header...
         $headerTitle    = $brandName.' | '.$pageTitle;
-        // | i | Navigation...
-        $state          = $pageID;
+
         // | i | http://ogp.me | Opengraph protocol...
         $opengraph      = true;
         $twitterCard    = false;
         // | i | Path & Media assets...
-        $productionURL  = 'feather+flip.com';
-        $uriSplitter    = explode('/',$_SERVER['REQUEST_URI']);
-        $url            = ($_SERVER['HTTP_HOST'] == $productionURL) ? '' : $uriSplitter[1].'/sites/all/themes/feflip'; 
-        $relativePath   = $url.'/';
+
         $logoPath       = "media/x-logo.png";
         
         $pageURL         = "";
@@ -80,7 +76,7 @@
             <link rel="shortcut icon" href="media/favicon.ico" type="image/x-icon">
                 <link rel="icon"          href="media/favicon.ico" type="image/x-icon">
                 
-            <link rel="image_src"    href="<?php echo $relativePath.'media/sharing/'.$siteImage.'.jpg'; ?>">
+            <link rel="image_src"    href="<?php echo variable_get('relativePath').'media/sharing/'.$siteImage.'.jpg'; ?>">
             <meta name="description" content="<?php echo $pageDescription; ?>">
             <meta name="keywords"    content="<?php echo $pageKeywords; ?>">
            
@@ -90,7 +86,7 @@
             
                     <meta property="og:title"       content="<?php echo $headerTitle; ?>"> 
                     <meta property="og:locale"      content="es">  
-                    <meta property="og:image"       content="<?php echo $relativePath.'media/sharing/'.$siteImage.'.jpg'; ?>">
+                    <meta property="og:image"       content="<?php echo variable_get('relativePath').'media/sharing/'.$siteImage.'.jpg'; ?>">
                     <meta property="og:description" content="<?php echo $pageDescription; ?>"> 
                     <meta property="og:url"         content="<?php echo $pageURL; ?>">
                     <meta property="og:type"        content="website">
@@ -124,14 +120,14 @@
             
             <?php // | i | Set-up scripts and Less files...  ?>
             
-            <link   rel="stylesheet/less"  href="<?php echo $relativePath; ?>style/style-nology.less?v=1.0" title="style-nology" type="text/css" media="screen">
-                <script type="text/javascript" src="<?php echo $relativePath; ?>library/vendors/less-1.7.4.min.js"></script>		
-                <script src="<?php echo $relativePath; ?>library/vendors/modernizr.custom.f+f.js"></script>
+            <link   rel="stylesheet/less"  href="<?php echo variable_get('relativePath'); ?>style/style-nology.less?v=1.0" title="style-nology" type="text/css" media="screen">
+                <script type="text/javascript" src="<?php echo variable_get('relativePath'); ?>library/vendors/less-1.7.4.min.js"></script>		
+                <script src="<?php echo variable_get('relativePath'); ?>library/vendors/modernizr.custom.f+f.js"></script>
                 
                 
         </head>
         
-        <body class="<?php echo $pageID; ?>" <?php if(isset($jsTrigger)) echo 'data-trigger="'.$jsTrigger.'"'; ?> data-section="<?php echo $pageID; ?>">
+        <body class="<?php echo variable_get('pageID'); ?>" <?php if(isset($jsTrigger)) echo 'data-trigger="'.$jsTrigger.'"'; ?> data-section="<?php echo variable_get('pageID'); ?>">
 
         <?php include 'header.html.php'; ?>
     
