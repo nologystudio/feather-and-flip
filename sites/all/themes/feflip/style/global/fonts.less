@@ -53,17 +53,17 @@
 				font-weight: @weight;
 			}
 			
-			.garamond()
+			.serif()
 			{
-				font-family: 'Lato', sans-serif;
-				font-weight: @weight;
+				font-family: 'Times', serif;
+				font-style: italic;
 			}
 			
 			.icon()
 			{
 				font-family: 'i-set';
 			}
-			
+						
 			// | i | Styles
 			/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 			
@@ -111,6 +111,15 @@
 			.l-ubold(@size,@color,@lineheight:'auto')
 			{
 				.lato(900);
+				.set-up(@size,@color,@lineheight:'auto');
+			}
+			
+			// | i | Garamond
+			/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+			
+			.gar(@size,@color,@lineheight:'auto')
+			{
+				.serif();
 				.set-up(@size,@color,@lineheight:'auto');
 			}
 		}

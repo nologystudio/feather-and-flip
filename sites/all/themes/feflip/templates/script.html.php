@@ -21,13 +21,21 @@
         *  
         ---------------------------------------------------------------------------------------------------------------- */ ?>
 	
+		
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-		<script src="<?php echo variable_get('relativePath'); ?>library/vendors/raphael.min.js" type="text/javascript" charset="utf-8"></script>
-		<script src="<?php echo variable_get('relativePath'); ?>library/ffApp.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script type="text/javascript" charset="utf-8" src="<?php echo variable_get('relativePath'); ?>library/vendors/angular/angular.min.js"></script>
+		<script type="text/javascript" charset="utf-8" src="<?php echo variable_get('relativePath'); ?>library/vendors/angular/angular-route.min.js"></script>
+		<script type="text/javascript" charset="utf-8" src="<?php echo variable_get('relativePath'); ?>library/vendors/transit.min.js" ></script>
+		<script type="text/javascript" charset="utf-8" src="<?php echo variable_get('relativePath'); ?>library/vendors/raphael.min.js" ></script>
+		<script type="text/javascript" charset="utf-8" src="<?php echo variable_get('relativePath'); ?>library/vendors/kartograph.min.js" ></script>
+		
+		<script type="text/javascript" src="<?php echo variable_get('relativePath'); ?>library/ffApp.js"></script>
+		<script type="text/javascript" src="<?php echo variable_get('relativePath'); ?>library/controllers/ffControllers.js"></script>
 				
 		<script>
 		    var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
 		    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
 		    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
 		    s.parentNode.insertBefore(g,s)}(document,'script'));
-		</script>
+		</script>		

@@ -290,6 +290,14 @@
 			 transition: background-color 0.1s ease-in-out;
 		}
 		
+		.animate-all()
+		{
+			-webkit-transition: all 0.5s ease-in-out;  
+			-moz-transition:    all 0.5s ease-in-out;  
+			-o-transition:      all 0.5s ease-in-out;  
+			transition:         all 0.5s ease-in-out; 
+		}
+		
 		/* ------------------------------------------------------------------------------------------------------------- */
 		/* ~ Columns ~ */
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
@@ -319,6 +327,14 @@
 		
 		.set-placeholder-style(@color)
 		{}
+		
+		.performance()
+		{
+			-webkit-transform: translate3d(0, 0, 0);
+			-moz-transform: translate3d(0, 0, 0);
+			-ms-transform: translate3d(0, 0, 0);
+			transform: translate3d(0, 0, 0);
+		}
 		
 		/* ------------------------------------------------------------------------------------------------------------- */
 		/* ~ Specific styling ~ */

@@ -31,6 +31,7 @@
 				.set-size(@size,@size);
 				border-radius: 2 * @size;
 				overflow: hidden;
+				background-color: @color-1;
 				
 				img
 				{
@@ -44,7 +45,7 @@
 		/* ~ Social media nav ~ */
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 		
-		.ui-set-social-media-nav(@color:white,@btn-size:28px)
+		.ui-set-social-media-nav(@color:white,@btn-size:34px)
 		{
 			& > a
 			{
@@ -66,8 +67,8 @@
 				
 				&[rel="facebook"]   { .set-icon('e0aa'); }
 				&[rel="twitter"]    { .set-icon('e0ab'); }
-				&[rel="pinterest"]  { .set-icon(''); }
-				&[rel="instagram"]  { .set-icon(''); }
+				&[rel="pinterest"]  { .set-icon('e0ac'); }
+				&[rel="instagram"]  { .set-icon('e0b1'); }
 				&[rel="google-plus"]{ .set-icon('e0ad'); }
 				
 				&:hover
@@ -83,11 +84,11 @@
 	
 		#ui-set-button
 		{
-			.rounded(@color,@font-size,@padding:@ref-padding)
+			.rounded(@color:@color-2,@font-size,@padding:@ref-padding)
 			{
-				font-size: @font-size;
+				#font > .l-light(@font-size,white);
 				background-color: @color;
-				padding: @unit @padding;
+				padding: 2 * @unit @padding;
 				border-radius: 100px;
 				text-transform: uppercase;
 			}
@@ -140,31 +141,62 @@
 					{
 						@w: @global-wrapper-width/2;
 						@h: @header-height/2;
+						@m: -120px;
 						
 						.set-size(@w,@h);
 						.set-pos(absolute);
-						.set-bg(yellow);
 						.z(1);
 						#align > .absolute-center(@h,@w);
+						margin-top: @m;
 						display: block;
-						
-						h1,h2,h3,h4,h5,h6
-						{
-							text-align: center;
-							text-transform: uppercase;
-							text-shadow: 1px 1px 0px black;
-						}
 						
 						a
 						{
-							.set-size();
-							.box-sizing();
-							margin: @unit auto;
-							display: table;
+							@shadow: 1px 1px 0px black;;
 							
-							&.rounded-btn
+							.set-size(100%);
+							.box-sizing();
+							.animate-opacity();
+							.set-opacity(1);
+							#align > .left;
+							margin: @unit auto;
+							
+							h1,h2,h3,h4,h5,h6
 							{
-								#ui-set-button > .rounded(black,12px,30px);
+								.set-size();
+								#font > .l-bold(48px,white);
+								text-align: center;
+								text-transform: uppercase;
+								text-shadow: @shadow;
+							}
+							
+							span
+							{
+								#align > .left;
+								display: block;
+								clear: both;
+								
+								&.rounded-btn
+								{
+									.set-size();
+									#ui-set-button > .rounded(@color-2,20px,40px);
+									#align > .center;
+									display: table;
+								}
+							
+								&.cursive
+								{
+									.set-size(100%);
+									#font > .gar(18px,white);
+									text-align: center;
+									margin: @unit 0 @ref-padding 0;
+									text-shadow: @shadow;
+								}
+							}
+							
+							&:hover
+							{
+								.set-opacity(0.5);
 							}
 						}
 					}

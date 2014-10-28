@@ -12,12 +12,13 @@
 <input type="hidden" name="form_id" value="user_login" />
 <div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Log in" class="form-submit" /></div></div></form>  
 <section id="start-your-journey">
-        <header>start your journey</header>
+        <header><h3 class="simple">start your journey</h3></header>
         <div class="gallery-wrapper">
                 <?php for($i=0;$i<5;$i++): ?>
                 <a href="" rel="destination" class="gallery-item">
                         <figure class="circle-mask">
-                                <img src="" alt=""/>
+                                <img src="http://placehold.it/300x300" alt=""/>
+                                <div class="border"></div>
                         </figure>
                         <h2>destination</h2>
                 </a>
@@ -28,7 +29,7 @@
         <header>
                 <h3 class="icon compass">MAP IT<span> where to go now </span></h3>
         </header>
-        <aside>
+        <aside class="on">
                 <nav>
                         <ul>
                                 <li data-image=""><span>hotels</span>destination</li>

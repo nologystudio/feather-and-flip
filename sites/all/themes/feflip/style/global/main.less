@@ -129,15 +129,22 @@
 			.set-size(@global-width,@header-height);
 			.set-bg();
 			.z(0);
+			.performance();
 			overflow: hidden;
 			display: block;
+			min-height: @header-height/2;
 			
 			&:before
 			{
+				@color-top: fadeout(black,0%);
+				@color-bottom: fadeout(white,100%);
+				
 				.set-size(100%,25%);
 				.set-pos(absolute);
-				.set-bg-gradient(black,fadeout(white,100%));
-				content:'';
+				.set-bg-gradient(@color-top,@color-bottom);
+				.set-opacity(0.7);
+				.z(1);
+				content: '';
 			}
 			
 			a[id="brand"]
@@ -155,10 +162,13 @@
 			
 			nav[id="social-media"]
 			{
+				@margin: 75px;
+				
 				.set-pos(absolute);
 				.ui-set-social-media-nav();
-				top: 75px;
-				right: @ref-padding;
+				.z(1);
+				top: @margin;
+				right: @margin;
 			}
 			
 			div.slideshow-gallery
@@ -187,6 +197,7 @@
 				& > form[id="search"]
 				{
 					.reset();
+					.set-size(@grid-3-col);
 					#align > .left;
 					
 					input
@@ -213,7 +224,6 @@
 					
 					.set-size(auto,100%);
 					#align > .right;
-					background-color: white;
 					padding: @ref-padding;
 					margin: 10px 0;
 					
@@ -223,11 +233,15 @@
 						.box-sizing();
 						#align > .left;
 						overflow: hidden;
+						margin: 0 @gutter;
 						
 						a
 						{
 							.reset();
+							#font > .l-light(18px,white);
+							#align > .left;
 							text-transform: uppercase;
+							display: block;
 						}
 						
 						& > a + *
@@ -262,13 +276,33 @@
 				
 				h1,h2,h3
 				{
+					.set-size();
+					#font > .l-ubold(36px,@grey-1);
+					display: block;
+					
 					span
 					{
-						
+						#font > .gar(18px,@grey-1);
+						clear: both;
+						display: block;
 					}
 					
-					&.feather{}
-					&.compass{}
+					&.feather
+					{
+						.set-bg(orange);
+					}
+					
+					&.compass
+					{
+						.set-bg(pink);
+					}
+					
+					&.simple
+					{
+						#font > .l-light(22px,@color-2);
+						text-transform: uppercase;
+						text-decoration: underline;
+					}
 				}
 			}
 			
@@ -282,6 +316,9 @@
 					
 					a
 					{
+						@gutter: @ref-padding;
+						@border-weight: 2 * @unit;
+						
 						.set-size(@grid-5-col);
 						.box-sizing();
 						#align > .left;
@@ -290,17 +327,68 @@
 						
 						figure
 						{
-							.ui-set-circle-mask(@grid-5-col);
+							.ui-set-circle-mask(@grid-5-col - @gutter);
+							.performance();
+							margin: 0 @gutter/2;
+							background-color: @grey-1;
+							overflow: hidden;
+							
+							// | i | This fix the issue with the mask in Safari
+							-webkit-mask-image: -webkit-radial-gradient(circle,@grey-1,@grey-1);
+							
+							img
+							{
+								.set-opacity(1);
+								.animate-opacity();
+								#align > .left;
+								display: block;
+							}
+							
+							div.border
+							{
+								.set-size(100%,100%);
+								.ui-set-circle-mask(100%);
+								.set-pos(absolute);
+								.box-sizing();
+								.animate-all();
+								.set-opacity(0);
+								background-color: transparent;
+								border: solid 1px @grey-1;
+							}
 						}
 						
 						h1,h2,h3,h4,h5,h6
 						{
 							.set-size(100%);
+							.animate-all();
+							#font > .l-light(18px,@color-2);
 							#align > .left;
 							text-align: center;
 							text-transform: uppercase;
 							display: block;
 							margin: @ref-padding/2 0;
+						}
+						
+						&:hover
+						{
+							figure
+							{
+								img
+								{
+									.set-opacity(0.5);
+								}
+								
+								div.border
+								{
+									.set-opacity(1);
+									border: solid @border-weight @grey-1;
+								}
+							}
+							
+							*
+							{
+								color: @grey-1;
+							}
 						}
 					}
 				}
@@ -497,7 +585,7 @@
 				.box-sizing();
 				#align > .center;
 				display: block;
-				padding: @ref-padding 0;
+				padding: 0 0 @ref-padding 0;
 				overflow: hidden;
 				
 				ul
@@ -516,17 +604,20 @@
 						
 						&:first-child
 						{
-							@height: 70px; 
-							
-							#font > .l-light(24px,@color-2,@height);
+							#font > .l-light(24px,@color-2);
+							background-color: red;
 							text-transform: uppercase;
 							border-bottom: solid 1px @color-2;
-							padding-bottom: @gutter;
+							padding: 50px;
 							
 							span
 							{
-								.set-size(@height,@height);
-								#align > .left;
+								@size: 200px; 
+								
+								.set-size(@size,@size);
+								.set-pos(absolute);
+								bottom: 0;
+								left: 0;
 								
 								&.popular
 								{
@@ -564,16 +655,25 @@
 			
 			& > div.fixed-bar
 			{
-				.set-size(100%,100px);
+				@height: 100px;
+				
+				.set-size(100%,@height);
 				.box-sizing();
 				#align > .left;
 				background-color: @color-1;
-				padding: @ref-padding;
+				padding: 0 @ref-padding;
 				
 				a[id="brand"]
 				{
+					.set-size(auto,100%);
 					.set-pos(absolute);
 					left: @ref-padding;
+					
+					img
+					{
+						.reset();
+						.set-size(auto,100%);
+					}
 				}
 				
 				nav[id="social-media"]
