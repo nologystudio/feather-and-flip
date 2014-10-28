@@ -26,7 +26,7 @@
 </section>  
 <section id="map-it">
         <header>
-                <img src="<?php echo variable_get('relativePath'); ?>media/map/map-it-where-to-go-now.png" alt="MAP IT. Where to go now"/>
+                <h3 class="icon compass">MAP IT<span> where to go now </span></h3>
         </header>
         <aside>
                 <nav>
@@ -58,6 +58,7 @@
 </section>
 <section id="travel-journal">
         <header>
+                <h3 class="icon feather">TRAVEL<span> journal </span></h3>
                 <button class="rounded-btn icon arrow-down">Filter by category</button>
                 <ul>
                         <li>category</li>

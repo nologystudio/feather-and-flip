@@ -39,7 +39,7 @@
 					<li><a href="">hotel, country</a></li>
 				</ul>
 				<ul>
-					<li><span class="icon f+f"></span>feather + flip</li>
+					<li><span class="icon ff"></span>feather + flip</li>
 					<li><a href="">about us</a></li>
 					<li><a href="">travel journal</a></li>
 					<li><a href="">FAQs</a></li>

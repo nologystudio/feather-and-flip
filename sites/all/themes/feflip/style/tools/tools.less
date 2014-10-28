@@ -33,7 +33,7 @@
 		/* ~ Background ~ */
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 		
-		.set-bg(@color:#ccc,@url:'@{media-url}textures/no-image.png',@repeat:no-repeat,@x:center,@y:center)
+		.set-bg(@color:#ccc,@url:'',@repeat:no-repeat,@x:center,@y:center)
 		{
 			background: @color url('@{url}') @repeat @x @y;
 		}
@@ -80,7 +80,7 @@
 		
 		.set-bg-gradient(@color-top:black,@color-bottom:#333)
 		{
-			background-color: @color-top;
+			background-color: transparent;
 			background-image: -webkit-gradient(linear,left top,left bottom,from(@color-top),to(@color-bottom));
 			background-image: -webkit-linear-gradient(top,@color-top,@color-bottom);
 			background-image: -ms-linear-gradient(top,@color-top,@color-bottom);
@@ -234,20 +234,16 @@
 		/* ~ Add side icon ~ */
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 		
-		.add-right-icon(@image:'',@padding:30px,@height:25px)
+		.add-right-icon(@image:'',@padding:30px)
 		{	
-			.set-size(auto,@height);
 			.set-bg(transparent,'@{media-url}icons/@{image}',no-repeat,right,center);
 			padding-right: @padding;
-			line-height: @height;
 		}
 		
-		.add-left-icon(@image:'',@padding:30px,@height:25px)
+		.add-left-icon(@image:'',@padding:30px)
 		{
-			.set-size(auto,@height);
 			.set-bg(transparent,'@{media-url}icons/@{image}',no-repeat,left,center);
 			padding-left: @padding;
-			line-height: @height;
 		}
 		
 		/* ------------------------------------------------------------------------------------------------------------- */

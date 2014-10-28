@@ -5,7 +5,7 @@
         /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */ ?>
         
         <header>
-                <a id="brand" href=""><img src="<?php echo variable_get('relativePath'); ?>media/brand/feather-and-flip.png" alt="Feather+flip"/></a>
+                <a id="brand" href=""><img src="<?php echo variable_get('relativePath'); ?>media/brand/feather-and-flip-white-logo.png" alt="Feather+flip"/></a>
                 <nav id="social-media" class="white">
                         <a href="" rel="twitter"></a>
                         <a href="" rel="facebook"></a>

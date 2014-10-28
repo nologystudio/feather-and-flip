@@ -116,10 +116,11 @@
                
             <link rel="canonical" href="">		    
             <link rel="alternate" hreflang="x-default" href="">
-            <link rel="alternate" hreflang="en-UK" href="" title="English (UK)">
+            <link rel="alternate" hreflang="en-US" href="" title="English (US)">
             
             <?php // | i | Set-up scripts and Less files...  ?>
             
+            <link   href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
             <link   rel="stylesheet/less"  href="<?php echo variable_get('relativePath'); ?>style/style-nology.less?v=1.0" title="style-nology" type="text/css" media="screen">
                 <script type="text/javascript" src="<?php echo variable_get('relativePath'); ?>library/vendors/less-1.7.4.min.js"></script>		
                 <script src="<?php echo variable_get('relativePath'); ?>library/vendors/modernizr.custom.f+f.js"></script>

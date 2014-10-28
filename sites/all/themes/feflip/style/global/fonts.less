@@ -36,7 +36,7 @@
 		    font-style: normal;
 		}		
 		
-		#set-font-style
+		#font
 		{
 			// | i | Set fonts...
 			/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
@@ -45,6 +45,18 @@
 			{
 				-webkit-font-smoothing: antialiased;
 				text-shadow: 1px 1px 1px rgba(0,0,0,0.001);
+			}
+			
+			.lato(@weight)
+			{
+				font-family: 'Lato', sans-serif;
+				font-weight: @weight;
+			}
+			
+			.garamond()
+			{
+				font-family: 'Lato', sans-serif;
+				font-weight: @weight;
 			}
 			
 			.icon()
@@ -67,6 +79,39 @@
 				.icon();
 				.set-up(@size,@color,@lineheight);
 				.browser-fixes();
+			}
+			
+			// | i | Lato
+			/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+			
+			.l-thin(@size,@color,@lineheight:'auto')
+			{
+				.lato(100);
+				.set-up(@size,@color,@lineheight:'auto');
+			}
+			
+			.l-light(@size,@color,@lineheight:'auto')
+			{
+				.lato(300);
+				.set-up(@size,@color,@lineheight:'auto');
+			}
+			
+			.l-normal(@size,@color,@lineheight:'auto')
+			{
+				.lato(400);
+				.set-up(@size,@color,@lineheight:'auto');
+			}
+			
+			.l-bold(@size,@color,@lineheight:'auto')
+			{
+				.lato(700);
+				.set-up(@size,@color,@lineheight:'auto');
+			}
+			
+			.l-ubold(@size,@color,@lineheight:'auto')
+			{
+				.lato(900);
+				.set-up(@size,@color,@lineheight:'auto');
 			}
 		}
 		
