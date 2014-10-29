@@ -54,7 +54,7 @@
 		/* ~ Navigation ~ */
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 		
-		@nav-height: 100px;
+		@nav-height: 120px;
 		
 		/* ~ Section ~ */
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
@@ -183,10 +183,13 @@
 			
 		body > nav[role="main-navigation"]
 		{
+			@int-height: 60px;
+			
 			.set-size(100%,@nav-height);
 			.set-bg(fadeout(black,20%));
+			.box-sizing();
 			.z(1);
-			margin-top: -@nav-height;
+			padding: @ref-padding 0;
 			
 			div.wrapper
 			{
@@ -198,22 +201,30 @@
 				{
 					.reset();
 					.set-size(@grid-3-col);
+					.set-bg(fadeout(white,80%));
 					#align > .left;
+					border-radius: 2 * @int-height;
 					
 					input
 					{
 						.reset();
-						.set-bg(fadeout(white,50%));
+						.set-size(100%,@int-height);
+						.box-sizing();
 						#align > .left;
-						padding: @ref-padding;
-						margin: 2 * @unit 0;
 						
 						&[type="text"]
-						{}
+						{
+							#font > .l-normal(18px,#ccc,@int-height);
+							padding: 0 @ref-padding;
+						}
 						
 						&[type="submit"]
 						{	
-							.set-bg();
+							.set-size(@int-height,@int-height);
+							.set-pos(absolute);
+							.set-bg(transparent,'@{media-url}icons/search-white-icon.png');
+							background-size: auto 50%;
+							right: @unit;
 						}
 					}
 				}
@@ -224,28 +235,108 @@
 					
 					.set-size(auto,100%);
 					#align > .right;
-					padding: @ref-padding;
-					margin: 10px 0;
 					
-					li
+					& > li
 					{
 						.set-size();
 						.box-sizing();
 						#align > .left;
-						overflow: hidden;
-						margin: 0 @gutter;
+						margin: 0 2 * @gutter;
 						
-						a
+						& > a
 						{
 							.reset();
-							#font > .l-light(18px,white);
+							.animate-opacity();
+							.set-opacity(1);
+							#font > .l-light(16px,white);
 							#align > .left;
 							text-transform: uppercase;
 							display: block;
+							line-height: @int-height;
+							
+							&:hover
+							{
+								.set-opacity(0.5);
+							}
 						}
 						
 						& > a + *
 						{
+							.set-pos(absolute);
+						}
+						
+						& > a + ul
+						{
+							.reset();
+							.set-size(@grid-3-col);
+							.set-opacity(0);
+							.hide();
+							margin-top: 90px - @ref-padding;
+							padding-top: @ref-padding;
+							left: 50%;
+							margin-left: -@grid-3-col/2;
+							
+							li
+							{
+								.set-size(100%);
+								.box-sizing();
+								#align > .left;
+								padding: 0 @ref-padding;
+								padding-left: 2 * @ref-padding;
+								
+								a
+								{
+									.set-size(100%);
+									.box-sizing();
+									.animate-all();
+									#font > .l-light(18px,black);
+									#align > .left;
+									text-transform: uppercase;
+									border-bottom: solid fadeout(white,75%) 1px;
+									padding: @ref-padding/3 0;
+									line-height: 36px;
+									
+									&:hover
+									{
+										color: white;
+									}
+								}
+								
+								&:last-child
+								{
+									a
+									{
+										border: 0;
+									}
+								}
+							}
+							
+							// | i | Specific list styling...
+							/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+							
+							.set-background-icon(@icon)
+							{
+								li
+								{
+									.set-bg(@color-2,'@{media-url}icons/nav-@{icon}-list-icon.png',no-repeat,20px,center);
+									background-size: auto 25px;
+								}
+							}
+							
+							&[id="hotel-list"]
+							{
+								.set-background-icon('hotel');
+							}
+							
+							&[id="itinerary-list"]
+							{
+								.set-background-icon('itinerary');
+							}
+						}
+						
+						& > a + form
+						{
+							.set-size(100%);
 							.hide();
 						}
 					}
@@ -605,7 +696,7 @@
 						&:first-child
 						{
 							#font > .l-light(24px,@color-2);
-							background-color: red;
+							background-color: black;
 							text-transform: uppercase;
 							border-bottom: solid 1px @color-2;
 							padding: 50px;
@@ -655,7 +746,7 @@
 			
 			& > div.fixed-bar
 			{
-				@height: 100px;
+				@height: 130px;
 				
 				.set-size(100%,@height);
 				.box-sizing();
@@ -672,7 +763,8 @@
 					img
 					{
 						.reset();
-						.set-size(auto,100%);
+						.set-size(auto,70%);
+						margin-top: 5%;
 					}
 				}
 				
@@ -682,6 +774,7 @@
 					.ui-set-social-media-nav(black);
 					#align > .center;
 					display: table;
+					margin-top: 45px;
 				}
 				
 				small

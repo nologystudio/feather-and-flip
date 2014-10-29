@@ -55,7 +55,7 @@
                         <ul>
                                 <li>
                                         <a href="/#/hotel-reviews">hotel reviews</a>
-                                        <ul>
+                                        <ul id="hotel-list">
                                                 <li><a href="#">hotel</a></li>
                                                 <li><a href="#">hotel</a></li>
                                                 <li><a href="#">hotel</a></li>
@@ -64,7 +64,7 @@
                                 </li>
                                 <li>
                                         <a href="/#/intineraries">itineraries</a>
-                                        <ul>
+                                        <ul id="itinerary-list">
                                                 <li><a href="#">itinerary</a></li>
                                                 <li><a href="#">itinerary</a></li>
                                                 <li><a href="#">itinerary</a></li>
