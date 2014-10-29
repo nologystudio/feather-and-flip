@@ -128,7 +128,7 @@
                 
         </head>
         
-        <body class="<?php echo variable_get('pageID'); ?>" ng-view <?php if(isset($jsTrigger)) echo 'data-trigger="'.$jsTrigger.'"'; ?> data-section="<?php echo variable_get('pageID'); ?>">
+        <body class="<?php echo variable_get('pageID'); ?>" ng-view>
 
         <?php include 'header.html.php'; ?>
     

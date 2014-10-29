@@ -360,16 +360,24 @@
 			
 			& > header
 			{
+				@h: 70px;
+				
 				.set-size(100%);
+				.box-sizing();
 				#align > .left;
 				text-align: center;
-				padding: @ref-padding 0;
-				
+				padding: 2 * @ref-padding 0;
+				overflow: hidden;
+				min-height: @h;
+					
 				h1,h2,h3
 				{
-					.set-size();
+					.set-size(@grid-3-col,@h);
+					.set-pos(absolute);
+					.set-coord(50%,50%);
 					#font > .l-ubold(36px,@grey-1);
-					display: block;
+					margin-left: -@grid-3-col/2;
+					margin-top: -@h/2;
 					
 					span
 					{
@@ -547,7 +555,7 @@
 					button
 					{
 						.reset();
-						#ui-set-button > .rounded(black,12px,30px);
+						#ui-set-button > .rounded(@color-2,16px,30px);
 						#align > .right;
 					}
 					
@@ -563,7 +571,7 @@
 					
 					.set-size(@grid-3-col);
 					.box-sizing();
-					.set-bg(#333);
+					.set-bg(@color-2);
 					.set-box-shadow(grey,0,0,10px);
 					#align > .left;
 					margin: @gutter;
@@ -573,7 +581,7 @@
 					{
 						.reset();
 						.set-size(100%,200px);
-						.set-bg(pink);
+						.set-bg(@color-2);
 						#align > .left;
 						
 						img
@@ -672,11 +680,13 @@
 			
 			& > nav
 			{
+				@vertical-padding: 2 * @ref-padding;
+				
 				.set-size(@global-wrapper-width);
 				.box-sizing();
 				#align > .center;
 				display: block;
-				padding: 0 0 @ref-padding 0;
+				padding: @vertical-padding 0;
 				overflow: hidden;
 				
 				ul
@@ -684,7 +694,7 @@
 					.set-size(@grid-3-col);
 					.box-sizing();
 					#align > .left;
-					padding: @gutter;
+					padding: @ref-padding/2;
 					
 					li
 					{
@@ -698,31 +708,36 @@
 							#font > .l-light(24px,@color-2);
 							background-color: black;
 							text-transform: uppercase;
-							border-bottom: solid 1px @color-2;
-							padding: 50px;
+							border-bottom: solid 1px fadeout(@color-2,50%);
+							padding: 60px 0 10px 50px;
+							margin-bottom: 10px;
 							
 							span
 							{
-								@size: 200px; 
+								@size: 100px; 
+								@bg-size: 30px;
 								
-								.set-size(@size,@size);
+								.set-size(@size/2,@size);
 								.set-pos(absolute);
-								bottom: 0;
-								left: 0;
+								bottom: @gutter;
+								left: @unit;
 								
 								&.popular
 								{
 									.set-bg(transparent,'@{media-url}icons/fcolor-hotel-icon.png',no-repeat,left,bottom);
+									.set-bgs(@bg-size);
 								}
 								
 								&.destination
 								{
 									.set-bg(transparent,'@{media-url}icons/fcolor-destination-icon.png',no-repeat,left,bottom);
+									.set-bgs(@bg-size);
 								}
 								
 								&.ff
 								{
 									.set-bg(transparent,'@{media-url}icons/fcolor-feather-icon.png',no-repeat,left,bottom);
+									.set-bgs(auto,80%);
 								}
 							}
 						}
@@ -732,8 +747,10 @@
 							.set-size(100%);
 							.set-opacity(1);
 							.animate-opacity();
+							.box-sizing();
 							#font > .l-light(12px,@color-2);
 							text-transform: uppercase;
+							padding-left: @gutter; 
 							
 							&:hover
 							{
@@ -754,11 +771,11 @@
 				background-color: @color-1;
 				padding: 0 @ref-padding;
 				
-				a[id="brand"]
+				a[id$="brand"]
 				{
 					.set-size(auto,100%);
 					.set-pos(absolute);
-					left: @ref-padding;
+					.set-coord(@ref-padding,0);
 					
 					img
 					{
@@ -766,9 +783,29 @@
 						.set-size(auto,70%);
 						margin-top: 5%;
 					}
+					
+					&[id="tzell-brand"]
+					{
+						right: @ref-padding;
+						left: auto;
+						
+						small
+						{
+							.reset();
+							.set-pos(absolute);
+							#font > .l-normal(10px,black);
+							top: @ref-padding;
+						}
+						
+						img
+						{
+							height: 35%;
+							margin-top: 35%;
+						}
+					}
 				}
 				
-				nav[id="social-media"]
+				& > nav[id="social-media"]
 				{
 					.set-size();
 					.ui-set-social-media-nav(black);
@@ -777,12 +814,13 @@
 					margin-top: 45px;
 				}
 				
-				small
+				& > small
 				{
 					.set-size(100%);
 					#align > .left;
+					#font > .l-normal(10px,black);
 					text-align: center;
-					padding: @ref-padding/2 0;
+					padding: @ref-padding 0 0 0;
 				}
 			}
 		}

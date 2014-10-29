@@ -58,6 +58,11 @@
 					<a href="" rel="pinterest"></a>
 					<a href="" rel="google-plus"></a>
 				</nav>
+				<a id="tzell-brand" href="http://www.tzell.com/tzell/index.htm" target="_blank">
+					<small>Powered by</small>
+					<img src="<?php echo variable_get('relativePath'); ?>media/brand/tzell-logo.png" alt="Powered by Tzell Travel Group"/>
+				</a>
+
 				<small>2014 FEATHER+FLIP LLC. ALL RIGHTS RESERVED</small>
 			</div>
 		</footer>
