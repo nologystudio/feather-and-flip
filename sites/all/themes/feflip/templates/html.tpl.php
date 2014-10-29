@@ -59,10 +59,10 @@
         ?>
         
         <!DOCTYPE html>
-        <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-        <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-        <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-        <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+        <!--[if lt IE 7]>      <html ng-app="ffApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+        <!--[if IE 7]>         <html ng-app="ffApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+        <!--[if IE 8]>         <html ng-app="ffApp" class="no-js lt-ie9"> <![endif]-->
+        <!--[if gt IE 8]><!--> <html ng-app="ffApp" class="no-js"> <!--<![endif]-->       
         
         <head>
             <meta charset="utf-8">
@@ -70,7 +70,6 @@
             <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
             <!--<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7, IE=9">-->
             <meta content="initial-scale=1, minimum-scale=1, width=device-width" name="viewport">		    
-            <base href="/feather-and-flip/">
             
             <title><?php echo $headerTitle; ?></title>
             <link rel="shortcut icon" href="media/favicon.ico" type="image/x-icon">
@@ -128,7 +127,7 @@
                 
         </head>
         
-        <body class="<?php echo variable_get('pageID'); ?>" ng-view>
+        <body class="<?php echo variable_get('pageID'); ?>">
 
         <?php include 'header.html.php'; ?>
     
