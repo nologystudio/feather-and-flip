@@ -74,6 +74,7 @@ function feflip_preprocess_views_view(&$variables) {
     */
     $variables['home_dests_slideshow'] = get_home_destinations('promote_to_slideshow');
     $variables['home_dests'] = get_home_destinations();
+    $variables['home_dests_map'] = get_home_destinations('promote_to_map');
   }
 }
 
