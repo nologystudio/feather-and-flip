@@ -30,6 +30,16 @@ function expedia_services_test()
 }
 
 /**
+ * Implements hook_permission.
+ */
+function expedia_services_permission() {
+  return array(
+    'expedia_services module' => array(
+      'title' => t('Expedia Services permission'),
+  ));
+}
+
+/**
  * Implements hook_menu().
  */
 function expedia_services_menu() {
@@ -39,7 +49,7 @@ function expedia_services_menu() {
 		'description' => 'Configuration expedia services connection',
 		'page callback' => 'drupal_get_form',
 		'page arguments' => array('expedia_services_form'),
-		'access arguments' => array('access administration pages'),
+		'access arguments' => array('expedia_services module'),
 		'type' => MENU_NORMAL_ITEM,
 	);
 

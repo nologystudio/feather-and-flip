@@ -77,6 +77,16 @@ function sabre_services_soap_test()
 }
 
 /**
+ * Implements hook_permission.
+ */
+function sabre_services_permission() {
+  return array(
+    'sabre_services module' => array(
+      'title' => t('Sabre Services permission'),
+  ));
+}
+
+/**
  * Implements hook_menu().
  */
 function sabre_services_menu() {
@@ -86,7 +96,7 @@ function sabre_services_menu() {
 		'description' => 'Configuration sabre services connection',
 		'page callback' => 'drupal_get_form',
 		'page arguments' => array('sabre_services_form'),
-		'access arguments' => array('access administration pages'),
+		'access arguments' => array('sabre_services module'),
 		'type' => MENU_NORMAL_ITEM,
 	);
 
