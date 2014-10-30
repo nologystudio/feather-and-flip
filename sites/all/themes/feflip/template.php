@@ -64,7 +64,17 @@ function feflip_preprocess_node(&$variables) {
 
 /* Add customized classes by block, view.. */
 function feflip_preprocess_views_view(&$variables) {
- 
+  $view = $variables['view'];
+
+  // Home View
+  if ($view->name == 'home' && $view->current_display == 'page') {
+
+    /* 
+    * Collect data for the destinations slideshow.
+    */
+    $variables['home_dests_slideshow'] = get_home_destinations('promote_to_slideshow');
+    $variables['home_dests'] = get_home_destinations();
+  }
 }
 
 
@@ -90,4 +100,24 @@ function feflip_field__taxonomy_term_reference($variables) {
   $output = '<div class="' . $variables['classes'] . (!in_array('clearfix', $variables['classes_array']) ? ' clearfix' : '') . '"' . $variables['attributes'] .'>' . $output . '</div>';
 
   return $output;
+}
+
+/* 
+* Get destinations promoted to front page
+* @param filter_field
+* @return array()
+*/
+function get_home_destinations($filter_field = 'promote') {
+  /*
+  * Get destinations promoted to frontpage altering the existing 'start_your_journey' view
+  * adding the promoted filter.
+  * 
+  */
+  $dest_view = views_get_view('start_your_journey');
+  // add filter criteria
+  $dest_view->set_display('page');
+  $dest_view->add_item($dest_view->current_display, 'filter', 'node', $filter_field, array('operator' => '=','value' => 1));
+  $dest_view->preview();
+
+  return $dest_view->result;
 }
