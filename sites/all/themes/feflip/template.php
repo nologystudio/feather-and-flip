@@ -20,6 +20,9 @@ function feflip_preprocess_html(&$variables) {
  * Override or insert variables into the page template for HTML output.
  */
 function feflip_process_html(&$variables) {
+  
+  //Load navigation main menu
+  get_header_main_navigation_menu();
 
 }
 
@@ -121,4 +124,38 @@ function get_home_destinations($filter_field = 'promote') {
   $dest_view->preview();
 
   return $dest_view->result;
+}
+
+/*
+ * Get main navigation menu for header
+ * @return string
+ */
+function get_header_main_navigation_menu(){
+  
+  $destinations =  Destination::getAllDestinationTileCountry();
+    
+  $navigationMenu = '<ul>'; 
+  
+  $main_menu = menu_navigation_links('menu-main-navigation');
+  
+  foreach ($main_menu as $key => $menu_item) {
+  
+  	$navigationMenu .= '<li><a href="'.url($menu_item['href']).'>'.$menu_item['title'].'</a>';
+        
+        //only for hotel reviews and itineraries
+        if ((strpos($key, '1700') !== FALSE || strpos($key, '1701') !== FALSE) && count($destinations) > 0)
+        {
+             $navigationMenu .= '<ul id="'.$menu_item['attributes']['title'].'">';
+             foreach($destinations as $destination)
+                 $navigationMenu .= '<li><a href="#">'.$destination.'</a></li>';
+             
+             $navigationMenu .= '</ul>';
+        }
+        
+        $navigationMenu .= '</li>';
+  }
+  
+  $navigationMenu .= '</ul>';
+  
+  return $navigationMenu;
 }
