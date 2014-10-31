@@ -59,13 +59,15 @@
 			
 			var wSize  = [$(window).width(),$(window).height()];
 			var header = $('body > header');
-			//var gItems = $element[4].children;
 			
-			console.log($element);
+			//var gItems = $element[4].children;
+			//console.log($element);
 			
 			// | i | Resize slideshow to match screen height...
+			
 			if(header.height() > wSize[1]) 
 				header.transition({height:$(window).height()});
+			
 			// | i | Resize image to fit in screen...
 			
 			/*var imgSize = [1280,800];
@@ -91,6 +93,7 @@
         	$('#landing-gallery, .gallery-container').css({
 	        	height : (size[1] + 10) + 'px'
         	});*/
+        	
 		}]);
 		
 		

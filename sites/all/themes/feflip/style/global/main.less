@@ -44,6 +44,7 @@
 		@color-1: #D9DFDE;
 		@color-2: #9CB1AD;
 		@color-3: #96A8A4;
+		@color-4: #7b8c88;
 		@grey-1:  #333333;
 		
 		/* ~ Header ~ */
@@ -378,6 +379,7 @@
 					#font > .l-ubold(36px,@grey-1);
 					margin-left: -@grid-3-col/2;
 					margin-top: -@h/2;
+					padding: @ref-padding/2 0;
 					
 					span
 					{
@@ -495,18 +497,18 @@
 			
 			&[id="map-it"]
 			{
-				height: 600px;
+				height: 700px;
 				display: block;
+				background-color: red;
 				
 				& > header
 				{
 					.z(2);
 					
-					img
+					h3
 					{
-						.set-size(100px);
-						#align > .center;
-						display: block;
+						.set-bg(transparent,'@{media-url}icons/black-compass-icon.png',no-repeat,20px,center);
+						.set-bgs(70px);
 					}
 				}
 				
@@ -514,7 +516,7 @@
 				{
 					.set-size(100%,100%);
 					.set-pos(absolute);
-					.set-bg(green);
+					.set-bg(@color-1);
 					.set-coord(0,0);
 					.z(0);
 					
@@ -526,14 +528,102 @@
 				
 				aside
 				{
-					@width: 200px;
-					@increment: 40px;
+					@width: 400px;
+					@increment: 15px;
 					
-					.set-size(@width,100%);
+					.set-size(@width,auto);
 					.set-bg(black);
 					.set-pos(absolute);
-					.set-coord(-@width + @increment,0);
+					.set-coord(-(@width+@increment),@ref-padding);
+					.set-box-shadow(@grey-1,0,0,@ref-padding);
 					.z(1);
+				
+					nav
+					{
+						@p: @ref-padding/2;
+						@tab-width: 80px;
+						
+						.set-size(@width);
+						#align > .left;
+						
+						div.tab
+						{
+							@h: 64px;
+							
+							.set-size(@tab-width,@h);
+							.set-pos(absolute);
+							.set-box-shadow(@grey-1,0,0,@ref-padding);
+							right: -@tab-width;
+							background-color: black;
+							border-radius: 0 @h @h 0;
+						}
+						
+						ul
+						{
+							.set-size(100%);
+							.box-sizing();
+							#align > .left;
+							padding: @p + @unit;
+							
+							li
+							{
+								@fs: 18px;
+								@border-style: solid 1px fadeout(@color-1,60%);
+								
+								.set-size(100%);
+								.box-sizing();
+								.animate-opacity();
+								.set-opacity(1);
+								#align > .left;
+								#font > .l-light(@fs,@color-2);
+								text-transform: uppercase;
+								padding: @gutter;
+								cursor: pointer;
+								
+								span
+								{
+									width: 80px;
+									text-align: center;
+									display: inline-block;
+									margin-right: 20px;
+								}
+								
+								&:first-child
+								{
+									#font > .l-normal(@fs,@color-2);
+									border-bottom: @border-style;
+									margin-bottom: 2 * @p - @gutter;
+								}
+								
+								&:last-child
+								{
+									padding-bottom: 2 * @p;
+									border-bottom: @border-style;
+								}
+								
+								&:hover
+								{
+									.set-opacity(0.5);
+								}
+							}
+						}
+						
+						figure
+						{
+							.reset();
+							.set-size(100%);
+							.box-sizing();
+							#align > .left;
+							padding: 0 @p @p @p;
+							
+							img
+							{
+								.set-size(100%,100px);
+								background-color: fadeout(@color-2,80%);
+								border: 0;
+							}
+						}
+					}
 					
 					&.on
 					{
@@ -545,6 +635,7 @@
 			&[id="travel-journal"]
 			{
 				background-color: white;
+				padding-bottom: 4 * @ref-padding;
 				
 				& > header
 				{
@@ -555,8 +646,39 @@
 					button
 					{
 						.reset();
-						#ui-set-button > .rounded(@color-2,16px,30px);
+						.animate-opacity();
+						.set-opacity(1);
+						#ui-set-button > .rounded(@color-3,16px,34px);
 						#align > .right;
+						padding-right: @ref-padding/2;
+						
+						span
+						{
+							.set-size();
+							.set-pos(absolute);
+							#font > .ic(22px,white);
+							#align > .right;
+							display: block;
+							margin-left: @unit;
+							margin-top: -2px;
+							
+							&:before
+							{
+								content: '\22';
+							}
+						}
+						
+						&:hover
+						{
+							.set-opacity(0.75);
+						}
+					}
+					
+					h3
+					{
+						.set-bg(transparent,'@{media-url}icons/grey-feather-icon.png',no-repeat,82%,bottom);
+						.set-bgs(auto,100px);
+						margin-top: -45px;
 					}
 					
 					ul
@@ -571,22 +693,24 @@
 					
 					.set-size(@grid-3-col);
 					.box-sizing();
-					.set-bg(@color-2);
 					.set-box-shadow(grey,0,0,10px);
 					#align > .left;
+					background-color: @color-2;
 					margin: @gutter;
 					overflow: hidden;
 					
 					figure
 					{
 						.reset();
-						.set-size(100%,200px);
+						.set-size(100%);
 						.set-bg(@color-2);
 						#align > .left;
+						display: block;
 						
 						img
 						{
 							.set-size(100%);
+							#align > .left;
 						}
 					}
 					
@@ -595,18 +719,50 @@
 						.set-size(100%);
 						.set-pos(absolute);
 						.box-sizing();
-						background-color: fadeout(@color-1,50%);
+						background-color: fadeout(@color-2,50%);
 						bottom: 0;
-						padding: @block-margin;
-						text-align: center;
+						padding: @block-margin/2 @block-margin;
 					}
 					
 					h3,h4,time
 					{
-						.set-size();
+						.set-size(100%);
 						#align > .left;
 						clear: both;
 						text-align: center;
+					}
+					
+					h3
+					{
+						#font > .l-light(24px,white);
+						text-transform: uppercase;
+						margin-bottom: @block-margin/2;
+					}
+					
+					h4
+					{
+						#font > .gar(20px,white);
+					}
+					
+					time
+					{
+						#font > .l-normal(12px,white);
+						text-transform: uppercase;
+						font-style: normal;
+						margin-top: @unit;
+					}
+					
+					hr
+					{
+						width: 50%;
+						margin: auto;
+						border: 0;
+						border-top: solid 1px fadeout(white,50%);
+					}
+					
+					hr + h4
+					{
+						margin-top: @block-margin/2;
 					}
 					
 					// ---------------------------------------------------------
@@ -616,11 +772,37 @@
 					&.review
 					{
 						padding: @block-margin;
+						
+						&[id]
+						{
+							h3
+							{
+								#font > .ic(48px,@color-4);
+							}
+							
+							.set-header-icon(@icon)
+							{
+								h3:before
+								{
+									content: '\@{icon}';
+								}
+							}
+							
+							&[id="twitter-feed"]
+							{
+								.set-header-icon('e094');
+							}
+							
+							&[id="instagram-feed"]
+							{
+								.set-header-icon('e09a');
+							}
+						}
 					}
 					
 					&[id="newsletter-signup"]
 					{
-						padding: @block-margin;
+						padding: @block-margin @block-margin/2;
 						
 						form
 						{
@@ -637,23 +819,22 @@
 								&[type="text"]
 								{
 									.box-sizing();
-									background-color: white;
-									padding: @block-margin;
+									#font > .l-normal(16px,white);
+									.set-placeholder-style(fadeout(white,50%));
+									background-color: @color-4;
+									padding: @block-margin/2 @block-margin;
+									margin: @ref-padding 0;
+									border-radius: @unit;
 								}
 								
 								&[type="submit"]
 								{
+									#font > .l-light(32px,white);
 									text-transform: uppercase;
 								}
 							}
 						}
 					}
-					
-					&[id="instagram-feed"]
-					{}
-					
-					&[id="twitter-feed"]
-					{}
 				}
 			}
 			

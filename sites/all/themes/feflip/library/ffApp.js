@@ -34,6 +34,9 @@
 				templateUrl : '',
 				controller  : 'HomeCtrl'
 			});
+			$routeProvider.otherwise({
+				redirectTo : '/home'
+			});
 		}]);
         
         
