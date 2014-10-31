@@ -1,0 +1,9 @@
+<?php 
+
+/**
+ * Implements hook_admin_paths_alter().
+ */
+function feflip_import_content_admin_paths_alter(&$paths) {
+  $paths['user'] = TRUE;
+  $paths['user/*'] = TRUE;
+}

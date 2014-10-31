@@ -1,0 +1,4 @@
+name = Feather & Flip import content
+description = Allows import zero-day data into drupal easily. Developed by <a target="_blank" href="http://nologystudio.com">NOLOGY.</a>
+core = 7.x
+configure = admin/config/feflip/import
