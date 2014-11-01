@@ -20,10 +20,9 @@ function feflip_preprocess_html(&$variables) {
  * Override or insert variables into the page template for HTML output.
  */
 function feflip_process_html(&$variables) {
-  
-  //Load navigation main menu
-  get_header_main_navigation_menu();
 
+  //Load navigation main menu
+  $variables['main_navigation'] = get_header_main_navigation_menu();
 }
 
 /**
@@ -81,6 +80,27 @@ function feflip_preprocess_views_view(&$variables) {
   }
 }
 
+/**
+ * Implements hook_form_alter().
+ */
+function feflip_form_alter(&$form, $form_state, $form_id) {
+  if ($form_id == 'user_login_block' || $form_id == 'user_login') {
+    $form['#attributes']['class'] = 'sign-in';
+    //TODO: customize login form
+    unset($form['name']['#title']);
+    $form['name']['#attributes']['placeholder'] = 'e-mail or username';
+    $form['name']['#description'] = '';
+
+    unset($form['pass']['#title']);
+    $form['pass']['#description'] = '';
+
+    $form['links']['#markup'] = '<div id="upgrade">
+    <h4>you deserve an upgrade</h4>
+    <h5>create a free membership to access insider-only hotel rates not available to the public.</h5>
+    <a href="" class="rounded-btn">free membership</a>
+    </div>';
+  }
+}
 
 /**
  * Implements theme_field__field_type().
@@ -136,23 +156,36 @@ function get_header_main_navigation_menu(){
     
   $navigationMenu = '<ul>'; 
   
-  $main_menu = menu_navigation_links('menu-main-navigation');
+  $main_menu = menu_tree_all_data('menu-main-navigation');
   
   foreach ($main_menu as $key => $menu_item) {
-  
-  	$navigationMenu .= '<li><a href="'.url($menu_item['href']).'>'.$menu_item['title'].'</a>';
+
+    // if user is logged in and is the 'join-us' item, render user menu inside
+    if (strpos($key, '1703') !== FALSE) {
+      if (user_is_logged_in()){
+        $navigationMenu .= '<li><a href="'.url('user').'">My Account</a>';
+        // TODO: get user menu
+      } else {
+        $navigationMenu .= '<li><a href="'.url($menu_item['link']['link_path']).'">'.$menu_item['link']['link_title'].'</a>';
+        // TODO: get feather and flip login form
+        $form = drupal_get_form('user_login');
+        $navigationMenu .= drupal_render($form);
+      }
+    } else {
+
+      $navigationMenu .= '<li><a href="'.url($menu_item['link']['link_path']).'">'.$menu_item['link']['link_title'].'</a>';
         
-        //only for hotel reviews and itineraries
-        if ((strpos($key, '1700') !== FALSE || strpos($key, '1701') !== FALSE) && count($destinations) > 0)
-        {
-             $navigationMenu .= '<ul id="'.$menu_item['attributes']['title'].'">';
-             foreach($destinations as $destination)
-                 $navigationMenu .= '<li><a href="#">'.$destination.'</a></li>';
-             
-             $navigationMenu .= '</ul>';
-        }
-        
-        $navigationMenu .= '</li>';
+      //only for hotel reviews and itineraries
+      if ((strpos($key, '1700') !== FALSE || strpos($key, '1701') !== FALSE) && count($destinations) > 0)
+      {
+           $navigationMenu .= '<ul id="'.$menu_item['link']['link_title'].'">';
+           foreach($destinations as $destination)
+               $navigationMenu .= '<li><a href="#">'.$destination.'</a></li>';
+           
+           $navigationMenu .= '</ul>';
+      }
+    }
+    $navigationMenu .= '</li>';
   }
   
   $navigationMenu .= '</ul>';

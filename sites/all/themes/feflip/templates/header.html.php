@@ -52,6 +52,8 @@
                                 <input type="text" placeholder="Enter destination or hotel" value=""/>
                                 <input type="submit" value=""/>
                         </form>
+                        <?php print_r($main_navigation); ?>
+                    <!--   
                         <ul>
                                 <li>
                                         <a href="/#/hotel-reviews">hotel reviews</a>
@@ -90,5 +92,6 @@
                                         </form>
                                 </li>
                         </ul>
+                    -->
                 </div>
         </nav>
