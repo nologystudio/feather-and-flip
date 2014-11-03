@@ -1,13 +1,3 @@
-
-<?php
-
-    if (!user_is_logged_in()){
-        $form = drupal_get_form('user_login');
-        print(drupal_render($form));
-    }
-
-?>
-
 <section id="start-your-journey">
         <header><h3 class="simple">start your journey</h3></header>
         <div class="gallery-wrapper">
