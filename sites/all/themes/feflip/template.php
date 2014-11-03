@@ -86,20 +86,114 @@ function feflip_preprocess_views_view(&$variables) {
 function feflip_form_alter(&$form, $form_state, $form_id) {
   if ($form_id == 'user_login_block' || $form_id == 'user_login') {
     $form['#attributes']['class'] = 'sign-in';
-    //TODO: customize login form
+    $form['#attributes']['rel'] = 'no-follow';
+
     unset($form['name']['#title']);
     $form['name']['#attributes']['placeholder'] = 'e-mail or username';
     $form['name']['#description'] = '';
 
     unset($form['pass']['#title']);
     $form['pass']['#description'] = '';
-
-    $form['links']['#markup'] = '<div id="upgrade">
-    <h4>you deserve an upgrade</h4>
-    <h5>create a free membership to access insider-only hotel rates not available to the public.</h5>
-    <a href="" class="rounded-btn">free membership</a>
-    </div>';
   }
+}
+
+/**
+ * Implements theme_form().
+ * Remove extra div and add content for login form
+ */
+function feflip_form($variables)
+{
+  $element = $variables['element'];
+  if (isset($element['#action'])) {
+    $element['#attributes']['action'] = drupal_strip_dangerous_protocols($element['#action']);
+  }
+  element_set_attributes($element, array('method', 'id'));
+  if (empty($element['#attributes']['accept-charset'])) {
+    $element['#attributes']['accept-charset'] = "UTF-8";
+  }
+  if ($element['#form_id'] == 'search_api_page_search_form'){
+    $element['#children'] = strip_tags($element['#children'], '<label><input>');
+    $element['#attributes']['id'] = 'search';
+    return '<form' . drupal_attributes($element['#attributes']) . '>' . $element['#children'] . '</form>';
+  }
+  elseif (in_array($element['#form_id'], array('user_login', 'user_login_block'))) {
+    $f  = '<form' . drupal_attributes($element['#attributes']) . '><div id="already-a-member">' . $element['#children'] . '</div>';
+    $f .= '<div id="upgrade"><h4>you deserve an upgrade</h4><h5>create a free membership to access insider-only hotel rates not available to the public.</h5><a href="/user/register" class="rounded-btn">free membership</a></div>';
+    $f .= '</form>';
+    return $f;
+  }
+  else {
+  // Custom div wrapper
+    return '<form' . drupal_attributes($element['#attributes']) . '>' . $element['#children'] . '</form>';
+  }
+}
+
+/**
+ * Implements theme_container().
+ * removing submit wrappers
+ */
+function feflip_container($variables) {
+  $element = $variables['element'];
+  // Ensure #attributes is set.
+  $element += array('#attributes' => array());
+
+  // Special handling for form elements.
+  if (isset($element['#array_parents'])) {
+    // Assign an html ID.
+    if (!isset($element['#attributes']['id'])) {
+      $element['#attributes']['id'] = $element['#id'];
+    }
+    // Add the 'form-wrapper' class.
+    $element['#attributes']['class'][] = 'form-wrapper';
+  }
+  return $element['#children'];
+}
+
+/**
+ * Implements theme_form_element().
+ * removing inputs wrappers
+ */
+function feflip_form_element($variables)
+{
+  $element = &$variables['element'];
+
+  // This function is invoked as theme wrapper, but the rendered form element
+  // may not necessarily have been processed by form_builder().
+  $element += array(
+    '#title_display' => 'before',
+    );
+
+  // Add element #id for #type 'item'.
+  if (isset($element['#markup']) && !empty($element['#id'])) {
+    $attributes['id'] = $element['#id'];
+  }
+
+  $output = '';
+
+  // If #title is not set, we don't display any label or required marker.
+  if (!isset($element['#title'])) {
+    $element['#title_display'] = 'none';
+  }
+
+  switch ($element['#title_display']) {
+    case 'before':
+    case 'invisible':
+    $output .= ' ' . theme('form_element_label', $variables);
+    $output .= ' ' . $element['#children'];
+    break;
+
+    case 'after':
+    $output .= ' ' . $element['#children'];
+    $output .= ' ' . theme('form_element_label', $variables) . "\n";
+    break;
+
+    case 'none':
+    case 'attribute':
+    // Output no label and no required marker, only the children.
+    $output .= ' ' . $element['#children'];
+    break;
+  }
+  return $output;
 }
 
 /**
