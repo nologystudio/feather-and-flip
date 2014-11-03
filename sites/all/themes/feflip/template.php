@@ -178,7 +178,7 @@ function get_header_main_navigation_menu(){
       //only for hotel reviews and itineraries
       if ((strpos($key, '1700') !== FALSE || strpos($key, '1701') !== FALSE) && count($destinations) > 0)
       {
-           $navigationMenu .= '<ul id="'.$menu_item['link']['link_title'].'">';
+           $navigationMenu .= '<ul id="'.$menu_item['link']['options']['attributes']['title'].'">';
            foreach($destinations as $destination)
                $navigationMenu .= '<li><a href="#">'.$destination.'</a></li>';
            
