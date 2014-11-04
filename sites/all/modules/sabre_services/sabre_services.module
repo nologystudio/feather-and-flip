@@ -71,7 +71,7 @@ function sabre_services_soap_test()
 	if (module_exists('wsclient'))
 	{
 		$sabreService = new Sabre;
-		//$sabreService->HotelDescription('0219730');
+		//$sabreService->HotelDescription('0051231');
 		//$sabreService->HotelAvail('LGA');
 	}
 }
@@ -181,6 +181,17 @@ function sabre_services_form($form, &$form_state) {
 		'#description'   => t("Sabre ARC code."),
 		'#required' => TRUE
 	);
+	$form['sabre_test_mode'] = array(
+		'#type'          => 'select',
+		'#title'         => t('Sabre: Test mode'),
+		'#options' 	 => array(
+				 	   0 => t('No'),
+				           1 => t('Yes'),
+				        ),		
+		'#default_value' => variable_get('sabre_test_mode'),
+		'#description'   => t("Use the web service testing Sabre"),
+		'#required' => TRUE
+	);	
 
   return system_settings_form($form);
 }

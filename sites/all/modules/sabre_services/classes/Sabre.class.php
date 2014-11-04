@@ -2,15 +2,24 @@
 
 class Sabre
 {
+     
      var $IPCC = '';
      var $USERNAME = '';
      var $PASSWORD = '';
+     var $TESTMODE;
+     var $TESTSUFFIX = '';
      
      function Sabre()
      {
         $this->IPCC = variable_get('sabre_ipcc');
         $this->USERNAME = variable_get('sabre_username');
         $this->PASSWORD = variable_get('sabre_passw');
+        $this->TESTMODE = variable_get('sabre_test_mode');
+        
+        if ($this->TESTMODE == 1)
+            $this->TESTSUFFIX = "_test";
+        else
+            $this->TESTSUFFIX = '';        
      }
      
      private function Header_MessageHeader($action, $conversationID)
@@ -77,7 +86,8 @@ class Sabre
       */
      private function CreateSession()
      {
-        $service = wsclient_service_load('createsession');
+        
+        $service = wsclient_service_load('createsession'.$this->TESTSUFFIX);
         
         $headers = array(
             $this->Header_MessageHeader('SessionCreateRQ', uniqid()),
@@ -91,8 +101,6 @@ class Sabre
         try
         {  
             $response = $service->SessionCreateRQ($this->IPCC);
-            //$args['body']['POS']['Source']['PseudoCityCode'] = $this->IPCC;
-            //$response = $service->invoke('SessionCreateRQ', $args);
             $xmlstr = $service->endpoint()->client()->__getLastResponse();
             //dpm($this->ReadXML($xmlstr ));
             $xml = simplexml_load_string($xmlstr); 
@@ -116,7 +124,7 @@ class Sabre
       */
      private function CloseSession($securityToken, $conversationId)
      {
-        $service = wsclient_service_load('closesession');
+        $service = wsclient_service_load('closesession'.$this->TESTSUFFIX);
         
         $headers = array(
             $this->Header_MessageHeader('SessionCloseRQ', $conversationId),
@@ -162,7 +170,7 @@ class Sabre
         $conversationId = $sessionInfo['ConversationId'];        
         
         //Load service
-        $service = wsclient_service_load('hotelavail');
+        $service = wsclient_service_load('hotelavail'.$this->TESTSUFFIX);
         
         //Create headers and settings
         $headers = array(
@@ -181,8 +189,8 @@ class Sabre
             $args['AvailRequestSegment']['HotelSearchCriteria']['Criterion']['HotelRef']['HotelCityCode'] = $hotelCityCode;
             //$args['AvailRequestSegment']['HotelSearchCriteria']['Criterion']['HotelRef']['HotelCode'] = $hotelCode;
             //$args['AvailRequestSegment']['HotelSearchCriteria']['Criterion']['HotelRef']['HotelName'] = 'Park Hyatt New York';
-            $args['AvailRequestSegment']['TimeSpan']['End'] = '11-28';
-            $args['AvailRequestSegment']['TimeSpan']['Start'] = '11-20';
+            $args['AvailRequestSegment']['TimeSpan']['End'] = '2015-01-20';
+            $args['AvailRequestSegment']['TimeSpan']['Start'] = '2015-01-15';
             $args['Version'] = '2.1.0';
             
             $response = $service->OTA_HotelAvailRQ($args);
@@ -214,7 +222,7 @@ class Sabre
         $conversationId = $sessionInfo['ConversationId'];
         
         //Load service
-        $service = wsclient_service_load('hoteldescription');
+        $service = wsclient_service_load('hoteldescription'.$this->TESTSUFFIX);
         
         //Create headers and settings
         $headers = array(
@@ -231,8 +239,8 @@ class Sabre
         {  
             $args['AvailRequestSegment']['GuestCounts']['Count'] = 1;
             $args['AvailRequestSegment']['HotelSearchCriteria']['Criterion']['HotelRef']['HotelCode'] = $hotelCode;
-            $args['AvailRequestSegment']['TimeSpan']['End'] = '11-28';
-            $args['AvailRequestSegment']['TimeSpan']['Start'] = '11-20';
+            $args['AvailRequestSegment']['TimeSpan']['End'] = '2015-01-20';
+            $args['AvailRequestSegment']['TimeSpan']['Start'] = '2015-01-15';
             $args['Version'] = '2.1.0';
             
             //$prueba = $service->load($service->datatypes['HotelPropertyDescriptionRQ'],'HotelPropertyDescriptionRQ');

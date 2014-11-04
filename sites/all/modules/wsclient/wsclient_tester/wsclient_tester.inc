@@ -155,11 +155,12 @@ function wsclient_tester_prepare_request_callback($form, $form_state) {
         $conversationID = $form_state['input']['conversationid'];
     
     $action = $operation['name'];
+  
     if ($action == "OTA_HotelAvailRQ")
         $action = "OTA_HotelAvailLLSRQ";
     else if ($action == "HotelPropertyDescriptionRQ")
         $action = "HotelPropertyDescriptionLLSRQ";
-    else if ( $action = "HotelRateDescriptionRQ")
+    else if ( $action == "HotelRateDescriptionRQ")
         $action = "HotelRateDescriptionLLSRQ";
 
     $bodyMessageHeader = array(
