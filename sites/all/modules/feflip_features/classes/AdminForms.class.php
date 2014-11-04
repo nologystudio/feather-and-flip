@@ -3,14 +3,14 @@
 class AdminForms
 {
     const API = 'Mailchimp.php';
-    const APIKEY = '';//'eae1d5448b1a2cb751661162fd5011fd-us8';
-    const LISTID = '';//'487e37ac3f';
+    const APIKEY = 'eae1d5448b1a2cb751661162fd5011fd-us8';
+    const LISTID = '487e37ac3f';
 
     static function subscribeToNewsLetter($custom_data, &$errorMsg)
     {
         if (!isset($custom_data['user_email'])) 
         {
-            $errorMsg = "No se ha indicado un mail.";
+            $errorMsg = "You must include an email.";
             return false;
         }
 
@@ -22,7 +22,7 @@ class AdminForms
             $mailchimp = new Mailchimp(self::APIKEY);
 
             $values =array();
-            $values['FNAME']    = $custom_data['user_name'];
+            //$values['FNAME']    = $custom_data['user_name'];
             $values['EMAIL']    = $custom_data['user_email'];            
 
             $resultado = $mailchimp->lists->subscribe(

@@ -69,6 +69,31 @@
 		
 		<?php include 'script.html.php'; ?>
 		
+		<script>
+				$(document).ready(function() {
+					$('#signupNewsLetter').submit(function() {
+
+						alert('Performing subscription...');
+
+						var formData = {
+							'formID' 		: 'newsletterForm',
+							'user_email' 		: $('#user-email').val(),
+
+						};
+
+						$.ajax({
+							type   : 'POST',
+							url    : '/sites/all/themes/feflip/forms_controller/admin_forms_submit.php',
+							data   : formData,
+							success: function(msg) {
+								alert(msg);
+							}
+						});
+						return false;
+					});
+				});
+		</script>			
+		
 		</body>
 		
 		</html>

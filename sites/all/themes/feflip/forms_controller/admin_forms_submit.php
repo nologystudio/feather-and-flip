@@ -23,8 +23,15 @@
 
 				break;
 			case 'newsletterForm':
-				// Connect with mailchimp library
-				$result = AdminForms::subscribeToNewsLetter($input_values, $error);
+			    // Connect with mailchimp library
+			    if (AdminForms::subscribeToNewsLetter($input_values, $error))
+			    {
+			        echo 'All right you are subscribe.';
+			    }
+			    else
+			    {
+			        echo '<b>Error:</b>&nbsp;' . $error;
+			    }
 			break;			
 			default:
 			break;
