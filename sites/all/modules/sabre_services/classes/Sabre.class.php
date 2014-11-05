@@ -267,4 +267,94 @@ class Sabre
             $this->CloseSession($securityToken, $conversationId);
         }
      }
+     
+     public function HotelBookReservation()
+     {
+        //Open session with sabre
+        $sessionInfo = $this->CreateSession();
+        $securityToken = $sessionInfo['SecurityToken'];
+        $conversationId = $sessionInfo['ConversationId'];
+        
+        //Load service
+        $service = wsclient_service_load('hotelbookreservation'.$this->TESTSUFFIX);
+        
+        //Create headers and settings
+        $headers = array(
+            $this->Header_MessageHeader('OTA_HotelResLLSRQ', $conversationId),
+            $this->Header_SecurityToken($securityToken)
+                         );
+        
+        $service->settings['options']['trace'] = TRUE;
+        $service->settings['options']['cache_wsdl'] = WSDL_CACHE_NONE;        
+        $service->settings['soap_headers'] = $headers;
+        
+        //Execute operation
+        try
+        {  
+            $args = array();
+            $response = $service->OTA_HotelResRQ($args);
+            
+            //$xmlRequest = $service->endpoint()->client()->__getLastRequest();
+            //dpm($this->ReadXML($xmlRequest));
+            //$xmlResponse = $service->endpoint()->client()->__getLastResponse();
+            //dpm($this->ReadXML($xmlResponse));
+            
+            //dpm($response);
+        }
+        catch (Exception $e)
+        {
+            $response = $e->getMessage();
+            //dpm($response);
+        }           
+        finally
+        {
+            //Close sabre session
+            $this->CloseSession($securityToken, $conversationId);
+        }        
+     }
+     
+     public function HotelModifyReservation()
+     {
+        //Open session with sabre
+        $sessionInfo = $this->CreateSession();
+        $securityToken = $sessionInfo['SecurityToken'];
+        $conversationId = $sessionInfo['ConversationId'];
+        
+        //Load service
+        $service = wsclient_service_load('hotelmodifyreservation'.$this->TESTSUFFIX);
+        
+        //Create headers and settings
+        $headers = array(
+            $this->Header_MessageHeader('HotelResModifyLLSRQ', $conversationId),
+            $this->Header_SecurityToken($securityToken)
+                         );
+        
+        $service->settings['options']['trace'] = TRUE;
+        $service->settings['options']['cache_wsdl'] = WSDL_CACHE_NONE;        
+        $service->settings['soap_headers'] = $headers;
+        
+        //Execute operation
+        try
+        {  
+            $args = array();
+            $response = $service->HotelResModifyRQ($args);
+            
+            //$xmlRequest = $service->endpoint()->client()->__getLastRequest();
+            //dpm($this->ReadXML($xmlRequest));
+            //$xmlResponse = $service->endpoint()->client()->__getLastResponse();
+            //dpm($this->ReadXML($xmlResponse));
+            
+            //dpm($response);
+        }
+        catch (Exception $e)
+        {
+            $response = $e->getMessage();
+            //dpm($response);
+        }           
+        finally
+        {
+            //Close sabre session
+            $this->CloseSession($securityToken, $conversationId);
+        }        
+     }     
 }
