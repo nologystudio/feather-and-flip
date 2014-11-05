@@ -91,6 +91,29 @@
 				padding: 2 * @unit @padding;
 				border-radius: 100px;
 				text-transform: uppercase;
+				text-align: center;
+			}
+		}
+		
+		/* ------------------------------------------------------------------------------------------------------------- */
+		/* ~ Input style ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+	
+		#ui-set-input
+		{
+			.input-text(@bg-color:orange,@font-size:16px,@font-color:white,@padding:@ref-padding)
+			{
+				#font > .l-normal(@font-size,@font-color);
+				.set-placeholder-style(fadeout(@font-color,50%));
+				background-color: @bg-color;
+				padding: @padding/2 @padding;
+				border-radius: @unit;
+			}
+			
+			.input-submit(@font-color:white)
+			{
+				#font > .l-light(32px,@font-color);
+				text-transform: uppercase;
 			}
 		}
 		

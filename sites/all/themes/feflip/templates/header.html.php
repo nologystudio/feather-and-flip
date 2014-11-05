@@ -13,7 +13,7 @@
                         <a href="#" rel="pinterest"></a>
                         <a href="#" rel="google-plus"></a>
                 </nav>
-                <!-- | 2 | Header gallery -->
+                <!-- Header gallery -->
                 <div class="slideshow-gallery" ng-controller="SlideshowCtrl">
                         <button rel="left"></button>
                         <button rel="right"></button>

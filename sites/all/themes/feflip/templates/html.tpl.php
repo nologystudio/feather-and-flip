@@ -127,7 +127,7 @@
                 
         </head>
         
-        <body class="<?php echo variable_get('pageID'); ?>">
+        <body class="<?php echo variable_get('pageID'); ?>" ng-view>
 
         <?php include 'header.html.php'; ?>
     

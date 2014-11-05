@@ -26,7 +26,62 @@
 		
 		var ffAppControllers = angular.module('ffControllers',[]);
 		
-		 /* ~ Home ~ */
+		/* ~ Main navigation ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+		
+		ffAppControllers.controller('NavCtrl',['$scope',function($scope){
+			
+			var _o         = $('nav[role="main-navigation"] > div.wrapper > ul > li');
+			var navOptions = _o.toArray();
+			
+			angular.forEach(navOptions,function(_l){
+				if(!angular.isUndefined(_l.children[1])){
+					
+					var _target = $(_l.children[1]);
+					var stClass = 'on';
+					
+					$(_l).on({
+						mouseenter: function(){
+							_target.toggleClass(stClass);
+  						}, 
+  						mouseleave: function(){
+  							_target.toggleClass(stClass);
+  						}
+					});
+				}
+			});
+		}]);
+		
+		/* ~ Sign-up ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+		
+		ffAppControllers.controller('SignUpCtrl',['$scope',function($scope){
+			
+			$scope.response = ['success','error'];
+			$scope.types    = ['sign-up','sign-in','response'];
+			
+			$scope.type     = $scope.types[0];
+			$scope.rMessage = $scope.response[0];
+			
+			// | i | Close lighwindow...
+			
+			$scope.close = function(){
+				$('div.call-to-action').remove();
+			}
+			
+			// | i | Switch bettwen forms...
+			
+			$scope.switcher = function(_state){
+				$scope.type = "sign-" + _state;
+			}
+			
+			// | i | Sign-up form...
+			// | i | Sign-in form...
+			// | i | Password recovery...
+			
+		}]);
+		
+		/* ~ Home ~ */
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 		
 		ffAppControllers.controller('HomeCtrl',['$scope',function($scope){
@@ -37,18 +92,22 @@
 		
 		ffAppControllers.controller('MapCtrl',['$scope','$element',function($scope,$element){
 			
-			var theMap       = kartograph.map('#map');
-			var worldMapPath = '/feather-and-flip/media/map/map-usa.svg';
-			var destinations = $('.pin').toArray();
+			//var theMap       = kartograph.map('#map');
+			//var worldMapPath = '/feather-and-flip/media/map/map-usa.svg';
+			//var destinations = $('.pin').toArray();
 			
-			// | i | Aside navigation...
+			// | i | Aside menu...
+			
+			$scope.displayMenu = function(){
+				$('#map-it aside').toggleClass('on');
+			}
 			
 			// | i | Map functionality...
 			
 			$scope.setMap = function(){}
 			
-			theMap.loadMap(worldMapPath,function(){
-			});
+			//theMap.loadMap(worldMapPath,function(){
+			//});
 		
 		}]);
 		
