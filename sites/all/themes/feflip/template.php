@@ -7,13 +7,16 @@ function feflip_preprocess_html(&$variables) {
         $productionURL  = 'feather+flip.com';
         $uriSplitter    = explode('/',$_SERVER['REQUEST_URI']);
         $url            = ($_SERVER['HTTP_HOST'] == $productionURL) ? '' : $uriSplitter[1].'/sites/all/themes/feflip'; 
-        $relativePath   = $url.'/';  
-  
+        $relativePath   = '/sites/all/themes/feflip/';//$url.'/';
+          
         variable_set('relativePath', $relativePath);
+        $arg = arg();
         
         variable_set('pageID', 'global');
 	if (drupal_is_front_page())
 	    variable_set('pageID', 'home');
+        else if ($arg[2] == 'hotel-reviews')
+            variable_set('pageID', 'hotel-reviews');
 }
 
 /**
@@ -270,11 +273,13 @@ function get_header_main_navigation_menu(){
       $navigationMenu .= '<li><a href="'.url($menu_item['link']['link_path']).'">'.$menu_item['link']['link_title'].'</a>';
         
       //only for hotel reviews and itineraries
-      if ((strpos($key, '1700') !== FALSE || strpos($key, '1701') !== FALSE) && count($destinations) > 0)
+      if ((strpos($key, '2029') !== FALSE || strpos($key, '1701') !== FALSE) && count($destinations) > 0)
       {
            $navigationMenu .= '<ul id="'.$menu_item['link']['options']['attributes']['title'].'">';
            foreach($destinations as $destination)
-               $navigationMenu .= '<li><a href="#">'.$destination.'</a></li>';
+           {
+               $navigationMenu .= '<li><a href="'. $destination['url'] . (strpos($key, '2029') !== FALSE ? '/hotel-reviews' : '').'">'.$destination['destination'].'</a></li>';
+           }
            
            $navigationMenu .= '</ul>';
       }

@@ -62,6 +62,8 @@
 		/* ~ Section ~ */
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 			
+		@s-b-padding: 2 * @ref-padding;
+		
 		/* ~ Footer ~ */
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 			
@@ -439,9 +441,9 @@
 								{
 									.set-size(25%,@h);
 									.box-sizing();
+									.set-bgc(@grey-1);
 									#align > .right;
 									padding: @ref-padding/2;
-									background-color: @grey-1;
 									
 									h4,h5,a
 									{
@@ -498,6 +500,7 @@
 		body > section[id]
 		{
 			#align > .left;
+			.ui-global-styles();
 			
 			& > div.wrapper
 			{
@@ -557,6 +560,19 @@
 				}
 			}
 			
+			& > footer
+			{
+				.set-size(100%);
+				.hide();
+				#align > .left;
+				
+				button,
+				a
+				{
+					.reset();
+				}
+			}
+			
 			&[id="start-your-journey"]
 			{
 				*[class$="-wrapper"]
@@ -580,8 +596,8 @@
 						{
 							.ui-set-circle-mask(@grid-5-col - @gutter);
 							.performance();
+							.set-bgc(@grey-1);
 							margin: 0 @gutter/2;
-							background-color: @grey-1;
 							overflow: hidden;
 							
 							// | i | This fix the issue with the mask in Safari
@@ -603,7 +619,7 @@
 								.box-sizing();
 								.animate-all();
 								.set-opacity(0);
-								background-color: transparent;
+								.set-bgc(transparent);
 								border: solid 1px @grey-1;
 							}
 						}
@@ -649,7 +665,6 @@
 			{
 				height: 700px;
 				display: block;
-				background-color: red;
 				
 				& > header
 				{
@@ -703,9 +718,9 @@
 							
 							.set-size(@tab-width,@h);
 							.set-pos(absolute);
+							.set-bgc(black);
 							.set-box-shadow(@shadow-color,0,0,@ref-padding);
 							right: -@tab-width;
-							background-color: black;
 							border-radius: 0 @h @h 0;
 						}
 						
@@ -770,7 +785,7 @@
 							img
 							{
 								.set-size(100%,100px);
-								background-color: fadeout(@color-2,80%);
+								.set-bgc(fadeout(@color-2,80%));
 								border: 0;
 							}
 						}
@@ -785,7 +800,7 @@
 			
 			&[id="travel-journal"]
 			{
-				background-color: white;
+				.set-bgc(white);
 				padding-bottom: 4 * @ref-padding;
 				
 				& > header
@@ -852,8 +867,8 @@
 						.set-size(@grid-3-col);
 						.box-sizing();
 						.set-box-shadow(#ccc,0,0,@gutter);
+						.set-bgc(@color-2);
 						#align > .left;
-						background-color: @color-2;
 						margin: @gutter;
 						overflow: hidden;
 						
@@ -876,8 +891,8 @@
 						{
 							.set-size(100%);
 							.set-pos(absolute);
+							.set-bgc(fadeout(@color-2,50%));
 							.box-sizing();
-							background-color: fadeout(@color-2,50%);
 							bottom: 0;
 							padding: @block-margin/2 @block-margin;
 						}
@@ -997,7 +1012,183 @@
 			}
 			
 			&[id="itinerary"]
-			{}
+			{
+				padding-bottom: @s-b-padding;
+				
+				& > header
+				{
+					.set-bgc(@color-1);
+					margin-bottom: @ref-padding;
+				}
+				
+				& > div.wrapper
+				{
+					article
+					{
+						.set-size();
+						#align > .left;
+						
+						h3
+						{
+							.set-size(100%);
+							.box-sizing();
+							#font > .gar(14px,@grey-1);
+							padding: 5%;
+							line-height: 22px;
+							text-align: center;
+							text-transform: uppercase;
+						}
+						
+						div.slideshow-gallery
+						{
+							.ui-set-slideshow(650px);
+						}
+						
+						ul
+						{
+							.reset();
+							.set-size(100%);
+							#align > .left;
+							
+							li
+							{
+								.set-size(100%);
+								#align > .left;
+								margin: @gutter 0;
+								
+								figure
+								{
+									@s: 200px;
+									
+									.reset();
+									.ui-set-circle-mask(@s);
+									#align > .left;
+									margin-right: @ref-padding;
+									
+									img
+									{}
+								}
+								
+								div
+								{
+									@w: 800px;
+									
+									.set-size(@w);
+									#align > .left;
+									margin-top: @ref-padding/2;
+									
+									h4,h5
+									{
+										#align > .left;
+										margin: @unit 0;
+									}
+									
+									h4
+									{
+										#font > .l-normal(22px,@grey-1);
+									}
+									
+									h5
+									{
+										#font > .gar(14px,@grey-1);
+										line-height: 22px;
+									}
+								}
+							}
+						}
+						
+						& + article
+						{
+							margin-top: @ref-padding;
+						}
+					}
+				}
+			}
+			
+			&[id="hotel-reviews"]
+			{
+				padding-bottom: @s-b-padding;
+				
+				& > div.wrapper
+				{
+					width: @global-wrapper-width + 6 * @unit;
+				}
+				
+				a.item
+				{
+					.set-size(@grid-3-col,300px);
+					#align > .left;
+					display: block;
+					margin: @unit;
+					
+					& > figure
+					{
+						.reset();
+						.set-size(100%,100%);
+						.set-bgc(black);
+						#align > .left;
+						overflow: hidden;
+						display:block;
+						
+						img
+						{
+							.set-size(100%);
+							.set-opacity(0.5);
+							.animate-opacity();
+						}
+					}
+					
+					& > div
+					{
+						@h: 145px;
+						
+						.set-size(100%,@h);
+						.box-sizing();
+						.set-pos(absolute);
+						.set-coord(0,50%);
+						.set-opacity(0.75);
+						.animate-opacity();
+						.z(1);
+						margin-top: -@h/2;
+						padding: @ref-padding;
+						
+						
+						h2,h3
+						{
+							.set-size(100%);
+							#align > .left;
+							display: block;
+							text-align: center;
+							padding: @gutter 0;
+						}
+						
+						h2
+						{
+							#font > .l-light(22px,white);
+							text-transform: uppercase;
+							border-bottom: solid 1px fadeout(white,50%);
+						}
+						
+						h3
+						{
+							#font > .gar(14px,white);
+						}
+					}
+					
+					&:hover
+					{
+						& > figure img
+						{
+							.set-opacity(1);
+						}
+						
+						& > div
+						{
+							.set-opacity(0.25);
+						}
+					}
+				}
+			}
 			
 			&[id="hotel"]
 			{}
@@ -1015,7 +1206,7 @@
 
 		body > footer
 		{
-			background-color: black;
+			.set-bgc(black);
 			
 			& > nav
 			{
@@ -1045,7 +1236,7 @@
 						&:first-child
 						{
 							#font > .l-light(24px,@color-2);
-							background-color: black;
+							.set-bgc(black);
 							text-transform: uppercase;
 							border-bottom: solid 1px fadeout(@color-2,50%);
 							padding: 60px 0 10px 50px;
@@ -1106,8 +1297,8 @@
 				
 				.set-size(100%,@height);
 				.box-sizing();
+				.set-bgc(@color-1);
 				#align > .left;
-				background-color: @color-1;
 				padding: 0 @ref-padding;
 				
 				a[id$="brand"]
@@ -1174,7 +1365,7 @@
 			.set-pos(fixed);
 			.set-coord(0,0);
 			.chrome-fix();
-			background-color: fadeout(@color-1,80%);
+			.set-bgc(fadeout(@color-1,80%));
 			overflow: hidden;
 			display: block;
 			z-index: 10;

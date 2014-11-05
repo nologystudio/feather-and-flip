@@ -93,6 +93,9 @@
 				text-transform: uppercase;
 				text-align: center;
 			}
+			
+			.header()
+			{}
 		}
 		
 		/* ------------------------------------------------------------------------------------------------------------- */
@@ -114,6 +117,50 @@
 			{
 				#font > .l-light(32px,@font-color);
 				text-transform: uppercase;
+			}
+		}
+		
+		/* ------------------------------------------------------------------------------------------------------------- */
+		/* ~ Global styles ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+		
+		.ui-global-styles()
+		{
+			*.middle-line
+			{
+				@w: 30%;
+				@margin: 10%;
+				@color: @grey-1;
+				
+				.set-size(100%);
+				.box-sizing();
+				#align > .left;
+				#font > .gar(20px,@color);
+				padding: @ref-padding;
+				text-align: center;
+				display: block;
+				
+				&:before,
+				&:after
+				{
+					.set-size(@w,1px);
+					.set-bgc(@color);
+					.set-pos(absolute);
+					top: 50%;
+					left: 50%;
+					display: block;
+					content: '';
+				}
+				
+				&:before
+				{
+					margin-left: -1 * (@w + @margin);
+				}
+				
+				&:after
+				{
+					margin-left: @margin;
+				}
 			}
 		}
 		

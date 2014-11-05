@@ -24,10 +24,9 @@
                         <div class="tab" ng-click="displayMenu()"></div>
                         <ul>
                                 <li data-image=""><span>hotels</span>destination</li>
-                                <li data-image=""><span>0</span>City, Country</li>
-                                <li data-image=""><span>1</span>City, Country</li>
-                                <li data-image=""><span>2</span>City, Country</li>
-                                <li data-image=""><span>3</span>City, Country</li>
+                                <?php foreach(Destination::getAllDestinationTitleCountryAndNumHotels() as $destination){ ?>
+                                    <li data-image=""><span><?php echo $destination['numhotels']; ?></span><?php echo $destination['destination']; ?></li>
+                                <?php } ?>
                         </ul>
                         <figure>
                                 <img src="" alt=""/>
