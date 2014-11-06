@@ -1,5 +1,7 @@
 <?php
 
+require_once('Hotel.class.php');
+
 class Destination
 {
     /*
@@ -52,18 +54,9 @@ class Destination
          foreach($nodes as $node)
          {
             $wrapper = entity_metadata_wrapper('node', $node);
-              
-            $query = new EntityFieldQuery;
             
-            $count = $query->entityCondition('entity_type', 'node')
-              ->entityCondition('bundle', 'hotel')
-              ->propertyCondition('status', 1)
-              ->fieldCondition('field_destination','target_id', $node->nid, '=')
-              ->count()
-              ->execute();              
-              
             $destinations[] = array('destination' => $wrapper->title->value().', '.$wrapper->field_country->value() ,
-                                    'numhotels'   => $count);
+                                    'numhotels'   => Hotel::NumHotelsByDestination($node->nid));
          }
          
          return $destinations;        

@@ -4,3 +4,4 @@ core = 7.x
 configure = admin/config/feflip
 files[] = classes/Destination.class.php
 files[] = classes/AdminForms.class.php
+files[] = classes/Hotel.class.php

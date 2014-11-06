@@ -4,9 +4,11 @@
  * Add body classes if certain regions have content.
  */
 function feflip_preprocess_html(&$variables) {
+        /*
         $productionURL  = 'feather+flip.com';
         $uriSplitter    = explode('/',$_SERVER['REQUEST_URI']);
         $url            = ($_SERVER['HTTP_HOST'] == $productionURL) ? '' : $uriSplitter[1].'/sites/all/themes/feflip'; 
+        */
         $relativePath   = '/sites/all/themes/feflip/';//$url.'/';
           
         variable_set('relativePath', $relativePath);
@@ -17,6 +19,8 @@ function feflip_preprocess_html(&$variables) {
 	    variable_set('pageID', 'home');
         else if ($arg[2] == 'hotel-reviews')
             variable_set('pageID', 'hotel-reviews');
+        else if ($arg[2] == 'itineraries')
+            variable_set('pageID', 'itinerary');
 }
 
 /**
@@ -80,6 +84,10 @@ function feflip_preprocess_views_view(&$variables) {
     $variables['home_dests_slideshow'] = get_home_destinations('promote_to_slideshow');
     $variables['home_dests'] = get_home_destinations();
     $variables['home_dests_map'] = get_home_destinations('promote_to_map');
+  }
+  else if ($view->name == 'hotel_reviews' && $view->current_display == 'page'){
+    
+    $variables['hotels'] = Hotel::HotelReviews($variables);
   }
 }
 
@@ -278,7 +286,7 @@ function get_header_main_navigation_menu(){
            $navigationMenu .= '<ul id="'.$menu_item['link']['options']['attributes']['title'].'">';
            foreach($destinations as $destination)
            {
-               $navigationMenu .= '<li><a href="'. $destination['url'] . (strpos($key, '2029') !== FALSE ? '/hotel-reviews' : '').'">'.$destination['destination'].'</a></li>';
+               $navigationMenu .= '<li><a href="'. $destination['url'] . (strpos($key, '2029') !== FALSE ? '/hotel-reviews' : '/itineraries').'">'.$destination['destination'].'</a></li>';
            }
            
            $navigationMenu .= '</ul>';

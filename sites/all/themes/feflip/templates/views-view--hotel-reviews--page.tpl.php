@@ -1,17 +1,17 @@
 <section id="hotel-reviews">
         <div class="wrapper">
                 <h1 class="middle-line">Hotel Reviews</h1>
-                <?php for($i=0;$i<20;$i++): ?>
+                <?php foreach($hotels as $hotel): ?>
                 <a class="item" href="">
                         <figure>
-                                <img src="http://placehold.it/347x300" alt=""/>
+                                <img src="<?php echo $hotel['image'];?>" alt=""/>
                         </figure>
                         <div>
-                                <h2>Hotel Name</h2>
-                                <h3>City, Country</h3>
+                                <h2><?php echo $hotel['name'];?></h2>
+                                <h3><?php echo $hotel['destination'];?></h3>
                         </div>
                 </a>
-                <?php endfor; ?>
+                <?php endforeach; ?>
         </div>
         <footer>
                 <button rel="load-more">load more</button>
