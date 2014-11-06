@@ -12,8 +12,8 @@ function feflip_preprocess_html(&$variables) {
         $relativePath   = '/sites/all/themes/feflip/';//$url.'/';
           
         variable_set('relativePath', $relativePath);
-        //AboutUs->nid=27
-        $static_nodes = array('html__node__27');
+        // AboutUs->nid=27; FAQ->nid=28
+        $static_nodes = array('html__node__27', 'html__node__28');
         $arg = arg();
 
         variable_set('pageID', 'global');
@@ -43,6 +43,8 @@ function feflip_process_html(&$variables) {
 
   //Load navigation main menu
   $variables['main_navigation'] = get_header_main_navigation_menu();
+  //Load footer fixed menu
+  $variables['footer_fixed_menu'] = get_footer_fixed_menu();
 }
 
 /**
@@ -318,4 +320,19 @@ function get_header_main_navigation_menu(){
   $navigationMenu .= '</ul>';
   
   return $navigationMenu;
+}
+
+/*
+ * Get fixed menu in footer
+ * @return string
+ */
+function get_footer_fixed_menu() {
+  $f_menu = menu_tree_all_data('menu-footer-right');
+  $output = '<ul>';
+  $output .= '<li><span class="icon ff"></span>feather + flip</li>';
+  foreach ($f_menu as $key => $menu_item) {
+    $output .= '<li><a href="'.url($menu_item['link']['link_path']).'">'.$menu_item['link']['link_title'].'</a></li>';
+  }
+  $output .= '</ul>';
+  return $output;
 }

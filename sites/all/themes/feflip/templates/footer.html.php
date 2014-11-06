@@ -38,16 +38,7 @@
 					<li><a href="">hotel, country</a></li>
 					<li><a href="">hotel, country</a></li>
 				</ul>
-				<ul>
-					<li><span class="icon ff"></span>feather + flip</li>
-					<li><a href="">about us</a></li>
-					<li><a href="">travel journal</a></li>
-					<li><a href="">FAQs</a></li>
-					<li><a href="">sales</a></li>
-					<li><a href="">our partners</a></li>
-					<li><a href="">terms of service</a></li>
-					<li><a href="">privacy policy</a></li>
-				</ul>
+				<?php echo $footer_fixed_menu; ?>
 			</nav>
 			<div class="fixed-bar">
 				<a id="brand" href=""><img src="<?php echo variable_get('relativePath'); ?>media/brand/feather-and-flip-black-logo.png" alt="Feather+flip"/></a>
