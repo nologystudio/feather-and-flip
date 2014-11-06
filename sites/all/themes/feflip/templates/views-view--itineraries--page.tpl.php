@@ -32,13 +32,13 @@
                                         <button></button>
                                 </div>
                                 <div class="slideshow-wrapper">
-                                        <?php for($i=0;$i<1;$i++): ?>
+                                        <?php foreach($itinerary['images'] as $image){ ?>
                                         <article class="slideshow-item">
                                                 <figure>
-                                                        <img src="http://placehold.it/1040x650" alt="City, Country" data-size="1280x800"/>
+                                                        <img src="<?php echo $image;?>" alt="City, Country" data-size="1280x800"/>
                                                 </figure>
                                         </article>
-                                        <?php endfor; ?>
+                                        <?php } ?>
                                 </div>
                         </div>
                 </article>
