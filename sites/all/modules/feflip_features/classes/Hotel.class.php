@@ -27,13 +27,22 @@ class Hotel
         $nodes = self::getNodes($view);
         $hotelsinfo = array();
         
+        
         foreach($nodes as $node)
         {
             $wrapper = entity_metadata_wrapper('node', $node);
+            
+            $imageurl = 'http://placehold.it/347x300';
+            foreach($wrapper->field_images->value() as $image)
+            {
+                if (count($image->field_mainimage) > 0 && $image->field_main_image['und'][0]['value'] == '1')
+                    $imageurl = image_style_url('hotel_review_347',$image->field_mainimage['und'][0]['uri']);
+            }           
+            
             $hotelsinfo[] = array('name'        => $wrapper->title->value(),
                                   'destination' => $wrapper->field_destination->title->value().', '.$wrapper->field_destination->field_country->value(),
-                                  'image'       => 'http://placehold.it/347x300'
-                                  );    
+                                  'image'       => $imageurl
+                                  );
         }
         
         return $hotelsinfo;
