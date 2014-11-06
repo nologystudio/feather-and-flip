@@ -12,15 +12,28 @@ function feflip_preprocess_html(&$variables) {
         $relativePath   = '/sites/all/themes/feflip/';//$url.'/';
           
         variable_set('relativePath', $relativePath);
+        //AboutUs->nid=27
+        $static_nodes = array('html__node__27');
         $arg = arg();
-        
+
         variable_set('pageID', 'global');
 	if (drupal_is_front_page())
 	    variable_set('pageID', 'home');
-        else if ($arg[2] == 'hotel-reviews')
+        else if (isset($arg[2]) && $arg[2] == 'hotel-reviews')
             variable_set('pageID', 'hotel-reviews');
-        else if ($arg[2] == 'itineraries')
+        else if (isset($arg[2]) && $arg[2] == 'itineraries')
             variable_set('pageID', 'itinerary');
+        else{
+          
+          foreach($variables['theme_hook_suggestions'] as $item)
+          {
+              if (array_search($item, $static_nodes) !== false)
+              {
+                  variable_set('pageID', 'static');
+                  break;
+              }
+          }
+        }
 }
 
 /**
@@ -68,6 +81,10 @@ function feflip_process_maintenance_page(&$variables) {
  * Override or insert variables into the node template.
  */
 function feflip_preprocess_node(&$variables) {
+ 
+  if (isset($variables['node']) && ($variables['node']->type == 'page')) {
+	$variables['theme_hook_suggestions'][] = 'node__static';
+}
 
 }
 
