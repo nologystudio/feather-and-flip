@@ -89,6 +89,9 @@ function feflip_preprocess_views_view(&$variables) {
     
     $variables['hotels'] = Hotel::HotelReviews($variables);
   }
+  else if($view->name == 'itineraries' && $view->current_display == 'page'){
+    $variables['itinerary'] =  Itinerary::ItinerariesInfo($view);
+  }
 }
 
 /**
@@ -286,7 +289,7 @@ function get_header_main_navigation_menu(){
            $navigationMenu .= '<ul id="'.$menu_item['link']['options']['attributes']['title'].'">';
            foreach($destinations as $destination)
            {
-               $navigationMenu .= '<li><a href="'. $destination['url'] . (strpos($key, '2029') !== FALSE ? '/hotel-reviews' : '/itineraries').'">'.$destination['destination'].'</a></li>';
+               $navigationMenu .= '<li><a href="'. $destination['url'] . (strpos($key, '2029') !== FALSE ? '/hotel-reviews' : '/itinerary').'">'.$destination['destination'].'</a></li>';
            }
            
            $navigationMenu .= '</ul>';
