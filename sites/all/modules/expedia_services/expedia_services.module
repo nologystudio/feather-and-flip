@@ -17,7 +17,7 @@
 function expedia_services_test()
 {
 	if (module_exists('wsclient')):
-		$res = Expedia::CityHotels('bangkok');
+		$res = Expedia::GetHotelInfo('238974');
 		if (isset($res['HotelListResponse']) && isset($res['HotelListResponse']['EanWsError'])){
 			$err = Expedia::GetErrorMessage($res);
 		}

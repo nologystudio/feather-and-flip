@@ -32,6 +32,26 @@ class Expedia
 	}
 
 	/*
+	*	Get holtel info
+	*	@param hid
+	*/
+	public static function GetHotelInfo($hid)
+	{
+		$service = wsclient_service_load('expedia__rest');
+		$service->settings['http_headers'] = array(
+			'Content-Type' => array('multipart/form-data'),
+		);
+
+		$res = null;
+		try {
+			$res = $service->expedia__rest_hotel_info($hid);
+		} catch (Exception $e) {
+			return $e->getMessage();
+		}
+		return $res;
+	}
+
+	/*
 	*	Extract EAN error message
 	*	@param Expedia object
 	* 	
