@@ -2,7 +2,7 @@
         <div class="wrapper">
                 <h1 class="middle-line">Hotel Reviews</h1>
                 <?php foreach($hotels as $hotel): ?>
-                <a class="item" href="">
+                <a class="item" href="<?php echo $hotel['url']; ?>">
                         <figure>
                                 <img src="<?php echo $hotel['image'];?>" alt=""/>
                         </figure>

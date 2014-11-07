@@ -17,12 +17,15 @@ function feflip_preprocess_html(&$variables) {
         $arg = arg();
 
         variable_set('pageID', 'global');
+        
 	if (drupal_is_front_page())
 	    variable_set('pageID', 'home');
         else if (isset($arg[2]) && $arg[2] == 'hotel-reviews')
             variable_set('pageID', 'hotel-reviews');
         else if (isset($arg[2]) && $arg[2] == 'itineraries')
             variable_set('pageID', 'itinerary');
+        else if (array_search('node-type-hotel', $variables['classes_array']) !== false)    
+            variable_set('pageID', 'hotel');
         else{
           
           foreach($variables['theme_hook_suggestions'] as $item)
@@ -86,7 +89,17 @@ function feflip_preprocess_node(&$variables) {
  
   if (isset($variables['node']) && ($variables['node']->type == 'page')) {
 	$variables['theme_hook_suggestions'][] = 'node__static';
-}
+  }
+  elseif (isset($variables['node']) && ($variables['node']->type == 'hotel')){
+      //Get navigation
+      $urls = Hotel::NextPreviousUrlHotel($variables['node']);
+      //dpm(Hotel::GetImages($variables['node']));
+      $variables['features'] = Hotel::GetContentBlocks($variables['node']);
+      $variables['next'] = $urls['next'];
+      $variables['previous'] = $urls['previous'];
+      $variables['hotelreviews'] = url('node/'.$variables['node']->field_destination['und'][0]['entity']->nid).'/hotel-reviews';
+      
+  }
 
 }
 
