@@ -93,7 +93,7 @@ function feflip_preprocess_node(&$variables) {
   elseif (isset($variables['node']) && ($variables['node']->type == 'hotel')){
       //Get navigation
       $urls = Hotel::NextPreviousUrlHotel($variables['node']);
-      //dpm(Hotel::GetImages($variables['node']));
+      $variables['images'] = Hotel::GetImages($variables['node']);
       $variables['features'] = Hotel::GetContentBlocks($variables['node']);
       $variables['next'] = $urls['next'];
       $variables['previous'] = $urls['previous'];

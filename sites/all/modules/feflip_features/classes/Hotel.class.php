@@ -27,7 +27,6 @@ class Hotel
         $nodes = self::getNodes($view);
         $hotelsinfo = array();
         
-        
         foreach($nodes as $node)
         {
             $wrapper = entity_metadata_wrapper('node', $node);
@@ -173,12 +172,15 @@ class Hotel
                 {
                     foreach($contentblock->field_mainimage['und'] as $image)
                     {
-                        $images[] = image_style_url('large',$image['uri']);
+                        $images[] = array( 'url'      => image_style_url('large',$image['uri']),
+                                           'alt'  => $node->field_destination['und'][0]['entity']->title .', '.$node->field_destination['und'][0]['entity']->field_country['und'][0]['value']);
                     }
                 }
                 
             }
         }
+
+        if (count($images) == 0) $images[] = array('url' => "http://placehold.it/1040x650", 'alt' => 'City, Country');
         
         return $images;
     }

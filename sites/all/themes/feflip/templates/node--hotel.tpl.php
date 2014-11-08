@@ -47,13 +47,13 @@
                                 <button></button>
                         </div>
                         <div class="slideshow-wrapper">
-                                <?php for($i=0;$i<1;$i++): ?>
+                                <?php foreach($images as $image){ ?>
                                 <article class="slideshow-item">
                                         <figure>
-                                                <img src="http://placehold.it/1040x650" alt="City, Country" data-size="1280x800"/>
+                                                <img src="<?php echo $image['url'];?>" alt="<?php echo $image['alt']?>" data-size="1280x800"/>
                                         </figure>
                                 </article>
-                                <?php endfor; ?>
+                                <?php } ?>
                         </div>
                 </div>
                 <!-- Features -->
@@ -86,7 +86,7 @@
                                         <li><?php echo $node->field_phone_number['und'][0]['value'];?></li>
                                         
                                         <?php } if(count($node->field_hotel_url) == 1){ ?>
-                                        <li><a href="<?php echo $node->field_hotel_url['und'][0]['value'];?>" target="_blank"><?php echo $node->field_hotel_url['und'][0]['value'];?></a></li>
+                                        <li><a href="<?php echo 'http://'.$node->field_hotel_url['und'][0]['value'];?>" target="_blank"><?php echo $node->field_hotel_url['und'][0]['value'];?></a></li>
                                         <?php } ?>
                                 </ul>
                         </h4>
