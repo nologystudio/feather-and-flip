@@ -26,17 +26,15 @@
 			<nav>
 				<ul>
 					<li><span class="icon destination"></span>destinations</li>
-					<li><a href="">city, country</a></li>
-					<li><a href="">city, country</a></li>
-					<li><a href="">city, country</a></li>
-					<li><a href="">city, country</a></li>
+					<?php foreach ($footer_destinations_menu as $destination) { ?>
+					<li><a href=""><?php echo $destination['withcountry']?></a></li>
+					<?php } ?>
 				</ul>
 				<ul>
 					<li><span class="icon popular"></span>popular hotels</li>
-					<li><a href="">hotel, country</a></li>
-					<li><a href="">hotel, country</a></li>
-					<li><a href="">hotel, country</a></li>
-					<li><a href="">hotel, country</a></li>
+					<?php foreach ($footer_hotels_menu as $hotel) {?>
+					<li><a href="<?php echo $hotel['url']; ?>"><?php echo $hotel['name'].', '. $hotel['country'];?></a></li>
+					<?php } ?>
 				</ul>
 				<?php echo $footer_fixed_menu; ?>
 			</nav>

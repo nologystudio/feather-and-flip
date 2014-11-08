@@ -16,15 +16,9 @@ class Hotel
         
           return $nodes;
     }
-    
-    /*
-     *Return info to show in hotelreviews page
-     *@return array Hotels info hotel name, distination and image
-     */
-    public static function HotelReviews($variables)
+
+    private static function getHotelsInfo($nodes)
     {
-        $view = $variables['view'];
-        $nodes = self::getNodes($view);
         $hotelsinfo = array();
         
         foreach($nodes as $node)
@@ -40,11 +34,24 @@ class Hotel
             
             $hotelsinfo[] = array('name'        => $wrapper->title->value(),
                                   'destination' => $wrapper->field_destination->title->value().', '.$wrapper->field_destination->field_country->value(),
+                                  'country'     => $wrapper->field_destination->field_country->value(),
                                   'image'       => $imageurl,
                                   'url'         => url('node/'.$node->nid)
                                   );
         }
         
+        return $hotelsinfo;        
+    }
+    
+    /*
+     *Return info to show in hotelreviews page
+     *@return array Hotels info hotel name, distination and image
+     */
+    public static function HotelReviews($variables)
+    {
+        $view = $variables['view'];
+        $nodes = self::getNodes($view);
+        $hotelsinfo = self::getHotelsInfo($nodes);        
         return $hotelsinfo;
     }
     
@@ -202,5 +209,26 @@ class Hotel
           ->execute();
           
         return $count;  
+    }
+
+    public static function GetFooterHotels()
+    {
+        $query = new EntityFieldQuery;
+        
+        $nodes = $query->entityCondition('entity_type', 'node')
+          ->entityCondition('bundle', 'hotel')
+          ->propertyCondition('status', 1)
+          ->propertyCondition('promote', 1)
+          ->execute();
+        
+        $hotels = array();
+
+        if (isset($nodes['node']))
+        {
+            $nodes = node_load_multiple(array_keys($nodes['node']));
+            $hotels = self::getHotelsInfo($nodes);
+        }
+        
+        return $hotels;      
     }
 }

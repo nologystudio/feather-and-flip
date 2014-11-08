@@ -48,6 +48,10 @@ function feflip_process_html(&$variables) {
   $variables['main_navigation'] = get_header_main_navigation_menu();
   //Load footer fixed menu
   $variables['footer_fixed_menu'] = get_footer_fixed_menu();
+  //Load footer destination
+  $variables['footer_destinations_menu'] = Destination::GetFooterDestinations();
+  //Load footer hotels
+  $variables['footer_hotels_menu'] = Hotel::GetFooterHotels();
 }
 
 /**
@@ -113,9 +117,10 @@ function feflip_preprocess_views_view(&$variables) {
     /* 
     * Collect data for the destinations slideshow.
     */
-    $variables['home_dests_slideshow'] = get_home_destinations('promote_to_slideshow');
-    $variables['home_dests'] = get_home_destinations();
-    $variables['home_dests_map'] = get_home_destinations('promote_to_map');
+    //$variables['home_dests_slideshow'] = get_home_destinations('promote_to_slideshow');
+    //$variables['home_dests'] = get_home_destinations();
+    //$variables['home_dests_map'] = get_home_destinations('promote_to_map');
+    $variables['destinations'] = Destination::GetAllDestination();
   }
   else if ($view->name == 'hotel_reviews' && $view->current_display == 'page'){
     
@@ -292,7 +297,7 @@ function get_home_destinations($filter_field = 'promote') {
  */
 function get_header_main_navigation_menu(){
   
-  $destinations =  Destination::getAllDestinationTileCountry();
+  $destinations =  Destination::GetAllDestination();
     
   $navigationMenu = '<ul>'; 
   
@@ -321,7 +326,7 @@ function get_header_main_navigation_menu(){
            $navigationMenu .= '<ul id="'.$menu_item['link']['options']['attributes']['title'].'">';
            foreach($destinations as $destination)
            {
-               $navigationMenu .= '<li><a href="'. $destination['url'] . (strpos($key, '2029') !== FALSE ? '/hotel-reviews' : '/itinerary').'">'.$destination['destination'].'</a></li>';
+               $navigationMenu .= '<li><a href="'. $destination['url'] . (strpos($key, '2029') !== FALSE ? '/hotel-reviews' : '/itinerary').'">'.$destination['withcountry'].'</a></li>';
            }
            
            $navigationMenu .= '</ul>';

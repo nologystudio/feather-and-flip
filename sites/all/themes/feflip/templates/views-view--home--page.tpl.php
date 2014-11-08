@@ -1,15 +1,15 @@
 <section id="start-your-journey">
         <header><h3 class="simple">start your journey</h3></header>
         <div class="gallery-wrapper">
-                <?php for($i=0;$i<5;$i++): ?>
+                <?php foreach($destinations as $destination){ ?>
                 <a href="" rel="destination" class="gallery-item">
                         <figure class="circle-mask">
-                                <img src="http://placehold.it/300x300" alt=""/>
+                                <img src="<?php echo $destination['image'];?>" alt=""/>
                                 <div class="border"></div>
                         </figure>
-                        <h2>destination</h2>
+                        <h2><?php echo $destination['destination']?></h2>
                 </a>
-                <?php endfor; ?>
+                <?php } ?>
         </div>
         <footer>
                 <a href="" class="section-button"></a>
@@ -24,7 +24,7 @@
                         <div class="tab" ng-click="displayMenu()"></div>
                         <ul>
                                 <li data-image=""><span>hotels</span>destination</li>
-                                <?php foreach(Destination::getAllDestinationTitleCountryAndNumHotels() as $destination){ ?>
+                                <?php foreach($destinations as $destination){ ?>
                                     <li data-image=""><span><?php echo $destination['numhotels']; ?></span><?php echo $destination['destination']; ?></li>
                                 <?php } ?>
                         </ul>
