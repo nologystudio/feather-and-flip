@@ -1,4 +1,4 @@
-<section id="static">
+<section class="static">
 	<article id="about">
 		<h1><?php echo $title; ?></h1>
 		<?php echo (isset($body[0]) ? $body[0]['safe_value'] : ''); ?>
