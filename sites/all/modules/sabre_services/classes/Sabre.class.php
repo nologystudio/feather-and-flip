@@ -162,7 +162,7 @@ class Sabre
      }
      
          
-     public function HotelAvail($hotelCityCode)
+     public function HotelAvail($hotelCityCode, $cityName, $numpersonas, $start, $end)
      {
         //Open session with sabre
         $sessionInfo = $this->CreateSession();
@@ -185,12 +185,14 @@ class Sabre
         //Execute operation
         try
         {  
-            $args['AvailRequestSegment']['GuestCounts']['Count'] = 1;
+            $args['AvailRequestSegment']['GuestCounts']['Count'] = $numpersonas;
+            if(!empty($cityName))
+                $args['AvailRequestSegment']['HotelSearchCriteria']['Criterion']['Address']['CityName'] = $cityName;
             $args['AvailRequestSegment']['HotelSearchCriteria']['Criterion']['HotelRef']['HotelCityCode'] = $hotelCityCode;
             //$args['AvailRequestSegment']['HotelSearchCriteria']['Criterion']['HotelRef']['HotelCode'] = $hotelCode;
             //$args['AvailRequestSegment']['HotelSearchCriteria']['Criterion']['HotelRef']['HotelName'] = 'Park Hyatt New York';
-            $args['AvailRequestSegment']['TimeSpan']['End'] = '2015-01-20';
-            $args['AvailRequestSegment']['TimeSpan']['Start'] = '2015-01-15';
+            $args['AvailRequestSegment']['TimeSpan']['End'] = $end;
+            $args['AvailRequestSegment']['TimeSpan']['Start'] = $start;
             $args['Version'] = '2.1.0';
             
             $response = $service->OTA_HotelAvailRQ($args);
@@ -214,7 +216,7 @@ class Sabre
         }
      }
      
-     public function HotelDescription($hotelCode)
+     public function HotelDescription($hotelCode, $numpersonas, $start, $end)
      {
         //Open session with sabre
         $sessionInfo = $this->CreateSession();
@@ -237,15 +239,15 @@ class Sabre
         //Execute operation
         try
         {  
-            $args['AvailRequestSegment']['GuestCounts']['Count'] = 1;
+            $args['AvailRequestSegment']['GuestCounts']['Count'] = $numpersonas;
             $args['AvailRequestSegment']['HotelSearchCriteria']['Criterion']['HotelRef']['HotelCode'] = $hotelCode;
-            $args['AvailRequestSegment']['TimeSpan']['End'] = '2015-01-20';
-            $args['AvailRequestSegment']['TimeSpan']['Start'] = '2015-01-15';
+            $args['AvailRequestSegment']['TimeSpan']['End'] = $end;
+            $args['AvailRequestSegment']['TimeSpan']['Start'] = $start;
             $args['Version'] = '2.1.0';
             
             //$prueba = $service->load($service->datatypes['HotelPropertyDescriptionRQ'],'HotelPropertyDescriptionRQ');
             //dpm($prueba);
-            dpm($service);
+            //dpm($service);
             
             $response = $service->HotelPropertyDescriptionRQ($args);
             
