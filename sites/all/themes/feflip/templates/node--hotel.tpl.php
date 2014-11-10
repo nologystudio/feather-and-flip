@@ -1,13 +1,13 @@
 <section id="hotel">
         <header>
-                <form>
+                <form id="hotelRates" method="POST">
                         <label for="check-in">
                                 <span>check in</span>
-                                <input type="text" name="check-in" value=""/>
+                                <input id="checkin" type="text" name="check-in" value=""/>
                         </label>
                         <label for="check-out">
                                 <span>check out</span>
-                                <input type="text" name="check-out" value=""/>
+                                <input id="checkout" type="text" name="check-out" value=""/>
                         </label>
                         <label for="rooms">
                                 <span>rooms</span>
@@ -15,12 +15,13 @@
                         </label>
                         <label for="adults">
                                 <span>adults</span>
-                                <input type="text" name="adults" value="" maxlength="2"/>
+                                <input id="numAdults" type="text" name="adults" value="" maxlength="2"/>
                         </label>
                         <label for="children">
                                 <span>children</span>
                                 <input type="text" name="children" value="" maxlength="2"/>
                         </label>
+                        <input id="hotelCode" type="hidden" value="<?php echo $node->field_hotelcode['und'][0]['value']?>"/>
                         <input type="submit" value="get rates"/>
                 </form>
         </header>

@@ -59,10 +59,12 @@ class AdminForms
         }
     }
 
-    // Submit Booking
-    static function submitBooking($booking_data)
+    // Get hotel rates
+    static function getHotelRates($values)
     {
-      
+        $sabreService = new Sabre;
+        return $sabreService->HotelDescription($values['hotelCode'], $values['numAdults'], $values['checkin'], $values['checkout']);
+        
     } 
  
 }

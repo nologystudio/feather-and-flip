@@ -19,8 +19,9 @@
 		}
 
 		switch ($form_id) {
-			case 'bookingForm': //'customForm':
-
+			case 'hotelRates': 
+				$result = AdminForms::getHotelRates($input_values);
+				//watchdog('FormsController', 'Resultado: '.$result);
 				break;
 			case 'newsletterForm':
 			    // Connect with mailchimp library

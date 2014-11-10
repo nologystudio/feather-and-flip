@@ -80,6 +80,28 @@
 						});
 						return false;
 					});
+					
+					$('#hotelRates').submit(function() {
+
+						alert ("Read hotel rates...");
+						var formData = {
+							'formID' 		: 'hotelRates',
+							'checkin' 		: $('#checkin').val(),
+							'checkout' 		: $('#checkout').val(),
+							'numAdults' 		: $('#numAdults').val(),
+							'hotelCode' 		: $('#hotelCode').val(),
+						};
+
+						$.ajax({
+							type   : 'POST',
+							url    : '/sites/all/themes/feflip/forms_controller/admin_forms_submit.php',
+							data   : formData,
+							success: function(msg) {
+								alert ( "Finish. " );
+							}
+						});
+						return false;
+					});					
 				});
 		</script>			
 		
