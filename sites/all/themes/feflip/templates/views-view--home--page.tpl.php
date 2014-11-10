@@ -59,10 +59,10 @@
                         <h3>Join the adventure</h3>
                         <hr>
                         <h4>Sign up for our newsletter</h4>
-                        <form>
-                                <input type="email" placeholder="Your email address" value=""/>
+                        <form id="signupNewsLetter" method="POST">
+                                <input id="user-email" type="email" placeholder="Your email address" value=""/>                
                                 <input type="submit" value="submit"/>
-                        </form>
+                        </form>  
                 </div>
                 <?php for($i=0;$i<5;$i++): ?>
                 <article class="quick-entry">
