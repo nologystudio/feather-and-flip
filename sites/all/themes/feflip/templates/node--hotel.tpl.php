@@ -15,7 +15,7 @@
                         </label>
                         <label for="adults">
                                 <span>adults</span>
-                                <input id="numAdults" type="text" name="adults" value="4" maxlength="2"/>
+                                <input id="numAdults" type="text" name="adults" value="3" maxlength="2"/>
                         </label>
                         <label for="children">
                                 <span>children</span>

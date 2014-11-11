@@ -64,9 +64,14 @@ class AdminForms
     {
         $sabreService = new Sabre;
         $expediaService = new Expedia;
+        
+        $date = explode("/", $values['checkin']);
+        $sabreChecking = $date[2].'-'. $date[0].'-'.$date[1];
+        $date = explode("/", $values['checkout']);
+        $sabreCheckout = $date[2].'-'. $date[0].'-'.$date[1];
 
         return array(
-            'sabre' => $sabreService->HotelDescription($values['hotelCode'], $values['numAdults'], $values['checkin'], $values['checkout']),
+            'sabre' => $sabreService->HotelDescription($values['hotelCode'], $values['numAdults'], $sabreChecking, $sabreCheckout),
             'expedia' => $expediaService->RoomAvailability($values['eanCode'], $values['checkin'], $values['checkout'], $values['numRooms'], $values['numAdults'], $values['numChildren'])
         );
         

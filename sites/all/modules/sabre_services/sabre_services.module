@@ -71,10 +71,11 @@ function sabre_services_soap_test()
 	if (module_exists('wsclient'))
 	{
 		$sabreService = new Sabre;
-		$star = '2015-01-15';
-		$end = '2015-01-20';
-		$sabreService->HotelAvail('LGA','', 2, $star, $end);
-		//$sabreService->HotelDescription('0001141', 2, $star, $end);
+		$star = '2014-11-20';
+		$end = '2014-11-30';
+		//$sabreService->HotelAvail('LGA','', 2, $star, $end);
+		$result = $sabreService->HotelDescription('0005485', 3, $star, $end);
+		dpm($result);
 	}
 }
 

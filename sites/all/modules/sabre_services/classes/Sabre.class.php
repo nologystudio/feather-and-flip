@@ -236,6 +236,8 @@ class Sabre
         $service->settings['options']['cache_wsdl'] = WSDL_CACHE_NONE;        
         $service->settings['soap_headers'] = $headers;
         
+        $response = '';
+        
         //Execute operation
         try
         {  
@@ -244,30 +246,28 @@ class Sabre
             $args['AvailRequestSegment']['TimeSpan']['End'] = $end;
             $args['AvailRequestSegment']['TimeSpan']['Start'] = $start;
             $args['Version'] = '2.1.0';
-            
-            //$prueba = $service->load($service->datatypes['HotelPropertyDescriptionRQ'],'HotelPropertyDescriptionRQ');
-            //dpm($prueba);
-            //dpm($service);
-            
+                        
             $response = $service->HotelPropertyDescriptionRQ($args);
             
-            $xmlRequest = $service->endpoint()->client()->__getLastRequest();
-            dpm($this->ReadXML($xmlRequest));
+            //$xmlRequest = $service->endpoint()->client()->__getLastRequest();
+            //dpm($this->ReadXML($xmlRequest));
             //$xmlResponse = $service->endpoint()->client()->__getLastResponse();
             //dpm($this->ReadXML($xmlResponse));
             
-            dpm($response);
+            //dpm($response);
         }
         catch (Exception $e)
         {
             $response = $e->getMessage();
-            dpm($response);
+            //dpm($response);
         }           
         finally
         {
             //Close sabre session
             $this->CloseSession($securityToken, $conversationId);
         }
+        
+        return $response;
      }
      
      public function HotelBookReservation()
