@@ -31,7 +31,7 @@
                                 </figure>
                                 <div class="info-wrapper">
                                         <a href="" rel="">
-                                                <h1>city, country</h1>
+                                                <h1><?php if(isset($slideTitle)) echo $slideTitle; else echo 'city, country'; ?></h1>
                                                 <span class="cursive">see hotels</span>
                                                 <span class="rounded-btn">go to spain</span>
                                         </a>

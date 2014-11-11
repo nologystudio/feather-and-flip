@@ -39,13 +39,43 @@ function feflip_preprocess_html(&$variables) {
         }
 }
 
+function feflip_preprocess_page(&$variables){
+  
+  $slideTitle = '';
+  if (drupal_is_front_page())
+  {
+      $slideTitle = 'front page';
+  }
+  else if (isset($variables['theme_hook_suggestions'][3]))
+  {
+     if ($variables['theme_hook_suggestions'][3] == 'page__node__hotel_reviews')
+     {
+        $slideTitle = 'hotel reviews';
+     }
+     else if ($variables['theme_hook_suggestions'][3] == 'page__node__itinerary')
+     {
+        $slideTitle = 'itenerary';
+     }
+  }
+  else if (isset($variables['node']))
+  {
+    $slideTitle = 'about us';
+  }
+  
+  $variables['slideTitle'] = $slideTitle;
+  
+}
+
+function feflip_process_page(&$variables){
+   //Load navigation main menu
+  $variables['main_navigation'] = get_header_main_navigation_menu();
+}
+
 /**
  * Override or insert variables into the page template for HTML output.
  */
 function feflip_process_html(&$variables) {
 
-  //Load navigation main menu
-  $variables['main_navigation'] = get_header_main_navigation_menu();
   //Load footer fixed menu
   $variables['footer_fixed_menu'] = get_footer_fixed_menu();
   //Load footer destination
@@ -93,6 +123,7 @@ function feflip_preprocess_node(&$variables) {
  
   if (isset($variables['node']) && ($variables['node']->type == 'page')) {
 	$variables['theme_hook_suggestions'][] = 'node__static';
+        $variables['slideTitle'] = 'about us';
   }
   elseif (isset($variables['node']) && ($variables['node']->type == 'hotel')){
       //Get navigation
