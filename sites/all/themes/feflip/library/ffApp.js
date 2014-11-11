@@ -30,13 +30,13 @@
 			'ffControllers'
 		]).
 		config(['$routeProvider',function($routeProvider){
-			$routeProvider.when('/home',{ 
+			/*$routeProvider.when('/home',{ 
 				templateUrl : '',
 				controller  : 'HomeCtrl'
 			});
 			$routeProvider.otherwise({
 				redirectTo : '/home'
-			});
+			});*/
 		}]);
         
         

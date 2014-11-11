@@ -50,7 +50,7 @@
                 <a href="" class="section-button"></a>
         </footer>
 </section>
-<section id="travel-journal">
+<section id="travel-journal" ng-controller="BlogCtrl">
         <header>
                 <h3 class="icon feather">TRAVEL<span> journal </span></h3>
         </header>

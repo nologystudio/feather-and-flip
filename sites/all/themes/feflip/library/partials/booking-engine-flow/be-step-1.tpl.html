@@ -4,11 +4,11 @@
 		<!-- ---------------------------------------------------------------------------------------------------------------
          
         * Project     : F+F
-        * Document    : booking-engine.tpl.html
-        * Created on  : 4 Nov, 2.014
+        * Document    : be-step-1.tpl.html
+        * Created on  : 8 Nov, 2.014
         * Version     : 1.0
         * Author      : Aday
-        * Description : Booking engine HTML template
+        * Description : Booking engine step 1 HTML template
          
         -------------------------------------------------------------------------------------------------------------------
            *          This code has been developed by NOLOGY. in the awesome Canaries - www.nologystudio.com           *
@@ -21,28 +21,40 @@
 		
 		<!-- Step 1: Check-in + Check-out + Adults + Children + Rooms -->
 		
-		<div id="step-1"></div>
-		
-		<!-- Step 2: Price display -->
-		
-		<div id="step-2"></div>
-		
-		<!-- Step 3: Hotel room detail -->
-		
-		<div id="step-3"></div>
-		
-		<!-- Step 4: Personal information -->
-		
-		<div id="step-4"></div>
-		
-		<!-- Step 5: Confirmation -->
-		
-		<div id="step-5"></div>
-		
-		<!-- Navigation -->
-		
-		<footer>
-			<button rel="go">go</button>
-		</footer>
+		<section id="dates">
+			<header>select your dates</header>
+			<div class="month">
+				<header>
+					<nav></nav>
+				</header>
+			</div>
+			<div class="month">
+				<header>
+					<nav></nav>
+				</header>
+			</div>
+		</section>
+		<section id="who-is-going">
+			<header>who is going</header>
+			<div class="counter">
+				<small>adults</small>
+				<input type="text" value="1" readonly required/>
+				<nav>
+					<button rel="plus"></button>
+					<button rel="minus"></button>
+				</nav>
+			</div>
+			<button rel="next">continue</button>
+		</section>
+		<section id="rooms">
+			<header>number of rooms</header>
+			<div class="counter">
+				<input type="text" value="1" readonly required/>
+				<nav>
+					<button rel="plus"></button>
+					<button rel="minus"></button>
+				</nav>
+			</div>
+		</section>
 		
 		

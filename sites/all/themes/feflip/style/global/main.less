@@ -52,7 +52,8 @@
 		/* ~ Header ~ */
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 		
-		@header-height: 780px;
+		@header-height: 150px;
+		@header-gallery-height: 600px;
 			
 		/* ~ Navigation ~ */
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
@@ -130,19 +131,18 @@
 		body > header
 		{
 			.set-size(@global-width,@header-height);
-			.set-bg();
-			.z(0);
+			.set-pos(fixed);
+			.z(5);
 			.performance();
 			overflow: hidden;
 			display: block;
-			min-height: @header-height/2;
 			
 			&:before
 			{
 				@color-top: fadeout(black,0%);
 				@color-bottom: fadeout(white,100%);
 				
-				.set-size(100%,25%);
+				.set-size(100%,100%);
 				.set-pos(absolute);
 				.set-bg-gradient(@color-top,@color-bottom);
 				.set-opacity(0.7);
@@ -161,6 +161,14 @@
 				top: @ref-padding/2;
 				left: 50%;
 				margin-left: -@w/2;
+				
+				img
+				{
+					.animate-all();
+					width: 100%;
+					margin: auto;
+					display: block;
+				}
 			}
 			
 			nav[id="social-media"]
@@ -169,14 +177,46 @@
 				
 				.set-pos(absolute);
 				.ui-set-social-media-nav();
+				.animate-all();
 				.z(1);
 				top: @margin;
 				right: @margin;
 			}
 			
-			div.slideshow-gallery
+			// | i | Style when the user has scrolling a bit...
+			/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+			
+			&.scrolling
 			{
-				.ui-set-slideshow();
+				height: @header-height - 50px;
+				
+				a img
+				{
+					width: 50%;
+					
+				}
+				
+				nav[id="social-media"]
+				{
+					top: @ref-padding;
+					
+					a
+					{
+						font-size: 18px;
+						margin: 0 3px;	
+					}
+				}
+			}
+			
+			// | i | Style for the top gallery...
+			/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+			
+			& + div.slideshow-gallery
+			{
+				.set-size(100%,@header-gallery-height);
+				.ui-set-slideshow(@header-gallery-height);
+				.set-pos(fixed);
+				.z(0);
 			}
 		}	
 
@@ -192,6 +232,7 @@
 			.set-bg(fadeout(black,20%));
 			.box-sizing();
 			.z(1);
+			margin-top: @header-gallery-height - @nav-height;
 			padding: @ref-padding 0;
 			
 			div.wrapper
@@ -500,6 +541,7 @@
 		body > section
 		{
 			#align > .left;
+			.set-bgc(white);
 			.ui-global-styles();
 			
 			& > div.wrapper
@@ -663,12 +705,13 @@
 			
 			&[id="map-it"]
 			{
-				height: 700px;
 				display: block;
 				
 				& > header
 				{
 					.z(1);
+					.set-pos(absolute);
+					.set-coord(0,0);
 					
 					h3
 					{
@@ -677,13 +720,18 @@
 					}
 				}
 				
-				div[id="map"]
+				& > section,
+				& > *[id]
 				{
-					.set-size(100%,100%);
-					.set-pos(absolute);
+					.set-size(100%);
+					.box-sizing();
+					#align > .left;
+				}
+				
+				& > *[id="map"]
+				{
+					.set-size(100%,700px);
 					.set-bg(@color-1);
-					.set-coord(0,0);
-					.z(0);
 					
 					div.pin
 					{
@@ -795,6 +843,60 @@
 					{
 						left: 0;
 					}
+				}
+				
+				& > section[id="weather-carrousel"]
+				{
+					.set-bg(fadeout(@color-1,50%));
+					overflow: hidden;
+					
+					div.destination
+					{
+						.set-size(200px);
+						#align > .left;
+						padding: @ref-padding/2 @ref-padding;
+						
+						small
+						{
+							.set-size(100%);
+							#font > .l-normal(12px,@grey-1);
+							text-transform: uppercase;
+							text-align: center;
+							display: block;
+							background-color: red;
+						}
+						
+						div
+						{
+							.set-size(100%);
+							.box-sizing();
+							#align > .left;
+							padding: @gutter;
+							
+							span
+							{
+								.set-size(50%);
+								#font > .l-bold(18px,@grey-1);
+								#align > .left;
+								display: block;
+								
+								&:first-child
+								{
+									text-align: left;
+								}
+								
+								&:last-child
+								{
+									text-align: right;
+								}
+							}
+						}
+					}
+				}
+				
+				& > section[id="hotel-list-by-continent"]
+				{
+					.set-bg(@grey-1);
 				}
 			}
 			

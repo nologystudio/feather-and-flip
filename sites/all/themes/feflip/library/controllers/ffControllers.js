@@ -86,6 +86,12 @@
 		
 		ffAppControllers.controller('HomeCtrl',['$scope',function($scope){
 		}]);
+		
+		/* ~ Booking ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+		
+		ffAppControllers.controller('BookingEngineCtrl',['$scope',function($scope){
+		}]);
         
         /* ~ Map ~ */
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
@@ -111,21 +117,27 @@
 		
 		}]);
 		
+		/* ~ Blog ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+		
+		ffAppControllers.controller('BlogCtrl',['$scope','$element',function($scope,$element){
+		}]);
+		
 		/* ~ Gallery ~ */
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 		
 		ffAppControllers.controller('SlideshowCtrl',['$scope','$element',function($scope,$element){
 			
-			var wSize  = [$(window).width(),$(window).height()];
-			var header = $('body > header');
+			//var wSize  = [$(window).width(),$(window).height()];
+			//var header = $('body > header');
 			
 			//var gItems = $element[4].children;
 			//console.log($element);
 			
 			// | i | Resize slideshow to match screen height...
 			
-			if(header.height() > wSize[1]) 
-				header.transition({height:$(window).height()});
+			//if(header.height() > wSize[1]) 
+			//	header.transition({height:$(window).height()});
 			
 			// | i | Resize image to fit in screen...
 			
