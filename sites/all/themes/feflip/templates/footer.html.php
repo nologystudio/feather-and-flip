@@ -88,8 +88,11 @@
 							'formID' 		: 'hotelRates',
 							'checkin' 		: $('#checkin').val(),
 							'checkout' 		: $('#checkout').val(),
+							'numRooms' 		: $('#numRooms').val(),
+							'numChildren' 		: $('#numChildren').val(),
 							'numAdults' 		: $('#numAdults').val(),
 							'hotelCode' 		: $('#hotelCode').val(),
+							'eanCode' 			: $('#eanCode').val(),
 						};
 
 						$.ajax({
@@ -97,7 +100,7 @@
 							url    : '/sites/all/themes/feflip/forms_controller/admin_forms_submit.php',
 							data   : formData,
 							success: function(msg) {
-								alert ( "Finish. " );
+								console.log(msg);
 							}
 						});
 						return false;

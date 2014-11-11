@@ -63,7 +63,12 @@ class AdminForms
     static function getHotelRates($values)
     {
         $sabreService = new Sabre;
-        return $sabreService->HotelDescription($values['hotelCode'], $values['numAdults'], $values['checkin'], $values['checkout']);
+        $expediaService = new Expedia;
+
+        return array(
+            'sabre' => $sabreService->HotelDescription($values['hotelCode'], $values['numAdults'], $values['checkin'], $values['checkout']),
+            'expedia' => $expediaService->RoomAvailability($values['eanCode'], $values['checkin'], $values['checkout'], $values['numRooms'], $values['numAdults'], $values['numChildren'])
+        );
         
     } 
  

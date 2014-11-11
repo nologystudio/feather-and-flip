@@ -52,6 +52,35 @@ class Expedia
 	}
 
 	/*
+	*	Get room availability
+	*	@param hotelId, checkin, checkout, rooms, numAdults, numChildren
+	*/
+	public function RoomAvailability($hotelId, $checkin, $checkout, $rooms, $numAdults, $numChildren)
+	{
+		$service = wsclient_service_load('expedia__rest');
+		$service->settings['http_headers'] = array(
+			'Content-Type' => array('multipart/form-data'),
+		);
+
+		// Set roomGroup data
+		$roomGroup = array(
+			'Room' =>	array(
+				'numberOfAdults' 	=>	$numAdults,
+				'numberOfChildren' 	=>	$numChildren,
+				'childAges' 		=> 	'4,6'
+			)
+		);
+
+		$res = null;
+		try {
+			$res = $service->expedia__rest_room_avail($hotelId, $checkin, $checkout, json_encode($roomGroup));
+		} catch (Exception $e) {
+			return $e->getMessage();
+		}
+		return $res;
+	}
+
+	/*
 	*	Extract EAN error message
 	*	@param Expedia object
 	* 	

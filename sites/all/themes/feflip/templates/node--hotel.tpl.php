@@ -3,25 +3,26 @@
                 <form id="hotelRates" method="POST">
                         <label for="check-in">
                                 <span>check in</span>
-                                <input id="checkin" type="text" name="check-in" value=""/>
+                                <input id="checkin" type="text" name="check-in" value="11/20/2014"/>
                         </label>
                         <label for="check-out">
                                 <span>check out</span>
-                                <input id="checkout" type="text" name="check-out" value=""/>
+                                <input id="checkout" type="text" name="check-out" value="11/30/2014"/>
                         </label>
                         <label for="rooms">
                                 <span>rooms</span>
-                                <input type="text" name="rooms" value="" maxlength="2"/>
+                                <input id="numRooms" type="text" name="rooms" value="2" maxlength="2"/>
                         </label>
                         <label for="adults">
                                 <span>adults</span>
-                                <input id="numAdults" type="text" name="adults" value="" maxlength="2"/>
+                                <input id="numAdults" type="text" name="adults" value="4" maxlength="2"/>
                         </label>
                         <label for="children">
                                 <span>children</span>
-                                <input type="text" name="children" value="" maxlength="2"/>
+                                <input id="numChildren" type="text" name="children" value="2" maxlength="2"/>
                         </label>
                         <input id="hotelCode" type="hidden" value="<?php echo $node->field_hotelcode['und'][0]['value']?>"/>
+                        <input id="eanCode" type="hidden" value="<?php echo (isset($node->field_ean_hotelcode['und']) ? $node->field_ean_hotelcode['und'][0]['value'] : ''); ?>"/>
                         <input type="submit" value="get rates"/>
                 </form>
         </header>

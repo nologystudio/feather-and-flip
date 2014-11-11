@@ -21,6 +21,7 @@
 		switch ($form_id) {
 			case 'hotelRates': 
 				$result = AdminForms::getHotelRates($input_values);
+				echo json_encode($result);
 				//watchdog('FormsController', 'Resultado: '.$result);
 				break;
 			case 'newsletterForm':
