@@ -4,6 +4,4 @@
   </div></div> <!-- /.section, /#messages -->
 <?php endif; ?>
 
-<?php include 'header.html.php'; ?>
-
 <?php print render($page['content']); ?>

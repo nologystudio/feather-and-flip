@@ -1,3 +1,5 @@
+<?php include 'slideshowandmainmenu.html.php';?>
+
 <section id="itinerary">
         <header>
                 <ul>

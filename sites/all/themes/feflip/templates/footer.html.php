@@ -39,7 +39,7 @@
 				<?php echo $footer_fixed_menu; ?>
 			</nav>
 			<div class="fixed-bar">
-				<a id="brand" href=""><img src="<?php echo variable_get('relativePath'); ?>media/brand/feather-and-flip-black-logo.png" alt="Feather+flip"/></a>
+				<a id="brand" href="/"><img src="<?php echo variable_get('relativePath'); ?>media/brand/feather-and-flip-black-logo.png" alt="Feather+flip"/></a>
 				<nav id="social-media" class="black">
 					<a href="" rel="twitter"></a>
 					<a href="" rel="facebook"></a>

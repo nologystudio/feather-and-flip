@@ -39,37 +39,6 @@ function feflip_preprocess_html(&$variables) {
         }
 }
 
-function feflip_preprocess_page(&$variables){
-  
-  $slideTitle = '';
-  if (drupal_is_front_page())
-  {
-      $slideTitle = 'front page';
-  }
-  else if (isset($variables['theme_hook_suggestions'][3]))
-  {
-     if ($variables['theme_hook_suggestions'][3] == 'page__node__hotel_reviews')
-     {
-        $slideTitle = 'hotel reviews';
-     }
-     else if ($variables['theme_hook_suggestions'][3] == 'page__node__itinerary')
-     {
-        $slideTitle = 'itenerary';
-     }
-  }
-  else if (isset($variables['node']))
-  {
-    $slideTitle = 'about us';
-  }
-  
-  $variables['slideTitle'] = $slideTitle;
-  
-}
-
-function feflip_process_page(&$variables){
-   //Load navigation main menu
-  $variables['main_navigation'] = get_header_main_navigation_menu();
-}
 
 /**
  * Override or insert variables into the page template for HTML output.
@@ -120,10 +89,10 @@ function feflip_process_maintenance_page(&$variables) {
  * Override or insert variables into the node template.
  */
 function feflip_preprocess_node(&$variables) {
- 
+         
   if (isset($variables['node']) && ($variables['node']->type == 'page')) {
 	$variables['theme_hook_suggestions'][] = 'node__static';
-        $variables['slideTitle'] = 'about us';
+        $variables['slideImages'] =  Helpers::GetAllImagesFromFieldCollection($variables['node']->field_images, $variables['node']->title, 'http://placehold.it/1280x800', 'headerslideshow');
   }
   elseif (isset($variables['node']) && ($variables['node']->type == 'hotel')){
       //Get navigation
@@ -133,15 +102,29 @@ function feflip_preprocess_node(&$variables) {
       $variables['next'] = $urls['next'];
       $variables['previous'] = $urls['previous'];
       $variables['hotelreviews'] = url('node/'.$variables['node']->field_destination['und'][0]['entity']->nid).'/hotel-reviews';
-      
+      $images = array();
+      $images[] = array('url'     => 'http://placehold.it/1280x800',
+                        'text'    => $variables['node']->title,
+                        'tamanio' => getimagesize('http://placehold.it/1280x800'));
+      $variables['slideImages'] = $images; 
   }
-
+  
+  //Load navigation main menu
+  $variables['main_navigation'] = get_header_main_navigation_menu();
 }
 
 /* Add customized classes by block, view.. */
 function feflip_preprocess_views_view(&$variables) {
   $view = $variables['view'];
-
+  
+  $destinations = NULL;
+  
+  $images = array();
+  $images[] = array('url'     => 'http://placehold.it/1280x800',
+                    'text'    => '',
+                    'tamanio' => getimagesize('http://placehold.it/1280x800'));
+  
+  
   // Home View
   if ($view->name == 'home' && $view->current_display == 'page') {
 
@@ -151,15 +134,26 @@ function feflip_preprocess_views_view(&$variables) {
     //$variables['home_dests_slideshow'] = get_home_destinations('promote_to_slideshow');
     //$variables['home_dests'] = get_home_destinations();
     //$variables['home_dests_map'] = get_home_destinations('promote_to_map');
-    $variables['destinations'] = Destination::GetAllDestination();
+
+    $variables['slideImages'] = Destination::GetImagesForHomeSlideShow();
+    $destinations = Destination::GetAllDestination();
+    $variables['destinations'] = $destinations;
+    $variables['main_navigation'] = get_header_main_navigation_menu($destinations);
   }
   else if ($view->name == 'hotel_reviews' && $view->current_display == 'page'){
     
     $variables['hotels'] = Hotel::HotelReviews($variables);
+    $variables['main_navigation'] = get_header_main_navigation_menu();
+    $images[0]['text'] = 'hotel review';
+    $variables['slideImages'] = $images;    
   }
   else if($view->name == 'itineraries' && $view->current_display == 'page'){
     $variables['itinerary'] =  Itinerary::ItinerariesInfo($view);
+    $variables['main_navigation'] = get_header_main_navigation_menu();
+    $images[0]['text'] = $variables['itinerary']['name'];
+    $variables['slideImages'] = $images;
   }
+  
 }
 
 /**
@@ -326,9 +320,10 @@ function get_home_destinations($filter_field = 'promote') {
  * Get main navigation menu for header
  * @return string
  */
-function get_header_main_navigation_menu(){
+function get_header_main_navigation_menu($destinations=NULL){
   
-  $destinations =  Destination::GetAllDestination();
+  if (!isset($destinations))
+      $destinations =  Destination::GetAllDestination();
     
   $navigationMenu = '<ul>'; 
   
@@ -370,6 +365,7 @@ function get_header_main_navigation_menu(){
   
   return $navigationMenu;
 }
+
 
 /*
  * Get fixed menu in footer

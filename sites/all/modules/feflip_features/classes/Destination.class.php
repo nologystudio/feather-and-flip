@@ -1,5 +1,6 @@
 <?php
 
+require_once('Helpers.class.php');
 require_once('Hotel.class.php');
 
 class Destination
@@ -59,5 +60,20 @@ class Destination
          $nodes = self::getAllDestinationNodes('promote');
          $destinations =  self::getDestinations($nodes);         
          return $destinations; 
+    }
+    
+    public static function GetImagesForHomeSlideShow()
+    {
+         $nodes = self::getAllDestinationNodes('promote_to_slideshow');
+         
+         $images = array();
+         
+         foreach($nodes as $node)
+         {
+             $wrapper = entity_metadata_wrapper('node', $node);
+             $images[] = Helpers::GetMainImageFromFieldCollection($node->field_images, $wrapper->title->value().', '.$wrapper->field_country->value(),'http://placehold.it/1280x800', 'headerslideshow');
+         }
+         
+         return $images; 
     }
 }

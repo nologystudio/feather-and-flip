@@ -1,3 +1,5 @@
+<?php include 'slideshowandmainmenu.html.php';?>
+
 <section id="start-your-journey">
         <header><h3 class="simple">start your journey</h3></header>
         <div class="gallery-wrapper">

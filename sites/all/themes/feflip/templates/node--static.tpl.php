@@ -1,3 +1,5 @@
+<?php include 'slideshowandmainmenu.html.php';?>
+
 <section class="static">
 	<article id="about">
 		<h1><?php echo $title; ?></h1>

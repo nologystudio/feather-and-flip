@@ -1,3 +1,5 @@
+<?php include 'slideshowandmainmenu.html.php';?>
+
 <section id="hotel-reviews">
         <div class="wrapper">
                 <h1 class="middle-line">Hotel Reviews</h1>

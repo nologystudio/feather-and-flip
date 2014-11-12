@@ -128,6 +128,8 @@
         </head>
         
         <body class="<?php echo variable_get('pageID'); ?>">
+        
+        <?php include 'header.html.php'; ?>
 
         <?php echo $page; ?>
     

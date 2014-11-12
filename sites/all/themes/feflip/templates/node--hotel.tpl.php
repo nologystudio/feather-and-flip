@@ -1,3 +1,5 @@
+<?php include 'slideshowandmainmenu.html.php';?>
+
 <section id="hotel">
         <header>
                 <form id="hotelRates" method="POST">
