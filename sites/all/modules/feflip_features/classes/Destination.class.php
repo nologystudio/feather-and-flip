@@ -28,13 +28,22 @@ class Destination
 
     private static function getDestinations($nodes)
     {
+         $continents = array('north_america' =>'North America',
+                            'south_america' =>'South America',
+                            'caribbean'     =>'Caribbean',
+                            'africa'        =>'Africa',
+                            'europe'        =>'Europe',
+                            'asia'          =>'Asia',
+                            'oceania'       =>'Oceania');         
+         
          $destinations = array();
          foreach($nodes as $node)
          {
               $wrapper = entity_metadata_wrapper('node', $node);
               $image = "http://placehold.it/300x300";
               $destinations[] =  array( 'destination'   => $wrapper->title->value(),
-                                        'withcountry'   => $wrapper->title->value().', '.$wrapper->field_country->value(),   
+                                        'withcountry'   => $wrapper->title->value().', '.$wrapper->field_country->value(),
+                                        'continent'     => isset($continents[$wrapper->field_continent->value()]) ? $continents[$wrapper->field_continent->value()] : $wrapper->field_continent->value(),
                                         'url'           => url('node/'.$node->nid),
                                         'image'         => $image,
                                         'numhotels'     => Hotel::NumHotelsByDestination($node->nid)

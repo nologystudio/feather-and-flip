@@ -24,6 +24,8 @@ function feflip_preprocess_html(&$variables) {
             variable_set('pageID', 'hotel-reviews');
         else if (isset($arg[2]) && $arg[2] == 'itineraries')
             variable_set('pageID', 'itinerary');
+        else if (isset($arg[0]) && $arg[0] == 'map-it')
+           variable_set('pageID', 'map-it');           
         else if (array_search('node-type-hotel', $variables['classes_array']) !== false)    
             variable_set('pageID', 'hotel');
         else{
@@ -91,7 +93,7 @@ function feflip_process_maintenance_page(&$variables) {
 function feflip_preprocess_node(&$variables) {
          
   if (isset($variables['node']) && ($variables['node']->type == 'page')) {
-	$variables['theme_hook_suggestions'][] = 'node__static';
+        $variables['theme_hook_suggestions'][] = 'node__static';
         $variables['slideImages'] =  Helpers::GetAllImagesFromFieldCollection($variables['node']->field_images, $variables['node']->title, 'http://placehold.it/1280x800', 'headerslideshow');
   }
   elseif (isset($variables['node']) && ($variables['node']->type == 'hotel')){
@@ -140,18 +142,30 @@ function feflip_preprocess_views_view(&$variables) {
     $variables['destinations'] = $destinations;
     $variables['main_navigation'] = get_header_main_navigation_menu($destinations);
   }
-  else if ($view->name == 'hotel_reviews' && $view->current_display == 'page'){
+  elseif ($view->name == 'hotel_reviews' && $view->current_display == 'page'){
     
     $variables['hotels'] = Hotel::HotelReviews($variables);
     $variables['main_navigation'] = get_header_main_navigation_menu();
     $images[0]['text'] = 'hotel review';
     $variables['slideImages'] = $images;    
   }
-  else if($view->name == 'itineraries' && $view->current_display == 'page'){
+  elseif($view->name == 'itineraries' && $view->current_display == 'page'){
     $variables['itinerary'] =  Itinerary::ItinerariesInfo($view);
     $variables['main_navigation'] = get_header_main_navigation_menu();
     $images[0]['text'] = $variables['itinerary']['name'];
     $variables['slideImages'] = $images;
+  }
+  elseif($view->name == 'map_it' && $view->current_display == 'page'){
+    $variables['slideImages'] = Destination::GetImagesForHomeSlideShow();
+    $destinations = Destination::GetAllDestination();
+    
+    $destinationbycontinent = array();
+    foreach($destinations as $destination)
+      $destinationbycontinent[$destination['continent']][] = $destination;
+    
+    $variables['destinationsbycontinent'] = $destinationbycontinent;
+    $variables['destinations'] = $destinations;
+    $variables['main_navigation'] = get_header_main_navigation_menu($destinations);    
   }
   
 }
