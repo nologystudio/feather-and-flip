@@ -160,8 +160,7 @@ class Sabre
         $dom->formatOutput = TRUE;
         return $dom->saveXml();
      }
-     
-         
+        
      public function HotelAvail($hotelCityCode, $cityName, $numpersonas, $start, $end)
      {
         //Open session with sabre
@@ -270,7 +269,7 @@ class Sabre
         return $response;
      }
      
-     public function HotelBookReservation()
+     public function HotelBookReservation($roomTypes, $hotelCode, $numPersonas, $star, $end)
      {
         //Open session with sabre
         $sessionInfo = $this->CreateSession();
@@ -292,16 +291,33 @@ class Sabre
         
         //Execute operation
         try
-        {  
+        {            
             $args = array();
+            $args['Hotel']['BasicPropertyInfo']['HotelCode'] = $hotelCode;
+            $args['Hotel']['BasicPropertyInfo']['ConfirmationNumber'] = 'ABC123';
+    
+            $args['Hotel']['Guarantee']['Type'] = 'GDPST';
+            $args['Hotel']['Guarantee']['CC_Info']['PaymentCard']['Code'] = 'AX';
+            $args['Hotel']['Guarantee']['CC_Info']['PaymentCard']['ExpireDate'] = '2015-12';
+            $args['Hotel']['Guarantee']['CC_Info']['PaymentCard']['Number'] = '1234567890';
+            $args['Hotel']['Guarantee']['CC_Info']['PersonName']['Surname'] = 'TEST';
+            
+            $args['Hotel']['RoomType']['NumberOfUnits'] = $roomTypes[0]['numunit'];
+            $args['Hotel']['RoomType']['RoomTypeCode'] = $roomTypes[0]['code'];
+            $args['Hotel']['GuestCounts']['Count'] = $numPersonas;
+            $args['Hotel']['TimeSpan']['Start'] = $star;
+            $args['Hotel']['TimeSpan']['End'] = $end;
+            $args['Version'] = '2.1.0';
+            
             $response = $service->OTA_HotelResRQ($args);
             
-            //$xmlRequest = $service->endpoint()->client()->__getLastRequest();
-            //dpm($this->ReadXML($xmlRequest));
+            $xmlRequest = $service->endpoint()->client()->__getLastRequest();
+            dpm($this->ReadXML($xmlRequest));
             //$xmlResponse = $service->endpoint()->client()->__getLastResponse();
             //dpm($this->ReadXML($xmlResponse));
             
-            //dpm($response);
+            dpm($response);
+
         }
         catch (Exception $e)
         {

@@ -72,10 +72,14 @@ function sabre_services_soap_test()
 	{
 		$sabreService = new Sabre;
 		$star = '2014-11-20';
-		$end = '2014-11-30';
+		$end = '2014-11-23';
+		$hotelCode = '0018368';
+		$roomTypes[] = array('numunit' => 1, 'code' => 'C1KPR8');
+		$numPersonas = 1;
 		//$sabreService->HotelAvail('LGA','', 2, $star, $end);
-		$result = $sabreService->HotelDescription('0005485', 3, $star, $end);
-		dpm($result);
+		//$result = $sabreService->HotelDescription('0005485', 3, $star, $end);
+		//dpm($result);
+		$sabreService->HotelBookReservation($roomTypes, $hotelCode, $numPersonas, $star, $end);
 	}
 }
 
