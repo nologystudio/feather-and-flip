@@ -22,7 +22,7 @@ function feflip_preprocess_html(&$variables) {
 	    variable_set('pageID', 'home');
         else if (isset($arg[2]) && $arg[2] == 'hotel-reviews')
             variable_set('pageID', 'hotel-reviews');
-        else if (isset($arg[2]) && $arg[2] == 'itineraries')
+        else if (isset($arg[2]) && $arg[2] == 'itinerary')
             variable_set('pageID', 'itinerary');
         else if (isset($arg[0]) && $arg[0] == 'map-it')
            variable_set('pageID', 'map-it');           

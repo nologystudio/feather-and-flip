@@ -45,15 +45,15 @@
                 <?php } ?>
         </section>
         <section id="hotel-list-by-continent">
-                <div class="row">
-                <?php foreach($destinationsbycontinent as $continent => $destinations){?>
+                <?php $numContient = 0; foreach($destinationsbycontinent as $continent => $destinations){?>
+                <?php if ($numContient == 0) { ?><div class="row"><?php } ?>
                    <ul>
                        <li><?php echo $continent;?></li>
                    <?php for($i=0; $i<count($destinations); $i++){ ?>
                        <li><?php echo $destinations[$i]['destination'] . '<span></span>'; if ($i === 0) {echo'<span></span>';} ?></li>
                    <?php } ?>
                    </ul>
-                <?php } ?>
-                </div>
+                <?php if ($numContient == 2) { ?></div><?php } ?>
+                <?php $numContient++; if($numContient >2) {$numContient = 0;} } ?>
         </section>
 </section>
