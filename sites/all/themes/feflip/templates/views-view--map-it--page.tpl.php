@@ -1,9 +1,13 @@
 <?php include 'slideshowandmainmenu.html.php';?>
 
 <section id="map-it" class="full" ng-controller="MapCtrl">
-        <header>
+        <header class="animated fadeInUp">
                 <h3 class="icon compass">MAP IT</h3>
-                <nav id="zoom"></nav>
+                <nav id="zoom">
+                        <button rel="zoom-in"></button>
+                        <button rel="zoom-out"></button>
+                        <button rel="move"></button>
+                </nav>
                 <ul role="select">
                         <li>filter by continent</li>
                         <li>North America</li>
@@ -33,8 +37,8 @@
                 <?php foreach($destinations as $destination){ ?>
                 <div class="destination">
                         <small><?php echo $destination['destination'];?></small>
-                        <div class="info">
-                                <span class="icon"></span>
+                        <div class="info animated fadeInUp">
+                                <span class="icon">1</span>
                                 <span class="temp">60¡F</span>
                         </div>
                 </div>
@@ -45,9 +49,9 @@
                 <?php foreach($destinationsbycontinent as $continent => $destinations){?>
                    <ul>
                        <li><?php echo $continent;?></li>
-                   <?php foreach($destinations as $destination){?>
-                       <li><?php echo $destination['destination'];?></li>
-                   <?php }?>
+                   <?php for($i=0; $i<count($destinations); $i++){ ?>
+                       <li><?php echo $destinations[$i]['destination'] . '<span></span>'; if ($i === 0) {echo'<span></span>';} ?></li>
+                   <?php } ?>
                    </ul>
                 <?php } ?>
                 </div>

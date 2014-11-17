@@ -33,6 +33,9 @@
 				overflow: hidden;
 				background-color: @color-1;
 				
+				// | i | This fix the issue with the mask in Safari
+				-webkit-mask-image: -webkit-radial-gradient(circle,transparent,transparent);
+				
 				img
 				{
 					.set-size(100%,100%);
@@ -121,6 +124,14 @@
 		}
 		
 		/* ------------------------------------------------------------------------------------------------------------- */
+		/* ~ Icons ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+	
+		.ui-add-icon(@icon,@x,@y)
+		{
+		}
+		
+		/* ------------------------------------------------------------------------------------------------------------- */
 		/* ~ Global styles ~ */
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 		
@@ -160,6 +171,65 @@
 				&:after
 				{
 					margin-left: @margin;
+				}
+			}
+			
+			ul[role="select"]
+			{
+				@alpha-effect: 0.5;
+				
+				.set-size(240px);
+				
+				li
+				{
+					#ui-set-button > .rounded(fadeout(@color-1,5%),14px);
+					.box-sizing();
+					.set-opacity(1);
+					.animate-opacity();
+					.performance();
+					.hide(1);
+					cursor: pointer;
+					border: solid 2px @color-2;
+					margin-bottom: @unit;
+					color: @color-4;
+					
+					&:first-child
+					{
+						.show();
+						.ui-add-icon('down-arrow',right,center);
+						background-color: @color-2;
+						color: white;
+						
+						&:after
+						{
+							.set-size();
+							.set-pos(absolute);
+							#font > .ic(22px,white);
+							#align > .right;
+							display: block;
+							content: '\22';
+							top: -4px;
+							right: -10px;
+						}
+					}
+					
+					&:hover
+					{
+						.set-opacity(@alpha-effect);
+					}
+				}
+				
+				&:hover
+				{
+					li
+					{
+						display: block;
+						
+						&:first-child
+						{
+							.set-opacity(@alpha-effect);
+						}
+					}
 				}
 			}
 		}
