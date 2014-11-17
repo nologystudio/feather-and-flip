@@ -84,7 +84,7 @@ class Sabre
      /*
       * Create a session with sabre service and get security token and conversation id
       */
-     private function CreateSession()
+     public function CreateSession()
      {
         
         $service = wsclient_service_load('createsession'.$this->TESTSUFFIX);
@@ -122,7 +122,7 @@ class Sabre
      /*
       * Close a session 
       */
-     private function CloseSession($securityToken, $conversationId)
+     public function CloseSession($securityToken, $conversationId)
      {
         $service = wsclient_service_load('closesession'.$this->TESTSUFFIX);
         
@@ -374,5 +374,86 @@ class Sabre
             //Close sabre session
             $this->CloseSession($securityToken, $conversationId);
         }        
-     }     
+     }
+     
+     public function TravelItineraryAddInfo($sessionInfo)
+     {
+        $securityToken = $sessionInfo['SecurityToken'];
+        $conversationId = $sessionInfo['ConversationId'];
+        
+        //Load service
+        $service = wsclient_service_load('travelitineraryaddinfo'.$this->TESTSUFFIX);
+        
+        //Create headers and settings
+        $headers = array(
+            $this->Header_MessageHeader('TravelItineraryAddInfoLLSRQ', $conversationId),
+            $this->Header_SecurityToken($securityToken)
+                         );
+        
+        $service->settings['options']['trace'] = TRUE;
+        $service->settings['options']['cache_wsdl'] = WSDL_CACHE_NONE;        
+        $service->settings['soap_headers'] = $headers;
+        
+        try
+        {  
+            $args = array();
+            $args['Version'] = '2.0.2';
+            $response = $service->TravelItineraryAddInfoRQ($args);
+            
+            //$xmlRequest = $service->endpoint()->client()->__getLastRequest();
+            //dpm($this->ReadXML($xmlRequest));
+            //$xmlResponse = $service->endpoint()->client()->__getLastResponse();
+            //dpm($this->ReadXML($xmlResponse));
+            
+            //dpm($response);
+        }
+        catch (Exception $e)
+        {
+            $response = $e->getMessage();
+            //dpm($response);
+        }
+        
+        return $response;
+     }
+     
+     
+     public function TravelItineraryRead()
+     {
+        $securityToken = $sessionInfo['SecurityToken'];
+        $conversationId = $sessionInfo['ConversationId'];
+        
+        //Load service
+        $service = wsclient_service_load('travelitineraryread'.$this->TESTSUFFIX);
+        
+        //Create headers and settings
+        $headers = array(
+            $this->Header_MessageHeader('TravelItineraryReadRQ', $conversationId),
+            $this->Header_SecurityToken($securityToken)
+                         );
+        
+        $service->settings['options']['trace'] = TRUE;
+        $service->settings['options']['cache_wsdl'] = WSDL_CACHE_NONE;        
+        $service->settings['soap_headers'] = $headers;
+        
+        try
+        {  
+            $args = array();
+            $args['Version'] = '2.2.0';
+            $response = $service->TravelItineraryReadRQ($args);
+            
+            //$xmlRequest = $service->endpoint()->client()->__getLastRequest();
+            //dpm($this->ReadXML($xmlRequest));
+            //$xmlResponse = $service->endpoint()->client()->__getLastResponse();
+            //dpm($this->ReadXML($xmlResponse));
+            
+            //dpm($response);
+        }
+        catch (Exception $e)
+        {
+            $response = $e->getMessage();
+            //dpm($response);
+        }
+        
+        return $response;
+     }
 }
