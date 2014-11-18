@@ -3,6 +3,9 @@
 class Helpers
 {
 
+    // Fixed configuration values
+    const RSS_URL = 'http://www.featherandflip.com/travel-journal/?format=rss';
+
     public static function GetAllImagesFromFieldCollection($fieldCollection, $imageText, $alternativeImage, $style)
     {
         $images = array();
@@ -35,8 +38,7 @@ class Helpers
         
         return $images;
     }
-    
-    
+
     public static function GetMainImageFromFieldCollection($fieldCollection, $imageText, $alternativeImage, $style)
     {
         $image = NULL;
@@ -65,6 +67,54 @@ class Helpers
                                            'tamanio'  => getimagesize($alternativeImage));
         
         return $image;
-    }    
+    }
+
+    // Import external rss
+    public static function ImportExternalRss()
+    {
+        $rss = self::ParseExternalRss();
+        // TODO: implement method for save new rss items to drupal database
+        // private static function RssToNodes()
+        // 
+        // self::RssToNodes();
+        return $rss;
+    }
+
+    // Read and parse external rss
+    private static function ParseExternalRss()
+    {
+        $ch = curl_init();
+        curl_setopt_array($ch,array(
+            CURLOPT_URL             => self::RSS_URL,
+            CURLOPT_USERAGENT       => 'crawler_rss',
+            CURLOPT_TIMEOUT         => 120,
+            CURLOPT_CONNECTTIMEOUT  => 30,
+            CURLOPT_RETURNTRANSFER  => TRUE,
+            CURLOPT_ENCODING        => 'UTF-8'
+        ));
+        $data = curl_exec($ch);
+        curl_close($ch);
+
+        $xml = simplexml_load_string($data, 'SimpleXMLElement', LIBXML_NOCDATA);
+        $rs = array();
+        foreach ($xml->channel->item as $item) {
+            $rs[] = array(
+                'title'     => (string)$item->title,
+                'category'  => (string)$item->category,
+                'pubDate'   => (string)$item->pubDate,
+                'url'       => (string)$item->link,
+                'description' => (string)$item->description,
+                'img'       => ''
+            );
+        }
+        return $rs;
+    }
+
+    // Create nodes in drupal from rss result
+    // @param array $items ['title', 'category', 'pubDate', 'url', 'description', 'img']
+    private static function RssToNodes($items)
+    {
+        // TODO:
+    }
 
 }
