@@ -5,11 +5,11 @@
                 <form id="hotelRates" method="POST">
                         <label for="check-in">
                                 <span>check in</span>
-                                <input id="checkin" type="text" name="check-in" value="11/20/2014"/>
+                                <input id="checkin" type="text" name="check-in" value="11/20/2015"/>
                         </label>
                         <label for="check-out">
                                 <span>check out</span>
-                                <input id="checkout" type="text" name="check-out" value="11/30/2014"/>
+                                <input id="checkout" type="text" name="check-out" value="11/30/2015"/>
                         </label>
                         <label for="rooms">
                                 <span>rooms</span>

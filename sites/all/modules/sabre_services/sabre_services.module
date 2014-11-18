@@ -76,10 +76,31 @@ function sabre_services_soap_test()
 		$hotelCode = '0018368';
 		$roomTypes[] = array('numunit' => 1, 'code' => 'C1KPR8');
 		$numPersonas = 1;
+
+		echo $no;
+		echo $no;
+		echo $no;
+		echo $no;
+		echo $no;
+		echo $no;
+		echo $no;
+		//dpm($sabreService->HotelDescription($hotelCode, $numPersonas, $star, $end));
+		
+		$sessionInfo = $sabreService->CreateSession();
+		dpm ($sessionInfo);
+		
+		$result = $sabreService->TravelItineraryAddInfo($sessionInfo, 'Prueba', 'esto es una prueba');
+		$result = $sabreService->EndTransaction($sessionInfo);
+		dpm($result);
+		//$result = $sabreService->TravelItineraryRead($sessionInfo);
+		//dpm($result);
+		$sabreService->CloseSession($sessionInfo['SecurityToken'], $sessionInfo['ConversationId']);
+		
+		//dpm($result);
 		//$sabreService->HotelAvail('LGA','', 2, $star, $end);
 		//$result = $sabreService->HotelDescription('0005485', 3, $star, $end);
 		//dpm($result);
-		$sabreService->HotelBookReservation($roomTypes, $hotelCode, $numPersonas, $star, $end);
+		//$sabreService->HotelBookReservation($roomTypes, $hotelCode, $numPersonas, $star, $end);
 	}
 }
 

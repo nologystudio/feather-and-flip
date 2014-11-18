@@ -146,7 +146,9 @@ class Sabre
         {
             $response = $e->getMessage();
             //dpm($response);
-        }         
+        }
+        
+        return $response;
      }
      
      /*
@@ -241,6 +243,7 @@ class Sabre
         try
         {  
             $args['AvailRequestSegment']['GuestCounts']['Count'] = $numpersonas;
+            $args['AvailRequestSegment']['RateRange']['CurrencyCode'] = 'USD';
             $args['AvailRequestSegment']['HotelSearchCriteria']['Criterion']['HotelRef']['HotelCode'] = $hotelCode;
             $args['AvailRequestSegment']['TimeSpan']['End'] = $end;
             $args['AvailRequestSegment']['TimeSpan']['Start'] = $start;
@@ -376,7 +379,7 @@ class Sabre
         }        
      }
      
-     public function TravelItineraryAddInfo($sessionInfo)
+     public function TravelItineraryAddInfo($sessionInfo, $name, $surname)
      {
         $securityToken = $sessionInfo['SecurityToken'];
         $conversationId = $sessionInfo['ConversationId'];
@@ -396,10 +399,24 @@ class Sabre
         
         try
         {  
-            $args = array();
-            $args['Version'] = '2.0.2';
-            $response = $service->TravelItineraryAddInfoRQ($args);
+            $args = array();       
+                  
+            $args['AgencyInfo']['Address']['AddressLine'] = 'SABRE TRAVEL';
+            $args['AgencyInfo']['Address']['CityName'] = 'SOUTHLAKE';
+            $args['AgencyInfo']['Address']['CountryCode'] = 'US';
+            $args['AgencyInfo']['Address']['PostalCode'] = '76092';
+            $args['AgencyInfo']['Address']['StateCountyProv']['StateCode'] = 'TX';
+            $args['AgencyInfo']['Address']['StreetNmbr'] = '3150 SABRE DRIVE';
             
+            $args['CustomerInfo']['PersonName']['GivenName'] = $name;
+            $args['CustomerInfo']['PersonName']['Surname'] = $surname;
+            //$args['CustomerInfo']['PersonName']['GivenName'] = 'otro';
+            //$args['CustomerInfo']['PersonName']['Surname'] = 'este es el otro';
+            
+            $args['Version'] = '2.0.2';
+            
+            $response = $service->TravelItineraryAddInfoRQ($args);
+            //dpm($response);
             //$xmlRequest = $service->endpoint()->client()->__getLastRequest();
             //dpm($this->ReadXML($xmlRequest));
             //$xmlResponse = $service->endpoint()->client()->__getLastResponse();
@@ -410,14 +427,14 @@ class Sabre
         catch (Exception $e)
         {
             $response = $e->getMessage();
-            //dpm($response);
+            //var_dump ($e);
         }
         
         return $response;
      }
      
      
-     public function TravelItineraryRead()
+     public function TravelItineraryRead($sessionInfo)
      {
         $securityToken = $sessionInfo['SecurityToken'];
         $conversationId = $sessionInfo['ConversationId'];
@@ -438,9 +455,52 @@ class Sabre
         try
         {  
             $args = array();
+            $args['MessagingDetails']['SubjectAreas']['SubjectArea'] = 'FULL';
             $args['Version'] = '2.2.0';
             $response = $service->TravelItineraryReadRQ($args);
             
+            $xmlRequest = $service->endpoint()->client()->__getLastRequest();
+            dpm($this->ReadXML($xmlRequest));
+            //$xmlResponse = $service->endpoint()->client()->__getLastResponse();
+            //dpm($this->ReadXML($xmlResponse));
+            
+            //dpm($response);
+        }
+        catch (Exception $e)
+        {
+            $response = $e->getMessage();
+            //dpm($response);
+        }
+        
+        return $response;
+     }
+     
+     
+     public function EndTransaction($sessionInfo)
+     {
+        $securityToken = $sessionInfo['SecurityToken'];
+        $conversationId = $sessionInfo['ConversationId'];
+        
+        //Load service
+        $service = wsclient_service_load('endtransaction'.$this->TESTSUFFIX);
+        
+        //Create headers and settings
+        $headers = array(
+            $this->Header_MessageHeader('EndTransactionLLSRQ', $conversationId),
+            $this->Header_SecurityToken($securityToken)
+                         );
+        
+        $service->settings['options']['trace'] = TRUE;
+        $service->settings['options']['cache_wsdl'] = WSDL_CACHE_NONE;        
+        $service->settings['soap_headers'] = $headers;
+        
+        try
+        {  
+            $args = array();
+            $args['EndTransaction']['Ind'] = 'true';
+            $args['Itinerary']['Ind'] = 'false';
+            $args['Version'] = '2.0.4';
+            $response = $service->EndTransactionRQ($args);
             //$xmlRequest = $service->endpoint()->client()->__getLastRequest();
             //dpm($this->ReadXML($xmlRequest));
             //$xmlResponse = $service->endpoint()->client()->__getLastResponse();
@@ -454,6 +514,6 @@ class Sabre
             //dpm($response);
         }
         
-        return $response;
+        return $response;        
      }
 }
