@@ -19,10 +19,13 @@
 		}
 
 		switch ($form_id) {
+			case 'getDestinations':
+				$result = AdminForms::getDestinations();
+				echo json_encode($result);
+				break;
 			case 'hotelRates': 
 				$result = AdminForms::getHotelRates($input_values);
 				echo json_encode($result);
-				//watchdog('FormsController', 'Resultado: '.$result);
 				break;
 			case 'newsletterForm':
 			    // Connect with mailchimp library

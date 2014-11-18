@@ -46,7 +46,9 @@ class Destination
                                         'continent'     => isset($continents[$wrapper->field_continent->value()]) ? $continents[$wrapper->field_continent->value()] : $wrapper->field_continent->value(),
                                         'url'           => url('node/'.$node->nid),
                                         'image'         => $image,
-                                        'numhotels'     => Hotel::NumHotelsByDestination($node->nid)
+                                        'numhotels'     => Hotel::NumHotelsByDestination($node->nid),
+                                        'latitude'      => $wrapper->field_latitude->value(),
+                                        'longitude'     => $wrapper->field_longitude->value()
                                       );
          }
          

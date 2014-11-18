@@ -75,7 +75,13 @@ class AdminForms
             'expedia' => $expediaService->RoomAvailability($values['eanCode'], $values['checkin'], $values['checkout'], $values['numRooms'], $values['numAdults'], $values['numChildren'])
         );
         
-    } 
+    }
+    
+    static function getDestinations()
+    {
+        $result = Destination::GetAllDestination();
+        return $result;
+    }
  
 }
 
