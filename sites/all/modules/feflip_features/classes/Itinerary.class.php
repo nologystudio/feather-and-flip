@@ -39,10 +39,15 @@ class Itinerary
             foreach($wrapper->field_images->value() as $image)
             {
                 if (count($image->field_mainimage) > 0)
-                    $images[] = image_style_url('large',$image->field_mainimage['und'][0]['uri']);
+                {
+                    $url = image_style_url('itinerary_1040',$image->field_mainimage['und'][0]['uri']);
+                    $images[] = array('url'     => $url,
+                                      'tamanio' => $tamanio = getimagesize($url)
+                                      );
+                }
             }
             
-            if (count($images) == 0) $images[] = 'http://placehold.it/1040x650';
+            if (count($images) == 0) $images[] = array('url' =>'http://placehold.it/1040x650', 'tamanio'=>getimagesize('http://placehold.it/1040x650'));
             
             $itineraryinfo['name'] = $wrapper->title->value();
             $itineraryinfo['destination'] = $wrapper->field_destination->title->value().', '.$wrapper->field_destination->field_country->value();

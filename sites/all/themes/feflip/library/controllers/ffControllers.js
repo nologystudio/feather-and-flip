@@ -91,6 +91,25 @@
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 		
 		ffAppControllers.controller('BookingEngineCtrl',['$scope',function($scope){
+			
+			$scope.globalPath = '/feather-and-flip/library/partials/';
+			$scope.path       = $scope.globalPath + 'booking-engine-flow/';
+			$scope.state      = 3;
+			$scope.booking    = $scope.globalPath + 'booking-engine.tpl.html';
+			$scope.searchTpl  = $scope.path + 'be-search.tpl.html';
+			$scope.stepTpl    = {
+				0 : '',
+				// --> 
+				1 : $scope.path + 'be-step-1.tpl.html',
+				// --> 
+				2 : $scope.path + 'be-step-2.tpl.html',
+				// --> Hotel room detail 
+				3 : $scope.path + 'be-step-3.tpl.html', 
+				// --> 
+				4 : $scope.path + 'be-step-4.tpl.html'
+			}
+			
+			$scope.availableRooms = {0:'',1:''};
 		}]);
         
         /* ~ Map ~ */

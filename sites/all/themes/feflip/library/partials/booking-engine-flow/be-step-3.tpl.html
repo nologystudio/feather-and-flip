@@ -21,6 +21,53 @@
 		
 		<!-- Step 3: Hotel room detail -->
 		
+		<header>
+			<div class="wrapper">
+				<h1 class="middle-line">Available rates</h1>
+				<ul id="current-search">
+					<li>November 24,2014 to November 28,2014</li>
+					<li>2 Rooms</li>
+					<li>2 Adults, 4 Children</li>
+				</ul>
+			</div>
+			<form id="booking-search" ng-include="searchTpl"></form>
+		</header>
 		
+		<ul id="search-result">
+			<li ng-repeat="room in availableRooms">
+				<div class="room-wrapper">
+					<div class="left-col">
+						<figure>
+							<img src="http://placehold.it/150x150"/>
+						</figure>
+						<h2>
+							executive double room
+							<small>this is room detail</small>
+						</h2>
+					</div>
+					<div class="right-col">
+						<h3>price</h3>
+						<button rel="see-rates">see rates</button>
+						<button ng-if="room.showRates" rel="plus"></button>
+					</div>
+				</div>
+				<ul id="room-rates">
+					<li ng-if="room.showRates" ng-repeat="rate in room.rates">
+						<div class="room-wrapper">
+							<div class="left-col">
+								<h2>
+									executive double room
+									<small>this is room detail</small>
+								</h2>
+							</div>
+							<div class="right-col">
+								<h3>price</h3>
+								<a href="#" rel="book-this">book this room</a>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</li>
+		</ul>
 		
 		

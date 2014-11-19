@@ -34,7 +34,7 @@
 				background-color: @color-1;
 				
 				// | i | This fix the issue with the mask in Safari
-				-webkit-mask-image: -webkit-radial-gradient(circle,transparent,transparent);
+				//-webkit-mask-image: -webkit-radial-gradient(circle,transparent,transparent);
 				
 				img
 				{
@@ -230,6 +230,64 @@
 							.set-opacity(@alpha-effect);
 						}
 					}
+				}
+			}
+			
+			form[id="booking-search"]
+			{
+				@margin-ref:  1.5 * @gutter;
+						
+				.set-size(@global-wrapper-width);
+				#align > .center;
+				display: block;
+				overflow: hidden;
+				
+				label
+				{
+					#align > .left;
+					margin: @margin-ref;
+					
+					span
+					{
+						#align > .left;
+						#font > .l-normal(12px,@grey-1);
+						text-transform: uppercase;
+						margin-bottom: @unit;
+					}
+					
+					input
+					{
+						.reset();
+						.box-sizing();
+						.set-bgc(fadeout(@color-2,90%));
+						#align > .left;
+						#font > .l-normal(18px,@color-4);
+						border-radius: @unit;
+						border: solid 2px @color-3;
+						padding: @gutter;
+						display: block;
+						clear: both;
+						
+						&[name="rooms"],
+						&[name="adults"],
+						&[name="children"]
+						{
+							.set-size(70px);
+						}
+						
+						&[name="check-in"],
+						&[name="check-out"],
+						{
+						}
+					}
+				}
+				
+				input[type="submit"]
+				{
+					.reset();
+					#ui-set-button > .rounded(@color-2,18px);
+					#align > .right;
+					margin: 35px @margin-ref 0 @margin-ref;
 				}
 			}
 		}

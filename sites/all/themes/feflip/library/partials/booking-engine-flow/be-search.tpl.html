@@ -4,11 +4,11 @@
 		<!-- ---------------------------------------------------------------------------------------------------------------
          
         * Project     : F+F
-        * Document    : booking-engine.tpl.html
-        * Created on  : 4 Nov, 2.014
+        * Document    : be-search.tpl.html
+        * Created on  : 16 Nov, 2.014
         * Version     : 1.0
         * Author      : Aday
-        * Description : Booking engine HTML template
+        * Description : Booking engine search HTML template
          
         -------------------------------------------------------------------------------------------------------------------
            *          This code has been developed by NOLOGY. in the awesome Canaries - www.nologystudio.com           *
@@ -19,30 +19,30 @@
         * 
         ---------------------------------------------------------------------------------------------------------------- -->
 		
-		<!-- Step 1: Check-in + Check-out + Adults + Children + Rooms -->
-		
-		<div id="step-1" ng-if="state == 1" ng-include="stepTpl[state]"></div>
-		
-		<!-- Step 2: Price display -->
-		
-		<div id="step-2" ng-if="state == 2" ng-include="stepTpl[state]"></div>
-		
-		<!-- Step 3: Hotel room detail -->
-		
-		<div id="step-3" ng-if="state == 3" ng-include="stepTpl[state]"></div>
-		
-		<!-- Step 4: Personal information -->
-		
-		<div id="step-4" ng-if="state == 4" ng-include="stepTpl[state]"></div>
-		
-		<!-- Step 5: Confirmation -->
-		
-		<div id="step-5" ng-if="state == 5" ng-include="stepTpl[state]"></div>
-		
-		<!-- Navigation -->
-		
-		<footer>
-			<button rel="go">go</button>
-		</footer>
+		<form id="booking-search">
+			<div class="wrapper">
+				<label for="check-in">
+					<span>check in</span>
+					<input type="text" name="check-in" value=""/>
+				</label>
+				<label for="check-out">
+					<span>check out</span>
+					<input type="text" name="check-out" value=""/>
+				</label>
+				<label for="rooms">
+					<span>rooms</span>
+					<input type="text" name="rooms" value="" maxlength="2"/>
+				</label>
+				<label for="adults">
+					<span>adults</span>
+					<input type="text" name="adults" value="" maxlength="2"/>
+				</label>
+				<label for="children">
+					<span>children</span>
+					<input type="text" name="children" value="" maxlength="2"/>
+				</label>
+				<input type="submit" value="get rates"/>
+			</div>
+		</form>
 		
 		
