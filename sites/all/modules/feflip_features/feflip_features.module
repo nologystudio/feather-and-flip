@@ -32,6 +32,6 @@ function feflip_features_admin_paths_alter(&$paths) {
  * Implements hook_cron().
  */
 function feflip_features_cron() {
-	//TODO: read rss from  squarespace blog
-  watchdog('cron', 'Custom Feather+Flip cron job');
+	// Rss import task
+	Helpers::ImportExternalRss();
 }

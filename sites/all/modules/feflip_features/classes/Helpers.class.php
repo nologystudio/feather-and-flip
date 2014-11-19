@@ -72,12 +72,13 @@ class Helpers
     // Import external rss
     public static function ImportExternalRss()
     {
-        $rss = self::ParseExternalRss();
-        // TODO: implement method for save new rss items to drupal database
-        // private static function RssToNodes()
-        // 
-        // self::RssToNodes();
-        return $rss;
+        try {
+            $rss = self::ParseExternalRss();
+            self::RssToNodes($rss);
+        } catch (Exception $e) {
+            watchdog('error', 'Importing F+F rss');
+        }
+        watchdog('cron', 'Imported F+F rss');
     }
 
     // Read and parse external rss
@@ -98,13 +99,19 @@ class Helpers
         $xml = simplexml_load_string($data, 'SimpleXMLElement', LIBXML_NOCDATA);
         $rs = array();
         foreach ($xml->channel->item as $item) {
+
+            // Get media namespaces and get img url
+            $namespaces = $item->getNameSpaces(true);
+            $media = $item->children($namespaces['media']);
+            $img = $media->content->attributes()->url;
+
             $rs[] = array(
                 'title'     => (string)$item->title,
                 'category'  => (string)$item->category,
                 'pubDate'   => (string)$item->pubDate,
                 'url'       => (string)$item->link,
                 'description' => (string)$item->description,
-                'img'       => ''
+                'img'       => (string)$img
             );
         }
         return $rs;
@@ -114,7 +121,67 @@ class Helpers
     // @param array $items ['title', 'category', 'pubDate', 'url', 'description', 'img']
     private static function RssToNodes($items)
     {
-        // TODO:
+        foreach ($items as $rss_post) {
+            // Check if node exists by title
+            $efq = new EntityFieldQuery();
+            $result = $efq->entityCondition('entity_type', 'node')
+                ->entityCondition('bundle', 'post')
+                ->propertyCondition('title', $rss_post['title'], '=')
+                ->execute();
+            if (empty($result['node'])) {
+                // Create node
+                $post = self::feflipNewContent('post');
+                $post->title->set($rss_post['title']);
+                $post->body->set(array('value' => $rss_post['description']));
+                $post->field_original_pubdate->set($rss_post['pubDate']);
+                $post->field_original_url->set($rss_post['url']);
+                $post->field_original_image->set($rss_post['img']);
+
+                // Term reference
+                $tid = self::feflipNewTerm('blog_categories', $rss_post['category']);
+                if (!empty($tid)){
+                    $post->field_blog_category->set(array(intval($tid)));
+                }
+                $post->save();
+            }
+        }
+    }
+
+    // Set a new entity by type
+    private static function feflipNewContent($type = 'page')
+    {
+        $values = array(
+            'type' => $type,
+            'uid' => 1,
+            'status' => 1,
+            'comment' => 0,
+            'promote' => 0,
+        );
+        $entity = entity_create('node', $values);
+        return entity_metadata_wrapper('node', $entity);
+    }
+
+    // Create or get term and return term id
+    private static function feflipNewTerm($vocab = '', $term = '')
+    {
+        $tid = '';
+        if (!empty($vocab) && !empty($term)){
+            $arr_terms = taxonomy_get_term_by_name($term, $vocab);
+            if (!empty($arr_terms)) {
+                $arr_terms = array_values($arr_terms);
+                $tid = $arr_terms[0]->tid;
+            }
+            else {
+                $vobj = taxonomy_vocabulary_machine_name_load($vocab);
+                $nterm = new stdClass();
+                $nterm->name = $term;
+                $nterm->vid = $vobj->vid;
+                taxonomy_term_save($nterm);
+                $tid = $nterm->tid;
+            }
+        }
+        return $tid;
+
     }
 
 }
