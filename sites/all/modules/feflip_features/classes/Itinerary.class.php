@@ -42,12 +42,12 @@ class Itinerary
                 {
                     $url = image_style_url('itinerary_1040',$image->field_mainimage['und'][0]['uri']);
                     $images[] = array('url'     => $url,
-                                      'tamanio' => $tamanio = getimagesize($url)
+                                      'size' => getimagesize($url)
                                       );
                 }
             }
             
-            if (count($images) == 0) $images[] = array('url' =>'http://placehold.it/1040x650', 'tamanio'=>getimagesize('http://placehold.it/1040x650'));
+            if (count($images) == 0) $images[] = array('url' =>'http://placehold.it/1040x650', 'size'=>getimagesize('http://placehold.it/1040x650'));
             
             $itineraryinfo['name'] = $wrapper->title->value();
             $itineraryinfo['destination'] = $wrapper->field_destination->title->value().', '.$wrapper->field_destination->field_country->value();

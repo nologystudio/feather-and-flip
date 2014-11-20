@@ -107,7 +107,7 @@ function feflip_preprocess_node(&$variables) {
       $images = array();
       $images[] = array('url'     => 'http://placehold.it/1280x800',
                         'text'    => $variables['node']->title,
-                        'tamanio' => getimagesize('http://placehold.it/1280x800'));
+                        'size' => getimagesize('http://placehold.it/1280x800'));
       $variables['slideImages'] = $images; 
   }
   elseif (isset($variables['node']) && ($variables['node']->type == 'post')) {
@@ -127,7 +127,7 @@ function feflip_preprocess_views_view(&$variables) {
   $images = array();
   $images[] = array('url'     => 'http://placehold.it/1280x800',
                     'text'    => '',
-                    'tamanio' => getimagesize('http://placehold.it/1280x800'));
+                    'size' => getimagesize('http://placehold.it/1280x800'));
   
   
   // Home View

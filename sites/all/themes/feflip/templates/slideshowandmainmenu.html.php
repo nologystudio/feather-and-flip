@@ -10,14 +10,20 @@
                         <?php foreach($slideImages as $image){ ?>
                         <article class="slideshow-item">
                                 <figure>
-                                        <img src="<?php echo $image['url'];?>" alt="" data-size="<?php echo $image['tamanio'][0].'x'.$image['tamanio'][1];?>"/>
+                                        <img src="<?php echo $image['url'];?>" alt="" data-size="<?php echo $image['size'][0].'x'.$image['size'][1];?>"/>
                                 </figure>
                                 <div class="info-wrapper">
-                                        <a href="" rel="">
+                                        <?php if( isset($image['linkto'])){ ?>
+                                        <a href="<?php echo $image['linkto']; ?>" rel="">
                                                 <h1><?php if(isset($image['text'])) echo $image['text']; else echo 'city, country'; ?></h1>
                                                 <span class="cursive">see hotels</span>
-                                                <span class="rounded-btn">go to spain</span>
+                                                <span class="rounded-btn">go to <?php echo $image['destination']?></span>
                                         </a>
+                                        <?php } else {?>
+                                        <a href="">
+                                        <h1><?php if(isset($image['text'])) echo $image['text']; else echo 'city, country'; ?></h1>
+                                        </a>
+                                        <?php }?>
                                 </div>
                         </article>
                         <?php } ?>

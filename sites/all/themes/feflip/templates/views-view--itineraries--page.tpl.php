@@ -37,7 +37,7 @@
                                         <?php foreach($itinerary['images'] as $image){ ?>
                                         <article class="slideshow-item">
                                                 <figure>
-                                                        <img src="<?php echo $image['url'];?>" alt="City, Country" data-size="<?php echo $image['tamanio'][0].'x'.$image['tamanio'][1];?>"/>
+                                                        <img src="<?php echo $image['url'];?>" alt="City, Country" data-size="<?php echo $image['size'][0].'x'.$image['size'][1];?>"/>
                                                 </figure>
                                         </article>
                                         <?php } ?>

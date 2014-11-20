@@ -179,15 +179,18 @@ class Hotel
                 {
                     foreach($contentblock->field_mainimage['und'] as $image)
                     {
-                        $images[] = array( 'url'      => image_style_url('large',$image['uri']),
-                                           'alt'  => $node->field_destination['und'][0]['entity']->title .', '.$node->field_destination['und'][0]['entity']->field_country['und'][0]['value']);
+                        $url = image_style_url('hotel_1040',$image['uri']);
+                        $imageSize = getimagesize($url);
+                        $images[] = array( 'url'      => $url,
+                                           'alt'  => $node->field_destination['und'][0]['entity']->title .', '.$node->field_destination['und'][0]['entity']->field_country['und'][0]['value'],
+                                           'size'   => $imageSize);
                     }
                 }
                 
             }
         }
 
-        if (count($images) == 0) $images[] = array('url' => "http://placehold.it/1040x650", 'alt' => 'City, Country');
+        if (count($images) == 0) $images[] = array('url' => "http://placehold.it/1040x650", 'alt' => 'City, Country', 'size' => getimagesize("http://placehold.it/1040x650"));
         
         return $images;
     }

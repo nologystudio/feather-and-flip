@@ -54,7 +54,7 @@
                                 <?php foreach($images as $image){ ?>
                                 <article class="slideshow-item">
                                         <figure>
-                                                <img src="<?php echo $image['url'];?>" alt="<?php echo $image['alt']?>" data-size="1280x800"/>
+                                                <img src="<?php echo $image['url'];?>" alt="<?php echo $image['alt']?>" data-size="<?php echo $image['size'][0].'x'.$image['size'][1];?>"/>
                                         </figure>
                                 </article>
                                 <?php } ?>

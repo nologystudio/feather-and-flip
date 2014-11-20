@@ -83,9 +83,12 @@ class Destination
          foreach($nodes as $node)
          {
              $wrapper = entity_metadata_wrapper('node', $node);
-             $images[] = Helpers::GetMainImageFromFieldCollection($node->field_images, $wrapper->title->value().', '.$wrapper->field_country->value(),'http://placehold.it/1280x800', 'headerslideshow');
+             $image = Helpers::GetMainImageFromFieldCollection($node->field_images, $wrapper->title->value().', '.$wrapper->field_country->value(),'http://placehold.it/1280x800', 'headerslideshow');
+             $image['linkto'] = url('node/'.$node->nid) . '/hotel-reviews';
+             $image['destination'] = $wrapper->title->value();
+             $images[] = $image;
          }
-         
+             
          return $images; 
     }
 }
