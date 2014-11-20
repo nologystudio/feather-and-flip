@@ -94,32 +94,83 @@
 			
 			$scope.globalPath = '/feather-and-flip/library/partials/';
 			$scope.path       = $scope.globalPath + 'booking-engine-flow/';
-			$scope.state      = 3;
+			$scope.state      = 1;
 			$scope.booking    = $scope.globalPath + 'booking-engine.tpl.html';
 			$scope.searchTpl  = $scope.path + 'be-search.tpl.html';
 			$scope.stepTpl    = {
 				0 : '',
-				// --> 
+				// --> Landing
 				1 : $scope.path + 'be-step-1.tpl.html',
-				// --> 
+				// --> Search results
 				2 : $scope.path + 'be-step-2.tpl.html',
 				// --> Hotel room detail 
 				3 : $scope.path + 'be-step-3.tpl.html', 
-				// --> 
-				4 : $scope.path + 'be-step-4.tpl.html'
+				// --> Fill data
+				4 : $scope.path + 'be-step-4.tpl.html',
+				// --> Confirmation
+				5 : $scope.path + 'be-step-5.tpl.html'
 			}
 			
 			$scope.availableRooms = {0:'',1:''};
+			
+			$scope.booking = {
+				dates    : {
+					checkIn : '',
+					checkOut: ''
+				},
+				adults   : {},
+				children : {},
+				babies   : {},
+				rooms    : {}
+			}
+			
+		/* ~ Step 1 ~ Home page selection */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+		
+			$scope.guestManager = function(){
+			}
+			
+			$scope.roomManager = function(){
+			}
+		
+		/* ~ Step 2 ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+		
+		/* ~ Step 3 ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+		
+		/* ~ Step 4 ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+		
+		/* ~ Step 5 ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+		
 		}]);
         
         /* ~ Map ~ */
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 		
-		ffAppControllers.controller('MapCtrl',['$scope','$element',function($scope,$element){
+		ffAppControllers.controller('MapCtrl',['$scope','$element','$http',function($scope,$element,$http){
 			
-			//var theMap       = kartograph.map('#map');
-			//var worldMapPath = '/feather-and-flip/media/map/map-usa.svg';
-			//var destinations = $('.pin').toArray();
+			var endPoint = 'http://54.164.51.183/sites/all/themes/feflip/forms_controller/admin_forms_submit.php';
+			var data     = {formID:'getDestinations'};
+			
+			$scope.destinations = {};
+			
+			$http({
+                method : 'POST',
+                url    : endPoint,
+                data   : $.param({formID:'getDestinations'}),
+                headers : { 
+            		'Content-Type' : 'application/x-www-form-urlencoded'
+				},
+				transformRequest: angular.identity
+            }).
+            success(function(_data){
+	            //$scope.destinations = _data;
+            }).
+            error(function(_data,_status){
+            });
 			
 			// | i | Aside menu...
 			
@@ -127,63 +178,65 @@
 				$('#map-it aside').toggleClass('on');
 			}
 			
-			// | i | Map functionality...
-			
-			$scope.setMap = function(){}
-			
-			//theMap.loadMap(worldMapPath,function(){
-			//});
-		
 		}]);
 		
 		/* ~ Blog ~ */
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 		
 		ffAppControllers.controller('BlogCtrl',['$scope','$element',function($scope,$element){
+			
+			console.log($element[0]);
+			
+			var grid = $('.feed-wrapper');
+			
+
+			grid.shuffle({
+				itemSelector: '.quick-entry'
+			});
+			
+		}]);
+		
+		/* ~ Messenger ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+		
+		ffAppControllers.controller('MessengerCtrl',['$scope','$element',function($scope,$element){
+		}]);
+		
+		/* ~ Newsletter ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+		
+		ffAppControllers.controller('NewsletterCtrl',['$scope','$element','$http',function($scope,$element,$http){
+			
+			var mcService = '';
+			var status    = ['still','success','error'];
+			
+			$scope.userEmail     = '';
+			$scope.currentStatus = status[0];
+						
+			$scope.submit = function(){
+				$http({
+	                method : 'POST',
+	                url    : mcService,
+	                data   : $.param({email:$scope.userEmail}),
+	                headers : { 
+	            		'Content-Type' : 'application/x-www-form-urlencoded'
+					},
+					transformRequest: angular.identity
+	            }).
+	            success(function(){
+		        	$scope.currentStatus = status[1];
+	            }).
+	            error(function(){
+		            $scope.currentStatus = status[2];
+	            });
+			}
+			
 		}]);
 		
 		/* ~ Gallery ~ */
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 		
 		ffAppControllers.controller('SlideshowCtrl',['$scope','$element',function($scope,$element){
-			
-			//var wSize  = [$(window).width(),$(window).height()];
-			//var header = $('body > header');
-			
-			//var gItems = $element[4].children;
-			//console.log($element);
-			
-			// | i | Resize slideshow to match screen height...
-			
-			//if(header.height() > wSize[1]) 
-			//	header.transition({height:$(window).height()});
-			
-			// | i | Resize image to fit in screen...
-			
-			/*var imgSize = [1280,800];
-    		var winCoef = $(window).width()/imgSize[0];
-    		var _image  = $('.gallery-container img');
-    			        	
-        	if(winCoef * imgSize[1] < $(window).height()){
-        	
-        		var newWidth = imgSize[0] * ($(window).height()/imgSize[1]) + 'px';
-        		
-	        	_image.css({
-		        	width      : imgSize[0] * ($(window).height()/imgSize[1]) + 'px',
-		        	height     : $(window).height() + 'px',
-		        	marginLeft : - (newWidth - $(window).width())/2 + 'px' 
-	        	});
-	        }else{
-	        	_image.css({
-		        	width  : $(window).width() + 'px',
-		        	height : 'auto'
-	        	});
-        	}
-        	
-        	$('#landing-gallery, .gallery-container').css({
-	        	height : (size[1] + 10) + 'px'
-        	});*/
-        	
 		}]);
 		
 		

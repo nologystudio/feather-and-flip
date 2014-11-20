@@ -3,13 +3,15 @@
                 <h3 class="icon feather">TRAVEL<span> journal </span></h3>
         </header>
         <div class="feed-wrapper">
-                <div id="newsletter-signup" class="quick-entry">
+                <div id="newsletter-signup" class="quick-entry" ng-controller="NewsletterCtrl" ng-switch="currentStatus">
                         <h3>Join the adventure</h3>
                         <hr>
-                        <h4>Sign up for our newsletter</h4>
+                        <h4 ng-switch-when="still">Sign up for our newsletter</h4>
                         <form id="signupNewsLetter" method="POST">
-                                <input id="user-email" type="email" placeholder="Your email address" value=""/>                
-                                <input type="submit" value="submit"/>
+                                <small id="error" class="animated fadeInUp" ng-switch-when="error">We're sorry,<br>an error has occurred</small>
+                                <small id="success" class="animated fadeInUp" ng-switch-when="success" >Thanks!</small>
+                                <input id="user-email" type="email" ng-switch-when="still" placeholder="Your email address" value="{{userEmail}}" ng-model="userEmail" required/>
+                                <input type="submit" ng-switch-when="still" value="submit"/>
                         </form>  
                 </div>
                 <?php foreach ($view->result as $post) {

@@ -41,13 +41,15 @@
 		/* ~ Color swatches ~ */
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */	
 		
-		@color-1: #D9DFDE;
-		@color-2: #9CB1AD;
-		@color-3: #96A8A4;
+		@color-0: fadeout(#D9DFDE,50%);
+		@color-1: #d9dfdE;
+		@color-2: #9cb1ad;
+		@color-3: #96a8a4;
 		@color-4: #7b8c88;
 		@color-5: #545958;
 		@color-6: #708c84;
 		@grey-1:  #333333;
+		@grey-2:  #999999;
 		@warning-color: orange;
 		
 		/* ~ Header ~ */
@@ -122,6 +124,7 @@
 		h6
 		{
 			.reset();
+			font-weight: normal;
 			list-style: none;
 		}
 
@@ -644,7 +647,7 @@
 							margin: 0 @gutter/2;
 							overflow: hidden;
 							
-							// | i | This fix the issue with the mask in Safari
+							// | i | This fix the issue with the mask in Safari...
 							-webkit-mask-image: -webkit-radial-gradient(circle,@grey-1,@grey-1);
 							
 							img
@@ -795,7 +798,7 @@
 					
 					div.pin
 					{
-						.hide();
+						//.hide();
 					}
 				}
 				
@@ -810,6 +813,7 @@
 					.set-pos(absolute);
 					.set-coord(-(@width+@increment),@ref-padding);
 					.set-box-shadow(@shadow-color,0,0,@ref-padding);
+					.animate-all();
 					.z(2);
 				
 					nav
@@ -1102,9 +1106,9 @@
 				
 				div.feed-wrapper
 				{
-					.set-size(100%);
+					.set-size(@global-wrapper-width + 6 * @gutter);
 					.box-sizing();
-					#align > .left;
+					#align > .center;
 					display: block;
 					
 					*.quick-entry
@@ -1223,11 +1227,21 @@
 						&[id="newsletter-signup"]
 						{
 							padding: @block-margin @block-margin/2;
+							min-height: 290px;
 							
 							form
 							{
 								.set-size(100%);
 								#align > .left;
+								
+								small
+								{
+									#font > .gar(30px,white);
+									width: 100%;
+									display: block;
+									padding: @ref-padding 0;
+									text-align: center;
+								}
 								
 								input
 								{
@@ -1983,7 +1997,7 @@
 				
 				footer
 				{
-					.hide();
+					
 				}
 				
 				div[id^="step-"]
@@ -1993,7 +2007,146 @@
 					display: block;
 					
 					&[id$="1"]
-					{}
+					{
+						& > section[id]
+						{
+							.set-size(100%);
+							.box-sizing();
+							#align > .left;
+							padding: @ref-padding;
+							
+							header
+							{
+								.set-bgc(transparent);
+								#font > .l-light(24px,@color-2);
+								text-align: center;
+								text-transform: uppercase;
+							}
+							
+							& > div.wrapper
+							{
+								.set-size();
+								#align > .center;
+								padding: @ref-padding 0;
+								display: table;
+							
+								div.counter
+								{
+									#ui-set-input > .counter();
+									margin: 0 @ref-padding/2;
+								}
+							}
+							
+							& > button[rel="next"]
+							{
+								.reset();
+								.set-opacity(1);
+								.animate-opacity();
+								#ui-set-button > .rounded(@color-2,16px,60px);
+								#align > .center;
+								display: table;
+								
+								&:hover
+								{
+									.set-opacity(0.5);
+								}
+							}
+							
+							&.warning
+							{
+								header
+								{
+									color: @warning-color;
+								}
+							}
+							
+							&[id="dates"]
+							{
+								.set-bgc(@color-0);
+								
+								div[id="calendar"]
+								{
+									.set-size();
+									#align > .center;
+									padding: @ref-padding 0;
+									display: table;
+									overflow: hidden;
+									
+									#ui-set-input > .calendar();
+								}
+								
+								&.warning 
+								{
+									h6
+									{
+										color: @warning-color !important;
+									}
+								}
+							}
+							
+							&[id="who-is-going"]
+							{
+								.set-bgc(white);
+								
+								&.warning 
+								{
+									*
+									{
+										border-color: @warning-color !important;
+									}
+								}
+							}
+							
+							&[id="rooms"]
+							{
+								.set-bgc(@color-0);
+								
+								&.warning 
+								{
+									*
+									{
+										border-color: @warning-color !important;
+									}
+								}
+							}
+							
+							&:last-of-type
+							{
+								padding-bottom: 125px;
+							}
+						}
+						
+						& > footer
+						{
+							@h: 125px;
+					
+							.set-size(100%,@h/2);
+							.set-pos(absolute);
+							.set-bgc(@color-1);
+							bottom: 0;
+							
+							button
+							{
+								&[rel="confirm"]
+								{
+									.reset();
+									#font > .l-light(24px,white);
+									#ui-set-button > .circle(@h,24px,white,transparent,white);
+									#align > .center;
+									.set-opacity(1);
+									.animate-opacity();
+									.set-bgc(@color-2);
+									margin-top: -@h/2;
+									text-transform: uppercase;
+									
+									&:hover
+									{
+										.set-opacity(0.5);
+									}
+								}
+							}
+						}
+					}
 					
 					&[id$="2"]
 					{}

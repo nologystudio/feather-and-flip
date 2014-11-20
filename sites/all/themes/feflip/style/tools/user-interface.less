@@ -97,6 +97,18 @@
 				text-align: center;
 			}
 			
+			.circle(@s,@fs,@bc,@brc:@color-2,@fc:@color-2)
+			{
+				.set-size(@s,@s);
+				.set-bgc(transparent);
+				#align > .left;
+				overflow: hidden;
+				border: solid 2px @brc;
+				border-radius: @s;
+				color: @fc;
+				font-size: @fs;
+			}
+			
 			.header()
 			{}
 		}
@@ -120,6 +132,179 @@
 			{
 				#font > .l-light(32px,@font-color);
 				text-transform: uppercase;
+			}
+			
+			.counter(@s:150px,@fs:64px,@bc:transparent)
+			{
+				&
+				{
+					#ui-set-button > .circle(@s,@fs,@bc,@grey-2);
+					
+					input[type="text"]
+					{
+						.reset();
+						.set-size(@s,@s);
+						.set-pos(absolute);
+						#font > .l-light(64px,@color-2);
+						text-align: center;
+					}
+					
+					nav
+					{
+						@size: 25px;
+						
+						.set-size(@size,2*@size);
+						.set-pos(absolute);
+						overflow: hidden;
+						display: block;
+						right: 20px;
+						top: 50%;
+						margin-top: -@size;
+						
+						button
+						{
+							.reset();
+							.set-size(@size,@size);
+							.animate-color();
+							#align > .left;
+							#font > .ic(20px,@color-2);
+							
+							&[rel="plus"]
+							{
+								&:before
+								{
+									content: '\4c';
+								}
+							}
+							
+							&[rel="minus"]
+							{
+								&:before
+								{
+									content: '\4b';
+								}
+							}	
+							
+							&:hover
+							{
+								color: @grey-1;
+							}
+						}
+					}
+				}
+			}
+			
+			.calendar()
+			{
+				div.month-gallery
+				{
+					@day-size: 50px;
+					@day-m: 2px;
+					@w: 7 * (@day-size + 2 * @day-m);
+					
+					.set-size(@w);
+					#align > .left;
+					margin: 0 @ref-padding;
+					overflow: hidden;
+					
+					header
+					{
+						h6
+						{
+							#font > .l-light(14px,@color-2);
+						}
+						
+						nav
+						{
+							.set-size();
+							#align > .center;
+							padding: 2*@unit 0;
+							display: table;
+							overflow: hidden;
+							
+							small
+							{
+								.set-size();
+								#font > .l-light(16px,@grey-2);
+								#align > .left;
+								margin: 0 @ref-padding;
+								text-align: center;
+							}
+							
+							button[rel]
+							{
+								.reset();
+								.animate-color();
+								#font > .ic(22px,@color-2);
+								#align > .left;
+								
+								&[rel="prev"]:before
+								{
+									content: '\23';
+								}
+								
+								&[rel="next"]:before
+								{
+									content: '\24';
+								}
+								
+								&:hover
+								{
+									color: @grey-1;
+								}
+							}
+						}
+					}
+					
+					div[id].month-container
+					{
+						.set-size(@w);
+						#align > .left;
+						display: block;
+						
+						& > header
+						{
+							.set-size(100%);
+							#align > .left;
+							
+							small
+							{
+								.set-size(@day-size + 2 * @day-m);
+								#font > .l-normal(10px,@grey-2);
+								#align > .left;
+								text-align: center;
+								margin-bottom: @unit;
+								text-transform: uppercase;
+							}
+						}
+						
+						button
+						{
+							.animate-all();
+							.performance();
+							
+							#font > .l-light(18px,@color-2);
+							#ui-set-button > .circle(@day-size,18px,transparent,@grey-2);
+							#align > .left;
+							margin: @day-m;
+							border-width: 1px;
+							
+							&[id="sat"],
+							&[id="sun"]
+							{
+								.set-bgc(fadeout(@color-2,75%));
+							}
+							
+							&:hover,
+							&.on
+							{
+								.set-bgc(@color-1);
+								border-color: @grey-1;
+								color: @grey-1;
+							}
+						}
+					}
+				}
 			}
 		}
 		
@@ -350,7 +535,7 @@
 						
 						a
 						{
-							@shadow: 1px 1px 0px black;;
+							@shadow: 1px 1px 0px black;
 							
 							.set-size(100%);
 							.box-sizing();

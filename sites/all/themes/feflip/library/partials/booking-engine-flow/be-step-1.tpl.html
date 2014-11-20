@@ -23,38 +23,166 @@
 		
 		<section id="dates">
 			<header>select your dates</header>
-			<div class="month">
+			<div id="calendar" class="animated fadeInUp">
+				<div class="month-gallery">
 				<header>
-					<nav></nav>
+					<h6>Choose your arrival date</h6>
+					<nav>
+						<button rel="prev"></button>
+						<small>month</small>
+						<button rel="next"></button>
+					</nav>
 				</header>
+				<div id="month-id" class="month-container">
+					<header>
+						<small>mon</small>
+						<small>tue</small>
+						<small>wed</small>
+						<small>thu</small>
+						<small>fri</small>
+						<small>sat</small>
+						<small>sun</small>
+					</header>
+					<!-- | i | Week 1 -->
+					<button id="mon">1</button>
+					<button id="tue">2</button>
+					<button id="wed">3</button>
+					<button id="thu">4</button>
+					<button id="fri">5</button>
+					<button id="sat">6</button>
+					<button id="sun">7</button>
+					<!-- | i | Week 2 -->
+					<button id="mon">8</button>
+					<button id="tue">9</button>
+					<button id="wed">10</button>
+					<button id="thu">11</button>
+					<button id="fri">12</button>
+					<button id="sat">13</button>
+					<button id="sun">14</button>
+					<!-- | i | Week 3 -->
+					<button id="mon">15</button>
+					<button id="tue">16</button>
+					<button id="wed">17</button>
+					<button id="thu">18</button>
+					<button id="fri">19</button>
+					<button id="sat">20</button>
+					<button id="sun">21</button>
+					<!-- | i | Week 4 -->
+					<button id="mon">22</button>
+					<button id="tue">23</button>
+					<button id="wed">24</button>
+					<button id="thu">25</button>
+					<button id="fri">26</button>
+					<button id="sat">27</button>
+					<button id="sun">28</button>
+					<!-- | i | Week 5 -->
+					<button id="mon">29</button>
+					<button id="tue">30</button>
+					<button id="wed">31</button>
+				</div>
 			</div>
-			<div class="month">
+				<div class="month-gallery">
 				<header>
-					<nav></nav>
+					<h6>Choose your departure date</h6>
+					<nav>
+						<button rel="prev"></button>
+						<small>month</small>
+						<button rel="next"></button>
+					</nav>
 				</header>
+				<div id="month-id" class="month-container">
+					<header>
+						<small>mon</small>
+						<small>tue</small>
+						<small>wed</small>
+						<small>thu</small>
+						<small>fri</small>
+						<small>sat</small>
+						<small>sun</small>
+					</header>
+					<!-- | i | Week 1 -->
+					<button id="mon">1</button>
+					<button id="tue">2</button>
+					<button id="wed">3</button>
+					<button id="thu">4</button>
+					<button id="fri">5</button>
+					<button id="sat">6</button>
+					<button id="sun">7</button>
+					<!-- | i | Week 2 -->
+					<button id="mon">8</button>
+					<button id="tue">9</button>
+					<button id="wed">10</button>
+					<button id="thu">11</button>
+					<button id="fri">12</button>
+					<button id="sat">13</button>
+					<button id="sun">14</button>
+					<!-- | i | Week 3 -->
+					<button id="mon">15</button>
+					<button id="tue">16</button>
+					<button id="wed">17</button>
+					<button id="thu">18</button>
+					<button id="fri">19</button>
+					<button id="sat">20</button>
+					<button id="sun">21</button>
+					<!-- | i | Week 4 -->
+					<button id="mon">22</button>
+					<button id="tue">23</button>
+					<button id="wed">24</button>
+					<button id="thu">25</button>
+					<button id="fri">26</button>
+					<button id="sat">27</button>
+					<button id="sun">28</button>
+					<!-- | i | Week 5 -->
+					<button id="mon">29</button>
+					<button id="tue">30</button>
+					<button id="wed">31</button>
+				</div>
 			</div>
+			</div>
+			<button rel="next">continue</button>
 		</section>
 		<section id="who-is-going">
-			<header>who is going</header>
-			<div class="counter">
-				<small>adults</small>
-				<input type="text" value="1" readonly required/>
-				<nav>
-					<button rel="plus"></button>
-					<button rel="minus"></button>
-				</nav>
+			<header>who's going?</header>
+			<div class="wrapper">
+				<div id="adults" class="counter">
+					<input type="text" value="1" ng-model="adults" readonly required/>
+					<nav>
+						<button rel="plus"  ng-click="guestManager()"></button>
+						<button rel="minus" ng-click="guestManager()"></button>
+					</nav>
+				</div>
+				<div id="children" class="counter">
+					<input type="text" value="1" ng-model="children" readonly required/>
+					<nav>
+						<button rel="plus"  ng-click="guestManager()"></button>
+						<button rel="minus" ng-click="guestManager()"></button>
+					</nav>
+				</div>
+				<div id="children" class="counter">
+					<input type="text" value="1" ng-model="childrenUnderTwo" readonly required/>
+					<nav>
+						<button rel="plus"  ng-click="guestManager()"></button>
+						<button rel="minus" ng-click="guestManager()"></button>
+					</nav>
+				</div>
 			</div>
 			<button rel="next">continue</button>
 		</section>
 		<section id="rooms">
 			<header>number of rooms</header>
-			<div class="counter">
-				<input type="text" value="1" readonly required/>
-				<nav>
-					<button rel="plus"></button>
-					<button rel="minus"></button>
-				</nav>
+			<div class="wrapper">
+				<div class="counter">
+					<input type="text" value="1" ng-model="numberOfRooms" readonly required/>
+					<nav>
+						<button rel="plus"  ng-click="roomManager()"></button>
+						<button rel="minus" ng-click="roomManager()"></button>
+					</nav>
+				</div>
 			</div>
 		</section>
+		
+		<footer>
+			<button rel="confirm">go</button>
+		</footer>
 		
 		

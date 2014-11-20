@@ -16,7 +16,10 @@
         <footer>
                 <a href="" class="section-button"></a>
         </footer>
-</section>  
+</section>
+<!-- | i | Booking engine: Landing ------------------------------------------------------- -->
+<section id="booking-engine" ng-controller="BookingEngineCtrl" ng-include="booking"></section>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - -  -->
 <section id="map-it" ng-controller="MapCtrl">
         <header>
                 <h3 class="icon compass">MAP IT<span> where to go now </span></h3>
@@ -36,16 +39,16 @@
                 </nav>
         </aside>
         <div id="map">
-                <div class="pin" data-lat="" data-lon="">
-                        <a href="" class="info">
+                <div class="pin" ng-repeat="destination in destinations">
+                        <a href="{{destination.url}}" class="info">
                                 <div class="wrapper">
                                         <figure>
-                                                <img src="" alt=""/>
+                                                <img src="{{destination.image}}"/>
                                         </figure>
-                                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English</p>
+                                        <p></p>
                                 </div>
                         </a>
-                        <small>destination</small>
+                        <small>{{destination.withcountry}}</small>
                 </div>
         </div>
         <footer>

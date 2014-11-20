@@ -2,33 +2,9 @@
 
 <section id="hotel">
         <header>
-                <form id="hotelRates" method="POST">
-                        <label for="check-in">
-                                <span>check in</span>
-                                <input id="checkin" type="text" name="check-in" value="11/20/2015"/>
-                        </label>
-                        <label for="check-out">
-                                <span>check out</span>
-                                <input id="checkout" type="text" name="check-out" value="11/30/2015"/>
-                        </label>
-                        <label for="rooms">
-                                <span>rooms</span>
-                                <input id="numRooms" type="text" name="rooms" value="2" maxlength="2"/>
-                        </label>
-                        <label for="adults">
-                                <span>adults</span>
-                                <input id="numAdults" type="text" name="adults" value="3" maxlength="2"/>
-                        </label>
-                        <label for="children">
-                                <span>children</span>
-                                <input id="numChildren" type="text" name="children" value="2" maxlength="2"/>
-                        </label>
-                        <input id="hotelCode" type="hidden" value="<?php echo $node->field_hotelcode['und'][0]['value']?>"/>
-                        <input id="eanCode" type="hidden" value="<?php echo (isset($node->field_ean_hotelcode['und']) ? $node->field_ean_hotelcode['und'][0]['value'] : ''); ?>"/>
-                        <input type="submit" value="get rates"/>
-                </form>
+            <form id="booking-search" ng-controller="BookingEngineCtrl" ng-include="searchTpl"></form>
         </header>
-        <article>
+        <article id="detail">
                 <header>
                         <a href="<?php echo $hotelreviews;?>" rel="all">view all hotels in destination</a>
                         <h1 class="middle-line"><?php echo $node->title;?></h1>
@@ -60,6 +36,13 @@
                                 <?php } ?>
                         </div>
                 </div>
+        </article>
+        
+        <!-- | i | Booking engine: Room detail --------------------------------------------------- -->
+        <section id="booking-engine" ng-controller="BookingEngineCtrl" ng-include="booking"></section>
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - -  - - - -  -  -->        
+        
+        <article id="features">
                 <!-- Features -->
                 <?php foreach($features as $obj){?>
                 <ul class="row">
@@ -96,5 +79,9 @@
                         </h4>
                 </footer>
         </article>
-        <footer></footer>
+        <footer>
+                <a href="#" rel="terms-and-conditions"></a>
+                <a href="#" rel="map"></a>
+                <a href="#" rel="tripadvisor"></a>
+        </footer>
 </section>
