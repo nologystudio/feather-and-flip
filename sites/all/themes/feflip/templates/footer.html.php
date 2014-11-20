@@ -52,7 +52,7 @@
 					<img src="<?php echo variable_get('relativePath'); ?>media/brand/tzell-logo.png" alt="Powered by Tzell Travel Group"/>
 				</a>
 
-				<small>2014 FEATHER+FLIP LLC. ALL RIGHTS RESERVED</small>
+				<small><?php echo date("Y"); ?> FEATHER+FLIP LLC. ALL RIGHTS RESERVED</small>
 			</div>
 		</footer>
 		
