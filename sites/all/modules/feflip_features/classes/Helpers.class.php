@@ -184,5 +184,19 @@ class Helpers
         return $tid;
 
     }
+    
+    public static function GetSocialMediaMenu($class)
+    {
+            $menu = menu_tree_all_data('menu-social-media-links');
+            
+            $result = '<nav id="social-media" class="'.$class.'">';
+            foreach ($menu as $key => $menu_item) {
+                 $result .= '<a href="'.$menu_item['link']['link_path'].'" rel="'.strtolower($menu_item['link']['link_title']).'"></a>';
+            }
+            
+            $result .= '</nav>';    
+                
+            return $result;          
+    }
 
 }

@@ -40,13 +40,8 @@
 			</nav>
 			<div class="fixed-bar">
 				<a id="brand" href="/"><img src="<?php echo variable_get('relativePath'); ?>media/brand/feather-and-flip-black-logo.png" alt="Feather+flip"/></a>
-				<nav id="social-media" class="black">
-					<a href="" rel="twitter"></a>
-					<a href="" rel="facebook"></a>
-					<a href="" rel="instagram"></a>
-					<a href="" rel="pinterest"></a>
-					<a href="" rel="google-plus"></a>
-				</nav>
+				<?php echo Helpers::GetSocialMediaMenu('black');?>
+
 				<a id="tzell-brand" href="http://www.tzell.com/tzell/index.htm" target="_blank">
 					<small>Powered by</small>
 					<img src="<?php echo variable_get('relativePath'); ?>media/brand/tzell-logo.png" alt="Powered by Tzell Travel Group"/>
