@@ -110,6 +110,9 @@ function feflip_preprocess_node(&$variables) {
                         'tamanio' => getimagesize('http://placehold.it/1280x800'));
       $variables['slideImages'] = $images; 
   }
+  elseif (isset($variables['node']) && ($variables['node']->type == 'post')) {
+    $variables['theme_hook_suggestions'][] = 'node__post';
+  }
   
   //Load navigation main menu
   $variables['main_navigation'] = get_header_main_navigation_menu();
@@ -140,6 +143,7 @@ function feflip_preprocess_views_view(&$variables) {
     $variables['slideImages'] = Destination::GetImagesForHomeSlideShow();
     $destinations = Destination::GetAllDestination();
     $variables['destinations'] = $destinations;
+    $variables['travel_journal'] = views_embed_view('travel_journal', 'page');
     $variables['main_navigation'] = get_header_main_navigation_menu($destinations);
   }
   elseif ($view->name == 'hotel_reviews' && $view->current_display == 'page'){

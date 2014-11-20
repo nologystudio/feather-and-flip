@@ -76,7 +76,7 @@ class Helpers
             $rss = self::ParseExternalRss();
             self::RssToNodes($rss);
         } catch (Exception $e) {
-            watchdog('error', 'Importing F+F rss');
+            watchdog('error', 'Importing F+F rss: '.$e->getMessage());
         }
         watchdog('cron', 'Imported F+F rss');
     }
@@ -132,6 +132,7 @@ class Helpers
                 // Create node
                 $post = self::feflipNewContent('post');
                 $post->title->set($rss_post['title']);
+                $post->created->set(strtotime($rss_post['pubDate']));
                 $post->body->set(array('value' => $rss_post['description']));
                 $post->field_original_pubdate->set($rss_post['pubDate']);
                 $post->field_original_url->set($rss_post['url']);

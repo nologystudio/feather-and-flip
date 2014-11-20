@@ -52,49 +52,6 @@
                 <a href="" class="section-button"></a>
         </footer>
 </section>
-<section id="travel-journal" ng-controller="BlogCtrl">
-        <header>
-                <h3 class="icon feather">TRAVEL<span> journal </span></h3>
-        </header>
-        <div class="feed-wrapper">
-                <div id="newsletter-signup" class="quick-entry">
-                        <h3>Join the adventure</h3>
-                        <hr>
-                        <h4>Sign up for our newsletter</h4>
-                        <form id="signupNewsLetter" method="POST">
-                                <input id="user-email" type="email" placeholder="Your email address" value=""/>                
-                                <input type="submit" value="submit"/>
-                        </form>  
-                </div>
-                <?php for($i=0;$i<5;$i++): ?>
-                <article class="quick-entry">
-                        <figure>
-                                <img src="http://placehold.it/500x300" alt=""/>
-                        </figure>
-                        <footer>
-                                <h4>Block title</h4>
-                                <time datetime="2008-02-14 20:00">Date</time>
-                        </footer>
-                </article>
-                <?php endfor; ?>
-                <article class="quick-entry review">
-                        <h3>hotel le panam</h3>
-                        <hr>
-                        <h4>It is a long established fact that a reader will be distracted</h4>
-                        <time datetime="2008-02-14 20:00">Date</time>
-                </article>
-                <article id="twitter-feed" class="quick-entry review">
-                        <h3></h3>
-                        <hr>
-                        <h4>It is a long established fact that a reader will be distracted</h4>
-                        <time datetime="2008-02-14 20:00">Date</time>
-                </article>
-                <article id="instagram-feed" class="quick-entry review">
-                        <h3></h3>
-                        <hr>
-                </article>
-        </div>
-        <footer>
-                <a href="" class="section-button"></a>
-        </footer>
-</section>   
+<?php
+    // Print Travel journal section
+    echo $travel_journal; ?> 
