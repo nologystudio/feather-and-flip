@@ -4,7 +4,7 @@
         <header><h3 class="simple">start your journey</h3></header>
         <div class="gallery-wrapper">
                 <?php foreach($destinations as $destination){ ?>
-                <a href="" rel="destination" class="gallery-item">
+                <a href="<?php echo $destination['url'].'/itinerary';?>" rel="destination" class="gallery-item">
                         <figure class="circle-mask">
                                 <img src="<?php echo $destination['image'];?>" alt=""/>
                                 <div class="border"></div>
