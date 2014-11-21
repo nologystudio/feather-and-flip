@@ -1,3 +1,4 @@
+<?php if (!drupal_is_front_page()) include 'slideshowandmainmenu.html.php'; ?>
 <section id="travel-journal" ng-controller="BlogCtrl">
         <header>
                 <h3 class="icon feather">TRAVEL<span> journal </span></h3>

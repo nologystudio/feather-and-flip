@@ -23,10 +23,10 @@ function feflip_features_init() {
 /**
  * Implements hook_admin_paths_alter().
  */
-function feflip_features_admin_paths_alter(&$paths) {
-  $paths['user'] = TRUE;
-  $paths['user/*'] = TRUE;
-}
+// function feflip_features_admin_paths_alter(&$paths) {
+//   $paths['user'] = TRUE;
+//   $paths['user/*'] = TRUE;
+// }
 
 /**
  * Implements hook_cron().

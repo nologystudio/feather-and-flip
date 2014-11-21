@@ -28,6 +28,8 @@ function feflip_preprocess_html(&$variables) {
            variable_set('pageID', 'map-it');           
         else if (array_search('node-type-hotel', $variables['classes_array']) !== false)    
             variable_set('pageID', 'hotel');
+        else if (isset($arg[0]) && $arg[0] == 'travel-journal')
+            variable_set('pageID', 'travel-journal');
         else{
           
           foreach($variables['theme_hook_suggestions'] as $item)
@@ -145,6 +147,20 @@ function feflip_preprocess_views_view(&$variables) {
     $variables['destinations'] = $destinations;
     $variables['travel_journal'] = views_embed_view('travel_journal', 'page');
     $variables['main_navigation'] = get_header_main_navigation_menu($destinations);
+  }
+  elseif (($view->name == 'travel_journal' || $view->name == 'travel_journal_tags') && $view->current_display == 'page') {
+    if (!empty($view->result)){
+      $post = array_shift($view->result);
+      $images = array(array(
+        'url' => $post->field_field_original_image[0]['raw']['safe_value'],
+        'text' => $post->node_title,
+        'size' => getimagesize($post->field_field_original_image[0]['raw']['safe_value']),
+        'linkto' => $post->field_field_original_url[0]['raw']['safe_value'],
+        'destination' => 'post'
+      ));
+      $variables['main_navigation'] = get_header_main_navigation_menu();
+      $variables['slideImages'] = $images;  
+    }
   }
   elseif ($view->name == 'hotel_reviews' && $view->current_display == 'page'){
     
