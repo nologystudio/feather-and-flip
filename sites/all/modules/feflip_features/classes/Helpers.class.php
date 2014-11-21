@@ -191,7 +191,7 @@ class Helpers
             
             $result = '<nav id="social-media" class="'.$class.'">';
             foreach ($menu as $key => $menu_item) {
-                 $result .= '<a href="'.$menu_item['link']['link_path'].'" rel="'.strtolower($menu_item['link']['link_title']).'"></a>';
+                 $result .= '<a href="'.$menu_item['link']['link_path'].'" target="_blank" rel="'.strtolower($menu_item['link']['link_title']).'"></a>';
             }
             
             $result .= '</nav>';    

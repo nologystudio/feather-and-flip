@@ -19,6 +19,12 @@
 		}
 
 		switch ($form_id) {
+			case 'signup':
+				$result = AdminForms::signUpUser($input_values);
+				echo json_encode($result);
+				break;
+			case 'signin':
+				break;
 			case 'getDestinations':
 				$result = AdminForms::getDestinations();
 				echo json_encode($result);

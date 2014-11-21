@@ -84,6 +84,46 @@ class AdminForms
         $result = Destination::GetAllDestination();
         return $result;
     }
+    
+    static function signUpUser($input_values)
+    {
+            $new_user = array(
+                           'name' => $input_values['mail'],
+                           'pass' => $input_values['password'],
+                           'mail' => $input_values['mail'],
+                           //'signature_format' => 'full_html',
+                           'status' => 1,
+                           //'access' => REQUEST_TIME,
+                           //'timezone' => 'America/New_York',
+                           //'init' => 'email address',
+                           //'roles' => array(DRUPAL_AUTHENTICATED_RID => 'authenticated user'),
+                           'field_first_name' =>
+                                   array(LANGUAGE_NONE =>
+                                   array(0 =>
+                                   array('value' => $input_values['firstname']))),
+                           'field_last_name' =>
+                                   array(LANGUAGE_NONE =>
+                                   array(0 =>
+                                   array('value' => $input_values['lastname']))),
+           );
+                                
+           $account = user_save(NULL, $new_user);
+           return $account;
+           
+    }
+    
+    static function signInUser($username, $password)
+    {
+            if($uid = user_authenticate($username, $password))
+            {
+              user_login_submit(array(), array('uid' => $uid));
+              return true;
+            }
+            else
+            {
+                return false;
+            }
+    }
  
 }
 
