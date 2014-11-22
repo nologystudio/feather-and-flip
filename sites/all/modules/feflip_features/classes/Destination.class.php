@@ -40,7 +40,7 @@ class Destination
          foreach($nodes as $node)
          {
               $wrapper = entity_metadata_wrapper('node', $node);
-              $image = "http://placehold.it/300x300";
+              $image = Helpers::GetMainImageFromFieldCollection($node->field_images, $wrapper->title->value().', '.$wrapper->field_country->value(),'http://placehold.it/300x300', 'large');//"http://placehold.it/300x300";
               $destinations[] =  array( 'destination'   => $wrapper->title->value(),
                                         'withcountry'   => $wrapper->title->value().', '.$wrapper->field_country->value(),
                                         'continent'     => isset($continents[$wrapper->field_continent->value()]) ? $continents[$wrapper->field_continent->value()] : $wrapper->field_continent->value(),

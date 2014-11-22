@@ -84,45 +84,82 @@ class AdminForms
         $result = Destination::GetAllDestination();
         return $result;
     }
-    
-    static function signUpUser($input_values)
+
+
+    static function signUpUser($input_values, &$error)
     {
+        $mail = $input_values['mail'];
+        $pass = $input_values['password'];
+        $firstName = $input_values['firstname'];
+        $lastName = $input_values['lastname'];
+
+        $user = user_load_by_name($mail);
+
+        if (!$user)
+        {
             $new_user = array(
-                           'name' => $input_values['mail'],
-                           'pass' => $input_values['password'],
-                           'mail' => $input_values['mail'],
-                           //'signature_format' => 'full_html',
-                           'status' => 1,
-                           //'access' => REQUEST_TIME,
-                           //'timezone' => 'America/New_York',
-                           //'init' => 'email address',
-                           //'roles' => array(DRUPAL_AUTHENTICATED_RID => 'authenticated user'),
-                           'field_first_name' =>
-                                   array(LANGUAGE_NONE =>
-                                   array(0 =>
-                                   array('value' => $input_values['firstname']))),
-                           'field_last_name' =>
-                                   array(LANGUAGE_NONE =>
-                                   array(0 =>
-                                   array('value' => $input_values['lastname']))),
-           );
-                                
-           $account = user_save(NULL, $new_user);
-           return $account;
-           
-    }
-    
-    static function signInUser($username, $password)
-    {
-            if($uid = user_authenticate($username, $password))
+                'name' => $mail,
+                'pass' => $pass,
+                'mail' => $mail,
+                //'signature_format' => 'full_html',
+                'status' => 1,
+                //'access' => REQUEST_TIME,
+                //'timezone' => 'America/New_York',
+                //'init' => 'email address',
+                //'roles' => array(DRUPAL_AUTHENTICATED_RID => 'authenticated user'),
+                'field_first_name' =>
+                    array(LANGUAGE_NONE =>
+                        array(0 =>
+                            array('value' => $firstName))),
+                'field_last_name' =>
+                    array(LANGUAGE_NONE =>
+                        array(0 =>
+                            array('value' => $lastName))),
+            );
+
+            try
             {
-              user_login_submit(array(), array('uid' => $uid));
-              return true;
+                user_save(NULL, $new_user);
+                $error = '';
+                return true;
             }
-            else
+            catch (Exception $e)
             {
+                $error = $e->getMessage();
                 return false;
             }
+        }
+        else
+        {
+            $error = 'User already exists';
+            return false;
+        }
+    }
+    
+    static function signInUser($input_values, &$error)
+    {
+        $username = $input_values['username'];
+        $password = $input_values['password'];
+
+        if($uid = user_authenticate($username, $password))
+        {
+            try
+            {
+                user_login_submit(array(), array('uid' => $uid));
+                $error = '';
+                return true;
+            }
+            catch (Exception $e)
+            {
+                $error = $e->getMessage();
+                return false;
+            }
+        }
+        else
+        {
+            $error = 'User not authenticate';
+            return false;
+        }
     }
  
 }

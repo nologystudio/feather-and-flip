@@ -20,10 +20,14 @@
 
 		switch ($form_id) {
 			case 'signup':
-				$result = AdminForms::signUpUser($input_values);
-				echo json_encode($result);
+                $result = AdminForms::signUpUser($input_values, $error);
+                $obj = array('result'=>$result, 'error'=>$error);
+				echo json_encode($obj);
 				break;
 			case 'signin':
+                $result = AdminForms::signInUser($input_values,$error);
+                $obj = array('result'=>$result, 'error'=>$error);
+                echo json_encode($obj);
 				break;
 			case 'getDestinations':
 				$result = AdminForms::getDestinations();

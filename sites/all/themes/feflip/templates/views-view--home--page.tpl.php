@@ -6,7 +6,7 @@
                 <?php foreach($destinations as $destination){ ?>
                 <a href="<?php echo $destination['url'].'/itinerary';?>" rel="destination" class="gallery-item">
                         <figure class="circle-mask">
-                                <img src="<?php echo $destination['image'];?>" alt=""/>
+                                <img src="<?php echo $destination['image']['url'];?>" alt=""/>
                                 <div class="border"></div>
                         </figure>
                         <h2><?php echo $destination['destination']?></h2>
