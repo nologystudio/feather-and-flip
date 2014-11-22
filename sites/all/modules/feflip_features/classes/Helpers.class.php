@@ -111,7 +111,7 @@ class Helpers
                 'pubDate'   => (string)$item->pubDate,
                 'url'       => (string)$item->link,
                 'description' => (string)$item->description,
-                'img'       => (string)$img
+                'img'       => preg_replace('/\/(\d+)w\//', '/1000w/', (string)$img)
             );
         }
         return $rs;
