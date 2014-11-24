@@ -13,17 +13,15 @@
                                         <img src="<?php echo $image['url'];?>" alt="" data-size="<?php echo $image['size'][0].'x'.$image['size'][1];?>"/>
                                 </figure>
                                 <div class="info-wrapper">
-                                        <?php if( isset($image['linkto'])){ ?>
-                                        <a href="<?php echo $image['linkto']; ?>" rel="">
+                                        <a href="<?php if(isset($image['linkto'])) echo $image['linkto']; else echo ''; ?>" <?php if(isset($blank) && $blank){ echo 'target="_blank"'; } ?> rel="">
                                                 <h1><?php if(isset($image['text'])) echo $image['text']; else echo 'city, country'; ?></h1>
-                                                <span class="cursive">see hotels</span>
-                                                <span class="rounded-btn">go to <?php echo $image['destination']?></span>
+                                                <?php if(isset($image['subtitle'])){ ?>
+                                                <span class="cursive"><?php echo $image['subtitle']; ?></span>
+                                                <?php } ?>
+                                                <?php if(isset($image['btntext'])){?>
+                                                <span class="rounded-btn"><?php echo $image['btntext'];?></span>
+                                                <?php } ?>
                                         </a>
-                                        <?php } else {?>
-                                        <a href="">
-                                        <h1><?php if(isset($image['text'])) echo $image['text']; else echo 'city, country'; ?></h1>
-                                        </a>
-                                        <?php }?>
                                 </div>
                         </article>
                         <?php } ?>

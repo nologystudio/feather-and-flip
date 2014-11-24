@@ -142,7 +142,7 @@ function feflip_preprocess_views_view(&$variables) {
     //$variables['home_dests'] = get_home_destinations();
     //$variables['home_dests_map'] = get_home_destinations('promote_to_map');
 
-    $variables['slideImages'] = Destination::GetImagesForHomeSlideShow();
+    $variables['slideImages'] = Destination::GetImagesForHomeSlideShow('see hotels');
     $destinations = Destination::GetAllDestination();
     $variables['destinations'] = $destinations;
     $variables['travel_journal'] = views_embed_view('travel_journal', 'page');
@@ -150,33 +150,44 @@ function feflip_preprocess_views_view(&$variables) {
   }
   elseif (($view->name == 'travel_journal' || $view->name == 'travel_journal_tags') && $view->current_display == 'page') {
     if (!empty($view->result)){
-      $post = array_shift($view->result);
-      $images = array(array(
-        'url' => $post->field_field_original_image[0]['raw']['safe_value'],
-        'text' => $post->node_title,
-        'size' => getimagesize($post->field_field_original_image[0]['raw']['safe_value']),
-        'linkto' => $post->field_field_original_url[0]['raw']['safe_value'],
-        'destination' => 'post'
-      ));
-      $variables['main_navigation'] = get_header_main_navigation_menu();
-      $variables['slideImages'] = $images;  
+        $post = array_shift($view->result);
+        $orig_date = strtotime($post->field_field_original_pubdate[0]['raw']['safe_value']);
+        $images = array(array(
+            'url' => $post->field_field_original_image[0]['raw']['safe_value'],
+            'text' => $post->node_title,
+            'size' => getimagesize($post->field_field_original_image[0]['raw']['safe_value']),
+            'linkto' => $post->field_field_original_url[0]['raw']['safe_value'],
+            'btntext' => 'read more',
+            'subtitle' => date('F, Y', $orig_date)
+        ));
+        $variables['blank'] = true;
+        $variables['main_navigation'] = get_header_main_navigation_menu();
+        $variables['slideImages'] = $images;
     }
   }
   elseif ($view->name == 'hotel_reviews' && $view->current_display == 'page'){
     
-    $variables['hotels'] = Hotel::HotelReviews($variables);
-    $variables['main_navigation'] = get_header_main_navigation_menu();
-    $images[0]['text'] = 'hotel review';
-    $variables['slideImages'] = $images;    
+      $variables['hotels'] = Hotel::HotelReviews($variables);
+      $variables['main_navigation'] = get_header_main_navigation_menu();
+      if(isset($variables['view']->args[0]))
+      {
+          $destination = node_load($variables['view']->args[0]);
+          $images = Destination::GetAllImagesDestination($destination,'hotel reviews');
+      }
+      $variables['slideImages'] = $images;
   }
   elseif($view->name == 'itineraries' && $view->current_display == 'page'){
-    $variables['itinerary'] =  Itinerary::ItinerariesInfo($view);
-    $variables['main_navigation'] = get_header_main_navigation_menu();
-    $images[0]['text'] = $variables['itinerary']['name'];
-    $variables['slideImages'] = $images;
+      $variables['itinerary'] =  Itinerary::ItinerariesInfo($view);
+      $variables['main_navigation'] = get_header_main_navigation_menu();
+      if(isset($variables['view']->args[0]))
+      {
+          $destination = node_load($variables['view']->args[0]);
+          $images = Destination::GetAllImagesDestination($destination,$variables['itinerary']['name']);
+      }
+      $variables['slideImages'] = $images;
   }
   elseif($view->name == 'map_it' && $view->current_display == 'page'){
-    $variables['slideImages'] = Destination::GetImagesForHomeSlideShow();
+    $variables['slideImages'] = Destination::GetImagesForHomeSlideShow('see hotels');
     $destinations = Destination::GetAllDestination();
     
     $destinationbycontinent = array();

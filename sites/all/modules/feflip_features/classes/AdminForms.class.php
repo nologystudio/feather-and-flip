@@ -145,7 +145,8 @@ class AdminForms
         {
             try
             {
-                user_login_submit(array(), array('uid' => $uid));
+                $account = array('uid' => $uid);
+                user_login_submit(array(), $account);
                 $error = '';
                 return true;
             }

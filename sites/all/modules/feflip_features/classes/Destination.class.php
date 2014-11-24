@@ -34,7 +34,7 @@ class Destination
                             'africa'        =>'Africa',
                             'europe'        =>'Europe',
                             'asia'          =>'Asia',
-                            'oceania'       =>'Oceania');         
+                            'oceania'       =>'Oceania');
          
          $destinations = array();
          foreach($nodes as $node)
@@ -74,7 +74,7 @@ class Destination
          return $destinations; 
     }
     
-    public static function GetImagesForHomeSlideShow()
+    public static function GetImagesForHomeSlideShow($subtitle)
     {
          $nodes = self::getAllDestinationNodes('promote_to_slideshow');
          
@@ -86,9 +86,20 @@ class Destination
              $image = Helpers::GetMainImageFromFieldCollection($node->field_images, $wrapper->title->value().', '.$wrapper->field_country->value(),'http://placehold.it/1280x800', 'headerslideshow');
              $image['linkto'] = url('node/'.$node->nid) . '/hotel-reviews';
              $image['destination'] = $wrapper->title->value();
+             $image['subtitle'] = $subtitle;
+             $image['btntext'] = 'go to ' . $wrapper->title->value();
              $images[] = $image;
          }
              
          return $images; 
+    }
+
+    public static function  GetAllImagesDestination($destination, $subtitle)
+    {
+        $wrapper = entity_metadata_wrapper('node', $destination);
+        $images = Helpers::GetAllImagesFromFieldCollection($destination->field_images, $wrapper->title->value().', '.$wrapper->field_country->value(), 'http://placehold.it/1280x800', 'headerslideshow');
+        for($i=0; $i < count($images); $i++)
+            $images[$i]['subtitle'] = $subtitle;
+        return $images;
     }
 }
