@@ -22,27 +22,29 @@
                         else
                                 $type = 'entry';
                         $orig_date = strtotime($post->field_field_original_pubdate[0]['raw']['safe_value']);
+                        $img_url = preg_replace('/\/(\d+)w\//', '/500w/', $post->field_field_original_image[0]['raw']['safe_value']);
+                        $img_wh = getimagesize($img_url); 
                         
                         switch ($type) {
                                 case 'review': ?>
-                                        <article class="quick-entry review">
+                                        <a class="quick-entry review" target="_blank" href="<?php echo $post->field_field_original_url[0]['raw']['safe_value']; ?>">
                                                 <h3><?php echo $title_slices[1]; ?></h3>
                                                 <hr>
                                                 <h4><?php echo $title_slices[0]; ?></h4>
                                                 <time datetime="<?php echo date('Y-m-d i:s', $orig_date); ?>"><?php echo date('F, Y', $orig_date); ?></time>
-                                        </article>
+                                        </a>
                                 <?php break;
                                  
                                 default: ?>
-                                        <article class="quick-entry">
+                                        <a class="quick-entry" data-size="<?php echo $img_wh[0].'x'.$img_wh[1]; ?>" target="_blank" href="<?php echo $post->field_field_original_url[0]['raw']['safe_value']; ?>">
                                                 <figure>
-                                                        <img src="<?php echo $post->field_field_original_image[0]['raw']['safe_value']; ?>" alt=""/>
+                                                        <img src="<?php echo $img_url; ?>" alt=""/>
                                                 </figure>
                                                 <footer>
                                                         <h4><?php echo $post->node_title; ?></h4>
                                                         <time datetime="<?php echo date('Y-m-d i:s', $orig_date); ?>"><?php echo date('F, Y', $orig_date); ?></time>
                                                 </footer>
-                                        </article>
+                                        </a>
                                 <?php break;
                          } ?>                        
                 <?php } ?>
