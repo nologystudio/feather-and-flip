@@ -7,11 +7,17 @@
 		$drupal_path = $_SERVER['DOCUMENT_ROOT'];
 		define('DRUPAL_ROOT', $drupal_path);
 		require_once DRUPAL_ROOT . '/includes/bootstrap.inc';
-		drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
+		//drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
 
 		//watchdog('FormsController', 'formID ===> '.$_POST['formID']);
 
 		$form_id = $_POST['formID'];
+		
+		if($form_id == 'signin')
+			drupal_bootstrap(DRUPAL_BOOTSTRAP_SESSION);
+		else
+			drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
+
 		$input_values = array();
 		foreach ($_POST as $key => $value) {
 			if ($key != 'formID')
