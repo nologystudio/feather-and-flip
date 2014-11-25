@@ -8,8 +8,11 @@ class Sabre
      var $PASSWORD = '';
      var $TESTMODE;
      var $TESTSUFFIX = '';
-     
-     function Sabre()
+
+    /**
+     *Constructor
+     */
+    function Sabre()
      {
         $this->IPCC = variable_get('sabre_ipcc');
         $this->USERNAME = variable_get('sabre_username');
@@ -21,8 +24,14 @@ class Sabre
         else
             $this->TESTSUFFIX = '';        
      }
-     
-     private function Header_MessageHeader($action, $conversationID)
+
+    /**
+     * Create message header for soap message
+     * @param $action
+     * @param $conversationID
+     * @return SoapHeader
+     */
+    private function Header_MessageHeader($action, $conversationID)
      {
         $toDate = new DateTime();
         $timestamp = $toDate->format('Y-m-d\Th:i:sP');
@@ -52,8 +61,12 @@ class Sabre
         
         return $header;
      }
-     
-     private function Header_UserNameToken()
+
+    /**
+     * Create security header with user name token
+     * @return SoapHeader
+     */
+    private function Header_UserNameToken()
      {
         $usernameToken = array(
                     'UsernameToken' => array(
@@ -68,8 +81,13 @@ class Sabre
         
         return $header;
      }
-     
-     private function Header_SecurityToken($securityToken)
+
+    /**
+     * Create security header with security token
+     * @param $securityToken
+     * @return SoapHeader
+     */
+    private function Header_SecurityToken($securityToken)
      {
            $securityTokenHeader = array( 
                           'BinarySecurityToken' => $securityToken
@@ -79,12 +97,12 @@ class Sabre
            
            return $header;
      }
-     
-     
-     /*
-      * Create a session with sabre service and get security token and conversation id
-      */
-     public function CreateSession()
+
+    /**
+     * Create a session with sabre service and get security token and conversation id
+     * @return array
+     */
+    public function CreateSession()
      {
         
         $service = wsclient_service_load('createsession'.$this->TESTSUFFIX);
@@ -118,11 +136,15 @@ class Sabre
         
         return $result;
      }
-     
-     /*
-      * Close a session 
-      */
-     public function CloseSession($securityToken, $conversationId)
+
+
+    /**
+     * Close a open session
+     * @param $securityToken
+     * @param $conversationId
+     * @return string
+     */
+    public function CloseSession($securityToken, $conversationId)
      {
         $service = wsclient_service_load('closesession'.$this->TESTSUFFIX);
         
@@ -150,10 +172,13 @@ class Sabre
         
         return $response;
      }
-     
-     /*
-      * Format XML for print
-      */
+
+
+    /**
+     * Format XML for print
+     * @param $xml
+     * @return string
+     */
      private function ReadXML($xml)
      {
         $dom = new DOMDocument;
@@ -162,8 +187,17 @@ class Sabre
         $dom->formatOutput = TRUE;
         return $dom->saveXml();
      }
-        
-     public function HotelAvail($hotelCityCode, $cityName, $numpersonas, $start, $end)
+
+
+    /**
+     * Call sabre action OTA_HotelAvailLLSRQ and return response
+     * @param $hotelCityCode
+     * @param $cityName
+     * @param $numpersonas
+     * @param $start
+     * @param $end
+     */
+    public function HotelAvail($hotelCityCode, $cityName, $numpersonas, $start, $end)
      {
         //Open session with sabre
         $sessionInfo = $this->CreateSession();
@@ -216,8 +250,17 @@ class Sabre
             $this->CloseSession($securityToken, $conversationId);
         }
      }
-     
-     public function HotelDescription($hotelCode, $numpersonas, $start, $end)
+
+
+    /**
+     * Call sabre action HotelPropertyDescriptionLLSRQ and return response
+     * @param $hotelCode
+     * @param $numpersonas
+     * @param $start
+     * @param $end
+     * @return string
+     */
+    public function HotelDescription($hotelCode, $numpersonas, $start, $end)
      {
         //Open session with sabre
         $sessionInfo = $this->CreateSession();
@@ -271,6 +314,71 @@ class Sabre
         
         return $response;
      }
+
+    /**
+     * Returns array hotels description
+     * @param $hotelsCodes
+     * @param $numpersonas
+     * @param $start
+     * @param $end
+     * @return array
+     */
+    public function ListHotelDescription($hotelsCodes, $numpersonas, $start, $end)
+    {
+        //Open session with sabre
+        $sessionInfo = $this->CreateSession();
+        $securityToken = $sessionInfo['SecurityToken'];
+        $conversationId = $sessionInfo['ConversationId'];
+
+        //Load service
+        $service = wsclient_service_load('hoteldescription'.$this->TESTSUFFIX);
+
+        //Create headers and settings
+        $headers = array(
+            $this->Header_MessageHeader('HotelPropertyDescriptionLLSRQ', $conversationId),
+            $this->Header_SecurityToken($securityToken)
+        );
+
+        $service->settings['options']['trace'] = TRUE;
+        $service->settings['options']['cache_wsdl'] = WSDL_CACHE_NONE;
+        $service->settings['soap_headers'] = $headers;
+
+        $response = array();
+
+        //Execute operation
+        try
+        {
+            foreach($hotelsCodes as $code) {
+                $args['AvailRequestSegment']['GuestCounts']['Count'] = $numpersonas;
+                $args['AvailRequestSegment']['RateRange']['CurrencyCode'] = 'USD';
+                $args['AvailRequestSegment']['HotelSearchCriteria']['Criterion']['HotelRef']['HotelCode'] = $code;
+                $args['AvailRequestSegment']['TimeSpan']['End'] = $end;
+                $args['AvailRequestSegment']['TimeSpan']['Start'] = $start;
+                $args['Version'] = '2.1.0';
+
+                $response[$code] = $service->HotelPropertyDescriptionRQ($args);
+
+                //$xmlRequest = $service->endpoint()->client()->__getLastRequest();
+                //dpm($this->ReadXML($xmlRequest));
+                //$xmlResponse = $service->endpoint()->client()->__getLastResponse();
+                //dpm($this->ReadXML($xmlResponse));
+
+                //dpm($response);
+            }
+        }
+        catch (Exception $e)
+        {
+            $response[] = $e->getMessage();
+            //dpm($response);
+        }
+        finally
+        {
+            //Close sabre session
+            $this->CloseSession($securityToken, $conversationId);
+        }
+
+        return $response;
+    }
      
      public function HotelBookReservation($roomTypes, $hotelCode, $numPersonas, $star, $end)
      {

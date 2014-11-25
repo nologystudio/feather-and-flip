@@ -2,7 +2,7 @@
 
 class Hotel
 {
-    /*
+    /**
      *Returns nodes from result view
      *@param $view
      *@return array
@@ -43,7 +43,7 @@ class Hotel
         return $hotelsinfo;        
     }
     
-    /*
+    /**
      *Return info to show in hotelreviews page
      *@return array Hotels info hotel name, distination and image
      */
@@ -56,7 +56,7 @@ class Hotel
     }
     
     
-    /*
+    /**
      *Return all url of hotels by destination
      *@param $destinationId
      *@return array with nid and url fo all hotels by destination
@@ -82,7 +82,7 @@ class Hotel
         return $links;
     }
     
-    /*
+    /**
      *Return array with next and previous url of hotel
      *@param $node Hotel node
      *@return array
@@ -195,7 +195,7 @@ class Hotel
         return $images;
     }
     
-    /*
+    /**
      *Return number hotel by destination
      *@param destination id
      *@return integer
@@ -233,5 +233,36 @@ class Hotel
         }
         
         return $hotels;      
+    }
+
+    /**
+     * Returns hotels code of sabre and expedia by destination
+     * @param $destinationID
+     * @return array
+     */
+    public static function GetHotelCodesByDestination($destinationID)
+    {
+        $query = new EntityFieldQuery;
+
+        $nodes = $query->entityCondition('entity_type', 'node')
+            ->entityCondition('bundle', 'hotel')
+            ->propertyCondition('status', 1)
+            ->fieldCondition('field_destination','target_id', $destinationID, '=')
+            ->execute();
+
+        $codes = array();
+
+        if (isset($nodes['node']))
+        {
+            $hotelsNode = node_load_multiple(array_keys($nodes['node']));
+            foreach($hotelsNode as $hotel)
+            {
+                $wrapper = entity_metadata_wrapper('node', $hotel);
+                $codes['sabre'][] = $wrapper->field_hotelcode->value();
+                $codes['expedia'][] = $wrapper->field_ean_hotelcode->value();
+            }
+        }
+
+        return $codes;
     }
 }

@@ -8,7 +8,7 @@
 */
 
 //if (empty(arg(0)))
-	//sabre_services_soap_test();
+//	sabre_services_soap_test();
  	//module_invoke_all('test');
 /**
  * Tests wsclient connections
@@ -71,31 +71,26 @@ function sabre_services_soap_test()
 	if (module_exists('wsclient'))
 	{
 		$sabreService = new Sabre;
-		$star = '2014-11-20';
-		$end = '2014-11-23';
-		$hotelCode = '0018368';
-		$roomTypes[] = array('numunit' => 1, 'code' => 'C1KPR8');
-		$numPersonas = 1;
-
-		echo $no;
-		echo $no;
-		echo $no;
-		echo $no;
-		echo $no;
-		echo $no;
-		echo $no;
+		$star = '2015-06-20';
+		$end = '2015-06-25';
+		//$hotelCode = '0018368';
+		//$roomTypes[] = array('numunit' => 1, 'code' => 'C1KPR8');
+		$numPersonas = 2;
+        $codes = Hotel::GetHotelCodesByDestination(30);
+        //dpm($codes);
+        $response = $sabreService->ListHotelDescription($codes['sabre'],$numPersonas,$star,$end);
+        dpm($response);
 		//dpm($sabreService->HotelDescription($hotelCode, $numPersonas, $star, $end));
-		
+		/*
 		$sessionInfo = $sabreService->CreateSession();
 		dpm ($sessionInfo);
-		
 		$result = $sabreService->TravelItineraryAddInfo($sessionInfo, 'Prueba', 'esto es una prueba');
 		$result = $sabreService->EndTransaction($sessionInfo);
 		dpm($result);
 		//$result = $sabreService->TravelItineraryRead($sessionInfo);
 		//dpm($result);
 		$sabreService->CloseSession($sessionInfo['SecurityToken'], $sessionInfo['ConversationId']);
-		
+		*/
 		//dpm($result);
 		//$sabreService->HotelAvail('LGA','', 2, $star, $end);
 		//$result = $sabreService->HotelDescription('0005485', 3, $star, $end);
