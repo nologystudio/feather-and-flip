@@ -86,6 +86,12 @@ class AdminForms
     }
 
 
+    /**
+     * Create a new user
+     * @param $input_values
+     * @param $error
+     * @return bool
+     */
     static function signUpUser($input_values, &$error)
     {
         $mail = $input_values['mail'];
@@ -135,7 +141,13 @@ class AdminForms
             return false;
         }
     }
-    
+
+    /**
+     * User log in
+     * @param $input_values
+     * @param $error
+     * @return bool
+     */
     static function signInUser($input_values, &$error)
     {
         $username = $input_values['username'];
@@ -163,7 +175,27 @@ class AdminForms
             return false;
         }
     }
- 
+
+    /**
+     * User log out
+     * @param $error
+     * @return bool
+     */
+    static  function logOutUser(&$error)
+    {
+        try
+        {
+            module_load_include('pages.inc', 'user');
+            user_logout();
+            $error = '';
+            return true;
+        }
+        catch (Exception $e)
+        {
+            $error = $e->getMessage();
+            return false;
+        }
+    }
 }
 
 ?>

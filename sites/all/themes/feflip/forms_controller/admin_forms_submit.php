@@ -35,6 +35,11 @@
                 $obj = array('result'=>$result, 'error'=>$error);
                 echo json_encode($obj);
 				break;
+            case 'logout':
+                $result = AdminForms::logOutUser($error);
+                $obj = array('result' => $result, 'error' => $error);
+                echo json_encode($obj);
+                break;
 			case 'getDestinations':
 				$result = AdminForms::getDestinations();
 				echo json_encode($result);
