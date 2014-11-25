@@ -3,20 +3,20 @@
 	// Receive and call to needed function for each form
 	if (isset($_POST['formID']) && !empty($_POST['formID'])){
 
+        global $base_url;
+        $base_url = 'http://'.$_SERVER['HTTP_HOST'];
+
 		// Drupal Bootstrap
 		$drupal_path = $_SERVER['DOCUMENT_ROOT'];
-		define('DRUPAL_ROOT', $drupal_path);
+        chdir($drupal_path);
+		define('DRUPAL_ROOT', getcwd());
 		require_once DRUPAL_ROOT . '/includes/bootstrap.inc';
-		//drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
+		drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
+        drupal_settings_initialize();
 
 		//watchdog('FormsController', 'formID ===> '.$_POST['formID']);
 
 		$form_id = $_POST['formID'];
-		
-		if($form_id == 'signin')
-			drupal_bootstrap(DRUPAL_BOOTSTRAP_SESSION);
-		else
-			drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
 
 		$input_values = array();
 		foreach ($_POST as $key => $value) {
