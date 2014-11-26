@@ -80,6 +80,20 @@ class Expedia
 		return $res;
 	}
 
+    /*
+    *	Get room availability for list hotels
+    *	@param hotelId, checkin, checkout, rooms, numAdults, numChildren
+    */
+    public function ListRoomsAvailability($listhotelId, $checkin, $checkout, $rooms, $numAdults, $numChildren)
+    {
+        $res = array();
+
+        foreach($listhotelId as $hotelId)
+            $res[] = $this->RoomAvailability($hotelId,$checkin,$checkout,$rooms, $numAdults, $numChildren);
+
+        return $res;
+    }
+
 	/*
 	*	Extract EAN error message
 	*	@param Expedia object

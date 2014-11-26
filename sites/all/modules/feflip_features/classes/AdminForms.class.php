@@ -6,6 +6,31 @@ class AdminForms
     const APIKEY = 'eae1d5448b1a2cb751661162fd5011fd-us8';
     const LISTID = '487e37ac3f';
 
+
+    private static function encrypt_decrypt($action, $string) {
+        $output = false;
+
+        $encrypt_method = "AES-256-CBC";
+        $secret_key = date('Y-m-d H:i:s');//'This is my secret key';
+        $secret_iv = date('Y-m-d H:i:s');//'This is my secret iv';
+
+        // hash
+        $key = hash('sha256', $secret_key);
+
+        // iv - encrypt method AES-256-CBC expects 16 bytes - else you will get a warning
+        $iv = substr(hash('sha256', $secret_iv), 0, 16);
+
+        if( $action == 'encrypt' ) {
+            $output = openssl_encrypt($string, $encrypt_method, $key, 0, $iv);
+            $output = base64_encode($output);
+        }
+        else if( $action == 'decrypt' ){
+            $output = openssl_decrypt(base64_decode($string), $encrypt_method, $key, 0, $iv);
+        }
+
+        return $output;
+    }
+
     static function subscribeToNewsLetter($custom_data, &$errorMsg)
     {
         if (!isset($custom_data['user_email'])) 
@@ -195,6 +220,18 @@ class AdminForms
             $error = $e->getMessage();
             return false;
         }
+    }
+
+    /**
+     * Return in user is logged in
+     * @return bool
+     */
+    static function userIsLoggedIn()
+    {
+        if (user_is_logged_in())
+            return 'true';//self::encrypt_decrypt('encrypt','true');
+        else
+            return 'false';//self::encrypt_decrypt('encrypt','false');
     }
 }
 

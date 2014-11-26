@@ -102,7 +102,7 @@
             <?php if($twitterCard): ?>
             
                     <meta name="twitter:card"        content="summary">
-                    <meta name="twitter:site"        content="@nologystudio">
+                    <meta name="twitter:site"        content="">
                     <meta name="twitter:creator"     content="">
                     <meta name="twitter:url"         content="">
                     <meta name="twitter:title"       content="">
@@ -127,7 +127,7 @@
                 
         </head>
         
-        <body class="<?php echo variable_get('pageID'); ?>">
+        <body class="<?php echo variable_get('pageID'); ?>" data-user="<?php echo AdminForms::userIsLoggedIn();?>">
         
         <?php include 'header.html.php'; ?>
 
