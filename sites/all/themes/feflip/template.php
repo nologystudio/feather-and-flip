@@ -150,16 +150,28 @@ function feflip_preprocess_views_view(&$variables) {
   }
   elseif (($view->name == 'travel_journal' || $view->name == 'travel_journal_tags') && $view->current_display == 'page') {
     if (!empty($view->result)){
-        $post = array_shift($view->result);
-        $orig_date = strtotime($post->field_field_original_pubdate[0]['raw']['safe_value']);
-        $images = array(array(
-            'url' => $post->field_field_original_image[0]['raw']['safe_value'],
-            'text' => $post->node_title,
-            'size' => getimagesize($post->field_field_original_image[0]['raw']['safe_value']),
-            'linkto' => $post->field_field_original_url[0]['raw']['safe_value'],
-            'btntext' => 'read more',
-            'subtitle' => date('F, Y', $orig_date)
-        ));
+        //$post = array_shift($view->result);
+
+        //find first post with image
+        for($i=0; $i<count($view->result); $i++)
+        {
+            $post = $view->result[$i];
+            if(isset($post->field_field_original_image[0]['raw']['safe_value'])
+                && !empty($post->field_field_original_image[0]['raw']['safe_value'])
+                && strlen($post->field_field_original_image[0]['raw']['safe_value']) > 0) break;
+        }
+
+        if (isset($post)) {
+            $orig_date = strtotime($post->field_field_original_pubdate[0]['raw']['safe_value']);
+            $images = array(array(
+                'url' => $post->field_field_original_image[0]['raw']['safe_value'],
+                'text' => $post->node_title,
+                'size' => getimagesize($post->field_field_original_image[0]['raw']['safe_value']),
+                'linkto' => $post->field_field_original_url[0]['raw']['safe_value'],
+                'btntext' => 'read more',
+                'subtitle' => date('F, Y', $orig_date)
+            ));
+        }
         $variables['blank'] = true;
         $variables['main_navigation'] = get_header_main_navigation_menu();
         $variables['slideImages'] = $images;
