@@ -119,10 +119,10 @@ class AdminForms
      */
     static function signUpUser($input_values, &$error)
     {
-        $mail = $input_values['mail'];
-        $pass = $input_values['password'];
-        $firstName = $input_values['firstname'];
-        $lastName = $input_values['lastname'];
+        $mail = $input_values['userEmail'];
+        $pass = $input_values['userPassword'];
+        $firstName = $input_values['userName'];
+        $lastName = $input_values['userLast'];
 
         $user = user_load_by_name($mail);
 
@@ -151,6 +151,7 @@ class AdminForms
             try
             {
                 user_save(NULL, $new_user);
+                drupal_goto();
                 $error = '';
                 return true;
             }
@@ -175,8 +176,8 @@ class AdminForms
      */
     static function signInUser($input_values, &$error)
     {
-        $username = $input_values['username'];
-        $password = $input_values['password'];
+        $username = $input_values['userEmail'];
+        $password = $input_values['userPassword'];
 
         if($uid = user_authenticate($username, $password))
         {
@@ -184,6 +185,7 @@ class AdminForms
             {
                 $form_state = array('uid' => $uid);
                 user_login_submit(array(), $form_state);
+                drupal_goto();
 
                 $error = '';
                 return true;

@@ -127,7 +127,7 @@
                 
         </head>
         
-        <body class="<?php echo variable_get('pageID'); ?>" data-user="<?php echo AdminForms::userIsLoggedIn();?>">
+        <body class="<?php echo variable_get('pageID'); ?>" ng-controller="BodyCtrl" ng-init="user = <?php echo AdminForms::userIsLoggedIn();?>">
         
         <?php include 'header.html.php'; ?>
 

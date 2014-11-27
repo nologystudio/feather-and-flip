@@ -53,7 +53,7 @@
 		
 		<!-- | i | Overlay engine ------------------------------------------------------------ -->
 		
-		<div class="call-to-action" ng-controller="MessengerCtrl" ng-include="messenger"></div>
+		<div class="call-to-action" ng-controller="MessengerCtrl" ng-include="messenger" ng-show="display"></div>
 		
 		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 		

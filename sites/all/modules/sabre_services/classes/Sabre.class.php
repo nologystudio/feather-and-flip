@@ -252,6 +252,77 @@ class Sabre
      }
 
 
+    public function ListHotelAvail($hotelsCodes, $numpersonas, $start, $end)
+    {
+        //Open session with sabre
+        $sessionInfo = $this->CreateSession();
+        $securityToken = $sessionInfo['SecurityToken'];
+        $conversationId = $sessionInfo['ConversationId'];
+
+        //Load service
+        $service = wsclient_service_load('hotelavail'.$this->TESTSUFFIX);
+
+        //Create headers and settings
+        $headers = array(
+            $this->Header_MessageHeader('OTA_HotelAvailLLSRQ', $conversationId),
+            $this->Header_SecurityToken($securityToken)
+        );
+
+        $service->settings['options']['trace'] = TRUE;
+        $service->settings['options']['cache_wsdl'] = WSDL_CACHE_NONE;
+        $service->settings['soap_headers'] = $headers;
+
+        //Execute operation
+        try
+        {
+            $obj = new stdClass();
+            $obj->AvailRequestSegment->GuestCounts->Count = $numpersonas;
+            //$obj->AvailRequestSegment->HotelSearchCriteria->Criterion = array();
+            foreach($hotelsCodes as $hotelCode) {
+                //$hr = new stdClass();
+                //$hr->HotelRef->HotelCode = $hotelCode;
+                if ($hotelCode == '0000000')continue;
+                $obj->AvailRequestSegment->HotelSearchCriteria->Criterion->HotelRef[]['HotelCode'] = $hotelCode;
+            }
+            $obj->AvailRequestSegment->TimeSpan->End = $end;
+            $obj->AvailRequestSegment->TimeSpan->Start = $start;
+            $obj->Version = '2.1.0';
+            dpm($obj);
+
+
+
+            $args['AvailRequestSegment']['GuestCounts']['Count'] = $numpersonas;
+            foreach($hotelsCodes as $hotelCode)
+                $args['AvailRequestSegment']['HotelSearchCriteria']['Criterion'][]['HotelRef']['HotelCode'] = $hotelCode;
+            dpm($args);
+            //$args['AvailRequestSegment']['HotelSearchCriteria']['Criterion']['HotelRef']['HotelCode'] = $hotelCode;
+            //$args['AvailRequestSegment']['HotelSearchCriteria']['Criterion']['HotelRef']['HotelName'] = 'Park Hyatt New York';
+            $args['AvailRequestSegment']['TimeSpan']['End'] = $end;
+            $args['AvailRequestSegment']['TimeSpan']['Start'] = $start;
+            $args['Version'] = '2.1.0';
+
+            $response = $service->OTA_HotelAvailRQ($obj);
+
+            $xmlRequest = $service->endpoint()->client()->__getLastRequest();
+            dpm($this->ReadXML($xmlRequest));
+            //$xmlResponse = $service->endpoint()->client()->__getLastResponse();
+            //dpm($this->ReadXML($xmlResponse));
+
+            dpm($response);
+        }
+        catch (Exception $e)
+        {
+            $response = $e->getMessage();
+            dpm($response);
+        }
+        finally
+        {
+            //Close sabre session
+            $this->CloseSession($securityToken, $conversationId);
+        }
+    }
+
+
     /**
      * Call sabre action HotelPropertyDescriptionLLSRQ and return response
      * @param $hotelCode
@@ -509,13 +580,14 @@ class Sabre
         {  
             $args = array();       
                   
+            /*
             $args['AgencyInfo']['Address']['AddressLine'] = 'SABRE TRAVEL';
             $args['AgencyInfo']['Address']['CityName'] = 'SOUTHLAKE';
             $args['AgencyInfo']['Address']['CountryCode'] = 'US';
             $args['AgencyInfo']['Address']['PostalCode'] = '76092';
             $args['AgencyInfo']['Address']['StateCountyProv']['StateCode'] = 'TX';
             $args['AgencyInfo']['Address']['StreetNmbr'] = '3150 SABRE DRIVE';
-            
+            */
             $args['CustomerInfo']['PersonName']['GivenName'] = $name;
             $args['CustomerInfo']['PersonName']['Surname'] = $surname;
             //$args['CustomerInfo']['PersonName']['GivenName'] = 'otro';
@@ -563,7 +635,7 @@ class Sabre
         try
         {  
             $args = array();
-            $args['MessagingDetails']['SubjectAreas']['SubjectArea'] = 'FULL';
+            $args['MessagingDetails']['Transaction']['Code'] = 'PNR';
             $args['Version'] = '2.2.0';
             $response = $service->TravelItineraryReadRQ($args);
             
