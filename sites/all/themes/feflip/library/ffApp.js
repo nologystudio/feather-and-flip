@@ -28,16 +28,7 @@
 		angular.module('ffApp',[
 			'ngRoute',
 			'ffControllers'
-		]).
-		config(['$routeProvider',function($routeProvider){
-			/*$routeProvider.when('/home',{ 
-				templateUrl : '',
-				controller  : 'HomeCtrl'
-			});
-			$routeProvider.otherwise({
-				redirectTo : '/home'
-			});*/
-		}]);
+		]);
         
         
         

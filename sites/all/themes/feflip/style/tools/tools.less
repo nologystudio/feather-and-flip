@@ -308,6 +308,21 @@
 			transition:         all 0.5s ease-in-out; 
 		}
 		
+		.set-animation(@duration,@delay)
+		{
+			-webkit-animation-duration: @duration;
+			-webkit-animation-delay: @delay;
+			
+			-moz-animation-duration: @duration;
+			-moz-animation-delay: @delay;
+			
+			-o-animation-duration: @duration;
+			-o-animation-delay: @delay;
+			
+			-ms-animation-duration: @duration;
+			-ms-animation-delay: @delay;
+		}
+		
 		/* ------------------------------------------------------------------------------------------------------------- */
 		/* ~ Columns ~ */
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */

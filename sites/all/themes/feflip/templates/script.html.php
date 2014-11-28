@@ -34,8 +34,12 @@
 		<script type="text/javascript" charset="utf-8" src="library/vendors/raphael.min.js" ></script>
 		<script type="text/javascript" charset="utf-8" src="library/vendors/kartograph.min.js" ></script>
 		-->
-		
-		<script type="text/javascript" src="<?php echo variable_get('relativePath'); ?>library/ffApp.js"></script>
+
+        <script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.js'></script>
+        <link   href='https://api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.css' rel='stylesheet'/>
+
+
+        <script type="text/javascript" src="<?php echo variable_get('relativePath'); ?>library/ffApp.js"></script>
 		<script type="text/javascript" src="<?php echo variable_get('relativePath'); ?>library/controllers/ffControllers.js"></script>
 		
 		<!--

@@ -136,23 +136,11 @@
 		{
 			.set-size(@global-width,@header-height);
 			.set-pos(fixed);
+			.set-bg(transparent,'@{media-url}bgs/header-black-gradient.png',repeat,center,top);
 			.z(5);
 			.performance();
 			overflow: hidden;
 			display: block;
-			
-			&:before
-			{
-				@color-top: fadeout(black,0%);
-				@color-bottom: fadeout(white,100%);
-				
-				.set-size(100%,100%);
-				.set-pos(absolute);
-				.set-bg-gradient(@color-top,@color-bottom);
-				.set-opacity(0.7);
-				.z(1);
-				content: '';
-			}
 			
 			a[id="brand"]
 			{
@@ -312,6 +300,9 @@
 						
 						& > a + *
 						{
+							@duration: 0.5s;
+							@delay: 0s;
+							
 							.set-pos(absolute);
 							
 							&.on
@@ -325,6 +316,7 @@
 							.reset();
 							.set-size(@grid-3-col);
 							.set-opacity(0);
+							.set-bg(transparent,'@{media-url}icons/top-dropdown-arrow.png',no-repeat,center,top);
 							.hide();
 							margin-top: @top-ref - @ref-padding;
 							padding-top: @ref-padding;
@@ -1268,8 +1260,6 @@
 						}
 					}
 				}
-				
-				
 			}
 			
 			&[id="itinerary"]

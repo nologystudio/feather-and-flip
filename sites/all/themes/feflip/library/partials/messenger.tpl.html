@@ -1,0 +1,71 @@
+		
+		
+			
+		<!-- ---------------------------------------------------------------------------------------------------------------
+         
+        * Project     : F+F
+        * Document    : sign-up.tpl.html
+        * Created on  : 4 Nov, 2.014
+        * Version     : 1.0
+        * Author      : Aday
+        * Description : Sign-up lightwindow HTML template
+         
+        -------------------------------------------------------------------------------------------------------------------
+           *          This code has been developed by NOLOGY. in the awesome Canaries - www.nologystudio.com           *
+        -------------------------------------------------------------------------------------------------------------------
+         
+        * Log * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+        -------------------------------------------------------------------------------------------------------------------
+        * 
+        ---------------------------------------------------------------------------------------------------------------- -->
+		
+		<!-- STATE 1: Sign-up/Log-in -->
+		
+		<div id="sign-up" class="content animated fadeInUp" ng-if="triggerState == 'signup'" ng-controller="SignUpCtrl">
+			<header>
+				<small ng-show="type == 'sign-up'">Already SIGNUP?<button id="sign-in" ng-click="switcher('in')">sign in now</button></small>
+			</header>
+			<!-- Callback messages -->
+			<div id="response-messages" ng-switch on="rMessage" ng-show="type == 'response'">
+				<h1 ng-switch-when="success">Success</h1>
+				<h1 ng-switch-when="error">Error</h1>
+				<h1 ng-switch-default></h1>
+			</div>
+			<!-- Sign up form -->
+			<form id="sign-up-form" ng-show="type == 'sign-up'">
+				<header>
+					<h1>join our adventure</h1>
+					<h2>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</h2>
+				</header>
+				<input type="text"  name="user-name"  required value="" placeholder="First name"/> 
+				<input type="text"  name="user-last"  required value="" placeholder="Last name"/>
+				<input type="email" name="user-email" required value="" placeholder="Your email address"/>
+				<div class="wrapper-to-center">
+					<input type="password" name="user-password"  required value="" placeholder="Create password"/>
+					<input type="password" name="check-password" required value="" placeholder="Retype password"/>
+				</div>
+				<footer>
+					<input type="submit" value="sign up"/>
+					<small>we respect your privacy</small>
+				</footer>
+			</form>
+			<!-- Sign in form -->
+			<form id="sign-in-form" ng-show="type == 'sign-in'">
+				<header>
+					<h1>live the adventure</h1>
+					<h2>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</h2>
+				</header>
+				<div class="wrapper-to-center">
+					<input type="email"    name="user-email"    required value="" placeholder="Your email"/>
+					<input type="password" name="user-password" required value="" placeholder="Your password"/>
+				</div>
+				<footer>
+					<input type="submit" value="sign in"/>
+					<a id="new-password" href="">forgot your password?</a>
+				</footer>
+			</form>
+		</div>	
+		
+		<!-- STATE 2: Loader -->
+		
+		<div id="loading" class="content" ng-if="triggerState == loading"></div>
