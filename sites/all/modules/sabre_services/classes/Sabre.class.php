@@ -275,51 +275,38 @@ class Sabre
         //Execute operation
         try
         {
-            $obj = new stdClass();
-            $obj->AvailRequestSegment->GuestCounts->Count = $numpersonas;
-            //$obj->AvailRequestSegment->HotelSearchCriteria->Criterion = array();
-            foreach($hotelsCodes as $hotelCode) {
-                //$hr = new stdClass();
-                //$hr->HotelRef->HotelCode = $hotelCode;
-                if ($hotelCode == '0000000')continue;
-                $obj->AvailRequestSegment->HotelSearchCriteria->Criterion->HotelRef[]['HotelCode'] = $hotelCode;
-            }
-            $obj->AvailRequestSegment->TimeSpan->End = $end;
-            $obj->AvailRequestSegment->TimeSpan->Start = $start;
-            $obj->Version = '2.1.0';
-            dpm($obj);
-
-
-
             $args['AvailRequestSegment']['GuestCounts']['Count'] = $numpersonas;
-            foreach($hotelsCodes as $hotelCode)
-                $args['AvailRequestSegment']['HotelSearchCriteria']['Criterion'][]['HotelRef']['HotelCode'] = $hotelCode;
-            dpm($args);
+            foreach($hotelsCodes as $hotelCode) {
+                if ($hotelCode == '0000000')continue;
+                $args['AvailRequestSegment']['HotelSearchCriteria']['Criterion']['HotelRef'][]['HotelCode'] = $hotelCode;
+            }
             //$args['AvailRequestSegment']['HotelSearchCriteria']['Criterion']['HotelRef']['HotelCode'] = $hotelCode;
             //$args['AvailRequestSegment']['HotelSearchCriteria']['Criterion']['HotelRef']['HotelName'] = 'Park Hyatt New York';
             $args['AvailRequestSegment']['TimeSpan']['End'] = $end;
             $args['AvailRequestSegment']['TimeSpan']['Start'] = $start;
             $args['Version'] = '2.1.0';
 
-            $response = $service->OTA_HotelAvailRQ($obj);
+            $response = $service->OTA_HotelAvailRQ($args);
 
-            $xmlRequest = $service->endpoint()->client()->__getLastRequest();
-            dpm($this->ReadXML($xmlRequest));
+            //$xmlRequest = $service->endpoint()->client()->__getLastRequest();
+            //dpm($this->ReadXML($xmlRequest));
             //$xmlResponse = $service->endpoint()->client()->__getLastResponse();
             //dpm($this->ReadXML($xmlResponse));
 
-            dpm($response);
+            //dpm($response);
         }
         catch (Exception $e)
         {
             $response = $e->getMessage();
-            dpm($response);
+            //dpm($response);
         }
         finally
         {
             //Close sabre session
             $this->CloseSession($securityToken, $conversationId);
         }
+
+        return $response;
     }
 
 
@@ -450,6 +437,7 @@ class Sabre
 
         return $response;
     }
+
      
      public function HotelBookReservation($roomTypes, $hotelCode, $numPersonas, $star, $end)
      {

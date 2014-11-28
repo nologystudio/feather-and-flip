@@ -31,6 +31,33 @@ class Expedia
 		return $res;
 	}
 
+    public static function GetHotelsByCode($hotelCodes, $checkin, $checkout, $numAdults, $numChildren)
+    {
+        $service = wsclient_service_load('expedia__rest');
+        $service->settings['http_headers'] = array(
+            'Content-Type' => array('multipart/form-data'),
+        );
+
+        // Set roomGroup data
+        $roomGroup = array(
+            'Room' =>	array(
+                'numberOfAdults' 	=>	$numAdults,
+                'numberOfChildren' 	=>	$numChildren,
+                'childAges' 		=> 	'4,6'
+            )
+        );
+
+        $codes = implode(",",$hotelCodes);
+
+        $res = null;
+        try {
+            $res = $service->expedia__rest_hotel_list_by_hotel_codes($codes, $checkin, $checkout, json_encode($roomGroup));
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+        return $res;
+    }
+
 	/*
 	*	Get holtel info
 	*	@param hid

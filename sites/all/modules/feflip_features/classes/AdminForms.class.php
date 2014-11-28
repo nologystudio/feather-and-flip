@@ -151,9 +151,11 @@ class AdminForms
             try
             {
                 user_save(NULL, $new_user);
-                drupal_goto();
+
+                $result = self::signInUser($input_values, $error);
+
                 $error = '';
-                return true;
+                return $result;
             }
             catch (Exception $e)
             {
@@ -185,8 +187,6 @@ class AdminForms
             {
                 $form_state = array('uid' => $uid);
                 user_login_submit(array(), $form_state);
-                drupal_goto();
-
                 $error = '';
                 return true;
             }

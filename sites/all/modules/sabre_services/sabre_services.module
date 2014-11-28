@@ -72,9 +72,9 @@ function sabre_services_soap_test()
 	if (module_exists('wsclient'))
 	{
 		$sabreService = new Sabre;
-		$star = '2015-06-20';
-		$end = '2015-06-25';
-		$hotelCode = '0018368';
+		$star = '2015-12-01';
+		$end = '2015-12-05';
+		$hotelCode = '0050313';
 		//$roomTypes[] = array('numunit' => 1, 'code' => 'C1KPR8');
 		$numPersonas = 2;
         //$codes = Hotel::GetHotelCodesByDestination(30);
@@ -88,8 +88,17 @@ function sabre_services_soap_test()
             //$hotelInfo = $sabreService->HotelDescription($sessionInfo, $hotelCode, $numPersonas, $star, $end);
             //$result = $sabreService->TravelItineraryAddInfo($sessionInfo, 'Prueba', 'esto es una prueba');
         $codes = Hotel::GetHotelCodesByDestination(30);
+
         $result = $sabreService->ListHotelAvail($codes['sabre'],$numPersonas,$star,$end);
         dpm($result);
+
+        $result = $sabreService->HotelDescription($hotelCode, $numPersonas, $star, $end);
+        dpm($result);
+
+        //$res = Expedia::GetHotelsByCode($codes['expedia'],'12/01/2015', '12/05/2015', $numPersonas, 0);
+        //dpm($res);
+
+
             //$result = $sabreService->EndTransaction($sessionInfo);
             //dpm($result);
             //$result = $sabreService->TravelItineraryRead($sessionInfo);
