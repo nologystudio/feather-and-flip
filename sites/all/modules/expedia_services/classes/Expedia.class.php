@@ -82,7 +82,7 @@ class Expedia
 	*	Get room availability
 	*	@param hotelId, checkin, checkout, rooms, numAdults, numChildren
 	*/
-	public function RoomAvailability($hotelId, $checkin, $checkout, $rooms, $numAdults, $numChildren)
+	public static function RoomAvailability($hotelId, $checkin, $checkout, $rooms, $numAdults, $numChildren)
 	{
 		$service = wsclient_service_load('expedia__rest');
 		$service->settings['http_headers'] = array(
@@ -111,12 +111,12 @@ class Expedia
     *	Get room availability for list hotels
     *	@param hotelId, checkin, checkout, rooms, numAdults, numChildren
     */
-    public function ListRoomsAvailability($listhotelId, $checkin, $checkout, $rooms, $numAdults, $numChildren)
+    public static function ListRoomsAvailability($listhotelId, $checkin, $checkout, $rooms, $numAdults, $numChildren)
     {
         $res = array();
 
         foreach($listhotelId as $hotelId)
-            $res[] = $this->RoomAvailability($hotelId,$checkin,$checkout,$rooms, $numAdults, $numChildren);
+            $res[] = self::RoomAvailability($hotelId,$checkin,$checkout,$rooms, $numAdults, $numChildren);
 
         return $res;
     }

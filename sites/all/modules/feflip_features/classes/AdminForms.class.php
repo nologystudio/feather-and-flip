@@ -129,7 +129,6 @@ class AdminForms
     static function getHotelRates($values)
     {
         $sabreService = new Sabre;
-        $expediaService = new Expedia;
 
         $date = explode("/", $values['checkin']);
         $sabreChecking = $date[2].'-'. $date[0].'-'.$date[1];
@@ -138,7 +137,7 @@ class AdminForms
 
         return array(
             'sabre' => $sabreService->ListHotelAvail($values['sabreCodes'], $values['numAdults'], $sabreChecking, $sabreCheckout),
-            'expedia' => $expediaService->GetHotelsByCode($values['eanCodes'], $values['checkin'], $values['checkout'], $values['numRooms'], $values['numAdults'], $values['numChildren'])
+            'expedia' => Expedia::GetHotelsByCode($values['eanCodes'], $values['checkin'], $values['checkout'], $values['numRooms'], $values['numAdults'], $values['numChildren'])
         );
     }
 
@@ -150,7 +149,6 @@ class AdminForms
     static function getHotelDescription($values)
     {
         $sabreService = new Sabre;
-        $expediaService = new Expedia;
 
         $date = explode("/", $values['checkin']);
         $sabreChecking = $date[2].'-'. $date[0].'-'.$date[1];
@@ -159,7 +157,7 @@ class AdminForms
 
         return array(
             'sabre' => $sabreService->HotelDescription($values['hotelCode'], $values['numAdults'], $sabreChecking, $sabreCheckout),
-            'expedia' => $expediaService->RoomAvailability($values['eanCode'], $values['checkin'], $values['checkout'], $values['numRooms'], $values['numAdults'], $values['numChildren'])
+            'expedia' => Expedia::RoomAvailability($values['eanCode'], $values['checkin'], $values['checkout'], $values['numRooms'], $values['numAdults'], $values['numChildren'])
         );
     }
 
