@@ -386,20 +386,34 @@ function get_header_main_navigation_menu($destinations=NULL){
   
   $main_menu = menu_tree_all_data('menu-main-navigation');
   
-  foreach ($main_menu as $key => $menu_item) {
+  foreach ($main_menu as $key => $menu_item)
+  {
 
-    // if user is logged in and is the 'join-us' item, render user menu inside
-    if (strpos($key, '1703') !== FALSE) {
-      if (user_is_logged_in()){
-        $navigationMenu .= '<li><a href="'.url('user').'">My Account</a>';
-        // TODO: get user menu
-      } else {
+    // if user is logged in and is the 'my account' item, render user menu inside
+    if (strpos($key, '1703') !== FALSE)
+    {
+      if (user_is_logged_in())
+      {
+        $navigationMenu .= '<li><a href="'.url($menu_item['link']['link_path']).'">'.$menu_item['link']['link_title'].'</a>';
+          if(isset($menu_item['below']) && count($menu_item['below']) > 0) {
+              $navigationMenu .= '<ul id="itinerary-list">';
+              foreach ($menu_item['below'] as $submenuItem) {
+                  $navigationMenu .= '<li><a href="'. url($submenuItem['link']['link_path']).'">'.$submenuItem['link']['link_title'].'</a></li>';
+              }
+              $navigationMenu .= '</ul>';
+          }
+      }
+      /*
+      else
+      {
         $navigationMenu .= '<li><a href="'.url($menu_item['link']['link_path']).'">'.$menu_item['link']['link_title'].'</a>';
         // TODO: get feather and flip login form
         $form = drupal_get_form('user_login');
         $navigationMenu .= drupal_render($form);
-      }
-    } else {
+      }*/
+    }
+    else
+    {
 
       $navigationMenu .= '<li><a href="'.url($menu_item['link']['link_path']).'">'.$menu_item['link']['link_title'].'</a>';
         

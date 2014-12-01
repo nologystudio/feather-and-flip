@@ -31,6 +31,42 @@ class AdminForms
         return $output;
     }
 
+
+    /**
+     * Same function that drupal user.module, this function try load user by name if don't load a user try load by email
+     * @param $name
+     * @param $password
+     * @return bool
+     * @throws Exception
+     */
+    private static function user_authenticate($name, $password) {
+        $uid = FALSE;
+        if (!empty($name) && !empty($password)) {
+            $account = user_load_by_name($name);
+            if(!$account) $account = user_load_by_mail($name);
+            if ($account) {
+                // Allow alternate password hashing schemes.
+                require_once DRUPAL_ROOT . '/' . variable_get('password_inc', 'includes/password.inc');
+                if (user_check_password($password, $account)) {
+                    // Successful authentication.
+                    $uid = $account->uid;
+
+                    // Update user to new password scheme if needed.
+                    if (user_needs_new_hash($account)) {
+                        user_save($account, array('pass' => $password));
+                    }
+                }
+            }
+        }
+        return $uid;
+    }
+
+    /**
+     * Subscribe new user to mailchimp news letter
+     * @param $custom_data
+     * @param $errorMsg
+     * @return bool
+     */
     static function subscribeToNewsLetter($custom_data, &$errorMsg)
     {
         if (!isset($custom_data['user_email'])) 
@@ -84,7 +120,12 @@ class AdminForms
         }
     }
 
-    // Get hotel rates
+
+    /**
+     * Returns hotels rates of expedia and sabre (call webservice)
+     * @param $values
+     * @return array
+     */
     static function getHotelRates($values)
     {
         //$sabreService = new Sabre;
@@ -103,7 +144,11 @@ class AdminForms
         );
         
     }
-    
+
+    /**
+     * Returns all destinations of drupal data base
+     * @return array
+     */
     static function getDestinations()
     {
         $result = Destination::GetAllDestination();
@@ -181,7 +226,7 @@ class AdminForms
         $username = $input_values['userEmail'];
         $password = $input_values['userPassword'];
 
-        if($uid = user_authenticate($username, $password))
+        if($uid = self::user_authenticate($username, $password))
         {
             try
             {
