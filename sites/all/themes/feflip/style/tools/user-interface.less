@@ -138,56 +138,70 @@
 			{
 				&
 				{
-					#ui-set-button > .circle(@s,@fs,@bc,@grey-2);
-					
-					input[type="text"]
+					& > small
 					{
-						.reset();
-						.set-size(@s,@s);
-						.set-pos(absolute);
-						#font > .l-light(64px,@color-2);
+						.set-size(100%);
+						#font > .l-light(24px,@grey-2);
+						#align > .left;
+						margin: 0 0 @ref-padding/2 0;
+						display: block;
 						text-align: center;
+						text-transform: uppercase;
 					}
 					
-					nav
+					& > div.counter-wrapper
 					{
-						@size: 25px;
+						#ui-set-button > .circle(@s,@fs,@bc,@grey-2);
 						
-						.set-size(@size,2*@size);
-						.set-pos(absolute);
-						overflow: hidden;
-						display: block;
-						right: 20px;
-						top: 50%;
-						margin-top: -@size;
-						
-						button
+						input[type="text"]
 						{
 							.reset();
-							.set-size(@size,@size);
-							.animate-color();
-							#align > .left;
-							#font > .ic(20px,@color-2);
+							.set-size(@s,@s);
+							.set-pos(absolute);
+							#font > .l-light(64px,@color-2);
+							text-align: center;
+						}
+						
+						nav
+						{
+							@size: 25px;
 							
-							&[rel="plus"]
+							.set-size(@size,2*@size);
+							.set-pos(absolute);
+							overflow: hidden;
+							display: block;
+							right: 20px;
+							top: 50%;
+							margin-top: -@size;
+							
+							button
 							{
-								&:before
+								.reset();
+								.set-size(@size,@size);
+								.animate-color();
+								#align > .left;
+								#font > .ic(20px,@color-2);
+								
+								&[rel="plus"]
 								{
-									content: '\4c';
+									&:before
+									{
+										content: '\4c';
+									}
 								}
-							}
-							
-							&[rel="minus"]
-							{
-								&:before
+								
+								&[rel="minus"]
 								{
-									content: '\4b';
+									&:before
+									{
+										content: '\4b';
+									}
+								}	
+								
+								&:hover
+								{
+									color: @grey-1;
 								}
-							}	
-							
-							&:hover
-							{
-								color: @grey-1;
 							}
 						}
 					}

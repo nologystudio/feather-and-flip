@@ -21,46 +21,47 @@
 		
 		<!-- STATE 1: Sign-up/Log-in -->
 		
-		<div id="sign-up" class="content animated fadeInUp" ng-if="triggerState == 'signup'" ng-controller="SignUpCtrl">
+		<div id="sign-up" class="content animated fadeInUp" ng-if="triggerState == 'signup'" ng-controller="RegistrationCtrl">
 			<header>
 				<small ng-show="type == 'sign-up'">Already SIGNUP?<button id="sign-in" ng-click="switcher('in')">sign in now</button></small>
 			</header>
 			<!-- Callback messages -->
-			<div id="response-messages" ng-switch on="rMessage" ng-show="type == 'response'">
+			<div id="response-messages" ng-switch on="rMessage" ng-show="rMessage">
 				<h1 ng-switch-when="success">Success</h1>
 				<h1 ng-switch-when="error">Error</h1>
+				<h1 ng-switch-when="error-in-login">Error</h1>
 				<h1 ng-switch-default></h1>
 			</div>
 			<!-- Sign up form -->
-			<form id="sign-up-form" ng-show="type == 'sign-up'">
+			<form id="sign-up-form" name="sign-up-form" ng-show="type == 'sign-up'">
 				<header>
 					<h1>join our adventure</h1>
 					<h2>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</h2>
 				</header>
-				<input type="text"  name="user-name"  required value="" placeholder="First name"/> 
-				<input type="text"  name="user-last"  required value="" placeholder="Last name"/>
-				<input type="email" name="user-email" required value="" placeholder="Your email address"/>
+				<input type="text"  name="user-signup-name"  value="" placeholder="First name" ng-change="checkChangedInput()" ng-model="data.userName" required/> 
+				<input type="text"  name="user-signup-last"  value="" placeholder="Last name"  ng-change="checkChangedInput()" ng-model="data.userLast" required/>
+				<input type="email" name="user-signup-email" value="" placeholder="Your email address" ng-change="checkChangedInput()" ng-model="data.userEmail" required/>
 				<div class="wrapper-to-center">
-					<input type="password" name="user-password"  required value="" placeholder="Create password"/>
-					<input type="password" name="check-password" required value="" placeholder="Retype password"/>
+					<input type="password" name="user-signup-password" value="" placeholder="Create password" ng-change="checkChangedInput()" ng-model="data.userPassword" required/>
+					<input type="password" name="check-repassword"     value="" placeholder="Retype password" ng-change="checkChangedInput()" ng-model="data.userRepassword" required/>
 				</div>
 				<footer>
-					<input type="submit" value="sign up"/>
+					<input type="submit" value="sign up" ng-click="regSubmit('up')"/>
 					<small>we respect your privacy</small>
 				</footer>
 			</form>
 			<!-- Sign in form -->
-			<form id="sign-in-form" ng-show="type == 'sign-in'">
+			<form id="sign-in-form" name="sign-in-form" ng-show="type == 'sign-in'">
 				<header>
 					<h1>live the adventure</h1>
 					<h2>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</h2>
 				</header>
 				<div class="wrapper-to-center">
-					<input type="email"    name="user-email"    required value="" placeholder="Your email"/>
-					<input type="password" name="user-password" required value="" placeholder="Your password"/>
+					<input type="text"     name="user-email"    value="" placeholder="Your email"    ng-change="checkChangedInput()" ng-model="data.userEmail"    required/>
+					<input type="password" name="user-password" value="" placeholder="Your password" ng-change="checkChangedInput()" ng-model="data.userPassword" required/>
 				</div>
 				<footer>
-					<input type="submit" value="sign in"/>
+					<input type="submit" value="sign in" ng-click="regSubmit('in')"/>
 					<a id="new-password" href="">forgot your password?</a>
 				</footer>
 			</form>

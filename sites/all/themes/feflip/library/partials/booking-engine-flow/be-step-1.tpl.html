@@ -141,47 +141,55 @@
 			</div>
 			<button rel="next">continue</button>
 		</section>
-		<section id="who-is-going">
-			<header>who's going?</header>
-			<div class="wrapper">
-				<div id="adults" class="counter">
-					<input type="text" value="1" ng-model="adults" readonly required/>
-					<nav>
-						<button rel="plus"  ng-click="guestManager()"></button>
-						<button rel="minus" ng-click="guestManager()"></button>
-					</nav>
-				</div>
-				<div id="children" class="counter">
-					<input type="text" value="1" ng-model="children" readonly required/>
-					<nav>
-						<button rel="plus"  ng-click="guestManager()"></button>
-						<button rel="minus" ng-click="guestManager()"></button>
-					</nav>
-				</div>
-				<div id="children" class="counter">
-					<input type="text" value="1" ng-model="childrenUnderTwo" readonly required/>
-					<nav>
-						<button rel="plus"  ng-click="guestManager()"></button>
-						<button rel="minus" ng-click="guestManager()"></button>
-					</nav>
-				</div>
-			</div>
-			<button rel="next">continue</button>
-		</section>
 		<section id="rooms">
 			<header>number of rooms</header>
 			<div class="wrapper">
 				<div class="counter">
-					<input type="text" value="1" ng-model="numberOfRooms" readonly required/>
+					<div class="counter-wrapper">
+						<input type="text" value="{{bookingInfo.rooms.number}}" ng-model="bookingInfo.rooms.number" readonly required/>
+						<nav>
+							<button rel="plus"  ng-click="roomManager('+')"></button>
+							<button rel="minus" ng-click="roomManager('-')"></button>
+						</nav>
+					</div>
+				</div>
+			</div>
+			<button rel="next">continue</button>
+		</section>
+		<section id="who-is-going" ng-repeat="room in bookingInfo.rooms.info">
+			<h1 ng-if="$first">who's going?</h1>
+			<h2 ng-if="!$first">ROOM {{$index+1}}</h2>
+			<div class="wrapper">
+				<div id="adults" class="counter">
+					<small>Adults</small>
+					<div class="counter-wrapper">
+						<input type="text" value="{{room.adults.number}}" ng-model="room.adults.number" readonly required/>
+						<nav>
+							<button rel="plus"  ng-click="guestManager($index,'+')"></button>
+							<button rel="minus" ng-click="guestManager($index,'-')"></button>
+						</nav>
+					</div>
+				</div>
+				<div id="children" class="counter">
+					<small>Children</small>
+					<div class="counter-wrapper">
+						<input type="text" value="{{room.children.number}}" ng-model="room.children.number" readonly required/>
+						<nav>
+							<button rel="plus"  ng-click="guestManager($index,'+')"></button>
+							<button rel="minus" ng-click="guestManager($index,'-')"></button>
+						</nav>
+					</div>
+				</div>
+				<div id="children-age" class="counter" ng-repeat="child in room.children.number">
+					<!--<input type="text" value="1" ng-model="childrenUnderTwo" readonly required/>
 					<nav>
-						<button rel="plus"  ng-click="roomManager()"></button>
-						<button rel="minus" ng-click="roomManager()"></button>
-					</nav>
+						<button rel="plus"  ng-click="guestManager()"></button>
+						<button rel="minus" ng-click="guestManager()"></button>
+					</nav-->
 				</div>
 			</div>
 		</section>
-		
-		<footer>
+		<footer ng-show="bookingInfo.rooms.info[0].adults.number">
 			<button rel="confirm">go</button>
 		</footer>
 		

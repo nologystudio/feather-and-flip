@@ -5,15 +5,15 @@
         </header>
         <div class="feed-wrapper">
                 <div id="newsletter-signup" class="quick-entry" ng-controller="NewsletterCtrl" ng-switch="currentStatus">
-                        <h3>Join the adventure</h3>
-                        <hr>
-                        <h4 ng-switch-when="still">Sign up for our newsletter</h4>
-                        <form id="signupNewsLetter" method="POST">
-                                <small id="error" class="animated fadeInUp" ng-switch-when="error">We're sorry,<br>an error has occurred</small>
-                                <small id="success" class="animated fadeInUp" ng-switch-when="success" >Thanks!</small>
-                                <input id="user-email" type="email" ng-switch-when="still" placeholder="Your email address" value="{{userEmail}}" ng-model="userEmail" required/>
-                                <input type="submit" ng-switch-when="still" value="submit"/>
-                        </form>  
+                    <h3>Join the adventure</h3>
+                    <hr>
+                    <h4 ng-switch-when="still">Sign up for our newsletter</h4>
+                    <form>
+                        <small id="error" class="animated fadeInUp" ng-switch-when="error">We're sorry,<br>an error has occurred</small>
+                        <small id="success" class="animated fadeInUp" ng-switch-when="success">Thanks!</small>
+                        <input name="user-email" type="email" ng-switch-when="still" placeholder="Your email address" value="{{signUpData.userEmail}}" ng-changed="checkChangedInput()" ng-model="signUpData.userEmail" required/>
+                        <input type="submit" ng-switch-when="still" value="submit" ng-click="regSubmit()"/>
+                    </form>
                 </div>
                 <?php foreach ($view->result as $post) {
                         $title_slices = explode(':', $post->node_title);

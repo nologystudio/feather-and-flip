@@ -2005,12 +2005,19 @@
 							#align > .left;
 							padding: @ref-padding;
 							
-							header
+							& > header,
+							& > h1,
+							& > h2
 							{
 								.set-bgc(transparent);
 								#font > .l-light(24px,@color-2);
 								text-align: center;
 								text-transform: uppercase;
+							}
+							
+							& > h2
+							{
+								display: block;
 							}
 							
 							& > div.wrapper
@@ -2022,8 +2029,10 @@
 							
 								div.counter
 								{
+									.set-size(150px);
 									#ui-set-input > .counter();
 									margin: 0 @ref-padding/2;
+									#align > .left;
 								}
 							}
 							
@@ -2074,7 +2083,7 @@
 								}
 							}
 							
-							&[id="who-is-going"]
+							&[id="rooms"]
 							{
 								.set-bgc(white);
 								
@@ -2087,7 +2096,7 @@
 								}
 							}
 							
-							&[id="rooms"]
+							&[id="who-is-going"]
 							{
 								.set-bgc(@color-0);
 								
@@ -2097,6 +2106,11 @@
 									{
 										border-color: @warning-color !important;
 									}
+								}
+								
+								& + section[id="who-is-going"]
+								{
+									border-top: solid 1px @color-1;
 								}
 							}
 							
@@ -2635,6 +2649,7 @@
 						&[type="password"]
 						{
 							#ui-set-input > .input-text(@global-color,16px,@color-1);
+							border: solid 1px @global-color;
 						}
 						
 						&[type="submit"]
@@ -2649,7 +2664,7 @@
 						&.warning
 						{
 							.set-placeholder-style(@warning-color);
-							border: solid 1px @warning-color;
+							border-color: @warning-color;
 							color: @warning-color;
 						}
 					}
