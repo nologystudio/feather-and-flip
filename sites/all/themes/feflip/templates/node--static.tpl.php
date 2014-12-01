@@ -5,7 +5,7 @@
 		<h1><?php echo $title; ?></h1>
 		<?php echo (isset($body[0]) ? $body[0]['safe_value'] : ''); ?>
 	</article>
-	<?php if (strpos($title, 'ABOUT') !== false): // Only for 'about us' page ?>
+	<?php if (strpos(strtoupper($title), 'ABOUT') !== false): // Only for 'about us' page ?>
 		<article id="who-we-are">
 			<h2>Who we are</h2>
 			<ul>

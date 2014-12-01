@@ -128,21 +128,39 @@ class AdminForms
      */
     static function getHotelRates($values)
     {
-        //$sabreService = new Sabre;
+        $sabreService = new Sabre;
         $expediaService = new Expedia;
-        
-        /*
+
         $date = explode("/", $values['checkin']);
         $sabreChecking = $date[2].'-'. $date[0].'-'.$date[1];
         $date = explode("/", $values['checkout']);
         $sabreCheckout = $date[2].'-'. $date[0].'-'.$date[1];
-        */
-        
+
         return array(
-            //'sabre' => $sabreService->HotelDescription($values['hotelCode'], $values['numAdults'], $sabreChecking, $sabreCheckout),
+            'sabre' => $sabreService->ListHotelAvail($values['sabreCodes'], $values['numAdults'], $sabreChecking, $sabreCheckout),
+            'expedia' => $expediaService->GetHotelsByCode($values['eanCodes'], $values['checkin'], $values['checkout'], $values['numRooms'], $values['numAdults'], $values['numChildren'])
+        );
+    }
+
+    /**
+     * Returns rooms description of hotels (call webservice)
+     * @param $values
+     * @return array
+     */
+    static function getHotelDescription($values)
+    {
+        $sabreService = new Sabre;
+        $expediaService = new Expedia;
+
+        $date = explode("/", $values['checkin']);
+        $sabreChecking = $date[2].'-'. $date[0].'-'.$date[1];
+        $date = explode("/", $values['checkout']);
+        $sabreCheckout = $date[2].'-'. $date[0].'-'.$date[1];
+
+        return array(
+            'sabre' => $sabreService->HotelDescription($values['hotelCode'], $values['numAdults'], $sabreChecking, $sabreCheckout),
             'expedia' => $expediaService->RoomAvailability($values['eanCode'], $values['checkin'], $values['checkout'], $values['numRooms'], $values['numAdults'], $values['numChildren'])
         );
-        
     }
 
     /**

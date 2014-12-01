@@ -44,10 +44,23 @@
 				$result = AdminForms::getDestinations();
 				echo json_encode($result);
 				break;
-			case 'hotelRates': 
-				$result = AdminForms::getHotelRates($input_values);
+			case 'hotelRates':
+                $destination = $input_values['destination'];
+				//Get hotels code by destination
+                $codes = Hotel::GetHotelCodesByDestination($destination);
+                //Pass sabre and ean code by parameters
+                $input_values['sabreCodes'] = $codes['sabre'];
+                $input_values['eanCodes'] = $codes['expedia'];
+                //Web service call
+                $result = AdminForms::getHotelRates($input_values);
 				echo json_encode($result);
 				break;
+            case 'hotelDescription':
+                $result = AdminForms::getHotelDescription($input_values);
+                echo json_encode($result);
+                break;
+            case 'hotelBooking':
+                break;
 			case 'newsletterForm':
 			    // Connect with mailchimp library
 			    if (AdminForms::subscribeToNewsLetter($input_values, $error))
