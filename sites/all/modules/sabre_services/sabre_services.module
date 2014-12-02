@@ -72,8 +72,8 @@ function sabre_services_soap_test()
 	if (module_exists('wsclient'))
 	{
 		$sabreService = new Sabre;
-		$star = '2015-12-01';
-		$end = '2015-12-05';
+		$star = '2015-06-01';
+		$end = '2015-06-05';
 		$hotelCode = '0050313';
 		//$roomTypes[] = array('numunit' => 1, 'code' => 'C1KPR8');
 		$numPersonas = 2;

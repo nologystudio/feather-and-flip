@@ -276,12 +276,12 @@ class Sabre
         try
         {
             $args['AvailRequestSegment']['GuestCounts']['Count'] = $numpersonas;
+
             foreach($hotelsCodes as $hotelCode) {
                 if ($hotelCode == '0000000')continue;
                 $args['AvailRequestSegment']['HotelSearchCriteria']['Criterion']['HotelRef'][]['HotelCode'] = $hotelCode;
             }
-            //$args['AvailRequestSegment']['HotelSearchCriteria']['Criterion']['HotelRef']['HotelCode'] = $hotelCode;
-            //$args['AvailRequestSegment']['HotelSearchCriteria']['Criterion']['HotelRef']['HotelName'] = 'Park Hyatt New York';
+
             $args['AvailRequestSegment']['TimeSpan']['End'] = $end;
             $args['AvailRequestSegment']['TimeSpan']['Start'] = $start;
             $args['Version'] = '2.1.0';
@@ -354,8 +354,8 @@ class Sabre
             
             //$xmlRequest = $service->endpoint()->client()->__getLastRequest();
             //dpm($this->ReadXML($xmlRequest));
-            //$xmlResponse = $service->endpoint()->client()->__getLastResponse();
-            //dpm($this->ReadXML($xmlResponse));
+            $xmlResponse = $service->endpoint()->client()->__getLastResponse();
+            dpm($this->ReadXML($xmlResponse));
             
             //dpm($response);
         }

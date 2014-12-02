@@ -4,43 +4,43 @@
  * Add body classes if certain regions have content.
  */
 function feflip_preprocess_html(&$variables) {
-        /*
-        $productionURL  = 'feather+flip.com';
-        $uriSplitter    = explode('/',$_SERVER['REQUEST_URI']);
-        $url            = ($_SERVER['HTTP_HOST'] == $productionURL) ? '' : $uriSplitter[1].'/sites/all/themes/feflip'; 
-        */
-        $relativePath   = '/sites/all/themes/feflip/';//$url.'/';
-          
-        variable_set('relativePath', $relativePath);
-        // AboutUs->nid=27; FAQ->nid=28
-        $static_nodes = array('html__node__27', 'html__node__28', 'html__node__86', 'html__node__87', 'html__node__88', 'html__node__89');
-        $arg = arg();
+    /*
+    $productionURL  = 'feather+flip.com';
+    $uriSplitter    = explode('/',$_SERVER['REQUEST_URI']);
+    $url            = ($_SERVER['HTTP_HOST'] == $productionURL) ? '' : $uriSplitter[1].'/sites/all/themes/feflip';
+    */
+    $relativePath   = '/sites/all/themes/feflip/';//$url.'/';
 
-        variable_set('pageID', 'global');
+    variable_set('relativePath', $relativePath);
+    // AboutUs->nid=27; FAQ->nid=28
+    $static_nodes = array('html__node__27', 'html__node__28', 'html__node__86', 'html__node__87', 'html__node__88', 'html__node__89');
+    $arg = arg();
+
+    variable_set('pageID', 'global');
         
 	if (drupal_is_front_page())
-	    variable_set('pageID', 'home');
-        else if (isset($arg[2]) && $arg[2] == 'hotel-reviews')
-            variable_set('pageID', 'hotel-reviews');
-        else if (isset($arg[2]) && $arg[2] == 'itinerary')
-            variable_set('pageID', 'itinerary');
-        else if (isset($arg[0]) && $arg[0] == 'map-it')
-           variable_set('pageID', 'map-it');           
-        else if (array_search('node-type-hotel', $variables['classes_array']) !== false)    
-            variable_set('pageID', 'hotel');
-        else if (isset($arg[0]) && $arg[0] == 'travel-journal')
-            variable_set('pageID', 'travel-journal');
-        else{
-          
-          foreach($variables['theme_hook_suggestions'] as $item)
+        variable_set('pageID', 'home');
+    else if (isset($arg[2]) && $arg[2] == 'hotel-reviews')
+        variable_set('pageID', 'hotel-reviews');
+    else if (isset($arg[2]) && $arg[2] == 'itinerary')
+        variable_set('pageID', 'itinerary');
+    else if (isset($arg[0]) && $arg[0] == 'map-it')
+       variable_set('pageID', 'map-it');
+    else if (array_search('node-type-hotel', $variables['classes_array']) !== false)
+        variable_set('pageID', 'hotel');
+    else if (isset($arg[0]) && $arg[0] == 'travel-journal')
+        variable_set('pageID', 'travel-journal');
+    else{
+
+      foreach($variables['theme_hook_suggestions'] as $item)
+      {
+          if (array_search($item, $static_nodes) !== false)
           {
-              if (array_search($item, $static_nodes) !== false)
-              {
-                  variable_set('pageID', 'static');
-                  break;
-              }
+              variable_set('pageID', 'static');
+              break;
           }
-        }
+      }
+    }
 }
 
 
@@ -87,6 +87,20 @@ function feflip_process_maintenance_page(&$variables) {
     // If toggle_site_slogan is FALSE, the site_slogan will be empty, so we rebuild it.
     $variables['site_slogan'] = filter_xss_admin(variable_get('site_slogan', ''));
   }
+}
+
+function feflip_preprocess_user_profile(&$variables)
+{
+    if(isset($variables['user'])) {
+        $loadUser = user_load($variables['user']->uid);
+        $variables['loadUser'] = $loadUser;
+    }
+    $images = array();
+    $images[] = array('url' => 'http://placehold.it/1280x800',
+        'text' => 'User profile',
+        'size' => getimagesize('http://placehold.it/1280x800'));
+    $variables['slideImages'] = $images;
+    $variables['main_navigation'] = get_header_main_navigation_menu();
 }
 
 /**
