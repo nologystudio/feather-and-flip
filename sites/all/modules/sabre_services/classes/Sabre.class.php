@@ -318,10 +318,10 @@ class Sabre
      * @param $end
      * @return string
      */
-    public function HotelDescription($hotelCode, $numpersonas, $start, $end)
+    public function HotelDescription($sessionInfo,$hotelCode, $numpersonas, $start, $end)
      {
         //Open session with sabre
-        $sessionInfo = $this->CreateSession();
+        //$sessionInfo = $this->CreateSession();
         $securityToken = $sessionInfo['SecurityToken'];
         $conversationId = $sessionInfo['ConversationId'];
         
@@ -367,82 +367,18 @@ class Sabre
         finally
         {
             //Close sabre session
-            $this->CloseSession($securityToken, $conversationId);
+            //$this->CloseSession($securityToken, $conversationId);
         }
         
         return $response;
      }
 
-    /**
-     * Returns array hotels description
-     * @param $hotelsCodes
-     * @param $numpersonas
-     * @param $start
-     * @param $end
-     * @return array
-     */
-    public function ListHotelDescription($hotelsCodes, $numpersonas, $start, $end)
-    {
-        //Open session with sabre
-        $sessionInfo = $this->CreateSession();
-        $securityToken = $sessionInfo['SecurityToken'];
-        $conversationId = $sessionInfo['ConversationId'];
-
-        //Load service
-        $service = wsclient_service_load('hoteldescription'.$this->TESTSUFFIX);
-
-        //Create headers and settings
-        $headers = array(
-            $this->Header_MessageHeader('HotelPropertyDescriptionLLSRQ', $conversationId),
-            $this->Header_SecurityToken($securityToken)
-        );
-
-        $service->settings['options']['trace'] = TRUE;
-        $service->settings['options']['cache_wsdl'] = WSDL_CACHE_NONE;
-        $service->settings['soap_headers'] = $headers;
-
-        $response = array();
-
-        //Execute operation
-        try
-        {
-            foreach($hotelsCodes as $code) {
-                $args['AvailRequestSegment']['GuestCounts']['Count'] = $numpersonas;
-                $args['AvailRequestSegment']['RateRange']['CurrencyCode'] = 'USD';
-                $args['AvailRequestSegment']['HotelSearchCriteria']['Criterion']['HotelRef']['HotelCode'] = $code;
-                $args['AvailRequestSegment']['TimeSpan']['End'] = $end;
-                $args['AvailRequestSegment']['TimeSpan']['Start'] = $start;
-                $args['Version'] = '2.1.0';
-
-                $response[$code] = $service->HotelPropertyDescriptionRQ($args);
-
-                //$xmlRequest = $service->endpoint()->client()->__getLastRequest();
-                //dpm($this->ReadXML($xmlRequest));
-                //$xmlResponse = $service->endpoint()->client()->__getLastResponse();
-                //dpm($this->ReadXML($xmlResponse));
-
-                //dpm($response);
-            }
-        }
-        catch (Exception $e)
-        {
-            $response[] = $e->getMessage();
-            //dpm($response);
-        }
-        finally
-        {
-            //Close sabre session
-            $this->CloseSession($securityToken, $conversationId);
-        }
-
-        return $response;
-    }
 
      
-     public function HotelBookReservation($roomTypes, $hotelCode, $numPersonas, $star, $end)
+     public function HotelBookReservation($sessionInfo,$roomTypes, $hotelCode, $numPersonas, $star, $end)
      {
         //Open session with sabre
-        $sessionInfo = $this->CreateSession();
+        //$sessionInfo = $this->CreateSession();
         $securityToken = $sessionInfo['SecurityToken'];
         $conversationId = $sessionInfo['ConversationId'];
         
@@ -458,35 +394,38 @@ class Sabre
         $service->settings['options']['trace'] = TRUE;
         $service->settings['options']['cache_wsdl'] = WSDL_CACHE_NONE;        
         $service->settings['soap_headers'] = $headers;
-        
+
+         $response = '';
         //Execute operation
         try
         {            
             $args = array();
-            $args['Hotel']['BasicPropertyInfo']['HotelCode'] = $hotelCode;
-            $args['Hotel']['BasicPropertyInfo']['ConfirmationNumber'] = 'ABC123';
-    
+            $args['Hotel']['BasicPropertyInfo']['RPH'] = '1';
+            //$args['Hotel']['BasicPropertyInfo']['HotelCode'] = $hotelCode;
+            //$args['Hotel']['BasicPropertyInfo']['ConfirmationNumber'] = 'ABC123';
+
+
             $args['Hotel']['Guarantee']['Type'] = 'GDPST';
-            $args['Hotel']['Guarantee']['CC_Info']['PaymentCard']['Code'] = 'AX';
+            /*
+            $args['Hotel']['Guarantee']['CC_Info']['PaymentCard']['Code'] = 'CA';
             $args['Hotel']['Guarantee']['CC_Info']['PaymentCard']['ExpireDate'] = '2015-12';
-            $args['Hotel']['Guarantee']['CC_Info']['PaymentCard']['Number'] = '1234567890';
+            $args['Hotel']['Guarantee']['CC_Info']['PaymentCard']['Number'] = '4111-1111-1111-1111';
             $args['Hotel']['Guarantee']['CC_Info']['PersonName']['Surname'] = 'TEST';
-            
+            */
+
             $args['Hotel']['RoomType']['NumberOfUnits'] = $roomTypes[0]['numunit'];
-            $args['Hotel']['RoomType']['RoomTypeCode'] = $roomTypes[0]['code'];
-            $args['Hotel']['GuestCounts']['Count'] = $numPersonas;
-            $args['Hotel']['TimeSpan']['Start'] = $star;
-            $args['Hotel']['TimeSpan']['End'] = $end;
+            //$args['Hotel']['RoomType']['RoomTypeCode'] = $roomTypes[0]['code'];
+            //$args['Hotel']['GuestCounts']['Count'] = $numPersonas;
+            //$args['Hotel']['TimeSpan']['Start'] = $star;
+            //$args['Hotel']['TimeSpan']['End'] = $end;
             $args['Version'] = '2.1.0';
-            
+
             $response = $service->OTA_HotelResRQ($args);
             
             $xmlRequest = $service->endpoint()->client()->__getLastRequest();
             dpm($this->ReadXML($xmlRequest));
-            //$xmlResponse = $service->endpoint()->client()->__getLastResponse();
-            //dpm($this->ReadXML($xmlResponse));
-            
-            dpm($response);
+            $xmlResponse = $service->endpoint()->client()->__getLastResponse();
+            dpm($this->ReadXML($xmlResponse));
 
         }
         catch (Exception $e)
@@ -497,8 +436,10 @@ class Sabre
         finally
         {
             //Close sabre session
-            $this->CloseSession($securityToken, $conversationId);
-        }        
+            //$this->CloseSession($securityToken, $conversationId);
+        }
+
+         return $response;
      }
      
      public function HotelModifyReservation()

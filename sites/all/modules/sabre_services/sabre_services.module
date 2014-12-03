@@ -75,7 +75,7 @@ function sabre_services_soap_test()
 		$star = '2015-06-01';
 		$end = '2015-06-05';
 		$hotelCode = '0050313';
-		//$roomTypes[] = array('numunit' => 1, 'code' => 'C1KPR8');
+		$roomTypes[] = array('numunit' => 1, 'code' => 'C1KPR8');
 		$numPersonas = 2;
         //$codes = Hotel::GetHotelCodesByDestination(30);
         //dpm($codes);
@@ -87,13 +87,25 @@ function sabre_services_soap_test()
             //$sessionInfo = $sabreService->CreateSession();
             //$hotelInfo = $sabreService->HotelDescription($sessionInfo, $hotelCode, $numPersonas, $star, $end);
             //$result = $sabreService->TravelItineraryAddInfo($sessionInfo, 'Prueba', 'esto es una prueba');
-        $codes = Hotel::GetHotelCodesByDestination(30);
+        //$codes = Hotel::GetHotelCodesByDestination(30);
 
-        $result = $sabreService->ListHotelAvail($codes['sabre'],$numPersonas,$star,$end);
-        dpm($result);
+        //$result = $sabreService->ListHotelAvail($codes['sabre'],$numPersonas,$star,$end);
+        //dpm($result);
 
-        $result = $sabreService->HotelDescription($hotelCode, $numPersonas, $star, $end);
-        dpm($result);
+        $sessionInfo = $sabreService->CreateSession();
+
+        try {
+            $result = $sabreService->HotelDescription($sessionInfo,$hotelCode, $numPersonas, $star, $end);
+            dpm($result);
+
+            //$result = $sabreService->TravelItineraryRead($sessionInfo);
+            //dpm($result);
+
+            $result = $sabreService->HotelBookReservation($sessionInfo,$roomTypes,'0050313',$numPersonas, $star, $end );
+            dpm($result);
+        }
+        catch(Exception $e){}
+        finally{ $sabreService->CloseSession($sessionInfo['SecurityToken'],$sessionInfo['ConversationId']); }
 
         //$res = Expedia::GetHotelsByCode($codes['expedia'],'12/01/2015', '12/05/2015', $numPersonas, 0);
         //dpm($res);
