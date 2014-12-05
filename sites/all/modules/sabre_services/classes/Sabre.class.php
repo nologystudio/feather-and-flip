@@ -121,8 +121,7 @@ class Sabre
             $response = $service->SessionCreateRQ($this->IPCC);
             $xmlstr = $service->endpoint()->client()->__getLastResponse();
             //dpm($this->ReadXML($xmlstr ));
-            $xml = simplexml_load_string($xmlstr); 
-            $securityToken = (string)$xml->children('soap-env',true)->Header->children('wsse',true)->Security->BinarySecurityToken;
+            $xml = simplexml_load_string($xmlstr);
             $result = array(
                             'SecurityToken' => (string)$xml->children('soap-env',true)->Header->children('wsse',true)->Security->BinarySecurityToken,
                             'ConversationId'    => $response->ConversationId
@@ -130,8 +129,8 @@ class Sabre
         }
         catch (Exception $e)
         {
-            $response = $e->getMessage();
             $result = array();
+            $result['error'] = $e->getMessage();
         }        
         
         return $result;
@@ -140,13 +139,15 @@ class Sabre
 
     /**
      * Close a open session
-     * @param $securityToken
-     * @param $conversationId
+     * @param $sessionInfo
      * @return string
      */
-    public function CloseSession($securityToken, $conversationId)
+    public function CloseSession($sessionInfo)
      {
-        $service = wsclient_service_load('closesession'.$this->TESTSUFFIX);
+         $securityToken = $sessionInfo['SecurityToken'];
+         $conversationId = $sessionInfo['ConversationId'];
+
+         $service = wsclient_service_load('closesession'.$this->TESTSUFFIX);
         
         $headers = array(
             $this->Header_MessageHeader('SessionCloseRQ', $conversationId),
@@ -196,14 +197,15 @@ class Sabre
      * @param $numpersonas
      * @param $start
      * @param $end
+     * @return string
      */
     public function HotelAvail($hotelCityCode, $cityName, $numpersonas, $start, $end)
      {
         //Open session with sabre
         $sessionInfo = $this->CreateSession();
         $securityToken = $sessionInfo['SecurityToken'];
-        $conversationId = $sessionInfo['ConversationId'];        
-        
+        $conversationId = $sessionInfo['ConversationId'];
+
         //Load service
         $service = wsclient_service_load('hotelavail'.$this->TESTSUFFIX);
         
@@ -232,12 +234,10 @@ class Sabre
             
             $response = $service->OTA_HotelAvailRQ($args);
             
-            $xmlRequest = $service->endpoint()->client()->__getLastRequest();
-            dpm($this->ReadXML($xmlRequest));
+            //$xmlRequest = $service->endpoint()->client()->__getLastRequest();
+            //dpm($this->ReadXML($xmlRequest));
             //$xmlResponse = $service->endpoint()->client()->__getLastResponse();
             //dpm($this->ReadXML($xmlResponse));
-            
-            dpm($response);
         }
         catch (Exception $e)
         {
@@ -247,11 +247,20 @@ class Sabre
         finally
         {
             //Close sabre session
-            $this->CloseSession($securityToken, $conversationId);
+            $this->CloseSession($sessionInfo);
         }
+
+         return $response;
      }
 
 
+    /**
+     * @param $hotelsCodes
+     * @param $numpersonas
+     * @param $start
+     * @param $end
+     * @return string
+     */
     public function ListHotelAvail($hotelsCodes, $numpersonas, $start, $end)
     {
         //Open session with sabre
@@ -303,7 +312,7 @@ class Sabre
         finally
         {
             //Close sabre session
-            $this->CloseSession($securityToken, $conversationId);
+            $this->CloseSession($sessionInfo);
         }
 
         return $response;
@@ -354,8 +363,8 @@ class Sabre
             
             //$xmlRequest = $service->endpoint()->client()->__getLastRequest();
             //dpm($this->ReadXML($xmlRequest));
-            $xmlResponse = $service->endpoint()->client()->__getLastResponse();
-            dpm($this->ReadXML($xmlResponse));
+            //$xmlResponse = $service->endpoint()->client()->__getLastResponse();
+            //dpm($this->ReadXML($xmlResponse));
             
             //dpm($response);
         }
@@ -367,7 +376,7 @@ class Sabre
         finally
         {
             //Close sabre session
-            //$this->CloseSession($securityToken, $conversationId);
+            //$this->CloseSession($sessionInfo);
         }
         
         return $response;
@@ -405,13 +414,12 @@ class Sabre
             //$args['Hotel']['BasicPropertyInfo']['ConfirmationNumber'] = 'ABC123';
 
 
-            $args['Hotel']['Guarantee']['Type'] = 'GDPST';
-            /*
-            $args['Hotel']['Guarantee']['CC_Info']['PaymentCard']['Code'] = 'CA';
+            $args['Hotel']['Guarantee']['Type'] = 'G';
+            $args['Hotel']['Guarantee']['CC_Info']['PaymentCard']['Code'] = 'VI';
             $args['Hotel']['Guarantee']['CC_Info']['PaymentCard']['ExpireDate'] = '2015-12';
-            $args['Hotel']['Guarantee']['CC_Info']['PaymentCard']['Number'] = '4111-1111-1111-1111';
+            $args['Hotel']['Guarantee']['CC_Info']['PaymentCard']['Number'] = '4111111111111111';
             $args['Hotel']['Guarantee']['CC_Info']['PersonName']['Surname'] = 'TEST';
-            */
+
 
             $args['Hotel']['RoomType']['NumberOfUnits'] = $roomTypes[0]['numunit'];
             //$args['Hotel']['RoomType']['RoomTypeCode'] = $roomTypes[0]['code'];
@@ -436,7 +444,7 @@ class Sabre
         finally
         {
             //Close sabre session
-            //$this->CloseSession($securityToken, $conversationId);
+            //$this->CloseSession($sessionInfo);
         }
 
          return $response;
@@ -483,9 +491,58 @@ class Sabre
         finally
         {
             //Close sabre session
-            $this->CloseSession($securityToken, $conversationId);
+            $this->CloseSession($sessionInfo);
         }        
      }
+
+    public function CancelBooking($confirmationNumber)
+    {
+        //Open session with sabre
+        $sessionInfo = $this->CreateSession();
+        $securityToken = $sessionInfo['SecurityToken'];
+        $conversationId = $sessionInfo['ConversationId'];
+
+        //Load service
+        $service = wsclient_service_load('cancelbooking'.$this->TESTSUFFIX);
+
+        //Create headers and settings
+        $headers = array(
+            $this->Header_MessageHeader('OTA_CancelLLSRQ', $conversationId),
+            $this->Header_SecurityToken($securityToken)
+        );
+
+        $service->settings['options']['trace'] = TRUE;
+        $service->settings['options']['cache_wsdl'] = WSDL_CACHE_NONE;
+        $service->settings['soap_headers'] = $headers;
+
+        $response = '';
+
+        //Execute operation
+        try
+        {
+            $args = array();
+            $args['Segment']['Type'] = 'hotel';
+            $args['Segment']['Number'] = $confirmationNumber;
+            $response = $service->OTA_CancelRQ($args);
+
+            $xmlRequest = $service->endpoint()->client()->__getLastRequest();
+            dpm($this->ReadXML($xmlRequest));
+            $xmlResponse = $service->endpoint()->client()->__getLastResponse();
+            dpm($this->ReadXML($xmlResponse));
+        }
+        catch (Exception $e)
+        {
+            $response = $e->getMessage();
+            //dpm($response);
+        }
+        finally
+        {
+            //Close sabre session
+            $this->CloseSession($sessionInfo);
+        }
+
+        return $response;
+    }
      
      public function TravelItineraryAddInfo($sessionInfo, $name, $surname)
      {
@@ -517,6 +574,8 @@ class Sabre
             $args['AgencyInfo']['Address']['StateCountyProv']['StateCode'] = 'TX';
             $args['AgencyInfo']['Address']['StreetNmbr'] = '3150 SABRE DRIVE';
             */
+
+            $args['CustomerInfo']['Email']['Address'] = 'francisco@nologystudio.com';
             $args['CustomerInfo']['PersonName']['GivenName'] = $name;
             $args['CustomerInfo']['PersonName']['Surname'] = $surname;
             //$args['CustomerInfo']['PersonName']['GivenName'] = 'otro';
@@ -536,7 +595,6 @@ class Sabre
         catch (Exception $e)
         {
             $response = $e->getMessage();
-            //var_dump ($e);
         }
         
         return $response;
