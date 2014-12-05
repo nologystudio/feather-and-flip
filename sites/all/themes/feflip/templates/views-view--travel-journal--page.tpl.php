@@ -17,7 +17,7 @@
                 </div>
                 <?php foreach ($view->result as $post) {
                         $title_slices = explode(':', $post->node_title);
-                        if ((count($title_slices) > 1) && ($post->field_field_blog_category[0]['rendered']['#title'] == 'Hotel Reviews'))
+                        if ((count($title_slices) > 1) && (isset($post->field_field_blog_category[0])) && ($post->field_field_blog_category[0]['rendered']['#title'] == 'Hotel Reviews'))
                                 $type = 'review';
                         else
                                 $type = 'entry';
