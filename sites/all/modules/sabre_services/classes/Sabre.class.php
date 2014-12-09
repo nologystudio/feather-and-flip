@@ -430,10 +430,10 @@ class Sabre
 
             $response = $service->OTA_HotelResRQ($args);
             
-            $xmlRequest = $service->endpoint()->client()->__getLastRequest();
-            dpm($this->ReadXML($xmlRequest));
-            $xmlResponse = $service->endpoint()->client()->__getLastResponse();
-            dpm($this->ReadXML($xmlResponse));
+            //$xmlRequest = $service->endpoint()->client()->__getLastRequest();
+            //dpm($this->ReadXML($xmlRequest));
+            //$xmlResponse = $service->endpoint()->client()->__getLastResponse();
+            //dpm($this->ReadXML($xmlResponse));
 
         }
         catch (Exception $e)
@@ -495,10 +495,10 @@ class Sabre
         }        
      }
 
-    public function CancelBooking($confirmationNumber)
+    public function CancelBooking($sessionInfo)
     {
         //Open session with sabre
-        $sessionInfo = $this->CreateSession();
+        //$sessionInfo = $this->CreateSession();
         $securityToken = $sessionInfo['SecurityToken'];
         $conversationId = $sessionInfo['ConversationId'];
 
@@ -522,13 +522,14 @@ class Sabre
         {
             $args = array();
             $args['Segment']['Type'] = 'hotel';
-            $args['Segment']['Number'] = $confirmationNumber;
+            //$args['Segment']['Number'] = $confirmationNumber;
+            $args['Version'] = '2.0.0';
             $response = $service->OTA_CancelRQ($args);
 
-            $xmlRequest = $service->endpoint()->client()->__getLastRequest();
-            dpm($this->ReadXML($xmlRequest));
-            $xmlResponse = $service->endpoint()->client()->__getLastResponse();
-            dpm($this->ReadXML($xmlResponse));
+            //$xmlRequest = $service->endpoint()->client()->__getLastRequest();
+            //dpm($this->ReadXML($xmlRequest));
+            //$xmlResponse = $service->endpoint()->client()->__getLastResponse();
+            //dpm($this->ReadXML($xmlResponse));
         }
         catch (Exception $e)
         {
@@ -538,7 +539,7 @@ class Sabre
         finally
         {
             //Close sabre session
-            $this->CloseSession($sessionInfo);
+            //$this->CloseSession($sessionInfo);
         }
 
         return $response;
@@ -565,22 +566,11 @@ class Sabre
         try
         {  
             $args = array();       
-                  
-            /*
-            $args['AgencyInfo']['Address']['AddressLine'] = 'SABRE TRAVEL';
-            $args['AgencyInfo']['Address']['CityName'] = 'SOUTHLAKE';
-            $args['AgencyInfo']['Address']['CountryCode'] = 'US';
-            $args['AgencyInfo']['Address']['PostalCode'] = '76092';
-            $args['AgencyInfo']['Address']['StateCountyProv']['StateCode'] = 'TX';
-            $args['AgencyInfo']['Address']['StreetNmbr'] = '3150 SABRE DRIVE';
-            */
 
             $args['CustomerInfo']['Email']['Address'] = 'francisco@nologystudio.com';
             $args['CustomerInfo']['PersonName']['GivenName'] = $name;
             $args['CustomerInfo']['PersonName']['Surname'] = $surname;
-            //$args['CustomerInfo']['PersonName']['GivenName'] = 'otro';
-            //$args['CustomerInfo']['PersonName']['Surname'] = 'este es el otro';
-            
+
             $args['Version'] = '2.0.2';
             
             $response = $service->TravelItineraryAddInfoRQ($args);

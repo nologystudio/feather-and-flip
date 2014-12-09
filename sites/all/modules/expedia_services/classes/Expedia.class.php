@@ -121,6 +121,74 @@ class Expedia
         return $res;
     }
 
+    /**
+     * Booking of hotel
+     * @param $hotelId
+     * @param $checkin
+     * @param $checkout
+     * @param $numAdults
+     * @param $numChildren
+     * @param $roomcode
+     * @param $ratecode
+     * @param $numAdults
+     * @param $numChildren
+     * @param $firstname
+     * @param $lastname
+     * @param $email
+     * @param $phone
+     * @param $creditCardType
+     * @param $creaditCardNumber
+     * @param $creditCardIdentifier
+     * @param $creditCardExpirationMonth
+     * @param $creditCardExpirationYear
+     * @return null|string
+     */
+    public static function HotelBookReservation($hotelId, $checkin, $checkout,$numAdults, $numChildren, $roomcode, $ratecode,
+                                                $firstname, $lastname, $email, $phone, $creditCardType, $creaditCardNumber, $creditCardIdentifier,
+                                                $creditCardExpirationMonth, $creditCardExpirationYear)
+    {
+        $service = wsclient_service_load('expedia__rest');
+        $service->settings['http_headers'] = array(
+            'Content-Type' => array('multipart/form-data'),
+        );
+
+        // Set roomGroup data
+        $roomGroup = array(
+            'Room' =>	array(
+                'numberOfAdults' 	=>	$numAdults,
+                'numberOfChildren' 	=>	$numChildren,
+                'childAges' 		=> 	'4',
+                'firstName'         => $firstname,
+                'lastName'          => $lastname,
+                'bedTypeId'         => '14'
+            )
+        );
+
+        // Set ReservationInfo data
+        $reservationInfo = array(
+            'email'                     => $email,
+            'firstName'                 => $firstname,
+            'lastName'                  => $lastname,
+            'homePhone'                 => $phone,
+            'creditCardType'            => $creditCardType,
+            'creditCardNumber'          => $creaditCardNumber,
+            'creditCardIdentifier'      => $creditCardIdentifier,
+            'creditCardExpirationMonth' => $creditCardExpirationMonth,
+            'creditCardExpirationYear'  => $creditCardExpirationYear
+        );
+
+        $res = null;
+
+        try{
+            $res = $service->expedia__rest_room_reservation($hotelId, $checkin, $checkout, $roomcode, $ratecode, json_encode($roomGroup), json_encode($reservationInfo));
+        }
+        catch(Exception $e){
+            return $e->getMessage();
+        }
+
+        return $res;
+    }
+
 	/*
 	*	Extract EAN error message
 	*	@param Expedia object

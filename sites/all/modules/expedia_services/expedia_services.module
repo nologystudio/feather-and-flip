@@ -7,8 +7,8 @@
 *
 */
 
-// if (empty(arg(0)))
-// 	expedia_services_test();
+//if (empty(arg(0)))
+ //	expedia_services_test();
 /**
  * Tests wsclient connections
  *
@@ -17,6 +17,37 @@
 function expedia_services_test()
 {
 	if (module_exists('wsclient')):
+
+        //Tarjeta de Prueba: VISA 4111111111111111 expiration 06 / 2016 CVC 737
+
+        $star = '06/01/2015';
+        $end =  '06/05/2015';
+        $hotelId = '141150';
+        $numAdults = 2;
+        $numChildren = 1;
+        $roomTypeCode = '200388177';
+        $rateCode = '202507334';
+        $creditCardType = 'VI';
+        $creditCardNumber = '4111111111111111';
+        $creditCardIdentifier = '737';
+        $creditCardExpirationMonth = '06';
+        $creditCardExpirationYear = '2016';
+        $firsName = 'Manolito';
+        $lastName = 'Gafotas';
+        $email = 'francisco@nologystudio.com';
+        $phone = '928000000';
+
+
+
+        //$codes = Hotel::GetHotelCodesByDestination(30);
+        //$res = Expedia::GetHotelsByCode($codes['expedia'], $star, $end, 2, 1);
+        //$res = Expedia::RoomAvailability($hotelId, $star, $end, 1, $numAdults, $numChildren );
+        $res = Expedia::HotelBookReservation($hotelId, $star, $end, $numAdults, $numChildren, $roomTypeCode,$rateCode, $firsName, $lastName,
+            $email,$phone, $creditCardType, $creditCardNumber, $creditCardIdentifier, $creditCardExpirationMonth, $creditCardExpirationYear);
+        dpm($res);
+
+
+        /*
 		$res = Expedia::GetHotelInfo('238974');
 		if (isset($res['HotelListResponse']) && isset($res['HotelListResponse']['EanWsError'])){
 			$err = Expedia::GetErrorMessage($res);
@@ -26,6 +57,7 @@ function expedia_services_test()
 		}
 		if (isset($err))
 			dpm($err);
+		*/
 	endif;
 }
 
