@@ -179,8 +179,20 @@ class Expedia
 
         $res = null;
 
+        $service->settings['curl options'] = array(
+            CURLOPT_POSTFIELDS => array(
+                'hotelId' => $hotelId,
+                'arrivalDate' => $checkin,
+                'departureDate' => $checkout,
+                'roomTypeCode' => $roomcode,
+                'rateCode' => $ratecode,
+                'RoomGroup' => json_encode($roomGroup),
+                'ReservationInfo' => json_encode($reservationInfo))
+        );
+
         try{
-            $res = $service->expedia__rest_room_reservation($hotelId, $checkin, $checkout, $roomcode, $ratecode, json_encode($roomGroup), json_encode($reservationInfo));
+            //$res = $service->expedia__rest_room_reservation($hotelId, $checkin, $checkout, $roomcode, $ratecode, json_encode($roomGroup), json_encode($reservationInfo));
+            $res = $service->expedia__rest_room_reservation();
         }
         catch(Exception $e){
             return $e->getMessage();
