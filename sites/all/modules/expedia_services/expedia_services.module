@@ -8,7 +8,7 @@
 */
 
 //if (empty(arg(0)))
- //	expedia_services_test();
+// 	expedia_services_test();
 /**
  * Tests wsclient connections
  *
@@ -41,7 +41,8 @@ function expedia_services_test()
 
         //$codes = Hotel::GetHotelCodesByDestination(30);
         //$res = Expedia::GetHotelsByCode($codes['expedia'], $star, $end, 2, 1);
-        //$res = Expedia::RoomAvailability($hotelId, $star, $end, 1, $numAdults, $numChildren );
+        $res = Expedia::RoomAvailability($hotelId, $star, $end, 1, $numAdults, $numChildren );
+        dpm($res);
         $res = Expedia::HotelBookReservation($hotelId, $star, $end, $numAdults, $numChildren, $roomTypeCode,$rateCode, $firsName, $lastName,
             $email,$phone, $creditCardType, $creditCardNumber, $creditCardIdentifier, $creditCardExpirationMonth, $creditCardExpirationYear);
         dpm($res);

@@ -149,7 +149,8 @@ class Expedia
     {
         $service = wsclient_service_load('expedia__rest');
         $service->settings['http_headers'] = array(
-            'Content-Type' => array('multipart/form-data'),
+            //'Content-Type' => array('multipart/form-data'),
+            'Content-Type' => array('application/x-www-form-urlencoded'),
         );
 
         // Set roomGroup data
