@@ -27,7 +27,7 @@ class Itinerary
                  $imageurl = 'http://placehold.it/200x200';
 
                  if (count($route->field_image) > 0)
-                          $imageurl = image_style_url('large',$route->field_image['und'][0]['uri']);
+                          $imageurl = image_style_url('itinerary_route_icon',$route->field_image['und'][0]['uri']);
                   
                   $routes[] = array('name'            => isset($route->field_route_name['und'][0]['value']) ? $route->field_route_name['und'][0]['value'] : '',
                                     'description'     => isset($route->field_description['und'][0]['value']) ? $route->field_description['und'][0]['value'] : '',
