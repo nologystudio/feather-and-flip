@@ -29,6 +29,71 @@ function feflip_features_init() {
 // }
 
 /**
+ * Implements hook_search_api_autocomplete_types().
+ */
+function feflip_features_search_api_autocomplete_types() {
+  $types['feflip_features'] = array(
+    'name' => t('feflip_features searches'),
+    'description' => t('Searches provided by the <em>Feather+Flip Features</em> module.'),
+    'list searches' => 'feflip_features_list_autocomplete_searches',
+    'create query' => 'feflip_features_create_autocomplete_query',
+    // OPTIONAL – only if you want additional search-specific options, like for Views:
+    //'config form' => 'MODULE_autocomplete_config_form',
+  );
+  return $types;
+}
+
+function feflip_features_list_autocomplete_searches(SearchApiIndex $index) {
+  $ret = array();
+  // If your module only provides one search, it's simple:
+  $ret['feflip_features']['name'] = t('feflip_features search');
+  // Otherwise, loop over all defined searches:
+  // foreach (… as $search) {
+  //   // Remember to use a proper prefix to avoid conflicts.
+  //   $id = 'feflip_features_' . $search->id;
+  //   $ret[$id]['name'] = $search->label;
+  //   // If the searches have additional options/information:
+  //   $ret[$id]['options']['custom'] = $search->options;
+  //}
+  return $ret;
+}
+
+function feflip_features_create_autocomplete_query(SearchApiAutocompleteSearch $search, $complete, $incomplete) {
+  $query = search_api_query($search->index_id);
+  if ($complete) {
+    $query->keys($complete);
+  }
+  if (!empty($search->options['custom']['extra'])) {
+    list($f, $v) = explode('=', $search->options['custom']['extra'], 2);
+    $query->condition($f, $v);
+  }
+  if (!empty($search->options['custom']['user_filters'])) {
+    foreach (explode("\n", $search->options['custom']['user_filters']) as $line) {
+      list($f, $v) = explode('=', $line, 2);
+      $query->condition($f, $v);
+    }
+  }
+  return $query;
+}
+
+function feflip_features_search_form(array $form, array &$form_state) {
+  // …
+  $form['keys'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Enter destination or hotel'),
+  );
+  // If there's only one search in your module, with ID "MODULE".
+  // Otherwise, get the proper ID, as assigned in MODULE_list_autocomplete_searches(),
+  // for the current search.
+  $autocomplete_id = 'feflip_features';
+  $search = search_api_autocomplete_search_load($autocomplete_id);
+  if ($search && $search->enabled) {
+    $search->alterElement($form['keys']);
+  }
+
+  return $form;
+}
+/**
  * Implements hook_cron().
  */
 function feflip_features_cron() {

@@ -108,8 +108,13 @@
 						return false;
 					});					
 				});
-		</script>			
-		
+		</script>
+		<?php // Add autocomplete js files ?>
+	<!--	<script type="text/javascript" src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/misc/drupal.js"></script>
+		<script type="text/javascript" src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/misc/jquery.once.js?v=1.2"></script>
+		<script type="text/javascript" src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/misc/autocomplete.js?v=7.32"></script>
+		<script type="text/javascript" src="<?php echo drupal_get_path('module', 'search_api_autocomplete') . '/search_api_autocomplete.js'; ?>"></script>
+	-->	
 		</body>
 		
 		</html>

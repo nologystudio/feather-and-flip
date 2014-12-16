@@ -36,6 +36,8 @@
         
         <nav role="main-navigation" ng-controller="NavCtrl">
                 <div class="wrapper">
+                        <?php $form = drupal_get_form('feflip_features_search_form'); ?>
+                        <?php //echo drupal_render($form); ?>
                         <form id="search">
                                 <input type="text" placeholder="Enter destination or hotel" value=""/>
                                 <input type="submit" value=""/>
