@@ -1,18 +1,13 @@
         <!-- Header gallery -->
-        <div class="slideshow-gallery" ng-controller="SlideshowCtrl">
-                <button rel="left"></button>
-                <button rel="right"></button>
-                <div id="slideshow-state-bar">
-                        <button class="on"></button>
-                        <button></button>
-                </div>
-                <div class="slideshow-wrapper">
-                        <?php foreach($slideImages as $image){ ?>
-                        <article class="slideshow-item">
+        <div id="main-header-gallery" ng-controller="SlideshowCtrl">
+               <ul>
+                    <?php foreach($slideImages as $image){ ?>
+                     <li>
+                        <article>
                                 <figure>
                                         <img src="<?php echo $image['url'];?>" alt="" data-size="<?php echo $image['size'][0].'x'.$image['size'][1];?>"/>
                                 </figure>
-                                <div class="info-wrapper">
+                                <div class="info-wrapper animated fadeInUp">
                                         <a href="<?php if(isset($image['linkto'])) echo $image['linkto']; else echo ''; ?>" <?php if(isset($blank) && $blank){ echo 'target="_blank"'; } ?> rel="">
                                                 <h1><?php if(isset($image['text'])) echo $image['text']; else echo 'city, country'; ?></h1>
                                                 <?php if(isset($image['subtitle'])){ ?>
@@ -24,8 +19,15 @@
                                         </a>
                                 </div>
                         </article>
-                        <?php } ?>
-                </div>
+                     </li>
+                    <?php } ?>
+               </ul>
+            <button rel="left"></button>
+            <button rel="right"></button>
+            <!--<div id="slideshow-state-bar">
+                <button class="on"></button>
+                <button></button>
+            </div>-->
         </div>        
                 
         <?php 

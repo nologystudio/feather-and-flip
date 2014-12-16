@@ -135,7 +135,7 @@
 		body > header
 		{
 			.set-size(@global-width,@header-height);
-			.set-pos(fixed);
+			.set-pos(absolute);
 			.set-bg(transparent,'@{media-url}bgs/header-black-gradient.png',repeat,center,top);
 			.z(5);
 			.performance();
@@ -203,7 +203,7 @@
 			// | i | Style for the top gallery...
 			/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 			
-			& + div.slideshow-gallery
+			& + div[id$="-gallery"]
 			{
 				.set-size(100%,@header-gallery-height);
 				.ui-set-slideshow(@header-gallery-height);
@@ -222,11 +222,30 @@
 			@int-height: 60px;
 			
 			.set-size(100%,@nav-height);
-			.set-bg(fadeout(black,20%));
+			.set-bgc(fadeout(black,20%));
 			.box-sizing();
-			.z(1);
+			.animate-all();
+			.z(5);
 			margin-top: @header-gallery-height - @nav-height;
 			padding: @ref-padding 0;
+			
+			&.sticky
+			{
+				height: @nav-height/2;
+				padding: 0;
+				position: fixed;
+				top: -(@header-gallery-height - @nav-height);
+				
+				form[id="search"]
+				{
+					.scale(0.7);
+				}
+				
+				& + section[id]
+				{
+					margin-top: @header-gallery-height;
+				}
+			}
 			
 			div.wrapper
 			{
@@ -239,6 +258,7 @@
 					.reset();
 					.set-size(@grid-3-col);
 					.set-bg(fadeout(white,80%));
+					.animate-all();
 					#align > .left;
 					border-radius: 2 * @int-height;
 					
@@ -614,86 +634,162 @@
 			
 			&[id="start-your-journey"]
 			{
-				*[class$="-wrapper"]
+				& > div[id]
 				{
-					.set-size(@global-wrapper-width,100%);
-					#align > .center;
-					display: block;
+					@elPerPage: 5;
+					@h: @grid-5-col + 60px; 
 					
-					a
+					.set-size(@elPerPage * @grid-5-col,@h);
+					padding: 0;
+					margin: 0 auto;
+					overflow: hidden;
+					
+					button
 					{
-						@gutter: @ref-padding;
-						@border-weight: 2 * @unit;
+						@s: 100px;
 						
-						.set-size(@grid-5-col);
-						.box-sizing();
-						#align > .left;
-						display: block;
-						padding-bottom: @ref-padding;
+						.reset();
+						.set-size(@s,@s);
+						.set-pos(absolute);
+						.animate-all();
+						.performance();
+						.set-opacity(0);
+						#font > .ic(@s/2,@color-3,@s);
 						
-						figure
+						top: 50%;
+						text-transform: uppercase;
+						margin-top: -@s/2;
+						background-color: red;
+						z-index: 2;
+						cursor: pointer;
+						
+						&[rel="right"]
 						{
-							.ui-set-circle-mask(@grid-5-col - @gutter);
-							.performance();
-							.set-bgc(@grey-1);
-							margin: 0 @gutter/2;
-							overflow: hidden;
+							right: 0;
 							
-							// | i | This fix the issue with the mask in Safari...
-							-webkit-mask-image: -webkit-radial-gradient(circle,@grey-1,@grey-1);
-							
-							img
+							&:before
 							{
-								.set-opacity(1);
-								.animate-opacity();
-								#align > .left;
-								display: block;
-							}
-							
-							div.border
-							{
-								.set-size(100%,100%);
-								.ui-set-circle-mask(100%);
-								.set-pos(absolute);
-								.box-sizing();
-								.animate-all();
-								.set-opacity(0);
-								.set-bgc(transparent);
-								border: solid 1px @grey-1;
+								content: "\35";
 							}
 						}
 						
-						h1,h2,h3,h4,h5,h6
+						&[rel="left"]
 						{
-							.set-size(100%);
-							.animate-all();
-							#font > .l-light(18px,@color-2);
-							#align > .left;
-							text-align: center;
-							text-transform: uppercase;
-							display: block;
-							margin: @ref-padding/2 0;
+							left: 0;
+							
+							&:before
+							{
+								content: "\34";
+							}
 						}
 						
 						&:hover
 						{
-							figure
+							color: @grey-1;
+						}
+					}
+					
+					&:hover
+					{
+						& > button
+						{
+							.set-opacity(1);
+						}
+					}
+					
+					ul
+					{
+						.reset();
+						.set-size(auto,100%);
+						margin: 0;
+						padding: 0;
+						list-style: none;
+						z-index: 1;
+						
+						& > li
+						{
+							.set-size(@grid-5-col,100%);
+							.performance();
+							#align > .left;
+							display: block;
+							padding: 0;
+							
+							& > a
 							{
-								img
+								@gutter: @ref-padding;
+								@border-weight: 2 * @unit;
+								
+								.set-size(@grid-5-col);
+								.box-sizing();
+								#align > .left;
+								display: block;
+								padding-bottom: @ref-padding;
+								
+								figure
 								{
-									.set-opacity(0.5);
+									.ui-set-circle-mask(@grid-5-col - @gutter);
+									.performance();
+									.set-bgc(white);
+									margin: 0 @gutter/2;
+									overflow: hidden;
+									
+									// | i | This fix the issue with the mask in Safari...
+									-webkit-mask-image: -webkit-radial-gradient(circle,@grey-1,@grey-1);
+									
+									img
+									{
+										.set-opacity(1);
+										.animate-opacity();
+										#align > .left;
+										display: block;
+									}
+									
+									div.border
+									{
+										.set-size(100%,100%);
+										.ui-set-circle-mask(100%);
+										.set-pos(absolute);
+										.box-sizing();
+										.animate-all();
+										.set-opacity(0);
+										.set-bgc(transparent);
+										border: solid 1px @grey-1;
+									}
 								}
 								
-								div.border
+								h1,h2,h3,h4,h5,h6
 								{
-									.set-opacity(1);
-									border: solid @border-weight @grey-1;
+									.set-size(100%);
+									.animate-all();
+									#font > .l-light(18px,@color-2);
+									#align > .left;
+									text-align: center;
+									text-transform: uppercase;
+									display: block;
+									margin: @ref-padding/2 0;
 								}
-							}
-							
-							*
-							{
-								color: @grey-1;
+								
+								&:hover
+								{
+									figure
+									{
+										img
+										{
+											.set-opacity(0.5);
+										}
+										
+										div.border
+										{
+											.set-opacity(1);
+											border: solid @border-weight @grey-1;
+										}
+									}
+									
+									*
+									{
+										color: @grey-1;
+									}
+								}
 							}
 						}
 					}

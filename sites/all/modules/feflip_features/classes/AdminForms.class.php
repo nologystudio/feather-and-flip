@@ -150,13 +150,13 @@ class AdminForms
     {
         $sabreService = new Sabre;
         $sessionInfo = null;
+
         session_start();
         if (isset($_SESSION['sabreSession']))
-        {
             $sabreService->CloseSession($_SESSION['sabreSession']);
-            $sessionInfo = $sabreService->CreateSession();
-            $_SESSION['sabreSession'] = $sessionInfo;
-        }
+
+        $sessionInfo = $sabreService->CreateSession();
+        $_SESSION['sabreSession'] = $sessionInfo;
 
         $date = explode("/", $values['checkin']);
         $sabreChecking = $date[2].'-'. $date[0].'-'.$date[1];

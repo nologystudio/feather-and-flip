@@ -35,10 +35,14 @@
 		/* ~ Main navigation ~ */
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 		
-		ffAppControllers.controller('NavCtrl',['$scope',function($scope){
+		ffAppControllers.controller('NavCtrl',function($scope){
 			
-			var _o         = $('nav[role="main-navigation"] > div.wrapper > ul > li');
+			var _nav       = $('nav[role="main-navigation"]');
+			var _o         = _nav.find('div.wrapper > ul > li');
+			var heightRef  = 480;
 			var navOptions = _o.toArray();
+			
+			// | i | Dropdown effects...
 			
 			angular.forEach(navOptions,function(_l){
 				if(!angular.isUndefined(_l.children[1])){
@@ -48,37 +52,48 @@
 					
 					$(_l).on({
 						mouseenter: function(){
-							_target
+							_target.toggleClass(stClass);
+							/*_target
 							.removeClass()
 							.toggleClass(stClass)
-							.addClass('animated fadeInUp');
+							.addClass('animated fadeInUp');*/
   						}, 
   						mouseleave: function(){
-  							_target.addClass('fadeOutDown').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend',function(){
+  							/*_target.addClass('fadeOutDown').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend',function(){
 	  							_target.removeClass();
-  							});
+  							});*/
+  							_target.toggleClass(stClass);
   						}
 					});
 				}
 			});
-		}]);
+			
+			// | i | Sticky navigation trigger...
+			
+			$(window).scroll(function(){
+				if($(this).scrollTop() >= heightRef){
+					_nav.addClass('sticky');
+				}else
+					_nav.removeClass('sticky');
+			});
+		});
 		
 		/* ~ Body ~ */
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 		
-		ffAppControllers.controller('BodyCtrl',['$scope',function($scope){
+		ffAppControllers.controller('BodyCtrl',function($scope){
 			
 			$scope.user;
 		
-		}]);
+		});
 			
 		/* ~ Booking ~ */
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 			
-		ffAppControllers.controller('BookingEngineCtrl',['$scope',function($scope){
+		ffAppControllers.controller('BookingEngineCtrl',function($scope){
 			
 			$scope.path       = globalPartialPath + 'booking-engine-flow/';
-			$scope.state      = 1;
+			$scope.state      = 0;
 			$scope.booking    = globalPartialPath + 'booking-engine.tpl.html';
 			$scope.searchTpl  = $scope.path + 'be-search.tpl.html';
 			$scope.stepTpl    = {
@@ -173,17 +188,18 @@
 		/* ~ Step 5 ~ */
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 		
-		}]);
+		});
         
         /* ~ Map ~ */
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 		
-		ffAppControllers.controller('MapCtrl',['$scope','$http',function($scope,$http){
+		ffAppControllers.controller('MapCtrl',function($scope,$http){
 			
 			L.mapbox.accessToken = 'pk.eyJ1Ijoibm9sb2d5IiwiYSI6IkFBdm5aVEkifQ.ItKi4oQ1-kPhJhedS4QmNg';
 			
 			var map  = L.mapbox.map('map','nology.k0cicjhd',{
 				zoomControl: false,
+				attributionControl: false,
 			    tileLayer: {
 			        continuousWorld: false,
 			        noWrap: false
@@ -262,19 +278,19 @@
 			
 			$scope.retrieveDestinations();
 			
-		}]);
+		});
 		
-		ffAppControllers.controller('WeatherWidgetCtrl',['$scope','$element','$http',function($scope,$element,$http){
+		ffAppControllers.controller('WeatherWidgetCtrl',function($scope,$element,$http){
 			// http://openweathermap.org/api 
 			// ae91d7c77096ad3ad172e7859bab4c06
 			// http://api.openweathermap.org/data/2.5/weather?q=London,uk
 			// http://api.openweathermap.org/data/2.5/group?id=524901,703448,2643743&units=metric
-		}]);
+		});
 		
 		/* ~ Blog ~ */
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 		
-		ffAppControllers.controller('BlogCtrl',['$scope','$element',function($scope,$element){
+		ffAppControllers.controller('BlogCtrl',function($scope,$element){
 			
 			var grid    = $('.feed-wrapper');
 			var entries = $('#travel-journal').find('a.quick-entry').toArray();
@@ -298,12 +314,12 @@
 			grid.shuffle({
 				itemSelector: '.quick-entry'
 			});
-		}]);
+		});
 		
 		/* ~ Messenger ~ */
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 		
-		ffAppControllers.controller('MessengerCtrl',['$rootScope','$scope','$element',function($root,$scope,$element){
+		ffAppControllers.controller('MessengerCtrl',function($scope,$element){
 			
 			var messageType     = ['hidden','signup','loading'];
 			
@@ -332,12 +348,12 @@
 					$scope.triggerOverlay();
 				}
 			});
-		}]);
+		});
 		
 		/* ~ Sign-up ~ */
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 		
-		ffAppControllers.controller('RegistrationCtrl',['$scope','$http',function($scope,$http){
+		ffAppControllers.controller('RegistrationCtrl',function($scope,$http){
 			
 			$scope.response = ['success','error','error-in-login'];
 			$scope.types    = ['sign-up','sign-in','response']; // * formID: signin / signup 
@@ -405,12 +421,12 @@
 			// | i | Sign-up form...
 			// | i | Sign-in form...
 			// | i | Password recovery...
-		}]);
+		});
 		
 		/* ~ Newsletter ~ */
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 		
-		ffAppControllers.controller('NewsletterCtrl',['$scope','$element','$location','$http',function($scope,$element,$http){
+		ffAppControllers.controller('NewsletterCtrl',function($scope,$element,$http){
 			
 			var mcService = '';
 			var status    = ['still','success','error'];
@@ -459,13 +475,103 @@
 	            });
 			}
 			
-		}]);
+		});
 		
 		/* ~ Gallery ~ */
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 		
-		ffAppControllers.controller('SlideshowCtrl',['$scope','$element',function($scope,$element){
-		}]);
+		ffAppControllers.controller('SlideshowCtrl',function($scope,$element){
+			
+			$scope.galleryId = 1;
+			
+			var galleryFrame = $('#miss-slideshow');
+			
+			switch($scope.galleryId){
+				case 1:
+					galleryFrame.sly({
+						horizontal    : true,
+						itemNav       : 'basic',
+						smart         : true,
+						startAt       : 0,
+						scrollBy      : 1,
+						speed         : 300,
+						elasticBounds : 1,
+						next          : galleryFrame.find('*[rel="right"]'),
+						prev          : galleryFrame.find('*[rel="left"]')
+					});
+				break;
+				case 2:
+				break;
+			}
+			
+			/*var sly = new Sly('.gallery-wrapper',{
+			    horizontal: true, // Switch to horizontal mode.
+			
+			    // Item based navigation
+			    itemNav:        null,  // Item navigation type. Can be: 'basic', 'centered', 'forceCentered'.
+			    itemSelector:   null,  // Select only items that match this selector.
+			    smart:          false, // Repositions the activated item to help with further navigation.
+			    activateOn:     null,  // Activate an item on this event. Can be: 'click', 'mouseenter', ...
+			    activateMiddle: false, // Always activate the item in the middle of the FRAME. forceCentered only.
+			
+			    // Scrolling
+			    scrollSource: null,  // Element for catching the mouse wheel scrolling. Default is FRAME.
+			    scrollBy:     0,     // Pixels or items to move per one mouse scroll. 0 to disable scrolling.
+			    scrollHijack: 300,   // Milliseconds since last wheel event after which it is acceptable to hijack global scroll.
+			    scrollTrap:   false, // Don't bubble scrolling when hitting scrolling limits.
+			
+			    // Dragging
+			    dragSource:    null,  // Selector or DOM element for catching dragging events. Default is FRAME.
+			    mouseDragging: false, // Enable navigation by dragging the SLIDEE with mouse cursor.
+			    touchDragging: false, // Enable navigation by dragging the SLIDEE with touch events.
+			    releaseSwing:  false, // Ease out on dragging swing release.
+			    swingSpeed:    0.2,   // Swing synchronization speed, where: 1 = instant, 0 = infinite.
+			    elasticBounds: false, // Stretch SLIDEE position limits when dragging past FRAME boundaries.
+			    interactive:   null,  // Selector for special interactive elements.
+			
+			    // Scrollbar
+			    scrollBar:     null,  // Selector or DOM element for scrollbar container.
+			    dragHandle:    false, // Whether the scrollbar handle should be draggable.
+			    dynamicHandle: false, // Scrollbar handle represents the ratio between hidden and visible content.
+			    minHandleSize: 50,    // Minimal height or width (depends on sly direction) of a handle in pixels.
+			    clickBar:      false, // Enable navigation by clicking on scrollbar.
+			    syncSpeed:     0.5,   // Handle => SLIDEE synchronization speed, where: 1 = instant, 0 = infinite.
+			
+			    // Pagesbar
+			    pagesBar:       null, // Selector or DOM element for pages bar container.
+			    activatePageOn: null, // Event used to activate page. Can be: click, mouseenter, ...
+			    pageBuilder:          // Page item generator.
+			        function (index) {
+			            return '<li>' + (index + 1) + '</li>';
+			        },
+			
+			    // Navigation buttons
+			    forward:  null, // Selector or DOM element for "forward movement" button.
+			    backward: null, // Selector or DOM element for "backward movement" button.
+			    prev:     null, // Selector or DOM element for "previous item" button.
+			    next:     null, // Selector or DOM element for "next item" button.
+			    prevPage: null, // Selector or DOM element for "previous page" button.
+			    nextPage: null, // Selector or DOM element for "next page" button.
+			
+			    // Automated cycling
+			    cycleBy:       null,  // Enable automatic cycling by 'items' or 'pages'.
+			    cycleInterval: 5000,  // Delay between cycles in milliseconds.
+			    pauseOnHover:  false, // Pause cycling when mouse hovers over the FRAME.
+			    startPaused:   false, // Whether to start in paused sate.
+			
+			    // Mixed options
+			    moveBy:        300,     // Speed in pixels per second used by forward and backward buttons.
+			    speed:         0,       // Animations speed in milliseconds. 0 to disable animations.
+			    easing:        'swing', // Easing for duration based (tweening) animations.
+			    startAt:       0,       // Starting offset in pixels or items.
+			    keyboardNavBy: null,    // Enable keyboard navigation by 'items' or 'pages'.
+			
+			    // Classes
+			    draggedClass:  'dragged', // Class for dragged elements (like SLIDEE or scrollbar handle).
+			    activeClass:   'active',  // Class for active items and pages.
+			    disabledClass: 'disabled' // Class for disabled navigation elements.
+			});*/
+		});
 		
 		
 		

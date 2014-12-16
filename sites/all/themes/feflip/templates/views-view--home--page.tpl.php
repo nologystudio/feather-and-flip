@@ -1,17 +1,25 @@
 <?php include 'slideshowandmainmenu.html.php';?>
 
 <section id="start-your-journey">
-        <header><h3 class="simple">start your journey</h3></header>
-        <div class="gallery-wrapper">
-                <?php foreach($destinations as $destination){ ?>
-                <a href="<?php echo $destination['url'].'/itinerary';?>" rel="destination" class="gallery-item">
-                        <figure class="circle-mask">
-                                <img src="<?php echo $destination['image']['url'];?>" alt=""/>
-                                <div class="border"></div>
-                        </figure>
-                        <h2><?php echo $destination['destination']?></h2>
-                </a>
+        <header>
+            <h3 class="simple">start your journey</h3>
+        </header>
+        <div id="miss-slideshow" ng-controller="SlideshowCtrl" ng-init="gID = miss-slideshow">
+            <ul>
+            <?php foreach($destinations as $key => $destination){ ?>
+                <li>
+                    <a id="destination-<?php echo $key;?>" href="<?php echo $destination['url'].'/itinerary';?>" rel="destination">
+                            <figure class="circle-mask">
+                                    <img src="<?php echo $destination['image']['url'];?>" alt="<?php echo $destination['destination']?>"/>
+                                    <div class="border"></div>
+                            </figure>
+                            <h2><?php echo $destination['destination']?></h2>
+                    </a>
+                 </li>
                 <?php } ?>
+            </ul>
+            <button rel="left"></button>
+            <button rel="right"></button>
         </div>
         <footer>
                 <a href="" class="section-button"></a>
