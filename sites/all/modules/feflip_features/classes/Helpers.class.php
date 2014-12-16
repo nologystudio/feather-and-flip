@@ -200,6 +200,34 @@ class Helpers
     }
 
     /**
+     * Return info of users booking
+     * @return array
+     */
+    public static function  GetBookingInfoByUser()
+    {
+        global $user;
+
+        $query = new EntityFieldQuery;
+
+        $forms = $query->entityCondition('entity_type', 'entityform')
+            ->entityCondition('type', 'booking')
+            ->propertyCondition('uid', $user->uid)
+            ->execute();
+
+        $submisions = array();
+
+        if (isset($forms['entityform']))
+        {
+            $resultquery = $forms['entityform'];
+            $keys = array_keys($resultquery);
+            foreach ($keys as $key)
+                $submisions[] = entity_load_single('entityform', $key);
+        }
+
+        return $submisions;
+    }
+
+    /**
      * Change max length  of text field
      * @param $field_name
      * @param $new_length
