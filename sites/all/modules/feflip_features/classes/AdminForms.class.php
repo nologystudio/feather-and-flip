@@ -149,6 +149,14 @@ class AdminForms
     static function getHotelDescription($values)
     {
         $sabreService = new Sabre;
+        $sessionInfo = null;
+        session_start();
+        if (isset($_SESSION['sabreSession']))
+        {
+            $sabreService->CloseSession($_SESSION['sabreSession']);
+            $sessionInfo = $sabreService->CreateSession();
+            $_SESSION['sabreSession'] = $sessionInfo;
+        }
 
         $date = explode("/", $values['checkin']);
         $sabreChecking = $date[2].'-'. $date[0].'-'.$date[1];
@@ -156,7 +164,7 @@ class AdminForms
         $sabreCheckout = $date[2].'-'. $date[0].'-'.$date[1];
 
         return array(
-            'sabre' => $sabreService->HotelDescription($values['hotelCode'], $values['numAdults'], $sabreChecking, $sabreCheckout),
+            'sabre' => $sabreService->HotelDescription($sessionInfo, $values['hotelCode'], $values['numAdults'], $sabreChecking, $sabreCheckout),
             'expedia' => Expedia::RoomAvailability($values['eanCode'], $values['checkin'], $values['checkout'], $values['numRooms'], $values['numAdults'], $values['numChildren'])
         );
     }
