@@ -151,7 +151,6 @@ class AdminForms
         $sabreService = new Sabre;
         $sessionInfo = null;
 
-        session_start();
         if (isset($_SESSION['sabreSession']))
             $sabreService->CloseSession($_SESSION['sabreSession']);
 

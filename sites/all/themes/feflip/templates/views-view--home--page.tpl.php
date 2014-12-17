@@ -38,7 +38,7 @@
                         <ul>
                                 <li data-image=""><span>hotels</span>destination</li>
                                 <?php foreach($destinations as $destination){ ?>
-                                    <li data-image=""><span><?php echo $destination['numhotels']; ?></span><?php echo $destination['destination']; ?></li>
+                                    <li data-image=""><span><?php echo $destination['numhotels']; ?></span><a href="<?php echo $destination['url']. '/hotel-reviews';?>"><?php echo $destination['destination']; ?></a></li>
                                 <?php } ?>
                         </ul>
                         <figure>

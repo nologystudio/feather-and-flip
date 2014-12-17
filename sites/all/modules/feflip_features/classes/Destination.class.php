@@ -45,7 +45,8 @@ class Destination
          {
               $wrapper = entity_metadata_wrapper('node', $node);
               $image = Helpers::GetMainImageFromFieldCollection($node->field_images, $wrapper->title->value().', '.$wrapper->field_country->value(),'http://placehold.it/300x300', $style);//"http://placehold.it/300x300";
-              $destinations[] =  array( 'destination'   => $wrapper->title->value(),
+              $destinations[] =  array( 'id'            => $wrapper->nid,
+                                        'destination'   => $wrapper->title->value(),
                                         'withcountry'   => $wrapper->title->value().', '.$wrapper->field_country->value(),
                                         'continent'     => isset($continents[$wrapper->field_continent->value()]) ? $continents[$wrapper->field_continent->value()] : $wrapper->field_continent->value(),
                                         'url'           => url('node/'.$node->nid),
@@ -54,7 +55,8 @@ class Destination
                                         'latitude'      => $wrapper->field_latitude->value(),
                                         'longitude'     => $wrapper->field_longitude->value(),
                                         'description'   => isset($wrapper->field_description->value()['safe_value'])  ? $wrapper->field_description->value()['safe_value'] : '',
-                                        'maptourl'      => drupal_get_path_alias('node/'.$node->nid . '/hotel-reviews')
+                                        'maptourl'      => drupal_get_path_alias('node/'.$node->nid . '/hotel-reviews'),
+                                        'weatherid'     => $wrapper->field_weather_id->value()
                                       );
          }
          
