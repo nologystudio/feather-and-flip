@@ -130,9 +130,9 @@ class AdminForms
     {
         $sabreService = new Sabre;
 
-        $date = explode("/", $values['checkin']);
+        $date = explode("/", $values['checkIn']);
         $sabreChecking = $date[2].'-'. $date[0].'-'.$date[1];
-        $date = explode("/", $values['checkout']);
+        $date = explode("/", $values['checkOut']);
         $sabreCheckout = $date[2].'-'. $date[0].'-'.$date[1];
 
         // Sabre numAdults
@@ -145,7 +145,7 @@ class AdminForms
 
         return array(
             'sabre' => $sabreService->ListHotelAvail($values['sabreCodes'], $numAdults, $sabreChecking, $sabreCheckout),
-            'expedia' => Expedia::GetHotelsByCode($values['eanCodes'], $values['checkin'], $values['checkout'], $values['rooms']['info'])
+            'expedia' => Expedia::GetHotelsByCode($values['eanCodes'], $values['checkIn'], $values['checkOut'], $values['rooms']['info'])
         );
     }
 

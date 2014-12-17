@@ -24,6 +24,7 @@
 				$input_values[$key] = $value;
 		}
 
+
 		switch ($form_id) {
 			case 'signup':
                 $result = AdminForms::signUpUser($input_values, $error);
@@ -45,16 +46,34 @@
 				echo json_encode($result);
 				break;
 			case 'hotelRates':
+                $nextPage = '';
+                //Caso del home al hotelreview y del hotelreview al hotelreview
                 $destination = $input_values['destination'];
-				//Get hotels code by destination
-                $codes = Hotel::GetHotelCodesByDestination($destination);
+                if(isset($destination) && !empty($destination))
+                {
+                    $codes = Hotel::GetHotelCodesByDestination($destination);
+                    $next = drupal_get_path_alias('node/'. $destination . '/hotel-reviews');
+                }
+                //Caso del node hotel
+                else
+                {
+                    $codes['sabre'][] = $input_values['sabreCode'];
+                    $codes['expedia'][] = $input_values['expediaCode'];
+                }
+
+
                 //Pass sabre and ean code by parameters
                 $input_values['sabreCodes'] = $codes['sabre'];
                 $input_values['eanCodes'] = $codes['expedia'];
                 //Web service call
                 $result = AdminForms::getHotelRates($input_values);
-				echo json_encode($result);
-				break;
+
+                $_SESSION['hotelRates'] = $result;
+                $_SESSION['inputValues'] = $input_values;
+
+                echo $next;
+
+                break;
             case 'hotelDescription':
                 $result = AdminForms::getHotelDescription($input_values);
                 echo json_encode($result);
