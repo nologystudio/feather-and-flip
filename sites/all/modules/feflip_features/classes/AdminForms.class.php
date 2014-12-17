@@ -135,9 +135,17 @@ class AdminForms
         $date = explode("/", $values['checkout']);
         $sabreCheckout = $date[2].'-'. $date[0].'-'.$date[1];
 
+        // Sabre numAdults
+        $numAdults = 0;
+        foreach ($values['rooms']['info'] as $room) {
+            $numAdults += $room['adults'];
+            // adding children as adults
+            $numAdults += count($room['children']);
+        }
+
         return array(
-            'sabre' => $sabreService->ListHotelAvail($values['sabreCodes'], $values['numAdults'], $sabreChecking, $sabreCheckout),
-            'expedia' => Expedia::GetHotelsByCode($values['eanCodes'], $values['checkin'], $values['checkout'], $values['numRooms'], $values['numAdults'], $values['numChildren'], $values['childAges'])
+            'sabre' => $sabreService->ListHotelAvail($values['sabreCodes'], $numAdults, $sabreChecking, $sabreCheckout),
+            'expedia' => Expedia::GetHotelsByCode($values['eanCodes'], $values['checkin'], $values['checkout'], $values['rooms']['info'])
         );
     }
 
@@ -162,9 +170,17 @@ class AdminForms
         $date = explode("/", $values['checkout']);
         $sabreCheckout = $date[2].'-'. $date[0].'-'.$date[1];
 
+        // Sabre numAdults
+        $numAdults = 0;
+        foreach ($values['rooms']['info'] as $room) {
+            $numAdults += $room['adults'];
+            // adding children as adults
+            $numAdults += count($room['children']);
+        }
+
         return array(
-            'sabre' => $sabreService->HotelDescription($sessionInfo, $values['hotelCode'], $values['numAdults'], $sabreChecking, $sabreCheckout),
-            'expedia' => Expedia::RoomAvailability($values['eanCode'], $values['checkin'], $values['checkout'], $values['numRooms'], $values['numAdults'], $values['numChildren'])
+            'sabre' => $sabreService->HotelDescription($sessionInfo, $values['hotelCode'], $numAdults, $sabreChecking, $sabreCheckout),
+            'expedia' => Expedia::RoomAvailability($values['eanCode'], $values['checkin'], $values['checkout'], $values['rooms']['info'])
         );
     }
 

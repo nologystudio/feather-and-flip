@@ -31,21 +31,23 @@ class Expedia
 		return $res;
 	}
 
-    public static function GetHotelsByCode($hotelCodes, $checkin, $checkout, $numAdults, $numChildren, $childAges)
+    public static function GetHotelsByCode($hotelCodes, $checkin, $checkout, $roomConfig)
     {
         $service = wsclient_service_load('expedia__rest');
         $service->settings['http_headers'] = array(
             'Content-Type' => array('multipart/form-data'),
         );
 
-        // Set roomGroup data
-        $roomGroup = array(
-            'Room' =>	array(
-                'numberOfAdults' 	=>	$numAdults,
-                'numberOfChildren' 	=>	$numChildren,
-                'childAges' 		=> 	(isset($childAges) && count($childAges) > 0) ? implode(",",$childAges) : ''
-            )
-        );
+        // Parsing room configuration data
+        foreach ($roomConfig as $room) {
+            $roomGroup[] = array(
+                'Room' => array(
+                    'numberOfAdults'    => $room['adults'],
+                    'numberOfChildren'  => (isset($room['children']) && ($room['children'] > 0)) ? count($room['children']) : 0,
+                    'childAges'         => (isset($room['children']) && ($room['children'] > 0)) ? implode(',', $room['children']) : ''
+                )
+            );
+        }
 
         $codes = implode(",",$hotelCodes);
 
@@ -80,23 +82,25 @@ class Expedia
 
 	/*
 	*	Get room availability
-	*	@param hotelId, checkin, checkout, rooms, numAdults, numChildren
+	*	@param hotelId, checkin, checkout, roomConfig
 	*/
-	public static function RoomAvailability($hotelId, $checkin, $checkout, $rooms, $numAdults, $numChildren)
+	public static function RoomAvailability($hotelId, $checkin, $checkout, $roomConfig)
 	{
 		$service = wsclient_service_load('expedia__rest');
 		$service->settings['http_headers'] = array(
 			'Content-Type' => array('multipart/form-data'),
 		);
 
-		// Set roomGroup data
-		$roomGroup = array(
-			'Room' =>	array(
-				'numberOfAdults' 	=>	$numAdults,
-				'numberOfChildren' 	=>	$numChildren,
-				'childAges' 		=> 	'4,6'
-			)
-		);
+        // Parsing room configuration data
+        foreach ($roomConfig as $room) {
+            $roomGroup[] = array(
+                'Room' => array(
+                    'numberOfAdults'    => $room['adults'],
+                    'numberOfChildren'  => (isset($room['children']) && ($room['children'] > 0)) ? count($room['children']) : 0,
+                    'childAges'         => (isset($room['children']) && ($room['children'] > 0)) ? implode(',', $room['children']) : ''
+                )
+            );
+        }
 
 		$res = null;
 		try {
@@ -109,14 +113,14 @@ class Expedia
 
     /*
     *	Get room availability for list hotels
-    *	@param hotelId, checkin, checkout, rooms, numAdults, numChildren
+    *	@param hotelId, checkin, checkout, roomConfig
     */
-    public static function ListRoomsAvailability($listhotelId, $checkin, $checkout, $rooms, $numAdults, $numChildren)
+    public static function ListRoomsAvailability($listhotelId, $checkin, $checkout, $roomConfig)
     {
         $res = array();
 
         foreach($listhotelId as $hotelId)
-            $res[] = self::RoomAvailability($hotelId,$checkin,$checkout,$rooms, $numAdults, $numChildren);
+            $res[] = self::RoomAvailability($hotelId,$checkin,$checkout,$roomConfig);
 
         return $res;
     }
