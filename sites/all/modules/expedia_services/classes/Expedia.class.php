@@ -31,7 +31,7 @@ class Expedia
 		return $res;
 	}
 
-    public static function GetHotelsByCode($hotelCodes, $checkin, $checkout, $numAdults, $numChildren)
+    public static function GetHotelsByCode($hotelCodes, $checkin, $checkout, $numAdults, $numChildren, $childAges)
     {
         $service = wsclient_service_load('expedia__rest');
         $service->settings['http_headers'] = array(
@@ -43,7 +43,7 @@ class Expedia
             'Room' =>	array(
                 'numberOfAdults' 	=>	$numAdults,
                 'numberOfChildren' 	=>	$numChildren,
-                'childAges' 		=> 	'4,6'
+                'childAges' 		=> 	(isset($childAges) && count($childAges) > 0) ? implode(",",$childAges) : ''
             )
         );
 
@@ -188,7 +188,7 @@ class Expedia
                 'roomTypeCode' => $roomcode,
                 'rateCode' => $ratecode,
                 'RoomGroup' => json_encode($roomGroup),
-                'ReservationInfo' => json_encode($reservationInfo))
+                'ReservationInfo' => /*json_encode($reservationInfo)*/ implode(",",$reservationInfo))
         );
 
         try{

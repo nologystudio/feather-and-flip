@@ -60,7 +60,7 @@
                 </div>
         </div>
         <footer>
-                <a href="" class="section-button"></a>
+                <a href="/map-it" class="section-button">view all</a>
         </footer>
 </section>
 <?php

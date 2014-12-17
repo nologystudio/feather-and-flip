@@ -137,7 +137,7 @@ class AdminForms
 
         return array(
             'sabre' => $sabreService->ListHotelAvail($values['sabreCodes'], $values['numAdults'], $sabreChecking, $sabreCheckout),
-            'expedia' => Expedia::GetHotelsByCode($values['eanCodes'], $values['checkin'], $values['checkout'], $values['numRooms'], $values['numAdults'], $values['numChildren'])
+            'expedia' => Expedia::GetHotelsByCode($values['eanCodes'], $values['checkin'], $values['checkout'], $values['numRooms'], $values['numAdults'], $values['numChildren'], $values['childAges'])
         );
     }
 
