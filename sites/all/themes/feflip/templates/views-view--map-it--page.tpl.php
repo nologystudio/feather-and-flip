@@ -1,3 +1,4 @@
+<?php $hideSlide = true; ?>
 <?php include 'slideshowandmainmenu.html.php';?>
 
 <section id="map-it" class="full" ng-controller="MapCtrl">
@@ -39,9 +40,9 @@
                     <small class="animated fadeInUp">{{city.name}}</small>
                     <div class="info animated fadeInUp">
                                 <span class="icon">
-                                    <img src="media/weather/icons/{{city.weather[0].icon}}.png" alt="{{city.name}}"/>
+                                    <img src="/sites/all/themes/feflip/media/weather/icons/{{city.weather[0].icon}}.png" alt="{{city.name}}"/>
                                 </span>
-                        <span class="temp">{{city.main.temp | number:0}}°F</span>
+                        <span class="temp">{{((city.main.temp - 273.15) * 1.8 + 32) | number:0}}°F</span>
                     </div>
                 </li>
             </ul>
