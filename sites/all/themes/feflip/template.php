@@ -156,7 +156,7 @@ function feflip_preprocess_views_view(&$variables) {
     //$variables['home_dests'] = get_home_destinations();
     //$variables['home_dests_map'] = get_home_destinations('promote_to_map');
 
-    $variables['slideImages'] = Destination::GetImagesForHomeSlideShow('see hotels');
+    $variables['slideImages'] = Destination::GetImagesForHomeSlideShow('view hotels');
     $destinations = Destination::GetAllDestination();
     $variables['destinations'] = $destinations;
     $variables['travel_journal'] = views_embed_view('travel_journal', 'page');
@@ -213,7 +213,7 @@ function feflip_preprocess_views_view(&$variables) {
       $variables['slideImages'] = $images;
   }
   elseif($view->name == 'map_it' && $view->current_display == 'page'){
-    $variables['slideImages'] = Destination::GetImagesForHomeSlideShow('see hotels');
+    $variables['slideImages'] = Destination::GetImagesForHomeSlideShow('view hotels');
     $destinations = Destination::GetAllDestination();
     
     $destinationbycontinent = array();

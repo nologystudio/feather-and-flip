@@ -1,4 +1,3 @@
-<?php $hideSlide = true; ?>
 <?php include 'slideshowandmainmenu.html.php';?>
 
 <section id="map-it" class="full" ng-controller="MapCtrl">
