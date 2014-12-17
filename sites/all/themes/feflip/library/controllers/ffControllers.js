@@ -277,7 +277,7 @@
 					newMarker.properties.icon.iconUrl = '/sites/all/themes/feflip/media/icons/destination-map-pin.png';
 					newMarker.properties.image        = _d.image.url;
 					newMarker.properties.description  = _d.description;
-					newMarker.properties.url          = _d.url;
+					newMarker.properties.url          = _d.maptourl;
 					
 					console.log(_d);
 					

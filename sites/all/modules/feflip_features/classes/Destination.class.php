@@ -53,7 +53,8 @@ class Destination
                                         'numhotels'     => Hotel::NumHotelsByDestination($node->nid),
                                         'latitude'      => $wrapper->field_latitude->value(),
                                         'longitude'     => $wrapper->field_longitude->value(),
-                                        'description'   => isset($wrapper->field_description->value()['safe_value'])  ? $wrapper->field_description->value()['safe_value'] : '' 
+                                        'description'   => isset($wrapper->field_description->value()['safe_value'])  ? $wrapper->field_description->value()['safe_value'] : '',
+                                        'maptourl'      => drupal_get_path_alias('node/'.$node->nid . '/hotel-reviews')
                                       );
          }
          
