@@ -73,8 +73,7 @@
 			$(window).scroll(function(){
 				if($(this).scrollTop() >= heightRef){
 					_nav.addClass('sticky');
-				}else
-					_nav.removeClass('sticky');
+				}else _nav.removeClass('sticky');
 			});
 		});
 		
@@ -193,7 +192,7 @@
         /* ~ Map ~ */
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 		
-		ffAppControllers.controller('MapCtrl',function($scope,$http){
+		ffAppControllers.controller('MapCtrl',function($scope,$http,$timeout){
 			
 			L.mapbox.accessToken = 'pk.eyJ1Ijoibm9sb2d5IiwiYSI6IkFBdm5aVEkifQ.ItKi4oQ1-kPhJhedS4QmNg';
 			
@@ -206,36 +205,25 @@
 			    }
 			}).setView([40,0],2);
 			
-			map.dragging.disable();
+			//map.dragging.disable();
 			map.touchZoom.disable();
 			map.doubleClickZoom.disable();
 			map.scrollWheelZoom.disable();
 			// | i | Disable tap handler, if present.
-			if (map.tap) map.tap.disable();
+			if(map.tap) map.tap.disable();
 			
-			//var destLayer  = L.mapbox.featureLayer().addTo(map);
-			//var geoJson    = [];
-			/*var markerType = {
-			    "type": "Feature",
-			    "geometry": {
-			        "type": "Point",
-			        "coordinates": [-75.00, 40]
-			    },
-			    "properties": {
-			        "title": "Small astronaut",
-			        "icon" : {
-			            "iconUrl"     : "/mapbox.js/assets/images/astronaut1.png",
-			            "iconSize"    : [50, 50], // size of the icon
-			            "iconAnchor"  : [25, 25], // point of the icon which will correspond to marker's location
-			            "popupAnchor" : [0, -25], // point from which the popup should open relative to the iconAnchor
-			            "className"   : "dot"
-			        }
-			    }
-			}*/
+			var destLayer  = L.mapbox.featureLayer().addTo(map);
+			var geoJson    = [];
+			
+			var gFrame = $('#weather-carrousel');
+			var lBtn   = gFrame.find('*[rel="left"]');
+			var rBtn   = gFrame.find('*[rel="right"]');
 			
 			$scope.destinations = {};
+			$scope.weatherSpots = {};
 			
 			// | i | Retrieve destinations...
+			// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 			
 			$scope.retrieveDestinations = function(){
 				$http({
@@ -250,27 +238,125 @@
 	            success(function(_data){
 		            $scope.destinations = _data;
 		            $scope.addDestinations();
-	            }).
+		            $scope.getWeatherData();
+		        }).
 	            error(function(_data,_status){
 	            });
             }
             
             // | i | Add destination markers to map...
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 			
 			$scope.addDestinations = function(){
+				
+				var markerType = {
+				    type     : "Feature",
+				    geometry : {
+				        type        : "Point",
+				        coordinates : [0,0]
+				    },
+				    properties: {
+				        title : "",
+				        icon  : {
+				            iconUrl     : "",
+				            iconSize    : [38,47], // size of the icon
+				            iconAnchor  : [19,47], // point of the icon which will correspond to marker's location
+				            popupAnchor : [0,-10], // point from which the popup should open relative to the iconAnchor
+				            className   : "ff-Pin"
+				        }
+				    }
+				}
+				
 				angular.forEach($scope.destinations,function(_d){
-					L.marker([_d.latitude,_d.longitude],{
-					    icon: L.mapbox.marker.icon({
-					        'marker-size'   : 'large',
-					        'marker-symbol' : '',
-					        'marker-color'  : '#000'
-					    })
-					}).addTo(map);
+					
+					var newMarker = angular.copy(markerType);
+					
+					newMarker.geometry.coordinates[0] = _d.longitude;
+					newMarker.geometry.coordinates[1] = _d.latitude;
+					newMarker.properties.title        = _d.destination;
+					newMarker.properties.icon.iconUrl = '/sites/all/themes/feflip/media/icons/destination-map-pin.png';
+					newMarker.properties.image        = _d.image.url;
+					newMarker.properties.description  = _d.description;
+					newMarker.properties.url          = _d.url;
+					
+					console.log(_d);
+					
+					geoJson.push(newMarker);
 				});
-				//myLayer.setGeoJSON(geoJson);
+				
+				destLayer.on('layeradd', function(_e){
+				    
+				    var marker       = _e.layer,
+				        feature      = marker.feature,
+						popupContent = '<a href="'+feature.properties.url+'" class="expanded-destination-pin"><figure><img src="'+feature.properties.image+'"/></figure><p>'+feature.properties.description+'</p><small>more...</small></a>';
+					
+				    marker.setIcon(L.icon(feature.properties.icon));
+				    
+				    marker.bindPopup(popupContent,{
+				        closeButton  : false,
+				        minWidth     : 300,
+				        zoomAnimation: true,
+				        keepInView   : true,
+				        autoPan      : true
+				    });
+				});
+				
+				$('*[rel="zoom-in"').on('click',function(_e){
+					map.zoom(10,true);
+				});
+				
+				$('*[rel="zoom-out"').on('click',function(_e){
+				    map.zoom(20,true);
+				});
+				
+				destLayer.setGeoJSON(geoJson);
 			};
 			
+			// | i | Weather widget...
+			// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+			
+			$scope.getWeatherData = function(){
+				if(gFrame.size() > 0){
+		            $http({
+		                method : 'GET',
+		                url    : 'http://api.openweathermap.org/data/2.5/group',
+		                params : {id:'5412230,4164138,5134295,4568127,4004293,3521342,2986160'}
+		            }).
+		            success(function(_data){
+			            if(_data.cnt > 0){
+				            $scope.weatherSpots = _data.list;
+				            $timeout(function(){ 
+					            $scope.setWeatherGallery();
+			                },100,false);
+				            
+				        }else gFrame.hide();
+		            }).
+		            error(function(){
+			            gFrame.hide();
+		            });
+				}
+			}
+			
+			$scope.setWeatherGallery = function(){
+				gFrame.sly({
+					horizontal    : true,
+					itemNav       : 'basic',
+					activateOn    : 'click',
+					mouseDragging : 1,
+					touchDragging : 1,
+					smart         : 1,
+					startAt       : 0,
+					scrollBy      : 1,
+					speed         : 300,
+					elasticBounds : 1,
+					activatePageOn: 'click',
+					prevPage      : lBtn,
+					nextPage      : rBtn
+				});
+			}
+			
 			// | i | Aside menu...
+			// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 			
 			$scope.displayMenu = function(){
 				$('#map-it aside').toggleClass('on');
@@ -278,13 +364,6 @@
 			
 			$scope.retrieveDestinations();
 			
-		});
-		
-		ffAppControllers.controller('WeatherWidgetCtrl',function($scope,$element,$http){
-			// http://openweathermap.org/api 
-			// ae91d7c77096ad3ad172e7859bab4c06
-			// http://api.openweathermap.org/data/2.5/weather?q=London,uk
-			// http://api.openweathermap.org/data/2.5/group?id=524901,703448,2643743&units=metric
 		});
 		
 		/* ~ Blog ~ */
@@ -480,97 +559,64 @@
 		/* ~ Gallery ~ */
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 		
-		ffAppControllers.controller('SlideshowCtrl',function($scope,$element){
+		ffAppControllers.controller('SlideshowCtrl',function($scope,$element,$http){
 			
-			$scope.galleryId = 1;
+			var gFrame = $('#'+$element[0].id);
+			var lBtn   = gFrame.find('*[rel="left"]');
+			var rBtn   = gFrame.find('*[rel="right"]');
 			
-			var galleryFrame = $('#miss-slideshow');
-			
-			switch($scope.galleryId){
-				case 1:
-					galleryFrame.sly({
+			switch(gFrame.hasClass('one-item')){
+				case false:
+					gFrame.sly({
 						horizontal    : true,
 						itemNav       : 'basic',
-						smart         : true,
+						activateOn    : 'click',
+						mouseDragging : 1,
+						touchDragging : 1,
+						smart         : 1,
 						startAt       : 0,
 						scrollBy      : 1,
 						speed         : 300,
 						elasticBounds : 1,
-						next          : galleryFrame.find('*[rel="right"]'),
-						prev          : galleryFrame.find('*[rel="left"]')
+						activatePageOn: 'click',
+						prevPage      : lBtn,
+						nextPage      : rBtn
 					});
 				break;
-				case 2:
+				case true:
+				
+					// | i | This resizes the images within the main gallery...
+					/* ------------------------------------------------------------------------------------------------- */
+					if(gFrame.hasClass('main')) 
+						gFrame.find('li').css({'width':$(window).width()+'px'});
+					/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+					
+					gFrame
+					.find('li')
+					.delay(300)
+					.transit({opacity:1},function(){
+						gFrame.sly({
+						horizontal     : 1,
+						itemNav        : 'forceCentered',
+						smart          : 1,
+						activateMiddle : 1,
+						mouseDragging  : 1,
+						touchDragging  : 1,
+						releaseSwing   : 1,
+						startAt        : 0,
+						scrollBy       : 1,
+						speed          : 500,
+						elasticBounds  : 1,
+						cycleBy        : 'items',  
+						cycleInterval  : 7000,
+						pauseOnHover   : true,
+						startPaused    : false, 
+						prev           : lBtn,
+						next           : rBtn
+						});
+					});
 				break;
 			}
-			
-			/*var sly = new Sly('.gallery-wrapper',{
-			    horizontal: true, // Switch to horizontal mode.
-			
-			    // Item based navigation
-			    itemNav:        null,  // Item navigation type. Can be: 'basic', 'centered', 'forceCentered'.
-			    itemSelector:   null,  // Select only items that match this selector.
-			    smart:          false, // Repositions the activated item to help with further navigation.
-			    activateOn:     null,  // Activate an item on this event. Can be: 'click', 'mouseenter', ...
-			    activateMiddle: false, // Always activate the item in the middle of the FRAME. forceCentered only.
-			
-			    // Scrolling
-			    scrollSource: null,  // Element for catching the mouse wheel scrolling. Default is FRAME.
-			    scrollBy:     0,     // Pixels or items to move per one mouse scroll. 0 to disable scrolling.
-			    scrollHijack: 300,   // Milliseconds since last wheel event after which it is acceptable to hijack global scroll.
-			    scrollTrap:   false, // Don't bubble scrolling when hitting scrolling limits.
-			
-			    // Dragging
-			    dragSource:    null,  // Selector or DOM element for catching dragging events. Default is FRAME.
-			    mouseDragging: false, // Enable navigation by dragging the SLIDEE with mouse cursor.
-			    touchDragging: false, // Enable navigation by dragging the SLIDEE with touch events.
-			    releaseSwing:  false, // Ease out on dragging swing release.
-			    swingSpeed:    0.2,   // Swing synchronization speed, where: 1 = instant, 0 = infinite.
-			    elasticBounds: false, // Stretch SLIDEE position limits when dragging past FRAME boundaries.
-			    interactive:   null,  // Selector for special interactive elements.
-			
-			    // Scrollbar
-			    scrollBar:     null,  // Selector or DOM element for scrollbar container.
-			    dragHandle:    false, // Whether the scrollbar handle should be draggable.
-			    dynamicHandle: false, // Scrollbar handle represents the ratio between hidden and visible content.
-			    minHandleSize: 50,    // Minimal height or width (depends on sly direction) of a handle in pixels.
-			    clickBar:      false, // Enable navigation by clicking on scrollbar.
-			    syncSpeed:     0.5,   // Handle => SLIDEE synchronization speed, where: 1 = instant, 0 = infinite.
-			
-			    // Pagesbar
-			    pagesBar:       null, // Selector or DOM element for pages bar container.
-			    activatePageOn: null, // Event used to activate page. Can be: click, mouseenter, ...
-			    pageBuilder:          // Page item generator.
-			        function (index) {
-			            return '<li>' + (index + 1) + '</li>';
-			        },
-			
-			    // Navigation buttons
-			    forward:  null, // Selector or DOM element for "forward movement" button.
-			    backward: null, // Selector or DOM element for "backward movement" button.
-			    prev:     null, // Selector or DOM element for "previous item" button.
-			    next:     null, // Selector or DOM element for "next item" button.
-			    prevPage: null, // Selector or DOM element for "previous page" button.
-			    nextPage: null, // Selector or DOM element for "next page" button.
-			
-			    // Automated cycling
-			    cycleBy:       null,  // Enable automatic cycling by 'items' or 'pages'.
-			    cycleInterval: 5000,  // Delay between cycles in milliseconds.
-			    pauseOnHover:  false, // Pause cycling when mouse hovers over the FRAME.
-			    startPaused:   false, // Whether to start in paused sate.
-			
-			    // Mixed options
-			    moveBy:        300,     // Speed in pixels per second used by forward and backward buttons.
-			    speed:         0,       // Animations speed in milliseconds. 0 to disable animations.
-			    easing:        'swing', // Easing for duration based (tweening) animations.
-			    startAt:       0,       // Starting offset in pixels or items.
-			    keyboardNavBy: null,    // Enable keyboard navigation by 'items' or 'pages'.
-			
-			    // Classes
-			    draggedClass:  'dragged', // Class for dragged elements (like SLIDEE or scrollbar handle).
-			    activeClass:   'active',  // Class for active items and pages.
-			    disabledClass: 'disabled' // Class for disabled navigation elements.
-			});*/
 		});
 		
 		

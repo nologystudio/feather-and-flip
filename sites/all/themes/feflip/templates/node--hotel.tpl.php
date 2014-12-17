@@ -19,27 +19,25 @@
                         </div>
                 </header>
                 <!-- Gallery starts here -->
-                <div class="slideshow-gallery" ng-controller="SlideshowCtrl">
-                        <button rel="left"></button>
-                        <button rel="right"></button>
-                        <div id="slideshow-state-bar">
-                                <button class="on"></button>
-                                <button></button>
-                        </div>
-                        <div class="slideshow-wrapper">
-                                <?php foreach($images as $image){ ?>
-                                <article class="slideshow-item">
-                                        <figure>
-                                                <img src="<?php echo $image['url'];?>" alt="<?php echo $image['alt']?>" data-size="<?php echo $image['size'][0].'x'.$image['size'][1];?>"/>
-                                        </figure>
+                <div id="hotel-gallery" class="one-item" ng-controller="SlideshowCtrl">
+                    <ul>
+                        <?php foreach($images as $image){ ?>
+                            <li>
+                                <article>
+                                    <figure>
+                                        <img src="<?php echo $image['url'];?>" alt="<?php echo $image['alt']?>"/>
+                                    </figure>
                                 </article>
-                                <?php } ?>
-                        </div>
+                            </li>
+                        <?php } ?>
+                    </ul>
+                    <button rel="left"></button>
+                    <button rel="right"></button>
                 </div>
         </article>
         
         <!-- | i | Booking engine: Room detail --------------------------------------------------- -->
-        <section id="booking-engine" ng-controller="BookingEngineCtrl" ng-include="booking"></section>
+        <!--<section id="booking-engine" ng-controller="BookingEngineCtrl" ng-include="booking"></section>-->
         <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - -  - - - -  -  -->        
         
         <article id="features">

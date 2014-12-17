@@ -33,14 +33,20 @@
                         <small>destination</small>
                 </div>
         </section>
-        <section id="weather-carrousel" ng-controller="WeatherWidgetCtrl">
-            <div class="destination" ng-repeat="destination in destinations">
-                <small>{{destination.destination}}</small>
-                <div class="info animated fadeInUp">
-                    <span class="icon">1</span>
-                    <span class="temp">60°F</span>
-                </div>
-            </div>
+        <section id="weather-carrousel">
+            <ul>
+                <li ng-repeat="city in weatherSpots">
+                    <small class="animated fadeInUp">{{city.name}}</small>
+                    <div class="info animated fadeInUp">
+                                <span class="icon">
+                                    <img src="media/weather/icons/{{city.weather[0].icon}}.png" alt="{{city.name}}"/>
+                                </span>
+                        <span class="temp">{{city.main.temp | number:0}}°F</span>
+                    </div>
+                </li>
+            </ul>
+            <button rel="left"></button>
+            <button rel="right"></button>
         </section>
         <section id="hotel-list-by-continent">
                 <?php $numContient = 0; foreach($destinationsbycontinent as $continent => $destinations){?>

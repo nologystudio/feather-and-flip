@@ -1,5 +1,5 @@
         <!-- Header gallery -->
-        <div id="main-header-gallery" ng-controller="SlideshowCtrl">
+        <div id="main-header-gallery" class="one-item main" ng-controller="SlideshowCtrl">
                <ul>
                     <?php foreach($slideImages as $image){ ?>
                      <li>
@@ -24,10 +24,6 @@
                </ul>
             <button rel="left"></button>
             <button rel="right"></button>
-            <!--<div id="slideshow-state-bar">
-                <button class="on"></button>
-                <button></button>
-            </div>-->
         </div>        
                 
         <?php 

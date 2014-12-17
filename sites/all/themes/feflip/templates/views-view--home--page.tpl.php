@@ -4,7 +4,7 @@
         <header>
             <h3 class="simple">start your journey</h3>
         </header>
-        <div id="miss-slideshow" ng-controller="SlideshowCtrl" ng-init="gID = miss-slideshow">
+        <div id="miss-slideshow" ng-controller="SlideshowCtrl">
             <ul>
             <?php foreach($destinations as $key => $destination){ ?>
                 <li>

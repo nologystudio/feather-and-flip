@@ -31,7 +31,7 @@
 				.set-size(@size,@size);
 				border-radius: 2*@size;
 				overflow: hidden;
-				background-color: @color-1;
+				background-color: transparent;
 				
 				// | i | This fix the issue with the mask in Safari
 				//-webkit-mask-image: -webkit-radial-gradient(circle,transparent,transparent);
@@ -381,7 +381,7 @@
 				
 				li
 				{
-					#ui-set-button > .rounded(fadeout(@color-1,5%),14px);
+					#ui-set-button > .rounded(fadeout(@color-1,25%),14px);
 					.box-sizing();
 					.set-opacity(1);
 					.animate-opacity();
@@ -495,6 +495,47 @@
 		/* ~ Slideshow ~ */
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 		
+		.ui-set-slideshow-arrows(@arrow-size:50px,@margin:50px,@left-icon:'\23',@right-icon:'\24')
+		{
+			.reset(); 
+			.set-size(@arrow-size,@arrow-size);
+			.set-pos(absolute);
+			.animate-all();
+			.performance();
+			.set-opacity(0);
+			#font > .ic(@arrow-size/1.5,@color-3,@arrow-size);
+			top: 50%;
+			margin-top: -@arrow-size/2;
+			cursor: pointer;
+			z-index: 1;
+			
+			&[rel="left"]
+			{
+				left: @margin;
+				
+				&:before
+				{
+					content: @left-icon;
+				}
+			}
+			
+			&[rel="right"]
+			{
+				right: @margin;
+				
+				&:before
+				{
+					content: @right-icon;
+				}
+			}
+			
+			&:hover
+			{
+				.set-opacity(1);
+				color: @grey-1;
+			}
+		}
+		
 		.ui-set-slideshow(@height:@header-height)
 		{
 			& > ul
@@ -507,7 +548,8 @@
 			
 				& > li
 				{
-					.set-size(100%,@height);
+					.set-size(1280px,@height);
+					.set-opacity(0);
 					#align > .left;
 					
 					article
@@ -610,45 +652,7 @@
 			
 			& > button[rel]
 			{
-				@arrow-size: 50px;
-				@margin: 50px;
-				
-				.reset(); 
-				.set-size(@arrow-size,@arrow-size);
-				.set-pos(absolute);
-				.set-opacity(0.75);
-				.animate-opacity();
-				.hide();
-				#font > .ic(@arrow-size/1.5,white,@arrow-size);
-				top: 50%;
-				margin-top: -@arrow-size/2;
-				cursor: pointer;
-				z-index: 1;
-				
-				&[rel="left"]
-				{
-					left: @margin;
-					
-					&:before
-					{
-						content: "\23";
-					}
-				}
-				
-				&[rel="right"]
-				{
-					right: @margin;
-					
-					&:before
-					{
-						content: "\24";
-					}
-				}
-				
-				&:hover
-				{
-					.set-opacity(1);
-				}
+				.ui-set-slideshow-arrows();
 			}
 			
 			& > div[id$="-state-bar"]

@@ -210,6 +210,19 @@
 				.set-pos(fixed);
 				.performance();
 				.z(0);
+				
+				button[rel]
+				{
+					@s: 100px;
+					
+					.ui-set-slideshow-arrows(@s,0,'\34','\35');
+					margin-top: -@s;
+				}
+				
+				&:hover > button[rel]
+				{
+					.set-opacity(1);
+				}
 			}
 		}	
 
@@ -236,9 +249,14 @@
 				position: fixed;
 				top: -(@header-gallery-height - @nav-height);
 				
-				form[id="search"]
+				& > div.wrapper > form[id="search"]
 				{
-					.scale(0.7);
+					margin-top: 10px;
+					
+					input
+					{
+						height: @int-height - 20px !important;
+					}
 				}
 				
 				& + section[id]
@@ -261,12 +279,14 @@
 					.animate-all();
 					#align > .left;
 					border-radius: 2 * @int-height;
+					margin-left: -20px;
 					
 					input
 					{
 						.reset();
 						.set-size(100%,@int-height);
 						.box-sizing();
+						.animate-all();
 						#align > .left;
 						
 						&[type="text"]
@@ -644,57 +664,13 @@
 					margin: 0 auto;
 					overflow: hidden;
 					
-					button
+					button[rel]
 					{
 						@s: 100px;
 						
-						.reset();
-						.set-size(@s,@s);
-						.set-pos(absolute);
-						.animate-all();
-						.performance();
-						.set-opacity(0);
+						.ui-set-slideshow-arrows(@s,0,'\34','\35');
 						#font > .ic(@s/2,@color-3,@s);
-						
-						top: 50%;
-						text-transform: uppercase;
-						margin-top: -@s/2;
-						background-color: red;
 						z-index: 2;
-						cursor: pointer;
-						
-						&[rel="right"]
-						{
-							right: 0;
-							
-							&:before
-							{
-								content: "\35";
-							}
-						}
-						
-						&[rel="left"]
-						{
-							left: 0;
-							
-							&:before
-							{
-								content: "\34";
-							}
-						}
-						
-						&:hover
-						{
-							color: @grey-1;
-						}
-					}
-					
-					&:hover
-					{
-						& > button
-						{
-							.set-opacity(1);
-						}
 					}
 					
 					ul
@@ -794,6 +770,14 @@
 						}
 					}
 				}
+				
+				&:hover
+				{
+					& > div[id] > button
+					{
+						.set-opacity(1);
+					}
+				}
 			}
 			
 			&[id="map-it"]
@@ -884,9 +868,94 @@
 					.set-size(100%,700px);
 					.set-bg(@color-1);
 					
-					div.pin
+					// | i | Custom popup mapbox style...
+					
+					.leaflet-popup-content-wrapper
 					{
-						//.hide();
+						background: transparent;
+						box-shadow: none;
+						padding: 0;
+						margin: 0;
+						height: auto;
+					}
+					
+					.leaflet-popup-content
+					{
+						padding: 0;
+					}
+					
+					.leaflet-popup-tip-container
+					{
+						.set-size(30px,15px);
+					}
+					
+					.leaflet-popup-tip
+					{
+						border-left: 15px solid transparent;
+						border-right: 15px solid transparent;
+						border-top: 20px solid @grey-1;
+					}
+					
+					a.expanded-destination-pin
+					{
+						@h: 70px;
+						@p: @unit;
+						
+						.set-size(100%,@h+2*@p);
+						.set-pos();
+						.set-bgc(@grey-1);
+						.animate-all();
+						padding: @p;
+						display: block;
+						border-radius: 100px;
+						overflow: hidden;
+						
+						figure
+						{
+							.ui-set-circle-mask(@h);
+							.set-pos(absolute);
+						}
+						
+						p,
+						small
+						{
+							.box-sizing();
+							.animate-all();
+							#align > .left;
+							display: block;
+						}
+						
+						p
+						{
+							#font > .gar(10px,white);
+							max-height: 30px;
+							margin: @p 0 0 0;
+							line-height: 14px;
+							padding: 0 @ref-padding/2 0 @h + 2 * @p;
+							overflow: hidden;
+						}
+						
+						small
+						{
+							.reset();
+							.set-size(100%);
+							.set-opacity(0.5);
+							#font > .gar(14px,white);
+							padding-left: @h + 2 * @p;
+						}
+						
+						&:hover
+						{
+							p
+							{
+								.set-opacity(0.5);
+							}
+							
+							small
+							{
+								.set-opacity(1);
+							}
+						}
 					}
 				}
 				
@@ -919,9 +988,24 @@
 							.set-size(@tab-width,@h);
 							.set-pos(absolute);
 							.set-bgc(black);
+							.box-sizing();
 							.set-box-shadow(@shadow-color,0,0,@ref-padding);
+							.animate-all();
+							#font > .ic(38px,@color-2,@h);
+							text-align: center;
 							right: -@tab-width;
 							border-radius: 0 @h @h 0;
+							padding-left: @unit;
+							
+							&:before
+							{
+								content: '\61';
+							}
+							
+							&:hover
+							{
+								color: white;
+							}
 						}
 						
 						ul
@@ -933,7 +1017,7 @@
 							
 							li
 							{
-								@fs: 18px;
+								@fs: 16px;
 								@border-style: solid 1px fadeout(@color-1,60%);
 								
 								.set-size(100%);
@@ -979,6 +1063,7 @@
 							.reset();
 							.set-size(100%);
 							.box-sizing();
+							.set-opacity(0);
 							#align > .left;
 							padding: 0 @p @p @p;
 							
@@ -994,54 +1079,115 @@
 					&.on
 					{
 						left: 0;
+						
+						& > nav > div.tab:before
+						{
+							.set-opacity(0.25);
+						}
 					}
 				}
 				
 				& > section[id="weather-carrousel"]
 				{
+					@h: 75px;
+					
 					.set-bg(fadeout(@color-1,50%));
+					height: @h;
 					overflow: hidden;
 					
-					div.destination
+					& > button[rel]
 					{
-						.set-size(200px,100%);
-						#align > .left;
-						padding: @ref-padding/2 @ref-padding;
-						border-right: solid 1px white;
+						.ui-set-slideshow-arrows();
+						.set-size(@grid-5-col/2,@h);
+						top: 0;
+						margin-top: 0;
 						
-						small
+						&[rel="left"]
 						{
-							.set-size(100%);
-							#font > .l-normal(12px,@grey-1);
-							text-transform: uppercase;
-							text-align: center;
-							display: block;
+							left: 0;
 						}
 						
-						div.info
+						&[rel="right"]
 						{
-							.set-size(100%);
+							right: 0;
+						}
+					}
+					
+					& > ul
+					{
+						.reset();
+						.set-size(auto,100%);
+						#align > .left;
+						display: block;
+						
+						& > li
+						{
+							.set-size(@grid-5-col,100%);
 							.box-sizing();
+							.set-opacity(1);
 							#align > .left;
-							padding: @gutter 2 * @ref-padding 0 2 * @ref-padding;
+							padding: @ref-padding/2 @ref-padding;
+							border-right: solid 1px white;
+							display: block;
 							
-							span
+							&:last-child
 							{
-								.set-size(50%);
-								#font > .l-normal(18px,@grey-1);
-								#align > .left;
+								border-right: 0;
+							}
+							
+							small
+							{	
+								.set-size(100%);
+								#font > .l-normal(12px,@grey-1);
+								text-transform: uppercase;
+								text-align: center;
 								display: block;
+							}
+							
+							div.info
+							{
+								.set-size(100%);
+								.box-sizing();
+								#align > .left;
+								//padding: @gutter 2 * @ref-padding 0 2 * @ref-padding;
 								
-								&:first-child
+								span
 								{
-									text-align: left;
-								}
-								
-								&:last-child
-								{
-									text-align: right;
+									.set-size(50%);
+									#font > .l-normal(18px,@grey-1);
+									#align > .left;
+									display: block;
+									margin-top: @unit;
+									
+									img
+									{
+										@w: 50px;
+										
+										.set-size(@w,@w/2);
+										#align > .left;
+										margin: 0;
+										padding: 0;
+									}
+									
+									&:first-child
+									{
+										text-align: left;
+									}
+									
+									&:last-child
+									{
+										text-align: right;
+									}
 								}
 							}
+						}
+					}
+					
+					&:hover
+					{
+						& > button[rel]
+						{
+							.set-opacity(1);
 						}
 					}
 				}
@@ -1772,7 +1918,7 @@
 							
 							.set-size();
 							#align > .center;
-							margin-bottom: @ref-padding;
+							margin-bottom: 0;
 							display: table;
 							overflow: hidden;
 							
@@ -1782,6 +1928,7 @@
 								#font > .ic(18px,@color-2);
 								#align > .left;
 								display: block;
+								visibility: hidden;
 								
 								&:before
 								{
@@ -1791,18 +1938,35 @@
 						}
 					}
 					
-					& > div.slideshow-gallery
+					& > div[id="hotel-gallery"]
 					{
 						@h: 650px;
 						
-						.set-size(100%,@h);
+						.set-size(@global-wrapper-width,@h);
 						.ui-set-slideshow(@h);
 						#align > .left;
 						
+						& > ul
+						{
+							li
+							{
+								width: @global-wrapper-width;
+							}
+						}
+						
 						& > button[rel]
 						{
-							.show();
-							color: @grey-1;
+							color: @color-3;
+							
+							&:hover
+							{
+								color: @grey-1;
+							}
+						}
+						
+						&:hover > button[rel]
+						{
+							.set-opacity(1);
 						}
 					}
 					
