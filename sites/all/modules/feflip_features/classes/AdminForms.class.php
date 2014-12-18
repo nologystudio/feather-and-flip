@@ -140,7 +140,7 @@ class AdminForms
         foreach ($values['rooms']['info'] as $room) {
             $numAdults += $room['adults'];
             // adding children as adults
-            $numAdults += count($room['children']);
+            $numAdults += $room['children']['number'];
         }
 
         return array(
@@ -175,12 +175,12 @@ class AdminForms
         foreach ($values['rooms']['info'] as $room) {
             $numAdults += $room['adults'];
             // adding children as adults
-            $numAdults += count($room['children']);
+            $numAdults += $room['children']['number'];
         }
 
         return array(
             'sabre' => $sabreService->HotelDescription($sessionInfo, $values['hotelCode'], $numAdults, $sabreChecking, $sabreCheckout),
-            'expedia' => Expedia::RoomAvailability($values['eanCode'], $values['checkin'], $values['checkout'], $values['rooms']['info'])
+            'expedia' => Expedia::RoomAvailability($values['eanCode'], $values['checkIn'], $values['checkOut'], $values['rooms']['info'])
         );
     }
 
