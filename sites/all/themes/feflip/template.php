@@ -415,18 +415,24 @@ function get_header_main_navigation_menu($destinations=NULL){
                   $navigationMenu .= '<li><a href="'. url($submenuItem['link']['link_path']).'">'.$submenuItem['link']['link_title'].'</a></li>';
               }
               $navigationMenu .= '</ul>';*/
-              
+
+              $featherUser = Helpers::GetFeatherFlipUser();
+              $bookings = Helpers::GetBookingInfoByUser();
+
               $navigationMenu .= '<div id="user-profile">
 							<div id="bookings">
 								<div class="bg"></div>
-								<h4>My Bookings</h4>
-								<h5>Booking 13324432342wwrer33543dwwr / 12/02</h5>
-								<h5>Booking 13324432342wwrer33543dwwr</h5>
-							</div>
+								<h4>My Bookings</h4>';
+              foreach($bookings as $booking)
+                  $navigationMenu .= '<h5>Booking ' . $booking->field_booking_id['und'][0]['value'].'</h5>';
+								//<h5>Booking 13324432342wwrer33543dwwr / 12/02</h5>
+								//<h5>Booking 13324432342wwrer33543dwwr</h5>
+
+              $navigationMenu .= '</div>
 							<div id="profile">
-								<h4>user@useremail.com</h4>
+								<h4>'. $featherUser->name .'</h4>
 								<h5>Forgot password? RESET HERE</h5>
-								<a href="/user/register">log out</a>
+								<a href="/user/logout">log out</a>
 							</div>
 						</div>';
           }

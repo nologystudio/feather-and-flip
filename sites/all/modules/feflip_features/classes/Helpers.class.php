@@ -227,6 +227,13 @@ class Helpers
         return $submisions;
     }
 
+    public static function GetFeatherFlipUser()
+    {
+        global $user;
+        $loadUser = user_load($user->uid);
+        return $loadUser;
+    }
+
     /**
      * Change max length  of text field
      * @param $field_name
