@@ -246,8 +246,8 @@ class AdminForms
     {
         $mail = $input_values['userEmail'];
         $pass = $input_values['userPassword'];
-        $firstName = $input_values['userName'];
-        $lastName = $input_values['userLast'];
+        $firstName = (isset($input_values['userName']) ? $input_values['userName'] : '');
+        $lastName = (isset($input_values['userLast']) ? $input_values['userLast'] : '');
 
         $user = user_load_by_name($mail);
 
