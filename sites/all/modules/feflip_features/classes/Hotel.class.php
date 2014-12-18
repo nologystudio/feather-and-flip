@@ -36,7 +36,9 @@ class Hotel
                                   'destination' => $wrapper->field_destination->title->value().', '.$wrapper->field_destination->field_country->value(),
                                   'country'     => $wrapper->field_destination->field_country->value(),
                                   'image'       => $imageurl,
-                                  'url'         => url('node/'.$node->nid)
+                                  'url'         => url('node/'.$node->nid),
+                                  'sabreCode'   => $wrapper->field_hotelcode->value(),
+                                  'expediaCode' => $wrapper->field_ean_hotelcode->value()
                                   );
         }
         
@@ -265,4 +267,16 @@ class Hotel
 
         return $codes;
     }
+
+    // Get the low rates from a server response between sabre & expedia ids
+    public static function GetResponseRates($ratesData, $sabreId, $expediaId)
+    {
+      $exRate = $saRate = array('rate' => 0.0, 'currency' => '');
+      if (isset($ratesData['expedia']) && isset($ratesData['expedia']['HotelListResponse']))
+        $exRate = Expedia::GetLowRateFromResponse($ratesData['expedia']['HotelListResponse'], $expediaId);
+      if (isset($ratesData['sabre']) && isset($ratesData['sabre']->AvailabilityOptions) && isset($ratesData['sabre']->AvailabilityOptions->AvailabilityOption))
+        $saRate = Sabre::GetLowRateFromResponse($ratesData['sabre']->AvailabilityOptions->AvailabilityOption, $sabreId);
+      return array('sabre' => $saRate, 'expedia' => $exRate);
+    }
+
 }

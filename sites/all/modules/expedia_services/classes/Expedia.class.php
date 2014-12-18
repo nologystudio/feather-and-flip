@@ -206,6 +206,27 @@ class Expedia
         return $res;
     }
 
+    /*
+    *   Get lowRate from a HotelRates response
+    *   for hotelId parameter
+    *   @param Expedia object HotelRates response
+    *   @param hotelId
+    *   
+    */
+    public static function GetLowRateFromResponse($ratesResponse, $hotelId)
+    {
+        $rateInfo = array('rate' => 0.0, 'currency' => '');
+        if (isset($ratesResponse['HotelList']) && isset($ratesResponse['HotelList']['HotelSummary'])) {
+            foreach ($ratesResponse['HotelList']['HotelSummary'] as $key => $hotel) {
+                if ($hotel['hotelId'] == $hotelId) {
+                    $rateInfo = array('rate' => $hotel['lowRate'], 'currency' => $hotel['rateCurrencyCode']);
+                    break;
+                }
+            }
+        }
+        return $rateInfo;
+    }
+
 	/*
 	*	Extract EAN error message
 	*	@param Expedia object

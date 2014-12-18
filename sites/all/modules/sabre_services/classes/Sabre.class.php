@@ -673,4 +673,25 @@ class Sabre
         
         return $response;        
      }
+
+    /*
+    *   Get lowRate from a HotelRates response
+    *   for hotelId parameter
+    *   @param Sabre object HotelRates response
+    *   @param hotelId
+    *   
+    */
+    public static function GetLowRateFromResponse($ratesResponse, $hotelId)
+    {
+        $rateInfo = array('rate' => 0.0, 'currency' => '');
+        foreach ($ratesResponse as $key => $hotel) {
+            if ($hotel->BasicPropertyInfo->HotelCode == $hotelId) {
+                $rateInfo = array(
+                    'rate' => (isset($hotel->BasicPropertyInfo->RateRange) ? $hotel->BasicPropertyInfo->RateRange->Min : 0.0),
+                    'currency' => (isset($hotel->BasicPropertyInfo->RateRange) ? $hotel->BasicPropertyInfo->RateRange->CurrencyCode : ''));
+                break;
+            }
+        }
+        return $rateInfo;
+    }
 }
