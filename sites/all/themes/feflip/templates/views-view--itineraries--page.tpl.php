@@ -9,7 +9,7 @@
                         <li id="destination">
                                 <figure>
                                         <div class="mask">
-                                                <img src="http://placehold.it/100x100" alt=""/>
+                                                <img src="<?php echo (isset($slideImages) && isset($slideImages[0])) ? $slideImages[0]['marble'] : 'http://placehold.it/100x100'; ?>" alt=""/>
                                         </div>
                                         <figcaption><?php echo $itinerary['destination'];?></figcaption>
                                 </figure>
@@ -62,4 +62,5 @@
                 </article>
         </div>
         <footer></footer>
-</section>   
+</section>
+<?php if (isset($travel_journal)) print $travel_journal; ?>

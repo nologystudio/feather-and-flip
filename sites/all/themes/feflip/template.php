@@ -180,7 +180,7 @@ function feflip_preprocess_views_view(&$variables) {
             $images = array(array(
                 'url' => $post->field_field_original_image[0]['raw']['safe_value'],
                 'text' => $post->node_title,
-                'size' => getimagesize($post->field_field_original_image[0]['raw']['safe_value']),
+                'size' => (!empty($post->field_field_original_image[0]['raw']['safe_value']) ? getimagesize($post->field_field_original_image[0]['raw']['safe_value']) : array(0, 0)),
                 'linkto' => $post->field_field_original_url[0]['raw']['safe_value'],
                 'btntext' => 'read more',
                 'subtitle' => date('F, Y', $orig_date)
@@ -209,6 +209,12 @@ function feflip_preprocess_views_view(&$variables) {
       {
           $destination = node_load($variables['view']->args[0]);
           $images = Destination::GetAllImagesDestination($destination,$variables['itinerary']['name']);
+          // check if exist term with this destination name
+          $term = taxonomy_get_term_by_name($destination->title);
+          if (!empty($term)) {
+            $cat = array_shift($term);
+            $variables['travel_journal'] = views_embed_view('travel_journal_tags', 'page', $cat->tid);
+          }
       }
       $variables['slideImages'] = $images;
   }

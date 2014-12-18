@@ -26,7 +26,8 @@ class Helpers
                         $sizeImage = getimagesize($url);
                         $images[] = array( 'url'      => image_style_url($style,$image['uri']),
                                            'text'     => $imageText,
-                                           'size'  => $sizeImage);
+                                           'size'  => $sizeImage,
+                                            'marble' => image_style_url('itinerary_main_icon',$imageItems->field_mainimage['und'][0]['uri']));
                     }
                 }
             }
@@ -34,7 +35,8 @@ class Helpers
     
         if (count($images) == 0) $images[] = array('url'      => $alternativeImage,
                                                    'text'     => $imageText,
-                                                   'size'  => getimagesize($alternativeImage));
+                                                   'size'  => getimagesize($alternativeImage),
+                                                    'marble' => 'http://placehold.it/100x100');
         
         return $images;
     }
