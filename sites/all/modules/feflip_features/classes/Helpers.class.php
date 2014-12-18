@@ -250,7 +250,8 @@ class Helpers
      * @param $field_name
      * @param $new_length
      */
-    public static function ChangeTextFieldMaxLength($field_name, $new_length) {
+    public static function ChangeTextFieldMaxLength($field_name, $new_length)
+    {
         $field_table = 'field_data_' . $field_name;
         $field_revision_table = 'field_revision_' . $field_name;
         $field_column = $field_name . '_value';
@@ -272,4 +273,34 @@ class Helpers
             ->execute();
     }
 
+    /*
+    *   Save a new booking
+    */
+    public static function StoreBooking($args)
+    {
+        global $user;
+        $entityform = entity_create('entityform', array(
+        'type' => 'booking',
+        'created' => time(),
+        'changed' => time(),
+        'language' => LANGUAGE_NONE,
+        'uid' => $user->uid));
+
+        $wrapper = entity_metadata_wrapper('entityform', $entityform);
+
+        //Fill fields
+        $wrapper->field_first_name      = $args['user_first_name'];
+        $wrapper->field_last_name       = $args['user_last_name'];
+        $wrapper->field_email           = $args['user_email'];
+        $wrapper->field_user_id         = $user->uid;
+        $wrapper->field_booking_id      = $args['booking_id'];
+        $wrapper->field_hotel_name      = $args['booking_hotelName'];
+        $wrapper->field_hotel_contact   = $args['booking_hotelContact'];
+        $wrapper->field_check_in        = $args['booking_ckeckIn'];
+        $wrapper->field_check_out       = $args['booking_checkOut'];
+        $wrapper->field_rate            = $args['booking_rate'];
+
+        //Done!
+        $wrapper->save();
+    }
 }
