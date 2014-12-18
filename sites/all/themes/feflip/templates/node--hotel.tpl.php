@@ -1,6 +1,22 @@
 <?php include 'slideshowandmainmenu.html.php';?>
 
-<section id="hotel">
+<?php
+// if exists previous booking we get existing data
+$hotelDescription = $inputValues = array();
+if (isset($_SESSION['hotelDescription']))
+{
+    $hotelDescription = $_SESSION['hotelDescription'];
+    unset($_SESSION['hotelDescription']);
+}
+if (isset($_SESSION['inputValues']))
+{
+    $inputValues = $_SESSION['inputValues'];
+    unset($_SESSION['inputValues']);
+}
+
+?>
+
+<section id="hotel" data-Result='<?php echo json_encode($hotelDescription); ?>'>
         <header id="booking-header-engine">
             <form id="booking-search" ng-controller="BookingEngineCtrl" ng-include="searchTpl"></form>
         </header>
@@ -37,7 +53,7 @@
         </article>
         
         <!-- | i | Booking engine: Room detail --------------------------------------------------- -->
-        <!--<section id="booking-engine" ng-controller="BookingEngineCtrl" ng-include="booking"></section>-->
+        <section id="booking-engine" ng-controller="BookingEngineCtrl" ng-include="booking" ng-init="state=3"></section>
         <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - -  - - - -  -  -->        
         
         <article id="features">

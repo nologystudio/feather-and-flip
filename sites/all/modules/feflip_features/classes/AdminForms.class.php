@@ -159,15 +159,19 @@ class AdminForms
         $sabreService = new Sabre;
         $sessionInfo = null;
 
-        if (isset($_SESSION['sabreSession']))
-            $sabreService->CloseSession($_SESSION['sabreSession']);
+        if (isset($_SESSION['sabreSession'])) {
+            try {
+                $sabreService->CloseSession($_SESSION['sabreSession']);
+            }catch(Exception $e){}
+        }
 
         $sessionInfo = $sabreService->CreateSession();
-        $_SESSION['sabreSession'] = $sessionInfo;
+        /* OJO descomentar el guardado en la sesion*/
+        //$_SESSION['sabreSession'] = $sessionInfo;
 
-        $date = explode("/", $values['checkin']);
+        $date = explode("/", $values['checkIn']);
         $sabreChecking = $date[2].'-'. $date[0].'-'.$date[1];
-        $date = explode("/", $values['checkout']);
+        $date = explode("/", $values['checkOut']);
         $sabreCheckout = $date[2].'-'. $date[0].'-'.$date[1];
 
         // Sabre numAdults
@@ -178,10 +182,28 @@ class AdminForms
             $numAdults += $room['children']['number'];
         }
 
+        $service = isset($values['service']) ? $values['service'] : null;
+        $hotelId = isset($values['hotelId']) ? $values['hotelId'] : null;
+
+        if (isset($service) && isset($hotelId))
+        {
+            if ($service == 'sabre')
+            {
+                return $sabreService->HotelDescription($sessionInfo, $hotelId, $numAdults, $sabreChecking, $sabreCheckout);
+            }
+            else
+                return Expedia::RoomAvailability($hotelId, $values['checkIn'], $values['checkOut'], $values['rooms']['info']);
+        }
+
+        /* OJO hay que quitar este close session*/
+        $sabreService->CloseSession($sessionInfo);
+
+        /*
         return array(
             'sabre' => $sabreService->HotelDescription($sessionInfo, $values['hotelCode'], $numAdults, $sabreChecking, $sabreCheckout),
             'expedia' => Expedia::RoomAvailability($values['eanCode'], $values['checkIn'], $values['checkOut'], $values['rooms']['info'])
         );
+        */
     }
 
     /**

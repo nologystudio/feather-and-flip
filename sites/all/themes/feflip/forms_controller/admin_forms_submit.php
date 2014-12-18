@@ -75,8 +75,13 @@
 
                 break;
             case 'hotelDescription':
+                $nextPage = '';
                 $result = AdminForms::getHotelDescription($input_values);
-                echo json_encode($result);
+                $_SESSION['hotelDescription'] = $result;
+                $_SESSION['inputValues'] = $input_values;
+                $nextPage = drupal_get_path_alias('node/' . $input_values['internalId']);
+                echo $nextPage;
+                //echo json_encode($result);
                 break;
             case 'hotelBooking':
                 break;

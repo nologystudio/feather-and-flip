@@ -19,14 +19,14 @@
 <section id="hotel-reviews">
 <header id="booking-header-engine">
             <?php if(count($inputValues) > 0){?>
-                <form id="booking-search" ng-controller="BookingEngineCtrl" ng-include="searchTpl" ng-init="bookingInfo.destination = <?php echo $inputValues['destination'] ?>; bookingInfo.checkIn= '<?php echo $inputValues['checkIn'];?>'; bookingInfo.checkOut= '<?php echo $inputValues['checkOut'];?>'; bookingInfo.rooms=<?php json_encode($inputValues['rooms']);?>;"></form>
+                <form id="booking-search" ng-controller="BookingEngineCtrl" ng-include="searchTpl" ng-init='init(<?php echo json_encode($inputValues);?>)'></form>
             <?php } else { ?>
                 <form id="booking-search" ng-controller="BookingEngineCtrl" ng-include="searchTpl" ng-init="bookingInfo.destination = 0"></form>
             <?php } ?>
 			</header>
         <div class="wrapper">
                 <h1 class="middle-line">Hotel Reviews</h1>
-                <ul role="select" class="dark">
+                <ul role="select" class="dark" ng-controller="HotelFilterCtrl">
 					<li>filter by category</li>
                     <?php
                         $name = 'hoteltags';
@@ -76,7 +76,8 @@
                         // hotel categories classes
                         $hClasses = implode(' ', $hotel['categories']);
                 ?>
-                        <a class="item<?php echo (!empty($hClasses) ? ' '.$hClasses : ''); ?>" href="<?php echo $hotel['url']; ?>"<?php echo (!empty($service) ? ' data-service="'.$service.'"' : ''); ?><?php echo (!empty($service) ? ' data-hotelId="'.$hotel[$serviceCode].'"' : ''); ?>>
+
+                         <a class="item<?php echo (!empty($hClasses) ? ' '.$hClasses : ''); ?>" href="<?php echo $hotel['url']; ?>"<?php echo (!empty($service) ? ' data-service="'.$service.'"' : ''); ?><?php echo (!empty($service) ? ' data-hotelId="'.$hotel[$serviceCode].'"' : ''); ?> data-internalId="<?php echo $hotel['id'] ?>">
                                 <figure>
                                         <img src="<?php echo $hotel['image'];?>" alt=""/>
                                 </figure>
