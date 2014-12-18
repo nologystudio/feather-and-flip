@@ -1,7 +1,7 @@
 <?php include 'slideshowandmainmenu.html.php';?>
 
 <section id="hotel">
-        <header>
+        <header id="booking-header-engine">
             <form id="booking-search" ng-controller="BookingEngineCtrl" ng-include="searchTpl"></form>
         </header>
         <article id="detail">
@@ -49,7 +49,7 @@
                                 <ul>
                                         <li><?php echo $contentblock['title'] ?></li>
                                          <?php $i=1; foreach($contentblock['features'] as $feature) {?>
-                                            <li><span><?php echo $i++.'.'; ?></span><?php echo $feature; ?></li>
+                                            <li><span>&bull;</span><?php echo $feature; ?></li>
                                          <?php } ?>
                                 </ul>
                         </li>

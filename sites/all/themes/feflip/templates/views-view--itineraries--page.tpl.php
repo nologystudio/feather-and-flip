@@ -3,8 +3,9 @@
 <section id="itinerary">
         <header>
                 <ul>
-                        <li><button rel="sleep">sleep</button></li>
                         <li><button rel="eat">eat</button></li>
+<li><button rel="play">play</button></li>
+                        
                         <li id="destination">
                                 <figure>
                                         <div class="mask">
@@ -14,35 +15,34 @@
                                 </figure>
                                 <small>
                                         <div id="current-time">3:00 AM</div>
-                                        <div id="weather">25¼F<span></span></div>
+                                        <div id="weather">25°F<span></span></div>
                                 </small>
                         </li>
-                        <li><button rel="play">play</button></li>
+                        
+						<li><button rel="shop">shop</button></li>
                         <li><button rel="noteworthy">noteworthy</button></li>
                 </ul>
         </header>
         <div class="wrapper">
                 <article id="itinerary-guide">
-                        <h2 class="middle-line">Itinerary Guide</h2>
-                        <h3><?php echo $itinerary['description'];?></h3>
-                        <!-- Gallery starts here -->
-                        <div class="slideshow-gallery" ng-controller="SlideshowCtrl">
-                                <button rel="left"></button>
-                                <button rel="right"></button>
-                                <div id="slideshow-state-bar">
-                                        <button class="on"></button>
-                                        <button></button>
-                                </div>
-                                <div class="slideshow-wrapper">
-                                        <?php foreach($itinerary['images'] as $image){ ?>
-                                        <article class="slideshow-item">
-                                                <figure>
-                                                        <img src="<?php echo $image['url'];?>" alt="City, Country" data-size="<?php echo $image['size'][0].'x'.$image['size'][1];?>"/>
-                                                </figure>
-                                        </article>
-                                        <?php } ?>
-                                </div>
-                        </div>
+                    <h2 class="middle-line">Itinerary Guide</h2>
+                    <h3><?php echo $itinerary['description'];?></h3>
+                    <!-- Gallery starts here -->
+					<div id="itinerary-gallery" class="one-item" ng-controller="SlideshowCtrl">
+                		<ul>
+						<?php foreach($itinerary['images'] as $image){ ?>
+                        <li>
+                            <article>
+                                <figure>
+                                    <img src="<?php echo $image['url'];?>" alt=""/>
+                                </figure>
+                            </article>
+                        </li>
+						<?php } ?>
+                		</ul>
+						<button rel="left"></button>
+						<button rel="right"></button>
+            		</div> 
                 </article>
                 <article id="neighborhood-guide">
                         <h2 class="middle-line"><?php echo $itinerary['name'];?></h2>

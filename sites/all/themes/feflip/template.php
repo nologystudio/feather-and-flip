@@ -410,11 +410,25 @@ function get_header_main_navigation_menu($destinations=NULL){
       {
         $navigationMenu .= '<li><a href="'.url($menu_item['link']['link_path']).'">'.$menu_item['link']['link_title'].'</a>';
           if(isset($menu_item['below']) && count($menu_item['below']) > 0) {
-              $navigationMenu .= '<ul id="itinerary-list">';
+              /*$navigationMenu .= '<ul id="itinerary-list">';
               foreach ($menu_item['below'] as $submenuItem) {
                   $navigationMenu .= '<li><a href="'. url($submenuItem['link']['link_path']).'">'.$submenuItem['link']['link_title'].'</a></li>';
               }
-              $navigationMenu .= '</ul>';
+              $navigationMenu .= '</ul>';*/
+              
+              $navigationMenu .= '<div id="user-profile">
+							<div id="bookings">
+								<div class="bg"></div>
+								<h4>My Bookings</h4>
+								<h5>Booking 13324432342wwrer33543dwwr / 12/02</h5>
+								<h5>Booking 13324432342wwrer33543dwwr</h5>
+							</div>
+							<div id="profile">
+								<h4>user@useremail.com</h4>
+								<h5>Forgot password? RESET HERE</h5>
+								<a href="/user/register">log out</a>
+							</div>
+						</div>';
           }
       }
       /*
