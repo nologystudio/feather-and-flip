@@ -35,7 +35,8 @@ class Hotel
             foreach ($wrapper->field_hotel_tags->value() as $key => $tag) {
               $categories[] = strtolower($tag->name);
             }
-            $hotelsinfo[] = array('name'        => $wrapper->title->value(),
+            $hotelsinfo[] = array('id'          => $node->nid,
+                                  'name'        => $wrapper->title->value(),
                                   'destination' => $wrapper->field_destination->title->value().', '.$wrapper->field_destination->field_country->value(),
                                   'country'     => $wrapper->field_destination->field_country->value(),
                                   'image'       => $imageurl,

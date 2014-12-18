@@ -18,7 +18,11 @@
 ?>
 <section id="hotel-reviews">
 <header id="booking-header-engine">
-				<form id="booking-search" ng-controller="BookingEngineCtrl" ng-include="searchTpl" ng-init="bookingInfo.destination = 0"></form>
+            <?php if(count($inputValues) > 0){?>
+                <form id="booking-search" ng-controller="BookingEngineCtrl" ng-include="searchTpl" ng-init="bookingInfo.destination = <?php echo $inputValues['destination'] ?>; bookingInfo.checkIn= '<?php echo $inputValues['checkIn'];?>'; bookingInfo.checkOut= '<?php echo $inputValues['checkOut'];?>'; bookingInfo.rooms=<?php json_encode($inputValues['rooms']);?>;"></form>
+            <?php } else { ?>
+                <form id="booking-search" ng-controller="BookingEngineCtrl" ng-include="searchTpl" ng-init="bookingInfo.destination = 0"></form>
+            <?php } ?>
 			</header>
         <div class="wrapper">
                 <h1 class="middle-line">Hotel Reviews</h1>
