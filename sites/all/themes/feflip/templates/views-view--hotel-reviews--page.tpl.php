@@ -1,11 +1,19 @@
 <?php include 'slideshowandmainmenu.html.php';?>
 <?php
+        $showPrice = false;
         // if exists previous booking we get existing data
         $hotelRates = $inputValues = array();
         if (isset($_SESSION['hotelRates']))
-                $hotelRates = $_SESSION['hotelRates'];
+        {
+            $showPrice = true;
+            $hotelRates = $_SESSION['hotelRates'];
+            unset($_SESSION['hotelRates']);
+        }
         if (isset($_SESSION['inputValues']))
-                $inputValues = $_SESSION['inputValues'];
+        {
+            $inputValues = $_SESSION['inputValues'];
+            unset($_SESSION['inputValues']);
+        }
 
 ?>
 <section id="hotel-reviews">
@@ -31,18 +39,38 @@
                 <?php
                         $rates = Hotel::GetResponseRates($hotelRates, $hotel['sabreCode'], $hotel['expediaCode']);
                         $service = '';
-                        if (((float)$rates['expedia']['rate'] < (float)$rates['sabre']['rate']) && ((float)$rates['expedia']['rate'] != 0.0)){
+                        if (((float)$rates['expedia']['rate'] != 0.0) && ((float)$rates['sabre']['rate'] != 0.0))
+                        {
+                            if ((float)$rates['expedia']['rate']  < (float)$rates['sabre']['rate'])
+                            {
                                 $service = 'expedia';
                                 $serviceCode = 'expediaCode';
                                 $rate = (float)$rates['expedia']['rate'];
                                 $curr = $rates['expedia']['currency'];
-                        }
-                        elseif (((float)$rates['sabre']['rate'] < (float)$rates['expedia']['rate']) && ((float)$rates['sabre']['rate'] != 0.0)) {
+                            }
+                            else
+                            {
                                 $service = 'sabre';
                                 $serviceCode = 'sabreCode';
                                 $rate = (float)$rates['sabre']['rate'];
                                 $curr = $rates['sabre']['currency'];
+                            }
                         }
+                        elseif(((float)$rates['expedia']['rate'] == 0.0) && ((float)$rates['sabre']['rate'] != 0.0))
+                        {
+                            $service = 'sabre';
+                            $serviceCode = 'sabreCode';
+                            $rate = (float)$rates['sabre']['rate'];
+                            $curr = $rates['sabre']['currency'];
+                        }
+                        elseif(((float)$rates['expedia']['rate'] != 0.0) && ((float)$rates['sabre']['rate'] == 0.0))
+                        {
+                            $service = 'expedia';
+                            $serviceCode = 'expediaCode';
+                            $rate = (float)$rates['expedia']['rate'];
+                            $curr = $rates['expedia']['currency'];
+                        }
+
                 ?>
                         <a class="item" href="<?php echo $hotel['url']; ?>"<?php echo (!empty($service) ? ' data-service="'.$service.'"' : ''); ?><?php echo (!empty($service) ? ' data-hotelId="'.$hotel[$serviceCode].'"' : ''); ?>>
                                 <figure>
@@ -51,6 +79,7 @@
                                 <div>
                                         <h2><?php echo $hotel['name'];?></h2>
                                         <h3><?php echo $hotel['destination'];?></h3>
+                                        <?php if($showPrice){?>
                                         <?php if (!empty($service)) { ?>
                                                 <button rel="booking" class="animated fadeInUp">
                                                         <span>starting from</span>
@@ -61,7 +90,7 @@
                                                         <span>not</span>
                                                         <h4>available</h4>
                                                 </button>
-                                        <?php } ?>
+                                        <?php } }?>
                                 </div>
                         </a>
                 <?php endforeach; ?>
