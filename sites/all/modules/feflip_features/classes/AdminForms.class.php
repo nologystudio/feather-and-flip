@@ -280,7 +280,7 @@ class AdminForms
                 $result = self::signInUser($input_values, $error);
 
                 $error = '';
-                drupal_mail('user', 'register_no_approval_required', $mail, NULL, array('account' => $account), variable_get('site_mail'));
+                //_user_mail_notify('register_no_approval_required', $account);
                 return $result;
             }
             catch (Exception $e)
