@@ -218,11 +218,20 @@ class Expedia
     {
         $rateInfo = array('rate' => 0.0, 'currency' => '');
         if (isset($ratesResponse['HotelList']) && isset($ratesResponse['HotelList']['HotelSummary'])) {
-            foreach ($ratesResponse['HotelList']['HotelSummary'] as $key => $hotel) {
-                //dpm($hotel);
-                if ($hotel['hotelId'] == $hotelId) {
-                    $rateInfo = array('rate' => $hotel['lowRate'], 'currency' => $hotel['rateCurrencyCode']);
-                    break;
+            //Por si solo hay un hotel
+            if (isset($ratesResponse['HotelList']['HotelSummary']['hotelId']))
+            {
+                if ($ratesResponse['HotelList']['HotelSummary']['hotelId'] == $hotelId)
+                    $rateInfo = array('rate' => $ratesResponse['HotelList']['HotelSummary']['lowRate'], 'currency' => $ratesResponse['HotelList']['HotelSummary']['rateCurrencyCode']);
+            }
+            else
+            {
+                foreach ($ratesResponse['HotelList']['HotelSummary'] as $key => $hotel) {
+                    //dpm($hotel);
+                    if ($hotel['hotelId'] == $hotelId) {
+                        $rateInfo = array('rate' => $hotel['lowRate'], 'currency' => $hotel['rateCurrencyCode']);
+                        break;
+                    }
                 }
             }
         }

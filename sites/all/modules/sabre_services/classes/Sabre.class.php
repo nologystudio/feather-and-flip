@@ -353,7 +353,7 @@ class Sabre
         try
         {  
             $args['AvailRequestSegment']['GuestCounts']['Count'] = $numpersonas;
-            $args['AvailRequestSegment']['RateRange']['CurrencyCode'] = 'USD';
+            //$args['AvailRequestSegment']['RateRange']['CurrencyCode'] = 'USD';
             $args['AvailRequestSegment']['HotelSearchCriteria']['Criterion']['HotelRef']['HotelCode'] = $hotelCode;
             $args['AvailRequestSegment']['TimeSpan']['End'] = $end;
             $args['AvailRequestSegment']['TimeSpan']['Start'] = $start;

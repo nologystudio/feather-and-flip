@@ -17,7 +17,7 @@ if (isset($_SESSION['inputValues']))
 $datas = '';
 
 if (isset($hotelDescription) && !empty($hotelDescription))
-    $datas .= 'data-Result=\''. json_encode($hotelDescription) . '\'';
+    $datas .= 'data-Result=\''. str_replace("'", "&#39;", json_encode($hotelDescription)) . '\'';
 
 if(isset($inputValues['service']) && !empty($inputValues['service']))
     $datas .= 'data-service="'.$inputValues['service'] . '"';
@@ -28,7 +28,12 @@ if(isset($inputValues['service']) && !empty($inputValues['service']))
         <header id="booking-header-engine">
             <form id="booking-search" ng-controller="BookingEngineCtrl" ng-include="searchTpl"></form>
         </header>
-        <article id="detail">
+
+    <!-- | i | Booking engine: Room detail --------------------------------------------------- -->
+    <section id="booking-engine" ng-controller="BookingEngineCtrl" ng-include="booking" ng-init="state=3"></section>
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - -  - - - -  -  -->
+
+    <article id="detail">
                 <header>
                         <a href="<?php echo $hotelreviews;?>" rel="all">view all hotels in destination</a>
                         <h1 class="middle-line"><?php echo $node->title;?></h1>
@@ -59,11 +64,7 @@ if(isset($inputValues['service']) && !empty($inputValues['service']))
                     <button rel="right"></button>
                 </div>
         </article>
-        
-        <!-- | i | Booking engine: Room detail --------------------------------------------------- -->
-        <section id="booking-engine" ng-controller="BookingEngineCtrl" ng-include="booking" ng-init="state=3"></section>
-        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - -  - - - -  -  -->        
-        
+
         <article id="features">
                 <!-- Features -->
                 <?php foreach($features as $obj){?>
