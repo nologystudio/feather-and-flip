@@ -43,8 +43,8 @@ class Expedia
             $roomGroup[] = array(
                 'Room' => array(
                     'numberOfAdults'    => $room['adults'],
-                    'numberOfChildren'  => (isset($room['children']) && ($room['children'] > 0)) ? count($room['children']) : 0,
-                    'childAges'         => (isset($room['children']) && ($room['children'] > 0)) ? implode(',', $room['children']) : ''
+                    'numberOfChildren'  => (isset($room['children']) && ($room['children']['number'] > 0)) ? count($room['children']['ages']) : 0,
+                    'childAges'         => (isset($room['children']) && ($room['children']['number'] > 0)) ? implode(',', $room['children']['ages']) : ''
                 )
             );
         }
@@ -96,8 +96,8 @@ class Expedia
             $roomGroup[] = array(
                 'Room' => array(
                     'numberOfAdults'    => $room['adults'],
-                    'numberOfChildren'  => (isset($room['children']) && ($room['children'] > 0)) ? count($room['children']) : 0,
-                    'childAges'         => (isset($room['children']) && ($room['children'] > 0)) ? implode(',', $room['children']) : ''
+                    'numberOfChildren'  => (isset($room['children']) && ($room['children']['number'] > 0)) ? count($room['children']['ages']) : 0,
+                    'childAges'         => (isset($room['children']) && ($room['children']['number'] > 0)) ? implode(',', $room['children']['ages']) : ''
                 )
             );
         }
