@@ -384,7 +384,8 @@ class Sabre
 
 
      
-     public function HotelBookReservation($sessionInfo,$roomTypes, $hotelCode, $numPersonas, $star, $end)
+     public function HotelBookReservation($sessionInfo,$rph, $numUnit, $firstname, $lastname, $email, $phone,
+                                          $guaranteeType, $creditCardCode, $creditCardExpireDate, $creditCardNumber, $creditCardPersonSurname)
      {
         //Open session with sabre
         //$sessionInfo = $this->CreateSession();
@@ -408,20 +409,23 @@ class Sabre
         //Execute operation
         try
         {            
+            //Add person info
+            $this->TravelItineraryAddInfo($sessionInfo, $firstname, $lastname, $email);
+
             $args = array();
-            $args['Hotel']['BasicPropertyInfo']['RPH'] = '1';
+            $args['Hotel']['BasicPropertyInfo']['RPH'] = $rph;
             //$args['Hotel']['BasicPropertyInfo']['HotelCode'] = $hotelCode;
             //$args['Hotel']['BasicPropertyInfo']['ConfirmationNumber'] = 'ABC123';
 
 
-            $args['Hotel']['Guarantee']['Type'] = 'G';
-            $args['Hotel']['Guarantee']['CC_Info']['PaymentCard']['Code'] = 'VI';
-            $args['Hotel']['Guarantee']['CC_Info']['PaymentCard']['ExpireDate'] = '2015-12';
-            $args['Hotel']['Guarantee']['CC_Info']['PaymentCard']['Number'] = '4111111111111111';
-            $args['Hotel']['Guarantee']['CC_Info']['PersonName']['Surname'] = 'TEST';
+            $args['Hotel']['Guarantee']['Type'] = $guaranteeType;//'G';
+            $args['Hotel']['Guarantee']['CC_Info']['PaymentCard']['Code'] = $creditCardCode;//'VI';
+            $args['Hotel']['Guarantee']['CC_Info']['PaymentCard']['ExpireDate'] = $creditCardExpireDate;//'2015-12';
+            $args['Hotel']['Guarantee']['CC_Info']['PaymentCard']['Number'] = $creditCardNumber;//'4111111111111111';
+            $args['Hotel']['Guarantee']['CC_Info']['PersonName']['Surname'] = $creditCardPersonSurname;//'TEST';
 
 
-            $args['Hotel']['RoomType']['NumberOfUnits'] = $roomTypes[0]['numunit'];
+            $args['Hotel']['RoomType']['NumberOfUnits'] = $numUnit;
             //$args['Hotel']['RoomType']['RoomTypeCode'] = $roomTypes[0]['code'];
             //$args['Hotel']['GuestCounts']['Count'] = $numPersonas;
             //$args['Hotel']['TimeSpan']['Start'] = $star;
@@ -545,7 +549,7 @@ class Sabre
         return $response;
     }
      
-     public function TravelItineraryAddInfo($sessionInfo, $name, $surname)
+     public function TravelItineraryAddInfo($sessionInfo, $name, $surname, $email)
      {
         $securityToken = $sessionInfo['SecurityToken'];
         $conversationId = $sessionInfo['ConversationId'];
@@ -567,7 +571,7 @@ class Sabre
         {  
             $args = array();       
 
-            $args['CustomerInfo']['Email']['Address'] = 'francisco@nologystudio.com';
+            $args['CustomerInfo']['Email']['Address'] = $email;
             $args['CustomerInfo']['PersonName']['GivenName'] = $name;
             $args['CustomerInfo']['PersonName']['Surname'] = $surname;
 

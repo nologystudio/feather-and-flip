@@ -78,25 +78,27 @@
                 ?>
 
                          <a class="item<?php echo (!empty($hClasses) ? ' '.$hClasses : ''); ?>" href="<?php echo $hotel['url']; ?>"<?php echo (!empty($service) ? ' data-service="'.$service.'"' : ''); ?><?php echo (!empty($service) ? ' data-hotelId="'.$hotel[$serviceCode].'"' : ''); ?> data-internalId="<?php echo $hotel['id'] ?>">
-                                <figure>
-                                        <img src="<?php echo $hotel['image'];?>" alt=""/>
-                                </figure>
-                                <div>
-                                        <h2><?php echo $hotel['name'];?></h2>
-                                        <h3><?php echo $hotel['destination'];?></h3>
-                                        <?php if($showPrice){?>
-                                        <?php if (!empty($service)) { ?>
-                                                <button rel="booking" class="animated fadeInUp">
-                                                        <span>starting from</span>
-                                                        <h4><?php echo $rate; ?> <?php echo $curr; ?></h4>
-                                                </button>
-                                        <?php } else { ?>
-                                                <button rel="booking" class="warning animated fadeInUp">
-                                                        <span>not</span>
-                                                        <h4>available</h4>
-                                                </button>
-                                        <?php } }?>
-                                </div>
+                            <figure>
+                                    <img src="<?php echo $hotel['image'];?>" alt=""/>
+                            </figure>
+                            <div id="hotel-name">
+                                <h2><?php echo $hotel['name'];?></h2>
+                            </div>
+							<div id="hotel-destination">
+                                <h3><?php echo $hotel['destination'];?></h3>
+							</div>
+                            <?php if($showPrice){?>
+                            <?php if (!empty($service)) { ?>
+                                    <button rel="booking" class="animated fadeInUp">
+                                            <span>starting from</span>
+                                            <h4><?php echo $rate; ?> <?php echo $curr; ?></h4>
+                                    </button>
+                            <?php } else { ?>
+                                    <button rel="booking" class="warning animated fadeInUp">
+                                            <span>not</span>
+                                            <h4>available</h4>
+                                    </button>
+                            <?php } }?>
                         </a>
                 <?php endforeach; ?>
         </div>

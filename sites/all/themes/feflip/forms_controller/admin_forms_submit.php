@@ -61,7 +61,6 @@
                     $codes['expedia'][] = $input_values['expediaCode'];
                 }
 
-
                 //Pass sabre and ean code by parameters
                 $input_values['sabreCodes'] = $codes['sabre'];
                 $input_values['eanCodes'] = $codes['expedia'];
@@ -84,6 +83,8 @@
                 //echo json_encode($result);
                 break;
             case 'hotelBooking':
+                $result = AdminForms::hotelBookingReservation($input_values);
+                echo json_encode($result);
                 break;
 			case 'newsletterForm':
 			    // Connect with mailchimp library

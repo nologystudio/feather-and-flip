@@ -147,7 +147,7 @@ class Expedia
      * @param $creditCardExpirationYear
      * @return null|string
      */
-    public static function HotelBookReservation($hotelId, $checkin, $checkout,$numAdults, $numChildren, $roomcode, $ratecode,
+    public static function HotelBookReservation($hotelId, $checkin, $checkout,$roomConfig, $roomcode, $ratecode,
                                                 $firstname, $lastname, $email, $phone, $creditCardType, $creaditCardNumber, $creditCardIdentifier,
                                                 $creditCardExpirationMonth, $creditCardExpirationYear)
     {
@@ -158,16 +158,17 @@ class Expedia
         );
 
         // Set roomGroup data
-        $roomGroup = array(
-            'Room' =>	array(
-                'numberOfAdults' 	=>	$numAdults,
-                'numberOfChildren' 	=>	$numChildren,
-                'childAges' 		=> 	'4',
-                'firstName'         => $firstname,
-                'lastName'          => $lastname,
-                'bedTypeId'         => '14'
-            )
-        );
+        foreach ($roomConfig as $room) {
+            $roomGroup[] = array(
+                'Room' => array(
+                    'numberOfAdults' => $room['adults'],
+                    'numberOfChildren' => (isset($room['children']) && ($room['children']['number'] > 0)) ? count($room['children']['ages']) : 0,
+                    'childAges' => (isset($room['children']) && ($room['children']['number'] > 0)) ? implode(',', $room['children']['ages']) : '',
+                    'firstName' => $firstname,
+                    'lastName' => $lastname,
+                )
+            );
+        }
 
         // Set ReservationInfo data
         $reservationInfo = array(
@@ -218,6 +219,7 @@ class Expedia
         $rateInfo = array('rate' => 0.0, 'currency' => '');
         if (isset($ratesResponse['HotelList']) && isset($ratesResponse['HotelList']['HotelSummary'])) {
             foreach ($ratesResponse['HotelList']['HotelSummary'] as $key => $hotel) {
+                //dpm($hotel);
                 if ($hotel['hotelId'] == $hotelId) {
                     $rateInfo = array('rate' => $hotel['lowRate'], 'currency' => $hotel['rateCurrencyCode']);
                     break;

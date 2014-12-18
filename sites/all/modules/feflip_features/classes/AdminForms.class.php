@@ -206,6 +206,25 @@ class AdminForms
         */
     }
 
+    static function hotelBookingReservation($values)
+    {
+        $sabreService = new Sabre;
+
+        $service = isset($values['service']) ? $values['service'] : null;
+
+        if ($service == 'sabre')
+        {
+            $sessionInfo = $_SESSION['sabreSession'];
+
+            return $sabreService->HotelBookReservation($sessionInfo,$values['rph'], $values['numUnit'], $values['firstName'], $values['lastName'], $values['email'], $values['phone'],
+                $values['guaranteeType'], $values['creditCardCode'], $values['creditCardExpireDate'], $values['creditCardNumber'], $values['creditCardPersonSurname']);
+        }
+        else
+            return Expedia::HotelBookReservation($values['hotelId'],$values['checkIn'], $values['checkOut'],$values['rooms']['info'],
+                $values['roomCode'], $values['rateCode'], $values['firstName'], $values['lastName'], $values['email'], $values['phone'],
+                $values['creaditCardCode'], $values['creditCardNumber'], $values['creditCardIdentifier'], $values['creditCardExpirationMonth'], $values['creditCardExpirationYear']);
+    }
+
     /**
      * Returns all destinations of drupal data base
      * @return array
@@ -256,11 +275,12 @@ class AdminForms
 
             try
             {
-                user_save(NULL, $new_user);
+                $account = user_save(NULL, $new_user);
 
                 $result = self::signInUser($input_values, $error);
 
                 $error = '';
+                drupal_mail('user', 'register_no_approval_required', $mail, NULL, array('account' => $account), variable_get('site_mail'));
                 return $result;
             }
             catch (Exception $e)

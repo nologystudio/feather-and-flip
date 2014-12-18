@@ -16,7 +16,7 @@ if (isset($_SESSION['inputValues']))
 
 ?>
 
-<section id="hotel" data-Result='<?php echo json_encode($hotelDescription); ?>'>
+<section id="hotel" data-Result='<?php echo json_encode($hotelDescription); ?>' data-service="<?php echo $inputValues['service'];?>">
         <header id="booking-header-engine">
             <form id="booking-search" ng-controller="BookingEngineCtrl" ng-include="searchTpl"></form>
         </header>
