@@ -3,10 +3,10 @@
 class Sabre
 {
      
-     var $IPCC = '';
-     var $USERNAME = '';
-     var $PASSWORD = '';
-     var $TESTMODE;
+     var $IPCC = 'O58H';
+     var $USERNAME = '7971';
+     var $PASSWORD = 'WS072514';
+     var $TESTMODE = 1;
      var $TESTSUFFIX = '';
 
     /**
@@ -14,11 +14,11 @@ class Sabre
      */
     function Sabre()
      {
-        $this->IPCC = variable_get('sabre_ipcc');
-        $this->USERNAME = variable_get('sabre_username');
-        $this->PASSWORD = variable_get('sabre_passw');
-        $this->TESTMODE = variable_get('sabre_test_mode');
-        
+        $this->IPCC = variable_get('sabre_ipcc', $this->IPCC);
+        $this->USERNAME = variable_get('sabre_username', $this->USERNAME);
+        $this->PASSWORD = variable_get('sabre_passw', $this->PASSWORD);
+        $this->TESTMODE = variable_get('sabre_test_mode', $this->TESTMODE);
+
         if ($this->TESTMODE == 1)
             $this->TESTSUFFIX = "_test";
         else
