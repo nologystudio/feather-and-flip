@@ -685,7 +685,7 @@ class Sabre
     {
         $rateInfo = array('rate' => 0.0, 'currency' => '');
         foreach ($ratesResponse as $key => $hotel) {
-            if ($hotel->BasicPropertyInfo->HotelCode == $hotelId) {
+            if (isset($hotel->BasicPropertyInfo) && $hotel->BasicPropertyInfo->HotelCode == $hotelId) {
                 $rateInfo = array(
                     'rate' => (isset($hotel->BasicPropertyInfo->RateRange) ? $hotel->BasicPropertyInfo->RateRange->Min : 0.0),
                     'currency' => (isset($hotel->BasicPropertyInfo->RateRange) ? $hotel->BasicPropertyInfo->RateRange->CurrencyCode : ''));
