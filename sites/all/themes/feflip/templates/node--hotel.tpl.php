@@ -14,9 +14,17 @@ if (isset($_SESSION['inputValues']))
     unset($_SESSION['inputValues']);
 }
 
+$datas = '';
+
+if (isset($hotelDescription) && !empty($hotelDescription))
+    $datas .= 'data-Result=\''. json_encode($hotelDescription) . '\'';
+
+if(isset($inputValues['service']) && !empty($inputValues['service']))
+    $datas .= 'data-service="'.$inputValues['service'] . '"';
+
 ?>
 
-<section id="hotel" data-Result='<?php echo json_encode($hotelDescription); ?>' data-service="<?php echo $inputValues['service'];?>">
+<section id="hotel" <?php echo $datas; ?>>
         <header id="booking-header-engine">
             <form id="booking-search" ng-controller="BookingEngineCtrl" ng-include="searchTpl"></form>
         </header>
