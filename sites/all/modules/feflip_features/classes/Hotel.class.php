@@ -30,15 +30,19 @@ class Hotel
             {
                 if (count($image->field_mainimage) > 0 && $image->field_main_image['und'][0]['value'] == '1')
                     $imageurl = image_style_url('hotel_review_347',$image->field_mainimage['und'][0]['uri']);
-            }           
-            
+            }
+            $categories = array();           
+            foreach ($wrapper->field_hotel_tags->value() as $key => $tag) {
+              $categories[] = strtolower($tag->name);
+            }
             $hotelsinfo[] = array('name'        => $wrapper->title->value(),
                                   'destination' => $wrapper->field_destination->title->value().', '.$wrapper->field_destination->field_country->value(),
                                   'country'     => $wrapper->field_destination->field_country->value(),
                                   'image'       => $imageurl,
                                   'url'         => url('node/'.$node->nid),
                                   'sabreCode'   => $wrapper->field_hotelcode->value(),
-                                  'expediaCode' => $wrapper->field_ean_hotelcode->value()
+                                  'expediaCode' => $wrapper->field_ean_hotelcode->value(),
+                                  'categories'  => $categories
                                   );
         }
         

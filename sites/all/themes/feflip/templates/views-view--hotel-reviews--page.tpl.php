@@ -22,18 +22,16 @@
 			</header>
         <div class="wrapper">
                 <h1 class="middle-line">Hotel Reviews</h1>
-<ul role="select" class="dark">
+                <ul role="select" class="dark">
 					<li>filter by category</li>
-					<li>Boutique</li>
-					<li>Hip</li>
-					<li>Modern</li>
-					<li>Classic</li>
-					<li>Waterfront</li>
-					<li>Kids Club</li>
-					<li>Pool</li>
-					<li>Gym</li>
-					<li>Teens Only</li>
-					<li>F+F Favorite</li>
+                    <?php
+                        $name = 'hoteltags';
+                        $myvoc = taxonomy_vocabulary_machine_name_load($name);
+                        $tree = taxonomy_get_tree($myvoc->vid);
+                        foreach ($tree as $term) {
+                            echo '<li>'.$term->name.'</li>';
+                        }
+                    ?>
 				</ul>
                 <?php foreach($hotels as $hotel): ?>
                 <?php
@@ -71,8 +69,10 @@
                             $curr = $rates['expedia']['currency'];
                         }
 
+                        // hotel categories classes
+                        $hClasses = implode(' ', $hotel['categories']);
                 ?>
-                        <a class="item" href="<?php echo $hotel['url']; ?>"<?php echo (!empty($service) ? ' data-service="'.$service.'"' : ''); ?><?php echo (!empty($service) ? ' data-hotelId="'.$hotel[$serviceCode].'"' : ''); ?>>
+                        <a class="item<?php echo (!empty($hClasses) ? ' '.$hClasses : ''); ?>" href="<?php echo $hotel['url']; ?>"<?php echo (!empty($service) ? ' data-service="'.$service.'"' : ''); ?><?php echo (!empty($service) ? ' data-hotelId="'.$hotel[$serviceCode].'"' : ''); ?>>
                                 <figure>
                                         <img src="<?php echo $hotel['image'];?>" alt=""/>
                                 </figure>
