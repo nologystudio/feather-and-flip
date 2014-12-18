@@ -102,12 +102,17 @@ class Helpers
 
             // Get media namespaces and get img url
             $namespaces = $item->getNameSpaces(true);
-            $media = $item->children($namespaces['media']);
-            $img = $media->content->attributes()->url;
+            if (isset($namespaces['media'])){
+                $media = $item->children($namespaces['media']);
+                $img = $media->content->attributes()->url;
+            }
+            else {
+                $img = '';
+            }
 
             $rs[] = array(
                 'title'     => (string)$item->title,
-                'category'  => (string)$item->category,
+                'categories'  => (array)$item->category,
                 'pubDate'   => (string)$item->pubDate,
                 'url'       => (string)$item->link,
                 'description' => (string)$item->description,
@@ -139,11 +144,15 @@ class Helpers
                 $post->field_original_image->set($rss_post['img']);
 
                 // Term reference
-                $tid = self::feflipNewTerm('blog_categories', $rss_post['category']);
-                if (!empty($tid)){
-                    $post->field_blog_category->set(array(intval($tid)));
+                $tids = array();
+                foreach ($rss_post['categories'] as $cat) {
+                    $tid = self::feflipNewTerm('blog_categories', $cat);
+                    $tids[] = (intval($tid));
                 }
-                $post->save();
+                if (!empty($tids)){
+                    $post->field_blog_category->set($tids);
+                    $post->save();
+                }
             }
         }
     }
