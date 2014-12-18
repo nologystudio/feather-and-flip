@@ -208,6 +208,10 @@ function feflip_preprocess_views_view(&$variables) {
       if(isset($variables['view']->args[0]))
       {
           $destination = node_load($variables['view']->args[0]);
+          // weather code
+          $wrapper = entity_metadata_wrapper('node', $destination);
+          $variables['weather_id'] = $wrapper->field_weather_id->value();
+
           $images = Destination::GetAllImagesDestination($destination,$variables['itinerary']['name']);
           // check if exist term with this destination name
           $term = taxonomy_get_term_by_name($destination->title);

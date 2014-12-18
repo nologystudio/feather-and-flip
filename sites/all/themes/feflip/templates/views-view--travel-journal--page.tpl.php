@@ -48,12 +48,6 @@
                                 <?php break;
                          } ?>                        
                 <?php } ?>
-                <article id="twitter-feed" class="quick-entry review">
-                        <h3></h3>
-                        <hr>
-                        <h4>It is a long established fact that a reader will be distracted</h4>
-                        <time datetime="2008-02-14 20:00">Date</time>
-                </article>
                 <article id="instagram-feed" class="quick-entry review">
                         <h3></h3>
                         <hr>

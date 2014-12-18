@@ -15,7 +15,7 @@
                                 </figure>
                                 <small>
                                         <div id="current-time">3:00 AM</div>
-                                        <div id="weather">25°F<span></span></div>
+                                        <div id="weather" data-weatherId="<?php echo $weather_id; ?>">25°F<span></span></div>
                                 </small>
                         </li>
                         
