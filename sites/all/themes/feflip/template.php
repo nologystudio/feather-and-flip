@@ -222,17 +222,25 @@ function feflip_preprocess_views_view(&$variables) {
       }
       $variables['slideImages'] = $images;
   }
-  elseif($view->name == 'map_it' && $view->current_display == 'page'){
-    $variables['slideImages'] = Destination::GetImagesForHomeSlideShow('view hotels');
-    $destinations = Destination::GetAllDestination();
-    
-    $destinationbycontinent = array();
-    foreach($destinations as $destination)
-      $destinationbycontinent[$destination['continent']][] = $destination;
-    
-    $variables['destinationsbycontinent'] = $destinationbycontinent;
-    $variables['destinations'] = $destinations;
-    $variables['main_navigation'] = get_header_main_navigation_menu($destinations);    
+  elseif($view->name == 'map_it' && $view->current_display == 'page') {
+      $variables['slideImages'] = Destination::GetImagesForHomeSlideShow('view hotels');
+      $destinations = Destination::GetAllDestination();
+
+      $destinationbycontinent = array();
+      foreach ($destinations as $destination)
+          $destinationbycontinent[$destination['continent']][] = $destination;
+
+      //Añadimos los continentes que no tienen hoteles tambien
+      /*
+      $keys = array_keys(Destination::$continents);
+      foreach($keys as $key)
+          if (!isset($destinationbycontinent[Destination::$continents[$key]]))
+              $destinationbycontinent[Destination::$continents[$key]][] = null;
+      */
+
+      $variables['destinationsbycontinent'] = $destinationbycontinent;
+      $variables['destinations'] = $destinations;
+      $variables['main_navigation'] = get_header_main_navigation_menu($destinations);
   }
   
 }

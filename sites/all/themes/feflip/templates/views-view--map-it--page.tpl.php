@@ -53,8 +53,15 @@
                 <?php if ($numContient == 0) { ?><div class="row"><?php } ?>
                    <ul>
                        <li><?php echo $continent;?></li>
-                   <?php for($i=0; $i<count($destinations); $i++){ ?>
-                       <li><?php echo $destinations[$i]['destination'] . '<span></span>'; if ($i === 0) {echo'<span></span>';} ?></li>
+                   <?php for($i=0; $i<count($destinations); $i++){ $numHotels = Hotel::NumHotelsByDestination($destinations[$i]['id']); ?>
+                       <li>
+                           <?php
+                                 $destinationTxt = $destinations[$i]['destination'];
+                                 $k=0;
+                                 while ($k < $numHotels){$destinationTxt .= '<span></span>'; $k++;}
+                                 echo $destinationTxt;
+                           ?>
+                       </li>
                    <?php } ?>
                    </ul>
                 <?php if ($numContient == 2) { ?></div><?php } ?>

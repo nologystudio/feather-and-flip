@@ -5,6 +5,15 @@ require_once('Hotel.class.php');
 
 class Destination
 {
+
+    public static $continents = array('north_america' =>'North America',
+        'south_america' =>'South America',
+        'caribbean'     =>'Caribbean',
+        'africa'        =>'Africa',
+        'europe'        =>'Europe',
+        'asia'          =>'Asia',
+        'oceania'       =>'Oceania');
+
     /*
      * Return all nodes of destinations
      * @return array nodes
@@ -28,14 +37,6 @@ class Destination
 
     private static function getDestinations($nodes)
     {
-         $continents = array('north_america' =>'North America',
-                            'south_america' =>'South America',
-                            'caribbean'     =>'Caribbean',
-                            'africa'        =>'Africa',
-                            'europe'        =>'Europe',
-                            'asia'          =>'Asia',
-                            'oceania'       =>'Oceania');
-         
          $destinations = array();
          // Force style image if is homepage
          $style = 'large';
@@ -48,7 +49,7 @@ class Destination
               $destinations[] =  array( 'id'            => $node->nid,
                                         'destination'   => $wrapper->title->value(),
                                         'withcountry'   => $wrapper->title->value().', '.$wrapper->field_country->value(),
-                                        'continent'     => isset($continents[$wrapper->field_continent->value()]) ? $continents[$wrapper->field_continent->value()] : $wrapper->field_continent->value(),
+                                        'continent'     => isset(self::$continents[$wrapper->field_continent->value()]) ? self::$continents[$wrapper->field_continent->value()] : $wrapper->field_continent->value(),
                                         'url'           => url('node/'.$node->nid),
                                         'image'         => $image,
                                         'numhotels'     => Hotel::NumHotelsByDestination($node->nid),
