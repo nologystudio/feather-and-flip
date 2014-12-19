@@ -216,13 +216,19 @@ class AdminForms
         {
             $sessionInfo = $_SESSION['sabreSession'];
 
-            return $sabreService->HotelBookReservation($sessionInfo,$values['rph'], $values['numUnit'], $values['firstName'], $values['lastName'], $values['email'], $values['phone'],
-                $values['guaranteeType'], $values['creditCardCode'], $values['creditCardExpireDate'], $values['creditCardNumber'], $values['creditCardPersonSurname']);
+            return $sabreService->HotelBookReservation($sessionInfo,$values['$roomcode'], $values['numUnit'], $values['firstName'], $values['lastName'], $values['email'], $values['phone'],
+                $values['guaranteeType'], $values['creditCardCode'], $values['creditCardExpireDate'], $values['creditCardNumber']);
         }
         else
-            return Expedia::HotelBookReservation($values['hotelId'],$values['checkIn'], $values['checkOut'],$values['rooms']['info'],
+        {
+            $date = explode("-", $values['creditCardExpireDate']);
+            $creditCardExpirationMonth = $date[1];
+            $creditCardExpirationYear = $date[0];
+
+            return Expedia::HotelBookReservation($values['hotelId'], $values['checkIn'], $values['checkOut'], $values['rooms']['info'],
                 $values['roomCode'], $values['rateCode'], $values['firstName'], $values['lastName'], $values['email'], $values['phone'],
-                $values['creaditCardCode'], $values['creditCardNumber'], $values['creditCardIdentifier'], $values['creditCardExpirationMonth'], $values['creditCardExpirationYear']);
+                $values['creditCardCode'], $values['creditCardNumber'], $values['creditCardIdentifier'], $creditCardExpirationMonth, $creditCardExpirationYear);
+        }
     }
 
     /**

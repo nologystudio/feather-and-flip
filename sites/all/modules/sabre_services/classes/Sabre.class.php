@@ -385,7 +385,7 @@ class Sabre
 
      
      public function HotelBookReservation($sessionInfo,$rph, $numUnit, $firstname, $lastname, $email, $phone,
-                                          $guaranteeType, $creditCardCode, $creditCardExpireDate, $creditCardNumber, $creditCardPersonSurname)
+                                          $guaranteeType, $creditCardCode, $creditCardExpireDate, $creditCardNumber)
      {
         //Open session with sabre
         //$sessionInfo = $this->CreateSession();
@@ -422,7 +422,7 @@ class Sabre
             $args['Hotel']['Guarantee']['CC_Info']['PaymentCard']['Code'] = $creditCardCode;//'VI';
             $args['Hotel']['Guarantee']['CC_Info']['PaymentCard']['ExpireDate'] = $creditCardExpireDate;//'2015-12';
             $args['Hotel']['Guarantee']['CC_Info']['PaymentCard']['Number'] = $creditCardNumber;//'4111111111111111';
-            $args['Hotel']['Guarantee']['CC_Info']['PersonName']['Surname'] = $creditCardPersonSurname;//'TEST';
+            $args['Hotel']['Guarantee']['CC_Info']['PersonName']['Surname'] = $lastname;//'TEST';
 
 
             $args['Hotel']['RoomType']['NumberOfUnits'] = $numUnit;
