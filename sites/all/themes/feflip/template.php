@@ -231,12 +231,11 @@ function feflip_preprocess_views_view(&$variables) {
           $destinationbycontinent[$destination['continent']][] = $destination;
 
       //Añadimos los continentes que no tienen hoteles tambien
-      /*
-      $keys = array_keys(Destination::$continents);
+      /*$continents = Destination::GetContinents();
+      $keys = array_keys($continents);
       foreach($keys as $key)
-          if (!isset($destinationbycontinent[Destination::$continents[$key]]))
-              $destinationbycontinent[Destination::$continents[$key]][] = null;
-      */
+          if (!isset($destinationbycontinent[$continents[$key]]))
+              $destinationbycontinent[$continents[$key]][] = null;*/
 
       $variables['destinationsbycontinent'] = $destinationbycontinent;
       $variables['destinations'] = $destinations;

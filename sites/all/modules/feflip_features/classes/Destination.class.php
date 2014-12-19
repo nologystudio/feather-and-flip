@@ -6,14 +6,6 @@ require_once('Hotel.class.php');
 class Destination
 {
 
-    public static $continents = array('north_america' =>'North America',
-        'south_america' =>'South America',
-        'caribbean'     =>'Caribbean',
-        'africa'        =>'Africa',
-        'europe'        =>'Europe',
-        'asia'          =>'Asia',
-        'oceania'       =>'Oceania');
-
     /*
      * Return all nodes of destinations
      * @return array nodes
@@ -37,7 +29,8 @@ class Destination
 
     private static function getDestinations($nodes)
     {
-         $destinations = array();
+        $continents = self::GetContinents();
+        $destinations = array();
          // Force style image if is homepage
          $style = 'large';
          if (drupal_is_front_page())
@@ -49,7 +42,7 @@ class Destination
               $destinations[] =  array( 'id'            => $node->nid,
                                         'destination'   => $wrapper->title->value(),
                                         'withcountry'   => $wrapper->title->value().', '.$wrapper->field_country->value(),
-                                        'continent'     => isset(self::$continents[$wrapper->field_continent->value()]) ? self::$continents[$wrapper->field_continent->value()] : $wrapper->field_continent->value(),
+                                        'continent'     => isset($continents[$wrapper->field_continent->value()]) ? $continents[$wrapper->field_continent->value()] : $wrapper->field_continent->value(),
                                         'url'           => url('node/'.$node->nid),
                                         'image'         => $image,
                                         'numhotels'     => Hotel::NumHotelsByDestination($node->nid),
@@ -109,5 +102,16 @@ class Destination
         for($i=0; $i < count($images); $i++)
             $images[$i]['subtitle'] = $subtitle;
         return $images;
+    }
+
+    /**
+     * Read continents from drupal field
+     * @return mixed
+     */
+    public static function GetContinents()
+    {
+        $field = field_info_field('field_continent');
+        $allowed_values = list_allowed_values($field);
+        return $allowed_values;
     }
 }
