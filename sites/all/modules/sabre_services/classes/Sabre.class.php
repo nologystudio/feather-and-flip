@@ -409,6 +409,7 @@ class Sabre
         //Execute operation
         try
         {
+           //Add person info
             $this->TravelItineraryAddInfo($sessionInfo,$firstname, $lastname, $email);
 
             $args = array();

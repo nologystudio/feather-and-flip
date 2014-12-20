@@ -212,9 +212,6 @@ class AdminForms
         {
             $sessionInfo = $_SESSION['sabreSession'];
 
-            //Add person info
-            $sabreService->TravelItineraryAddInfo($sessionInfo, $values['firstName'], $values['lastName'], $values['email']);
-
             $result = $sabreService->HotelBookReservation($sessionInfo,$values['$roomcode'], $values['numUnit'], $values['firstName'], $values['lastName'], $values['email'], $values['phone'],
                 $values['guaranteeType'], $values['creditCardCode'], $values['creditCardExpireDate'], $values['creditCardNumber']);
 
