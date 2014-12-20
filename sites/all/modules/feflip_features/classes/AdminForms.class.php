@@ -156,19 +156,6 @@ class AdminForms
      */
     static function getHotelDescription($values)
     {
-        $sabreService = new Sabre;
-        $sessionInfo = null;
-
-        if (isset($_SESSION['sabreSession'])) {
-            try {
-                $sabreService->CloseSession($_SESSION['sabreSession']);
-            }catch(Exception $e){}
-        }
-
-        $sessionInfo = $sabreService->CreateSession();
-        /* OJO descomentar el guardado en la sesion*/
-        //$_SESSION['sabreSession'] = $sessionInfo;
-
         $date = explode("/", $values['checkIn']);
         $sabreChecking = $date[2].'-'. $date[0].'-'.$date[1];
         $date = explode("/", $values['checkOut']);
@@ -189,14 +176,23 @@ class AdminForms
         {
             if ($service == 'sabre')
             {
+                $sabreService = new Sabre;
+                $sessionInfo = null;
+
+                if (isset($_SESSION['sabreSession'])) {
+                    try {
+                        $sabreService->CloseSession($_SESSION['sabreSession']);
+                    }catch(Exception $e){}
+                }
+
+                $sessionInfo = $sabreService->CreateSession();
+                $_SESSION['sabreSession'] = $sessionInfo;
+
                 return $sabreService->HotelDescription($sessionInfo, $hotelId, $numAdults, $sabreChecking, $sabreCheckout);
             }
             else
                 return Expedia::RoomAvailability($hotelId, $values['checkIn'], $values['checkOut'], $values['rooms']['info']);
         }
-
-        /* OJO hay que quitar este close session*/
-        $sabreService->CloseSession($sessionInfo);
 
         /*
         return array(
@@ -216,8 +212,37 @@ class AdminForms
         {
             $sessionInfo = $_SESSION['sabreSession'];
 
-            return $sabreService->HotelBookReservation($sessionInfo,$values['$roomcode'], $values['numUnit'], $values['firstName'], $values['lastName'], $values['email'], $values['phone'],
+            //Add person info
+            $sabreService->TravelItineraryAddInfo($sessionInfo, $values['firstName'], $values['lastName'], $values['email']);
+
+            $result = $sabreService->HotelBookReservation($sessionInfo,$values['$roomcode'], $values['numUnit'], $values['firstName'], $values['lastName'], $values['email'], $values['phone'],
                 $values['guaranteeType'], $values['creditCardCode'], $values['creditCardExpireDate'], $values['creditCardNumber']);
+
+            if (isset($_SESSION['sabreSession'])) {
+                try {
+                    $sabreService->CloseSession($_SESSION['sabreSession']);
+                    unset($_SESSION['sabreSession']);
+                }catch(Exception $e){}
+            }
+
+            if (isset($result->ApplicationResults->Success) && isset($result->ApplicationResults->Hotel))
+            {
+                $args = array(
+                    'user_first_name'=>$values['firstName'],
+                    'user_last_name'=>$values['lastName'],
+                    'user_email'=>$values['email'],
+                    'booking_id'=>$result->ApplicationResults->Hotel->BasicPropertyInfo->ConfirmationNumber,
+                    'booking_hotelName'=>$result->ApplicationResults->Hotel->BasicPropertyInfo->HotelName,
+                    'booking_hotelContact'=>'',
+                    'booking_ckeckIn'=>$values['checkIn'],
+                    'booking_checkOut'=>$values['checkOut'],
+                    'booking_rate'=>$result->ApplicationResults->Hotel->RoomRates->Rates->Rate->Amount
+                );
+
+                Helpers::StoreBooking($args);
+            }
+
+            return $result;
         }
         else
         {

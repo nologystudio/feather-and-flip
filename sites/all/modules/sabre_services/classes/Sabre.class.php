@@ -408,9 +408,8 @@ class Sabre
          $response = '';
         //Execute operation
         try
-        {            
-            //Add person info
-            $this->TravelItineraryAddInfo($sessionInfo, $firstname, $lastname, $email);
+        {
+            $this->TravelItineraryAddInfo($sessionInfo,$firstname, $lastname, $email);
 
             $args = array();
             $args['Hotel']['BasicPropertyInfo']['RPH'] = $rph;
@@ -614,14 +613,14 @@ class Sabre
         $service->settings['soap_headers'] = $headers;
         
         try
-        {  
+        {
             $args = array();
             $args['MessagingDetails']['Transaction']['Code'] = 'PNR';
             $args['Version'] = '2.2.0';
             $response = $service->TravelItineraryReadRQ($args);
             
-            $xmlRequest = $service->endpoint()->client()->__getLastRequest();
-            dpm($this->ReadXML($xmlRequest));
+            //$xmlRequest = $service->endpoint()->client()->__getLastRequest();
+            //dpm($this->ReadXML($xmlRequest));
             //$xmlResponse = $service->endpoint()->client()->__getLastResponse();
             //dpm($this->ReadXML($xmlResponse));
             
