@@ -26,16 +26,21 @@
 			</header>
         <div class="wrapper">
                 <h1 class="middle-line">Hotel Reviews</h1>
-                <ul role="select" class="dark" ng-controller="HotelFilterCtrl">
-					<li>filter by category</li>
-                    <?php
-                        $name = 'hoteltags';
-                        $myvoc = taxonomy_vocabulary_machine_name_load($name);
-                        $tree = taxonomy_get_tree($myvoc->vid);
-                        foreach ($tree as $term) {
-                            echo '<li>'.$term->name.'</li>';
-                        }
-                    ?>
+                <div id="filter-container">
+					<ul role="select" class="dark">
+						<li>filter by category</li>
+					</ul>
+					<ul id="filter-list" ng-controller="HotelFilterCtrl">
+						<?php
+	                        $name = 'hoteltags';
+	                        $myvoc = taxonomy_vocabulary_machine_name_load($name);
+	                        $tree = taxonomy_get_tree($myvoc->vid);
+	                        foreach ($tree as $term) {
+	                            echo '<li><span></span>'.$term->name.'</li>';
+	                        }
+	                    ?>
+					</ul>
+				</div>
 				</ul>
                 <?php foreach($hotels as $hotel): ?>
                 <?php
