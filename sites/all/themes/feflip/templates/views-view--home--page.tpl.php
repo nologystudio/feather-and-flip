@@ -2,11 +2,12 @@
 
 <?php
 /************************************* Prueba funcional de booking ***************************************/
+
 /*
 $sabreService = new Sabre;
 $star = '2015-01-11';
 $end = '2015-01-19';
-$hotelCode = '0056853';//'0050313' con este hotel funciona la reserva;
+$hotelCode = '0054271';//'0050313' con este hotel funciona la reserva;
 $expediaHC = '113127';
 $numPersonas = 1;
 $mail = 'mail@testing.com';
@@ -24,7 +25,7 @@ try {
         'lastName'=>'TEST',
         'email'=>'mail@testing.com',
         'phone'=>'123456',
-        'guaranteeType'=>'G',
+        'guaranteeType'=>'GDPST',
         'creditCardCode'=>'VI',
         'creditCardNumber'=>'4111111111111111',
         'creditCardExpireDate'=>'2015-12',
@@ -44,6 +45,7 @@ finally
     unset($_SESSION['sabreSession']);
 }
 */
+
 /************************************* Fin prueba  **********************************************************/
 ?>
 

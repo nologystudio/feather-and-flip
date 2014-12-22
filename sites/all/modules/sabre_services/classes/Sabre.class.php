@@ -569,7 +569,14 @@ class Sabre
         
         try
         {  
-            $args = array();       
+            $args = array();
+
+            $args['AgencyInfo']['Address']['AddressLine'] = 'SABRE TRAVEL';
+            $args['AgencyInfo']['Address']['CityName'] = 'SOUTHLAKE';
+            $args['AgencyInfo']['Address']['CountryCode'] = 'US';
+            $args['AgencyInfo']['Address']['PostalCode'] = '76092';
+            $args['AgencyInfo']['Address']['StreetNmbr'] = '3150 SABRE DRIVE';
+
 
             $args['CustomerInfo']['Email']['Address'] = $email;
             $args['CustomerInfo']['PersonName']['GivenName'] = $name;
