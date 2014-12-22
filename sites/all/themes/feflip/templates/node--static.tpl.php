@@ -1,5 +1,21 @@
 <?php include 'slideshowandmainmenu.html.php';?>
 
+
+<?php if (strpos(strtoupper($title), 'BOOKING ERROR') !== false){ ?>
+
+<section id="booking-engine">
+    <div id="step-5">
+        <header>
+            <div class="wrapper">
+                <div class="feather"></div>
+                <h1>Error</h1>
+                <h3><?php echo (isset($body[0]) ? $body[0]['safe_value'] : ''); ?></h3>
+            </div>
+        </header>
+    </div>
+</section>
+
+<?php }else {?>
 <section class="static">
 	<article id="about">
 		<h1><?php echo $title; ?></h1>
@@ -25,3 +41,4 @@
 		</article>
 	<?php endif; ?>
 </section>
+<?php }?>

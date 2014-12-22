@@ -14,6 +14,7 @@ function feflip_preprocess_html(&$variables) {
     variable_set('relativePath', $relativePath);
     // AboutUs->nid=27; FAQ->nid=28
     $static_nodes = array('html__node__27', 'html__node__28', 'html__node__86', 'html__node__87', 'html__node__88', 'html__node__89');
+    $error_node = array ('html__node__288');
     $arg = arg();
 
     variable_set('pageID', 'global');
@@ -30,10 +31,18 @@ function feflip_preprocess_html(&$variables) {
         variable_set('pageID', 'hotel');
     else if (isset($arg[0]) && $arg[0] == 'travel-journal')
         variable_set('pageID', 'travel-journal');
+    else if (isset($arg[0]) && $arg[0] == 'booking-info')
+        variable_set('pageID', 'confirmation');
     else{
 
       foreach($variables['theme_hook_suggestions'] as $item)
       {
+          if (array_search($item, $error_node) !== false)
+          {
+              variable_set('pageID', 'error');
+              break;
+          }
+
           if (array_search($item, $static_nodes) !== false)
           {
               variable_set('pageID', 'static');
@@ -241,6 +250,36 @@ function feflip_preprocess_views_view(&$variables) {
       $variables['destinations'] = $destinations;
       $variables['main_navigation'] = get_header_main_navigation_menu($destinations);
   }
+    elseif($view->name == 'booking_info' && $view->current_display == 'page')
+    {
+        $booking = array(
+            'id'=>'',
+            'firstName' => '',
+            'lastName' => '',
+            'mail' => '',
+            'hotelName' => '',
+            'checkIn' => '',
+            'checkOut'=> '',
+            'rate' => ''
+        );
+
+        if (count($view->result) > 0 && isset($view->result[0]->_field_data['entityform_id']['entity']))
+        {
+            $entity = $view->result[0]->_field_data['entityform_id']['entity'];
+            $booking['id'] =  isset($entity->field_booking_id['und'][0]['value']) ? $entity->field_booking_id['und'][0]['value'] : '';
+            $booking['firstName'] =  isset($entity->field_first_name['und'][0]['value']) ? $entity->field_first_name['und'][0]['value'] : '';
+            $booking['lastName'] =  isset($entity->field_last_name ['und'][0]['value']) ? $entity->field_last_name ['und'][0]['value'] : '';
+            $booking['mail'] =  isset($entity->field_email ['und'][0]['value']) ? $entity->field_email ['und'][0]['value'] : '';
+            $booking['hotelName'] =  isset($entity->field_hotel_name['und'][0]['value']) ? $entity->field_hotel_name['und'][0]['value'] : '';
+            $booking['checkIn'] =  isset($entity->field_check_in['und'][0]['value']) ? $entity->field_check_in['und'][0]['value'] : '';
+            $booking['checkOut'] =  isset($entity->field_check_out['und'][0]['value']) ? $entity->field_check_out['und'][0]['value'] : '';
+            $booking['rate'] =  isset($entity->field_rate['und'][0]['value']) ? $entity->field_rate['und'][0]['value'] : '';
+        }
+
+        $variables['booking'] = $booking;
+        $variables['slideImages'] = $images;
+        $variables['main_navigation'] = get_header_main_navigation_menu($destinations);
+    }
   
 }
 

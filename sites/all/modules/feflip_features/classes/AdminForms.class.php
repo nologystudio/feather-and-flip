@@ -212,7 +212,7 @@ class AdminForms
         {
             $sessionInfo = $_SESSION['sabreSession'];
 
-            $result = $sabreService->HotelBookReservation($sessionInfo,$values['$roomcode'], $values['numUnit'], $values['firstName'], $values['lastName'], $values['email'], $values['phone'],
+            $result = $sabreService->HotelBookReservation($sessionInfo,$values['roomCode'], $values['numUnit'], $values['firstName'], $values['lastName'], $values['email'], $values['phone'],
                 $values['guaranteeType'], $values['creditCardCode'], $values['creditCardExpireDate'], $values['creditCardNumber']);
 
             if (isset($_SESSION['sabreSession'])) {
@@ -222,18 +222,18 @@ class AdminForms
                 }catch(Exception $e){}
             }
 
-            if (isset($result->ApplicationResults->Success) && isset($result->ApplicationResults->Hotel))
+            if (isset($result->ApplicationResults->Success) && isset($result->Hotel))
             {
                 $args = array(
                     'user_first_name'=>$values['firstName'],
                     'user_last_name'=>$values['lastName'],
                     'user_email'=>$values['email'],
-                    'booking_id'=>$result->ApplicationResults->Hotel->BasicPropertyInfo->ConfirmationNumber,
-                    'booking_hotelName'=>$result->ApplicationResults->Hotel->BasicPropertyInfo->HotelName,
+                    'booking_id'=>$result->Hotel->BasicPropertyInfo->ConfirmationNumber,
+                    'booking_hotelName'=>$result->Hotel->BasicPropertyInfo->HotelName,
                     'booking_hotelContact'=>'',
                     'booking_ckeckIn'=>$values['checkIn'],
                     'booking_checkOut'=>$values['checkOut'],
-                    'booking_rate'=>$result->ApplicationResults->Hotel->RoomRates->Rates->Rate->Amount
+                    'booking_rate'=>$result->Hotel->RoomRates->RoomRate->Rates->Rate->Amount
                 );
 
                 Helpers::StoreBooking($args);
@@ -247,9 +247,26 @@ class AdminForms
             $creditCardExpirationMonth = $date[1];
             $creditCardExpirationYear = $date[0];
 
-            return Expedia::HotelBookReservation($values['hotelId'], $values['checkIn'], $values['checkOut'], $values['rooms']['info'],
+            /*return Expedia::HotelBookReservation($values['hotelId'], $values['checkIn'], $values['checkOut'], $values['rooms']['info'],
                 $values['roomCode'], $values['rateCode'], $values['firstName'], $values['lastName'], $values['email'], $values['phone'],
-                $values['creditCardCode'], $values['creditCardNumber'], $values['creditCardIdentifier'], $creditCardExpirationMonth, $creditCardExpirationYear);
+                $values['creditCardCode'], $values['creditCardNumber'], $values['creditCardIdentifier'], $creditCardExpirationMonth, $creditCardExpirationYear);*/
+
+            $confirmationNumber = uniqid();
+            $args = array(
+                'user_first_name'=>$values['firstName'],
+                'user_last_name'=>$values['lastName'],
+                'user_email'=>$values['email'],
+                'booking_id'=>$confirmationNumber,
+                'booking_hotelName'=>'',
+                'booking_hotelContact'=>'',
+                'booking_ckeckIn'=>$values['checkIn'],
+                'booking_checkOut'=>$values['checkOut'],
+                'booking_rate'=> isset($values['total']) ? $values['total'] : ''
+            );
+
+            Helpers::StoreBooking($args);
+
+            return $confirmationNumber;
         }
     }
 
