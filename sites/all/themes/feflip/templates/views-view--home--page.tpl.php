@@ -1,5 +1,52 @@
 <?php include 'slideshowandmainmenu.html.php';?>
 
+<?php
+/************************************* Prueba funcional de booking ***************************************/
+/*
+$sabreService = new Sabre;
+$star = '2015-01-11';
+$end = '2015-01-19';
+$hotelCode = '0056853';//'0050313' con este hotel funciona la reserva;
+$expediaHC = '113127';
+$numPersonas = 1;
+$mail = 'mail@testing.com';
+
+$sessionInfo = $sabreService->CreateSession();
+$_SESSION['sabreSession'] = $sessionInfo;
+
+try {
+
+    $values = array(
+        'service'=>'sabre',
+        'roomCode'=>'2',
+        'numUnit'=>'1',
+        'firstName'=>'TEST',
+        'lastName'=>'TEST',
+        'email'=>'mail@testing.com',
+        'phone'=>'123456',
+        'guaranteeType'=>'G',
+        'creditCardCode'=>'VI',
+        'creditCardNumber'=>'4111111111111111',
+        'creditCardExpireDate'=>'2015-12',
+        'checkIn' => $star,
+        'checkOut' => $end
+    );
+
+    $result = $sabreService->HotelDescription($sessionInfo,$hotelCode, $numPersonas, $star, $end);
+    dpm($result);
+    $result = AdminForms::hotelBookingReservation($values);
+    dpm($result);
+}
+catch(Exception $e){dpm($e->getMessage());}
+finally
+{
+    $sabreService->CloseSession($sessionInfo);
+    unset($_SESSION['sabreSession']);
+}
+*/
+/************************************* Fin prueba  **********************************************************/
+?>
+
 <section id="start-your-journey">
         <header>
             <h3 class="simple">start your journey</h3>
