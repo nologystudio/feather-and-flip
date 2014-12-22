@@ -20,19 +20,7 @@
                 </ul>
                 <button rel="full-screen"></button>
         </header>
-        <section id="map">
-                <div class="pin" data-lat="" data-lon="">
-                        <a href="" class="info">
-                                <div class="wrapper">
-                                        <figure>
-                                                <img src="" alt=""/>
-                                        </figure>
-                                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English</p>
-                                </div>
-                        </a>
-                        <small>destination</small>
-                </div>
-        </section>
+        <section id="map"></section>
         <section id="weather-carrousel">
             <ul>
                 <li ng-repeat="city in weatherSpots">
