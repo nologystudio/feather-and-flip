@@ -46,7 +46,7 @@
         /* | i | Nav starts here... */ 
         /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */ ?>
         
-        <nav role="main-navigation" ng-controller="NavCtrl"<?php echo (((strpos($_SERVER['REQUEST_URI'], '/map-it') !== false) || (strpos($_SERVER['REQUEST_URI'], '/booking-info') !== false)) ? ' class="sticky"' : ''); ?>>
+        <nav role="main-navigation" ng-controller="NavCtrl"<?php echo (Helpers::IsStickySection() ? ' class="sticky"' : ''); ?>>
                 <div class="wrapper">
 						<a id="brand" href="/"></a>
                         <?php $form = drupal_get_form('feflip_features_search_form'); ?>

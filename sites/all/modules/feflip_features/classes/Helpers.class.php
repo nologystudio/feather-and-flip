@@ -303,4 +303,17 @@ class Helpers
         //Done!
         $wrapper->save();
     }
+
+    /*
+    *   Return boolean if string parameter exists in current url
+    */
+    public static function IsStickySection()
+    {
+        if ((strpos($_SERVER['REQUEST_URI'], '/map-it') !== false) ||
+            (strpos($_SERVER['REQUEST_URI'], '/booking-info') !== false) ||
+            (strpos($_SERVER['REQUEST_URI'], '/booking-error') !== false))
+            return true;
+        else
+            return false;
+    }
 }
