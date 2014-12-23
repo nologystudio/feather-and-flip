@@ -63,4 +63,5 @@
         </div>
         <footer></footer>
 </section>
+<?php if (isset($hotels)) print $hotels; ?>
 <?php if (isset($travel_journal)) print $travel_journal; ?>

@@ -228,6 +228,8 @@ function feflip_preprocess_views_view(&$variables) {
             $cat = array_shift($term);
             $variables['travel_journal'] = views_embed_view('travel_journal_tags', 'page', $cat->tid);
           }
+          // get hotels view for current destination
+          $variables['hotels'] = views_embed_view('hotel_reviews', 'page', $variables['view']->args[0]);
       }
       $variables['slideImages'] = $images;
   }

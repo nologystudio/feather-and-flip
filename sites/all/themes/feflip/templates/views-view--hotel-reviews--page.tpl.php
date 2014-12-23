@@ -1,4 +1,6 @@
-<?php include 'slideshowandmainmenu.html.php';?>
+<?php
+    $arg = arg();
+    if (isset($arg[2]) && ($arg[2] != 'itinerary')) include 'slideshowandmainmenu.html.php'; ?>
 <?php
         $showPrice = false;
         // if exists previous booking we get existing data
@@ -16,7 +18,7 @@
         }
 
 ?>
-<section id="hotel-reviews">
+<section id="hotel-reviews"<?php echo ((isset($arg[2]) && ($arg[2] == 'itinerary')) ? ' class="hidden"' : ''); ?>>
 <header id="booking-header-engine">
             <?php if(count($inputValues) > 0){?>
                 <form id="booking-search" ng-controller="BookingEngineCtrl" ng-include="searchTpl" ng-init='init(<?php echo json_encode($inputValues);?>)'></form>
