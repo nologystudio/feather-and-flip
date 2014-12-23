@@ -8,7 +8,7 @@
 */
 
 //if (empty(arg(0)))
-// 	expedia_services_test();
+ //	expedia_services_test();
 /**
  * Tests wsclient connections
  *
@@ -22,11 +22,9 @@ function expedia_services_test()
 
         $star = '06/01/2015';
         $end =  '06/05/2015';
-        $hotelId = '141150';
-        $numAdults = 2;
-        $numChildren = 1;
-        $roomTypeCode = '200388177';
-        $rateCode = '202507334';
+        $hotelId = '109293';
+        $roomTypeCode = '200730571';
+        $rateCode = '203628677';
         $creditCardType = 'VI';
         $creditCardNumber = '4111111111111111';
         $creditCardIdentifier = '737';
@@ -36,16 +34,21 @@ function expedia_services_test()
         $lastName = 'Gafotas';
         $email = 'francisco@nologystudio.com';
         $phone = '928000000';
-
+        $roomConfig = array();
+        $roomConfig[] = array(
+            'adults' => 2
+        );
 
 
         //$codes = Hotel::GetHotelCodesByDestination(30);
-        //$res = Expedia::GetHotelsByCode($codes['expedia'], $star, $end, 2, 1);
-        $res = Expedia::RoomAvailability($hotelId, $star, $end, 1, $numAdults, $numChildren );
-        dpm($res);
-        $res = Expedia::HotelBookReservation($hotelId, $star, $end, $numAdults, $numChildren, $roomTypeCode,$rateCode, $firsName, $lastName,
-            $email,$phone, $creditCardType, $creditCardNumber, $creditCardIdentifier, $creditCardExpirationMonth, $creditCardExpirationYear);
-        dpm($res);
+        //$res = Expedia::GetHotelsByCode($codes['expedia'], $star, $end, $roomConfig);
+        //dpm($res);
+        //$res = Expedia::RoomAvailability($hotelId, $star, $end, $roomConfig);
+        //dpm($res);
+
+        //$res = Expedia::HotelBookReservation($hotelId, $star, $end, $roomConfig, $roomTypeCode,$rateCode, $firsName, $lastName,
+          //  $email,$phone, $creditCardType, $creditCardNumber, $creditCardIdentifier, $creditCardExpirationMonth, $creditCardExpirationYear);
+        //dpm($res);
 
 
         /*
