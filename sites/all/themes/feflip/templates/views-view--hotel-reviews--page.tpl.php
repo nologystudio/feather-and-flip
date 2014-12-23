@@ -84,10 +84,10 @@
                     }
 
                     if (!empty($service)) {
-                        $hotel['service'] = $service;
-                        $hotel['serviceCode'] = $serviceCode;
-                        $hotel['rate'] = $rate;
-                        $hotel['curr'] = $curr;
+                        $hotel['_service'] = $service;
+                        $hotel['_serviceCode'] = $serviceCode;
+                        $hotel['_rate'] = $rate;
+                        $hotel['_curr'] = $curr;
                         if ((float)$rates['expedia']['rate'] != 0.0) {
                             $hotel['expedia_rate'] = $rates['expedia']['rate'];
                             $hotel['expedia_curr'] = $rates['expedia']['currency'];
@@ -108,7 +108,7 @@
             }
             ?>
             <?php foreach($hotels as $hotel){ $hClasses = implode(' ', $hotel['categories']);?>
-                <a class="item<?php echo (!empty($hClasses) ? ' '.$hClasses : ''); ?>" href="<?php echo $hotel['url']; ?>"<?php echo (!empty($hotel['service']) ? ' data-service="'.$hotel['service'].'"' : ''); ?><?php echo (!empty($hotel['service']) ? ' data-hotelId="'.$hotel[$serviceCode].'"' : ''); ?> data-internalId="<?php echo $hotel['id'] ?>"
+                <a class="item<?php echo (!empty($hClasses) ? ' '.$hClasses : ''); ?>" href="<?php echo $hotel['url']; ?>"<?php echo (!empty($hotel['_service']) ? ' data-service="'.$hotel['_service'].'"' : ''); ?><?php echo (!empty($hotel['_service']) ? ' data-hotelId="'.$hotel[$hotel['_serviceCode']].'"' : ''); ?> data-internalId="<?php echo $hotel['id'] ?>"
                     <?php if (isset($hotel['expedia_rate'])){echo 'data-expedia = "'.$hotel['expedia_rate'] .' '. $hotel['expedia_curr'].'|' . $hotel['expediaCode'].'" ';} if (isset($hotel['sabre_rate'])){echo 'data-sabre = "'.$hotel['sabre_rate'] .' '. $hotel['sabre_curr'].'|' . $hotel['sabreCode'] .'"';}?>>
                     <figure>
                         <img src="<?php echo $hotel['image'];?>" alt=""/>
@@ -120,10 +120,10 @@
                         <h3><?php echo $hotel['destination'];?></h3>
                     </div>
                     <?php if($showPrice){?>
-                        <?php if (!empty($hotel['service'])) { ?>
+                        <?php if (!empty($hotel['_service'])) { ?>
                             <button rel="booking" class="animated fadeInUp">
                                 <span>starting from</span>
-                                <h4><?php echo $hotel['rate']; ?> <?php echo $hotel['curr']; ?></h4>
+                                <h4><?php echo $hotel['_rate']; ?> <?php echo $hotel['_curr']; ?></h4>
                             </button>
                         <?php } else { ?>
                             <button rel="booking" class="warning animated fadeInUp">
