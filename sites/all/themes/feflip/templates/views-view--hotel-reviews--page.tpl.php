@@ -109,7 +109,7 @@
             ?>
             <?php foreach($hotels as $hotel){ $hClasses = implode(' ', $hotel['categories']);?>
                 <a class="item<?php echo (!empty($hClasses) ? ' '.$hClasses : ''); ?>" href="<?php echo $hotel['url']; ?>"<?php echo (!empty($hotel['service']) ? ' data-service="'.$hotel['service'].'"' : ''); ?><?php echo (!empty($hotel['service']) ? ' data-hotelId="'.$hotel[$serviceCode].'"' : ''); ?> data-internalId="<?php echo $hotel['id'] ?>"
-                    <?php if (isset($hotel['expedia_rate'])){echo 'data-expedia = "'.$hotel['expedia_rate'] .' '. $hotel['expedia_curr'].'" ';} if (isset($hotel['sabre_rate'])){echo 'data-sabre = "'.$hotel['sabre_rate'] .' '. $hotel['sabre_curr'].'"';}?>>
+                    <?php if (isset($hotel['expedia_rate'])){echo 'data-expedia = "'.$hotel['expedia_rate'] .' '. $hotel['expedia_curr'].'|' . $hotel['expediaCode'].'" ';} if (isset($hotel['sabre_rate'])){echo 'data-sabre = "'.$hotel['sabre_rate'] .' '. $hotel['sabre_curr'].'|' . $hotel['sabreCode'] .'"';}?>>
                     <figure>
                         <img src="<?php echo $hotel['image'];?>" alt=""/>
                     </figure>
