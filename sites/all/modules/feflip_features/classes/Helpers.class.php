@@ -153,8 +153,8 @@ class Helpers
                 }
                 if (!empty($tids)){
                     $post->field_blog_category->set($tids);
-                    $post->save();
                 }
+                $post->save();
             }
         }
     }
