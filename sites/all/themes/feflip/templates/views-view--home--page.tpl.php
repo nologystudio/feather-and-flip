@@ -96,17 +96,6 @@ finally
                 </nav>
         </aside>
         <div id="map">
-                <div class="pin" ng-repeat="destination in destinations">
-                        <a href="{{destination.url}}" class="info">
-                                <div class="wrapper">
-                                        <figure>
-                                                <img src="{{destination.image}}"/>
-                                        </figure>
-                                        <p></p>
-                                </div>
-                        </a>
-                        <small>{{destination.withcountry}}</small>
-                </div>
         </div>
         <footer>
                 <a href="/map-it" class="section-button">view all</a>
