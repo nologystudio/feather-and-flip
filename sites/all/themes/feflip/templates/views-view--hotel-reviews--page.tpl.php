@@ -88,6 +88,15 @@
                         $hotel['serviceCode'] = $serviceCode;
                         $hotel['rate'] = $rate;
                         $hotel['curr'] = $curr;
+                        if ((float)$rates['expedia']['rate'] != 0.0) {
+                            $hotel['expedia_rate'] = $rates['expedia']['rate'];
+                            $hotel['expedia_curr'] = $rates['expedia']['currency'];
+                        }
+                        if ((float)$rates['sabre']['rate'] != 0.0) {
+                            $hotel['sabre_rate'] = $rates['sabre']['rate'];
+                            $hotel['sabre_curr'] = $rates['sabre']['currency'];
+                        }
+
                         array_unshift($newHotels, $hotel);
                     }
                     else
@@ -99,7 +108,8 @@
             }
             ?>
             <?php foreach($hotels as $hotel){ $hClasses = implode(' ', $hotel['categories']);?>
-                <a class="item<?php echo (!empty($hClasses) ? ' '.$hClasses : ''); ?>" href="<?php echo $hotel['url']; ?>"<?php echo (!empty($hotel['service']) ? ' data-service="'.$hotel['service'].'"' : ''); ?><?php echo (!empty($hotel['service']) ? ' data-hotelId="'.$hotel[$serviceCode].'"' : ''); ?> data-internalId="<?php echo $hotel['id'] ?>">
+                <a class="item<?php echo (!empty($hClasses) ? ' '.$hClasses : ''); ?>" href="<?php echo $hotel['url']; ?>"<?php echo (!empty($hotel['service']) ? ' data-service="'.$hotel['service'].'"' : ''); ?><?php echo (!empty($hotel['service']) ? ' data-hotelId="'.$hotel[$serviceCode].'"' : ''); ?> data-internalId="<?php echo $hotel['id'] ?>"
+                    <?php if (isset($hotel['expedia_rate'])){echo 'data-expedia = "'.$hotel['expedia_rate'] .' '. $hotel['expedia_curr'].'" ';} if (isset($hotel['sabre_rate'])){echo 'data-sabre = "'.$hotel['sabre_rate'] .' '. $hotel['sabre_curr'].'"';}?>>
                     <figure>
                         <img src="<?php echo $hotel['image'];?>" alt=""/>
                     </figure>
