@@ -138,3 +138,28 @@
         <button rel="load-more">load more</button>
     </footer>
 </section>
+
+<div class="service-overlay">
+			<div class="content">
+				<button rel="close"></button>
+				<header>BOOK NOW!</header>
+				<div id="expedia-service">
+					<button>
+						<span>starting from</span>
+						<h4>1000$</h4>
+					</button>
+					<small>book with expedia</small>
+				</div>
+				<div id="sabre-service">
+					<button>
+						<span>starting from</span>
+						<h4>1000$</h4>
+					</button>
+					<small>*book with feather+flip</small>
+				</div>
+				<footer>
+					<sup>*</sup>
+					Feather+Flip perks may include free breakfasts, room upgrades and spa credits at partner hotels.
+				</footer>
+			</div>
+		</div>
