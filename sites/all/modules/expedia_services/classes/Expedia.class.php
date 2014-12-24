@@ -147,25 +147,76 @@ class Expedia
      * @param $creditCardExpirationYear
      * @return null|string
      */
-    public static function HotelBookReservation($hotelId, $checkin, $checkout,$roomConfig, $roomcode, $ratecode,
+    public static function HotelBookReservation($hotelId, $checkin, $checkout,$roomConfig, $roomcode, $ratecode, $rateKey, $supplierType, $chargeableRate,
                                                 $firstname, $lastname, $email, $phone, $creditCardType, $creaditCardNumber, $creditCardIdentifier,
                                                 $creditCardExpirationMonth, $creditCardExpirationYear)
     {
         $service = wsclient_service_load('expedia__rest');
         $service->settings['http_headers'] = array(
             //'Content-Type' => array('multipart/form-data'),
-            'Content-Type' => array('application/x-www-form-urlencoded'),
-            //'Accept' => array('application/xml')
+            'Content-Type' => array('application/x-www-form-urlencoded')
         );
+
         $service->url = 'https://book.api.ean.com';
-        $xml = <<<SESSIONCREATEXML
- <HotelRoomReservationRequest>
+
+        $xml =
+"<HotelRoomReservationRequest>
+    <hotelId>$hotelId</hotelId>
+    <arrivalDate>$checkin</arrivalDate>
+    <departureDate>$checkout</departureDate>
+    <supplierType>$supplierType</supplierType>
+    <rateKey>$rateKey</rateKey>
+    <roomTypeCode>$roomcode</roomTypeCode>
+    <rateCode>$ratecode</rateCode>
+    <chargeableRate>$chargeableRate</chargeableRate>
+    <RoomGroup>";
+        $rooms = "";
+        foreach ($roomConfig as $room)
+        {
+            $rooms .= "<Room>";
+            $rooms .="<numberOfAdults>".$room['adults']."</numberOfAdults>";
+            if (isset($room['children']) && ($room['children']['number'] > 0))
+            {
+                $rooms .= "<numberOfChildren>".count($room['children']['ages'])."</numberOfChildren>";
+                $rooms .= "<childAges>" . implode(',', $room['children']['ages']) . "</childAges>";
+            }
+            $rooms .= "<firstName>$firstname</firstName>";
+            $rooms .= "<lastName>$lastname</lastName>";
+            $rooms .= "</Room>";
+        }
+
+        $xml .= $rooms;
+
+        $xml .= "</RoomGroup>
+    <ReservationInfo>
+        <email>$email</email>
+        <firstName>$firstname</firstName>
+        <lastName>$lastname</lastName>
+        <homePhone>$phone</homePhone>
+        <creditCardType>$creditCardType</creditCardType>
+        <creditCardNumber>$creaditCardNumber</creditCardNumber>
+        <creditCardIdentifier>$creditCardIdentifier</creditCardIdentifier>
+        <creditCardExpirationMonth>$creditCardExpirationMonth</creditCardExpirationMonth>
+        <creditCardExpirationYear>$creditCardExpirationYear</creditCardExpirationYear>
+    </ReservationInfo>
+    <AddressInfo>
+        <address1>travelnow</address1>
+        <city>Seattle</city>
+        <stateProvinceCode>WA</stateProvinceCode>
+        <countryCode>US</countryCode>
+        <postalCode>98004</postalCode>
+    </AddressInfo>
+</HotelRoomReservationRequest>";
+
+
+/*
+$xml = "<HotelRoomReservationRequest>
     <hotelId>106347</hotelId>
     <arrivalDate>1/22/2015</arrivalDate>
     <departureDate>1/24/2015</departureDate>
     <supplierType>E</supplierType>
     <rateKey>af00b688-acf4-409e-8bdc-fcfc3d1cb80c</rateKey>
-    <roomTypeCode>198058</roomTypeCode>
+    <roomTypeCode>198058</roomTypeCode> 
     <rateCode>484072</rateCode>
     <chargeableRate>231.18</chargeableRate>
     <RoomGroup>
@@ -196,29 +247,20 @@ class Expedia
         <countryCode>US</countryCode>
         <postalCode>98004</postalCode>
     </AddressInfo>
-</HotelRoomReservationRequest>
-SESSIONCREATEXML;
+</HotelRoomReservationRequest>";*/
+
+/*
         // Set roomGroup data
         foreach ($roomConfig as $room) {
-            $values = array(
+            $roomGroup[] = array(
                 'Room' => array(
                     'numberOfAdults' => $room['adults'],
-                    //'numberOfChildren' => (isset($room['children']) && ($room['children']['number'] > 0)) ? count($room['children']['ages']) : 0,
-                    //'childAges' => (isset($room['children']) && ($room['children']['number'] > 0)) ? implode(',', $room['children']['ages']) : '',
+                    'numberOfChildren' => (isset($room['children']) && ($room['children']['number'] > 0)) ? count($room['children']['ages']) : 0,
+                    'childAges' => (isset($room['children']) && ($room['children']['number'] > 0)) ? implode(',', $room['children']['ages']) : '',
                     'firstName' => $firstname,
-                    'lastName' => $lastname,
-                    'bedTypeId'=> '15',
-                    'smokingPreference' =>'NS'
+                    'lastName' => $lastname
                 )
             );
-
-            if(isset($room['children']) && ($room['children']['number'] > 0))
-            {
-                $values['room']['numberOfChildren'] = count($room['children']['ages']);
-                $values['room']['childAges'] = implode(',', $room['children']['ages']);
-            }
-
-            $roomGroup[] = $values;
         }
 
 
@@ -246,7 +288,7 @@ SESSIONCREATEXML;
             'countryCode' => 'US',
             'postalCode' => '98004'
         );
-
+*/
 
 
         $res = null;
@@ -254,7 +296,6 @@ SESSIONCREATEXML;
         /*
         $service->settings['curl options'] = array(
             CURLOPT_POSTFIELDS => array(
-                //'xml' => htmlspecialchars($xml)
                 'hotelId' => $hotelId,
                 'arrivalDate' => $checkin,
                 'departureDate' => $checkout,
@@ -268,21 +309,11 @@ SESSIONCREATEXML;
         ));
         */
 
-        /*
-        $service->settings['curl options'] = array(
-            CURLOPT_SSL_VERIFYPEER => false
-        );
-        */
-
-        /*
-        $service->settings['curl options'] = array(
-            CURLOPT_SSL_VERIFYPEER => false,
-            CURLOPT_SSL_VERIFYHOST => 2
-        );*/
-
         try{
             //$res = $service->expedia__rest_room_reservation($hotelId, $checkin, $checkout, $roomcode, $ratecode, json_encode($roomGroup), json_encode($reservationInfo), json_encode($addressInfo),'E', '9dea54b4-2b95-4346-9ae1-3185757a96e9');
             $res = $service->expedia__rest_room_reservation_xml($xml);
+	    //dpm(self::ReadXML($xml));
+
         }
         catch(Exception $e){
             return $e->getMessage();
@@ -331,4 +362,19 @@ SESSIONCREATEXML;
 	{
 		return $obj['HotelListResponse']['EanWsError']['presentationMessage'];
 	}
+	
+	
+	/**
+	 * Format XML for print
+	 * @param $xml
+	 * @return string
+	 */
+	 private static function ReadXML($xml)
+	 {
+	    $dom = new DOMDocument;
+	    $dom->preserveWhiteSpace = FALSE;
+	    $dom->loadXML($xml);
+	    $dom->formatOutput = TRUE;
+	    return $dom->saveXml();
+	 }	
 }

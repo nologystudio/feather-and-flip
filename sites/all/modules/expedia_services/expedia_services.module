@@ -8,7 +8,7 @@
 */
 
 //if (empty(arg(0)))
- //	expedia_services_test();
+// 	expedia_services_test();
 /**
  * Tests wsclient connections
  *
@@ -19,6 +19,7 @@ function expedia_services_test()
 	if (module_exists('wsclient')):
 
         //Tarjeta de Prueba: VISA 4111111111111111 expiration 06 / 2016 CVC 737
+	//Tarjeta de Prueba: CA 5401999999999999 expiration 11 / 2016 CVC 123
 
         $star = '06/01/2015';
         $end =  '06/05/2015';
@@ -30,10 +31,13 @@ function expedia_services_test()
         $creditCardIdentifier = '737';
         $creditCardExpirationMonth = '06';
         $creditCardExpirationYear = '2016';
-        $firsName = 'Manolito';
-        $lastName = 'Gafotas';
-        $email = 'francisco@nologystudio.com';
+        $firsName = 'test';
+        $lastName = 'tester';
+        $email = 'test@travelnow.com';
         $phone = '928000000';
+	$rateKey = 'b2b46b0b-d98f-4548-807a-2ff139d1818a';
+	$supplierType = 'E';
+	$chargeableRate = '1912.48';
         $roomConfig = array();
         $roomConfig[] = array(
             'adults' => 2
@@ -46,8 +50,8 @@ function expedia_services_test()
         //$res = Expedia::RoomAvailability($hotelId, $star, $end, $roomConfig);
         //dpm($res);
 
-        //$res = Expedia::HotelBookReservation($hotelId, $star, $end, $roomConfig, $roomTypeCode,$rateCode, $firsName, $lastName,
-          //  $email,$phone, $creditCardType, $creditCardNumber, $creditCardIdentifier, $creditCardExpirationMonth, $creditCardExpirationYear);
+        //$res = Expedia::HotelBookReservation($hotelId, $star, $end, $roomConfig, $roomTypeCode,$rateCode, $rateKey, $supplierType, $chargeableRate, $firsName, $lastName,
+        //    $email,$phone, $creditCardType, $creditCardNumber, $creditCardIdentifier, $creditCardExpirationMonth, $creditCardExpirationYear);
         //dpm($res);
 
 
