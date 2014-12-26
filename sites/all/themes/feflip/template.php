@@ -130,9 +130,7 @@ function feflip_preprocess_node(&$variables) {
       $variables['previous'] = $urls['previous'];
       $variables['hotelreviews'] = url('node/'.$variables['node']->field_destination['und'][0]['entity']->nid).'/hotel-reviews';
       $images = array();
-      $images[] = array('url'     => 'http://placehold.it/1280x800',
-                        'text'    => $variables['node']->title,
-                        'size' => getimagesize('http://placehold.it/1280x800'));
+      $images[] = Helpers::GetMainImageFromFieldCollection($variables['node']->field_images, $variables['node']->title,'http://placehold.it/1280x800', 'headerslideshow');
       $variables['slideImages'] = $images; 
   }
   elseif (isset($variables['node']) && ($variables['node']->type == 'post')) {
