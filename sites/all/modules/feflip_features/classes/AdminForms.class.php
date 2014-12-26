@@ -145,7 +145,7 @@ class AdminForms
 
         return array(
             'sabre' => $sabreService->ListHotelAvail($values['sabreCodes'], $numAdults, $sabreChecking, $sabreCheckout),
-            'expedia' => Expedia::GetHotelsByCode($values['eanCodes'], $values['checkIn'], $values['checkOut'], $values['rooms']['info'])
+            'expedia' => Expedia::GetHotelsByCode_XML($values['eanCodes'], $values['checkIn'], $values['checkOut'], $values['rooms']['info'])
         );
     }
 
@@ -191,7 +191,7 @@ class AdminForms
                 return $sabreService->HotelDescription($sessionInfo, $hotelId, $numAdults, $sabreChecking, $sabreCheckout);
             }
             else
-                return Expedia::RoomAvailability($hotelId, $values['checkIn'], $values['checkOut'], $values['rooms']['info']);
+                return Expedia::RoomAvailability_XML($hotelId, $values['checkIn'], $values['checkOut'], $values['rooms']['info']);
         }
 
         /*

@@ -60,6 +60,43 @@ class Expedia
         return $res;
     }
 
+    public static function GetHotelsByCode_XML($hotelCodes, $checkin, $checkout, $roomConfig)
+    {
+        $service = wsclient_service_load('expedia__rest');
+        $service->settings['http_headers'] = array(
+            'Content-Type' => array('multipart/form-data'),
+        );
+
+       $xml="<HotelListRequest>
+    <arrivalDate>$checkin</arrivalDate>
+    <departureDate>$checkout</departureDate>
+    <RoomGroup>";
+        $rooms = "";
+        foreach ($roomConfig as $room)
+        {
+            $rooms .= "<Room>";
+            $rooms .="<numberOfAdults>".$room['adults']."</numberOfAdults>";
+            if (isset($room['children']) && ($room['children']['number'] > 0))
+            {
+                $rooms .= "<numberOfChildren>".count($room['children']['ages'])."</numberOfChildren>";
+                $rooms .= "<childAges>" . implode(',', $room['children']['ages']) . "</childAges>";
+            }
+            $rooms .= "</Room>";
+        }
+
+        $xml .= $rooms;
+        $xml .= "</RoomGroup>
+    <hotelIdList>". implode(',', $hotelCodes) ."</hotelIdList></HotelListRequest>";
+
+        $res = null;
+        try {
+            $res = $service->expedia__rest_hotel_list_by_hotel_codes_xml($xml);
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+        return $res;
+    }
+
 	/*
 	*	Get holtel info
 	*	@param hid
@@ -110,6 +147,44 @@ class Expedia
 		}
 		return $res;
 	}
+
+    public static function RoomAvailability_XML($hotelId, $checkin, $checkout, $roomConfig)
+    {
+        $service = wsclient_service_load('expedia__rest');
+        $service->settings['http_headers'] = array(
+            'Content-Type' => array('multipart/form-data'),
+        );
+
+        $xml="<HotelRoomAvailabilityRequest>
+    <hotelId>$hotelId</hotelId>
+    <arrivalDate>$checkin</arrivalDate>
+    <departureDate>$checkout</departureDate>
+    <includeDetails>true</includeDetails>
+    <RoomGroup>";
+        $rooms = "";
+        foreach ($roomConfig as $room)
+        {
+            $rooms .= "<Room>";
+            $rooms .="<numberOfAdults>".$room['adults']."</numberOfAdults>";
+            if (isset($room['children']) && ($room['children']['number'] > 0))
+            {
+                $rooms .= "<numberOfChildren>".count($room['children']['ages'])."</numberOfChildren>";
+                $rooms .= "<childAges>" . implode(',', $room['children']['ages']) . "</childAges>";
+            }
+            $rooms .= "</Room>";
+        }
+
+        $xml .= $rooms;
+        $xml .= "</RoomGroup></HotelRoomAvailabilityRequest>";
+
+        $res = null;
+        try {
+            $res = $service->expedia__rest_room_avail_xml($xml);
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+        return $res;
+    }
 
     /*
     *	Get room availability for list hotels
