@@ -95,8 +95,9 @@ if(isset($inputValues['service']) && !empty($inputValues['service']))
                                         <?php } if(count($node->field_phone_number) == 1){ ?>
                                         <li><?php echo $node->field_phone_number['und'][0]['value'];?></li>
                                         
-                                        <?php } if(count($node->field_hotel_url) == 1){ ?>
-                                        <li><a href="<?php echo 'http://'.$node->field_hotel_url['und'][0]['value'];?>" target="_blank"><?php echo $node->field_hotel_url['und'][0]['value'];?></a></li>
+                                        <?php } if(count($node->field_hotel_url) == 1){
+                                            $url_text = (isset($node->field_hotel_url_text['und']) ? $node->field_hotel_url_text['und'][0]['value'] : $node->field_hotel_url['und'][0]['value']); ?>
+                                        <li><a href="<?php echo 'http://'.$node->field_hotel_url['und'][0]['value'];?>" target="_blank"><?php echo $url_text;?></a></li>
                                         <?php } ?>
                                 </ul>
                         </h4>
