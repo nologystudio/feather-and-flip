@@ -140,7 +140,7 @@ class AdminForms
         foreach ($values['rooms']['info'] as $room) {
             $numAdults += $room['adults'];
             // adding children as adults
-            $numAdults += $room['children']['number'];
+            //$numAdults += $room['children']['number'];
         }
 
         return array(
@@ -166,7 +166,7 @@ class AdminForms
         foreach ($values['rooms']['info'] as $room) {
             $numAdults += $room['adults'];
             // adding children as adults
-            $numAdults += $room['children']['number'];
+            //$numAdults += $room['children']['number'];
         }
 
         $service = isset($values['service']) ? $values['service'] : null;
@@ -208,7 +208,24 @@ class AdminForms
 
         $service = isset($values['service']) ? $values['service'] : null;
 
-        if ($service == 'sabre')
+        /*
+        $keys = array_keys($values);
+        $message = '';
+        foreach($keys as $key)
+            $message .= $key .': ' . $values[$key] . ', ';
+        watchdog('AdminForm', 'boooking ===> '. $message);
+        */
+
+        $numAdults = 0;
+        $numChildren = 0;
+
+        /*
+        foreach ($values['rooms']['info'] as $room) {
+            $numAdults += $room['adults'];
+            $numChildren += $room['children']['number'];
+        }*/
+
+        if (isset($service) && $service == 'sabre')
         {
             $sessionInfo = $_SESSION['sabreSession'];
 
@@ -228,12 +245,19 @@ class AdminForms
                     'user_first_name'=>$values['firstName'],
                     'user_last_name'=>$values['lastName'],
                     'user_email'=>$values['email'],
+                    'user_phoneNumber' =>$values['phone'],
+                    'user_creditCard' => 'xxxxxxxxxxxx'. substr($values['creditCardNumber'], -4),
                     'booking_id'=>$result->Hotel->BasicPropertyInfo->ConfirmationNumber,
                     'booking_hotelName'=>$result->Hotel->BasicPropertyInfo->HotelName,
                     'booking_hotelContact'=>'',
                     'booking_ckeckIn'=>$values['checkIn'],
                     'booking_checkOut'=>$values['checkOut'],
-                    'booking_rate'=>$result->Hotel->RoomRates->RoomRate->Rates->Rate->Amount
+                    'booking_rate'=>$result->Hotel->RoomRates->RoomRate->Rates->Rate->Amount . ' ' . $result->Hotel->RoomRates->RoomRate->Rates->Rate->CurrencyCode,
+                    'booking_roomType' => '',
+                    'booking_nights' => $result->Hotel->TimeSpan->Duration,
+                    'booking_rooms' => $result->Hotel->NumberOfUnits,
+                    'booking_adults' => $numAdults,
+                    'booking_children' => $numChildren
                 );
 
                 Helpers::StoreBooking($args);
@@ -241,27 +265,57 @@ class AdminForms
 
             return $result;
         }
-        else
+        else if (isset($service) && $service == 'expedia')
         {
             $date = explode("-", $values['creditCardExpireDate']);
             $creditCardExpirationMonth = $date[1];
             $creditCardExpirationYear = $date[0];
 
-            /*return Expedia::HotelBookReservation($values['hotelId'], $values['checkIn'], $values['checkOut'], $values['rooms']['info'],
+            $result = array();
+            /*$result = Expedia::HotelBookReservation($values['hotelId'], $values['checkIn'], $values['checkOut'], $values['rooms']['info'],
                 $values['roomCode'], $values['rateCode'], $values['firstName'], $values['lastName'], $values['email'], $values['phone'],
                 $values['creditCardCode'], $values['creditCardNumber'], $values['creditCardIdentifier'], $creditCardExpirationMonth, $creditCardExpirationYear);*/
 
             $confirmationNumber = uniqid();
+            if (isset($result['processedWithConfirmation']) && isset($result['reservationStatusCode']) && $result['reservationStatusCode'] == 'CF')
+            {
+                $args = array(
+                    'user_first_name'=>$values['firstName'],
+                    'user_last_name'=>$values['lastName'],
+                    'user_email'=>$values['email'],
+                    'user_phoneNumber' =>$values['phone'],
+                    'user_creditCard' => 'xxxxxxxxxxxx'. substr($values['creditCardNumber'], -4),
+                    'booking_id'=>$result['itineraryId'] . '-' . $result['confirmationNumbers'],
+                    'booking_hotelName'=>$result['hotelName'],
+                    'booking_hotelContact'=>'',
+                    'booking_ckeckIn'=>$values['checkIn'],
+                    'booking_checkOut'=>$values['checkOut'],
+                    'booking_rate'=> $result['RateInfos']['RateInfo']['ChargeableRateInfo']['@Total'],
+                    'booking_nights' => $result['RateInfos']['RateInfo']['ChargeableRateInfo']['NightlyRatesPerRoom']['@size'],
+                    'booking_roomType' => $result['roomDescription'],
+                    'booking_rooms' => $result['numberOfRoomsBooked'],//isset($values['rooms']) ? $values['rooms'] : 0,
+                    'booking_adults' => $result['RateInfos']['RateInfo']['RoomGroup']['Room']['numberOfAdults'],
+                    'booking_children' => $result['RateInfos']['RateInfo']['RoomGroup']['Room']['numberOfChildren']
+                );
+            }
+
             $args = array(
                 'user_first_name'=>$values['firstName'],
                 'user_last_name'=>$values['lastName'],
                 'user_email'=>$values['email'],
+                'user_phoneNumber' =>$values['phone'],
+                'user_creditCard' => 'xxxxxxxxxxxx'. substr($values['creditCardNumber'], -4),
                 'booking_id'=>$confirmationNumber,
                 'booking_hotelName'=>'',
                 'booking_hotelContact'=>'',
                 'booking_ckeckIn'=>$values['checkIn'],
                 'booking_checkOut'=>$values['checkOut'],
-                'booking_rate'=> isset($values['total']) ? $values['total'] : ''
+                'booking_rate'=> isset($values['total']) ? $values['total'] : '',
+                'booking_roomType' => '',
+                'booking_nights' => '',
+                'booking_rooms' => isset($values['rooms']) ? $values['rooms'] : 0,
+                'booking_adults' => $numAdults,
+                'booking_children' => $numChildren
             );
 
             Helpers::StoreBooking($args);
