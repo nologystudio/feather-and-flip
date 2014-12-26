@@ -96,7 +96,11 @@
 			    {
 			        echo '<b>Error:</b>&nbsp;' . $error;
 			    }
-			break;			
+			break;
+            case 'customSearch':
+                $result = AdminForms::CustomSearch($input_values['key']);
+                echo json_encode($result);
+                break;
 			default:
 			break;
 		}
