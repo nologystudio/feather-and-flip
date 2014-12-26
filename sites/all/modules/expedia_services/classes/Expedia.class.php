@@ -160,6 +160,7 @@ class Expedia
     <arrivalDate>$checkin</arrivalDate>
     <departureDate>$checkout</departureDate>
     <includeDetails>true</includeDetails>
+    <includeRoomImages>true</includeRoomImages>
     <RoomGroup>";
         $rooms = "";
         foreach ($roomConfig as $room)
