@@ -255,27 +255,40 @@ function feflip_preprocess_views_view(&$variables) {
     elseif($view->name == 'booking_info' && $view->current_display == 'page')
     {
         $booking = array(
-            'id'=>'',
-            'firstName' => '',
-            'lastName' => '',
-            'mail' => '',
-            'hotelName' => '',
-            'checkIn' => '',
-            'checkOut'=> '',
-            'rate' => ''
+            'id'=>'...',
+            'firstName' => '...',
+            'lastName' => '...',
+            'mail' => '...',
+            'hotelName' => '...',
+            'checkIn' => '...',
+            'checkOut'=> '...',
+            'rate' => '...',
+            'creditCard' => '...',
+            'roomType' => '...',
+            'nights' => '...',
+            'rooms' => '...',
+            'adults' => '...',
+            'children' => '...'
         );
 
         if (count($view->result) > 0 && isset($view->result[0]->_field_data['entityform_id']['entity']))
         {
             $entity = $view->result[0]->_field_data['entityform_id']['entity'];
-            $booking['id'] =  isset($entity->field_booking_id['und'][0]['value']) ? $entity->field_booking_id['und'][0]['value'] : '';
-            $booking['firstName'] =  isset($entity->field_first_name['und'][0]['value']) ? $entity->field_first_name['und'][0]['value'] : '';
-            $booking['lastName'] =  isset($entity->field_last_name ['und'][0]['value']) ? $entity->field_last_name ['und'][0]['value'] : '';
-            $booking['mail'] =  isset($entity->field_email ['und'][0]['value']) ? $entity->field_email ['und'][0]['value'] : '';
-            $booking['hotelName'] =  isset($entity->field_hotel_name['und'][0]['value']) ? $entity->field_hotel_name['und'][0]['value'] : '';
-            $booking['checkIn'] =  isset($entity->field_check_in['und'][0]['value']) ? $entity->field_check_in['und'][0]['value'] : '';
-            $booking['checkOut'] =  isset($entity->field_check_out['und'][0]['value']) ? $entity->field_check_out['und'][0]['value'] : '';
-            $booking['rate'] =  isset($entity->field_rate['und'][0]['value']) ? $entity->field_rate['und'][0]['value'] : '';
+            $booking['id'] =  isset($entity->field_booking_id['und'][0]['value']) ? $entity->field_booking_id['und'][0]['value'] : '...';
+            $booking['firstName'] =  isset($entity->field_first_name['und'][0]['value']) ? $entity->field_first_name['und'][0]['value'] : '...';
+            $booking['lastName'] =  isset($entity->field_last_name ['und'][0]['value']) ? $entity->field_last_name ['und'][0]['value'] : '...';
+            $booking['phone'] = isset($entity->field_phone_number ['und'][0]['value']) ? $entity->field_phone_number ['und'][0]['value'] : '...';
+            $booking['mail'] =  isset($entity->field_email ['und'][0]['value']) ? $entity->field_email ['und'][0]['value'] : '...';
+            $booking['hotelName'] =  isset($entity->field_hotel_name['und'][0]['value']) ? $entity->field_hotel_name['und'][0]['value'] : '...';
+            $booking['checkIn'] =  isset($entity->field_check_in['und'][0]['value']) ? $entity->field_check_in['und'][0]['value'] : '...';
+            $booking['checkOut'] =  isset($entity->field_check_out['und'][0]['value']) ? $entity->field_check_out['und'][0]['value'] : '...';
+            $booking['rate'] =  isset($entity->field_rate['und'][0]['value']) ? $entity->field_rate['und'][0]['value'] : '...';
+            $booking['creditCard'] =  isset($entity->field_credit_card['und'][0]['value']) ? $entity->field_credit_card['und'][0]['value'] : '...';
+            $booking['roomType'] =  isset($entity->field_room_type['und'][0]['value']) ? $entity->field_room_type['und'][0]['value'] : '...';
+            $booking['nights'] =  isset($entity->field_nights['und'][0]['value']) ? $entity->field_nights['und'][0]['value'] : '...';
+            $booking['rooms'] =  isset($entity->field_rooms['und'][0]['value']) ? $entity->field_rooms['und'][0]['value'] : '...';
+            $booking['adults'] =  isset($entity->field_adults['und'][0]['value']) ? $entity->field_adults['und'][0]['value'] : '...';
+            $booking['children'] =  isset($entity->field_children['und'][0]['value']) ? $entity->field_children['und'][0]['value'] : '...';
         }
 
         $variables['booking'] = $booking;

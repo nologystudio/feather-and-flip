@@ -1,6 +1,6 @@
 <?php include 'slideshowandmainmenu.html.php';?>
 
-<section id="booking-engine">
+<section id="booking-engine" class="expanded">
     <div id="step-5">
         <header>
             <div class="wrapper">
@@ -27,15 +27,15 @@
                     </li>
                     <li>
                         <span>Phone</span>
-                        <span>...</span>
+                        <span><?php echo $booking['phone'];?></span>
                     </li>
                     <li>
                         <span>Credit card number</span>
-                        <span>...</span>
+                        <span><?php echo $booking['creditCard'];?></span>
                     </li>
                     <li>
                         <span>Room Type</span>
-                        <span>...</span>
+                        <span><?php echo $booking['roomType'];?></span>
                     </li>
                     <li>
                         <span>Check-in</span>
@@ -47,19 +47,19 @@
                     </li>
                     <li>
                         <span>Nights</span>
-                        <span>...</span>
+                        <span><?php echo $booking['nights'];?></span>
                     </li>
                     <li>
                         <span>Rooms</span>
-                        <span>...</span>
+                        <span><?php echo $booking['rooms'];?></span>
                     </li>
                     <li>
                         <span>Adults</span>
-                        <span>...</span>
+                        <span><?php echo $booking['adults'];?></span>
                     </li>
                     <li class="clear-border">
                         <span>Children</span>
-                        <span>...</span>
+                        <span><?php echo $booking['children'];?></span>
                     </li>
                     <li>
                         <span>Total</span>
