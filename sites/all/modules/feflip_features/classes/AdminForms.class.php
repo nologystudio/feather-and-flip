@@ -467,25 +467,27 @@ class AdminForms
      */
     static function CustomSearch($key)
     {
-        $efq = new EntityFieldQuery();
-        $result = $efq->entityCondition('entity_type', 'node')
-            ->entityCondition('bundle', array('destination', 'hotel'), 'IN')
-            ->propertyCondition('title', $key, 'CONTAINS')
-            ->execute();
         $payload = array('destinations' => array(), 'hotels' => array());
-        if (isset($result['node']) && !empty($result['node'])){
-            foreach ($result['node'] as $key => $res) {
-                $node = node_load($res->nid);
-                $image = Helpers::GetMainImageFromFieldCollection($node->field_images, $node->title,'http://placehold.it/100x100', 'itinerary_main_icon');
-                switch ($node->type) {
-                    case 'destination':
-                        $payload['destinations'][] = array('title' => $node->title, 'image' => $image['url'], 'url' => drupal_get_path_alias('node/'.$node->nid.'/itinerary'));
-                        break;
-                    case 'hotel':
-                        $payload['hotels'][] = array('title' => $node->title, 'image' => $image['url'], 'url' => drupal_get_path_alias('node/'.$node->nid));
-                        break;
-                    default:
-                        break;
+        if (!empty($key)){
+            $efq = new EntityFieldQuery();
+            $result = $efq->entityCondition('entity_type', 'node')
+                ->entityCondition('bundle', array('destination', 'hotel'), 'IN')
+                ->propertyCondition('title', $key, 'CONTAINS')
+                ->execute();
+            if (isset($result['node']) && !empty($result['node'])){
+                foreach ($result['node'] as $key => $res) {
+                    $node = node_load($res->nid);
+                    $image = Helpers::GetMainImageFromFieldCollection($node->field_images, $node->title,'http://placehold.it/100x100', 'itinerary_main_icon');
+                    switch ($node->type) {
+                        case 'destination':
+                            $payload['destinations'][] = array('title' => $node->title, 'image' => $image['url'], 'url' => drupal_get_path_alias('node/'.$node->nid.'/itinerary'));
+                            break;
+                        case 'hotel':
+                            $payload['hotels'][] = array('title' => $node->title, 'image' => $image['url'], 'url' => drupal_get_path_alias('node/'.$node->nid));
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
         }
