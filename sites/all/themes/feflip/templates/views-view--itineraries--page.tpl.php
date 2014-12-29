@@ -1,6 +1,6 @@
 <?php include 'slideshowandmainmenu.html.php';?>
 
-<section id="itinerary">
+<section id="itinerary" ng-controller="ItineraryCtrl">
         <header>
                 <ul>
                         <li><button rel="eat">eat</button></li>

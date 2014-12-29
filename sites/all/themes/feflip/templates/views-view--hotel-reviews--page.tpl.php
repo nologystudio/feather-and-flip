@@ -30,7 +30,7 @@
                 <h1 class="middle-line">Hotel Reviews</h1>
                 <div id="filter-container">
 					<ul role="select" class="dark">
-						<li>filter by category</li>
+						<li>Reset Filters</li>
 					</ul>
 					<ul id="filter-list" ng-controller="HotelFilterCtrl">
 						<?php

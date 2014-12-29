@@ -69,7 +69,7 @@
             <meta name="language" content="es"/>
             <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
             <!--<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7, IE=9">-->
-            <meta content="initial-scale=1, minimum-scale=1, width=device-width" name="viewport">		    
+            <!--<meta content="initial-scale=1, minimum-scale=1, width=device-width" name="viewport">-->	    
             
             <title><?php echo $headerTitle; ?></title>
             <link rel="shortcut icon" href="media/favicon.ico" type="image/x-icon">

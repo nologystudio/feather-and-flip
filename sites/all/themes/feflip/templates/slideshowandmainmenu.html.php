@@ -51,10 +51,20 @@
 						<a id="brand" href="/"></a>
                         <?php $form = drupal_get_form('feflip_features_search_form'); ?>
                         <?php //echo drupal_render($form); ?>
-                        <form id="search">
-                                <input type="text" placeholder="Enter destination or hotel" value=""/>
-                                <input type="submit" value=""/>
-                        </form>
+                        <form id="search" ng-controller="SearchCtrl">
+							<input type="text" placeholder="Enter destination or hotel" ng-keyup="searchSubmit()" value="{{userSearch}}" ng-model="userSearch"/>
+							<input type="submit" ng-click="searchSubmit()" value=""/>
+							<ul ng-if="showResult">
+								<li class="title" ng-if="hotels.length > 0">Hotels</li>
+								<li class="hotel" ng-repeat="hotel in hotels">
+									<a href="{{hotel.url}}">{{hotel.title}}</a>
+								</li>
+								<li class="title" ng-if="destinations.length > 0">Destinations</li>
+								<li class="destination" ng-repeat="destination in destinations">
+									<a href="{{destination.url}}">{{destination.title}}</a>
+								</li>
+							</ul>
+						</form>
                         <?php print_r($main_navigation); ?>
                 </div>
         </nav>
