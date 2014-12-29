@@ -107,7 +107,7 @@ function feflip_preprocess_user_profile(&$variables)
     $images = array();
     $images[] = array('url' => 'http://placehold.it/1280x800',
         'text' => 'User profile',
-        'size' => getimagesize('http://placehold.it/1280x800'));
+        'size' => array(1280,800));//getimagesize('http://placehold.it/1280x800'));
     $variables['slideImages'] = $images;
     $variables['main_navigation'] = get_header_main_navigation_menu();
 }
@@ -150,7 +150,7 @@ function feflip_preprocess_views_view(&$variables) {
   $images = array();
   $images[] = array('url'     => 'http://placehold.it/1280x800',
                     'text'    => '',
-                    'size' => getimagesize('http://placehold.it/1280x800'));
+                    'size' => array(1280,800));//getimagesize('http://placehold.it/1280x800'));
   
   
   // Home View
@@ -257,6 +257,7 @@ function feflip_preprocess_views_view(&$variables) {
             'firstName' => '...',
             'lastName' => '...',
             'mail' => '...',
+            'phone'=> '...',
             'hotelName' => '...',
             'checkIn' => '...',
             'checkOut'=> '...',

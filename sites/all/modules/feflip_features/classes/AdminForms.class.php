@@ -208,15 +208,14 @@ class AdminForms
 
         $service = isset($values['service']) ? $values['service'] : null;
 
-
         $numAdults = 0;
         $numChildren = 0;
 
-        /*
         foreach ($values['rooms']['info'] as $room) {
             $numAdults += $room['adults'];
             $numChildren += $room['children']['number'];
-        }*/
+        }
+
         $args = array();
         if (isset($service) && $service == 'sabre')
         {
@@ -250,7 +249,8 @@ class AdminForms
                     'booking_nights' => $result->Hotel->TimeSpan->Duration,
                     'booking_rooms' => $result->Hotel->NumberOfUnits,
                     'booking_adults' => $numAdults,
-                    'booking_children' => $numChildren
+                    'booking_children' => $numChildren,
+                    'booking_service' => $service
                 );
             }
 
@@ -266,8 +266,9 @@ class AdminForms
                 $values['roomCode'], $values['rateCode'], $values['rateKey'], $values['supplierType'], $values['chargeableRate'], $values['firstName'], $values['lastName'], $values['email'], $values['phone'],
                 $values['creditCardCode'], $values['creditCardNumber'], $values['creditCardIdentifier'], $creditCardExpirationMonth, $creditCardExpirationYear);
 
+            //watchdog('HotelBookingReservation', 'Expedia.class ===> '. '<pre>' . print_r( $result, true) . '</pre>');
 
-            if (isset($result['processedWithConfirmation']) && isset($result['reservationStatusCode']) && $result['reservationStatusCode'] == 'CF')
+            if(isset($result['HotelRoomReservationResponse']) && isset($result['HotelRoomReservationResponse']['processedWithConfirmation']) && isset($result['HotelRoomReservationResponse']['reservationStatusCode']) && $result['HotelRoomReservationResponse']['reservationStatusCode'] == 'CF')
             {
                 $args = array(
                     'user_first_name'=>$values['firstName'],
@@ -275,19 +276,22 @@ class AdminForms
                     'user_email'=>$values['email'],
                     'user_phoneNumber' =>$values['phone'],
                     'user_creditCard' => 'xxxxxxxxxxxx'. substr($values['creditCardNumber'], -4),
-                    'booking_id'=>$result['itineraryId'] . '-' . $result['confirmationNumbers'],
-                    'booking_hotelName'=>$result['hotelName'],
+                    'booking_id'=>$result['HotelRoomReservationResponse']['itineraryId'], //. '-' . $result['confirmationNumbers'],
+                    'booking_hotelName'=>$result['HotelRoomReservationResponse']['hotelName'],
                     'booking_hotelContact'=>'',
                     'booking_ckeckIn'=>$values['checkIn'],
                     'booking_checkOut'=>$values['checkOut'],
-                    'booking_rate'=> $result['RateInfos']['RateInfo']['ChargeableRateInfo']['@Total'],
-                    'booking_nights' => $result['RateInfos']['RateInfo']['ChargeableRateInfo']['NightlyRatesPerRoom']['@size'],
-                    'booking_roomType' => $result['roomDescription'],
-                    'booking_rooms' => $result['numberOfRoomsBooked'],
-                    'booking_adults' => $result['RateInfos']['RateInfo']['RoomGroup']['Room']['numberOfAdults'],
-                    'booking_children' => $result['RateInfos']['RateInfo']['RoomGroup']['Room']['numberOfChildren']
+                    'booking_rate'=> $result['HotelRoomReservationResponse']['RateInfos']['RateInfo']['ChargeableRateInfo']['@total'] . ' ' . $result['HotelRoomReservationResponse']['RateInfos']['RateInfo']['ChargeableRateInfo']['@currencyCode'],
+                    'booking_nights' => $result['HotelRoomReservationResponse']['RateInfos']['RateInfo']['ChargeableRateInfo']['NightlyRatesPerRoom']['@size'],
+                    'booking_roomType' => $result['HotelRoomReservationResponse']['roomDescription'],
+                    'booking_rooms' => $result['HotelRoomReservationResponse']['numberOfRoomsBooked'],
+                    'booking_adults' => $result['HotelRoomReservationResponse']['RateInfos']['RateInfo']['RoomGroup']['Room']['numberOfAdults'],
+                    'booking_children' => $result['HotelRoomReservationResponse']['RateInfos']['RateInfo']['RoomGroup']['Room']['numberOfChildren'],
+                    'booking_service' => $service
                 );
             }
+
+            //watchdog('HotelBookingReservation', 'Expedia.class  Args  ===> '. '<pre>' . print_r( $args, true) . '</pre>');
 
             return array('result' => $result, 'args' => $args);
 

@@ -8,6 +8,7 @@ if (isset($_SESSION['hotelDescription']))
     $hotelDescription = $_SESSION['hotelDescription'];
     unset($_SESSION['hotelDescription']);
 }
+
 if (isset($_SESSION['inputValues']))
 {
     $inputValues = $_SESSION['inputValues'];
@@ -30,7 +31,11 @@ if(isset($inputValues['service']) && !empty($inputValues['service']))
         </header>
 
     <!-- | i | Booking engine: Room detail --------------------------------------------------- -->
+    <?php if(count($inputValues) > 0){?>
+    <section id="booking-engine" ng-controller="BookingEngineCtrl" ng-include="booking" ng-init='init(<?php echo json_encode($inputValues);?>);state=3'></section>
+    <?php } else {?>
     <section id="booking-engine" ng-controller="BookingEngineCtrl" ng-include="booking" ng-init="state=3"></section>
+    <?php } ?>
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - -  - - - -  -  -->
 
     <article id="detail">
@@ -72,7 +77,7 @@ if(isset($inputValues['service']) && !empty($inputValues['service']))
                     <?php foreach($obj as $contentblock) {?>
                         <li>
                                 <ul>
-                                        <li><?php echo $contentblock['title'] ?></li>
+                                        <li id="<?php echo strtolower($contentblock['title']) ?>"><?php echo $contentblock['title'] ?></li>
                                          <?php $i=1; foreach($contentblock['features'] as $feature) {?>
                                             <li><span>&bull;</span><?php echo $feature; ?></li>
                                          <?php } ?>
@@ -83,6 +88,13 @@ if(isset($inputValues['service']) && !empty($inputValues['service']))
                 <?php } ?>
                 
                 <footer>
+					<h3 class="middle-line">Share this</h3>
+					<nav id="social-media">
+						<a href="#" rel="twitter"></a>
+						<a href="#" rel="facebook"></a>
+						<a href="#" rel="pinterest"></a>
+						<a href="#" rel="google-plus"></a>
+					</nav>
                         <h3 class="middle-line">Info</h3>
                         <h4>
                                 <ul>
