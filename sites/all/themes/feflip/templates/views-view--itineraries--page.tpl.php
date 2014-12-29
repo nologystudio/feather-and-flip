@@ -61,7 +61,9 @@
                         </ul>
                 </article>
         </div>
-        <footer></footer>
+       <footer>
+				<button rel="see-hotel-reviews">Go to Hotel Reviews</button>
+			</footer>
 </section>
 <?php if (isset($hotels)) print $hotels; ?>
 <?php if (isset($travel_journal)) print $travel_journal; ?>
