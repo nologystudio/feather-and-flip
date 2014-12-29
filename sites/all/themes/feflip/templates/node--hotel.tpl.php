@@ -94,7 +94,7 @@ if(isset($inputValues['service']) && !empty($inputValues['service']))
 					<nav id="social-media">
 						<a target="_blank" href="<?php echo getSocialLink('twitter', url('node/'.$node->nid, array('absolute' => TRUE))); ?>" rel="twitter"></a>
 						<a target="_blank" href="<?php echo getSocialLink('facebook', url('node/'.$node->nid, array('absolute' => TRUE))); ?>" rel="facebook"></a>
-						<a target="_blank" href="<?php echo getSocialLink('pinterest', url('node/'.$node->nid, array('absolute' => TRUE))); ?>" rel="pinterest"></a>
+						<a target="_blank" href="<?php echo getSocialLink('pinterest', url('node/'.$node->nid, array('absolute' => TRUE)), $images[0]['url'], $features[0][0]['features'][0]); ?>" rel="pinterest"></a>
 						<a target="_blank" href="<?php echo getSocialLink('google+', url('node/'.$node->nid, array('absolute' => TRUE))); ?>" rel="google-plus"></a>
 					</nav>
                         <h3 class="middle-line">Info</h3>

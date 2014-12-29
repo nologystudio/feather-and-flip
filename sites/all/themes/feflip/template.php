@@ -583,7 +583,7 @@ function feflip_html_head_alter(&$head_elements) {
 }
 
 // Generate share links
-function getSocialLink($_network,$url)
+function getSocialLink($_network,$url, $img = '', $desc = '')
 {
   if (strpos($url, 'http://') === false)
     $url = 'http://'.$_SERVER['HTTP_HOST'].'/'.$url;
@@ -595,7 +595,7 @@ function getSocialLink($_network,$url)
     return "https://twitter.com/share?url=".urlencode($url);
     break;
     case 'pinterest':
-    return "http://pinterest.com/pin/create/button/?url=".urlencode($url);
+    return "http://pinterest.com/pin/create/button/?url=".urlencode($url)."&media=".$img."&description=".urlencode($desc);
     break;
     case 'google+':
     return "https://plus.google.com/share?url=".urlencode($url);
