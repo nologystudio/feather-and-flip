@@ -83,8 +83,10 @@
                 //echo json_encode($result);
                 break;
             case 'hotelBooking':
-                $result = AdminForms::hotelBookingReservation($input_values);
-                echo json_encode($result);
+                $res = AdminForms::hotelBookingReservation($input_values);
+                if (!empty($res['args']))
+                    feflip_features_StoreBooking($res['args']);
+                echo json_encode($res['result']);
                 break;
 			case 'newsletterForm':
 			    // Connect with mailchimp library

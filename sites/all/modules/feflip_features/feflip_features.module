@@ -100,3 +100,42 @@ function feflip_features_cron() {
 	// Rss import task
 	Helpers::ImportExternalRss();
 }
+
+/*
+*   Save a new booking
+*/
+function feflip_features_StoreBooking($args)
+{
+    global $user;
+    $entityform = entity_create('entityform', array(
+    'type' => 'booking',
+    'created' => time(),
+    'changed' => time(),
+    'language' => LANGUAGE_NONE,
+    'uid' => $user->uid));
+
+    $wrapper = entity_metadata_wrapper('entityform', $entityform);
+
+    //Fill fields
+    $wrapper->field_first_name      = $args['user_first_name'];
+    $wrapper->field_last_name       = $args['user_last_name'];
+    $wrapper->field_email           = $args['user_email'];
+    $wrapper->field_phone_number    = $args['user_phoneNumber'];
+    $wrapper->field_credit_card     = $args['user_creditCard'];
+    $wrapper->field_room_type       = $args['booking_roomType'];
+    $wrapper->field_check_in        = $args['booking_ckeckIn'];
+    $wrapper->field_check_out       = $args['booking_checkOut'];
+    $wrapper->field_nights          = $args['booking_nights'];
+    $wrapper->field_rooms           = $args['booking_rooms'];
+    $wrapper->field_adults          = $args['booking_adults'];
+    $wrapper->field_children        = $args['booking_children'];
+    $wrapper->field_user_id         = $user->uid;
+    $wrapper->field_booking_id      = $args['booking_id'];
+    $wrapper->field_hotel_name      = $args['booking_hotelName'];
+    $wrapper->field_hotel_contact   = $args['booking_hotelContact'];
+    $wrapper->field_rate            = $args['booking_rate'];
+
+    //Done!
+    $wrapper->save();
+    rules_invoke_event('entityform_submission', $entityform);
+}

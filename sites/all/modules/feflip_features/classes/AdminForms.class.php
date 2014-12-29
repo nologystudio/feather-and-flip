@@ -217,7 +217,7 @@ class AdminForms
             $numAdults += $room['adults'];
             $numChildren += $room['children']['number'];
         }*/
-
+        $args = array();
         if (isset($service) && $service == 'sabre')
         {
             $sessionInfo = $_SESSION['sabreSession'];
@@ -252,11 +252,9 @@ class AdminForms
                     'booking_adults' => $numAdults,
                     'booking_children' => $numChildren
                 );
-
-                Helpers::StoreBooking($args);
             }
 
-            return $result;
+            return array('result' => $result, 'args' => $args);
         }
         else if (isset($service) && $service == 'expedia')
         {
@@ -289,11 +287,9 @@ class AdminForms
                     'booking_adults' => $result['RateInfos']['RateInfo']['RoomGroup']['Room']['numberOfAdults'],
                     'booking_children' => $result['RateInfos']['RateInfo']['RoomGroup']['Room']['numberOfChildren']
                 );
-
-                Helpers::StoreBooking($args);
             }
 
-            return $result;
+            return array('result' => $result, 'args' => $args);
 
             /*
             $confirmationNumber = uniqid();
@@ -316,7 +312,7 @@ class AdminForms
                 'booking_children' => $numChildren
             );
 
-            Helpers::StoreBooking($args);
+            feflip_features_StoreBooking($args);
 
             return $confirmationNumber;
             */
@@ -480,10 +476,10 @@ class AdminForms
                     $image = Helpers::GetMainImageFromFieldCollection($node->field_images, $node->title,'http://placehold.it/100x100', 'itinerary_main_icon');
                     switch ($node->type) {
                         case 'destination':
-                            $payload['destinations'][] = array('title' => $node->title, 'image' => $image['url'], 'url' => drupal_get_path_alias('node/'.$node->nid.'/itinerary'));
+                            $payload['destinations'][] = array('title' => $node->title, 'image' => $image['url'], 'url' => '/'.drupal_get_path_alias('node/'.$node->nid.'/itinerary'));
                             break;
                         case 'hotel':
-                            $payload['hotels'][] = array('title' => $node->title, 'image' => $image['url'], 'url' => drupal_get_path_alias('node/'.$node->nid));
+                            $payload['hotels'][] = array('title' => $node->title, 'image' => $image['url'], 'url' => '/'.drupal_get_path_alias('node/'.$node->nid));
                             break;
                         default:
                             break;
