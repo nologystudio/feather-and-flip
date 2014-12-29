@@ -65,10 +65,11 @@
         <!--[if gt IE 8]><!--> <html ng-app="ffApp" class="no-js"> <!--<![endif]-->       
         
         <head>
-            <meta charset="utf-8">
-            <meta name="language" content="es"/>
-            <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
             <!--<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7, IE=9">-->
+            <?php // | i | Social Media block... ?>
+            <?php echo $head; ?>
+            <?php // | i | Languages and Canonical... ?>
             <!--<meta content="initial-scale=1, minimum-scale=1, width=device-width" name="viewport">-->	    
             
             <title><?php echo $headerTitle; ?></title>
@@ -76,42 +77,6 @@
                 <link rel="icon"          href="media/favicon.ico" type="image/x-icon">
                 
             <link rel="image_src"    href="<?php echo variable_get('relativePath').'media/sharing/'.$siteImage.'.jpg'; ?>">
-            <meta name="description" content="<?php echo $pageDescription; ?>">
-            <meta name="keywords"    content="<?php echo $pageKeywords; ?>">
-           
-            <?php // | i | Social Media block... ?>
-            
-            <?php if($opengraph): ?>
-            
-                    <meta property="og:title"       content="<?php echo $headerTitle; ?>"> 
-                    <meta property="og:locale"      content="es">  
-                    <meta property="og:image"       content="<?php echo variable_get('relativePath').'media/sharing/'.$siteImage.'.jpg'; ?>">
-                    <meta property="og:description" content="<?php echo $pageDescription; ?>"> 
-                    <meta property="og:url"         content="<?php echo $pageURL; ?>">
-                    <meta property="og:type"        content="website">
-                    
-                    <meta property="og:article:published_time"  content=""> 
-                    <meta property="og:article:modified_time"   content=""> 
-                    <meta property="og:article:expiration_time" content=""> 
-                    <meta property="og:article:author"          content=""> 
-                    <meta property="og:article:section"         content=""> 
-                    <meta property="og:article:tag"  			content=""> 
-                    
-            <?php endif; ?>
-            
-            <?php if($twitterCard): ?>
-            
-                    <meta name="twitter:card"        content="summary">
-                    <meta name="twitter:site"        content="">
-                    <meta name="twitter:creator"     content="">
-                    <meta name="twitter:url"         content="">
-                    <meta name="twitter:title"       content="">
-                    <meta name="twitter:description" content="<?php echo $pageDescription; ?>">
-                    <meta name="twitter:image"       content="">
-            
-            <?php endif; ?>
-            
-                <?php // | i | Languages and Canonical... ?>
                
             <link rel="canonical" href="">		    
             <link rel="alternate" hreflang="x-default" href="">

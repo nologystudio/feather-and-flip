@@ -130,6 +130,7 @@ function feflip_features_StoreBooking($args)
     $wrapper->field_adults          = $args['booking_adults'];
     $wrapper->field_children        = $args['booking_children'];
     $wrapper->field_user_id         = $user->uid;
+    $wrapper->field_service         = $args['booking_service'];
     $wrapper->field_booking_id      = $args['booking_id'];
     $wrapper->field_hotel_name      = $args['booking_hotelName'];
     $wrapper->field_hotel_contact   = $args['booking_hotelContact'];
@@ -137,5 +138,50 @@ function feflip_features_StoreBooking($args)
 
     //Done!
     $wrapper->save();
-    rules_invoke_event('entityform_submission', $entityform);
+
+    // FORM SUBMISSION
+    // $form = new Entityform(array(
+    //   'type' => 'booking',
+    //   'language' => LANGUAGE_NONE,
+    //   'created' => time(),
+    //   'changed' => time(),
+    //   'uid' => $user->uid));
+
+    // $form->field_first_name     = array(LANGUAGE_NONE => array(array('value' => $args['user_first_name'])));
+    // $form->field_last_name      = array(LANGUAGE_NONE => array(array('value' => $args['user_last_name'])));
+    // $form->field_email          = array(LANGUAGE_NONE => array(array('value' => $args['user_email'])));
+    // $form->field_phone_number   = array(LANGUAGE_NONE => array(array('value' => $args['user_phoneNumber'])));
+    // $form->field_credit_card    = array(LANGUAGE_NONE => array(array('value' => $args['user_creditCard'])));
+    // $form->field_room_type      = array(LANGUAGE_NONE => array(array('value' => $args['booking_roomType'])));
+    // $form->field_check_in       = array(LANGUAGE_NONE => array(array('value' => $args['booking_ckeckIn'])));
+    // $form->field_check_out      = array(LANGUAGE_NONE => array(array('value' => $args['booking_checkOut'])));
+    // $form->field_nights         = array(LANGUAGE_NONE => array(array('value' => $args['booking_nights'])));
+    // $form->field_rooms          = array(LANGUAGE_NONE => array(array('value' => $args['booking_rooms'])));
+    // $form->field_adults         = array(LANGUAGE_NONE => array(array('value' => $args['booking_adults'])));
+    // $form->field_children       = array(LANGUAGE_NONE => array(array('value' => $args['booking_children'])));
+    // $form->field_user_id        = array(LANGUAGE_NONE => array(array('value' => $user->uid)));
+    // $form->field_service        = array(LANGUAGE_NONE => array(array('value' => $args['booking_service'])));
+    // $form->field_booking_id     = array(LANGUAGE_NONE => array(array('value' => $args['booking_id'])));
+    // $form->field_hotel_name     = array(LANGUAGE_NONE => array(array('value' => $args['booking_hotelName'])));
+    // $form->field_hotel_contact  = array(LANGUAGE_NONE => array(array('value' => $args['booking_hotelContact'])));
+    // $form->field_rate           = array(LANGUAGE_NONE => array(array('value' => $args['booking_rate'])));
+
+    // $form->uid = 1;
+    // entityform_save($form);
+
+
+}
+
+/**
+ * Implements hook_mail().
+ */
+function feflip_features_mail($key, &$message, $params) {
+  $message['module'] = 'feflip_features';
+  $message['key'] = $key;
+  $message['subject'] = $params['subject'];
+  $message['body'] = explode(
+    MAIL_LINE_ENDINGS . MAIL_LINE_ENDINGS,
+    $params['body']
+  );
+  return $message;
 }

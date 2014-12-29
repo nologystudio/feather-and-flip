@@ -25,6 +25,8 @@
 
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 		
+		<script type="text/javascript" charset="utf-8" src="<?php echo variable_get('relativePath'); ?>library/vendors/moment.min.js"></script>
+		<script type="text/javascript" charset="utf-8" src="<?php echo variable_get('relativePath'); ?>library/vendors/moment-range.min.js"></script>
 		<script type="text/javascript" charset="utf-8" src="<?php echo variable_get('relativePath'); ?>library/vendors/underscore.min.js"></script>
 		<script type="text/javascript" charset="utf-8" src="<?php echo variable_get('relativePath'); ?>library/vendors/angular/angular.min.js"></script>
 		<script type="text/javascript" charset="utf-8" src="<?php echo variable_get('relativePath'); ?>library/vendors/angular/angular-route.min.js"></script>

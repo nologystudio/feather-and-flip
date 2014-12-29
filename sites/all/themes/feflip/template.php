@@ -556,3 +556,50 @@ function get_footer_fixed_menu() {
   $output .= '</ul>';
   return $output;
 }
+
+// replace some metatags
+function feflip_html_head_alter(&$head_elements) {
+  $head_elements['system_meta_content_type']['#attributes'] = array (
+    'charset' => 'utf-8'
+    );
+  // Force global language metatag
+  $head_elements['language_global_metatag'] = array(
+    '#type' => 'html_tag',
+    '#tag' => 'meta',
+    '#attributes' => array('content' => 'en', 'name' => 'language'),
+    );
+  // Force global viewport metatag
+  // $head_elements['viewport_metatag'] = array(
+  //  '#type' => 'html_tag',
+  //  '#tag' => 'meta',
+  //  '#attributes' => array('content' => 'initial-scale=1, minimum-scale=1, width=device-width', 'name' => 'viewport'),
+  //  );
+  // Force the latest IE rendering engine and Google Chrome Frame.
+  $head_elements['chrome_frame'] = array(
+    '#type' => 'html_tag',
+    '#tag' => 'meta',
+    '#attributes' => array('http-equiv' => 'X-UA-Compatible', 'content' => 'IE=edge,chrome=1'),
+    );
+}
+
+// Generate share links
+function getSocialLink($_network,$url)
+{
+  if (strpos($url, 'http://') === false)
+    $url = 'http://'.$_SERVER['HTTP_HOST'].'/'.$url;
+  switch($_network){
+    case 'facebook':
+    return 'http://www.facebook.com/sharer.php?u='.urlencode($url);
+    break;
+    case 'twitter':
+    return "https://twitter.com/share?url=".urlencode($url);
+    break;
+    case 'pinterest':
+    return "http://pinterest.com/pin/create/button/?url=".urlencode($url);
+    break;
+    case 'google+':
+    return "https://plus.google.com/share?url=".urlencode($url);
+    break;
+    break;
+  }
+}

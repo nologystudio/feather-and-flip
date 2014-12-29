@@ -92,10 +92,10 @@ if(isset($inputValues['service']) && !empty($inputValues['service']))
                 <footer>
 					<h3 class="middle-line">Share this</h3>
 					<nav id="social-media">
-						<a href="#" rel="twitter"></a>
-						<a href="#" rel="facebook"></a>
-						<a href="#" rel="pinterest"></a>
-						<a href="#" rel="google-plus"></a>
+						<a target="_blank" href="<?php echo getSocialLink('twitter', url('node/'.$node->nid, array('absolute' => TRUE))); ?>" rel="twitter"></a>
+						<a target="_blank" href="<?php echo getSocialLink('facebook', url('node/'.$node->nid, array('absolute' => TRUE))); ?>" rel="facebook"></a>
+						<a target="_blank" href="<?php echo getSocialLink('pinterest', url('node/'.$node->nid, array('absolute' => TRUE))); ?>" rel="pinterest"></a>
+						<a target="_blank" href="<?php echo getSocialLink('google+', url('node/'.$node->nid, array('absolute' => TRUE))); ?>" rel="google-plus"></a>
 					</nav>
                         <h3 class="middle-line">Info</h3>
                         <h4>
