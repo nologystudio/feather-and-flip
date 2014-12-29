@@ -9,9 +9,11 @@ if (isset($_SESSION['hotelDescription']))
     unset($_SESSION['hotelDescription']);
 }
 
+$dataInputValues = '';
 if (isset($_SESSION['inputValues']))
 {
     $inputValues = $_SESSION['inputValues'];
+    $dataInputValues = 'data-inputvalues=\''. json_encode($inputValues) . '\'';
     unset($_SESSION['inputValues']);
 }
 
@@ -25,7 +27,7 @@ if(isset($inputValues['service']) && !empty($inputValues['service']))
 
 ?>
 
-<section id="hotel" <?php echo $datas; ?>>
+<section id="hotel" <?php echo $datas . ' ' . $dataInputValues; ?>>
         <header id="booking-header-engine">
             <form id="booking-search" ng-controller="BookingEngineCtrl" ng-include="searchTpl"></form>
         </header>
