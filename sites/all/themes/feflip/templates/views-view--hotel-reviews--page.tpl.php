@@ -80,7 +80,7 @@
 
             }
 
-            if (count($hotels) == count($withOutRate))
+            if (count($withRate) == 0)
                 $showNotAvailable = true;
 
             //Se define funcion para ordenar por el rate
