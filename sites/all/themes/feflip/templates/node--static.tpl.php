@@ -30,7 +30,7 @@
 					<p>Henley’s decade of experience in the travel industry includes Town & Country Travel, National Geographic Traveler, Departures, Ultratravel and Indagare. Despite  her background, she found planning trips for her own family frustrating, and every parent she knew shared the same problems. Henley joined forces with the Feather+Flip team to create a website where families could easily decide where to stay, which room to reserve and what to do while they are there - all quickly bookable online. Her motto: life is too short for bad hotels. Henley lives in New York City with her husband and two children and graduated from Princeton University.</p>
 				</li>
                 <li>
-                    <h3> NIKKI RIDGWAY, EDITOR/CO-FUNDER</h3>
+                    <h3> NIKKI RIDGWAY, EDITOR/CO-FOUNDER</h3>
                     <p>An English girl in New York, Nikki moved to New York  in 2009 after stints at travel magazines in Kuala Lumpur and London. She was associate editor at Indagare and, most recently, senior editor at Jetsetter.com. She has traveled to over 40 countries, including a yearlong trip around South America and a four-month passage across the Pacific Ocean. She lives in Brooklyn with her husband and son. Nikki studied English Literature at University of Sussex.</p>
                 </li>
 				<li>

@@ -125,7 +125,7 @@
 <hr />
 <div class="htmlmail-debug">
   <dl><dt><p>
-    To customize this message:
+    To customize this messagesss:
   </p></dt><dd><ol><li><p><?php if (empty($theme)): ?>
     Visit <u>admin/config/system/htmlmail</u>
     and select a theme to hold your custom email template files.

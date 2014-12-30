@@ -29,7 +29,11 @@ if(isset($inputValues['service']) && !empty($inputValues['service']))
 
 <section id="hotel" <?php echo $datas . ' ' . $dataInputValues; ?>>
         <header id="booking-header-engine">
-            <form id="booking-search" ng-controller="BookingEngineCtrl" ng-include="searchTpl"></form>
+            <?php if(count($inputValues) > 0){?>
+                <form id="booking-search" ng-controller="BookingEngineCtrl" ng-include="searchTpl" ng-init='init(<?php echo json_encode($inputValues);?>)'></form>
+            <?php } else { ?>
+                <form id="booking-search" ng-controller="BookingEngineCtrl" ng-include="searchTpl" ng-init="bookingInfo.destination = 0"></form>
+            <?php } ?>
         </header>
 
     <!-- | i | Booking engine: Room detail --------------------------------------------------- -->
