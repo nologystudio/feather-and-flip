@@ -362,11 +362,11 @@ class AdminForms
             try
             {
                 $account = user_save(NULL, $new_user);
+                _user_mail_notify('register_no_approval_required', $account);
 
                 $result = self::signInUser($input_values, $error);
 
                 $error = '';
-                _user_mail_notify('register_no_approval_required', $account);
                 return $result;
             }
             catch (Exception $e)
@@ -461,6 +461,7 @@ class AdminForms
             $result = $efq->entityCondition('entity_type', 'node')
                 ->entityCondition('bundle', array('destination', 'hotel'), 'IN')
                 ->propertyCondition('title', $key, 'CONTAINS')
+                ->propertyOrderBy('title', 'ASC')
                 ->execute();
             if (isset($result['node']) && !empty($result['node'])){
                 foreach ($result['node'] as $key => $res) {

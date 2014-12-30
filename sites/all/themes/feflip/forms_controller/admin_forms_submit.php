@@ -12,7 +12,7 @@
 		define('DRUPAL_ROOT', getcwd());
 		require_once DRUPAL_ROOT . '/includes/bootstrap.inc';
 		drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
-        drupal_settings_initialize();
+        //drupal_settings_initialize();
 
 		//watchdog('FormsController', 'formID ===> '.$_POST['formID']);
 
