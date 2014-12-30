@@ -261,7 +261,7 @@ class Sabre
      * @param $end
      * @return string
      */
-    public function ListHotelAvail($hotelsCodes, $numpersonas, $start, $end)
+    public function ListHotelAvail($hotelsCodes, $rateCodes, $numpersonas, $start, $end)
     {
         //Open session with sabre
         $sessionInfo = $this->CreateSession();
@@ -289,6 +289,11 @@ class Sabre
             foreach($hotelsCodes as $hotelCode) {
                 if ($hotelCode == '0000000')continue;
                 $args['AvailRequestSegment']['HotelSearchCriteria']['Criterion']['HotelRef'][]['HotelCode'] = $hotelCode;
+            }
+
+            if (isset($rateCodes) && count($rateCodes) > 0) {
+                foreach ($rateCodes as $rate)
+                    $args['AvailRequestSegment']['RatePlanCandidates']['ContractNegotiatedRateCode'][] = $rate;
             }
 
             $args['AvailRequestSegment']['TimeSpan']['End'] = $end;

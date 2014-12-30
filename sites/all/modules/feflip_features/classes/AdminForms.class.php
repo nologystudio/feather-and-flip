@@ -143,8 +143,11 @@ class AdminForms
             //$numAdults += $room['children']['number'];
         }
 
+        //$rateCodes = Hotel::GetHotelRateCodesBydestination($values['destination']);
+        $rateCodes = array();
+
         return array(
-            'sabre' => $sabreService->ListHotelAvail($values['sabreCodes'], $numAdults, $sabreChecking, $sabreCheckout),
+            'sabre' => $sabreService->ListHotelAvail($values['sabreCodes'],$rateCodes, $numAdults, $sabreChecking, $sabreCheckout),
             'expedia' => Expedia::GetHotelsByCode_XML($values['eanCodes'], $values['checkIn'], $values['checkOut'], $values['rooms']['info'])
         );
     }

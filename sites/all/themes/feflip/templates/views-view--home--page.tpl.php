@@ -1,6 +1,18 @@
 <?php include 'slideshowandmainmenu.html.php';?>
 
 <?php
+
+/***************************** Pruebas de rate codes *******************************************/
+/*
+$rates = Hotel::GetHotelRateCodesBydestination(142);
+dpm($rates);
+$codes = Hotel::GetHotelCodesByDestination(142);
+$sabreService = new Sabre;
+$result = $sabreService->ListHotelAvail($codes['sabre'],$rates,2,'2015-01-11','2015-01-19');
+dpm($result);
+*/
+/*********************************** Fin de prueba *********************************************/
+
 /************************************* Prueba funcional de booking ***************************************/
 
 /*

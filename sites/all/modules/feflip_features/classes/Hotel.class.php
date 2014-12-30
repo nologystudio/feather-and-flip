@@ -273,6 +273,39 @@ class Hotel
         return $codes;
     }
 
+
+    /**
+     * Return rate codes hotels of destination
+     * @param $destinationID
+     * @return array
+     */
+    public static function GetHotelRateCodesBydestination($destinationID)
+    {
+        $query = new EntityFieldQuery;
+
+        $nodes = $query->entityCondition('entity_type', 'node')
+            ->entityCondition('bundle', 'hotel')
+            ->propertyCondition('status', 1)
+            ->fieldCondition('field_destination','target_id', $destinationID, '=')
+            ->execute();
+
+        $rateCodes = array();
+
+        if (isset($nodes['node']))
+        {
+            $hotelsNode = node_load_multiple(array_keys($nodes['node']));
+            foreach($hotelsNode as $hotel)
+            {
+                $wrapper = entity_metadata_wrapper('node', $hotel);
+                $rateCode = $wrapper->field_rate_code->value();
+                if (isset($rateCode) && !empty($rateCode) && !in_array($rateCode, $rateCodes))
+                    $rateCodes[] = $rateCode;
+            }
+        }
+
+        return $rateCodes;
+    }
+
     // Get the low rates from a server response between sabre & expedia ids
     public static function GetResponseRates($ratesData, $sabreId, $expediaId)
     {
