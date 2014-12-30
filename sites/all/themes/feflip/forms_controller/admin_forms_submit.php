@@ -143,6 +143,9 @@
                 $result = AdminForms::CustomSearch($input_values['key']);
                 echo json_encode($result);
                 break;
+            case 'contact':
+                AdminForms::ContactSubmit($input_values);
+                break;
 			default:
 			break;
 		}

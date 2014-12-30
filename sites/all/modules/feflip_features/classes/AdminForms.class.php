@@ -253,7 +253,12 @@ class AdminForms
                     'booking_rooms' => $result->Hotel->NumberOfUnits,
                     'booking_adults' => $numAdults,
                     'booking_children' => $numChildren,
-                    'booking_service' => $service
+                    'booking_service' => $service,
+                    'user_address1' => '',
+                    'user_citycode'=> '',
+                    'user_stateProvinceCode'=> '',
+                    'user_countryCode'=> '',
+                    'user_postalCode'=> ''
                 );
             }
 
@@ -290,7 +295,12 @@ class AdminForms
                     'booking_rooms' => $result['HotelRoomReservationResponse']['numberOfRoomsBooked'],
                     'booking_adults' => $result['HotelRoomReservationResponse']['RateInfos']['RateInfo']['RoomGroup']['Room']['numberOfAdults'],
                     'booking_children' => $result['HotelRoomReservationResponse']['RateInfos']['RateInfo']['RoomGroup']['Room']['numberOfChildren'],
-                    'booking_service' => $service
+                    'booking_service' => $service,
+                    'user_address1' => '',
+                    'user_citycode'=> '',
+                    'user_stateProvinceCode'=> '',
+                    'user_countryCode'=> '',
+                    'user_postalCode'=> ''
                 );
             }
 
@@ -298,31 +308,6 @@ class AdminForms
 
             return array('result' => $result, 'args' => $args);
 
-            /*
-            $confirmationNumber = uniqid();
-            $args = array(
-                'user_first_name'=>$values['firstName'],
-                'user_last_name'=>$values['lastName'],
-                'user_email'=>$values['email'],
-                'user_phoneNumber' =>$values['phone'],
-                'user_creditCard' => 'xxxxxxxxxxxx'. substr($values['creditCardNumber'], -4),
-                'booking_id'=>$confirmationNumber,
-                'booking_hotelName'=>'',
-                'booking_hotelContact'=>'',
-                'booking_ckeckIn'=>$values['checkIn'],
-                'booking_checkOut'=>$values['checkOut'],
-                'booking_rate'=> isset($values['total']) ? $values['total'] : '',
-                'booking_roomType' => '',
-                'booking_nights' => '',
-                'booking_rooms' => isset($values['rooms']) ? $values['rooms'] : 0,
-                'booking_adults' => $numAdults,
-                'booking_children' => $numChildren
-            );
-
-            feflip_features_StoreBooking($args);
-
-            return $confirmationNumber;
-            */
         }
     }
 
@@ -381,7 +366,7 @@ class AdminForms
                 $result = self::signInUser($input_values, $error);
 
                 $error = '';
-                //_user_mail_notify('register_no_approval_required', $account);
+                _user_mail_notify('register_no_approval_required', $account);
                 return $result;
             }
             catch (Exception $e)
@@ -495,6 +480,33 @@ class AdminForms
             }
         }
         return $payload;
+    }
+
+    /**
+     * Submit entity form contact in drupal
+     * @param $inputValues
+     */
+    static function ContactSubmit($inputValues)
+    {
+        $entityform = entity_create('entityform', array(
+            'type' => 'contact',
+            'created' => time(),
+            'changed' => time(),
+            'language' => LANGUAGE_NONE,
+            'uid' => 0));
+
+        $wrapper = entity_metadata_wrapper('entityform', $entityform);
+
+        //Fill fields
+        $wrapper->field_contact_first_name            = $inputValues['firstName'];
+        $wrapper->field_contact_last_name             = $inputValues['lastName'];
+        $wrapper->field_contact_email                 = $inputValues['email'];
+        $wrapper->field_contact_department            = $inputValues['department'];
+        $wrapper->field_contact_subject               = $inputValues['subject'];
+        $wrapper->field_contact_message               = $inputValues['message'];
+
+        //Done!
+        $wrapper->save();
     }
 }
 
