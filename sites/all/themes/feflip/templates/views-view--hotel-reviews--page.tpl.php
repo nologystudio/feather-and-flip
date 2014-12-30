@@ -47,7 +47,8 @@
             <?php
             if ($showPrice)
             {
-                $newHotels = array();
+                $withRate = array();
+                $withOutRate = array();
 
                 foreach($hotels as $hotel)
                 {
@@ -99,14 +100,25 @@
                             $hotel['sabre_curr'] = $rates['sabre']['currency'];
                         }
 
-                        array_unshift($newHotels, $hotel);
+                        $withRate[] = $hotel;
                     }
                     else
-                        array_push($newHotels, $hotel);
+                        $withOutRate[] = $hotel;
 
                 }
 
-                $hotels = $newHotels;
+                //Se define funcion para ordenar por el rate
+                function rate_sort($a,$b) {
+                    if (isset($a['_rate']) && isset($b['_rate'])) {
+                        return $a['_rate'] > $b['_rate'];
+                    }
+
+                    return true;
+                }
+
+                usort($withRate, "rate_sort");
+
+                $hotels = array_merge($withRate, $withOutRate);
             }
             ?>
             <?php foreach($hotels as $hotel){ $hClasses = implode(' ', $hotel['categories']);?>
