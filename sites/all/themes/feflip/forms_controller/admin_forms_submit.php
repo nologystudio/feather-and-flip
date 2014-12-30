@@ -55,12 +55,6 @@
                     $codes = Hotel::GetHotelCodesByDestination($destination);
                     $next = drupal_get_path_alias('node/'. $destination . '/hotel-reviews');
                 }
-                //Caso del node hotel
-                else
-                {
-                    $codes['sabre'][] = $input_values['sabreCode'];
-                    $codes['expedia'][] = $input_values['expediaCode'];
-                }
 
                 //Pass sabre and ean code by parameters
                 $input_values['sabreCodes'] = $codes['sabre'];
@@ -75,9 +69,48 @@
 
                 break;
             case 'hotelDescription':
+                //watchdog('Admin Forms Submit', 'HotelDescription Values ===> '. '<pre>' . print_r( $input_values, true) . '</pre>');
                 $nextPage = '';
-                $result = AdminForms::getHotelDescription($input_values);
-                $_SESSION['hotelDescription'] = $result;
+
+                //Cuando hacemos get rates desde el nodo hotel aun no tenemos un servicio definido
+                if (!isset($input_values['service']) || empty($input_values['service']))
+                {
+                    //$input_values['internalId'] = 33; //esto tiene que venir por ahora lo simulo
+                    //Cargamos el nodo hotel para obtener los codigos de expedia y sabre
+                    $node = node_load($input_values['internalId']);
+                    $sabreCode = $node->field_hotelcode['und'][0]['value'];
+                    $expediaCode = $node->field_ean_hotelcode['und'][0]['value'];
+                    //Pasamos los codigos de expedia y sabre al input values
+                    $input_values['sabreCodes'] = array($sabreCode);
+                    $input_values['eanCodes'] = array($expediaCode);
+                    //Obtenemos los rates del hotel
+                    $hotelRates = AdminForms::getHotelRates($input_values);
+                    $rates = Hotel::GetResponseRates($hotelRates, $sabreCode, $expediaCode);
+                    //Añadimos los input values con el service y el hotelId
+                    if (((float)$rates['expedia']['rate'] != 0.0) && ((float)$rates['sabre']['rate'] != 0.0))
+                    {
+                         //Si tenemos precios de los dos servicios por ahora ofrecemos sabre
+                        $input_values['service'] = 'sabre';
+                        $input_values['hotelId'] = $sabreCode;
+                    }
+                    elseif(((float)$rates['expedia']['rate'] == 0.0) && ((float)$rates['sabre']['rate'] != 0.0))
+                    {
+                        $input_values['service'] = 'sabre';
+                        $input_values['hotelId'] = $sabreCode;
+                    }
+                    elseif(((float)$rates['expedia']['rate'] != 0.0) && ((float)$rates['sabre']['rate'] == 0.0))
+                    {
+                        $input_values['service'] = 'expedia';
+                        $input_values['hotelId'] = $expediaCode;
+                    }
+                }
+
+                if (isset($input_values['service']) || !empty($input_values['service']))
+                {
+                    $result = AdminForms::getHotelDescription($input_values);
+                    $_SESSION['hotelDescription'] = $result;
+                }
+
                 $_SESSION['inputValues'] = $input_values;
                 $nextPage = drupal_get_path_alias('node/' . $input_values['internalId']);
                 echo $nextPage;
