@@ -242,6 +242,33 @@ class Hotel
         return $hotels;      
     }
 
+
+    /**
+     * Return all hotels for a destination
+     * @param $destinationID
+     * @return array
+     */
+    public static function GetHotelsByDestination($destinationID)
+    {
+        $query = new EntityFieldQuery;
+
+        $nodes = $query->entityCondition('entity_type', 'node')
+            ->entityCondition('bundle', 'hotel')
+            ->propertyCondition('status', 1)
+            ->fieldCondition('field_destination','target_id', $destinationID, '=')
+            ->execute();
+
+        $hotels = array();
+
+        if (isset($nodes['node']))
+        {
+            $hotelsNode = node_load_multiple(array_keys($nodes['node']));
+            $hotels = self::getHotelsInfo($hotelsNode);
+        }
+
+        return $hotels;
+    }
+
     /**
      * Returns hotels code of sabre and expedia by destination
      * @param $destinationID

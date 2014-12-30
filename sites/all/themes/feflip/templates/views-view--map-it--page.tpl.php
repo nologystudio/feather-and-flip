@@ -41,12 +41,14 @@
                 <?php if ($numContient == 0) { ?><div class="row"><?php } ?>
                    <ul>
                        <li><?php echo $continent;?></li>
-                   <?php for($i=0; $i<count($destinations); $i++){ $numHotels = Hotel::NumHotelsByDestination($destinations[$i]['id']); ?>
+                   <?php for($i=0; $i<count($destinations); $i++){$hotels = Hotel::GetHotelsByDestination($destinations[$i]['id']);?>
                        <li>
                            <?php
                                  $destinationTxt = $destinations[$i]['destination'];
-                                 $k=0;
-                                 while ($k < $numHotels){$destinationTxt .= '<span></span>'; $k++;}
+
+                                 foreach($hotels as $hotel)
+                                     $destinationTxt .= '<a href="'. $hotel['url'] .'"><span></span></a>';
+
                                  echo $destinationTxt;
                            ?>
                        </li>
