@@ -23,7 +23,7 @@
             <?php if(count($inputValues) > 0){?>
                 <form id="booking-search" ng-controller="BookingEngineCtrl" ng-include="searchTpl" ng-init='init(<?php echo json_encode($inputValues);?>)'></form>
             <?php } else { ?>
-                <form id="booking-search" ng-controller="BookingEngineCtrl" ng-include="searchTpl" ng-init="bookingInfo.destination = 0"></form>
+                <form id="booking-search" ng-controller="BookingEngineCtrl" ng-include="searchTpl" ng-init="bookingInfo.destination = <?php if(isset($destinationId)) echo $destinationId; else echo 0;?>"></form>
             <?php } ?>
 			</header>
         <div class="wrapper">

@@ -206,6 +206,7 @@ function feflip_preprocess_views_view(&$variables) {
       {
           $destination = node_load($variables['view']->args[0]);
           $images = Destination::GetAllImagesDestination($destination,'hotel reviews');
+          $variables['destinationId'] = $destination->nid;
       }
       $variables['slideImages'] = $images;
   }

@@ -47,6 +47,7 @@
 				break;
 			case 'hotelRates':
                 $nextPage = '';
+                //watchdog('Admin Forms Submit', 'HotelRates ===> '. '<pre>' . print_r( $input_values, true) . '</pre>');
                 //Caso del home al hotelreview y del hotelreview al hotelreview
                 $destination = $input_values['destination'];
                 if(isset($destination) && !empty($destination))
