@@ -3,6 +3,7 @@
     if (isset($arg[2]) && ($arg[2] != 'itinerary')) include 'slideshowandmainmenu.html.php'; ?>
 <?php
         $showPrice = false;
+        $showNotAvailable = false;
         // if exists previous booking we get existing data
         $hotelRates = $inputValues = array();
         if (isset($_SESSION['hotelRates']))
@@ -17,6 +18,85 @@
             unset($_SESSION['inputValues']);
         }
 
+        if ($showPrice)
+        {
+            $withRate = array();
+            $withOutRate = array();
+
+            foreach($hotels as $hotel)
+            {
+                $rates = Hotel::GetResponseRates($hotelRates, $hotel['sabreCode'], $hotel['expediaCode']);
+                $service = '';
+                if (((float)$rates['expedia']['rate'] != 0.0) && ((float)$rates['sabre']['rate'] != 0.0))
+                {
+                    if ((float)$rates['expedia']['rate']  < (float)$rates['sabre']['rate'])
+                    {
+                        $service = 'expedia';
+                        $serviceCode = 'expediaCode';
+                        $rate = (float)$rates['expedia']['rate'];
+                        $curr = $rates['expedia']['currency'];
+                    }
+                    else
+                    {
+                        $service = 'sabre';
+                        $serviceCode = 'sabreCode';
+                        $rate = (float)$rates['sabre']['rate'];
+                        $curr = $rates['sabre']['currency'];
+                    }
+                }
+                elseif(((float)$rates['expedia']['rate'] == 0.0) && ((float)$rates['sabre']['rate'] != 0.0))
+                {
+                    $service = 'sabre';
+                    $serviceCode = 'sabreCode';
+                    $rate = (float)$rates['sabre']['rate'];
+                    $curr = $rates['sabre']['currency'];
+                }
+                elseif(((float)$rates['expedia']['rate'] != 0.0) && ((float)$rates['sabre']['rate'] == 0.0))
+                {
+                    $service = 'expedia';
+                    $serviceCode = 'expediaCode';
+                    $rate = (float)$rates['expedia']['rate'];
+                    $curr = $rates['expedia']['currency'];
+                }
+
+                if (!empty($service)) {
+                    $hotel['_service'] = $service;
+                    $hotel['_serviceCode'] = $serviceCode;
+                    $hotel['_rate'] = $rate;
+                    $hotel['_curr'] = $curr;
+                    if ((float)$rates['expedia']['rate'] != 0.0) {
+                        $hotel['expedia_rate'] = $rates['expedia']['rate'];
+                        $hotel['expedia_curr'] = $rates['expedia']['currency'];
+                    }
+                    if ((float)$rates['sabre']['rate'] != 0.0) {
+                        $hotel['sabre_rate'] = $rates['sabre']['rate'];
+                        $hotel['sabre_curr'] = $rates['sabre']['currency'];
+                    }
+
+                    $withRate[] = $hotel;
+                }
+                else
+                    $withOutRate[] = $hotel;
+
+            }
+
+            if (count($hotels) == count($withOutRate))
+                $showNotAvailable = true;
+
+            //Se define funcion para ordenar por el rate
+            function rate_sort($a,$b) {
+                if (isset($a['_rate']) && isset($b['_rate'])) {
+                    return $a['_rate'] > $b['_rate'];
+                }
+
+                return true;
+            }
+
+            usort($withRate, "rate_sort");
+
+            $hotels = array_merge($withRate, $withOutRate);
+        }
+
 ?>
 <section id="hotel-reviews"<?php echo ((isset($arg[2]) && ($arg[2] == 'itinerary')) ? ' class="hidden"' : ''); ?>>
 <header id="booking-header-engine">
@@ -26,6 +106,13 @@
                 <form id="booking-search" ng-controller="BookingEngineCtrl" ng-include="searchTpl" ng-init="bookingInfo.destination = <?php if(isset($destinationId)) echo $destinationId; else echo 0;?>"></form>
             <?php } ?>
 			</header>
+        <?php if($showNotAvailable){?>
+		<div role="header" class="not-available">
+			<div>
+				<h6>Sorry, there are no availabilities for these dates</h6>
+			</div>
+		</div>
+        <?php }?>
         <div class="wrapper">
                 <h1 class="middle-line">Hotel Reviews</h1>
                 <div id="filter-container">
@@ -44,83 +131,6 @@
 					</ul>
 				</div>
 				</ul>
-            <?php
-            if ($showPrice)
-            {
-                $withRate = array();
-                $withOutRate = array();
-
-                foreach($hotels as $hotel)
-                {
-                    $rates = Hotel::GetResponseRates($hotelRates, $hotel['sabreCode'], $hotel['expediaCode']);
-                    $service = '';
-                    if (((float)$rates['expedia']['rate'] != 0.0) && ((float)$rates['sabre']['rate'] != 0.0))
-                    {
-                        if ((float)$rates['expedia']['rate']  < (float)$rates['sabre']['rate'])
-                        {
-                            $service = 'expedia';
-                            $serviceCode = 'expediaCode';
-                            $rate = (float)$rates['expedia']['rate'];
-                            $curr = $rates['expedia']['currency'];
-                        }
-                        else
-                        {
-                            $service = 'sabre';
-                            $serviceCode = 'sabreCode';
-                            $rate = (float)$rates['sabre']['rate'];
-                            $curr = $rates['sabre']['currency'];
-                        }
-                    }
-                    elseif(((float)$rates['expedia']['rate'] == 0.0) && ((float)$rates['sabre']['rate'] != 0.0))
-                    {
-                        $service = 'sabre';
-                        $serviceCode = 'sabreCode';
-                        $rate = (float)$rates['sabre']['rate'];
-                        $curr = $rates['sabre']['currency'];
-                    }
-                    elseif(((float)$rates['expedia']['rate'] != 0.0) && ((float)$rates['sabre']['rate'] == 0.0))
-                    {
-                        $service = 'expedia';
-                        $serviceCode = 'expediaCode';
-                        $rate = (float)$rates['expedia']['rate'];
-                        $curr = $rates['expedia']['currency'];
-                    }
-
-                    if (!empty($service)) {
-                        $hotel['_service'] = $service;
-                        $hotel['_serviceCode'] = $serviceCode;
-                        $hotel['_rate'] = $rate;
-                        $hotel['_curr'] = $curr;
-                        if ((float)$rates['expedia']['rate'] != 0.0) {
-                            $hotel['expedia_rate'] = $rates['expedia']['rate'];
-                            $hotel['expedia_curr'] = $rates['expedia']['currency'];
-                        }
-                        if ((float)$rates['sabre']['rate'] != 0.0) {
-                            $hotel['sabre_rate'] = $rates['sabre']['rate'];
-                            $hotel['sabre_curr'] = $rates['sabre']['currency'];
-                        }
-
-                        $withRate[] = $hotel;
-                    }
-                    else
-                        $withOutRate[] = $hotel;
-
-                }
-
-                //Se define funcion para ordenar por el rate
-                function rate_sort($a,$b) {
-                    if (isset($a['_rate']) && isset($b['_rate'])) {
-                        return $a['_rate'] > $b['_rate'];
-                    }
-
-                    return true;
-                }
-
-                usort($withRate, "rate_sort");
-
-                $hotels = array_merge($withRate, $withOutRate);
-            }
-            ?>
             <?php foreach($hotels as $hotel){ $hClasses = implode(' ', $hotel['categories']);?>
                 <a class="item<?php echo (!empty($hClasses) ? ' '.$hClasses : ''); ?>" href="<?php echo $hotel['url']; ?>"<?php echo (!empty($hotel['_service']) ? ' data-service="'.$hotel['_service'].'"' : ''); ?><?php echo (!empty($hotel['_service']) ? ' data-hotelId="'.$hotel[$hotel['_serviceCode']].'"' : ''); ?> data-internalId="<?php echo $hotel['id'] ?>"
                     <?php if (isset($hotel['expedia_rate'])){echo 'data-expedia = "'.$hotel['expedia_rate'] .' '. $hotel['expedia_curr'].'|' . $hotel['expediaCode'].'" ';} if (isset($hotel['sabre_rate'])){echo 'data-sabre = "'.$hotel['sabre_rate'] .' '. $hotel['sabre_curr'].'|' . $hotel['sabreCode'] .'"';}?>>
