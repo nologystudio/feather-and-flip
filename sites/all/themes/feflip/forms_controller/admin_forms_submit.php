@@ -79,7 +79,7 @@
                     //Cargamos el nodo hotel para obtener los codigos de expedia y sabre
                     $node = node_load($input_values['internalId']);
                     $sabreCode = $node->field_hotelcode['und'][0]['value'];
-                    $expediaCode = $node->field_ean_hotelcode['und'][0]['value'];
+                    $expediaCode = isset($node->field_ean_hotelcode['und'][0]['value']) ? $node->field_ean_hotelcode['und'][0]['value'] : '0000000';
                     //Pasamos los codigos de expedia y sabre al input values
                     $input_values['sabreCodes'] = array($sabreCode);
                     $input_values['eanCodes'] = array($expediaCode);
