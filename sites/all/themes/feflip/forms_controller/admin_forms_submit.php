@@ -71,7 +71,7 @@
             case 'hotelDescription':
                 //watchdog('Admin Forms Submit', 'HotelDescription Values ===> '. '<pre>' . print_r( $input_values, true) . '</pre>');
                 $nextPage = '';
-
+                $input_values['available'] = false;
                 //Cuando hacemos get rates desde el nodo hotel aun no tenemos un servicio definido
                 if (!isset($input_values['service']) || empty($input_values['service']))
                 {
@@ -92,22 +92,28 @@
                          //Si tenemos precios de los dos servicios por ahora ofrecemos sabre
                         $input_values['service'] = 'sabre';
                         $input_values['hotelId'] = $sabreCode;
+                        $input_values['available'] = true;
                     }
                     elseif(((float)$rates['expedia']['rate'] == 0.0) && ((float)$rates['sabre']['rate'] != 0.0))
                     {
                         $input_values['service'] = 'sabre';
                         $input_values['hotelId'] = $sabreCode;
+                        $input_values['available'] = true;
                     }
                     elseif(((float)$rates['expedia']['rate'] != 0.0) && ((float)$rates['sabre']['rate'] == 0.0))
                     {
                         $input_values['service'] = 'expedia';
                         $input_values['hotelId'] = $expediaCode;
+                        $input_values['available'] = true;
                     }
+                    else
+                        $input_values['available'] = false;
                 }
 
-                if (isset($input_values['service']) || !empty($input_values['service']))
+                if (isset($input_values['service']) && !empty($input_values['service']))
                 {
                     $result = AdminForms::getHotelDescription($input_values);
+                    $input_values['available'] = true;
                     $_SESSION['hotelDescription'] = $result;
                 }
 
