@@ -61,55 +61,6 @@
 		
 		<?php include 'script.html.php'; ?>
 		
-		<script>
-				$(document).ready(function() {
-					$('#signupNewsLetter').submit(function() {
-
-						alert('Performing subscription...');
-
-						var formData = {
-							'formID' 		: 'newsletterForm',
-							'user_email' 		: $('#user-email').val(),
-
-						};
-
-						$.ajax({
-							type   : 'POST',
-							url    : '/sites/all/themes/feflip/forms_controller/admin_forms_submit.php',
-							data   : formData,
-							success: function(msg) {
-								alert(msg);
-							}
-						});
-						return false;
-					});
-					
-					$('#hotelRates').submit(function() {
-
-						alert ("Read hotel rates...");
-						var formData = {
-							'formID' 		: 'hotelRates',
-							'checkin' 		: $('#checkin').val(),
-							'checkout' 		: $('#checkout').val(),
-							'numRooms' 		: $('#numRooms').val(),
-							'numChildren' 		: $('#numChildren').val(),
-							'numAdults' 		: $('#numAdults').val(),
-							'hotelCode' 		: $('#hotelCode').val(),
-							'eanCode' 			: $('#eanCode').val(),
-						};
-
-						$.ajax({
-							type   : 'POST',
-							url    : '/sites/all/themes/feflip/forms_controller/admin_forms_submit.php',
-							data   : formData,
-							success: function(msg) {
-								console.log(msg);
-							}
-						});
-						return false;
-					});					
-				});
-		</script>
 		<?php // Add autocomplete js files ?>
 	<!--	<script type="text/javascript" src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/misc/drupal.js"></script>
 		<script type="text/javascript" src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/misc/jquery.once.js?v=1.2"></script>
