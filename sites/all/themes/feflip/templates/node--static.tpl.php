@@ -15,7 +15,9 @@
     </div>
 </section>
 
-<?php }else {?>
+<?php } else if (strpos(strtoupper($title), 'CONTACT') !== false) {?>
+<p>Here mark up contact.</p>
+<?php } else { ?>
 <section class="static">
 	<article id="about">
 		<h1><?php echo $title; ?></h1>
