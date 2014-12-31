@@ -503,6 +503,35 @@ class AdminForms
         //Done!
         $wrapper->save();
     }
+
+    /**
+     * Send reset password mail
+     * @param $userEmail
+     * @param $error
+     *
+     * @return $result
+     */
+    static function ResetPassw($userEmail, &$error)
+    {
+        $account = user_load_by_name($userEmail);
+        if ($account && !empty($userEmail)) {
+            // Mail one time login URL and instructions using current language.
+            $mail = _user_mail_notify('password_reset', $account, language_default());
+            if (!empty($mail)) {
+                watchdog('user', 'Password reset instructions mailed to %name at %email.', array('%name' => $account->name, '%email' => $account->mail));
+                $error = '';
+                return 'Mail sent';
+            }
+            else {
+                $error = 'Error sending email';
+                return '';
+            }
+        }
+        else {
+            $error = 'User not found';
+            return '';
+        }
+    }
 }
 
 ?>

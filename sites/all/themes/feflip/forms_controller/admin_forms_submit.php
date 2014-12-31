@@ -158,6 +158,11 @@
             case 'contact':
                 AdminForms::ContactSubmit($input_values);
                 break;
+            case 'resetPassw':
+                $result = AdminForms::ResetPassw($input_values['userEmail'], $error);
+                $obj = array('result'=>$result, 'error'=>$error);
+                echo json_encode($obj);
+                break;
 			default:
 			break;
 		}
