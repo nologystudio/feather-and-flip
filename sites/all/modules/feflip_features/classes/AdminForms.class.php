@@ -137,18 +137,17 @@ class AdminForms
 
         // Sabre numAdults
         $numAdults = 0;
-        foreach ($values['rooms']['info'] as $room) {
+        foreach ($values['rooms']['info'] as $room)
             $numAdults += $room['adults'];
-            // adding children as adults
-            //$numAdults += $room['children']['number'];
-        }
+
 
         //$rateCodes = Hotel::GetHotelRateCodesBydestination($values['destination']);
         $rateCodes = array();
 
         return array(
             'sabre' => $sabreService->ListHotelAvail($values['sabreCodes'],$rateCodes, $numAdults, $sabreChecking, $sabreCheckout),
-            'expedia' => Expedia::GetHotelsByCode_XML($values['eanCodes'], $values['checkIn'], $values['checkOut'], $values['rooms']['info'])
+            //se comenta la parte de [expedia]
+            //'expedia' => Expedia::GetHotelsByCode_XML($values['eanCodes'], $values['checkIn'], $values['checkOut'], $values['rooms']['info'])
         );
     }
 
@@ -166,11 +165,8 @@ class AdminForms
 
         // Sabre numAdults
         $numAdults = 0;
-        foreach ($values['rooms']['info'] as $room) {
+        foreach ($values['rooms']['info'] as $room)
             $numAdults += $room['adults'];
-            // adding children as adults
-            //$numAdults += $room['children']['number'];
-        }
 
         $service = isset($values['service']) ? $values['service'] : null;
         $hotelId = isset($values['hotelId']) ? $values['hotelId'] : null;
@@ -193,16 +189,12 @@ class AdminForms
 
                 return $sabreService->HotelDescription($sessionInfo, $hotelId, $numAdults, $sabreChecking, $sabreCheckout);
             }
+            //se comenta la parte de [expedia]
+            /*
             else
-                return Expedia::RoomAvailability_XML($hotelId, $values['checkIn'], $values['checkOut'], $values['rooms']['info']);
+                return Expedia::RoomAvailability_XML($hotelId, $values['checkIn'], $values['checkOut'], $values['rooms']['info']);*/
         }
 
-        /*
-        return array(
-            'sabre' => $sabreService->HotelDescription($sessionInfo, $values['hotelCode'], $numAdults, $sabreChecking, $sabreCheckout),
-            'expedia' => Expedia::RoomAvailability($values['eanCode'], $values['checkIn'], $values['checkOut'], $values['rooms']['info'])
-        );
-        */
     }
 
     static function hotelBookingReservation($values)
@@ -264,6 +256,8 @@ class AdminForms
 
             return array('result' => $result, 'args' => $args);
         }
+        //se comenta la parte de [expedia]
+        /*
         else if (isset($service) && $service == 'expedia')
         {
             $date = explode("-", $values['creditCardExpireDate']);
@@ -307,8 +301,8 @@ class AdminForms
             //watchdog('HotelBookingReservation', 'Expedia.class  Args  ===> '. '<pre>' . print_r( $args, true) . '</pre>');
 
             return array('result' => $result, 'args' => $args);
-
         }
+        */
     }
 
     /**

@@ -25,8 +25,9 @@
 
             foreach($hotels as $hotel)
             {
-                $rates = Hotel::GetResponseRates($hotelRates, $hotel['sabreCode'], $hotel['expediaCode']);
+                $rates = Hotel::GetResponseRates($hotelRates, $hotel['sabreCode']/*, $hotel['expediaCode']*/);
                 $service = '';
+                /*
                 if (((float)$rates['expedia']['rate'] != 0.0) && ((float)$rates['sabre']['rate'] != 0.0))
                 {
                     if ((float)$rates['expedia']['rate']  < (float)$rates['sabre']['rate'])
@@ -58,16 +59,26 @@
                     $rate = (float)$rates['expedia']['rate'];
                     $curr = $rates['expedia']['currency'];
                 }
+                */
+                if (((float)$rates['sabre']['rate'] != 0.0))
+                {
+                    $service = 'sabre';
+                    $serviceCode = 'sabreCode';
+                    $rate = (float)$rates['sabre']['rate'];
+                    $curr = $rates['sabre']['currency'];
+                }
 
                 if (!empty($service)) {
                     $hotel['_service'] = $service;
                     $hotel['_serviceCode'] = $serviceCode;
                     $hotel['_rate'] = $rate;
                     $hotel['_curr'] = $curr;
+                    /*
                     if ((float)$rates['expedia']['rate'] != 0.0) {
                         $hotel['expedia_rate'] = $rates['expedia']['rate'];
                         $hotel['expedia_curr'] = $rates['expedia']['currency'];
                     }
+                    */
                     if ((float)$rates['sabre']['rate'] != 0.0) {
                         $hotel['sabre_rate'] = $rates['sabre']['rate'];
                         $hotel['sabre_curr'] = $rates['sabre']['currency'];
