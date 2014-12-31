@@ -440,6 +440,27 @@ function feflip_field__taxonomy_term_reference($variables) {
   return $output;
 }
 
+/**
+ * Implements hook_theme().
+ */
+// function feflip_theme() {
+//   $items = array();
+ 
+//   $items['user_pass'] = array(
+//     'render element' => 'form',
+//     'path' => drupal_get_path('theme', 'feflip').'/templates',
+//     'template' => 'user-pass',
+//     'preprocess functions' => array(
+//       'feflip_preprocess_user_pass'
+//     ),
+//   );  
+//   return $items;
+// }
+// function feflip_preprocess_user_pass(&$vars) {
+//   //  alter the reset password form here
+//   dpm($vars);
+// }
+
 /* 
 * Get destinations promoted to front page
 * @param filter_field
