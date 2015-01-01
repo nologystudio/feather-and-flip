@@ -109,14 +109,25 @@
         }
 
 ?>
+<section id="get-rates">
+	<button id="get-rates">get rates</button>
+</section>
+<!-- | i | Booking engine: Landing ------------------------------------------------------- -->
+<?php if(count($inputValues) > 0){?>
+<section id="booking-engine" ng-controller="BookingEngineCtrl" ng-include="booking" ng-init='init(<?php echo json_encode($inputValues);?>)'></section>
+<?php } else { ?>
+<section id="booking-engine" ng-controller="BookingEngineCtrl" ng-include="booking" ng-init="bookingInfo.destination = <?php if(isset($destinationId)) echo $destinationId; else echo 0;?>"></section>
+<?php } ?>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - -  -->
 <section id="hotel-reviews"<?php echo ((isset($arg[2]) && ($arg[2] == 'itinerary')) ? ' class="hidden"' : ''); ?>>
-<header id="booking-header-engine">
-            <?php if(count($inputValues) > 0){?>
+		<!--<header id="booking-header-engine">
+				
+            <!--<?php if(count($inputValues) > 0){?>
                 <form id="booking-search" ng-controller="BookingEngineCtrl" ng-include="searchTpl" ng-init='init(<?php echo json_encode($inputValues);?>)'></form>
             <?php } else { ?>
                 <form id="booking-search" ng-controller="BookingEngineCtrl" ng-include="searchTpl" ng-init="bookingInfo.destination = <?php if(isset($destinationId)) echo $destinationId; else echo 0;?>"></form>
             <?php } ?>
-			</header>
+		</header>-->
         <?php if($showNotAvailable){?>
 		<div role="header" class="not-available">
 			<div>

@@ -54,7 +54,10 @@
                         <form id="search" ng-controller="SearchCtrl">
 							<input type="text" placeholder="Enter destination or hotel" ng-keyup="searchSubmit()" value="{{userSearch}}" ng-model="userSearch"/>
 							<input type="submit" ng-click="searchSubmit()" value=""/>
-							<ul ng-if="showResult">
+							<ul ng-if="showResult" ng-class="{'show':showResult}">
+								<li class="no-result" ng-if="noResult">
+									<a href="http://www.featherandflip.com/contact/">Don't see what you're looking for? Contact our team for help</a>
+								</li>
 								<li class="title" ng-if="hotels.length > 0">Hotels</li>
 								<li class="hotel" ng-repeat="hotel in hotels">
 									<a href="{{hotel.url}}">{{hotel.title}}</a>

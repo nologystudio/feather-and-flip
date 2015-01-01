@@ -24,15 +24,23 @@ if(isset($inputValues['service']) && !empty($inputValues['service']))
     $datas .= 'data-service="'.$inputValues['service'] . '"';
 
 ?>
-
+<section id="get-rates">
+	<button id="get-rates">get rates</button>
+</section>
+<!-- | i | Booking engine: Landing ------------------------------------------------------- -->
+<?php if(count($inputValues) > 0){?>
+<section id="booking-engine" ng-controller="BookingEngineCtrl" ng-include="booking" ng-init='init(<?php echo json_encode($inputValues);?>,0)'></section>
+<?php } else { ?>
+<section id="booking-engine" ng-controller="BookingEngineCtrl" ng-include="booking" ng-init="state=0; bookingInfo.destination = <?php if(isset($destination)) echo $destination; else echo 0;?>; bookingInfo.internalId = <?php if(isset($internalId)) echo $internalId; else echo 0;?>"></section>
+<?php } ?>
 <section id="hotel" <?php echo $datas ?>>
-        <header id="booking-header-engine">
+        <!--<header id="booking-header-engine">
             <?php if(count($inputValues) > 0){?>
                 <form id="booking-search" ng-controller="BookingEngineCtrl" ng-include="searchTpl" ng-init='state=3; init(<?php echo json_encode($inputValues);?>)'></form>
             <?php } else { ?>
                 <form id="booking-search" ng-controller="BookingEngineCtrl" ng-include="searchTpl" ng-init="state=3; bookingInfo.destination = <?php if(isset($destination)) echo $destination; else echo 0;?>; bookingInfo.internalId = <?php if(isset($internalId)) echo $internalId; else echo 0;?>"></form>
             <?php } ?>
-        </header>
+        </header>-->
 
     <!-- | i | Booking engine: Room detail --------------------------------------------------- -->
     <?php if(count($inputValues) > 0){?>

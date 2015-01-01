@@ -48,7 +48,7 @@
 
                                  foreach($hotels as $hotel)
                                      $destinationTxt .= '<a href="'. $hotel['url'] .'"><span></span></a>';
-
+                           
                                  echo $destinationTxt;
                            ?>
                        </li>
