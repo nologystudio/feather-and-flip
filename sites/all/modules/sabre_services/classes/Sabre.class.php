@@ -4,6 +4,7 @@ class Sabre
 {
      
      var $IPCC = 'O58H';
+     var $CONTEXT = 'X840';
      var $USERNAME = '7971';
      var $PASSWORD = 'WS072514';
      var $TESTMODE = 1;
@@ -119,13 +120,30 @@ class Sabre
         try
         {  
             $response = $service->SessionCreateRQ($this->IPCC);
+
+            //$xmlRequest = $service->endpoint()->client()->__getLastRequest();
+            //dpm($this->ReadXML($xmlRequest));
+            //$xmlResponse = $service->endpoint()->client()->__getLastResponse();
+            //dpm($this->ReadXML($xmlResponse));
+
             $xmlstr = $service->endpoint()->client()->__getLastResponse();
-            //dpm($this->ReadXML($xmlstr ));
             $xml = simplexml_load_string($xmlstr);
             $result = array(
                             'SecurityToken' => (string)$xml->children('soap-env',true)->Header->children('wsse',true)->Security->BinarySecurityToken,
                             'ConversationId'    => $response->ConversationId
                             );
+
+            //Hacemos una cambio de contexto para poder usar los rate codes de F+F que se encuentran en X840
+            /*
+            $newSecurityToken = $this->ChangeContext($result);
+
+            if (isset($newSecurityToken) && !empty($newSecurityToken))
+            {
+                if ($newSecurityToken != $result['SecurityToken'])
+                    $result['SecurityToken'] = $newSecurityToken;
+            }
+            */
+
         }
         catch (Exception $e)
         {
@@ -688,6 +706,50 @@ class Sabre
         }
         
         return $response;        
+     }
+
+     public function ChangeContext($sessionInfo)
+     {
+         $securityToken = $sessionInfo['SecurityToken'];
+         $conversationId = $sessionInfo['ConversationId'];
+
+         //Load service
+         $service = wsclient_service_load('contextchange'.$this->TESTSUFFIX);
+
+         //Create headers and settings
+         $headers = array(
+             $this->Header_MessageHeader('ContextChangeLLSRQ', $conversationId),
+             $this->Header_SecurityToken($securityToken)
+         );
+
+         $service->settings['options']['trace'] = TRUE;
+         $service->settings['options']['cache_wsdl'] = WSDL_CACHE_NONE;
+         $service->settings['soap_headers'] = $headers;
+
+         $newSecurityToken = '';
+
+         try
+         {
+             $args = array();
+             $args['OverSign']['Organization'] = $this->CONTEXT;
+             $args['OverSign']['Username'] = $this->USERNAME;
+             $args['Version'] = '2.0.3';
+             $response = $service->ContextChangeRQ($args);
+
+             if (isset($response->SecurityToken->_) && !empty($response->SecurityToken->_))
+                 $newSecurityToken = $response->SecurityToken->_;
+
+             //$xmlRequest = $service->endpoint()->client()->__getLastRequest();
+             //dpm($this->ReadXML($xmlRequest));
+             //$xmlResponse = $service->endpoint()->client()->__getLastResponse();
+             //dpm($this->ReadXML($xmlResponse));
+         }
+         catch(Exception $e)
+         {
+             return $response = $e->getMessage();
+         }
+
+         return $newSecurityToken;
      }
 
     /*
