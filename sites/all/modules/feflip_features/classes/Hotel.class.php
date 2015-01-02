@@ -333,6 +333,35 @@ class Hotel
         return $rateCodes;
     }
 
+
+    public static function GetFirstDiferentSabreCode($destination, $sabreCode)
+    {
+        $query = new EntityFieldQuery;
+
+        $nodes = $query->entityCondition('entity_type', 'node')
+            ->entityCondition('bundle', 'hotel')
+            ->propertyCondition('status', 1)
+            ->fieldCondition('field_destination','target_id', $destination, '=')
+            ->execute();
+
+        $result = '0000000';
+
+        if (isset($nodes['node'])) {
+            $hotelsNode = node_load_multiple(array_keys($nodes['node']));
+            foreach($hotelsNode as $hotel)
+            {
+                $wrapper = entity_metadata_wrapper('node', $hotel);
+                $code = $wrapper->field_hotelcode->value();
+                if ($code != '0000000' && $code != $sabreCode) {
+                    $result = $code;
+                    break;
+                }
+            }
+        }
+
+        return $result;
+    }
+
     // Get the low rates from a server response between sabre & expedia ids
     public static function GetResponseRates($ratesData, $sabreId, $expediaId)
     {

@@ -80,8 +80,9 @@
                     $sabreCode = $node->field_hotelcode['und'][0]['value'];
                     $expediaCode = isset($node->field_ean_hotelcode['und'][0]['value']) ? $node->field_ean_hotelcode['und'][0]['value'] : '0000000';
                     //Pasamos los codigos de expedia y sabre al input values
-                    //Se añade otro codigo porque con un solo codigo da error hay que mirar;
-                    $input_values['sabreCodes'] = array($sabreCode,'0031999');
+                    //Se añade otro codigo de sabre para hacer el HotelAvail porque pasando un hotel solo la llamada al servicio da un error
+                    $auxCode = Hotel::GetFirstDiferentSabreCode($node->field_destination['und'][0]['target_id'], $sabreCode);
+                    $input_values['sabreCodes'] = array($sabreCode, $auxCode);
                     $input_values['eanCodes'] = array($expediaCode);
                     //Obtenemos los rates del hotel
                     $hotelRates = AdminForms::getHotelRates($input_values);

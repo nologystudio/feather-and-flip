@@ -31,7 +31,7 @@ if(isset($inputValues['service']) && !empty($inputValues['service']))
 <?php if(count($inputValues) > 0){?>
 <section id="booking-engine" ng-controller="BookingEngineCtrl" ng-include="booking" ng-init='init(<?php echo json_encode($inputValues);?>,0)'></section>
 <?php } else { ?>
-<section id="booking-engine" ng-controller="BookingEngineCtrl" ng-include="booking" ng-init="state=0; bookingInfo.destination = <?php if(isset($destination)) echo $destination; else echo 0;?>; bookingInfo.internalId = <?php if(isset($internalId)) echo $internalId; else echo 0;?>"></section>
+<section id="booking-engine" ng-controller="BookingEngineCtrl" ng-include="booking" ng-init="initRate(0,<?php if(isset($destination)) echo $destination; else echo 0;?>,<?php if(isset($internalId)) echo $internalId; else echo 0;?>)"></section>
 <?php } ?>
 <section id="hotel" <?php echo $datas ?> ng-controller="HotelCtrl">
         <!--<header id="booking-header-engine">
