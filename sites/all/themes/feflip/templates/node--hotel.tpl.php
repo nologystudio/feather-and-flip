@@ -33,7 +33,7 @@ if(isset($inputValues['service']) && !empty($inputValues['service']))
 <?php } else { ?>
 <section id="booking-engine" ng-controller="BookingEngineCtrl" ng-include="booking" ng-init="state=0; bookingInfo.destination = <?php if(isset($destination)) echo $destination; else echo 0;?>; bookingInfo.internalId = <?php if(isset($internalId)) echo $internalId; else echo 0;?>"></section>
 <?php } ?>
-<section id="hotel" <?php echo $datas ?>>
+<section id="hotel" <?php echo $datas ?> ng-controller="HotelCtrl">
         <!--<header id="booking-header-engine">
             <?php if(count($inputValues) > 0){?>
                 <form id="booking-search" ng-controller="BookingEngineCtrl" ng-include="searchTpl" ng-init='state=3; init(<?php echo json_encode($inputValues);?>)'></form>
@@ -129,7 +129,14 @@ if(isset($inputValues['service']) && !empty($inputValues['service']))
         </article>
         <footer>
                 <a href="#" rel="terms-and-conditions"></a>
-                <a href="#" rel="map"></a>
+                <a rel="map"></a>
                 <a href="#" rel="tripadvisor"></a>
         </footer>
 </section>
+
+<div class="map-overlay">
+	<div class="content">
+		<div id="location"></div>
+		<button rel="close"></button>
+	</div>
+</div>
