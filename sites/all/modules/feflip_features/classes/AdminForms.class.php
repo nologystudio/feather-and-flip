@@ -146,8 +146,7 @@ class AdminForms
 
         return array(
             'sabre' => $sabreService->ListHotelAvail($values['sabreCodes'],$rateCodes, $numAdults, $sabreChecking, $sabreCheckout),
-            //se comenta la parte de [expedia]
-            //'expedia' => Expedia::GetHotelsByCode_XML($values['eanCodes'], $values['checkIn'], $values['checkOut'], $values['rooms']['info'])
+            'expedia' => Expedia::GetHotelsByCode_XML($values['eanCodes'], $values['checkIn'], $values['checkOut'], $values['rooms']['info'])
         );
     }
 
@@ -189,10 +188,9 @@ class AdminForms
 
                 return $sabreService->HotelDescription($sessionInfo, $hotelId, $numAdults, $sabreChecking, $sabreCheckout);
             }
-            //se comenta la parte de [expedia]
-            /*
+
             else
-                return Expedia::RoomAvailability_XML($hotelId, $values['checkIn'], $values['checkOut'], $values['rooms']['info']);*/
+                return Expedia::RoomAvailability_XML($hotelId, $values['checkIn'], $values['checkOut'], $values['rooms']['info']);
         }
 
     }
@@ -256,8 +254,6 @@ class AdminForms
 
             return array('result' => $result, 'args' => $args);
         }
-        //se comenta la parte de [expedia]
-        /*
         else if (isset($service) && $service == 'expedia')
         {
             $date = explode("-", $values['creditCardExpireDate']);
@@ -302,7 +298,6 @@ class AdminForms
 
             return array('result' => $result, 'args' => $args);
         }
-        */
     }
 
     /**
@@ -437,9 +432,9 @@ class AdminForms
     static function userIsLoggedIn()
     {
         if (user_is_logged_in())
-            return 'true';//self::encrypt_decrypt('encrypt','true');
+            return 'true';
         else
-            return 'false';//self::encrypt_decrypt('encrypt','false');
+            return 'false';
     }
 
     /**

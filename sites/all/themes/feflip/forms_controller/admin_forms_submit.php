@@ -58,8 +58,7 @@
 
                 //Pass sabre and ean code by parameters
                 $input_values['sabreCodes'] = $codes['sabre'];
-                //se comenta la parte de [expedia]
-                //$input_values['eanCodes'] = $codes['expedia'];
+                $input_values['eanCodes'] = $codes['expedia'];
                 //Web service call
                 $result = AdminForms::getHotelRates($input_values);
 
@@ -79,23 +78,30 @@
                     //Cargamos el nodo hotel para obtener los codigos de expedia y sabre
                     $node = node_load($input_values['internalId']);
                     $sabreCode = $node->field_hotelcode['und'][0]['value'];
-                    //$expediaCode = isset($node->field_ean_hotelcode['und'][0]['value']) ? $node->field_ean_hotelcode['und'][0]['value'] : '0000000';
+                    $expediaCode = isset($node->field_ean_hotelcode['und'][0]['value']) ? $node->field_ean_hotelcode['und'][0]['value'] : '0000000';
                     //Pasamos los codigos de expedia y sabre al input values
                     //Se añade otro codigo porque con un solo codigo da error hay que mirar;
                     $input_values['sabreCodes'] = array($sabreCode,'0031999');
-                    //$input_values['eanCodes'] = array($expediaCode);
+                    $input_values['eanCodes'] = array($expediaCode);
                     //Obtenemos los rates del hotel
                     $hotelRates = AdminForms::getHotelRates($input_values);
-                    $rates = Hotel::GetResponseRates($hotelRates, $sabreCode/*, $expediaCode*/);
+                    $rates = Hotel::GetResponseRates($hotelRates, $sabreCode, $expediaCode);
                     //Añadimos los input values con el service y el hotelId
-
-                    /*
                     if (((float)$rates['expedia']['rate'] != 0.0) && ((float)$rates['sabre']['rate'] != 0.0))
                     {
-                         //Si tenemos precios de los dos servicios por ahora ofrecemos sabre
-                        $input_values['service'] = 'sabre';
-                        $input_values['hotelId'] = $sabreCode;
-                        $input_values['available'] = true;
+                         //Si los presios son iguales ofrecemos o expedia es más caro ofrecemos sabre
+                        if (((float)$rates['expedia']['rate'] >= (float)$rates['sabre']['rate']))
+                        {
+                            $input_values['service'] = 'sabre';
+                            $input_values['hotelId'] = $sabreCode;
+                            $input_values['available'] = true;
+                        }
+                        else
+                        {
+                            $input_values['service'] = 'expedia';
+                            $input_values['hotelId'] = $expediaCode;
+                            $input_values['available'] = true;
+                        }
                     }
                     elseif(((float)$rates['expedia']['rate'] == 0.0) && ((float)$rates['sabre']['rate'] != 0.0))
                     {
@@ -107,16 +113,6 @@
                     {
                         $input_values['service'] = 'expedia';
                         $input_values['hotelId'] = $expediaCode;
-                        $input_values['available'] = true;
-                    }
-                    else
-                        $input_values['available'] = false;
-                    */
-
-                    if (((float)$rates['sabre']['rate'] != 0.0))
-                    {
-                        $input_values['service'] = 'sabre';
-                        $input_values['hotelId'] = $sabreCode;
                         $input_values['available'] = true;
                     }
                     else
