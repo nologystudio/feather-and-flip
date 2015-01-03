@@ -87,7 +87,7 @@ finally
         </footer>
 </section>
 <!-- | i | Booking engine: Landing ------------------------------------------------------- -->
-<section id="booking-engine" ng-controller="BookingEngineCtrl" ng-include="booking"></section>
+<section id="booking-engine" ng-controller="BookingEngineCtrl" ng-include="bookingSearch"></section>
 <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - -  -->
 <section id="map-it" ng-controller="MapCtrl">
         <header>

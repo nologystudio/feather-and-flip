@@ -71,7 +71,7 @@
                         $hotel['expedia_rate'] = $rates['expedia']['rate'];
                         $hotel['expedia_curr'] = $rates['expedia']['currency'];
                     }
-
+                    
                     if ((float)$rates['sabre']['rate'] != 0.0) {
                         $hotel['sabre_rate'] = $rates['sabre']['rate'];
                         $hotel['sabre_curr'] = $rates['sabre']['currency'];
@@ -102,14 +102,16 @@
         }
 
 ?>
-<section id="get-rates">
-	<button id="get-rates">get rates</button>
-</section>
+<?php if (isset($arg[2]) && $arg[2] != 'itinerary'): ?>
+    <section id="get-rates">
+    	<button id="get-rates">get rates</button>
+    </section>
+<?php endif; ?>
 <!-- | i | Booking engine: Landing ------------------------------------------------------- -->
 <?php if(count($inputValues) > 0){?>
-<section id="booking-engine" ng-controller="BookingEngineCtrl" ng-include="booking" ng-init='init(<?php echo json_encode($inputValues);?>)'></section>
+<section id="booking-engine" ng-controller="BookingEngineCtrl" ng-include="bookingSearch" ng-init='init(<?php echo json_encode($inputValues);?>,0)'></section>
 <?php } else { ?>
-<section id="booking-engine" ng-controller="BookingEngineCtrl" ng-include="booking" ng-init="bookingInfo.destination = <?php if(isset($destinationId)) echo $destinationId; else echo 0;?>"></section>
+<section id="booking-engine" ng-controller="BookingEngineCtrl" ng-include="bookingSearch" ng-init="initRate(0,<?php if(isset($destinationId)) echo $destinationId; else echo 0;?>,<?php if(isset($internalId)) echo $internalId; else echo 0;?>)"></section>
 <?php } ?>
 <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - -  -->
 <section id="hotel-reviews"<?php echo ((isset($arg[2]) && ($arg[2] == 'itinerary')) ? ' class="hidden"' : ''); ?>>

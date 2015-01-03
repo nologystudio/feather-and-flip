@@ -291,6 +291,7 @@ function feflip_preprocess_views_view(&$variables) {
             $booking['rooms'] =  isset($entity->field_rooms['und'][0]['value']) ? $entity->field_rooms['und'][0]['value'] : '...';
             $booking['adults'] =  isset($entity->field_adults['und'][0]['value']) ? $entity->field_adults['und'][0]['value'] : '...';
             $booking['children'] =  isset($entity->field_children['und'][0]['value']) ? $entity->field_children['und'][0]['value'] : '...';
+            $booking['service'] =  isset($entity->field_service['und'][0]['value']) ? $entity->field_service['und'][0]['value'] : '...';
         }
 
         $variables['booking'] = $booking;
@@ -443,23 +444,15 @@ function feflip_field__taxonomy_term_reference($variables) {
 /**
  * Implements hook_theme().
  */
-// function feflip_theme() {
-//   $items = array();
+function feflip_theme() {
+  $items = array();
  
-//   $items['user_pass'] = array(
-//     'render element' => 'form',
-//     'path' => drupal_get_path('theme', 'feflip').'/templates',
-//     'template' => 'user-pass',
-//     'preprocess functions' => array(
-//       'feflip_preprocess_user_pass'
-//     ),
-//   );  
-//   return $items;
-// }
-// function feflip_preprocess_user_pass(&$vars) {
-//   //  alter the reset password form here
-//   dpm($vars);
-// }
+  $items['user_pass_reset'] = array(
+    'render element' => 'form',
+    'template' => 'templates/user-pass'
+  );  
+  return $items;
+}
 
 /* 
 * Get destinations promoted to front page

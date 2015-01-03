@@ -73,8 +73,8 @@
             <!--<meta content="initial-scale=1, minimum-scale=1, width=device-width" name="viewport">-->	    
             
             <title><?php echo $headerTitle; ?></title>
-            <link rel="shortcut icon" href="media/favicon.ico" type="image/x-icon">
-                <link rel="icon"          href="media/favicon.ico" type="image/x-icon">
+            <link rel="shortcut icon" href="/sites/all/themes/feflip/media/brand/favicon.ico" type="image/x-icon">
+            <link rel="icon"          href="/sites/all/themes/feflip/media/brand/favicon.ico" type="image/x-icon">
                 
             <link rel="image_src"    href="<?php echo variable_get('relativePath').'media/sharing/'.$siteImage.'.jpg'; ?>">
                

@@ -62,6 +62,13 @@
                 </article>
         </div>
        <footer>
+				<h3 class="middle-line">Share this</h3>
+				<nav id="social-media">
+					<a href="#" rel="twitter"></a>
+					<a href="#" rel="facebook"></a>
+					<a href="#" rel="pinterest"></a>
+					<a href="#" rel="google-plus"></a>
+				</nav>
 				<button rel="see-hotel-reviews">Go to Hotel Reviews</button>
 			</footer>
 </section>
