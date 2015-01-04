@@ -34,7 +34,7 @@ if(isset($inputValues['service']) && !empty($inputValues['service']))
 	<section id="booking-engine" ng-controller="BookingEngineCtrl" ng-include="bookingSearch" ng-init="initRate(0,<?php if(isset($destination)) echo $destination; else echo 0;?>,<?php if(isset($internalId)) echo $internalId; else echo 0;?>)"></section>
 <?php } ?>
 
-<section id="hotel" <?php echo $datas ?> ng-controller="HotelCtrl">
+<section id="hotel" <?php echo $datas ?> ng-controller="HotelCtrl" ng-init="loadMap(39.186623,-106.817570)">
         <!--<header id="booking-header-engine">
             <?php if(count($inputValues) > 0){?>
                 <form id="booking-search" ng-controller="BookingEngineCtrl" ng-include="searchTpl" ng-init='state=3; init(<?php echo json_encode($inputValues);?>)'></form>
@@ -128,16 +128,28 @@ if(isset($inputValues['service']) && !empty($inputValues['service']))
                         </h4>
                 </footer>
         </article>
-        <footer>
+       <!-- <footer>
                 <a href="#" rel="terms-and-conditions"></a>
                 <a rel="map"></a>
                 <a href="#" rel="tripadvisor"></a>
-        </footer>
+        </footer>-->
 </section>
 
-<div class="map-overlay">
+<section id="map-it" class="short">
+	<header class="animated fadeInUp">
+        <h3></h3>
+        <!--<nav id="zoom">
+            <button rel="zoom-in"></button>
+            <button rel="zoom-out"></button>
+            <button rel="move"></button>
+        </nav>-->
+	</header>
+	<section id="map"></section>
+</section>
+
+<!--<div class="map-overlay">
 	<div class="content">
 		<div id="location"></div>
 		<button rel="close"></button>
 	</div>
-</div>
+</div>-->
