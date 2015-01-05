@@ -433,7 +433,7 @@ class Sabre
         try
         {
            //Add person info
-            $this->TravelItineraryAddInfo($sessionInfo,$firstname, $lastname, $email);
+            $this->TravelItineraryAddInfo($sessionInfo,$firstname, $lastname, $email, $phone);
 
             $args = array();
             $args['Hotel']['BasicPropertyInfo']['RPH'] = $rph;
@@ -572,7 +572,7 @@ class Sabre
         return $response;
     }
      
-     public function TravelItineraryAddInfo($sessionInfo, $name, $surname, $email)
+     public function TravelItineraryAddInfo($sessionInfo, $name, $surname, $email, $phone)
      {
         $securityToken = $sessionInfo['SecurityToken'];
         $conversationId = $sessionInfo['ConversationId'];
@@ -602,6 +602,8 @@ class Sabre
 
 
             $args['CustomerInfo']['Email']['Address'] = $email;
+            $args['CustomerInfo']['ContactNumbers']['ContactNumber']['Phone'] = $phone;
+            $args['CustomerInfo']['ContactNumbers']['ContactNumber']['PhoneUseType'] = 'H';
             $args['CustomerInfo']['PersonName']['GivenName'] = $name;
             $args['CustomerInfo']['PersonName']['Surname'] = $surname;
 
