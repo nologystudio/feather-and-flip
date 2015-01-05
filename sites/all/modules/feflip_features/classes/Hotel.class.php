@@ -334,6 +334,12 @@ class Hotel
     }
 
 
+    /**
+     * Return first sabre code different to param $sabreCode.
+     * @param $destination
+     * @param $sabreCode
+     * @return string
+     */
     public static function GetFirstDiferentSabreCode($destination, $sabreCode)
     {
         $query = new EntityFieldQuery;
@@ -361,6 +367,37 @@ class Hotel
 
         return $result;
     }
+
+    /*
+     * Funcion para ver cuantos hoteles no tienen latitud ni longitud
+     * se comenta por ahora porque no hace falta para la aplicacion
+
+    public static function GetHotelsWithOutLatLon()
+    {
+        $query = new EntityFieldQuery;
+
+        $nodes = $query->entityCondition('entity_type', 'node')
+            ->entityCondition('bundle', 'hotel')
+            ->propertyCondition('status', 1)
+            ->execute();
+
+        $withOut = array();
+        $with = array();
+        if (isset($nodes['node'])) {
+            $hotelsNode = node_load_multiple(array_keys($nodes['node']));
+            foreach($hotelsNode as $hotel)
+            {
+                if (!isset($hotel->field_latitude['und'][0]['value']) || !isset($hotel->field_longitude['und'][0]['value']))
+                    $withOut[] = $hotel;
+                else
+                    $with[] = $hotel;
+            }
+        }
+
+        dpm($withOut);
+        dpm($with);
+    }
+    */
 
     // Get the low rates from a server response between sabre & expedia ids
     public static function GetResponseRates($ratesData, $sabreId, $expediaId)

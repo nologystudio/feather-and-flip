@@ -34,7 +34,7 @@ if(isset($inputValues['service']) && !empty($inputValues['service']))
 	<section id="booking-engine" ng-controller="BookingEngineCtrl" ng-include="bookingSearch" ng-init="initRate(0,<?php if(isset($destination)) echo $destination; else echo 0;?>,<?php if(isset($internalId)) echo $internalId; else echo 0;?>)"></section>
 <?php } ?>
 
-<section id="hotel" <?php echo $datas ?> ng-controller="HotelCtrl" ng-init="loadMap(39.186623,-106.817570)">
+<section id="hotel" <?php echo $datas ?> ng-controller="HotelCtrl" ng-init="loadMap(<?php echo isset($node->field_latitude['und'][0]['value']) ? $node->field_latitude['und'][0]['value'] : '0'; ?>,<?php echo isset($node->field_longitude['und'][0]['value']) ? $node->field_longitude['und'][0]['value'] : '0'; ?>)">
         <!--<header id="booking-header-engine">
             <?php if(count($inputValues) > 0){?>
                 <form id="booking-search" ng-controller="BookingEngineCtrl" ng-include="searchTpl" ng-init='state=3; init(<?php echo json_encode($inputValues);?>)'></form>
