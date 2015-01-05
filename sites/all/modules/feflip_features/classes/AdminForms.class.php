@@ -3,8 +3,8 @@
 class AdminForms
 {
     const API = 'Mailchimp.php';
-    const APIKEY = 'eae1d5448b1a2cb751661162fd5011fd-us8';
-    const LISTID = '487e37ac3f';
+    const APIKEY = 'dced674ea5511297bee26bcfc6cead3b-us8';//'eae1d5448b1a2cb751661162fd5011fd-us8';
+    const LISTID = '9539518750';//'487e37ac3f';
 
 
     private static function encrypt_decrypt($action, $string) {
