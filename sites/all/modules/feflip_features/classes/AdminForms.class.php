@@ -69,7 +69,7 @@ class AdminForms
      */
     static function subscribeToNewsLetter($custom_data, &$errorMsg)
     {
-        if (!isset($custom_data['user_email'])) 
+        if (!isset($custom_data['userEmail']))
         {
             $errorMsg = "You must include an email.";
             return false;
@@ -84,7 +84,7 @@ class AdminForms
 
             $values =array();
             //$values['FNAME']    = $custom_data['user_name'];
-            $values['EMAIL']    = $custom_data['user_email'];            
+            $values['EMAIL']    = $custom_data['userEmail'];
 
             $resultado = $mailchimp->lists->subscribe(
                         self::LISTID,
