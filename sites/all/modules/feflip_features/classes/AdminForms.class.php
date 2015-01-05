@@ -478,12 +478,13 @@ class AdminForms
      */
     static function ContactSubmit($inputValues)
     {
+        global $user;
         $entityform = entity_create('entityform', array(
             'type' => 'contact',
             'created' => time(),
             'changed' => time(),
             'language' => LANGUAGE_NONE,
-            'uid' => 0));
+            'uid' => $user->uid));
 
         $wrapper = entity_metadata_wrapper('entityform', $entityform);
 
