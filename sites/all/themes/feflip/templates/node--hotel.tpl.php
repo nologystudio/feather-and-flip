@@ -66,20 +66,31 @@ if(isset($inputValues['service']) && !empty($inputValues['service']))
                         </div>
                 </header>
                 <!-- Gallery starts here -->
-                <div id="hotel-gallery" class="one-item" ng-controller="SlideshowCtrl">
-                    <ul>
-                        <?php foreach($images as $image){ ?>
-                            <li>
-                                <article>
-                                    <figure>
-                                        <img src="<?php echo $image['url'];?>" alt="<?php echo $image['alt']?>"/>
-                                    </figure>
-                                </article>
-                            </li>
-                        <?php } ?>
-                    </ul>
-                    <button rel="left"></button>
-                    <button rel="right"></button>
+                <div class="gallery-wrapper">
+	                <div id="hotel-gallery" class="one-item" ng-controller="SlideshowCtrl">
+	                    <ul>
+	                        <?php foreach($images as $image){ ?>
+	                            <li>
+	                                <article>
+	                                    <figure>
+	                                        <img src="<?php echo $image['url'];?>" alt="<?php echo $image['alt']?>"/>
+	                                    </figure>
+	                                </article>
+	                            </li>
+	                        <?php } ?>
+	                    </ul>
+	                </div>
+	                <div class="gallery-ui">
+						<div id="gallery-state-bar">
+							<ul class="pages">
+								<!--<?php foreach($images as $key => $image){ ?>
+								<li><?php echo $key; ?></li>
+								<?php } ?>-->
+							</ul>
+						</div>
+		                <button rel="left"></button>
+		                <button rel="right"></button>
+	                </div>
                 </div>
         </article>
 
@@ -138,18 +149,7 @@ if(isset($inputValues['service']) && !empty($inputValues['service']))
 <section id="map-it" class="short">
 	<header class="animated fadeInUp">
         <h3></h3>
-        <!--<nav id="zoom">
-            <button rel="zoom-in"></button>
-            <button rel="zoom-out"></button>
-            <button rel="move"></button>
-        </nav>-->
-	</header>
-	<section id="map"></section>
+        <a href="https://www.google.com/maps?q=<?php echo isset($node->field_latitude['und'][0]['value']) ? $node->field_latitude['und'][0]['value'] : '0'; ?>,<?php echo isset($node->field_longitude['und'][0]['value']) ? $node->field_longitude['und'][0]['value'] : '0'; ?>" target="_blank" rel="google-maps">View on Google Maps</a>
+    </header>
+	<section id="map" class="single"></section>
 </section>
-
-<!--<div class="map-overlay">
-	<div class="content">
-		<div id="location"></div>
-		<button rel="close"></button>
-	</div>
-</div>-->

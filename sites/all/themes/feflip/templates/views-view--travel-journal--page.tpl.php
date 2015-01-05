@@ -9,9 +9,9 @@
                     <hr>
                     <h4 ng-switch-when="still">Sign up for our newsletter</h4>
                     <form>
-                        <small id="error" class="animated fadeInUp" ng-switch-when="error">We're sorry,<br>an error has occurred</small>
+                        <small id="error"   class="animated fadeInUp" ng-switch-when="error">We're sorry,<br>an error has occurred</small>
                         <small id="success" class="animated fadeInUp" ng-switch-when="success">Thanks!</small>
-                        <input name="user-email" type="email" ng-switch-when="still" placeholder="Your email address" value="{{signUpData.userEmail}}" ng-changed="checkChangedInput()" ng-model="signUpData.userEmail" required/>
+                        <input name="user-email" type="email" ng-switch-when="still" placeholder="Your email address" value="{{signUpData.userEmail}}" ng-model="signUpData.userEmail" required/>
                         <input type="submit" ng-switch-when="still" value="submit" ng-click="regSubmit()"/>
                     </form>
                 </div>

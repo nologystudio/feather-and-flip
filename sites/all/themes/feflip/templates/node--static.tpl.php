@@ -16,7 +16,7 @@
 </section>
 
 <?php } else if (strpos(strtoupper($title), 'CONTACT') !== false) {?>
-<section id="contact" class="static" ng-controler="ContactCtrl">
+<section id="contact" class="static" ng-controller="ContactCtrl">
 	<header>
 		<h1>Use your words</h1>
 		<h2>for questions about feather+flip or to reach our editorial or sales team, please fill out our contact form.</h2>
@@ -38,9 +38,7 @@
 		</label>
 		<label for="user-department">
 			Select the appropriate department*
-			<select ng-model="userDepartment">
-				<option>Editorial</option>
-			</select>
+			<select ng-model="userDepartment" ng-options="department.name for department in departments"></select>
 		</label>
 		<label for="user-subject">
 			Subject*

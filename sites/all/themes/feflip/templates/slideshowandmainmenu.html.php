@@ -56,7 +56,7 @@
 							<input type="submit" ng-click="searchSubmit()" value=""/>
 							<ul ng-if="showResult" ng-class="{'show':showResult}">
 								<li class="no-result" ng-if="noResult">
-									<a href="http://www.featherandflip.com/contact/">Don't see what you're looking for? Contact our team for help</a>
+									<a href="/contact">Don't see what you're looking for? Contact our team for help</a>
 								</li>
 								<li class="title" ng-if="hotels.length > 0">Hotels</li>
 								<li class="hotel" ng-repeat="hotel in hotels">
