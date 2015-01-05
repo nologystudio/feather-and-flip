@@ -16,7 +16,43 @@
 </section>
 
 <?php } else if (strpos(strtoupper($title), 'CONTACT') !== false) {?>
-<p>Here mark up contact.</p>
+<section id="contact" class="static" ng-controler="ContactCtrl">
+	<header>
+		<h1>Use your words</h1>
+		<h2>for questions about feather+flip or to reach our editorial or sales team, please fill out our contact form.</h2>
+	</header>
+	<h4 ng-if="success">Thank you for contacting us.</h4>
+	<form id="contact-form">
+		<label for="user-name" class="half">
+			Name*
+			<input type="text" name="user-name" ng-model="data.userName" required/>
+			<small>First name</small>
+		</label>
+		<label for="user-last" class="half no-label">
+			<input type="text" name="user-last" ng-model="data.userLast" required/>
+			<small>Last name</small>
+		</label>
+		<label for="user-email">
+			Email*
+			<input type="email" name="user-email" ng-model="data.userEmail" required/>
+		</label>
+		<label for="user-department">
+			Select the appropriate department*
+			<select ng-model="userDepartment">
+				<option>Editorial</option>
+			</select>
+		</label>
+		<label for="user-subject">
+			Subject*
+			<input type="text" name="user-subject" ng-model="data.userSubject" required/>
+		</label>
+		<label for="user-message">
+			Message*
+			<textarea name="user-message" ng-model="data.userMessage" required></textarea>
+		</label>
+		<input type="submit" ng-click="submitContact()"/>
+	</form>
+</section>
 <?php } else { ?>
 <section class="static">
 	<article id="about">
