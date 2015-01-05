@@ -21,8 +21,8 @@
 		<h1>Use your words</h1>
 		<h2>for questions about feather+flip or to reach our editorial or sales team, please fill out our contact form.</h2>
 	</header>
-	<h4 ng-if="success">Thank you for contacting us.</h4>
-	<form id="contact-form">
+	<h4 ng-if="success" class="animated fadeInDown">Thank you for contacting us.</h4>
+	<form id="contact-form" name="contactForm">
 		<label for="user-name" class="half">
 			Name*
 			<input type="text" name="user-name" ng-model="data.userName" required/>
@@ -38,7 +38,12 @@
 		</label>
 		<label for="user-department">
 			Select the appropriate department*
-			<select ng-model="userDepartment" ng-options="department.name for department in departments"></select>
+			<select ng-model="data.userDepartment">
+				<option value="editorial" selected="selected">Editorial</option>
+				<option value="Advertising">Advertising</option>
+				<option value="Partnership Opportunities">Partnership Opportunities</option>
+				<option value="General Inquiries">General Inquiries</option>
+			</select>
 		</label>
 		<label for="user-subject">
 			Subject*
@@ -48,7 +53,7 @@
 			Message*
 			<textarea name="user-message" ng-model="data.userMessage" required></textarea>
 		</label>
-		<input type="submit" ng-click="submitContact()"/>
+		<input type="submit" ng-class="{disabled:!contactForm.$valid}" ng-click="!contactForm.$valid || submitContact()"/>
 	</form>
 </section>
 <?php } else { ?>
