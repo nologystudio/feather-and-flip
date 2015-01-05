@@ -511,9 +511,12 @@ function get_header_main_navigation_menu($destinations=NULL){
 								<div class="bg"></div>
 								<h4>My Bookings</h4>';
               foreach($bookings as $booking)
-                  $navigationMenu .= '<h5><a href="/booking-info/'.$booking->field_booking_id['und'][0]['value'].'">Booking ' . $booking->field_booking_id['und'][0]['value'].'</a></h5>';
-								//<h5>Booking 13324432342wwrer33543dwwr / 12/02</h5>
-								//<h5>Booking 13324432342wwrer33543dwwr</h5>
+              {
+                  if (isset($booking->field_booking_id['und'][0]['value']))
+                    $navigationMenu .= '<h5><a href="/booking-info/' . $booking->field_booking_id['und'][0]['value'] . '">Booking ' . $booking->field_booking_id['und'][0]['value'] . '</a></h5>';
+                  //<h5>Booking 13324432342wwrer33543dwwr / 12/02</h5>
+                  //<h5>Booking 13324432342wwrer33543dwwr</h5>
+              }
 
               $navigationMenu .= '</div>
 							<div id="profile">
