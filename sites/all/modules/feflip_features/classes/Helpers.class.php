@@ -4,7 +4,7 @@ class Helpers
 {
 
     // Fixed configuration values
-    const RSS_URL = 'http://www.featherandflip.com/travel-journal/?format=rss';
+    const RSS_URL = 'http://blog.featherandflip.com/?format=rss';
 
     public static function GetAllImagesFromFieldCollection($fieldCollection, $imageText, $alternativeImage, $style)
     {

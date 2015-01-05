@@ -105,74 +105,406 @@
  * 6. http://api.drupal.org/api/drupal/modules--system--theme.api.php/function/hook_preprocess_HOOK/7
  *
  * =========================================================== End instructions.
- */
-  $template_name = basename(__FILE__);
-  $current_path = realpath(NULL);
-  $current_len = strlen($current_path);
-  $template_path = realpath(dirname(__FILE__));
-  if (!strncmp($template_path, $current_path, $current_len)) {
-    $template_path = substr($template_path, $current_len + 1);
-  }
-  $template_url = url($template_path, array('absolute' => TRUE));
-?>
-<div class="htmlmail-body">
-<?php echo $body; ?>
-</div>
-<?php if ($debug):
-  $module_template = "htmlmail--$module.tpl.php";
-  $message_template = "htmlmail--$module--$key.tpl.php";
-?>
-<hr />
-<div class="htmlmail-debug">
-  <dl><dt><p>
-    To customize this messagesss:
-  </p></dt><dd><ol><li><p><?php if (empty($theme)): ?>
-    Visit <u>admin/config/system/htmlmail</u>
-    and select a theme to hold your custom email template files.
-  </p></li><li><p><?php elseif (empty($theme_path)): ?>
-    Visit <u>admin/appearance</u>
-    to enable your selected
-    <u><?php echo drupal_ucfirst($theme); ?></u> theme.
-  </p></li><li><?php endif;
-if ("$template_path/$template_name" == "$theme_path/$message_template"): ?><p>
-    Edit your<br />
-    <code><?php echo "$template_path/$template_name"; ?>/templates</code>
-    <br />file.
-  </p></li><li><?php
-else:
-  if (!file_exists("$theme_path/htmlmail.tpl.php")): ?><p>
-    Copy<br />
-    <code><?php echo "$module_path/htmlmail.tpl.php"; ?></code>
-    <br />to<br />
-    <code><?php echo "$theme_path/htmlmail.tpl.php"; ?></code>
-  </p></li><li><?php
-  endif;
-  if (!file_exists("$theme_path/$module_template")): ?><p>
-    For module-specific customization, copy<br />
-    <code><?php echo "$module_path/htmlmail.tpl.php"; ?></code>
-    <br />to<br />
-    <code><?php echo "$theme_path/$module_template"; ?></code>
-  </p></li><li><?php
-  endif;
-  if (!file_exists("$theme_path/$message_template")): ?><p>
-    For message-specific customization, copy<br />
-    <code><?php echo "$module_path/htmlmail.tpl.php"; ?></code>
-    <br />to<br />
-    <code><?php echo "$theme_path/$message_template"; ?></code>
-  </p></li><li><?php endif; ?><p>
-    Edit the copied file.
-  </p></li><li><?php
-endif; ?><p>
-    Send a test message to make sure your customizations worked.
-  </p></li><li><p>
-    If you think your customizations would be of use to others,
-    please contribute your file as a feature request in the
-    <a href="http://drupal.org/node/add/project-issue/htmlmail">issue queue</a>.
-  </p></li></ol></dd><?php if (!empty($params)): ?><dt><p>
-    The <?php echo $module; ?> module sets the <u><code>$params</code></u>
-    variable.  For this message,
-  </p></dt><dd><p><code><pre>
-$params = <?php echo check_plain(print_r($params, 1)); ?>
-  </pre></code></p></dd><?php endif; ?></dl>
-</div>
-<?php endif;
+ */ ?>
+
+<?php if ($params['subject'] == 'F+F New reservation'): // Admin notification ?>
+  <?php print_r($params['message']); ?>
+<?php else: // Booking notification to customer ?>
+  <?php
+    $entity = entity_load('entityform', array($params['message']));
+    if (!empty($entity)){
+      $wrapper = entity_metadata_wrapper('entityform', $entity[$params['message']]);
+      $service = $wrapper->field_service->value();
+      switch ($service) {
+        case 'expedia': ?>
+          <div style="background-color:#d9dfdE; font-family: Arial,sans-serif; font-size:14px; line-height: 22px; color: #333333;">
+          <table style="width:640px; margin:auto; padding:0; border-collapse:collapse;">
+            <tr style="height:20px;"></tr>
+            <tr align="center" style="border-bottom: dotted 1px #333333;">
+              <td valign="top" style="padding-bottom: 30px;">
+                <img style="width:300px; margin: auto;" src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/sites/all/themes/feflip/media/brand/feather-and-flip-black-logo.png"/>
+              </td>
+            </tr>
+            <tr style="height:20px;"></tr>
+            <tr style="border-bottom: dotted 1px #333333;">
+              <td style="text-transform: uppercase; font-size: 14px; color: #333333; line-height: 22px; padding-bottom: 20px;">Thank you for booking with Feather+Flip. We only recommend hotels we know and love, and we hope you feel the same way. Read on for your confirmation number, hotel cancellation policy and contact details.</td>
+            </tr>
+            <tr style="height:30px;"></tr>
+            <tr>
+              <td>
+                <table style="width:100%; border: solid 1px #333333; padding: 60px; border-radius: 5px; margin-bottom: 30px;">
+                  <tr>
+                    <td valign="top" style="padding-bottom: 20px;">
+                    <img style="margin: auto;" src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/sites/all/themes/feflip/media/services/expedia-service-email.png"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="color:#333333; font-size:14px; line-height: 22px; border-bottom: dotted 1px #333333; padding-bottom: 15px">The booking you recently made on the featherandflip.com website is confirmed. Your reservation details are below.</td>
+                  </tr>
+                  <tr>
+                    <td style="color:#333333; font-size:18px; line-height: 22px; padding-top: 15px"><span style="font-weight: bold; margin-right: 10px;">Customer Name:</span> <?php echo $wrapper->field_first_name->value().' '.$wrapper->field_last_name->value(); ?></td>
+                  </tr>
+                  <tr>
+                    <td style="color:#333333; font-size:18px; line-height: 22px;"><span style="font-weight: bold; margin-right: 10px;">Customer Email:</span> <?php echo $wrapper->field_email->value(); ?></td>
+                  </tr>
+                  <tr>
+                    <td style="color:#333333; font-size:18px; line-height: 22px; border-bottom: dotted 1px #333333; padding-bottom: 15px"><span style="font-weight: bold; margin-right: 10px;">Itinerary Number:</span> <?php echo $wrapper->field_booking_id->value(); ?></td>
+                  </tr>
+                  <tr>
+                    <td style="color:#333333; font-size:12px; line-height: 18px; padding-top: 15px">Please refer to your Itinerary Number if you contact customer service for any reason.</td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <table style="width:100%; border: solid 1px #333333; padding: 60px; border-radius: 5px; margin-bottom: 30px;">
+                  <tr>
+                    <td style="color:#333333; font-size:18px; font-weight:bold; line-height: 22px; text-transform: uppercase; border-bottom: dotted 1px #333333; padding-bottom: 15px"><?php echo $wrapper->field_hotel_name->value(); ?></td>
+                  </tr>
+                  <tr>
+                    <td style="padding-top: 15px; border-bottom: dotted 1px #333333; padding-bottom: 15px">
+                      <table style="margin: 0; padding-top: 15px;border-collapse:collapse; color:#333333; font-size:14px; line-height: 22px;">
+                        <tr><td><span style="font-weight: bold; margin-right: 10px;">Address:</span><?php echo $wrapper->field_hotel_contact->value(); ?></tr></td>
+                        <tr><td><span style="font-weight: bold; margin-right: 10px;">Phone:</span>Phone</tr></td>
+                        <tr><td><span style="font-weight: bold; margin-right: 10px;">Fax:</span>Fax</tr></td>
+                        <tr><td><span style="font-weight: bold; margin-right: 10px;">Check-in:</span><?php echo $wrapper->field_check_in->value(); ?></tr></td>
+                        <tr><td><span style="font-weight: bold; margin-right: 10px;">Check-out:</span><?php echo $wrapper->field_check_out->value(); ?></tr></td>
+                        <tr><td><span style="font-weight: bold; margin-right: 10px;">Number of nights:</span><?php echo $wrapper->field_nights->value(); ?></tr></td>
+                        <tr><td><span style="font-weight: bold; margin-right: 10px;">Number of guests:</span><?php echo $wrapper->field_adults->value()+$wrapper->field_children->value(); ?></tr></td>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <table style="width:100%; border: solid 1px #333333; padding: 60px; border-radius: 5px; margin-bottom: 30px;">
+                  <tr>
+                    <td style="color:#333333; font-size:18px; font-weight:bold; line-height: 22px; text-transform: uppercase; border-bottom: dotted 1px #333333; padding-bottom: 15px">room details</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <table style="width:100%; margin: 0; padding-top: 15px;border-collapse:collapse; color:#333333; font-size:14px; line-height: 22px;">
+                        <tr style="font-weight: bold; padding-top: 30px; padding-bottom: 15px; border-bottom: dotted 1px #333333; ">
+                          <td width="10%" valign="top" style="padding-top: 15px; padding-bottom: 15px;">#</td>
+                          <td width="22%" valign="top" style="padding-top: 15px; padding-bottom: 15px;">Room Type</td>
+                          <td width="22%" valign="top" style="padding-top: 15px; padding-bottom: 15px;">Reserved for</td>
+                          <td width="22%" valign="top" style="padding-top: 15px; padding-bottom: 15px;">Confirmation number</td>
+                          <td width="22%" valign="top" style="padding-top: 15px; padding-bottom: 15px;">Refundable</td>
+                        </tr>
+                        <tr style="padding-top: 15px; padding-bottom: 15px; border-bottom: dotted 1px #333333;">
+                          <td width="10%" valign="top" style="padding-top: 15px; padding-bottom: 15px;">#</td>
+                          <td width="22%" valign="top" style="padding-top: 15px; padding-bottom: 15px;">Room Type</td>
+                          <td width="22%" valign="top" style="padding-top: 15px; padding-bottom: 15px;">Reserved for</td>
+                          <td width="22%" valign="top" style="padding-top: 15px; padding-bottom: 15px;">Confirmation number</td>
+                          <td width="22%" valign="top" style="padding-top: 15px; padding-bottom: 15px;">Refundable</td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="color:#333333; font-size:12px; padding-top: 15px;">*Please note: Preferences and special requests cannot be guaranteed. Special requests are subject to availability upon check-in and may incur additional charges.</td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <table style="width:100%; border: solid 1px #333333; padding: 60px; border-radius: 5px; margin-bottom: 30px;">
+                  <tr>
+                    <td style="color:#333333; font-size:18px; font-weight:bold; line-height: 22px; text-transform: uppercase; border-bottom: dotted 1px #333333; padding-bottom: 15px">charges</td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <table style="width:100%; border: solid 1px #ffffff; background-color: #333333; padding: 60px; border-radius: 5px; margin-bottom: 30px;">
+                  <tr>
+                    <td style="color:#ffffff; font-size:14px; line-height: 22px; border-bottom: dotted 1px #333333; padding-bottom: 15px">
+                      <span style="font-weight:bold; margin-right: 5px; text-transform: uppercase;">Total cost for entire stay in USD$</span>(Including tax recovery charges and service fees)
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <table style="width:100%; color:#ffffff; font-size:14px; line-height: 22px; border-bottom: dotted 1px #ffffff; padding-bottom: 15px;">
+                        <tr style="padding-bottom: 15px; border-bottom: dotted 1px #ffffff;">
+                          <td width="50%" style="padding-bottom: 15px; border-bottom: dotted 1px #ffffff;">Payment status</td>
+                          <td style="text-align: right; padding-bottom: 15px; border-bottom: dotted 1px #ffffff;">Total cost of stay</td>
+                        </tr>
+                        <tr>
+                          <td width="50%" style="font-size: 18px; padding-top: 15px;">PAID</td>
+                          <td style="text-align: right; font-size: 18px;  padding-top: 15px;"><?php echo $wrapper->field_rate->value(); ?></td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <table style="width:100%; border: solid 1px #333333; padding: 60px; border-radius: 5px; margin-bottom: 30px;">
+                  <tr>
+                    <td style="color:#333333; font-size:18px; font-weight:bold; line-height: 22px; text-transform: uppercase; ">Payment information</td>
+                  </tr>
+                  <tr>
+                    <td style="color:#333333; font-size:14px; line-height:22px; border-bottom: dotted 1px #333333; padding-bottom: 15px">We have charged your credit card for the full payment of this reservation.</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <table style="width:100%;">
+                        <tr>
+                          <td style="color:#333333; font-size:18px; line-height: 22px; padding-top: 15px">
+                            <span style="font-weight: bold; margin-right: 10px;">Payment card name:</span> <?php echo $wrapper->field_first_name->value().' '.$wrapper->field_last_name->value(); ?></td>
+                        </tr>
+                        <tr>
+                          <td style="color:#333333; font-size:18px; line-height: 22px;">
+                            <span style="font-weight: bold; margin-right: 10px;">Billing Address:</span> <?php echo $wrapper->field_adress_1->value(); ?></td>
+                        </tr>
+                        <tr>
+                          <td style="color:#333333; font-size:18px; line-height: 22px; border-bottom: dotted 1px #333333; padding-bottom: 15px">
+                            <span style="font-weight: bold; margin-right: 10px;">Itinerary Number:</span> <?php echo $wrapper->field_booking_id->value(); ?></td>
+                        </tr>
+                        <tr>
+                          <td style="color:#333333; font-size:12px; line-height: 18px; padding-top: 15px">The above charges to your credit card were made by Travelscape, LLC. View our full <a href="#" style="color:#7b8c88; text-decoration: none;">Terms & Conditions.</a></td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <table style="width:100%; border: solid 1px #333333; padding: 60px; border-radius: 5px; margin-bottom: 30px;">
+                  <tr>
+                    <td style="color:#333333; font-size:18px; font-weight:bold; line-height: 22px; text-transform: uppercase; border-bottom: dotted 1px #333333; padding-bottom: 15px">Cancellation policy</td>
+                  </tr>
+                  <tr>
+                    <td style="color:#333333; font-size:14px; font-weight:bold; line-height: 22px; padding-top: 15px">Room 1</td>
+                  </tr>
+                  <tr>
+                    <td style="color:#333333; font-size:14px; line-height: 22px;">This rate is non-refundable and cannot be changed or cancelled - if you do choose to change or cancel this booking you will not be refunded any of the payment.</td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <table style="width:100%; border: solid 1px #333333; padding: 60px; border-radius: 5px; margin-bottom: 30px;">
+                  <tr>
+                    <td colspan="2" style="color:#333333; font-size:18px; font-weight:bold; line-height: 22px; text-transform: uppercase; border-bottom: dotted 1px #333333; padding-bottom: 15px">Customer support contact information</td>
+                  </tr>
+                  <tr>
+                    <td style="padding-top: 15px;"><img src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/sites/all/themes/feflip/media/services/expedia-service-email.png"/></td>
+                    <td style="padding-top: 15px; padding-left: 15px;"><a href="#" style="color:#7b8c88; text-decoration: none;">Change or cancel your reservation with Expedia/TravelNow</a></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+          </div>
+          <?php break;
+        case 'sabre': ?>
+          <div style="background-color:#d9dfdE; font-family: Arial,sans-serif; font-size:14px; line-height: 22px; color: #333333;">
+          <table style="width:640px; margin:auto; padding:0; border-collapse:collapse;">
+            <tr style="height:20px;"></tr>
+            <tr align="center" style="border-bottom: dotted 1px #333333;">
+              <td valign="top" style="padding-bottom: 30px;">
+                <img style="width:300px; margin: auto;" src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/sites/all/themes/feflip/media/brand/feather-and-flip-black-logo.png"/>
+              </td>
+            </tr>
+            <tr style="height:20px;"></tr>
+            <tr style="border-bottom: dotted 1px #333333;">
+              <td style="text-transform: uppercase; font-size: 14px; color: #333333; line-height: 22px; padding-bottom: 20px;">Thank you for booking with Feather+Flip. We only recommend hotels we know and love, and we hope you feel the same way. Read on for your confirmation number, hotel cancellation policy and contact details.</td>
+            </tr>
+            <tr style="height:30px;"></tr>
+            <tr>
+              <td>
+                <table style="width:100%; border: solid 1px #333333; padding: 60px; border-radius: 5px; margin-bottom: 30px;">
+                  <tr>
+                    <td valign="top" style="padding-bottom: 20px;">
+                    <img style="margin: auto;" src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/sites/all/themes/feflip/media/services/f+f-service-email.png"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="color:#333333; font-size:14px; line-height: 22px; border-bottom: dotted 1px #333333; padding-bottom: 15px">The booking you recently made on the featherandflip.com website is confirmed. Your reservation details are below.</td>
+                  </tr>
+                  <tr>
+                    <td style="color:#333333; font-size:18px; line-height: 22px; padding-top: 15px"><span style="font-weight: bold; margin-right: 10px;">Customer Name:</span> <?php echo $wrapper->field_first_name->value().' '.$wrapper->field_last_name->value(); ?></td>
+                  </tr>
+                  <tr>
+                    <td style="color:#333333; font-size:18px; line-height: 22px;"><span style="font-weight: bold; margin-right: 10px;">Customer Email:</span> <?php echo $wrapper->field_email->value(); ?></td>
+                  </tr>
+                  <tr>
+                    <td style="color:#333333; font-size:18px; line-height: 22px; border-bottom: dotted 1px #333333; padding-bottom: 15px"><span style="font-weight: bold; margin-right: 10px;">Itinerary Number:</span> <?php echo $wrapper->field_booking_id->value(); ?></td>
+                  </tr>
+                  <tr>
+                    <td style="color:#333333; font-size:12px; line-height: 18px; padding-top: 15px">Please refer to your Itinerary Number if you contact customer service for any reason.</td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <table style="width:100%; border: solid 1px #333333; padding: 60px; border-radius: 5px; margin-bottom: 30px;">
+                  <tr>
+                    <td style="color:#333333; font-size:18px; font-weight:bold; line-height: 22px; text-transform: uppercase; border-bottom: dotted 1px #333333; padding-bottom: 15px"><?php echo $wrapper->field_hotel_name->value(); ?></td>
+                  </tr>
+                  <tr>
+                    <td style="padding-top: 15px; border-bottom: dotted 1px #333333; padding-bottom: 15px">
+                      <table style="margin: 0; padding-top: 15px;border-collapse:collapse; color:#333333; font-size:14px; line-height: 22px;">
+                        <tr><td><span style="font-weight: bold; margin-right: 10px;">Address:</span><?php echo $wrapper->field_hotel_contact->value(); ?></tr></td>
+                        <tr><td><span style="font-weight: bold; margin-right: 10px;">Phone:</span>Phone</tr></td>
+                        <tr><td><span style="font-weight: bold; margin-right: 10px;">Fax:</span>Fax</tr></td>
+                        <tr><td><span style="font-weight: bold; margin-right: 10px;">Check-in:</span><?php echo $wrapper->field_check_in->value(); ?></tr></td>
+                        <tr><td><span style="font-weight: bold; margin-right: 10px;">Check-out:</span><?php echo $wrapper->field_check_out->value(); ?></tr></td>
+                        <tr><td><span style="font-weight: bold; margin-right: 10px;">Number of nights:</span><?php echo $wrapper->field_nights->value(); ?></tr></td>
+                        <tr><td><span style="font-weight: bold; margin-right: 10px;">Number of guests:</span><?php echo $wrapper->field_adults->value()+$wrapper->field_children->value(); ?></tr></td>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <table style="width:100%; border: solid 1px #333333; padding: 60px; border-radius: 5px; margin-bottom: 30px;">
+                  <tr>
+                    <td style="color:#333333; font-size:18px; font-weight:bold; line-height: 22px; text-transform: uppercase; border-bottom: dotted 1px #333333; padding-bottom: 15px">room details</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <table style="width:100%; margin: 0; padding-top: 15px;border-collapse:collapse; color:#333333; font-size:14px; line-height: 22px;">
+                        <tr style="font-weight: bold; padding-top: 30px; padding-bottom: 15px; border-bottom: dotted 1px #333333; ">
+                          <td width="10%" valign="top" style="padding-top: 15px; padding-bottom: 15px;">#</td>
+                          <td width="22%" valign="top" style="padding-top: 15px; padding-bottom: 15px;">Room Type</td>
+                          <td width="22%" valign="top" style="padding-top: 15px; padding-bottom: 15px;">Reserved for</td>
+                          <td width="22%" valign="top" style="padding-top: 15px; padding-bottom: 15px;">Confirmation number</td>
+                          <td width="22%" valign="top" style="padding-top: 15px; padding-bottom: 15px;">Refundable</td>
+                        </tr>
+                        <tr style="padding-top: 15px; padding-bottom: 15px; border-bottom: dotted 1px #333333;">
+                          <td width="10%" valign="top" style="padding-top: 15px; padding-bottom: 15px;">#</td>
+                          <td width="22%" valign="top" style="padding-top: 15px; padding-bottom: 15px;">Room Type</td>
+                          <td width="22%" valign="top" style="padding-top: 15px; padding-bottom: 15px;">Reserved for</td>
+                          <td width="22%" valign="top" style="padding-top: 15px; padding-bottom: 15px;">Confirmation number</td>
+                          <td width="22%" valign="top" style="padding-top: 15px; padding-bottom: 15px;">Refundable</td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="color:#333333; font-size:12px; padding-top: 15px;">*Please note: Preferences and special requests cannot be guaranteed. Special requests are subject to availability upon check-in and may incur additional charges.</td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <table style="width:100%; border: solid 1px #333333; padding: 60px; border-radius: 5px; margin-bottom: 30px;">
+                  <tr>
+                    <td style="color:#333333; font-size:18px; font-weight:bold; line-height: 22px; text-transform: uppercase; border-bottom: dotted 1px #333333; padding-bottom: 15px">charges</td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <table style="width:100%; border: solid 1px #ffffff; background-color: #333333; padding: 60px; border-radius: 5px; margin-bottom: 30px;">
+                  <tr>
+                    <td style="color:#ffffff; font-size:14px; line-height: 22px; border-bottom: dotted 1px #333333; padding-bottom: 15px">
+                      <span style="font-weight:bold; margin-right: 5px; text-transform: uppercase;">Total cost for entire stay in USD$</span>(Including tax recovery charges and service fees)
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <table style="width:100%; color:#ffffff; font-size:14px; line-height: 22px; border-bottom: dotted 1px #ffffff; padding-bottom: 15px;">
+                        <tr style="padding-bottom: 15px; border-bottom: dotted 1px #ffffff;">
+                          <td width="50%" style="padding-bottom: 15px; border-bottom: dotted 1px #ffffff;">Payment status</td>
+                          <td style="text-align: right; padding-bottom: 15px; border-bottom: dotted 1px #ffffff;">Total cost of stay</td>
+                        </tr>
+                        <tr>
+                          <td width="50%" style="font-size: 18px; padding-top: 15px;">PAID</td>
+                          <td style="text-align: right; font-size: 18px;  padding-top: 15px;"><?php echo $wrapper->field_rate->value(); ?></td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <table style="width:100%; border: solid 1px #333333; padding: 60px; border-radius: 5px; margin-bottom: 30px;">
+                  <tr>
+                    <td style="color:#333333; font-size:18px; font-weight:bold; line-height: 22px; text-transform: uppercase; ">Payment information</td>
+                  </tr>
+                  <tr>
+                    <td style="color:#333333; font-size:14px; line-height:22px; border-bottom: dotted 1px #333333; padding-bottom: 15px">We have charged your credit card for the full payment of this reservation.</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <table style="width:100%;">
+                        <tr>
+                          <td style="color:#333333; font-size:18px; line-height: 22px; padding-top: 15px">
+                            <span style="font-weight: bold; margin-right: 10px;">Payment card name:</span> <?php echo $wrapper->field_first_name->value().' '.$wrapper->field_last_name->value(); ?></td>
+                        </tr>
+                        <tr>
+                          <td style="color:#333333; font-size:18px; line-height: 22px;">
+                            <span style="font-weight: bold; margin-right: 10px;">Billing Address:</span> <?php echo $wrapper->field_adress_1->value(); ?></td>
+                        </tr>
+                        <tr>
+                          <td style="color:#333333; font-size:18px; line-height: 22px; border-bottom: dotted 1px #333333; padding-bottom: 15px">
+                            <span style="font-weight: bold; margin-right: 10px;">Itinerary Number:</span> <?php echo $wrapper->field_booking_id->value(); ?></td>
+                        </tr>
+                        <tr>
+                          <td style="color:#333333; font-size:12px; line-height: 18px; padding-top: 15px">The above charges to your credit card were made by Travelscape, LLC. View our full <a href="#" style="color:#7b8c88; text-decoration: none;">Terms & Conditions.</a></td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <table style="width:100%; border: solid 1px #333333; padding: 60px; border-radius: 5px; margin-bottom: 30px;">
+                  <tr>
+                    <td style="color:#333333; font-size:18px; font-weight:bold; line-height: 22px; text-transform: uppercase; border-bottom: dotted 1px #333333; padding-bottom: 15px">Cancellation policy</td>
+                  </tr>
+                  <tr>
+                    <td style="color:#333333; font-size:14px; font-weight:bold; line-height: 22px; padding-top: 15px">Room 1</td>
+                  </tr>
+                  <tr>
+                    <td style="color:#333333; font-size:14px; line-height: 22px;">This rate is non-refundable and cannot be changed or cancelled - if you do choose to change or cancel this booking you will not be refunded any of the payment.</td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <table style="width:100%; border: solid 1px #333333; padding: 60px; border-radius: 5px; margin-bottom: 30px;">
+                  <tr>
+                    <td colspan="2" style="color:#333333; font-size:18px; font-weight:bold; line-height: 22px; text-transform: uppercase; border-bottom: dotted 1px #333333; padding-bottom: 15px">Customer support contact information</td>
+                  </tr>
+                  <tr>
+                    <td style="padding-top: 15px; "><a href="#" style="color:#7b8c88; text-decoration: none;">Contact us</a></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+          </div>
+          <?php break;
+        default:
+          break;
+      }
+    }
+
+  ?>
+<?php endif; ?>

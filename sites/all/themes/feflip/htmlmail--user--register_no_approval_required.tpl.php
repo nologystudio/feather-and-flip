@@ -105,74 +105,70 @@
  * 6. http://api.drupal.org/api/drupal/modules--system--theme.api.php/function/hook_preprocess_HOOK/7
  *
  * =========================================================== End instructions.
- */
-  $template_name = basename(__FILE__);
-  $current_path = realpath(NULL);
-  $current_len = strlen($current_path);
-  $template_path = realpath(dirname(__FILE__));
-  if (!strncmp($template_path, $current_path, $current_len)) {
-    $template_path = substr($template_path, $current_len + 1);
-  }
-  $template_url = url($template_path, array('absolute' => TRUE));
-?>
-<div class="htmlmail-body">
-<?php echo $body; ?>
+ */ ?>
+<div style="background-color:#d9dfdE;">
+<table style="width:600px; margin:auto; font-family: Times,serif; padding:0; border-collapse:collapse;">
+  <tr style="height: 20px;"></tr>
+  <tr align="center">
+    <td valign="top" style="padding:0; margin:0">
+      <img style="width:300px; margin: auto;" src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/sites/all/themes/feflip/media/brand/feather-and-flip-black-logo.png"/>
+    </td>
+  </tr>
+  <tr style="height: 20px;"></tr>
+  <tr style="height: 20px; border-top:solid 1px #333333; ">
+    <td style="padding:10px; margin:0; font-size:22px; font-style: italic; color:#333333; font-weight:bold; text-align: center;">
+      Welcome to Feather+Flip beta!
+    </td>
+  </tr>
+  <tr>
+    <td style="padding:0px; margin:0px; font-size:18px; color:#333333; font-weight:bold; text-align: left; border-bottom:dotted 1px #333333;"></td>
+  </tr>
+  <tr>
+    <td style="padding:20px; margin:0; font-family: Arial,sans-serif; font-size:16px; color:#333333; line-height: 22px; text-align: left ">
+      <p>Welcome to the family.<br>
+
+Thank you for creating your account with Feather+Flip,  we're so excited to have you as one of our launch members. With your log in details you now have access to:
+      </p>
+    </td>
+  </tr>
+  <tr align="center">
+    <td style="padding:0 20px 20px 20px; border-bottom:dotted 1px #333333;" align="center">
+      <table style="width:600px; margin:auto; font-family: Arial,sans-serif;  font-size:12px; line-height:18px; padding:0; border-collapse:collapse; ">
+        <tr>
+          <td style="text-transform: uppercase; font-weight: bold; ">&bull; Exclusive rates and perks at F+F-favorite hotels</td>
+        </tr>
+        <tr>
+          <td style="text-transform: uppercase; font-weight: bold;">&bull; One-on-one travel planning with our experts</td>
+        </tr>
+        <tr>
+          <td style="text-transform: uppercase; font-weight: bold;">&bull; Insider travel content and destination itineraries</td>
+        </tr>
+        <tr>
+          <td style="text-transform: uppercase; font-weight: bold;">&bull; Special offers and advance bookings at top hotels</td>
+        </tr>
+        <tr>
+          <td style="text-transform: uppercase; font-weight: bold;">&bull; Family travel recommendations from globetrotting tastemakers</td>
+        </tr>
+        <tr>
+          <td style="text-transform: uppercase; font-weight: bold;">&bull; And more...</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td style="padding:20px; margin:0; font-size:16px; border-bottom:dotted 1px #333333; color:#333333; font-family: Times,serif; font-style: italic; line-height: 22px; text-align: left ">
+      <p>Questions? Comments? We'd love to hear from you. Email <a href="mailto:info@featherandflip.com" style="font-weight:bold; color:#333333">info@featherandflip.com</a>, tweet us, Facebook message us, use #featherandflip to share your family travel adventures on Instagram, or send us a postcard: 25 Broadway, 9th Floor, New York NY 10004.
+      </p>
+    </td>
+  </tr>
+  <tr style="height: 20px;">
+    <td style="border-top:solid 1px #333333;"></td>
+  </tr>
+  <tr align="center">
+    <td style="padding:20px; margin:0; font-size:16px;font-family: Arial,sans-serif; color:#333333; line-height: 22px; text-align: center " align="center">
+      <a href="http://www.featherandflip.com" style="text-decoration: none; text-align: center; font-size: 12px; text-transform: uppercase; padding: 20px; background-color: #333333; color: white;">Go to F+F</a>
+    </td>
+  </tr>
+  <tr style="height: 50px;"></tr>
+</table>
 </div>
-<?php if ($debug):
-  $module_template = "htmlmail--$module.tpl.php";
-  $message_template = "htmlmail--$module--$key.tpl.php";
-?>
-<hr />
-<div class="htmlmail-debug">
-  <dl><dt><p>
-    To customize this messagesss:
-  </p></dt><dd><ol><li><p><?php if (empty($theme)): ?>
-    Visit <u>admin/config/system/htmlmail</u>
-    and select a theme to hold your custom email template files.
-  </p></li><li><p><?php elseif (empty($theme_path)): ?>
-    Visit <u>admin/appearance</u>
-    to enable your selected
-    <u><?php echo drupal_ucfirst($theme); ?></u> theme.
-  </p></li><li><?php endif;
-if ("$template_path/$template_name" == "$theme_path/$message_template"): ?><p>
-    Edit your<br />
-    <code><?php echo "$template_path/$template_name"; ?>/templates</code>
-    <br />file.
-  </p></li><li><?php
-else:
-  if (!file_exists("$theme_path/htmlmail.tpl.php")): ?><p>
-    Copy<br />
-    <code><?php echo "$module_path/htmlmail.tpl.php"; ?></code>
-    <br />to<br />
-    <code><?php echo "$theme_path/htmlmail.tpl.php"; ?></code>
-  </p></li><li><?php
-  endif;
-  if (!file_exists("$theme_path/$module_template")): ?><p>
-    For module-specific customization, copy<br />
-    <code><?php echo "$module_path/htmlmail.tpl.php"; ?></code>
-    <br />to<br />
-    <code><?php echo "$theme_path/$module_template"; ?></code>
-  </p></li><li><?php
-  endif;
-  if (!file_exists("$theme_path/$message_template")): ?><p>
-    For message-specific customization, copy<br />
-    <code><?php echo "$module_path/htmlmail.tpl.php"; ?></code>
-    <br />to<br />
-    <code><?php echo "$theme_path/$message_template"; ?></code>
-  </p></li><li><?php endif; ?><p>
-    Edit the copied file.
-  </p></li><li><?php
-endif; ?><p>
-    Send a test message to make sure your customizations worked.
-  </p></li><li><p>
-    If you think your customizations would be of use to others,
-    please contribute your file as a feature request in the
-    <a href="http://drupal.org/node/add/project-issue/htmlmail">issue queue</a>.
-  </p></li></ol></dd><?php if (!empty($params)): ?><dt><p>
-    The <?php echo $module; ?> module sets the <u><code>$params</code></u>
-    variable.  For this message,
-  </p></dt><dd><p><code><pre>
-$params = <?php echo check_plain(print_r($params, 1)); ?>
-  </pre></code></p></dd><?php endif; ?></dl>
-</div>
-<?php endif;
