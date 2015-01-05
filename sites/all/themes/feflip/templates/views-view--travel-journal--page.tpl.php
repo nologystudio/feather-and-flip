@@ -4,15 +4,15 @@
                 <h3 class="icon feather">TRAVEL<span> journal </span></h3>
         </header>
         <div class="feed-wrapper">
-                <div id="newsletter-signup" class="quick-entry" ng-controller="NewsletterCtrl" ng-switch="currentStatus">
+                <div id="newsletter-signup" class="quick-entry" ng-controller="NewsletterCtrl">
                     <h3>Join the adventure</h3>
                     <hr>
-                    <h4 ng-switch-when="still">Sign up for our newsletter</h4>
-                    <form>
-                        <small id="error"   class="animated fadeInUp" ng-switch-when="error">We're sorry,<br>an error has occurred</small>
-                        <small id="success" class="animated fadeInUp" ng-switch-when="success">Thanks!</small>
-                        <input name="user-email" type="email" ng-switch-when="still" placeholder="Your email address" value="{{signUpData.userEmail}}" ng-model="signUpData.userEmail" required/>
-                        <input type="submit" ng-switch-when="still" value="submit" ng-click="regSubmit()"/>
+                    <h4 ng-if="currentStatus == 'still'">Sign up for our newsletter</h4>
+                    <form name="newsletterForm">
+                        <small id="error"   class="animated fadeInUp" ng-if="currentStatus == 'error'">We're sorry,<br>an error has occurred</small>
+                        <small id="success" class="animated fadeInUp" ng-if="currentStatus == 'success'">Thanks!</small>
+                        <input name="user-email" type="email" ng-if="currentStatus == 'still'" placeholder="Your email address" ng-model="signUpData.userEmail" required/>
+                        <input type="submit" ng-if="currentStatus == 'still'" value="submit" ng-class="{disabled:!newsletterForm.$valid}" ng-click="!newsletterForm.$valid || regSubmit()"/>
                     </form>
                 </div>
                 <?php foreach ($view->result as $post) {
