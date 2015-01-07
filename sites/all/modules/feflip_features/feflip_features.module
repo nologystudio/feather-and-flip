@@ -140,6 +140,9 @@ function feflip_features_StoreBooking($args)
     $wrapper->field_state_province_code = (isset($args['user_stateProvinceCode']) ? $args['user_stateProvinceCode'] : '');
     $wrapper->field_countrycode     = (isset($args['user_countryCode']) ? $args['user_countryCode'] : '');
     $wrapper->field_postal_code     = (isset($args['user_postalCode']) ? $args['user_postalCode'] : '');
+    $wrapper->field_tax_rate        = (isset($args['booking_tax_rate'])) ? $args['booking_tax_rate'] : '';
+    $wrapper->field_policy_cancel   = (isset($args['booking_policy_cancel'])) ? $args['booking_policy_cancel'] : '';
+    $wrapper->field_confirmation_number = (isset($args['booking_confirmation_number'])) ? $args['booking_confirmation_number'] : '';
 
     //Done!
     $wrapper->save();

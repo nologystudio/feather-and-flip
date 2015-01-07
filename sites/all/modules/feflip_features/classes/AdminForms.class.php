@@ -244,11 +244,13 @@ class AdminForms
                     'booking_adults' => $numAdults,
                     'booking_children' => $numChildren,
                     'booking_service' => $service,
-                    'user_address1' => '',
-                    'user_citycode'=> '',
-                    'user_stateProvinceCode'=> '',
-                    'user_countryCode'=> '',
-                    'user_postalCode'=> ''
+                    'user_address1' => '',//$values['address'],
+                    'user_citycode'=> '',//$values['cityCode'],
+                    'user_stateProvinceCode'=> '',//$values['provinceCode'],
+                    'user_countryCode'=> '',//$values['countryCode'],
+                    'user_postalCode'=> '',//$values['postalCode'],
+                    'booking_tax_rate' => '',//$values['taxRate'].' ' . $result->Hotel->RoomRates->RoomRate->Rates->Rate->CurrencyCode,
+                    'booking_policy_cancel' =>  ''//$values['cancellationPolicy']
                 );
             }
 
@@ -268,29 +270,41 @@ class AdminForms
 
             if(isset($result['HotelRoomReservationResponse']) && isset($result['HotelRoomReservationResponse']['processedWithConfirmation']) && isset($result['HotelRoomReservationResponse']['reservationStatusCode']) && $result['HotelRoomReservationResponse']['reservationStatusCode'] == 'CF')
             {
+                $nights = '';
+                if (isset($values['nightlyRates']))
+                {
+                    foreach($values['nightlyRates'] as $rate)
+                        $nights .= $rate['@rate'] . ' ' . $result['HotelRoomReservationResponse']['RateInfos']['RateInfo']['ChargeableRateInfo']['@currencyCode'] .  '|';
+
+                    $nights = substr($nights,0, strlen($nights)-1);
+                }
+
                 $args = array(
                     'user_first_name'=>$values['firstName'],
                     'user_last_name'=>$values['lastName'],
                     'user_email'=>$values['email'],
                     'user_phoneNumber' =>$values['phone'],
                     'user_creditCard' => 'xxxxxxxxxxxx'. substr($values['creditCardNumber'], -4),
-                    'booking_id'=>$result['HotelRoomReservationResponse']['itineraryId'], //. '-' . $result['confirmationNumbers'],
+                    'booking_id'=>$result['HotelRoomReservationResponse']['itineraryId'],
+                    'booking_confirmation_number' => $result['HotelRoomReservationResponse']['confirmationNumbers'],
                     'booking_hotelName'=>$result['HotelRoomReservationResponse']['hotelName'],
                     'booking_hotelContact'=>'',
                     'booking_ckeckIn'=>$values['checkIn'],
                     'booking_checkOut'=>$values['checkOut'],
                     'booking_rate'=> $result['HotelRoomReservationResponse']['RateInfos']['RateInfo']['ChargeableRateInfo']['@total'] . ' ' . $result['HotelRoomReservationResponse']['RateInfos']['RateInfo']['ChargeableRateInfo']['@currencyCode'],
-                    'booking_nights' => $result['HotelRoomReservationResponse']['RateInfos']['RateInfo']['ChargeableRateInfo']['NightlyRatesPerRoom']['@size'],
+                    'booking_nights' => $nights,//$result['HotelRoomReservationResponse']['RateInfos']['RateInfo']['ChargeableRateInfo']['NightlyRatesPerRoom']['@size'],
                     'booking_roomType' => $result['HotelRoomReservationResponse']['roomDescription'],
                     'booking_rooms' => $result['HotelRoomReservationResponse']['numberOfRoomsBooked'],
                     'booking_adults' => $result['HotelRoomReservationResponse']['RateInfos']['RateInfo']['RoomGroup']['Room']['numberOfAdults'],
                     'booking_children' => $result['HotelRoomReservationResponse']['RateInfos']['RateInfo']['RoomGroup']['Room']['numberOfChildren'],
                     'booking_service' => $service,
-                    'user_address1' => '',
-                    'user_citycode'=> '',
-                    'user_stateProvinceCode'=> '',
-                    'user_countryCode'=> '',
-                    'user_postalCode'=> ''
+                    'user_address1' => $values['address'],
+                    'user_citycode'=> $values['cityCode'],
+                    'user_stateProvinceCode'=> $values['provinceCode'],
+                    'user_countryCode'=> $values['countryCode'],
+                    'user_postalCode'=> $values['postalCode'],
+                    'booking_tax_rate' => $values['taxRate']. ' ' . $result['HotelRoomReservationResponse']['RateInfos']['RateInfo']['ChargeableRateInfo']['@currencyCode'],
+                    'booking_policy_cancel' => $values['cancellationPolicy']
                 );
             }
 

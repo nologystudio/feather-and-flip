@@ -47,11 +47,15 @@ Your reservation details are below.</h4>
 	        </ul>
 	        <ul id="" class="content col-5">
 		        <li class="black">Reserved for</li>
-		        <li>Name, Guests</li>
+		        <li><?php echo $booking['firstName']. ', ' .($booking['adults'] + $booking['children']);?></li>
 	        </ul>
 	        <ul id="" class="content col-5">
 		        <li class="black">Confirmation number</li>
+                <?php if($booking['service'] == 'expedia'): ?>
+                    <li><?php echo $booking['confirmationNumber'];?></li>
+                <?php else:?>
 		        <li><?php echo $booking['id'];?></li>
+                <?php endif;?>
 	        </ul>
 	        <ul id="" class="content col-5">
 		        <li class="black">Refundable</li>
@@ -64,15 +68,21 @@ Your reservation details are below.</h4>
 	        <small><span>Cost per night and per room in USD$</span>(Excluding tax recovery charges and service fees)</small>
 	        <ul id="dates" class="content col-3">
 		        <li class="black">Dates</li>
-		        <li><?php echo $booking['checkIn'];?> to <?php echo $booking['checkOut'];?></li>
+                <?php $i=0; foreach($booking['nightlyRates'] as $nightlyRate){?>
+		        <li><?php /*echo $booking['checkIn'];?> to <?php echo $booking['checkOut'];*/?><?php echo date('m/d/Y', strtotime($booking['checkIn'].' + '.($i++).' day'));?></li>
+                <?php } ?>
 	        </ul>
 	        <ul id="rooms" class="content col-3 right">
 		        <li class="black">Room 1</li>
-		        <li>$0000.00</li>
+                <?php foreach($booking['nightlyRates'] as $nightlyRate){?>
+		        <li><?php echo $nightlyRate;?></li>
+                <?php } ?>
 		    </ul>
 	        <ul id="total" class="content col-3 right">
 		        <li class="black">Total per night</li>
-		        <li class="black">$0000.00</li>
+                <?php foreach($booking['nightlyRates'] as $nightlyRate){?>
+		        <li class="black"><?php echo $nightlyRate;?></li>
+                <?php } ?>
 	        </ul>
 	        <small id="other-charges-title">Other Charges, fees and savings in USD$</small>
 	        <ul id="fees" class="content col-2">
@@ -80,8 +90,8 @@ Your reservation details are below.</h4>
 		        <li>Tax Recovery Charges and Service Fees</li>
 	        </ul>
 	        <ul id="total" class="content col-2">
-		        <li class="black">Total per night</li>
-		        <li class="black">$0000.00</li>
+		        <li class="black">Total</li>
+		        <li class="black"><?php echo $booking['taxRate'];?></li>
 	        </ul>
         </div>
         <div id="total" class="module grey">
@@ -102,7 +112,7 @@ Your reservation details are below.</h4>
 			</header>
 	        <ul class="content">
 		        <li><span>Payment card name:</span><?php echo $booking['firstName'];?> <?php echo $booking['lastName'];?></li>
-		        <li><span>Billing Address:</span>travelnow, Seattle, WA, United States, 98004</li>
+		        <li><span>Billing Address:</span><?php echo $booking['address'] .', ' . $booking['cityCode']. ', ' . $booking['postalCode']?></li>
 		        <li><span>Itinerary Number:</span><?php echo $booking['id'];?></li>
 	        </ul>
 	        <small>The above charges to your credit card were made by Travelscape, LLC. View our full <a href="#">Terms & Conditions.</a></small>
@@ -111,7 +121,7 @@ Your reservation details are below.</h4>
 	        <header>Cancellation Policy</header>
 	        <ul class="content">
 		        <li><span>Room 1</span></li>
-		        <li>This rate is non-refundable and cannot be changed or cancelled - if you do choose to change or cancel this booking you will not be refunded any of the payment.</li>
+		        <li><?php echo $booking['cancellationPolicy'];?></li>
 	        </ul>
         </div>
         <div id="support" class="module">
@@ -121,7 +131,7 @@ Your reservation details are below.</h4>
 		        	<figure>
 		        		<img src="/sites/all/themes/feflip/media/services/expedia-service-email.png"/>
 		        	</figure>
-		        	<a href="#">Change or cancel your reservation with Expedia/TravelNow</a>
+		        	<a href="http://travel.ian.com/index.jsp?pageName=userAgreement&locale=en_US&cid=456134" target="_blank">Change or cancel your reservation with Expedia/TravelNow</a>
 		        	<?php else: ?>
 		        	<a href="/contact">Contact us</a> or call 1-800...
 		        	<?php endif; ?>
