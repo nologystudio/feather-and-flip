@@ -138,6 +138,31 @@ function expedia_services_form($form, &$form_state) {
 		'#description'   => t("Expedia app shared secret."),
 		'#required' => TRUE
 	);
+	// Fixed strings
+	$form['apistrings'] = array(
+		'#type' => 'fieldset',
+		'#title' => t('Api Fixed Strings'),
+		'#collapsible' => FALSE,
+		'#collapsed' => FALSE,
+	);
+	$form['apistrings']['expedia_room_rate_disclaimer'] = array(
+		'#type'          => 'textfield',
+		'#title'         => t('Room rate disclaimer'),
+		'#default_value' => variable_get('expedia_room_rate_disclaimer'),
+		'#size' => 150, 
+		'#maxlength' => 255, 
+		'#description'   => t("You must display the room rate disclaimer below on all room availability pages. This text is not returned in the API."),
+		'#required' => TRUE
+	);
+	$form['apistrings']['expedia_photos_disclaimer'] = array(
+		'#type'          => 'textfield',
+		'#title'         => t('EAN photos disclaimer'),
+		'#default_value' => variable_get('expedia_photos_disclaimer'),
+		'#size' => 150, 
+		'#maxlength' => 255, 
+		'#description'   => t("The disclaimer below must be included on any page containing EAN-sourced property photos."),
+		'#required' => TRUE
+	);
 
   return system_settings_form($form);
 }
