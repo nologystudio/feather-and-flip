@@ -245,6 +245,7 @@ class Expedia
     <roomTypeCode>$roomcode</roomTypeCode>
     <rateCode>$ratecode</rateCode>
     <chargeableRate>$chargeableRate</chargeableRate>
+    <sendReservationEmail>false</sendReservationEmail>
     <RoomGroup>";
         $rooms = "";
         foreach ($roomConfig as $room)
