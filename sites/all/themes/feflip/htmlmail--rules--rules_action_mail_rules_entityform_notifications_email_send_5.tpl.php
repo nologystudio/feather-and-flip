@@ -165,13 +165,13 @@
                   <tr>
                     <td style="padding-top: 15px; border-bottom: dotted 1px #333333; padding-bottom: 15px">
                       <table style="margin: 0; padding-top: 15px;border-collapse:collapse; color:#333333; font-size:14px; line-height: 22px;">
-                        <tr><td><span style="font-weight: bold; margin-right: 10px;">Address:</span><?php echo $wrapper->field_hotel_contact->value(); ?></tr></td>
-                        <tr><td><span style="font-weight: bold; margin-right: 10px;">Phone:</span>Phone</tr></td>
-                        <tr><td><span style="font-weight: bold; margin-right: 10px;">Fax:</span>Fax</tr></td>
-                        <tr><td><span style="font-weight: bold; margin-right: 10px;">Check-in:</span><?php echo $wrapper->field_check_in->value(); ?></tr></td>
-                        <tr><td><span style="font-weight: bold; margin-right: 10px;">Check-out:</span><?php echo $wrapper->field_check_out->value(); ?></tr></td>
-                        <tr><td><span style="font-weight: bold; margin-right: 10px;">Number of nights:</span><?php echo $wrapper->field_nights->value(); ?></tr></td>
-                        <tr><td><span style="font-weight: bold; margin-right: 10px;">Number of guests:</span><?php echo $wrapper->field_adults->value()+$wrapper->field_children->value(); ?></tr></td>
+                        <tr><td><span style="font-weight: bold; margin-right: 10px;">Address:</span><?php echo $wrapper->field_hotel_contact->value(); ?></td></tr>
+                        <tr><td><span style="font-weight: bold; margin-right: 10px;">Phone:</span>Phone</td></tr>
+                        <tr><td><span style="font-weight: bold; margin-right: 10px;">Fax:</span>Fax</td></tr>
+                        <tr><td><span style="font-weight: bold; margin-right: 10px;">Check-in:</span><?php echo $wrapper->field_check_in->value(); ?></td></tr>
+                        <tr><td><span style="font-weight: bold; margin-right: 10px;">Check-out:</span><?php echo $wrapper->field_check_out->value(); ?></td></tr>
+                        <tr><td><span style="font-weight: bold; margin-right: 10px;">Number of nights:</span><?php echo count(explode('|', $wrapper->field_nights->value())); ?></td></tr>
+                        <tr><td><span style="font-weight: bold; margin-right: 10px;">Number of guests:</span><?php echo $wrapper->field_adults->value()+$wrapper->field_children->value(); ?></td></tr>
                       </table>
                     </td>
                   </tr>
@@ -196,10 +196,10 @@
                         </tr>
                         <tr style="padding-top: 15px; padding-bottom: 15px; border-bottom: dotted 1px #333333;">
                           <td width="10%" valign="top" style="padding-top: 15px; padding-bottom: 15px;">#</td>
-                          <td width="22%" valign="top" style="padding-top: 15px; padding-bottom: 15px;">Room Type</td>
-                          <td width="22%" valign="top" style="padding-top: 15px; padding-bottom: 15px;">Reserved for</td>
-                          <td width="22%" valign="top" style="padding-top: 15px; padding-bottom: 15px;">Confirmation number</td>
-                          <td width="22%" valign="top" style="padding-top: 15px; padding-bottom: 15px;">Refundable</td>
+                          <td width="22%" valign="top" style="padding-top: 15px; padding-bottom: 15px;"><?php echo $wrapper->field_room_type->value(); ?></td>
+                          <td width="22%" valign="top" style="padding-top: 15px; padding-bottom: 15px;"><?php echo $wrapper->field_first_name->value().' '.$wrapper->field_last_name->value(); ?></td>
+                          <td width="22%" valign="top" style="padding-top: 15px; padding-bottom: 15px;"><?php echo $wrapper->field_confirmation_number->value(); ?></td>
+                          <td width="22%" valign="top" style="padding-top: 15px; padding-bottom: 15px;"> NO </td>
                         </tr>
                       </table>
                     </td>
@@ -212,11 +212,55 @@
             </tr>
             <tr>
               <td>
-                <table style="width:100%; border: solid 1px #333333; padding: 60px; border-radius: 5px; margin-bottom: 30px;">
-                  <tr>
-                    <td style="color:#333333; font-size:18px; font-weight:bold; line-height: 22px; text-transform: uppercase; border-bottom: dotted 1px #333333; padding-bottom: 15px">charges</td>
-                  </tr>
-                </table>
+  	            <table style="width:100%; border: solid 1px #333333; padding: 60px; border-radius: 5px; margin-bottom: 30px;">
+        					<tr>
+        						<td style="color:#333333; font-size:18px; font-weight:bold; line-height: 22px; text-transform: uppercase; border-bottom: dotted 1px #333333; padding-bottom: 15px">charges</td>
+        					</tr>
+        					<tr>
+        						<td style="padding-top:15px;">
+        							<span style="font-weight:bold; text-transform: uppercase;">Cost per night and per room in USD$</span> (Excluding tax recovery charges and service fees)
+        						</td>
+        					</tr>
+        					<tr>
+        						<td>
+        							<table style="width:100%; font-size:14px; line-height: 22px; border-bottom: dotted 1px #333333;">
+        								<tr style="border-bottom: dotted 1px #333333; font-weight:bold; line-height: 40px;">
+        									<td style="border-bottom: dotted 1px #333333;">Dates</td>
+        									<td style="border-bottom: dotted 1px #333333;">Room 1</td>
+        									<td width="40%" align="right" style="border-bottom: dotted 1px #333333;">Total per night</td>
+        								</tr>
+                        <?php
+                        $nights = explode('|', $wrapper->field_nights->value());
+                        foreach ($nights as $key => $night) { ?>
+                          <tr style="">
+                            <td style=""><?php echo date('m/d/Y', strtotime($wrapper->field_check_in->value().' + '.($key).' days')); ?></td>
+                            <td style=""><?php echo $night; ?></td>
+                            <td width="40%" align="right" style="font-weight:bold;"><?php echo $night; ?></td>
+                          </tr>
+                        <?php } ?>
+        							</table>
+        						</td>
+        					</tr>
+        					<tr>
+        						<td style="padding-top:15px;">
+        							<span style="font-weight:bold; text-transform: uppercase;">Other charges, fees and savings in $USD</span>
+        						</td>
+        					</tr>
+        					<tr>
+        						<td>
+        							<table style="width:100%; font-size:14px; line-height: 22px; border-bottom: dotted 1px #333333;">
+        								<tr style="border-bottom: dotted 1px #333333; font-weight:bold; line-height: 40px;">
+        									<td style="border-bottom: dotted 1px #333333;">Item</td>
+        									<td width="40%" align="right" style="border-bottom: dotted 1px #333333;">Total</td>
+        								</tr>
+        								<tr style="">
+        									<td style="">Tax Recovery Charges and Service Fees</td>
+        									<td style="font-weight:bold" align="right"><?php echo $wrapper->field_tax_rate->value(); ?></td>
+        								</tr>
+        							</table>
+        						</td>
+        					</tr>
+        				</table>
               </td>
             </tr>
             <tr>
@@ -240,7 +284,6 @@
                         </tr>
                       </table>
                     </td>
-                  </tr>
                   </tr>
                 </table>
               </td>
@@ -270,7 +313,7 @@
                             <span style="font-weight: bold; margin-right: 10px;">Itinerary Number:</span> <?php echo $wrapper->field_booking_id->value(); ?></td>
                         </tr>
                         <tr>
-                          <td style="color:#333333; font-size:12px; line-height: 18px; padding-top: 15px">The above charges to your credit card were made by Travelscape, LLC. View our full <a href="#" style="color:#7b8c88; text-decoration: none;">Terms & Conditions.</a></td>
+                          <td style="color:#333333; font-size:12px; line-height: 18px; padding-top: 15px">The above charges to your credit card were made by Travelscape, LLC. View our full <a target="_blank" href="http://travel.ian.com/index.jsp?pageName=userAgreement&locale=en_US&cid=456134" style="color:#7b8c88; text-decoration: none;">Terms & Conditions.</a></td>
                         </tr>
                       </table>
                     </td>
@@ -288,7 +331,7 @@
                     <td style="color:#333333; font-size:14px; font-weight:bold; line-height: 22px; padding-top: 15px">Room 1</td>
                   </tr>
                   <tr>
-                    <td style="color:#333333; font-size:14px; line-height: 22px;">This rate is non-refundable and cannot be changed or cancelled - if you do choose to change or cancel this booking you will not be refunded any of the payment.</td>
+                    <td style="color:#333333; font-size:14px; line-height: 22px;"><?php echo $wrapper->field_policy_cancel->value(); ?></td>
                   </tr>
                 </table>
               </td>
@@ -358,13 +401,13 @@
                   <tr>
                     <td style="padding-top: 15px; border-bottom: dotted 1px #333333; padding-bottom: 15px">
                       <table style="margin: 0; padding-top: 15px;border-collapse:collapse; color:#333333; font-size:14px; line-height: 22px;">
-                        <tr><td><span style="font-weight: bold; margin-right: 10px;">Address:</span><?php echo $wrapper->field_hotel_contact->value(); ?></tr></td>
-                        <tr><td><span style="font-weight: bold; margin-right: 10px;">Phone:</span>Phone</tr></td>
-                        <tr><td><span style="font-weight: bold; margin-right: 10px;">Fax:</span>Fax</tr></td>
-                        <tr><td><span style="font-weight: bold; margin-right: 10px;">Check-in:</span><?php echo $wrapper->field_check_in->value(); ?></tr></td>
-                        <tr><td><span style="font-weight: bold; margin-right: 10px;">Check-out:</span><?php echo $wrapper->field_check_out->value(); ?></tr></td>
-                        <tr><td><span style="font-weight: bold; margin-right: 10px;">Number of nights:</span><?php echo $wrapper->field_nights->value(); ?></tr></td>
-                        <tr><td><span style="font-weight: bold; margin-right: 10px;">Number of guests:</span><?php echo $wrapper->field_adults->value()+$wrapper->field_children->value(); ?></tr></td>
+                        <tr><td><span style="font-weight: bold; margin-right: 10px;">Address:</span><?php echo $wrapper->field_hotel_contact->value(); ?></td></tr>
+                        <tr><td><span style="font-weight: bold; margin-right: 10px;">Phone:</span>Phone</td></tr>
+                        <tr><td><span style="font-weight: bold; margin-right: 10px;">Fax:</span>Fax</td></tr>
+                        <tr><td><span style="font-weight: bold; margin-right: 10px;">Check-in:</span><?php echo $wrapper->field_check_in->value(); ?></td></tr>
+                        <tr><td><span style="font-weight: bold; margin-right: 10px;">Check-out:</span><?php echo $wrapper->field_check_out->value(); ?></td></tr>
+                        <tr><td><span style="font-weight: bold; margin-right: 10px;">Number of nights:</span><?php echo $wrapper->field_nights->value(); ?></td></tr>
+                        <tr><td><span style="font-weight: bold; margin-right: 10px;">Number of guests:</span><?php echo $wrapper->field_adults->value()+$wrapper->field_children->value(); ?></td></tr>
                       </table>
                     </td>
                   </tr>
@@ -389,10 +432,10 @@
                         </tr>
                         <tr style="padding-top: 15px; padding-bottom: 15px; border-bottom: dotted 1px #333333;">
                           <td width="10%" valign="top" style="padding-top: 15px; padding-bottom: 15px;">#</td>
-                          <td width="22%" valign="top" style="padding-top: 15px; padding-bottom: 15px;">Room Type</td>
-                          <td width="22%" valign="top" style="padding-top: 15px; padding-bottom: 15px;">Reserved for</td>
-                          <td width="22%" valign="top" style="padding-top: 15px; padding-bottom: 15px;">Confirmation number</td>
-                          <td width="22%" valign="top" style="padding-top: 15px; padding-bottom: 15px;">Refundable</td>
+                          <td width="22%" valign="top" style="padding-top: 15px; padding-bottom: 15px;"><?php echo $wrapper->field_room_type->value(); ?></td>
+                          <td width="22%" valign="top" style="padding-top: 15px; padding-bottom: 15px;"><?php echo $wrapper->field_first_name->value().' '.$wrapper->field_last_name->value(); ?></td>
+                          <td width="22%" valign="top" style="padding-top: 15px; padding-bottom: 15px;"><?php echo $wrapper->field_confirmation_number->value(); ?></td>
+                          <td width="22%" valign="top" style="padding-top: 15px; padding-bottom: 15px;">NO</td>
                         </tr>
                       </table>
                     </td>
@@ -406,10 +449,54 @@
             <tr>
               <td>
                 <table style="width:100%; border: solid 1px #333333; padding: 60px; border-radius: 5px; margin-bottom: 30px;">
-                  <tr>
-                    <td style="color:#333333; font-size:18px; font-weight:bold; line-height: 22px; text-transform: uppercase; border-bottom: dotted 1px #333333; padding-bottom: 15px">charges</td>
-                  </tr>
-                </table>
+        					<tr>
+        						<td style="color:#333333; font-size:18px; font-weight:bold; line-height: 22px; text-transform: uppercase; border-bottom: dotted 1px #333333; padding-bottom: 15px">charges</td>
+        					</tr>
+        					<tr>
+        						<td style="padding-top:15px;">
+        							<span style="font-weight:bold; text-transform: uppercase;">Cost per night and per room in USD$</span> (Excluding tax recovery charges and service fees)
+        						</td>
+        					</tr>
+        					<tr>
+        						<td>
+        							<table style="width:100%; font-size:14px; line-height: 22px; border-bottom: dotted 1px #333333;">
+        								<tr style="border-bottom: dotted 1px #333333; font-weight:bold; line-height: 40px;">
+        									<td style="border-bottom: dotted 1px #333333;">Dates</td>
+        									<td style="border-bottom: dotted 1px #333333;">Room 1</td>
+        									<td width="40%" align="right" style="border-bottom: dotted 1px #333333;">Total per night</td>
+        								</tr>
+                        <?php
+                        $nights = explode('|', $wrapper->field_nights->value());
+                        foreach ($nights as $key => $night) { ?>
+                          <tr style="">
+                            <td style=""><?php echo date('m/d/Y', strtotime($wrapper->field_check_in->value().' + '.($key).' days')); ?></td>
+                            <td style=""><?php echo $night; ?></td>
+                            <td width="40%" align="right" style="font-weight:bold;"><?php echo $night; ?></td>
+                          </tr>
+                        <?php } ?>
+        							</table>
+        						</td>
+        					</tr>
+        					<tr>
+        						<td style="padding-top:15px;">
+        							<span style="font-weight:bold; text-transform: uppercase;">Other charges, fees and savings in $USD</span>
+        						</td>
+        					</tr>
+        					<tr>
+        						<td>
+        							<table style="width:100%; font-size:14px; line-height: 22px; border-bottom: dotted 1px #333333;">
+        								<tr style="border-bottom: dotted 1px #333333; font-weight:bold; line-height: 40px;">
+        									<td style="border-bottom: dotted 1px #333333;">Item</td>
+        									<td width="40%" align="right" style="border-bottom: dotted 1px #333333;">Total per night</td>
+        								</tr>
+        								<tr style="">
+        									<td style="">Tax Recovery Charges and Service Fees</td>
+        									<td style="font-weight:bold" align="right"><?php echo $wrapper->field_tax_rate->value(); ?></td>
+        								</tr>
+        							</table>
+        						</td>
+        					</tr>
+				        </table>
               </td>
             </tr>
             <tr>
@@ -433,7 +520,6 @@
                         </tr>
                       </table>
                     </td>
-                  </tr>
                   </tr>
                 </table>
               </td>
@@ -463,7 +549,7 @@
                             <span style="font-weight: bold; margin-right: 10px;">Itinerary Number:</span> <?php echo $wrapper->field_booking_id->value(); ?></td>
                         </tr>
                         <tr>
-                          <td style="color:#333333; font-size:12px; line-height: 18px; padding-top: 15px">The above charges to your credit card were made by Travelscape, LLC. View our full <a href="#" style="color:#7b8c88; text-decoration: none;">Terms & Conditions.</a></td>
+                          <td style="color:#333333; font-size:12px; line-height: 18px; padding-top: 15px"> <a target="_blank" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/terms-service" style="color:#7b8c88; text-decoration: none;">Terms of service.</a></td>
                         </tr>
                       </table>
                     </td>
@@ -481,7 +567,7 @@
                     <td style="color:#333333; font-size:14px; font-weight:bold; line-height: 22px; padding-top: 15px">Room 1</td>
                   </tr>
                   <tr>
-                    <td style="color:#333333; font-size:14px; line-height: 22px;">This rate is non-refundable and cannot be changed or cancelled - if you do choose to change or cancel this booking you will not be refunded any of the payment.</td>
+                    <td style="color:#333333; font-size:14px; line-height: 22px;"><?php echo $wrapper->field_policy_cancel->value(); ?></td>
                   </tr>
                 </table>
               </td>
