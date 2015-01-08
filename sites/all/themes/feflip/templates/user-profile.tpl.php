@@ -1,4 +1,8 @@
-<?php include 'slideshowandmainmenu.html.php';?>
+<?php
+drupal_goto('<front>');
+exit();
+
+include 'slideshowandmainmenu.html.php';?>
 
 <?php if(isset($user_profile['summary']['member_for'])) echo $user_profile['summary']['member_for']['#title'] . ': '. $user_profile['summary']['member_for']['#markup'];?>
 <br>

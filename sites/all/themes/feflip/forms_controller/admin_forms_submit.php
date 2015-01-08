@@ -161,6 +161,11 @@
                 $obj = array('result'=>$result, 'error'=>$error);
                 echo json_encode($obj);
                 break;
+            case 'updatePassw':
+                $result = AdminForms::UpdatePassw($input_values['newPassw'], $error);
+                $obj = array('result'=>$result, 'error'=>$error);
+                echo json_encode($obj);
+                break;
 			default:
 			break;
 		}

@@ -483,6 +483,16 @@ function feflip_theme() {
   $items['user_pass_reset'] = array(
     'render element' => 'form',
     'template' => 'templates/user-pass'
+  );
+
+  $items['user_pass'] = array(
+    'render element' => 'form',
+    'template' => 'templates/user-profile'
+  );    
+
+  $items['user_profile_form'] = array(
+    'render element' => 'form',
+    'template' => 'templates/user-profile-edit'
   );  
   return $items;
 }

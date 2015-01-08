@@ -542,6 +542,40 @@ class AdminForms
             return '';
         }
     }
+
+    /**
+     * Update current user password
+     * @param $newPass
+     * @param $error
+     *
+     * @return $result
+     */
+    static function UpdatePassw($newPass, &$error)
+    {
+        global $user;
+        require_once DRUPAL_ROOT . '/' . variable_get('password_inc', 'includes/password.inc');
+        if (user_is_logged_in()) {
+            $hashthepass = user_hash_password(trim($newPass));
+
+            // Abort if the hashing failed and returned FALSE.
+            if (!$hashthepass || empty($newPass)) {
+                $error = 'Password hash has failed';
+                return '';
+            }else{
+                db_update('users')
+                    ->fields(array(
+                        'pass' => $hashthepass))
+                    ->condition('uid', $user->uid)       
+                    ->execute();
+                $error = '';
+                return 'Password setted';
+            }
+        }
+        else {
+            $error = 'You are not authorized to access this page';
+            return '';
+        }
+    }
 }
 
 ?>
