@@ -246,6 +246,33 @@ class Expedia
         return $res;
     }
 
+    public static function CancelBooking_XML($itineraryId, $confirmationNumber, $email)
+    {
+        $service = wsclient_service_load('expedia__rest');
+        $service->settings['http_headers'] = array(
+            'Content-Type' => array('multipart/form-data'),
+        );
+
+        $xml="<HotelRoomCancellationRequest>
+    <itineraryId>$itineraryId</itineraryId>
+    <email>$email</email>
+    <confirmationNumber>$confirmationNumber</confirmationNumber>
+    </HotelRoomCancellationRequest>";
+
+        $res = null;
+
+        try
+        {
+            $res = $service->expedia__rest_cancel_booking_xml($xml);
+        }
+        catch (Exception $e)
+        {
+            return $e->getMessage();
+        }
+
+        return $res;
+    }
+
     /*
     *	Get room availability for list hotels
     *	@param hotelId, checkin, checkout, roomConfig
