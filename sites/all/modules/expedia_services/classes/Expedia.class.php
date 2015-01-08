@@ -91,6 +91,34 @@ class Expedia
         $res = null;
         try {
             $res = $service->expedia__rest_hotel_list_by_hotel_codes_xml($xml);
+
+            /*
+            if($service->type=='rest'){
+
+                $args = array(
+                    'cid' => '55505',
+                    'apiKey' => '9q5f2mjrnashqtw97ka2vg9j',
+                    'minorRev' => 28,
+                    'locale' => 'en_US',
+                    'xml' =>  urlencode($xml)
+                );
+                $parameters = '';
+                $operation = $service->operations['expedia__rest_hotel_list_by_hotel_codes_xml'];
+                foreach($args as $para_name=>$para_value){
+                    $parameters.=$para_name.'='.$para_value.'<br>';
+                }
+                $reqInfo = 'Uri:'.$service->url.$operation['url'].'<br>'.
+                    'Method:'.(isset($operation['type']) ? $operation['type'] : 'GET').'<br>'.
+                    'Parameter:'.$parameters;
+                $element['request']['packet']['#markup'] = $reqInfo;
+                $element['response']['header']['#markup'] = $service->endpoint()->client()->lastResponse->headers;
+                $element['response']['packet']['#markup'] = $service->endpoint()->client()->lastResponse->body;
+
+            }
+
+            watchdog('Expedia', 'RoomAvailability_XML ===> '. '<pre>' . print_r( $element, true) . '</pre>');
+            */
+
         } catch (Exception $e) {
             return $e->getMessage();
         }
@@ -181,7 +209,37 @@ class Expedia
 
         $res = null;
         try {
+
+
             $res = $service->expedia__rest_room_avail_xml($xml);
+
+            /*
+            if($service->type=='rest'){
+
+                $args = array(
+                    'cid' => '55505',
+                    'apiKey' => '9q5f2mjrnashqtw97ka2vg9j',
+                    'minorRev' => 28,
+                    'locale' => 'en_US',
+                    'xml' =>  urlencode($xml)
+                );
+                $parameters = '';
+                $operation = $service->operations['expedia__rest_room_avail_xml'];
+                foreach($args as $para_name=>$para_value){
+                    $parameters.=$para_name.'='.$para_value.'<br>';
+                }
+                $reqInfo = 'Uri:'.$service->url.$operation['url'].'<br>'.
+                    'Method:'.(isset($operation['type']) ? $operation['type'] : 'GET').'<br>'.
+                    'Parameter:'.$parameters;
+                $element['request']['packet']['#markup'] = $reqInfo;
+                $element['response']['header']['#markup'] = $service->endpoint()->client()->lastResponse->headers;
+                $element['response']['packet']['#markup'] = $service->endpoint()->client()->lastResponse->body;
+
+            }
+
+            watchdog('Expedia', 'RoomAvailability_XML ===> '. '<pre>' . print_r( $element, true) . '</pre>');
+            */
+
         } catch (Exception $e) {
             return $e->getMessage();
         }
@@ -236,6 +294,8 @@ class Expedia
 
         $service->url = 'https://book.api.ean.com';
 
+        $unique = uniqid('',true);
+
         $xml =
 "<HotelRoomReservationRequest>
     <hotelId>$hotelId</hotelId>
@@ -247,6 +307,7 @@ class Expedia
     <rateCode>$ratecode</rateCode>
     <chargeableRate>$chargeableRate</chargeableRate>
     <sendReservationEmail>false</sendReservationEmail>
+    <AffiliateConfirmationID>$unique</AffiliateConfirmationID>
     <RoomGroup>";
         $rooms = "";
         foreach ($roomConfig as $room)
@@ -390,7 +451,33 @@ $xml = "<HotelRoomReservationRequest>
         try{
             //$res = $service->expedia__rest_room_reservation($hotelId, $checkin, $checkout, $roomcode, $ratecode, json_encode($roomGroup), json_encode($reservationInfo), json_encode($addressInfo),'E', '9dea54b4-2b95-4346-9ae1-3185757a96e9');
             $res = $service->expedia__rest_room_reservation_xml($xml);
-	    //dpm(self::ReadXML($xml));
+
+            /*
+            if($service->type=='rest'){
+
+                $args = array(
+                    'cid' => '55505',
+                    'apiKey' => '9q5f2mjrnashqtw97ka2vg9j',
+                    'minorRev' => 28,
+                    'locale' => 'en_US',
+                    'xml' =>  urlencode($xml)
+                );
+                $parameters = '';
+                $operation = $service->operations['expedia__rest_room_reservation_xml'];
+                foreach($args as $para_name=>$para_value){
+                    $parameters.=$para_name.'='.$para_value.'<br>';
+                }
+                $reqInfo = 'Uri:'.$service->url.$operation['url'].'<br>'.
+                    'Method:'.(isset($operation['type']) ? $operation['type'] : 'GET').'<br>'.
+                    'Parameter:'.$parameters;
+                $element['request']['packet']['#markup'] = $reqInfo;
+                $element['response']['header']['#markup'] = $service->endpoint()->client()->lastResponse->headers;
+                $element['response']['packet']['#markup'] = $service->endpoint()->client()->lastResponse->body;
+
+            }
+
+            watchdog('Expedia', 'RoomAvailability_XML ===> '. '<pre>' . print_r( $element, true) . '</pre>');
+            */
 
         }
         catch(Exception $e){
