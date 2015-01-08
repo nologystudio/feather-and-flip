@@ -189,7 +189,7 @@
 						<span>starting from</span>
 						<h4>1000$</h4>
 					</button>
-					<small>book with expedia</small>
+					<small>book with expedia - online only</small>
 				</div>
 				<div id="sabre-service">
 					<button>
