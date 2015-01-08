@@ -151,6 +151,60 @@ class AdminForms
     }
 
     /**
+     * Cancel an existing booking
+     * @param $values
+     * @param $error
+     *
+     * @return array
+     */
+    static function hotelCancelBooking($values, &$error)
+    {
+        if (!isset($values['service']) || !isset($values['itineraryId']) || !isset($values['confirmationNumber']) || !isset($values['userEmail'])){
+            $error = 'Missing parameters';
+            return '';
+        }
+        else {
+            if ($values['service'] == 'sabre') {
+                $error = 'Method not implemented (Sabre)';
+                return '';
+            }
+            elseif ($values['service'] == 'expedia') {
+                $rs = Expedia::CancelBooking_XML($values['itineraryId'], $values['confirmationNumber'], $values['userEmail']);
+                if (isset($rs['HotelRoomCancellationResponse']) && isset($rs['HotelRoomCancellationResponse']['cancellationNumber'])) {
+                    $booking = $query->entityCondition('entity_type', 'entityform')
+                        ->entityCondition('type', 'booking')
+                        ->fieldCondition('field_booking_id','value', $values['itineraryId'], '=')
+                        ->fieldCondition('field_confirmation_number','value', $values['confirmationNumber'], '=')
+                        ->execute();
+
+                    if (isset($booking['entityform']))
+                    {
+                        $resultquery = $booking['entityform'];
+                        $keys = array_keys($resultquery);
+                        foreach ($keys as $key) {
+                            $eform = entity_load_single('entityform', $key);
+                            $wform = entity_metadata_wrapper('entityform', $eform);
+                            $wform->field_cancellation_number = $rs['HotelRoomCancellationResponse']['cancellationNumber'];
+                            $wform->save();
+                            break;
+                        }
+                        $error = '';
+                        return 'Booking cancelled';
+                    }
+                }
+                else {
+                    $error = 'Something went wrong';
+                    return '';
+                }
+            }
+            else {
+                $error = 'Booking service not passed';
+                return '';
+            }
+        }
+    }
+
+    /**
      * Returns rooms description of hotels (call webservice)
      * @param $values
      * @return array

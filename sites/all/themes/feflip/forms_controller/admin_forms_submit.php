@@ -138,6 +138,11 @@
                     feflip_features_StoreBooking($res['args']);
                 echo json_encode($res['result']);
                 break;
+            case 'cancelBooking':
+                $res = AdminForms::hotelCancelBooking($input_values, $error);
+                $obj = array('result'=>$result, 'error'=>$error);
+                echo json_encode($obj);
+                break;
 			case 'newsletterForm':
 			    // Connect with mailchimp library
 			    if (AdminForms::subscribeToNewsLetter($input_values, $error))
