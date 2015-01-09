@@ -133,17 +133,6 @@ class Sabre
                             'ConversationId'    => $response->ConversationId
                             );
 
-            //Hacemos una cambio de contexto para poder usar los rate codes de F+F que se encuentran en X840
-            /*
-            $newSecurityToken = $this->ChangeContext($result);
-
-            if (isset($newSecurityToken) && !empty($newSecurityToken))
-            {
-                if ($newSecurityToken != $result['SecurityToken'])
-                    $result['SecurityToken'] = $newSecurityToken;
-            }
-            */
-
         }
         catch (Exception $e)
         {
@@ -309,14 +298,18 @@ class Sabre
                 $args['AvailRequestSegment']['HotelSearchCriteria']['Criterion']['HotelRef'][]['HotelCode'] = $hotelCode;
             }
 
+            /*
             if (isset($rateCodes) && count($rateCodes) > 0) {
                 foreach ($rateCodes as $rate)
                     $args['AvailRequestSegment']['RatePlanCandidates']['ContractNegotiatedRateCode'][] = $rate;
-            }
+            }*/
 
             $args['AvailRequestSegment']['TimeSpan']['End'] = $end;
             $args['AvailRequestSegment']['TimeSpan']['Start'] = $start;
             $args['Version'] = '2.1.0';
+
+            //Hacemos un cambio de contexto a X840 para poder usar los rate codes
+            //$this->ChangeContext($sessionInfo);
 
             $response = $service->OTA_HotelAvailRQ($args);
 
@@ -350,7 +343,7 @@ class Sabre
      * @param $end
      * @return string
      */
-    public function HotelDescription($sessionInfo,$hotelCode, $numpersonas, $start, $end)
+    public function HotelDescription($sessionInfo,$hotelCode,$rateCodes, $numpersonas, $start, $end)
      {
         //Open session with sabre
         //$sessionInfo = $this->CreateSession();
@@ -378,10 +371,20 @@ class Sabre
             $args['AvailRequestSegment']['GuestCounts']['Count'] = $numpersonas;
             //$args['AvailRequestSegment']['RateRange']['CurrencyCode'] = 'USD';
             $args['AvailRequestSegment']['HotelSearchCriteria']['Criterion']['HotelRef']['HotelCode'] = $hotelCode;
+
+            /*
+            if (isset($rateCodes) && count($rateCodes) > 0) {
+                foreach ($rateCodes as $rate)
+                    $args['AvailRequestSegment']['RatePlanCandidates']['ContractNegotiatedRateCode'][] = $rate;
+            }*/
+
             $args['AvailRequestSegment']['TimeSpan']['End'] = $end;
             $args['AvailRequestSegment']['TimeSpan']['Start'] = $start;
             $args['Version'] = '2.1.0';
-                        
+
+            //Hacemos un cambio de contexto a X840 para poder usar los rate codes
+            //$this->ChangeContext($sessionInfo);
+
             $response = $service->HotelPropertyDescriptionRQ($args);
             
             //$xmlRequest = $service->endpoint()->client()->__getLastRequest();
@@ -458,8 +461,10 @@ class Sabre
             $response = $service->OTA_HotelResRQ($args);
             
             //$xmlRequest = $service->endpoint()->client()->__getLastRequest();
+            //watchdog('Sabre', 'HotelBookReservation XML RQ ===> '. '<pre>'. htmlspecialchars($this->ReadXML($xmlRequest)) .'</pre>');
             //dpm($this->ReadXML($xmlRequest));
             //$xmlResponse = $service->endpoint()->client()->__getLastResponse();
+            //watchdog('Sabre', 'HotelBookReservation XML RS ===> '. '<pre>'. htmlspecialchars($this->ReadXML($xmlResponse)) .'</pre>');
             //dpm($this->ReadXML($xmlResponse));
 
         }
@@ -717,6 +722,7 @@ class Sabre
 
          //Load service
          $service = wsclient_service_load('contextchange'.$this->TESTSUFFIX);
+         $service->clearCache();
 
          //Create headers and settings
          $headers = array(
@@ -728,30 +734,28 @@ class Sabre
          $service->settings['options']['cache_wsdl'] = WSDL_CACHE_NONE;
          $service->settings['soap_headers'] = $headers;
 
-         $newSecurityToken = '';
+         //$newSecurityToken = '';
 
          try
          {
              $args = array();
-             $args['OverSign']['Organization'] = $this->CONTEXT;
-             $args['OverSign']['Username'] = $this->USERNAME;
+             $args['ChangeAAA']['PseudoCityCode'] = $this->CONTEXT;
              $args['Version'] = '2.0.3';
+
              $response = $service->ContextChangeRQ($args);
 
-             if (isset($response->SecurityToken->_) && !empty($response->SecurityToken->_))
-                 $newSecurityToken = $response->SecurityToken->_;
-
              //$xmlRequest = $service->endpoint()->client()->__getLastRequest();
+             //watchdog('Sabre', 'ChangeContext XML RQ ===> '. '<pre>'. htmlspecialchars($this->ReadXML($xmlRequest)) .'</pre>');
              //dpm($this->ReadXML($xmlRequest));
              //$xmlResponse = $service->endpoint()->client()->__getLastResponse();
              //dpm($this->ReadXML($xmlResponse));
          }
          catch(Exception $e)
          {
-             return $response = $e->getMessage();
+             $response = $e->getMessage();
          }
 
-         return $newSecurityToken;
+         return $response;
      }
 
     /*

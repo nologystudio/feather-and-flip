@@ -141,8 +141,8 @@ class AdminForms
             $numAdults += $room['adults'];
 
 
-        //$rateCodes = Hotel::GetHotelRateCodesBydestination($values['destination']);
-        $rateCodes = array();
+        $rateCodes = Hotel::GetHotelRateCodesBydestination($values['destination']);
+        //$rateCodes = array();
 
         return array(
             'sabre' => $sabreService->ListHotelAvail($values['sabreCodes'],$rateCodes, $numAdults, $sabreChecking, $sabreCheckout),
@@ -170,7 +170,10 @@ class AdminForms
             }
             elseif ($values['service'] == 'expedia') {
                 $rs = Expedia::CancelBooking_XML($values['itineraryId'], $values['confirmationNumber'], $values['userEmail']);
+                //watchdog('AdminForms', ' ===> '. '<pre>'. count($rs) .'</pre>');
+                var_dump($rs);
                 if (isset($rs['HotelRoomCancellationResponse']) && isset($rs['HotelRoomCancellationResponse']['cancellationNumber'])) {
+                    $query = new EntityFieldQuery;
                     $booking = $query->entityCondition('entity_type', 'entityform')
                         ->entityCondition('type', 'booking')
                         ->fieldCondition('field_booking_id','value', $values['itineraryId'], '=')
@@ -234,13 +237,16 @@ class AdminForms
                 if (isset($_SESSION['sabreSession'])) {
                     try {
                         $sabreService->CloseSession($_SESSION['sabreSession']);
+                        unset($_SESSION['sabreSession']);
                     }catch(Exception $e){}
                 }
 
                 $sessionInfo = $sabreService->CreateSession();
                 $_SESSION['sabreSession'] = $sessionInfo;
 
-                return $sabreService->HotelDescription($sessionInfo, $hotelId, $numAdults, $sabreChecking, $sabreCheckout);
+                $rateCodes = $values['rateCodes'];
+
+                return $sabreService->HotelDescription($sessionInfo, $hotelId, $rateCodes, $numAdults, $sabreChecking, $sabreCheckout);
             }
 
             else

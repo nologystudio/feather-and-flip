@@ -72,11 +72,17 @@
                 //watchdog('Admin Forms Submit', 'HotelDescription Values ===> '. '<pre>' . print_r( $input_values, true) . '</pre>');
                 $nextPage = '';
                 $input_values['available'] = false;
+
+                //Cargamos el nodo hotel
+                $node = node_load($input_values['internalId']);
+
+                $input_values['rateCodes'] = array();
+                if (isset($node->field_rate_code['und'][0]['value']) && !empty($node->field_rate_code['und'][0]['value']))
+                    $input_values['rateCodes'] = array($node->field_rate_code['und'][0]['value']);
+
                 //Cuando hacemos get rates desde el nodo hotel aun no tenemos un servicio definido
                 if (!isset($input_values['service']) || empty($input_values['service']))
                 {
-                    //Cargamos el nodo hotel para obtener los codigos de expedia y sabre
-                    $node = node_load($input_values['internalId']);
                     $sabreCode = $node->field_hotelcode['und'][0]['value'];
                     $expediaCode = isset($node->field_ean_hotelcode['und'][0]['value']) ? $node->field_ean_hotelcode['und'][0]['value'] : '0000000';
                     //Pasamos los codigos de expedia y sabre al input values
@@ -140,7 +146,7 @@
                 break;
             case 'cancelBooking':
                 $res = AdminForms::hotelCancelBooking($input_values, $error);
-                $obj = array('result'=>$result, 'error'=>$error);
+                $obj = array('result'=>$res, 'error'=>$error);
                 echo json_encode($obj);
                 break;
 			case 'newsletterForm':
