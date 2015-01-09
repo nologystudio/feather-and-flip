@@ -170,8 +170,6 @@ class AdminForms
             }
             elseif ($values['service'] == 'expedia') {
                 $rs = Expedia::CancelBooking_XML($values['itineraryId'], $values['confirmationNumber'], $values['userEmail']);
-                //watchdog('AdminForms', ' ===> '. '<pre>'. count($rs) .'</pre>');
-                var_dump($rs);
                 if (isset($rs['HotelRoomCancellationResponse']) && isset($rs['HotelRoomCancellationResponse']['cancellationNumber'])) {
                     $query = new EntityFieldQuery;
                     $booking = $query->entityCondition('entity_type', 'entityform')
@@ -196,7 +194,10 @@ class AdminForms
                     }
                 }
                 else {
-                    $error = 'Something went wrong';
+                    if (isset($rs['HotelRoomCancellationResponse']) && isset($rs['HotelRoomCancellationResponse']['EanWsError']))
+                        $error = $rs['HotelRoomCancellationResponse']['EanWsError']['presentationMessage'];
+                    else
+                        $error = 'Something went wrong';
                     return '';
                 }
             }
