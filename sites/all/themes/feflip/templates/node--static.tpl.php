@@ -14,7 +14,30 @@
         </header>
     </div>
 </section>
-
+<?php } else if(strpos(strtoupper($title), 'PAGE NOT FOUND') !== false){ ?>
+        <section id="booking-engine">
+            <div id="step-5">
+                <header>
+                    <div class="wrapper">
+                        <div class="feather"></div>
+                        <h1>Page not found</h1>
+                        <h3><?php echo (isset($body[0]) ? $body[0]['safe_value'] : ''); ?></h3>
+                    </div>
+                </header>
+            </div>
+        </section>
+<?php } else if(strpos(strtoupper($title), 'ACCESS DENIED') !== false){ ?>
+    <section id="booking-engine">
+        <div id="step-5">
+            <header>
+                <div class="wrapper">
+                    <div class="feather"></div>
+                    <h1>Access denied</h1>
+                    <h3><?php echo (isset($body[0]) ? $body[0]['safe_value'] : ''); ?></h3>
+                </div>
+            </header>
+        </div>
+    </section>
 <?php } else if (strpos(strtoupper($title), 'CONTACT') !== false) {?>
 <section id="contact" class="static" ng-controller="ContactCtrl">
 	<header>

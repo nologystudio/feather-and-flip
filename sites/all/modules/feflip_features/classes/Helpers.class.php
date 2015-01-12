@@ -278,9 +278,13 @@ class Helpers
     */
     public static function IsStickySection()
     {
+        $header = drupal_get_http_header("status");
+
         if ((strpos($_SERVER['REQUEST_URI'], '/map-it') !== false) ||
             (strpos($_SERVER['REQUEST_URI'], '/booking-info') !== false) ||
-            (strpos($_SERVER['REQUEST_URI'], '/booking-error') !== false))
+            (strpos($_SERVER['REQUEST_URI'], '/booking-error') !== false) ||
+            $header == "404 Not Found" ||
+            $header == "403 Forbidden")
             return true;
         else
             return false;
