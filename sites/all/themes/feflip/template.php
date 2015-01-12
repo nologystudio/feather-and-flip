@@ -14,7 +14,7 @@ function feflip_preprocess_html(&$variables) {
     variable_set('relativePath', $relativePath);
     // AboutUs->nid=27; FAQ->nid=28
     $static_nodes = array('html__node__27', 'html__node__28', 'html__node__86', 'html__node__87', 'html__node__88', 'html__node__89');
-    $error_node = array ('html__node__288');
+    $error_node = array ('html__node__288', 'html__node__332', 'html__node__333');
     $arg = arg();
 
     variable_set('pageID', 'global');
