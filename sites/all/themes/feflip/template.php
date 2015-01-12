@@ -565,7 +565,7 @@ function get_header_main_navigation_menu($destinations=NULL){
               $navigationMenu .= '</div>
 							<div id="profile">
 								<h4>'. $featherUser->name .'</h4>
-								<h5>Forgot password? RESET HERE</h5>
+								<h5>Change password <button id="change-password">HERE</button></h5>
 								<a href="/user/logout">log out</a>
 							</div>
 						</div>';

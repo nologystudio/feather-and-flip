@@ -23,10 +23,12 @@ function feflip_features_init() {
 /**
  * Implements hook_admin_paths_alter().
  */
-// function feflip_features_admin_paths_alter(&$paths) {
+function feflip_features_admin_paths_alter(&$paths) {
 //   $paths['user'] = TRUE;
 //   $paths['user/*'] = TRUE;
-// }
+    $paths['entityform/*'] = TRUE;
+    $paths['entityform/*/edit'] = TRUE;
+}
 
 /**
  * Implements hook_search_api_autocomplete_types().
