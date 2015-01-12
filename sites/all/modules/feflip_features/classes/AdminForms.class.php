@@ -198,6 +198,34 @@ class AdminForms
                         $error = $rs['HotelRoomCancellationResponse']['EanWsError']['presentationMessage'];
                     else
                         $error = 'Something went wrong';
+
+                    // ********************************************************************************************************
+                    // TEST PURPOSES - save a fake cancellation number if is an error testing in expedia
+                    if (strpos($error, 'OMS OrderNumber not found for emain itinerary number') !== false) {
+                        $query = new EntityFieldQuery;
+                        $booking = $query->entityCondition('entity_type', 'entityform')
+                            ->entityCondition('bundle', 'booking')
+                            ->fieldCondition('field_booking_id','value', $values['itineraryId'], '=')
+                            ->fieldCondition('field_confirmation_number','value', $values['confirmationNumber'], '=')
+                            ->execute();
+
+                        if (isset($booking['entityform']))
+                        {
+                            $resultquery = $booking['entityform'];
+                            $keys = array_keys($resultquery);
+                            foreach ($keys as $key) {
+                                $eform = entity_load_single('entityform', $key);
+                                $wform = entity_metadata_wrapper('entityform', $eform);
+                                $wform->field_cancellation_number = 'XX-1234-XX';
+                                $wform->save();
+                                break;
+                            }
+                            $error = '';
+                            return 'TEST - Booking cancelled';
+                        }
+                    }
+                    // ***********************************************************************************************************  END TESTS
+
                     return '';
                 }
             }

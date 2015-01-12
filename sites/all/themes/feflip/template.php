@@ -325,6 +325,7 @@ function feflip_preprocess_views_view(&$variables) {
             $booking['address'] = isset($entity->field_adress_1['und'][0]['value']) ? $entity->field_adress_1['und'][0]['value'] : '';
             $booking['cityCode'] = isset($entity->field_citycode['und'][0]['value']) ? $entity->field_citycode['und'][0]['value'] : '';
             $booking['postalCode'] = isset($entity->field_postal_code['und'][0]['value']) ? $entity->field_postal_code['und'][0]['value'] : '';
+            $booking['cancellationNumber'] = isset($entity->field_cancellation_number['und'][0]['value']) ? $entity->field_cancellation_number['und'][0]['value'] : '';
         }
 
         $variables['booking'] = $booking;
