@@ -152,7 +152,9 @@
 		        	<figure>
 		        		<img src="/sites/all/themes/feflip/media/services/expedia-service-email.png"/>
 		        	</figure>
-		        	<a ng-click="cancel('confirm')" target="_blank">Change or cancel your reservation with Expedia/TravelNow</a>
+		        	<?php if (empty($booking['cancellationNumber'])) { ?>
+		        		<a ng-click="cancel('confirm')" target="_blank">Change or cancel your reservation with Expedia/TravelNow</a>
+		        	<?php } ?>
 		        	<?php else: ?>
 		        	<a href="/contact">Contact us</a> or call 1-800...
 		        	<?php endif; ?>
