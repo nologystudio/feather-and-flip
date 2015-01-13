@@ -314,8 +314,10 @@ class Sabre
             $response = $service->OTA_HotelAvailRQ($args);
 
             //$xmlRequest = $service->endpoint()->client()->__getLastRequest();
+            //watchdog('Sabre', 'ListHotelAvail XML RQ ===> '. '<pre>'. htmlspecialchars($this->ReadXML($xmlRequest)) .'</pre>');
             //dpm($this->ReadXML($xmlRequest));
             //$xmlResponse = $service->endpoint()->client()->__getLastResponse();
+            //watchdog('Sabre', 'ListHotelAvail XML RS ===> '. '<pre>'. htmlspecialchars($this->ReadXML($xmlResponse)) .'</pre>');
             //dpm($this->ReadXML($xmlResponse));
 
             //dpm($response);
@@ -388,8 +390,10 @@ class Sabre
             $response = $service->HotelPropertyDescriptionRQ($args);
             
             //$xmlRequest = $service->endpoint()->client()->__getLastRequest();
+            //watchdog('Sabre', 'HotelDescription XML RQ ===> '. '<pre>'. htmlspecialchars($this->ReadXML($xmlRequest)) .'</pre>');
             //dpm($this->ReadXML($xmlRequest));
             //$xmlResponse = $service->endpoint()->client()->__getLastResponse();
+            //watchdog('Sabre', 'HotelDescription XML RS ===> '. '<pre>'. htmlspecialchars($this->ReadXML($xmlResponse)) .'</pre>');
             //dpm($this->ReadXML($xmlResponse));
             
             //dpm($response);
