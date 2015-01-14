@@ -186,6 +186,7 @@ class Expedia
     <departureDate>$checkout</departureDate>
     <includeDetails>true</includeDetails>
     <includeRoomImages>true</includeRoomImages>
+    <includeHotelFeeBreakdown>true</includeHotelFeeBreakdown>
     <options>ROOM_TYPES,ROOM_AMENITIES</options>
     <RoomGroup>";
         $rooms = "";
