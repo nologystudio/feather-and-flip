@@ -156,7 +156,7 @@
 		        		<a ng-click="cancel('confirm')" target="_blank">Change or cancel your reservation with Expedia/TravelNow</a>
 		        	<?php } ?>
 		        	<?php else: ?>
-		        	<a href="/contact">Contact us</a> or call 1-800...
+		        	<a href="/contact">Contact us</a> or call our Customer Support (646) 854-3386
 		        	<?php endif; ?>
 		        </li>
 	        </ul>
