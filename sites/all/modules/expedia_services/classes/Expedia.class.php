@@ -320,6 +320,7 @@ class Expedia
         );
 
         $service->url = 'https://book.api.ean.com';
+        $service->global_parameters['customerIpAddress']['default value'] = $_SERVER['REMOTE_ADDR'];
 
         $unique = uniqid('',true);
 
@@ -476,6 +477,7 @@ $xml = "<HotelRoomReservationRequest>
         */
 
         try{
+            //watchdog('Expedia', 'HotelBookReservation ===> '. '<pre>' . print_r( $service, true) . '</pre>');
             //$res = $service->expedia__rest_room_reservation($hotelId, $checkin, $checkout, $roomcode, $ratecode, json_encode($roomGroup), json_encode($reservationInfo), json_encode($addressInfo),'E', '9dea54b4-2b95-4346-9ae1-3185757a96e9');
             $res = $service->expedia__rest_room_reservation_xml($xml);
 

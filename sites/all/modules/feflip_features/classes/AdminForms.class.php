@@ -393,7 +393,8 @@ class AdminForms
                     'user_countryCode'=> $values['countryCode'],
                     'user_postalCode'=> $values['postalCode'],
                     'booking_tax_rate' => $values['taxRate']. ' ' . $result['HotelRoomReservationResponse']['RateInfos']['RateInfo']['ChargeableRateInfo']['@currencyCode'],
-                    'booking_policy_cancel' => $values['cancellationPolicy']
+                    'booking_policy_cancel' => $values['cancellationPolicy'],
+                    'user_ip' => $_SERVER['REMOTE_ADDR']
                 );
             }
 
