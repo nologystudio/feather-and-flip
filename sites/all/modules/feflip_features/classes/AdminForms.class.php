@@ -298,6 +298,11 @@ class AdminForms
             $numChildren += $room['children']['number'];
         }
 
+        $userAgent = $_SERVER['HTTP_USER_AGENT'];
+
+        if (Helpers::get_device_type() != 'desktop')
+            $userAgent .= '; MOBILE_SITE';
+
         $args = array();
         if (isset($service) && $service == 'sabre')
         {
@@ -394,7 +399,8 @@ class AdminForms
                     'user_postalCode'=> $values['postalCode'],
                     'booking_tax_rate' => $values['taxRate']. ' ' . $result['HotelRoomReservationResponse']['RateInfos']['RateInfo']['ChargeableRateInfo']['@currencyCode'],
                     'booking_policy_cancel' => $values['cancellationPolicy'],
-                    'user_ip' => $_SERVER['REMOTE_ADDR']
+                    'user_ip' => $_SERVER['REMOTE_ADDR'],
+                    'user_agent' => $userAgent
                 );
             }
 

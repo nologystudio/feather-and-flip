@@ -314,7 +314,13 @@ class Expedia
 
         $service->url = 'https://book.api.ean.com';
         $service->global_parameters['customerIpAddress']['default value'] = $_SERVER['REMOTE_ADDR'];
-        $service->global_parameters['customerUserAgent']['default value'] = $_SERVER['HTTP_USER_AGENT'];
+
+        $userAgent = $_SERVER['HTTP_USER_AGENT'];
+
+        if (Helpers::get_device_type() != 'desktop')
+            $userAgent .= '; MOBILE_SITE';
+
+        $service->global_parameters['customerUserAgent']['default value'] = $userAgent;
 
         $unique = uniqid('',true);
 

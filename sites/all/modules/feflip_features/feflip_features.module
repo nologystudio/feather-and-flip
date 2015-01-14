@@ -146,6 +146,7 @@ function feflip_features_StoreBooking($args)
     $wrapper->field_policy_cancel   = (isset($args['booking_policy_cancel'])) ? $args['booking_policy_cancel'] : '';
     $wrapper->field_confirmation_number = (isset($args['booking_confirmation_number'])) ? $args['booking_confirmation_number'] : '';
     $wrapper->field_user_ip = (isset($args['user_ip'])) ? $args['user_ip'] : '';
+    $wrapper->field_user_agent = (isset($args['user_agent'])) ? $args['user_agent'] : '';
 
     //Done!
     $wrapper->save();

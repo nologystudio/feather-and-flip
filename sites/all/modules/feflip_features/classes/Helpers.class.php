@@ -289,4 +289,84 @@ class Helpers
         else
             return false;
     }
+
+
+    public static function get_device_type()
+    {
+
+        if (self::request_is_mobile()) {
+            $user_agent = strtolower(self::get_http_header('User-Agent'));
+
+            if (preg_match("/(Android)/i", $user_agent)) {
+                if (!preg_match("/(mobile)/i", $user_agent))
+                    return 'tablet';
+            }
+
+            /* if (preg_match("/(iPhone|Android)/i", $user_agent)) { */
+            if (preg_match("/ipad/i", $user_agent)) {
+                /*  if (preg_match("/(ipad)/i", $user_agent)) {*/
+                return 'ipad';
+            }
+            if (preg_match("/(iPhone)/i", $user_agent)) {
+                /*  if (preg_match("/(ipad)/i", $user_agent)) {*/
+                return 'ios';
+            }
+            return 'mobile';
+        }
+        return 'desktop';
+    }
+
+
+    public static function request_is_mobile()
+    {
+        if (self::get_http_header('X-Wap-Profile')!='' || self::get_http_header('Profile')!='') {
+            return true;
+        }
+        if (stripos(self::get_http_header('Accept'), 'wap') !== false) {
+            return true;
+        }
+        $user_agent = strtolower(self::get_http_header('User-Agent'));
+
+        $ua_prefixes = array(
+            'w3c ', 'w3c-', 'acs-', 'alav', 'alca', 'amoi', 'audi', 'avan', 'benq',
+            'bird', 'blac', 'blaz', 'brew', 'cell', 'cldc', 'cmd-', 'dang', 'doco',
+            'eric', 'hipt', 'htc_', 'inno', 'ipaq', 'ipod', 'jigs', 'kddi', 'keji',
+            'leno', 'lg-c', 'lg-d', 'lg-g', 'lge-', 'lg/u', 'maui', 'maxo', 'midp',
+            'mits', 'mmef', 'mobi', 'mot-', 'moto', 'mwbp', 'nec-', 'newt', 'noki',
+            'palm', 'pana', 'pant', 'phil', 'play', 'port', 'prox', 'qwap', 'sage',
+            'sams', 'sany', 'sch-', 'sec-', 'send', 'seri', 'sgh-', 'shar', 'sie-',
+            'siem', 'smal', 'smar', 'sony', 'sph-', 'symb', 't-mo', 'teli', 'tim-',
+            'tosh', 'tsm-', 'upg1', 'upsi', 'vk-v', 'voda', 'wap-', 'wapa', 'wapi',
+            'wapp', 'wapr', 'webc', 'winw', 'winw', 'xda ', 'xda-', 'ipad'
+        );
+        if (in_array(substr($user_agent, 0, 4), $ua_prefixes)) {
+            return true;
+        }
+        $ua_keywords = array(
+            'android', 'blackberry', 'hiptop', 'ipod', 'lge vx', 'midp',
+            'maemo', 'mmp', 'netfront', 'nintendo DS', 'novarra', 'openweb',
+            'opera mobi', 'opera mini', 'palm', 'psp', 'phone', 'smartphone',
+            'symbian', 'up.browser', 'up.link', 'wap', 'windows ce', 'ipad'
+        );
+        if (preg_match("/(" . implode("|", $ua_keywords) . ")/i", $user_agent)) {
+            return true;
+        }
+        return false;
+    }
+
+
+    public static function get_http_header($name, $original_device=true, $default='')
+    {
+        if ($original_device) {
+            $original = self::get_http_header("X-Device-$name", false);
+            if ($original!=='') {
+                return $original;
+            }
+        }
+        $key = 'HTTP_' . strtoupper(str_replace('-', '_', $name));
+        if (isset($_SERVER[$key])) {
+            return $_SERVER[$key];
+        }
+        return $default;
+    }
 }
