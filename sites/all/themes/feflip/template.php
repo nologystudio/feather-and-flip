@@ -615,7 +615,7 @@ function get_footer_fixed_menu() {
   $output = '<ul>';
   $output .= '<li><span class="icon ff"></span>feather + flip</li>';
   foreach ($f_menu as $key => $menu_item) {
-      if (strpos($key, '2205') !== FALSE)
+      if ((strpos($key, '2205') !== FALSE) || (strpos($key, '2208') !== FALSE))
           $output .= '<li><a href="' . url($menu_item['link']['link_path']) . '" target="_blank">' . $menu_item['link']['link_title'] . '</a></li>';
       else
           $output .= '<li><a href="' . url($menu_item['link']['link_path']) . '">' . $menu_item['link']['link_title'] . '</a></li>';
