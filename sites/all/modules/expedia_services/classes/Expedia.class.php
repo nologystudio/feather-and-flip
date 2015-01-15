@@ -267,6 +267,34 @@ class Expedia
         return $res;
     }
 
+    public static function PaymentTypes_XML($hotelId, $supplierType, $rateType)
+    {
+        $service = wsclient_service_load('expedia__rest');
+        $service->settings['http_headers'] = array(
+            'Content-Type' => array('multipart/form-data'),
+        );
+
+        $xml=
+            "<HotelPaymentRequest>
+                <hotelId>$hotelId</hotelId>
+                <supplierType>$supplierType</supplierType>
+                <rateType>$rateType</rateType>
+             </HotelPaymentRequest>";
+
+        $res = null;
+
+        try
+        {
+            $res = $service->expedia__rest_payment_types_xml($xml);
+        }
+        catch (Exception $e)
+        {
+            return $e->getMessage();
+        }
+
+        return $res;
+    }
+
     /*
     *	Get room availability for list hotels
     *	@param hotelId, checkin, checkout, roomConfig

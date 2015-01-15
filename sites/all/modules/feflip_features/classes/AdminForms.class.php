@@ -411,6 +411,16 @@ class AdminForms
     }
 
     /**
+     * Return hotel patment types
+     * @param $values
+     * @return null|string
+     */
+    static function getPaymentTypes($values)
+    {
+        return Expedia::PaymentTypes_XML($values['hotelId'], $values['supplierType'], $values['rateType']);
+    }
+
+    /**
      * Returns all destinations of drupal data base
      * @return array
      */

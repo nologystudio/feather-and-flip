@@ -149,6 +149,10 @@
                 $obj = array('result'=>$res, 'error'=>$error);
                 echo json_encode($obj);
                 break;
+            case 'paymentTypes':
+                $res = AdminForms::getPaymentTypes($input_values);
+                echo json_encode($res);
+                break;
 			case 'newsletterForm':
 			    // Connect with mailchimp library
 			    if (AdminForms::subscribeToNewsLetter($input_values, $error))
