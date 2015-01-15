@@ -569,6 +569,7 @@ class AdminForms
             $efq = new EntityFieldQuery();
             $result = $efq->entityCondition('entity_type', 'node')
                 ->entityCondition('bundle', array('destination', 'hotel'), 'IN')
+                ->propertyCondition('status', 1)
                 ->propertyCondition('title', $key, 'CONTAINS')
                 ->propertyOrderBy('title', 'ASC')
                 ->execute();
