@@ -287,7 +287,7 @@ function feflip_preprocess_views_view(&$variables) {
             $nightlyRates = array();
             $numNights = 0;
 
-            if (isset($entity->field_nights['und'][0]['value']))
+            if (isset($entity->field_nights['und'][0]['value']) && isset($entity->field_service['und'][0]['value']) && $entity->field_service['und'][0]['value'] == 'expedia' )
             {
                 $rates = explode("|", $entity->field_nights['und'][0]['value']);
                 if (isset($rates) && is_array($rates) && count($rates) > 0)
@@ -299,6 +299,10 @@ function feflip_preprocess_views_view(&$variables) {
                 {
                     $numNights = $entity->field_nights['und'][0]['value'];
                 }
+            }
+            else
+            {
+                $numNights = $entity->field_nights['und'][0]['value'];
             }
 
 

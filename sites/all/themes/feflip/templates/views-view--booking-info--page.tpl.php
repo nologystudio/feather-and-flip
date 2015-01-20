@@ -4,8 +4,12 @@
     <div id="booking-reference">
         <header>
             <div class="feather-logo"></div>
-            <h3>Thank you for booking with Feather+Flip. We only recommend hotels we know and love, and we hope you feel the same way. Read on for your confirmation number, hotel cancellation policy and contact details.</h3>
-		</header>
+            <?php if($booking['service'] == 'expedia') {?>
+            <h3>Thank you for booking with Feather+Flip and the Expedia Affiliate Network. We only recommend hotels we know and love, and we hope you feel the same way. Read on for your confirmation number, hotel cancellation policy and contact details.</h3>
+		    <?php } else { ?>
+                <h3>Thank you for booking with Feather+Flip and Tzell Travel Group. We only recommend hotels we know and love, and we hope you feel the same way. Read on for your confirmation number, hotel cancellation policy and contact details.</h3>
+            <?php } ?>
+        </header>
 		<?php if (!empty($booking['cancellationNumber'])) { ?>
 	        <div id="booking-id" class="module">
 		        <header>

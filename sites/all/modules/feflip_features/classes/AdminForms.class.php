@@ -311,6 +311,8 @@ class AdminForms
             $result = $sabreService->HotelBookReservation($sessionInfo,$values['roomCode'], $values['numUnit'], $values['firstName'], $values['lastName'], $values['email'], $values['phone'],
                 $values['guaranteeType'], $values['creditCardCode'], $values['creditCardExpireDate'], $values['creditCardNumber']);
 
+            //watchdog('HotelBookingReservation', 'AdmiForm.class ===> '. '<pre>' . print_r( $result, true) . '</pre>');
+
             if (isset($_SESSION['sabreSession'])) {
                 try {
                     $sabreService->CloseSession($_SESSION['sabreSession']);
@@ -331,20 +333,20 @@ class AdminForms
                     'booking_hotelContact'=>'',
                     'booking_ckeckIn'=>$values['checkIn'],
                     'booking_checkOut'=>$values['checkOut'],
-                    'booking_rate'=>$result->Hotel->RoomRates->RoomRate->Rates->Rate->Amount . ' ' . $result->Hotel->RoomRates->RoomRate->Rates->Rate->CurrencyCode,
+                    'booking_rate'=>$values['chargeableRate'] . ' ' . $result->Hotel->RoomRates->RoomRate->Rates->Rate->CurrencyCode,
                     'booking_roomType' => '',
                     'booking_nights' => $result->Hotel->TimeSpan->Duration,
                     'booking_rooms' => $result->Hotel->NumberOfUnits,
                     'booking_adults' => $numAdults,
                     'booking_children' => $numChildren,
                     'booking_service' => $service,
-                    'user_address1' => '',//$values['address'],
-                    'user_citycode'=> '',//$values['cityCode'],
-                    'user_stateProvinceCode'=> '',//$values['provinceCode'],
-                    'user_countryCode'=> '',//$values['countryCode'],
-                    'user_postalCode'=> '',//$values['postalCode'],
-                    'booking_tax_rate' => '',//$values['taxRate'].' ' . $result->Hotel->RoomRates->RoomRate->Rates->Rate->CurrencyCode,
-                    'booking_policy_cancel' =>  ''//$values['cancellationPolicy']
+                    'user_address1' => $values['address'],
+                    'user_citycode'=> $values['cityCode'],
+                    'user_stateProvinceCode'=> $values['provinceCode'],
+                    'user_countryCode'=> $values['countryCode'],
+                    'user_postalCode'=> $values['postalCode'],
+                    'booking_tax_rate' => $values['taxRate'].' ' . $result->Hotel->RoomRates->RoomRate->Rates->Rate->CurrencyCode,
+                    'booking_policy_cancel' =>  isset($values['cancellationPolicy']) ? $values['cancellationPolicy'] : ''
                 );
             }
 
