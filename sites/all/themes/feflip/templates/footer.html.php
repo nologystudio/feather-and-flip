@@ -53,9 +53,9 @@
 		
 		<!-- | i | Overlay engine ------------------------------------------------------------ -->
 		
-		<?php if (!user_is_logged_in()){?>
+		<?php //if (!user_is_logged_in()){?>
         <div class="call-to-action" ng-controller="MessengerCtrl" ng-include="messenger" ng-show="display"></div>
-		<?php } ?>
+		<?php //} ?>
 		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 		
 		
