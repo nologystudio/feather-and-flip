@@ -138,7 +138,7 @@ Thank you for creating your account with Feather+Flip,  we're so excited to have
           <td style="text-transform: uppercase; font-weight: bold; ">&bull; Exclusive rates and perks at F+F-favorite hotels</td>
         </tr>
         <tr>
-          <td style="text-transform: uppercase; font-weight: bold;">&bull; One-on-one travel planning with our experts</td>
+          <td style="text-transform: uppercase; font-weight: bold;">&bull; Tailored travel advice from our editors</td>
         </tr>
         <tr>
           <td style="text-transform: uppercase; font-weight: bold;">&bull; Insider travel content and destination itineraries</td>
