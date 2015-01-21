@@ -225,6 +225,7 @@ class Helpers
         $forms = $query->entityCondition('entity_type', 'entityform')
             ->entityCondition('type', 'booking')
             ->propertyCondition('uid', $user->uid)
+            ->propertyCondition('draft', 0)
             ->execute();
 
         $submisions = array();
