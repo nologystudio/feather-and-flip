@@ -1,0 +1,6 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTP_HOST} ^featherandflip.com$ [OR]
+  RewriteCond %{HTTP_HOST} ^www.featherandflip.com$
+  RewriteRule (.*)$ http://blog.featherandflip.com/$1 [R=301,L]
+</IfModule>
