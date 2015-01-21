@@ -127,7 +127,7 @@
             </tr>
             <tr style="height:20px;"></tr>
             <tr style="border-bottom: dotted 1px #333333;">
-              <td style="text-transform: uppercase; font-size: 14px; color: #333333; line-height: 22px; padding-bottom: 20px;">Thank you for booking with Feather+Flip. We only recommend hotels we know and love, and we hope you feel the same way. Read on for your confirmation number, hotel cancellation policy and contact details.</td>
+              <td style="text-transform: uppercase; font-size: 14px; color: #333333; line-height: 22px; padding-bottom: 20px;">Thank you for booking with Feather+Flip and the Expedia Affiliate Network. We only recommend hotels we know and love, and we hope you feel the same way. Read on for your confirmation number, hotel cancellation policy and contact details.</td>
             </tr>
             <tr style="height:30px;"></tr>
             <tr>
@@ -363,7 +363,7 @@
             </tr>
             <tr style="height:20px;"></tr>
             <tr style="border-bottom: dotted 1px #333333;">
-              <td style="text-transform: uppercase; font-size: 14px; color: #333333; line-height: 22px; padding-bottom: 20px;">Thank you for booking with Feather+Flip. We only recommend hotels we know and love, and we hope you feel the same way. Read on for your confirmation number, hotel cancellation policy and contact details.</td>
+              <td style="text-transform: uppercase; font-size: 14px; color: #333333; line-height: 22px; padding-bottom: 20px;">Thank you for booking with Feather+Flip and Tzell Travel Group. We only recommend hotels we know and love, and we hope you feel the same way. Read on for your confirmation number, hotel cancellation policy and contact details.</td>
             </tr>
             <tr style="height:30px;"></tr>
             <tr>
