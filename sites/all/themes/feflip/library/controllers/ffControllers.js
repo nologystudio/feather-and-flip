@@ -25,8 +25,7 @@
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
         
         var globalPartialPath = (window.location.host == 'localhost:8888') ? '/feather-and-flip/library/partials/' : '/sites/all/themes/feflip/library/partials/';
-		// var formSubmit        = 'http://54.164.51.183/sites/all/themes/feflip/forms_controller/admin_forms_submit.php';
-        var formSubmit        = 'https://www.featherandflip.com/sites/all/themes/feflip/forms_controller/admin_forms_submit.php';
+		var formSubmit        = window.location.protocol + '//' + window.location.host + '/api/forms';
         
         /* ~ Controllers ~ */
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
@@ -1181,9 +1180,13 @@
 			$scope.getWeatherData = function(){
 				if(gFrame.size() > 0){
 		            $http({
-		                method : 'GET',
-		                url    : 'http://api.openweathermap.org/data/2.5/group',
-		                params : {id:'5412230,4164138,5134295,4568127,4004293,3521342,2986160,5779451,4140963'}
+		                method  : 'GET',
+		                url     : 'http://api.openweathermap.org/data/2.5/group',
+		                params  : {id:'5412230,4164138,5134295,4568127,4004293,3521342,2986160,5779451,4140963'},
+		                headers : { 
+		            		'Content-Type' : 'application/x-www-form-urlencoded'
+						},
+						transformRequest: angular.identity
 		            }).
 		            success(function(_data){
 			            //console.log(_data);
@@ -1437,6 +1440,7 @@
 				$scope.signInError   = '';
 				$scope.signUpError   = '';
 				$scope.passwordError = '';
+				$scope.rMessage 	 = '';
 			}
 			
 			// | i | Close overlay...
@@ -1500,11 +1504,11 @@
 				}
 			}
 			
-			$scope.resetPassword = function(){
+			/*$scope.resetPassword = function(){
 				
 				var _p = $('#password-form input[type="password"]');
 				
-				if($scope.data.userRepassword == $scope.data.userPassword && $scope.data.userPassword != ''){
+				/*if($scope.data.userRepassword == $scope.data.userPassword && $scope.data.userPassword != ''){
 					_p.removeClass();
 					$http({
 		                method  : 'POST',
@@ -1519,12 +1523,12 @@
 			            switch(_data.error){
 				            case '':
 				            	$('#password-form').transition({opacity:0},function(){
-					            	$scope.rMessage = 'The email has been sent to reset the password';
+					            	$scope.rMessage = 'reset-password-success';
 					            	$scope.$apply();
 				            	});
 				            break;
 				            default:
-				            	$scope.error = 'Something went wrong, please try again later';
+				            	$scope.passwordError = 'Something went wrong, please try again later';
 				            break;
 			            }
 		            }).
@@ -1532,7 +1536,7 @@
 			            //console.log(_data);
 		            });
 				}else _p.addClass('warning');
-			}
+			}*/
 			
 			$scope.changePassword = function(){
 				
@@ -1543,7 +1547,7 @@
 					$http({
 		                method  : 'POST',
 		                url     : formSubmit,
-		                data    : $.param({formID:'updatePassw','newPass':$scope.userPassword}),
+		                data    : $.param({formID:'updatePassw','newPassw':$scope.data.userPassword}),
 		                headers : { 
 		            		'Content-Type' : 'application/x-www-form-urlencoded'
 						},
@@ -1555,7 +1559,7 @@
 				            	$scope.closeOverlay();
 				            break;
 				            default:
-				            	$scope.error = 'Something went wrong, please try again later';
+				            	$scope.passwordError = 'Something went wrong, please try again later';
 				            break;
 			            }
 		            }).
@@ -1566,43 +1570,32 @@
 			} 
 			
 			$scope.sendPasswordEmail = function(){
-				
-				var _t = $('#password-form input[type="email"]');
-				
-				switch($scope.data.userEmail){
-					case '': case undefined:
-						_t.addClass('warning');
-					break;
-					default:
-						//console.log('entrada');
-						$http({
-			                method  : 'POST',
-			                url     : formSubmit,
-			                data    : $.param({formID:'resetPassw','userEmail':$scope.data.userEmail}),
-			                headers : { 
-			            		'Content-Type' : 'application/x-www-form-urlencoded'
-							},
-							transformRequest: angular.identity
-			            }).
-			            success(function(_data){
-				            //console.log(_data);
-				            switch(_data.error){
-					            case '':
-					            	$('#password-form').transition({opacity:0},function(){
-						            	$scope.rMessage = 'The message has been sent, please check your email';
-						            	$scope.$apply();
-					            	});
-					            break;
-					            default:
-					            	$scope.error = 'The email does not exist';
-					            break;
-				            }
-			            }).
-			            error(function(_data){
-				            //console.log(_data);
-			            });
-					break;
-				}
+				$http({
+	                method  : 'POST',
+	                url     : formSubmit,
+	                data    : $.param({formID:'resetPassw','userEmail':$scope.data.userEmail}),
+	                headers : { 
+	            		'Content-Type' : 'application/x-www-form-urlencoded'
+					},
+					transformRequest: angular.identity
+	            }).
+	            success(function(_data){
+		            //console.log(_data);
+		            switch(_data.error){
+			            case '':
+			            	$('#password-form').transition({opacity:0},function(){
+				            	$scope.rMessage = 'reset-password-success'; 
+				            	$scope.$apply();
+			            	});
+			            break;
+			            default:
+			            	$scope.passwordError = 'The email does not exist';
+			            break;
+		            }
+	            }).
+	            error(function(_data){
+		            //console.log(_data);
+	            });
 			}
 			
 			// | i | Triggers for password recovery...
