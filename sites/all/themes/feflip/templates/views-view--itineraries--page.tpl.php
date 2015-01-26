@@ -64,10 +64,15 @@
        <footer>
 				<h3 class="middle-line">Share this</h3>
 				<nav id="social-media">
-					<a href="#" rel="twitter"></a>
-					<a href="#" rel="facebook"></a>
-					<a href="#" rel="pinterest"></a>
-					<a href="#" rel="google-plus"></a>
+                    <?php
+                    $arg = arg();
+                    $desc = strip_tags($itinerary['routes'][0]['description']);
+                    $desc = str_replace('&nbsp;', ' ', $desc);
+                    ?>
+                    <a target="_blank" href="<?php echo getSocialLink('twitter', url('node/'.$arg[1].'/itinerary', array('absolute' => TRUE))); ?>" rel="twitter"></a>
+                    <a target="_blank" href="<?php echo getSocialLink('facebook', url('node/'.$arg[1].'/itinerary', array('absolute' => TRUE))); ?>" rel="facebook"></a>
+                    <a target="_blank" href="<?php echo getSocialLink('pinterest', url('node/'.$arg[1].'/itinerary', array('absolute' => TRUE)), $slideImages[0]['url'], text_summary($desc).' ...'); ?>" rel="pinterest"></a>
+                    <a target="_blank" href="<?php echo getSocialLink('google+', url('node/'.$arg[1].'/itinerary', array('absolute' => TRUE))); ?>" rel="google-plus"></a>
 				</nav>
 				<button rel="see-hotel-reviews">Go to Hotel Reviews</button>
 			</footer>
