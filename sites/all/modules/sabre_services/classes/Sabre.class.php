@@ -298,18 +298,18 @@ class Sabre
                 $args['AvailRequestSegment']['HotelSearchCriteria']['Criterion']['HotelRef'][]['HotelCode'] = $hotelCode;
             }
 
-            /*
+
             if (isset($rateCodes) && count($rateCodes) > 0) {
                 foreach ($rateCodes as $rate)
                     $args['AvailRequestSegment']['RatePlanCandidates']['ContractNegotiatedRateCode'][] = $rate;
-            }*/
+            }
 
             $args['AvailRequestSegment']['TimeSpan']['End'] = $end;
             $args['AvailRequestSegment']['TimeSpan']['Start'] = $start;
             $args['Version'] = '2.1.0';
 
             //Hacemos un cambio de contexto a X840 para poder usar los rate codes
-            //$this->ChangeContext($sessionInfo);
+            $this->ChangeContext($sessionInfo);
 
             $response = $service->OTA_HotelAvailRQ($args);
 
@@ -374,18 +374,18 @@ class Sabre
             //$args['AvailRequestSegment']['RateRange']['CurrencyCode'] = 'USD';
             $args['AvailRequestSegment']['HotelSearchCriteria']['Criterion']['HotelRef']['HotelCode'] = $hotelCode;
 
-            /*
+
             if (isset($rateCodes) && count($rateCodes) > 0) {
                 foreach ($rateCodes as $rate)
                     $args['AvailRequestSegment']['RatePlanCandidates']['ContractNegotiatedRateCode'][] = $rate;
-            }*/
+            }
 
             $args['AvailRequestSegment']['TimeSpan']['End'] = $end;
             $args['AvailRequestSegment']['TimeSpan']['Start'] = $start;
             $args['Version'] = '2.1.0';
 
             //Hacemos un cambio de contexto a X840 para poder usar los rate codes
-            //$this->ChangeContext($sessionInfo);
+            $this->ChangeContext($sessionInfo);
 
             $response = $service->HotelPropertyDescriptionRQ($args);
             
