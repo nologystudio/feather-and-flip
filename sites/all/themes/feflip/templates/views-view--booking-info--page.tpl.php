@@ -140,7 +140,9 @@
 		        <li><span>Billing Address:</span><?php echo $booking['address'] .', ' . $booking['cityCode']. ', ' . $booking['postalCode']?></li>
 		        <li><span>Itinerary Number:</span><?php echo $booking['id'];?></li>
 	        </ul>
-	        <small>The above charges to your credit card were made by Travelscape, LLC. View our full <a href="http://travel.ian.com/index.jsp?pageName=userAgreement&locale=en_US&cid=456134" target="_blank">EAN Terms and Conditions.</a></small>
+	        <?php if($booking['service'] == 'expedia') {?>
+	        	<small>The above charges to your credit card were made by Travelscape, LLC. View our full <a href="http://travel.ian.com/index.jsp?pageName=userAgreement&locale=en_US&cid=456134" target="_blank">EAN Terms and Conditions.</a></small>
+	        <?php } ?>
         </div>
         <div id="cancellation" class="module">
 	        <header>Cancellation Policy</header>

@@ -153,6 +153,9 @@
                   <tr>
                     <td style="color:#333333; font-size:12px; line-height: 18px; padding-top: 15px">Please refer to your Itinerary Number if you contact customer service for any reason.</td>
                   </tr>
+                  <tr>
+                    <td style="color:#333333; font-size:12px; line-height: 18px; padding-top: 15px"><a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/booking-info/<?php echo $wrapper->field_booking_id->value(); ?>" style="color:#7b8c88; text-decoration: none;">View your booking in your Feather+Flip account</a></td>
+                  </tr>
                 </table>
               </td>
             </tr>
@@ -344,7 +347,7 @@
                   </tr>
                   <tr>
                     <td style="padding-top: 15px;"><img src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/sites/all/themes/feflip/media/services/expedia-service-email.png"/></td>
-                    <td style="padding-top: 15px; padding-left: 15px;"><a href="#" style="color:#7b8c88; text-decoration: none;">Change or cancel your reservation with Expedia/TravelNow</a></td>
+                    <td style="padding-top: 15px; padding-left: 15px;"><a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/booking-info/<?php echo $wrapper->field_booking_id->value(); ?>" style="color:#7b8c88; text-decoration: none;">Change or cancel your reservation with Expedia/TravelNow</a></td>
                   </tr>
                 </table>
               </td>
@@ -579,7 +582,7 @@
                     <td colspan="2" style="color:#333333; font-size:18px; font-weight:bold; line-height: 22px; text-transform: uppercase; border-bottom: dotted 1px #333333; padding-bottom: 15px">Customer support contact information</td>
                   </tr>
                   <tr>
-                    <td style="padding-top: 15px; "><a href="#" style="color:#7b8c88; text-decoration: none;">Contact us</a></td>
+                    <td style="padding-top: 15px; ">To change or cancel your booking, or if you’d like additional travel services, call Tzell Travel Group at 800-482-8785. Beyond the business hours of Monday through Friday, 9 am - 6 pm EST, call 800-482-8785 and use code M79H. Fees will apply.</td>
                   </tr>
                 </table>
               </td>
