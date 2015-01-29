@@ -141,11 +141,10 @@ class AdminForms
             $numAdults += $room['adults'];
 
 
-        $rateCodes = Hotel::GetHotelRateCodesBydestination($values['destination']);
-        //$rateCodes = array();
+        //$rateCodes = Hotel::GetHotelRateCodesBydestination($values['destination']);
 
         return array(
-            'sabre' => $sabreService->ListHotelAvail($values['sabreCodes'],$rateCodes, $numAdults, $sabreChecking, $sabreCheckout),
+            /*'sabre' => $sabreService->ListHotelAvail($values['sabreCodes'],$rateCodes, $numAdults, $sabreChecking, $sabreCheckout),*/
             'expedia' => Expedia::GetHotelsByCode_XML($values['eanCodes'], $values['checkIn'], $values['checkOut'], $values['rooms']['info'])
         );
     }
@@ -258,6 +257,7 @@ class AdminForms
 
         if (isset($service) && isset($hotelId))
         {
+            /*
             if ($service == 'sabre')
             {
                 $sabreService = new Sabre;
@@ -278,7 +278,8 @@ class AdminForms
                 return $sabreService->HotelDescription($sessionInfo, $hotelId, $rateCodes, $numAdults, $sabreChecking, $sabreCheckout);
             }
 
-            else
+            else*/
+            if ($service == 'expedia')
                 return Expedia::RoomAvailability_XML($hotelId, $values['checkIn'], $values['checkOut'], $values['rooms']['info']);
         }
 
@@ -304,7 +305,7 @@ class AdminForms
             $userAgent .= '; MOBILE_SITE';
 
         $args = array();
-        if (isset($service) && $service == 'sabre')
+        /*if (isset($service) && $service == 'sabre')
         {
             $sessionInfo = $_SESSION['sabreSession'];
 
@@ -352,7 +353,8 @@ class AdminForms
 
             return array('result' => $result, 'args' => $args);
         }
-        else if (isset($service) && $service == 'expedia')
+        else if (isset($service) && $service == 'expedia')*/
+        if (isset($service) && $service == 'expedia')
         {
             $date = explode("-", $values['creditCardExpireDate']);
             $creditCardExpirationMonth = $date[1];
