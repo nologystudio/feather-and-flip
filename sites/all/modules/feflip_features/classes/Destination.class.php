@@ -114,4 +114,22 @@ class Destination
         $allowed_values = list_allowed_values($field);
         return $allowed_values;
     }
+
+    /**
+    *
+    *   Check if destination has an itinerary related
+    *   @param id_destination
+    *   @return boolean
+    */
+    public static function HasItinerary($id_destination)
+    {
+        $efq = new EntityFieldQuery();
+        $result = $efq->entityCondition('entity_type', 'node')
+            ->entityCondition('bundle', 'itinerary')
+            ->propertyCondition('status', 1)
+            ->fieldCondition('field_destination','target_id', $id_destination, '=')
+            ->count()
+            ->execute();
+        return $result > 0;
+    }
 }
