@@ -124,6 +124,7 @@ DirectoryIndex index.php index.html index.htm
   <IfModule mod_headers.c>
 
     Header set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+    Header unset Link
 
     # Serve gzip compressed CSS files if they exist and the client accepts gzip.
     RewriteCond %{HTTP:Accept-encoding} gzip
