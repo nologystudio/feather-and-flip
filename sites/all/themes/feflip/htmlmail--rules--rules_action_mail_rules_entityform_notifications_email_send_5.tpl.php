@@ -109,6 +109,8 @@
 
 <?php if ($params['subject'] == 'F+F New reservation'): // Admin notification ?>
   <?php print_r($params['message']); ?>
+<?php elseif ($params['subject'] == 'F+F Contact'): // Admin contact notification ?>
+  <?php print_r($params['message']); ?>
 <?php else: // Booking notification to customer ?>
   <?php
     $entity = entity_load('entityform', array($params['message']));
