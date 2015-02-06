@@ -292,7 +292,7 @@ class Hotel
             foreach($hotelsNode as $hotel)
             {
                 $wrapper = entity_metadata_wrapper('node', $hotel);
-                //$codes['sabre'][] = $wrapper->field_hotelcode->value();
+                $codes['sabre'][] = $wrapper->field_hotelcode->value();
                 $codes['expedia'][] = $wrapper->field_ean_hotelcode->value();
             }
         }
@@ -400,15 +400,14 @@ class Hotel
     */
 
     // Get the low rates from a server response between sabre & expedia ids
-    public static function GetResponseRates($ratesData/*, $sabreId*/, $expediaId)
+    public static function GetResponseRates($ratesData, $sabreId, $expediaId)
     {
       $exRate = $saRate = array('rate' => 0.0, 'currency' => '');
       if (isset($ratesData['expedia']) && isset($ratesData['expedia']['HotelListResponse']))
         $exRate = Expedia::GetLowRateFromResponse($ratesData['expedia']['HotelListResponse'], $expediaId);
-      /*
       if (isset($ratesData['sabre']) && isset($ratesData['sabre']->AvailabilityOptions) && isset($ratesData['sabre']->AvailabilityOptions->AvailabilityOption))
-        $saRate = Sabre::GetLowRateFromResponse($ratesData['sabre']->AvailabilityOptions->AvailabilityOption, $sabreId);*/
-      return array(/*'sabre' => $saRate,*/ 'expedia' => $exRate);
+        $saRate = Sabre::GetLowRateFromResponse($ratesData['sabre']->AvailabilityOptions->AvailabilityOption, $sabreId);
+      return array('sabre' => $saRate, 'expedia' => $exRate);
     }
 
 }
