@@ -1,4 +1,6 @@
+        <?php $localIsSticky = isset($isSticky) ? $isSticky : false; ?>
         <!-- Header gallery -->
+        <?php if(!$localIsSticky){ ?>
         <div id="main-header-gallery" class="one-item main" ng-controller="SlideshowCtrl">
                <ul>
                     <?php foreach($slideImages as $image){ ?>
@@ -39,14 +41,14 @@
                 <button rel="right"></button>
             <?php } ?>
         </div>
-                
+        <?php } ?>
         <?php 
         
         /* ------------------------------------------------------------------------------------------------------------- */
         /* | i | Nav starts here... */ 
         /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */ ?>
         
-        <nav role="main-navigation" ng-controller="NavCtrl"<?php echo (Helpers::IsStickySection() ? ' class="sticky"' : ''); ?>>
+        <nav role="main-navigation" ng-controller="NavCtrl"<?php echo (Helpers::IsStickySection() || $localIsSticky ? ' class="sticky"' : ''); ?>>
                 <div class="wrapper">
 						<a id="brand" href="/"></a>
                         <?php $form = drupal_get_form('feflip_features_search_form'); ?>

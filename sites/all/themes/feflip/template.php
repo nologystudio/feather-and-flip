@@ -134,6 +134,7 @@ function feflip_preprocess_node(&$variables) {
       $variables['slideImages'] = $images;
       $variables['destination'] = $variables['node']->field_destination['und'][0]['entity']->nid;
       $variables['internalId'] = $variables['node']->nid;
+      $variables['isSticky'] = true;
   }
   elseif (isset($variables['node']) && ($variables['node']->type == 'post')) {
     $variables['theme_hook_suggestions'][] = 'node__post';
