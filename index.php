@@ -22,7 +22,8 @@ drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
 /*
 *	Redirect if mobile
 */
-if (Helpers::get_device_type() != 'desktop'){
+if ((Helpers::get_device_type() != 'desktop') && !isset($_COOKIE['m_site'])) {
+	setcookie('m_site', 1, time() + (86400 * 30), "/");
 	header('Location: http://m.featherandflip.com');
 	exit();
 }
