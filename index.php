@@ -18,4 +18,13 @@ define('DRUPAL_ROOT', getcwd());
 
 require_once DRUPAL_ROOT . '/includes/bootstrap.inc';
 drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
+
+/*
+*	Redirect if mobile
+*/
+if (Helpers::get_device_type() != 'desktop'){
+	header('Location: http://m.featherandflip.com');
+	exit();
+}
+
 menu_execute_active_handler();
