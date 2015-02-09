@@ -75,12 +75,6 @@
             <title><?php echo $headerTitle; ?></title>
             <link rel="shortcut icon" href="/sites/all/themes/feflip/media/brand/favicon.ico" type="image/x-icon">
             <link rel="icon"          href="/sites/all/themes/feflip/media/brand/favicon.ico" type="image/x-icon">
-                
-            <link rel="image_src"    href="<?php echo variable_get('relativePath').'media/sharing/'.$siteImage.'.jpg'; ?>">
-               
-            <link rel="canonical" href="">		    
-            <link rel="alternate" hreflang="x-default" href="">
-            <link rel="alternate" hreflang="en-US" href="" title="English (US)">
             
             <?php // | i | Set-up scripts and Less files...  ?>
             
