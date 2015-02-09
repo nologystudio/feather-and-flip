@@ -317,7 +317,7 @@ body > header nav[id="social-media"] > a {
   -o-transition: opacity 0.2s ease-in-out;
   transition: opacity 0.2s ease-in-out;
   font-family: 'i-set';
-  color: #ffffff;
+  color: white;
   font-size: 30px;
   line-height: 30px;
   -webkit-font-smoothing: antialiased;
@@ -351,7 +351,7 @@ body > header nav[id="social-media"] > a:hover {
 body > header h6 {
   font-family: 'Times', serif;
   font-style: italic;
-  color: #ffffff;
+  color: white;
   font-size: 16px;
   line-height: 'auto';
   position: absolute;
@@ -485,12 +485,12 @@ body > header + div[id$="-gallery"] > ul > li article > div.info-wrapper div h6 
   height: auto;
   font-family: 'Lato', sans-serif;
   font-weight: 700;
-  color: #ffffff;
+  color: white;
   font-size: 48px;
   line-height: 'auto';
   text-align: center;
   text-transform: uppercase;
-  text-shadow: 1px 1px 0px #000000;
+  text-shadow: 1px 1px 0px black;
 }
 body > header + div[id$="-gallery"] > ul > li article > div.info-wrapper a span,
 body > header + div[id$="-gallery"] > ul > li article > div.info-wrapper div span {
@@ -505,7 +505,7 @@ body > header + div[id$="-gallery"] > ul > li article > div.info-wrapper div spa
   height: auto;
   font-family: 'Lato', sans-serif;
   font-weight: 300;
-  color: #ffffff;
+  color: white;
   font-size: 20px;
   line-height: 'auto';
   background-color: #9cb1ad;
@@ -524,12 +524,12 @@ body > header + div[id$="-gallery"] > ul > li article > div.info-wrapper div spa
   height: auto;
   font-family: 'Times', serif;
   font-style: italic;
-  color: #ffffff;
+  color: white;
   font-size: 18px;
   line-height: 'auto';
   text-align: center;
   margin: 5px 0 30px 0;
-  text-shadow: 1px 1px 0px #000000;
+  text-shadow: 1px 1px 0px black;
 }
 body > header + div[id$="-gallery"] > ul > li article > div.info-wrapper a:hover,
 body > header + div[id$="-gallery"] > ul > li article > div.info-wrapper div:hover {
@@ -850,7 +850,7 @@ body > nav[role="main-navigation"] div.wrapper > form[id="search"] ul li {
 body > nav[role="main-navigation"] div.wrapper > form[id="search"] ul li.title {
   font-family: 'Lato', sans-serif;
   font-weight: 300;
-  color: #ffffff;
+  color: white;
   font-size: 12px;
   line-height: 'auto';
   border-bottom: solid 1px rgba(217, 223, 222, 0.5);
@@ -924,7 +924,7 @@ body > nav[role="main-navigation"] div.wrapper > ul > li > a {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
   font-family: 'Lato', sans-serif;
   font-weight: 300;
-  color: #ffffff;
+  color: white;
   font-size: 16px;
   line-height: 'auto';
   position: relative;
@@ -977,7 +977,7 @@ body > nav[role="main-navigation"] div.wrapper > ul > li > a + ul li {
   position: relative;
   float: left;
   padding: 0 30px;
-  padding-left: 60px;
+  padding-left: 45px;
 }
 body > nav[role="main-navigation"] div.wrapper > ul > li > a + ul li a {
   width: 100%;
@@ -991,15 +991,15 @@ body > nav[role="main-navigation"] div.wrapper > ul > li > a + ul li a {
   transition: all 0.5s ease-in-out;
   font-family: 'Lato', sans-serif;
   font-weight: 300;
-  color: #000000;
-  font-size: 18px;
+  color: black;
+  font-size: 14px;
   line-height: 'auto';
   position: relative;
   float: left;
   text-transform: uppercase;
   border-bottom: solid rgba(255, 255, 255, 0.25) 1px;
-  padding: 15px 0;
-  line-height: 22px;
+  padding: 10px 0;
+  line-height: 18px;
 }
 body > nav[role="main-navigation"] div.wrapper > ul > li > a + ul li a:hover {
   color: white;
@@ -1008,12 +1008,12 @@ body > nav[role="main-navigation"] div.wrapper > ul > li > a + ul li:last-child 
   border: 0;
 }
 body > nav[role="main-navigation"] div.wrapper > ul > li > a + ul[id="hotel-list"] li {
-  background: #9cb1ad url('../media/icons/nav-hotel-list-icon.png') no-repeat 20px center;
-  background-size: auto 25px;
+  background: #9cb1ad url('../media/icons/nav-hotel-list-icon.png') no-repeat 13px center;
+  background-size: auto 20px;
 }
 body > nav[role="main-navigation"] div.wrapper > ul > li > a + ul[id="itinerary-list"] li {
-  background: #9cb1ad url('../media/icons/nav-itinerary-list-icon.png') no-repeat 20px center;
-  background-size: auto 25px;
+  background: #9cb1ad url('../media/icons/nav-itinerary-list-icon.png') no-repeat 13px center;
+  background-size: auto 20px;
 }
 body > nav[role="main-navigation"] div.wrapper > ul > li > a + div[id] {
   width: 1040px;
@@ -1066,7 +1066,7 @@ body > nav[role="main-navigation"] div.wrapper > ul > li > a + div[id] > div[id=
   height: auto;
   font-family: 'Lato', sans-serif;
   font-weight: 300;
-  color: #ffffff;
+  color: white;
   font-size: 16px;
   line-height: 'auto';
   text-transform: uppercase;
@@ -1095,7 +1095,7 @@ body > nav[role="main-navigation"] div.wrapper > ul > li > a + div[id] > div[id=
 body > nav[role="main-navigation"] div.wrapper > ul > li > a + div[id] > div[id="bookings"] h5 a {
   font-family: 'Lato', sans-serif;
   font-weight: 300;
-  color: #ffffff;
+  color: white;
   font-size: 16px;
   line-height: 'auto';
   text-decoration: none;
@@ -1122,7 +1122,7 @@ body > nav[role="main-navigation"] div.wrapper > ul > li > a + div[id] > div[id=
   height: auto;
   font-family: 'Lato', sans-serif;
   font-weight: 300;
-  color: #ffffff;
+  color: white;
   font-size: 16px;
   line-height: 'auto';
   position: relative;
@@ -1176,7 +1176,7 @@ body > nav[role="main-navigation"] div.wrapper > ul > li > a + div[id] > div[id=
   transition: opacity 0.2s ease-in-out;
   font-family: 'Lato', sans-serif;
   font-weight: 300;
-  color: #ffffff;
+  color: white;
   font-size: 18px;
   line-height: 'auto';
   background-color: rgba(0, 0, 0, 0.5);
@@ -1206,7 +1206,7 @@ body > main[id],
 body > section {
   position: relative;
   float: left;
-  background-color: #ffffff;
+  background-color: white;
 }
 body > main[id] *.middle-line,
 body > section *.middle-line {
@@ -1262,7 +1262,7 @@ body > main[id] ul[role="select"] li,
 body > section ul[role="select"] li {
   font-family: 'Lato', sans-serif;
   font-weight: 300;
-  color: #ffffff;
+  color: white;
   font-size: 14px;
   line-height: 'auto';
   background-color: rgba(217, 223, 222, 0.75);
@@ -1304,7 +1304,7 @@ body > section ul[role="select"] li:first-child:after {
   height: auto;
   position: absolute;
   font-family: 'i-set';
-  color: #ffffff;
+  color: white;
   font-size: 22px;
   line-height: 'auto';
   -webkit-font-smoothing: antialiased;
@@ -1416,11 +1416,11 @@ body > section form[id="booking-search"] div.wrapper label input[name="check-out
 }
 body > main[id] form[id="booking-search"] div.wrapper label.warning span,
 body > section form[id="booking-search"] div.wrapper label.warning span {
-  color: #ffa500;
+  color: orange;
 }
 body > main[id] form[id="booking-search"] div.wrapper label.warning input,
 body > section form[id="booking-search"] div.wrapper label.warning input {
-  border-color: #ffa500;
+  border-color: orange;
 }
 body > main[id] form[id="booking-search"] div.wrapper label button,
 body > section form[id="booking-search"] div.wrapper label button {
@@ -1477,7 +1477,7 @@ body > section form[id="booking-search"] div.wrapper input[type="submit"] {
   display: block;
   font-family: 'Lato', sans-serif;
   font-weight: 300;
-  color: #ffffff;
+  color: white;
   font-size: 18px;
   line-height: 'auto';
   background-color: #9cb1ad;
@@ -1635,7 +1635,7 @@ body > main[id] > header h2.feather,
 body > section > header h2.feather,
 body > main[id] > header h3.feather,
 body > section > header h3.feather {
-  background: #ffa500 url('') no-repeat center center;
+  background: orange url('') no-repeat center center;
 }
 body > main[id] > header h1.compass,
 body > section > header h1.compass,
@@ -1643,7 +1643,7 @@ body > main[id] > header h2.compass,
 body > section > header h2.compass,
 body > main[id] > header h3.compass,
 body > section > header h3.compass {
-  background: #ffc0cb url('') no-repeat center center;
+  background: pink url('') no-repeat center center;
 }
 body > main[id] > header h1.simple,
 body > section > header h1.simple,
@@ -1704,7 +1704,7 @@ body > section[id="get-rates"] button[id="get-rates"] {
   display: block;
   font-family: 'Lato', sans-serif;
   font-weight: 300;
-  color: #ffffff;
+  color: white;
   font-size: 18px;
   line-height: 'auto';
   background-color: #9cb1ad;
@@ -1868,7 +1868,7 @@ body > section[id="start-your-journey"] > div[id] ul > li > a figure {
   -moz-transform: translate3d(0, 0, 0);
   -ms-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
-  background-color: #ffffff;
+  background-color: white;
   margin: 0 15px !important;
   overflow: hidden;
   color: #333333 !important;
@@ -2030,7 +2030,7 @@ body > main[id][id="map-it"] > header a[rel="google-maps"],
 body > section[id="map-it"] > header a[rel="google-maps"] {
   font-family: 'Lato', sans-serif;
   font-weight: 300;
-  color: #ffffff;
+  color: white;
   font-size: 12px;
   line-height: 'auto';
   background-color: transparent;
@@ -2238,7 +2238,7 @@ body > main[id][id="map-it"] > *[id="map"] a.expanded-destination-pin p,
 body > section[id="map-it"] > *[id="map"] a.expanded-destination-pin p {
   font-family: 'Times', serif;
   font-style: italic;
-  color: #ffffff;
+  color: white;
   font-size: 10px;
   line-height: 'auto';
   max-height: 40px;
@@ -2268,7 +2268,7 @@ body > section[id="map-it"] > *[id="map"] a.expanded-destination-pin small {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
   font-family: 'Times', serif;
   font-style: italic;
-  color: #ffffff;
+  color: white;
   font-size: 14px;
   line-height: 'auto';
   padding-left: 80px;
@@ -2295,7 +2295,7 @@ body > main[id][id="map-it"] > aside,
 body > section[id="map-it"] > aside {
   width: 400px;
   height: auto;
-  background: #000000 url('') no-repeat center center;
+  background: black url('') no-repeat center center;
   position: absolute;
   top: 30px;
   left: -415px;
@@ -2318,7 +2318,7 @@ body > section[id="map-it"] > aside nav div.tab {
   width: 80px;
   height: 64px;
   position: absolute;
-  background-color: #000000;
+  background-color: black;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -2829,7 +2829,7 @@ body > section[id="map-it"].short > *[id="map"] {
 }
 body > main[id][id="travel-journal"],
 body > section[id="travel-journal"] {
-  background-color: #ffffff;
+  background-color: white;
   padding-bottom: 120px;
 }
 body > main[id][id="travel-journal"] > header,
@@ -2860,7 +2860,7 @@ body > section[id="travel-journal"] > header button {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
   font-family: 'Lato', sans-serif;
   font-weight: 300;
-  color: #ffffff;
+  color: white;
   font-size: 16px;
   line-height: 'auto';
   background-color: #96a8a4;
@@ -2878,7 +2878,7 @@ body > section[id="travel-journal"] > header button span {
   height: auto;
   position: absolute;
   font-family: 'i-set';
-  color: #ffffff;
+  color: white;
   font-size: 22px;
   line-height: 'auto';
   -webkit-font-smoothing: antialiased;
@@ -2992,7 +2992,7 @@ body > main[id][id="travel-journal"] div.feed-wrapper *.quick-entry h3,
 body > section[id="travel-journal"] div.feed-wrapper *.quick-entry h3 {
   font-family: 'Lato', sans-serif;
   font-weight: 300;
-  color: #ffffff;
+  color: white;
   font-size: 24px;
   line-height: 'auto';
   text-transform: uppercase;
@@ -3002,7 +3002,7 @@ body > main[id][id="travel-journal"] div.feed-wrapper *.quick-entry h4,
 body > section[id="travel-journal"] div.feed-wrapper *.quick-entry h4 {
   font-family: 'Times', serif;
   font-style: italic;
-  color: #ffffff;
+  color: white;
   font-size: 20px;
   line-height: 'auto';
 }
@@ -3010,7 +3010,7 @@ body > main[id][id="travel-journal"] div.feed-wrapper *.quick-entry time,
 body > section[id="travel-journal"] div.feed-wrapper *.quick-entry time {
   font-family: 'Lato', sans-serif;
   font-weight: 400;
-  color: #ffffff;
+  color: white;
   font-size: 12px;
   line-height: 'auto';
   text-transform: uppercase;
@@ -3065,7 +3065,7 @@ body > main[id][id="travel-journal"] div.feed-wrapper *.quick-entry[id="newslett
 body > section[id="travel-journal"] div.feed-wrapper *.quick-entry[id="newsletter-signup"] form small {
   font-family: 'Times', serif;
   font-style: italic;
-  color: #ffffff;
+  color: white;
   font-size: 30px;
   line-height: 'auto';
   width: 100%;
@@ -3098,7 +3098,7 @@ body > section[id="travel-journal"] div.feed-wrapper *.quick-entry[id="newslette
   box-sizing: border-box;
   font-family: 'Lato', sans-serif;
   font-weight: 400;
-  color: #ffffff;
+  color: white;
   font-size: 16px;
   line-height: 'auto';
   background-color: #7b8c88;
@@ -3144,7 +3144,7 @@ body > main[id][id="travel-journal"] div.feed-wrapper *.quick-entry[id="newslett
 body > section[id="travel-journal"] div.feed-wrapper *.quick-entry[id="newsletter-signup"] form input[type="submit"] {
   font-family: 'Lato', sans-serif;
   font-weight: 300;
-  color: #ffffff;
+  color: white;
   font-size: 32px;
   line-height: 'auto';
   text-transform: uppercase;
@@ -3158,7 +3158,7 @@ body > section[id="travel-journal"] div.feed-wrapper *.quick-entry[id="newslette
 }
 body > main[id][id="travel-journal"] div.feed-wrapper *.quick-entry[id="newsletter-signup"] form input.ng-invalid.ng-dirty,
 body > section[id="travel-journal"] div.feed-wrapper *.quick-entry[id="newsletter-signup"] form input.ng-invalid.ng-dirty {
-  border-color: #ffa500;
+  border-color: orange;
 }
 body > main[id][id="itinerary"] > *[id="booking-header-engine"],
 body > section[id="itinerary"] > *[id="booking-header-engine"],
@@ -3206,7 +3206,7 @@ body > main[id][id="itinerary"] > header ul li,
 body > section[id="itinerary"] > header ul li {
   width: 173.33333333px;
   height: 170px;
-  -webkit-mask-image: -webkit-radial-gradient(circle, #ffffff, #000000);
+  -webkit-mask-image: -webkit-radial-gradient(circle, white, black);
   position: relative;
   float: left;
   overflow: hidden;
@@ -3564,12 +3564,12 @@ body > section[id="itinerary"] > div.wrapper article > div[id="itinerary-gallery
   height: auto;
   font-family: 'Lato', sans-serif;
   font-weight: 700;
-  color: #ffffff;
+  color: white;
   font-size: 48px;
   line-height: 'auto';
   text-align: center;
   text-transform: uppercase;
-  text-shadow: 1px 1px 0px #000000;
+  text-shadow: 1px 1px 0px black;
 }
 body > main[id][id="itinerary"] > div.wrapper article > div[id="itinerary-gallery"] > ul > li article > div.info-wrapper a span,
 body > section[id="itinerary"] > div.wrapper article > div[id="itinerary-gallery"] > ul > li article > div.info-wrapper a span,
@@ -3588,7 +3588,7 @@ body > section[id="itinerary"] > div.wrapper article > div[id="itinerary-gallery
   height: auto;
   font-family: 'Lato', sans-serif;
   font-weight: 300;
-  color: #ffffff;
+  color: white;
   font-size: 20px;
   line-height: 'auto';
   background-color: #9cb1ad;
@@ -3609,12 +3609,12 @@ body > section[id="itinerary"] > div.wrapper article > div[id="itinerary-gallery
   height: auto;
   font-family: 'Times', serif;
   font-style: italic;
-  color: #ffffff;
+  color: white;
   font-size: 18px;
   line-height: 'auto';
   text-align: center;
   margin: 5px 0 30px 0;
-  text-shadow: 1px 1px 0px #000000;
+  text-shadow: 1px 1px 0px black;
 }
 body > main[id][id="itinerary"] > div.wrapper article > div[id="itinerary-gallery"] > ul > li article > div.info-wrapper a:hover,
 body > section[id="itinerary"] > div.wrapper article > div[id="itinerary-gallery"] > ul > li article > div.info-wrapper a:hover,
@@ -3912,7 +3912,7 @@ body > section[id="itinerary"] > footer button {
   height: auto;
   font-family: 'Lato', sans-serif;
   font-weight: 300;
-  color: #ffffff;
+  color: white;
   font-size: 18px;
   line-height: 'auto';
   background-color: #9cb1ad;
@@ -3964,7 +3964,7 @@ body > section[id="hotel-reviews"] > div[role="header"].not-available > div h6 {
   height: auto;
   font-family: 'Lato', sans-serif;
   font-weight: 300;
-  color: #ffffff;
+  color: white;
   font-size: 14px;
   line-height: 'auto';
   position: relative;
@@ -4084,7 +4084,7 @@ body > section[id="hotel-reviews"] > div.wrapper *.item > figure {
   color: red;
   width: 100%;
   height: 100%;
-  background-color: #000000;
+  background-color: black;
   position: relative;
   float: left;
   overflow: hidden;
@@ -4153,7 +4153,7 @@ body > main[id][id="hotel-reviews"] > div.wrapper *.item > div h2,
 body > section[id="hotel-reviews"] > div.wrapper *.item > div h2 {
   font-family: 'Lato', sans-serif;
   font-weight: 300;
-  color: #ffffff;
+  color: white;
   font-size: 22px;
   line-height: 'auto';
   bottom: 0;
@@ -4164,7 +4164,7 @@ body > main[id][id="hotel-reviews"] > div.wrapper *.item > div h3,
 body > section[id="hotel-reviews"] > div.wrapper *.item > div h3 {
   font-family: 'Times', serif;
   font-style: italic;
-  color: #ffffff;
+  color: white;
   font-size: 14px;
   line-height: 'auto';
 }
@@ -4178,7 +4178,7 @@ body > section[id="hotel-reviews"] > div.wrapper *.item *[rel="booking"] {
   color: red;
   font-family: 'Lato', sans-serif;
   font-weight: 300;
-  color: #ffffff;
+  color: white;
   font-size: 14px;
   line-height: 'auto';
   padding: 10px 30px;
@@ -4205,7 +4205,7 @@ body > section[id="hotel-reviews"] > div.wrapper *.item *[rel="booking"] {
 }
 body > main[id][id="hotel-reviews"] > div.wrapper *.item *[rel="booking"].warning,
 body > section[id="hotel-reviews"] > div.wrapper *.item *[rel="booking"].warning {
-  background-color: #ffa500;
+  background-color: orange;
 }
 body > main[id][id="hotel-reviews"] > div.wrapper *.item *[rel="booking"] span,
 body > section[id="hotel-reviews"] > div.wrapper *.item *[rel="booking"] span {
@@ -4215,7 +4215,7 @@ body > main[id][id="hotel-reviews"] > div.wrapper *.item *[rel="booking"] h4,
 body > section[id="hotel-reviews"] > div.wrapper *.item *[rel="booking"] h4 {
   font-family: 'Lato', sans-serif;
   font-weight: 300;
-  color: #ffffff;
+  color: white;
   font-size: 18px;
   line-height: 'auto';
 }
@@ -4498,12 +4498,12 @@ body > section[id="hotel"] > article > div.gallery-wrapper > div[id="hotel-galle
   height: auto;
   font-family: 'Lato', sans-serif;
   font-weight: 700;
-  color: #ffffff;
+  color: white;
   font-size: 48px;
   line-height: 'auto';
   text-align: center;
   text-transform: uppercase;
-  text-shadow: 1px 1px 0px #000000;
+  text-shadow: 1px 1px 0px black;
 }
 body > main[id][id="hotel"] > article > div.gallery-wrapper > div[id="hotel-gallery"] > ul > li article > div.info-wrapper a span,
 body > section[id="hotel"] > article > div.gallery-wrapper > div[id="hotel-gallery"] > ul > li article > div.info-wrapper a span,
@@ -4522,7 +4522,7 @@ body > section[id="hotel"] > article > div.gallery-wrapper > div[id="hotel-galle
   height: auto;
   font-family: 'Lato', sans-serif;
   font-weight: 300;
-  color: #ffffff;
+  color: white;
   font-size: 20px;
   line-height: 'auto';
   background-color: #9cb1ad;
@@ -4543,12 +4543,12 @@ body > section[id="hotel"] > article > div.gallery-wrapper > div[id="hotel-galle
   height: auto;
   font-family: 'Times', serif;
   font-style: italic;
-  color: #ffffff;
+  color: white;
   font-size: 18px;
   line-height: 'auto';
   text-align: center;
   margin: 5px 0 30px 0;
-  text-shadow: 1px 1px 0px #000000;
+  text-shadow: 1px 1px 0px black;
 }
 body > main[id][id="hotel"] > article > div.gallery-wrapper > div[id="hotel-gallery"] > ul > li article > div.info-wrapper a:hover,
 body > section[id="hotel"] > article > div.gallery-wrapper > div[id="hotel-gallery"] > ul > li article > div.info-wrapper a:hover,
@@ -5141,6 +5141,51 @@ body > section.static > article[id="faqs"] ul li:first-child {
   border: 0;
   padding-top: 15px;
 }
+body > main[id].static > article[id="who-we-are"] ul,
+body > section.static > article[id="who-we-are"] ul {
+  margin-left: -180px;
+}
+body > main[id].static > article[id="who-we-are"] ul li,
+body > section.static > article[id="who-we-are"] ul li {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  position: relative;
+  float: left;
+  padding-left: 180px;
+  padding-top: 50px;
+  margin-bottom: 0;
+}
+body > main[id].static > article[id="who-we-are"] ul li *,
+body > section.static > article[id="who-we-are"] ul li * {
+  position: relative;
+  float: left;
+}
+body > main[id].static > article[id="who-we-are"] ul li figure,
+body > section.static > article[id="who-we-are"] ul li figure {
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  color: red;
+  display: block;
+  width: 150px;
+  height: 150px;
+  border-radius: 300px;
+  overflow: hidden;
+  background-color: transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+body > main[id].static > article[id="who-we-are"] ul li figure img,
+body > section.static > article[id="who-we-are"] ul li figure img {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  float: left;
+}
 body > main[id].static[id="contact"],
 body > section.static[id="contact"] {
   padding-bottom: 90px;
@@ -5271,7 +5316,7 @@ body > section.static[id="contact"] > form label input {
 }
 body > main[id].static[id="contact"] > form label input.ng-invalid.ng-dirty,
 body > section.static[id="contact"] > form label input.ng-invalid.ng-dirty {
-  border-color: #ffa500;
+  border-color: orange;
 }
 body > main[id].static[id="contact"] > form label select,
 body > section.static[id="contact"] > form label select {
@@ -5301,11 +5346,11 @@ body > section.static[id="contact"] > form label.no-label {
 }
 body > main[id].static[id="contact"] > form label.warning,
 body > section.static[id="contact"] > form label.warning {
-  color: #ffa500;
+  color: orange;
 }
 body > main[id].static[id="contact"] > form label.warning input,
 body > section.static[id="contact"] > form label.warning input {
-  border-color: #ffa500;
+  border-color: orange;
 }
 body > main[id].static[id="contact"] > form textarea,
 body > section.static[id="contact"] > form textarea {
@@ -5327,7 +5372,7 @@ body > main[id].static[id="contact"] > form textarea.ng-invalid.ng-dirty,
 body > section.static[id="contact"] > form textarea.ng-invalid.ng-dirty,
 body > main[id].static[id="contact"] > form textarea.warning,
 body > section.static[id="contact"] > form textarea.warning {
-  border-color: #ffa500;
+  border-color: orange;
 }
 body > main[id].static[id="contact"] > form input[type="submit"],
 body > section.static[id="contact"] > form input[type="submit"] {
@@ -5343,7 +5388,7 @@ body > section.static[id="contact"] > form input[type="submit"] {
   transition: opacity 0.2s ease-in-out;
   font-family: 'Lato', sans-serif;
   font-weight: 300;
-  color: #ffffff;
+  color: white;
   font-size: 18px;
   line-height: 'auto';
   background-color: #9cb1ad;
@@ -5368,7 +5413,7 @@ body > main[id][id] *[id="booking-engine"],
 body > section[id] *[id="booking-engine"] {
   width: 100%;
   height: 0px;
-  background-color: #ffffff;
+  background-color: white;
   -webkit-transition: all 0.5s ease-in-out;
   -moz-transition: all 0.5s ease-in-out;
   -o-transition: all 0.5s ease-in-out;
@@ -5391,7 +5436,7 @@ body > main[id][id] *[id="booking-engine"] footer,
 body > section[id] *[id="booking-engine"] footer {
   width: 100%;
   height: auto;
-  background-color: #ffffff;
+  background-color: white;
   position: relative;
   float: left;
 }
@@ -5479,12 +5524,12 @@ body > section[id] *[id="booking-engine"] div[id^="step-"] div.error-header {
   width: 100%;
   height: auto;
   position: absolute;
-  background-color: #ffa500;
+  background-color: orange;
   top: 0;
   left: 0;
   font-family: 'Lato', sans-serif;
   font-weight: 300;
-  color: #ffffff;
+  color: white;
   font-size: 14px;
   line-height: 'auto';
   padding: 20px 0;
@@ -5696,7 +5741,7 @@ body > section[id] *[id="booking-engine"] div[id^="step-"][id$="1"] > section[id
   transition: opacity 0.2s ease-in-out;
   font-family: 'Lato', sans-serif;
   font-weight: 300;
-  color: #ffffff;
+  color: white;
   font-size: 16px;
   line-height: 'auto';
   background-color: #9cb1ad;
@@ -5727,7 +5772,7 @@ body > main[id][id="booking-engine"] div[id^="step-"][id$="1"] > section[id].war
 body > section[id="booking-engine"] div[id^="step-"][id$="1"] > section[id].warning header,
 body > main[id][id] *[id="booking-engine"] div[id^="step-"][id$="1"] > section[id].warning header,
 body > section[id] *[id="booking-engine"] div[id^="step-"][id$="1"] > section[id].warning header {
-  color: #ffa500;
+  color: orange;
 }
 body > main[id][id="booking-engine"] div[id^="step-"][id$="1"] > section[id][id="dates"],
 body > section[id="booking-engine"] div[id^="step-"][id$="1"] > section[id][id="dates"],
@@ -5983,26 +6028,26 @@ body > section[id="booking-engine"] div[id^="step-"][id$="1"] > section[id][id="
 body > main[id][id] *[id="booking-engine"] div[id^="step-"][id$="1"] > section[id][id="dates"] div[id="calendar"] div.gallery-wrapper ul.month-gallery li[id].month-container button.warning,
 body > section[id] *[id="booking-engine"] div[id^="step-"][id$="1"] > section[id][id="dates"] div[id="calendar"] div.gallery-wrapper ul.month-gallery li[id].month-container button.warning {
   background-color: rgba(255, 165, 0, 0.2);
-  border-color: #ffa500;
-  color: #ffa500;
+  border-color: orange;
+  color: orange;
 }
 body > main[id][id="booking-engine"] div[id^="step-"][id$="1"] > section[id][id="dates"].warning h6,
 body > section[id="booking-engine"] div[id^="step-"][id$="1"] > section[id][id="dates"].warning h6,
 body > main[id][id] *[id="booking-engine"] div[id^="step-"][id$="1"] > section[id][id="dates"].warning h6,
 body > section[id] *[id="booking-engine"] div[id^="step-"][id$="1"] > section[id][id="dates"].warning h6 {
-  color: #ffa500 !important;
+  color: orange !important;
 }
 body > main[id][id="booking-engine"] div[id^="step-"][id$="1"] > section[id][id="rooms"],
 body > section[id="booking-engine"] div[id^="step-"][id$="1"] > section[id][id="rooms"],
 body > main[id][id] *[id="booking-engine"] div[id^="step-"][id$="1"] > section[id][id="rooms"],
 body > section[id] *[id="booking-engine"] div[id^="step-"][id$="1"] > section[id][id="rooms"] {
-  background-color: #ffffff;
+  background-color: white;
 }
 body > main[id][id="booking-engine"] div[id^="step-"][id$="1"] > section[id][id="rooms"].warning *,
 body > section[id="booking-engine"] div[id^="step-"][id$="1"] > section[id][id="rooms"].warning *,
 body > main[id][id] *[id="booking-engine"] div[id^="step-"][id$="1"] > section[id][id="rooms"].warning *,
 body > section[id] *[id="booking-engine"] div[id^="step-"][id$="1"] > section[id][id="rooms"].warning * {
-  border-color: #ffa500 !important;
+  border-color: orange !important;
 }
 body > main[id][id="booking-engine"] div[id^="step-"][id$="1"] > section[id][id="who-is-going"],
 body > section[id="booking-engine"] div[id^="step-"][id$="1"] > section[id][id="who-is-going"],
@@ -6014,7 +6059,7 @@ body > main[id][id="booking-engine"] div[id^="step-"][id$="1"] > section[id][id=
 body > section[id="booking-engine"] div[id^="step-"][id$="1"] > section[id][id="who-is-going"].warning *,
 body > main[id][id] *[id="booking-engine"] div[id^="step-"][id$="1"] > section[id][id="who-is-going"].warning *,
 body > section[id] *[id="booking-engine"] div[id^="step-"][id$="1"] > section[id][id="who-is-going"].warning * {
-  border-color: #ffa500 !important;
+  border-color: orange !important;
 }
 body > main[id][id="booking-engine"] div[id^="step-"][id$="1"] > section[id][id="who-is-going"] + section[id="who-is-going"],
 body > section[id="booking-engine"] div[id^="step-"][id$="1"] > section[id][id="who-is-going"] + section[id="who-is-going"],
@@ -6207,12 +6252,12 @@ body > section[id] *[id="booking-engine"] div[id^="step-"][id$="1"] > footer but
   line-height: 'auto';
   width: 125px;
   height: 125px;
-  background-color: #ffffff;
+  background-color: white;
   float: left;
   overflow: hidden;
   border: solid 2px transparent;
   border-radius: 125px;
-  color: #ffffff;
+  color: white;
   font-size: 24px;
   position: relative;
   margin: auto;
@@ -6276,7 +6321,7 @@ body > section[id] *[id="booking-engine"] div[id^="step-"][id$="3"].not-availabl
   height: auto;
   font-family: 'Lato', sans-serif;
   font-weight: 300;
-  color: #ffffff;
+  color: white;
   font-size: 14px;
   line-height: 'auto';
   position: relative;
@@ -6624,7 +6669,7 @@ body > main[id][id] *[id="booking-engine"] div[id^="step-"][id$="3"] ul[id="sear
 body > section[id] *[id="booking-engine"] div[id^="step-"][id$="3"] ul[id="search-result"] li div.room-wrapper div.right-col a[rel][rel="see-rates"] {
   font-family: 'Lato', sans-serif;
   font-weight: 300;
-  color: #ffffff;
+  color: white;
   font-size: 18px;
   line-height: 'auto';
   background-color: #708c84;
@@ -6643,7 +6688,7 @@ body > main[id][id] *[id="booking-engine"] div[id^="step-"][id$="3"] ul[id="sear
 body > section[id] *[id="booking-engine"] div[id^="step-"][id$="3"] ul[id="search-result"] li div.room-wrapper div.right-col a[rel][rel="book-this"] {
   font-family: 'Lato', sans-serif;
   font-weight: 300;
-  color: #ffffff;
+  color: white;
   font-size: 18px;
   line-height: 'auto';
   background-color: transparent;
@@ -6744,7 +6789,7 @@ body > section[id] *[id="booking-engine"] div[id^="step-"][id$="3"] small[id="ex
   float: left;
   font-family: 'Lato', sans-serif;
   font-weight: 300;
-  color: #ffffff;
+  color: white;
   font-size: 14px;
   line-height: 'auto';
   padding: 30px;
@@ -7310,7 +7355,6 @@ body > section[id] *[id="booking-engine"] div[id^="step-"][id$="5"] div.wrapper 
   display: block;
   font-family: 'Lato', sans-serif;
   font-weight: 300;
-  color: #ffffff;
   font-size: 10px;
   line-height: 'auto';
   background-color: #9cb1ad;
@@ -7352,8 +7396,8 @@ body > main[id][id="booking-engine"] div[id^="step-"][id$="5"] div.wrapper form[
 body > section[id="booking-engine"] div[id^="step-"][id$="5"] div.wrapper form[id="check-out-form"] > span.warning,
 body > main[id][id] *[id="booking-engine"] div[id^="step-"][id$="5"] div.wrapper form[id="check-out-form"] > span.warning,
 body > section[id] *[id="booking-engine"] div[id^="step-"][id$="5"] div.wrapper form[id="check-out-form"] > span.warning {
-  color: #ffa500;
-  border-color: #ffa500;
+  color: orange;
+  border-color: orange;
   margin-top: 5px;
 }
 body > main[id][id="booking-engine"] div[id^="step-"][id$="4"] div.wrapper form[id="check-out-form"] > span.warning.hidden,
@@ -7494,7 +7538,7 @@ body > main[id][id="booking-engine"] div[id^="step-"][id$="5"] div.wrapper form[
 body > section[id="booking-engine"] div[id^="step-"][id$="5"] div.wrapper form[id="check-out-form"] label input.warning,
 body > main[id][id] *[id="booking-engine"] div[id^="step-"][id$="5"] div.wrapper form[id="check-out-form"] label input.warning,
 body > section[id] *[id="booking-engine"] div[id^="step-"][id$="5"] div.wrapper form[id="check-out-form"] label input.warning {
-  border-color: #ffa500;
+  border-color: orange;
 }
 body > main[id][id="booking-engine"] div[id^="step-"][id$="4"] div.wrapper form[id="check-out-form"] label input.half,
 body > section[id="booking-engine"] div[id^="step-"][id$="4"] div.wrapper form[id="check-out-form"] label input.half,
@@ -7527,7 +7571,7 @@ body > main[id][id="booking-engine"] div[id^="step-"][id$="5"] div.wrapper form[
 body > section[id="booking-engine"] div[id^="step-"][id$="5"] div.wrapper form[id="check-out-form"] label input.ng-invalid.ng-dirty,
 body > main[id][id] *[id="booking-engine"] div[id^="step-"][id$="5"] div.wrapper form[id="check-out-form"] label input.ng-invalid.ng-dirty,
 body > section[id] *[id="booking-engine"] div[id^="step-"][id$="5"] div.wrapper form[id="check-out-form"] label input.ng-invalid.ng-dirty {
-  border-color: #ffa500;
+  border-color: orange;
 }
 body > main[id][id="booking-engine"] div[id^="step-"][id$="4"] div.wrapper form[id="check-out-form"] label textarea,
 body > section[id="booking-engine"] div[id^="step-"][id$="4"] div.wrapper form[id="check-out-form"] label textarea,
@@ -7612,7 +7656,7 @@ body > main[id][id="booking-engine"] div[id^="step-"][id$="5"] div.wrapper form[
 body > section[id="booking-engine"] div[id^="step-"][id$="5"] div.wrapper form[id="check-out-form"] label textarea.ng-invalid.ng-dirty,
 body > main[id][id] *[id="booking-engine"] div[id^="step-"][id$="5"] div.wrapper form[id="check-out-form"] label textarea.ng-invalid.ng-dirty,
 body > section[id] *[id="booking-engine"] div[id^="step-"][id$="5"] div.wrapper form[id="check-out-form"] label textarea.ng-invalid.ng-dirty {
-  border-color: #ffa500;
+  border-color: orange;
 }
 body > main[id][id="booking-engine"] div[id^="step-"][id$="4"] div.wrapper form[id="check-out-form"] label.half,
 body > section[id="booking-engine"] div[id^="step-"][id$="4"] div.wrapper form[id="check-out-form"] label.half,
@@ -7643,7 +7687,7 @@ body > main[id][id="booking-engine"] div[id^="step-"][id$="5"] div.wrapper form[
 body > section[id="booking-engine"] div[id^="step-"][id$="5"] div.wrapper form[id="check-out-form"] label.warning,
 body > main[id][id] *[id="booking-engine"] div[id^="step-"][id$="5"] div.wrapper form[id="check-out-form"] label.warning,
 body > section[id] *[id="booking-engine"] div[id^="step-"][id$="5"] div.wrapper form[id="check-out-form"] label.warning {
-  color: #ffa500;
+  color: orange;
 }
 body > main[id][id="booking-engine"] div[id^="step-"][id$="4"] div.wrapper form[id="check-out-form"] label.warning input,
 body > section[id="booking-engine"] div[id^="step-"][id$="4"] div.wrapper form[id="check-out-form"] label.warning input,
@@ -7653,7 +7697,7 @@ body > main[id][id="booking-engine"] div[id^="step-"][id$="5"] div.wrapper form[
 body > section[id="booking-engine"] div[id^="step-"][id$="5"] div.wrapper form[id="check-out-form"] label.warning input,
 body > main[id][id] *[id="booking-engine"] div[id^="step-"][id$="5"] div.wrapper form[id="check-out-form"] label.warning input,
 body > section[id] *[id="booking-engine"] div[id^="step-"][id$="5"] div.wrapper form[id="check-out-form"] label.warning input {
-  border-color: #ffa500;
+  border-color: orange;
 }
 body > main[id][id="booking-engine"] div[id^="step-"][id$="4"] div.wrapper form[id="check-out-form"] label[for="user-legal"] span,
 body > section[id="booking-engine"] div[id^="step-"][id$="4"] div.wrapper form[id="check-out-form"] label[for="user-legal"] span,
@@ -7789,7 +7833,7 @@ body > main[id][id] *[id="booking-engine"] div[id^="step-"][id$="5"] div.wrapper
 body > section[id] *[id="booking-engine"] div[id^="step-"][id$="5"] div.wrapper div[id="booking-info"] ul li:last-child {
   font-family: 'Lato', sans-serif;
   font-weight: 300;
-  color: #ffffff;
+  color: white;
   font-size: 24px;
   line-height: 'auto';
   margin-top: 0;
@@ -8214,7 +8258,7 @@ body > section[id="booking-engine"].expanded {
 /* ~ [F] Footer ~ */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 body > footer {
-  background-color: #000000;
+  background-color: black;
 }
 body > footer > nav {
   width: 1040px;
@@ -8255,7 +8299,7 @@ body > footer > nav ul li:first-child {
   color: #9cb1ad;
   font-size: 24px;
   line-height: 'auto';
-  background-color: #000000;
+  background-color: black;
   text-transform: uppercase;
   border-bottom: solid 1px rgba(156, 177, 173, 0.5);
   padding: 60px 0 10px 50px;
@@ -8353,7 +8397,7 @@ body > footer > div.fixed-bar a[id$="brand"][id="tzell-brand"] small {
   position: absolute;
   font-family: 'Lato', sans-serif;
   font-weight: 400;
-  color: #000000;
+  color: black;
   font-size: 10px;
   line-height: 'auto';
   top: 30px;
@@ -8383,7 +8427,7 @@ body > footer > div.fixed-bar > nav[id="social-media"] > a {
   -o-transition: opacity 0.2s ease-in-out;
   transition: opacity 0.2s ease-in-out;
   font-family: 'i-set';
-  color: #000000;
+  color: black;
   font-size: 34px;
   line-height: 34px;
   -webkit-font-smoothing: antialiased;
@@ -8421,7 +8465,7 @@ body > footer > div.fixed-bar > small {
   float: left;
   font-family: 'Lato', sans-serif;
   font-weight: 400;
-  color: #000000;
+  color: black;
   font-size: 10px;
   line-height: 'auto';
   text-align: center;
@@ -8460,7 +8504,7 @@ div.map-overlay div.content {
   width: 850px;
   height: 550px;
   position: absolute;
-  box-shadow: 0 0 100px #000000;
+  box-shadow: 0 0 100px black;
   background: #d9dfde url('../media/imagery/sign-up-bg.jpg') no-repeat center center;
   -webkit-transform: translate3d(0, 0, 0);
   -moz-transform: translate3d(0, 0, 0);
@@ -8497,7 +8541,7 @@ div.map-overlay div.content header small {
   float: left;
   font-family: 'Lato', sans-serif;
   font-weight: 300;
-  color: #ffffff;
+  color: white;
   font-size: 14px;
   line-height: 'auto';
   display: block;
@@ -8528,7 +8572,7 @@ div.map-overlay div.content header button[id="sign-in"] {
   float: right;
   font-family: 'Lato', sans-serif;
   font-weight: 400;
-  color: #ffffff;
+  color: white;
   font-size: 14px;
   line-height: 'auto';
   text-transform: uppercase;
@@ -8741,7 +8785,7 @@ div.map-overlay div.content form header h3 {
   box-sizing: border-box;
   font-family: 'Lato', sans-serif;
   font-weight: 400;
-  color: #ffa500;
+  color: orange;
   font-size: 12px;
   line-height: 'auto';
   bottom: 0px;
@@ -8779,7 +8823,7 @@ div.map-overlay div.content form div.wrapper-to-center small {
   position: absolute;
   font-family: 'Lato', sans-serif;
   font-weight: 400;
-  color: #ffa500;
+  color: orange;
   font-size: 12px;
   line-height: 'auto';
   text-transform: uppercase;
@@ -8992,8 +9036,8 @@ div.status-overlay div.content form input.warning,
 div.service-overlay div.content form input.warning,
 div.cancel-confirmation-overlay div.content form input.warning,
 div.map-overlay div.content form input.warning {
-  border-color: #ffa500;
-  color: #ffa500;
+  border-color: orange;
+  color: orange;
 }
 div.call-to-action div.content form input.ng-invalid.ng-dirty::-webkit-input-placeholder,
 div.error-overlay div.content form input.ng-invalid.ng-dirty::-webkit-input-placeholder,
@@ -9007,7 +9051,7 @@ div.status-overlay div.content form input.warning::-webkit-input-placeholder,
 div.service-overlay div.content form input.warning::-webkit-input-placeholder,
 div.cancel-confirmation-overlay div.content form input.warning::-webkit-input-placeholder,
 div.map-overlay div.content form input.warning::-webkit-input-placeholder {
-  color: #ffa500;
+  color: orange;
 }
 div.call-to-action div.content form input.ng-invalid.ng-dirty:-moz-placeholder,
 div.error-overlay div.content form input.ng-invalid.ng-dirty:-moz-placeholder,
@@ -9021,7 +9065,7 @@ div.status-overlay div.content form input.warning:-moz-placeholder,
 div.service-overlay div.content form input.warning:-moz-placeholder,
 div.cancel-confirmation-overlay div.content form input.warning:-moz-placeholder,
 div.map-overlay div.content form input.warning:-moz-placeholder {
-  color: #ffa500;
+  color: orange;
 }
 div.call-to-action div.content form input.ng-invalid.ng-dirty::-moz-placeholder,
 div.error-overlay div.content form input.ng-invalid.ng-dirty::-moz-placeholder,
@@ -9035,7 +9079,7 @@ div.status-overlay div.content form input.warning::-moz-placeholder,
 div.service-overlay div.content form input.warning::-moz-placeholder,
 div.cancel-confirmation-overlay div.content form input.warning::-moz-placeholder,
 div.map-overlay div.content form input.warning::-moz-placeholder {
-  color: #ffa500;
+  color: orange;
 }
 div.call-to-action div.content form input.ng-invalid.ng-dirty:-ms-input-placeholder,
 div.error-overlay div.content form input.ng-invalid.ng-dirty:-ms-input-placeholder,
@@ -9049,7 +9093,44 @@ div.status-overlay div.content form input.warning:-ms-input-placeholder,
 div.service-overlay div.content form input.warning:-ms-input-placeholder,
 div.cancel-confirmation-overlay div.content form input.warning:-ms-input-placeholder,
 div.map-overlay div.content form input.warning:-ms-input-placeholder {
-  color: #ffa500;
+  color: orange;
+}
+div.call-to-action div.content form label[for="user-sign-up-newsletter"],
+div.error-overlay div.content form label[for="user-sign-up-newsletter"],
+div.status-overlay div.content form label[for="user-sign-up-newsletter"],
+div.service-overlay div.content form label[for="user-sign-up-newsletter"],
+div.cancel-confirmation-overlay div.content form label[for="user-sign-up-newsletter"],
+div.map-overlay div.content form label[for="user-sign-up-newsletter"] {
+  position: relative;
+  float: left;
+  margin-left: 5px;
+}
+div.call-to-action div.content form label[for="user-sign-up-newsletter"] span,
+div.error-overlay div.content form label[for="user-sign-up-newsletter"] span,
+div.status-overlay div.content form label[for="user-sign-up-newsletter"] span,
+div.service-overlay div.content form label[for="user-sign-up-newsletter"] span,
+div.cancel-confirmation-overlay div.content form label[for="user-sign-up-newsletter"] span,
+div.map-overlay div.content form label[for="user-sign-up-newsletter"] span {
+  font-family: 'Times', serif;
+  font-style: italic;
+  color: #545958;
+  font-size: 14px;
+  line-height: 'auto';
+  position: relative;
+  float: left;
+  display: inline-block;
+  margin-left: 20px;
+}
+div.call-to-action div.content form label[for="user-sign-up-newsletter"] input[type="checkbox"],
+div.error-overlay div.content form label[for="user-sign-up-newsletter"] input[type="checkbox"],
+div.status-overlay div.content form label[for="user-sign-up-newsletter"] input[type="checkbox"],
+div.service-overlay div.content form label[for="user-sign-up-newsletter"] input[type="checkbox"],
+div.cancel-confirmation-overlay div.content form label[for="user-sign-up-newsletter"] input[type="checkbox"],
+div.map-overlay div.content form label[for="user-sign-up-newsletter"] input[type="checkbox"] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: auto;
 }
 div.call-to-action div.content form footer,
 div.error-overlay div.content form footer,
@@ -9157,7 +9238,7 @@ div.cancel-confirmation-overlay div.content small {
   position: absolute;
   font-family: 'Lato', sans-serif;
   font-weight: 300;
-  color: #ffffff;
+  color: white;
   font-size: 16px;
   line-height: 'auto';
   line-height: 22px;
@@ -9179,7 +9260,6 @@ div.cancel-confirmation-overlay div.content small button {
   transition: all 0.5s ease-in-out;
   font-family: 'Lato', sans-serif;
   font-weight: 300;
-  color: #ffffff;
   font-size: 16px;
   line-height: 'auto';
   background-color: transparent;
@@ -9203,8 +9283,8 @@ div.cancel-confirmation-overlay div.content small button:first-child {
 }
 div.cancel-confirmation-overlay div.content small button:first-child:hover {
   opacity: 1 !important;
-  border-color: #ffa500;
-  color: #ffa500;
+  border-color: orange;
+  color: orange;
 }
 div.service-overlay {
   display: none;
@@ -9283,7 +9363,7 @@ div.service-overlay div.content header {
 div.service-overlay div.content div {
   width: 48%;
   height: 280px;
-  background-color: #ffffff;
+  background-color: white;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -9294,10 +9374,10 @@ div.service-overlay div.content div {
   box-shadow: 0 0 5px #999999;
 }
 div.service-overlay div.content div[id="expedia-service"] {
-  background: #ffffff url('../media/services/expedia-service.png') no-repeat center 50px;
+  background: white url('../media/services/expedia-service.png') no-repeat center 50px;
 }
 div.service-overlay div.content div[id="sabre-service"] {
-  background: #ffffff url('../media/services/f+f-service.png') no-repeat center 20px;
+  background: white url('../media/services/f+f-service.png') no-repeat center 20px;
 }
 div.service-overlay div.content div button {
   border: none;
@@ -9326,7 +9406,7 @@ div.service-overlay div.content div button {
   float: none;
   font-family: 'Lato', sans-serif;
   font-weight: 300;
-  color: #ffffff;
+  color: white;
   font-size: 14px;
   line-height: 'auto';
   background-color: #333333;
@@ -9343,7 +9423,7 @@ div.service-overlay div.content div button span {
 div.service-overlay div.content div button h4 {
   font-family: 'Lato', sans-serif;
   font-weight: 300;
-  color: #ffffff;
+  color: white;
   font-size: 18px;
   line-height: 'auto';
 }
@@ -9502,6 +9582,30 @@ body.error > section[id] {
   margin-top: 0 !important;
   padding-top: 60px;
 }
+body.hotel > header,
+body.hotel > div[id="main-header-gallery"] {
+  display: none;
+  opacity: 0;
+}
+body.hotel > section[id] {
+  margin-top: 0px !important;
+  padding-top: 0px;
+}
+body.hotel > section[id][id="get-rates"] {
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  padding-top: 10px;
+  position: fixed;
+  top: 60px;
+}
+body.hotel > section[id][id="booking-engine"] {
+  padding-top: 120px;
+}
+body.hotel > section[id][id="hotel"] {
+  padding-top: 0px;
+}
 body.error > section[id] {
   height: auto;
 }
@@ -9516,10 +9620,12 @@ body.map-it > section[id] header {
 /* ------------------------------------------------------------------------------------------------------------- */
 /* ~ Landing ~ */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-body.landing {
+body.landing,
+body.mobile {
   background-color: #c9d4ce;
 }
-body.landing div.static-background {
+body.landing div.static-background,
+body.mobile div.static-background {
   width: 100%;
   height: 100%;
   position: fixed;
@@ -9528,7 +9634,8 @@ body.landing div.static-background {
   top: 0;
   z-index: 0;
 }
-body.landing h1 {
+body.landing h1,
+body.mobile h1 {
   width: 600px;
   height: auto;
   position: relative;
@@ -9543,23 +9650,27 @@ body.landing h1 {
   margin: 70px auto auto auto;
   text-align: center;
 }
-body.landing h1 figure {
+body.landing h1 figure,
+body.mobile h1 figure {
   width: auto;
   height: auto;
   position: relative;
   float: left;
 }
-body.landing h1 figure img {
+body.landing h1 figure img,
+body.mobile h1 figure img {
   width: 250px;
   height: auto;
 }
-body.landing h1 span {
+body.landing h1 span,
+body.mobile h1 span {
   position: relative;
   float: left;
   margin-top: 65px;
 }
-body.landing h1 a[id="visit-the-blog"] {
-  width: 220px;
+body.landing h1 a[id="visit-the-blog"],
+body.mobile h1 a[id="visit-the-blog"] {
+  width: 280px;
   height: auto;
   -webkit-transition: opacity 0.2s ease-in-out;
   -moz-transition: opacity 0.2s ease-in-out;
@@ -9574,7 +9685,7 @@ body.landing h1 a[id="visit-the-blog"] {
   float: none;
   font-family: 'Lato', sans-serif;
   font-weight: 300;
-  color: #ffffff;
+  color: white;
   font-size: 18px;
   line-height: 'auto';
   background-color: #9cb1ad;
@@ -9586,7 +9697,44 @@ body.landing h1 a[id="visit-the-blog"] {
   overflow: hidden;
   clear: both;
 }
-body.landing h1 a[id="visit-the-blog"]:hover {
+body.landing h1 a[id="visit-the-blog"]:hover,
+body.mobile h1 a[id="visit-the-blog"]:hover {
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
+}
+body.landing h1 a[id="go-to-homepage"],
+body.mobile h1 a[id="go-to-homepage"] {
+  width: 280px;
+  height: auto;
+  -webkit-transition: opacity 0.2s ease-in-out;
+  -moz-transition: opacity 0.2s ease-in-out;
+  -o-transition: opacity 0.2s ease-in-out;
+  transition: opacity 0.2s ease-in-out;
+  opacity: 1;
+  filter: alpha(opacity=100);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+  position: relative;
+  margin: auto;
+  float: none;
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+  color: white;
+  font-size: 18px;
+  line-height: 'auto';
+  background-color: #9cb1ad;
+  padding: 10px 30px;
+  border-radius: 100px;
+  text-transform: uppercase;
+  text-align: center;
+  display: block;
+  overflow: hidden;
+  clear: both;
+}
+body.landing h1 a[id="go-to-homepage"]:hover,
+body.mobile h1 a[id="go-to-homepage"]:hover {
   opacity: 0.5;
   filter: alpha(opacity=50);
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
@@ -9600,47 +9748,9 @@ body.landing h1 a[id="visit-the-blog"]:hover {
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 /* 1366x768 - 1280x1024 - 1280x800 - 1920x1080 - 1440x900 - 1680x1050 - 1600x900 - 1920x1200 - 1360x768 - 1280x768
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-@media only screen and (max-width: 1024px) {
-  /* ----------------------------------------------------------------------------------------------------------------
-		    
-	    * Project     : San Roque
-	    * Document    : less/style
-	    * Created on  : Ag 24, 2.014
-	    * Version     : 1.0 
-	    * Author      : Aday Henriquez
-	    * Description : iPad specific less/css portrait style
-	    
-	    -------------------------------------------------------------------------------------------------------------------
-	       *          This code has been developed by NOLOGY. in the awesome Canaries - www.nologystudio.com           *
-	    -------------------------------------------------------------------------------------------------------------------
-	   
-	    * Log * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-        -------------------------------------------------------------------------------------------------------------------
-        *  
-        ---------------------------------------------------------------------------------------------------------------- */
-}
 /* ------------------------------------------------------------------------------------------------------------- */
 /* ~ Small screens ~ */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-@media only screen and (max-width: 640px) {
-  /* ----------------------------------------------------------------------------------------------------------------
-		    
-	    * Project     : San Roque
-	    * Document    : less/style
-	    * Created on  : Ag 24, 2.014
-	    * Version     : 1.0 
-	    * Author      : Aday Henriquez
-	    * Description : iPhone specific less/css style
-	    
-	    -------------------------------------------------------------------------------------------------------------------
-	       *          This code has been developed by NOLOGY. in the awesome Canaries - www.nologystudio.com           *
-	    -------------------------------------------------------------------------------------------------------------------
-	   
-	    * Log * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-        -------------------------------------------------------------------------------------------------------------------
-        *  
-        ---------------------------------------------------------------------------------------------------------------- */
-}
 /* ------------------------------------------------------------------------------------------------------------- */
 /* ~ iPad - Portrait & Landscape ~ */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */

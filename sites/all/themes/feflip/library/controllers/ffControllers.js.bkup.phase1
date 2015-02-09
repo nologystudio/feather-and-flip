@@ -171,17 +171,7 @@
 					prev           : dFrame.find('*[rel="prev"]'),
 					next           : dFrame.find('*[rel="next"]')
 				});
-				
-				aFrame.find('*[rel="prev"]').on('click',function(){
-					dFrame.find('*[rel="prev"]').trigger('click');
-				});
-				
-				aFrame.find('*[rel="next"]').on('click',function(){
-					dFrame.find('*[rel="next"]').trigger('click');
-				});
-				
 			},1000);
-			
 		});
 			
 		/* ~ Booking ~ */
@@ -1429,12 +1419,11 @@
 			$scope.loading       = false;
 			
 			$scope.data = {
-				userName       		: '',
-				userLast       		: '',
-				userEmail      		: '',
-				userPassword   		: '',
-				userRepassword 		: '',
-				subscribeNewsletter : true
+				userName       : '',
+				userLast       : '',
+				userEmail      : '',
+				userPassword   : '',
+				userRepassword : ''
 			}
 			
 			// | i | Switch bettwen forms...
@@ -1442,12 +1431,11 @@
 			$scope.switcher = function(_state){
 				$scope.type = _state;
 				$scope.data = {
-					userName            : '',
-					userLast            : '',
-					userEmail           : '',
-					userPassword        : '',
-					userRepassword      : '',
-					subscribeNewsletter : true
+					userName       : '',
+					userLast       : '',
+					userEmail      : '',
+					userPassword   : '',
+					userRepassword : ''
 				}
 				$scope.signInError   = '';
 				$scope.signUpError   = '';
@@ -1492,23 +1480,28 @@
 			// | i | Submit form...
 			
 			$scope.regSubmit = function(_id){
-				$http({
-	                method  : 'POST',
-	                url     : formSubmit,
-	                data    : $.param(angular.extend({formID:'sign'+_id},$scope.data)),
-	                headers : { 
-	            		'Content-Type' : 'application/x-www-form-urlencoded'
-					},
-					transformRequest: angular.identity
-	            }).
-	            success(function(_data){
-		            if(_data.result) window.location.href = 'http://' + window.location.host + '';
-		            else{
-			            $scope.loading = false;
-			            $scope.signInError = 'The user or password is incorrect';
-			        }
-	            }).
-	            error(function(){});
+				
+				var isValid = true;
+				
+				if(isValid){ //$scope.checkChangedInput()
+					$http({
+		                method  : 'POST',
+		                url     : formSubmit,
+		                data    : $.param(angular.extend({formID:'sign'+_id},$scope.data)),
+		                headers : { 
+		            		'Content-Type' : 'application/x-www-form-urlencoded'
+						},
+						transformRequest: angular.identity
+		            }).
+		            success(function(_data){
+			            if(_data.result) window.location.href = 'http://' + window.location.host + '';
+			            else{
+				            $scope.loading = false;
+				            $scope.signInError = 'The user or password is incorrect';
+				        }
+		            }).
+		            error(function(){ });
+				}
 			}
 			
 			/*$scope.resetPassword = function(){

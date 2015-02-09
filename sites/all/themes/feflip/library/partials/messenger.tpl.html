@@ -43,6 +43,10 @@
 				<input type="email"    name="user-signup-email"    placeholder="Email address"     ng-pattern="/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/" ng-model="data.userEmail" required/>
 				<input type="password" name="user-signup-password" placeholder="Password"          ng-model="data.userPassword" required/>
 				<input type="password" name="check-repassword"     placeholder="Re-enter Password" ng-class="{'warning':data.userPassword != data.userRepassword}" ng-model="data.userRepassword" required/>
+				<label for="user-sign-up-newsletter">
+					<span>I want to join the adventure and sign up for your newsletter</span>
+					<input type="checkbox" name="user-sign-up-newsletter" ng-model="data.subscribeNewsletter"/>
+				</label>
 				<footer>
 					<input type="submit" value="Submit"  ng-class="{disabled:!signUpForm.$valid}" ng-click="!signUpForm.$valid || regSubmit('up')"/>
 					<small>we respect your privacy</small>
