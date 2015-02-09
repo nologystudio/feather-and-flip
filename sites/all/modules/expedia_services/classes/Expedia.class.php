@@ -280,6 +280,8 @@ class Expedia
             'Content-Type' => array('multipart/form-data'),
         );
 
+        $hotelId = trim($hotelId);
+
         $xml=
             "<HotelPaymentRequest>
                 <hotelId>$hotelId</hotelId>
@@ -358,6 +360,8 @@ class Expedia
         $service->global_parameters['customerUserAgent']['default value'] = $userAgent;
 
         $unique = uniqid('',true);
+
+        $hotelId = trim($hotelId);
 
         $xml =
 "<HotelRoomReservationRequest>

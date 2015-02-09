@@ -292,8 +292,12 @@ class Hotel
             foreach($hotelsNode as $hotel)
             {
                 $wrapper = entity_metadata_wrapper('node', $hotel);
-                $codes['sabre'][] = $wrapper->field_hotelcode->value();
-                $codes['expedia'][] = $wrapper->field_ean_hotelcode->value();
+                $sabreCode = $wrapper->field_hotelcode->value();
+                $eanCode = $wrapper->field_ean_hotelcode->value();
+                if(isset($sabreCode) && !empty($sabreCode))
+                    $codes['sabre'][] = trim($sabreCode);
+                if (isset($eanCode) && !empty($eanCode))
+                    $codes['expedia'][] = trim($eanCode);
             }
         }
 
@@ -326,7 +330,7 @@ class Hotel
                 $wrapper = entity_metadata_wrapper('node', $hotel);
                 $rateCode = $wrapper->field_rate_code->value();
                 if (isset($rateCode) && !empty($rateCode) && !in_array($rateCode, $rateCodes))
-                    $rateCodes[] = $rateCode;
+                    $rateCodes[] = trim($rateCode);
             }
         }
 
@@ -365,7 +369,7 @@ class Hotel
             }
         }
 
-        return $result;
+        return trim($result);
     }
 
     /*
