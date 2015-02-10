@@ -169,6 +169,61 @@ class Hotel
         
         return $contentblocks;
     }
+
+    /**
+     * Return array with the adress book of hotel
+     * @param $hotelId
+     * @return array
+     */
+    public static function GetAdressBook($hotelId)
+    {
+        $adressBook = array();
+
+        if (!isset($hotelId) || empty(trim($hotelId))) return $adressBook;
+
+        $query = new EntityFieldQuery;
+
+        $nodes = $query->entityCondition('entity_type', 'node')
+            ->entityCondition('bundle', 'address_book')
+            ->propertyCondition('status', 1)
+            ->fieldCondition('field_hotels','target_id', $hotelId, '=')
+            ->execute();
+
+        if (isset($nodes['node']))
+            $adressBook = node_load_multiple(array_keys($nodes['node']));
+
+        return $adressBook;
+    }
+
+
+    /**
+     * Return array with the testimonial of hotel
+     * @param $node
+     * @return array
+     */
+    public static function GetTestimonials($node)
+    {
+        $testimonials = array();
+
+        if (isset($node->field_testimonials['und']) && count($node->field_testimonials['und']) > 0)
+        {
+            $i=0;
+            foreach($node->field_testimonials['und'] as $item)
+            {
+                $testimonial = entity_load('field_collection_item',array($item['value']));
+                $testimonial = array_shift($testimonial);
+                //$testimonilas[] = $testimonial;
+                if (isset($testimonial->field_name_of_person['und'][0]['value']) && isset($testimonial->field_testimonial['und'][0]['value']))
+                {
+                    $testimonials[$i]['Person'] = $testimonial->field_name_of_person['und'][0]['value'];
+                    $testimonials[$i]['Testimonial'] = $testimonial->field_testimonial['und'][0]['value'];
+                    $i += 1;
+                }
+            }
+        }
+
+        return $testimonials;
+    }
     
     public static function GetImages($node)
     {
