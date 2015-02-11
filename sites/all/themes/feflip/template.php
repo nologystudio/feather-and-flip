@@ -105,7 +105,7 @@ function feflip_preprocess_user_profile(&$variables)
         $variables['loadUser'] = $loadUser;
     }
     $images = array();
-    $images[] = array('url' => 'http://placehold.it/1280x800',
+    $images[] = array('url' => 'https://placehold.it/1280x800',
         'text' => 'User profile',
         'size' => array(1280,800));//getimagesize('http://placehold.it/1280x800'));
     $variables['slideImages'] = $images;
@@ -119,7 +119,7 @@ function feflip_preprocess_node(&$variables) {
          
   if (isset($variables['node']) && ($variables['node']->type == 'page')) {
         $variables['theme_hook_suggestions'][] = 'node__static';
-        $variables['slideImages'] =  Helpers::GetAllImagesFromFieldCollection($variables['node']->field_images, $variables['node']->title, 'http://placehold.it/1280x800', 'headerslideshow');
+        $variables['slideImages'] =  Helpers::GetAllImagesFromFieldCollection($variables['node']->field_images, $variables['node']->title, 'https://placehold.it/1280x800', 'headerslideshow');
   }
   elseif (isset($variables['node']) && ($variables['node']->type == 'hotel')){
       //Get navigation
@@ -130,7 +130,7 @@ function feflip_preprocess_node(&$variables) {
       $variables['previous'] = $urls['previous'];
       $variables['hotelreviews'] = url('node/'.$variables['node']->field_destination['und'][0]['entity']->nid).'/hotel-reviews';
       $images = array();
-      $images[] = Helpers::GetMainImageFromFieldCollection($variables['node']->field_images, $variables['node']->title,'http://placehold.it/1280x800', 'headerslideshow');
+      $images[] = Helpers::GetMainImageFromFieldCollection($variables['node']->field_images, $variables['node']->title,'https://placehold.it/1280x800', 'headerslideshow');
       $variables['slideImages'] = $images;
       $variables['destination'] = $variables['node']->field_destination['und'][0]['entity']->nid;
       $variables['internalId'] = $variables['node']->nid;
@@ -151,7 +151,7 @@ function feflip_preprocess_views_view(&$variables) {
   $destinations = NULL;
   
   $images = array();
-  $images[] = array('url'     => 'http://placehold.it/1280x800',
+  $images[] = array('url'     => 'https://placehold.it/1280x800',
                     'text'    => '',
                     'size' => array(1280,800));//getimagesize('http://placehold.it/1280x800'));
   
