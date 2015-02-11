@@ -69,7 +69,7 @@ finally
             <ul>
             <?php foreach($destinations as $key => $destination){ ?>
                 <li>
-                    <a id="destination-<?php echo $destination['id']; ?>" href="<?php echo $destination['url'].'/itinerary';?>" rel="destination">
+                    <a rel="nofollow" id="destination-<?php echo $destination['id']; ?>" href="<?php echo $destination['url'].'/itinerary';?>" rel="destination">
                             <figure class="circle-mask">
                                     <img src="<?php echo $destination['image']['url'];?>" alt="<?php echo $destination['destination']?>"/>
                                     <div class="border"></div>
