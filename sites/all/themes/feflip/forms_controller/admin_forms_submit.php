@@ -176,6 +176,11 @@
             case 'contact':
                 AdminForms::ContactSubmit($input_values);
                 break;
+            case 'addressBook':
+                $hoteId = isset($input_values['hotelId']) ? $input_values['hotelId'] : null;
+                $result = AdminForms::AddressBookByHotel($hoteId);
+                echo json_encode($result);
+                break;
             case 'resetPassw':
                 $result = AdminForms::ResetPassw($input_values['userEmail'], $error);
                 $obj = array('result'=>$result, 'error'=>$error);

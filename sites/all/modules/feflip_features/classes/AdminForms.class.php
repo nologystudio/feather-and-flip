@@ -685,6 +685,22 @@ class AdminForms
             return '';
         }
     }
+
+    /**
+     * Return address book of hotel
+     * @param $hotelId
+     * @return array
+     */
+    static function AddressBookByHotel($hotelId)
+    {
+        $addressbooks = array();
+
+        if (!isset($hotelId) || empty(trim($hotelId))) return $addressbooks;
+
+        $addressbooks = Hotel::GetAddressBook($hotelId);
+
+        return $addressbooks;
+    }
 }
 
 ?>

@@ -175,7 +175,7 @@ class Hotel
      * @param $hotelId
      * @return array
      */
-    public static function GetAdressBook($hotelId)
+    public static function GetAddressBook($hotelId)
     {
         $adressBook = array();
 
@@ -189,8 +189,27 @@ class Hotel
             ->fieldCondition('field_hotels','target_id', $hotelId, '=')
             ->execute();
 
-        if (isset($nodes['node']))
-            $adressBook = node_load_multiple(array_keys($nodes['node']));
+        if (isset($nodes['node'])) {
+            $nodesLoaded = node_load_multiple(array_keys($nodes['node']));
+            foreach($nodesLoaded as $node)
+            {
+                $nodeAux['title'] = $node->title;
+                $nodeAux['review'] = isset($node->field_one_sentence_review['und'][0]['value']) ? $node->field_one_sentence_review['und'][0]['value'] : '';
+                $nodeAux['address'] = isset($node->field_address['und'][0]['value']) ? $node->field_address['und'][0]['value'] : '';
+                $nodeAux['phone'] = isset($node->field_ab_phone_number['und'][0]['value']) ? $node->field_ab_phone_number['und'][0]['value'] : '';
+                $nodeAux['latitude'] = isset($node->field_ab_latitude['und'][0]['value']) ? $node->field_ab_latitude['und'][0]['value'] : '';
+                $nodeAux['longitude'] = isset($node->field_ab_longitude['und'][0]['value']) ? $node->field_ab_longitude['und'][0]['value'] : '';
+                $nodeAux['googlePlaceId'] = isset($node->field_google_place_id['und'][0]['value']) ? $node->field_google_place_id['und'][0]['value'] : '';
+                $nodeAux['associaton'] = '';
+                if (isset($node->field_association_to_interests['und'][0]['tid']))
+                {
+                    $term = taxonomy_term_load($node->field_association_to_interests['und'][0]['tid']);
+                    if (isset($term)) $nodeAux['associaton'] = $term->name;
+                }
+
+                $adressBook[] = $nodeAux;
+            }
+        }
 
         return $adressBook;
     }
@@ -207,18 +226,14 @@ class Hotel
 
         if (isset($node->field_testimonials['und']) && count($node->field_testimonials['und']) > 0)
         {
-            $i=0;
             foreach($node->field_testimonials['und'] as $item)
             {
                 $testimonial = entity_load('field_collection_item',array($item['value']));
                 $testimonial = array_shift($testimonial);
-                //$testimonilas[] = $testimonial;
-                if (isset($testimonial->field_name_of_person['und'][0]['value']) && isset($testimonial->field_testimonial['und'][0]['value']))
-                {
-                    $testimonials[$i]['Person'] = $testimonial->field_name_of_person['und'][0]['value'];
-                    $testimonials[$i]['Testimonial'] = $testimonial->field_testimonial['und'][0]['value'];
-                    $i += 1;
-                }
+                $testimonials[] = array(
+                    'person'        => isset($testimonial->field_name_of_person['und'][0]['value']) ? $testimonial->field_name_of_person['und'][0]['value'] : '',
+                    'testimonial'   => isset($testimonial->field_testimonial['und'][0]['value']) ? $testimonial->field_testimonial['und'][0]['value'] : ''
+                );
             }
         }
 
