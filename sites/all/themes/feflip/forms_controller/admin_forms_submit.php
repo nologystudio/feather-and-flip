@@ -177,8 +177,8 @@
                 AdminForms::ContactSubmit($input_values);
                 break;
             case 'addressBook':
-                $hoteId = isset($input_values['hotelId']) ? $input_values['hotelId'] : null;
-                $result = AdminForms::AddressBookByHotel($hoteId);
+                $destinationId = isset($input_values['destinationId']) ? $input_values['destinationId'] : null;
+                $result = AdminForms::AddressBookByDestination($destinationId);
                 echo json_encode($result);
                 break;
             case 'resetPassw':

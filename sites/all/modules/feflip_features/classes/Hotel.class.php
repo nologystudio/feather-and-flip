@@ -175,18 +175,18 @@ class Hotel
      * @param $hotelId
      * @return array
      */
-    public static function GetAddressBook($hotelId)
+    public static function GetAddressBook($destinationId)
     {
         $adressBook = array();
 
-        if (!isset($hotelId) || empty(trim($hotelId))) return $adressBook;
+        if (!isset($destinationId) || empty(trim($destinationId))) return $adressBook;
 
         $query = new EntityFieldQuery;
 
         $nodes = $query->entityCondition('entity_type', 'node')
             ->entityCondition('bundle', 'address_book')
             ->propertyCondition('status', 1)
-            ->fieldCondition('field_hotels','target_id', $hotelId, '=')
+            ->fieldCondition('field_ab_destination','target_id', $destinationId, '=')
             ->execute();
 
         if (isset($nodes['node'])) {

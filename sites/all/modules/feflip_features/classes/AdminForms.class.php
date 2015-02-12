@@ -691,13 +691,13 @@ class AdminForms
      * @param $hotelId
      * @return array
      */
-    static function AddressBookByHotel($hotelId)
+    static function AddressBookByDestination($destinationId)
     {
         $addressbooks = array();
 
-        if (!isset($hotelId) || empty(trim($hotelId))) return $addressbooks;
+        if (!isset($destinationId) || empty(trim($destinationId))) return $addressbooks;
 
-        $addressbooks = Hotel::GetAddressBook($hotelId);
+        $addressbooks = Hotel::GetAddressBook($destinationId);
 
         return $addressbooks;
     }
