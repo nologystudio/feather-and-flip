@@ -126,6 +126,7 @@ function feflip_preprocess_node(&$variables) {
       $urls = Hotel::NextPreviousUrlHotel($variables['node']);
       $variables['images'] = Hotel::GetImages($variables['node']);
       $variables['features'] = Hotel::GetContentBlocks($variables['node']);
+      $variables['testimonials'] = Hotel::GetTestimonials($variables['node']);
       $variables['next'] = $urls['next'];
       $variables['previous'] = $urls['previous'];
       $variables['hotelreviews'] = url('node/'.$variables['node']->field_destination['und'][0]['entity']->nid).'/hotel-reviews';

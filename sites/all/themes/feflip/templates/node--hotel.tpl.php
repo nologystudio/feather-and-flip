@@ -146,7 +146,7 @@ if(isset($inputValues['service']) && !empty($inputValues['service']))
         </footer>-->
 </section>
 
-<section id="map-it" class="short">
+<section id="map-it" class="short" <?php if (isset($destination) && !empty($destination)) echo 'data-destination = "'.$destination.'"';?>>
 	<header class="animated fadeInUp">
         <h3></h3>
         <a href="https://www.google.com/maps?q=<?php echo isset($node->field_latitude['und'][0]['value']) ? $node->field_latitude['und'][0]['value'] : '0'; ?>,<?php echo isset($node->field_longitude['und'][0]['value']) ? $node->field_longitude['und'][0]['value'] : '0'; ?>" target="_blank" rel="google-maps">View on Google Maps</a>
