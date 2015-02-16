@@ -409,12 +409,12 @@
 				});
 			}
 			
-			$('*[rel="destination"],*[id^="destination"]').click(function(_e){
+			$('*[rel="destination"],*[id^="destination-"]').click(function(_e){
 				
 				var _t = $(this).attr('id');
 				
 				// | i | Uncheck none-selected items...
-				$('*[rel="destination"],*[id^="destination"]').each(function(){
+				$('*[rel="destination"],*[id^="destination-"]').each(function(){
 					if($(this).attr('id') == _t) $(this).addClass('on');
 					else $(this).removeClass('on');
 				});
@@ -653,7 +653,7 @@
 		
 			$scope.getRoomInfo = function(){
 				
-				var _s         = $('article[id="hotel"]');
+				var _s         = $('section[id="hotel"]');
 				var _result    = _s.data('result');
 				
 				$scope.service = _s.data('service');
@@ -1511,6 +1511,40 @@
 	            error(function(){});
 			}
 			
+			/*$scope.resetPassword = function(){
+				
+				var _p = $('#password-form input[type="password"]');
+				
+				/*if($scope.data.userRepassword == $scope.data.userPassword && $scope.data.userPassword != ''){
+					_p.removeClass();
+					$http({
+		                method  : 'POST',
+		                url     : formSubmit,
+		                data    : $.param({formID:'resetPassw','userEmail':$scope.data.userEmail}),
+		                headers : { 
+		            		'Content-Type' : 'application/x-www-form-urlencoded'
+						},
+						transformRequest: angular.identity
+		            }).
+		            success(function(_data){
+			            switch(_data.error){
+				            case '':
+				            	$('#password-form').transition({opacity:0},function(){
+					            	$scope.rMessage = 'reset-password-success';
+					            	$scope.$apply();
+				            	});
+				            break;
+				            default:
+				            	$scope.passwordError = 'Something went wrong, please try again later';
+				            break;
+			            }
+		            }).
+		            error(function(_data){
+			            //console.log(_data);
+		            });
+				}else _p.addClass('warning');
+			}*/
+			
 			$scope.changePassword = function(){
 				
 				var _p = $('#password-form input[type="password"]');
@@ -1738,62 +1772,32 @@
 						gFrame.find('li').css({'width':$(window).width()+'px'});
 					/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 					
-					if(!gFrame.hasClass('main')){
-						gFrame
-						.find('li')
-						.delay(300)
-						.transit({opacity:1},function(){
-							gFrame.sly({
-								horizontal     : 1,
-								itemNav        : 'centered',
-								activateOn     : 'click',
-								smart          : 1,
-								activateMiddle : 1,
-								mouseDragging  : 1,
-								touchDragging  : 1,
-								releaseSwing   : 1,
-								startAt        : 0,
-								scrollBy       : 1,
-								speed          : 500,
-								elasticBounds  : 1,
-								pagesBar       : $('div.gallery-ui ul.pages'),
-								activatePageOn : 'click',
-								cycleBy        : 'items',  
-								cycleInterval  : 7000,
-								pauseOnHover   : true,
-								startPaused    : false, 
-								prev           : lBtn,
-								next           : rBtn
-							});
+					gFrame
+					.find('li')
+					.delay(300)
+					.transit({opacity:1},function(){
+						gFrame.sly({
+						horizontal     : 1,
+						itemNav        : 'forceCentered',
+						smart          : 1,
+						activateMiddle : 1,
+						mouseDragging  : 1,
+						touchDragging  : 1,
+						releaseSwing   : 1,
+						startAt        : 0,
+						scrollBy       : 1,
+						speed          : 500,
+						elasticBounds  : 1,
+						pagesBar       : $('div.gallery-ui ul.pages'),
+						activatePageOn : 'click',
+						cycleBy        : 'items',  
+						cycleInterval  : 7000,
+						pauseOnHover   : true,
+						startPaused    : false, 
+						prev           : lBtn,
+						next           : rBtn
 						});
-					}else{
-						gFrame
-						.find('li')
-						.delay(300)
-						.transit({opacity:1},function(){
-							gFrame.sly({
-							horizontal     : 1,
-							itemNav        : 'forceCentered',
-							smart          : 1,
-							activateMiddle : 1,
-							mouseDragging  : 1,
-							touchDragging  : 1,
-							releaseSwing   : 1,
-							startAt        : 0,
-							scrollBy       : 1,
-							speed          : 500,
-							elasticBounds  : 1,
-							pagesBar       : $('div.gallery-ui ul.pages'),
-							activatePageOn : 'click',
-							cycleBy        : 'items',  
-							cycleInterval  : 7000,
-							pauseOnHover   : true,
-							startPaused    : false, 
-							prev           : lBtn,
-							next           : rBtn
-							});
-						});
-					}
+					});
 				break;
 			}
 		});
@@ -1843,7 +1847,7 @@
 		/* ~ Hotel ~ */
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 		
-		ffAppControllers.controller('HotelCtrl',function($scope,$http){
+		ffAppControllers.controller('HotelCtrl',function($scope){
 		
 			L.mapbox.accessToken = 'pk.eyJ1Ijoibm9sb2d5IiwiYSI6IkFBdm5aVEkifQ.ItKi4oQ1-kPhJhedS4QmNg';
 			
@@ -1864,7 +1868,6 @@
 			if(map.tap) map.tap.disable();
 			
 			var destLayer  = L.mapbox.featureLayer().addTo(map);
-			var bookLayer  = L.mapbox.featureLayer().addTo(map);
 			var geoJson    = [];
 			
 			$scope.latLon;
@@ -1905,93 +1908,24 @@
 				destLayer.setGeoJSON(geoJson);
 			};
 			
-			$scope.addItineraryPins = function(){
-				
-				var theBook    = {};
-				var destParams = {
-					formID 		  : 'addressBook',
-					destinationID : $('#map-it').data('destination')
-				}
-				
-				var markerType = {
-				    type     : "Feature",
-				    geometry : {
-				        type        : "Point",
-				        coordinates : [0,0]
-				    },
-				    properties: {
-				        title : "",
-				        icon  : {
-				            iconUrl     : "",
-				            iconSize    : [43,54], // size of the icon
-				            iconAnchor  : [22,54], // point of the icon which will correspond to marker's location
-				            popupAnchor : [0,-10], // point from which the popup should open relative to the iconAnchor
-				            className   : "ab-Pin"
-				        }
-				    }
-				}
-				
-				var setBook = function(){
-					
-					// | i | Attach pins to map...
-	            
-		            angular.forEach(theBook,function(_d){
-						
-						var newMarker = angular.copy(markerType);
-						
-						newMarker.geometry.coordinates[0] = _d.longitude;
-						newMarker.geometry.coordinates[1] = _d.latitude;
-						newMarker.properties.title        = _d.title;
-						newMarker.properties.phone        = _d.phone;
-						newMarker.properties.address      = _d.address;
-						newMarker.properties.icon.iconUrl = '/sites/all/themes/feflip/media/map/'+_d.association.toLowerCase()+'-pin.png';
-						newMarker.properties.review  	  = _d.review;
-						newMarker.properties.type  	      = _d.association.toLowerCase();
-						
-						if(_d.association.toLowerCase() != 'play') geoJson.push(newMarker);
-					});
-					
-					// | i | Bind pop-up...
-					
-					bookLayer.on('layeradd', function(_e){
-					    
-					    var marker       = _e.layer,
-					        feature      = marker.feature,
-							popupContent = '<div class="'+feature.properties.type+'"><h1>'+feature.properties.title+'</h1>'+feature.properties.review+'</div>';
-						
-					    marker.setIcon(L.icon(feature.properties.icon));
-					    
-					    if(feature.properties.type != undefined){
-						    marker.bindPopup(popupContent,{
-						        closeButton  : false,
-						        minWidth     : 300,
-						        zoomAnimation: true,
-						        keepInView   : true,
-						        autoPan      : true
-						    });
-					    }
-					});
-					
-					bookLayer.setGeoJSON(geoJson);
-				}
-				
-				// | i | Retrieve all address book pins...
-				
-				$http({
-	                method : 'POST',
-	                url    : formSubmit,
-	                data   : $.param(destParams),
-	                headers : { 
-	            		'Content-Type' : 'application/x-www-form-urlencoded'
-					},
-					transformRequest: angular.identity
-	            }).
-	            success(function(_data){
-		            theBook = _data;
-		            setBook();
-		        }).
-	            error(function(_data,_status){});
-			}
+			// | i | Triggers..
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+			
+			$('*[rel="map"]').on('click',function(){
+				$scope.showMap = true;
+				$('div.map-overlay').show().transition({opacity:1},function(){
+					setTimeout(function(){ 
+						map.updateSize();
+					},200);
+				});
+			});
+			
+			$('div.map-overlay *[rel="close"]').on('click',function(){
+				$scope.showMap = false;
+				$('div.map-overlay').transition({opacity:0},function(){
+					$(this).hide();
+				});
+			});
 			
 			// | i | Loader..
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -1999,8 +1933,7 @@
 			$scope.loadMap = function(_lat,_lon){
 				$scope.latLon = [_lat,_lon];
 				$scope.addHotel();
-				$scope.addItineraryPins();
-				map.setView($scope.latLon,19);
+				map.setView($scope.latLon,16);
 			}
 		});
 		
@@ -2017,8 +1950,8 @@
 			
 			$('header button[rel]').on('click',function(){
 				
-				var _t     = $(this).attr('rel').toLowerCase();
-				var guideY = $("#neighborhood-guide").offset().top;
+				var _t       = $(this).attr('rel').toLowerCase();
+				var guideY   = $("#neighborhood-guide").offset().top;
 				
 				$("#neighborhood-guide h4").each(function(){
 					if($(this).text().toLowerCase() == _t) $scope.scroll($(this).offset().top - navInc);
