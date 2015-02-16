@@ -48,13 +48,6 @@
                                 <?php break;
                          } ?>                        
                 <?php } ?>
-                <article id="instagram-feed" class="quick-entry review" ng-controller="InstagramCtrl" ng-show="lastImage">
-                        <h3></h3>
-                        <hr>
-						<figure>
-						<img src="{{lastImage}}"/>
-					</figure>
-                </article>
         </div>
         <footer>
                 <a href="" class="section-button"></a>
