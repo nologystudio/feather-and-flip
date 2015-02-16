@@ -614,6 +614,8 @@ function get_header_main_navigation_menu($destinations=NULL){
            $navigationMenu .= '<ul id="'.$menu_item['link']['options']['attributes']['title'].'">';
            foreach($destinations as $destination)
            {
+               if ((strpos($key, '1701') !== FALSE) && !Destination::HasItinerary($destination['id']))
+                   continue;
                $navigationMenu .= '<li><a href="'. $destination['url'] . (strpos($key, '2029') !== FALSE ? '/hotel-reviews' : '/itinerary').'">'.$destination['withcountry'].'</a></li>';
            }
            
