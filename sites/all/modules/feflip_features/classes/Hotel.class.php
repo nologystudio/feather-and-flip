@@ -169,6 +169,76 @@ class Hotel
         
         return $contentblocks;
     }
+
+    /**
+     * Return array with the adress book of hotel
+     * @param $hotelId
+     * @return array
+     */
+    public static function GetAddressBook($destinationId)
+    {
+        $adressBook = array();
+
+        if (!isset($destinationId) || empty(trim($destinationId))) return $adressBook;
+
+        $query = new EntityFieldQuery;
+
+        $nodes = $query->entityCondition('entity_type', 'node')
+            ->entityCondition('bundle', 'address_book')
+            //->propertyCondition('status', 1)
+            ->fieldCondition('field_ab_destination','target_id', $destinationId, '=')
+            ->execute();
+
+        if (isset($nodes['node'])) {
+            $nodesLoaded = node_load_multiple(array_keys($nodes['node']));
+            foreach($nodesLoaded as $node)
+            {
+                $nodeAux['title'] = $node->title;
+                $nodeAux['review'] = isset($node->field_one_sentence_review['und'][0]['value']) ? $node->field_one_sentence_review['und'][0]['value'] : '';
+                $nodeAux['address'] = isset($node->field_address['und'][0]['value']) ? $node->field_address['und'][0]['value'] : '';
+                $nodeAux['phone'] = isset($node->field_ab_phone_number['und'][0]['value']) ? $node->field_ab_phone_number['und'][0]['value'] : '';
+                $nodeAux['latitude'] = isset($node->field_ab_latitude['und'][0]['value']) ? $node->field_ab_latitude['und'][0]['value'] : '';
+                $nodeAux['longitude'] = isset($node->field_ab_longitude['und'][0]['value']) ? $node->field_ab_longitude['und'][0]['value'] : '';
+                $nodeAux['googlePlaceId'] = isset($node->field_google_place_id['und'][0]['value']) ? $node->field_google_place_id['und'][0]['value'] : '';
+                $nodeAux['association'] = '';
+                if (isset($node->field_association_to_interests['und'][0]['tid']))
+                {
+                    $term = taxonomy_term_load($node->field_association_to_interests['und'][0]['tid']);
+                    if (isset($term)) $nodeAux['association'] = $term->name;
+                }
+
+                $adressBook[] = $nodeAux;
+            }
+        }
+
+        return $adressBook;
+    }
+
+
+    /**
+     * Return array with the testimonial of hotel
+     * @param $node
+     * @return array
+     */
+    public static function GetTestimonials($node)
+    {
+        $testimonials = array();
+
+        if (isset($node->field_testimonials['und']) && count($node->field_testimonials['und']) > 0)
+        {
+            foreach($node->field_testimonials['und'] as $item)
+            {
+                $testimonial = entity_load('field_collection_item',array($item['value']));
+                $testimonial = array_shift($testimonial);
+                $testimonials[] = array(
+                    'person'        => isset($testimonial->field_name_of_person['und'][0]['value']) ? $testimonial->field_name_of_person['und'][0]['value'] : '',
+                    'testimonial'   => isset($testimonial->field_testimonial['und'][0]['value']) ? $testimonial->field_testimonial['und'][0]['value'] : ''
+                );
+            }
+        }
+
+        return $testimonials;
+    }
     
     public static function GetImages($node)
     {

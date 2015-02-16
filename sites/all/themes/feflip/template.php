@@ -126,6 +126,7 @@ function feflip_preprocess_node(&$variables) {
       $urls = Hotel::NextPreviousUrlHotel($variables['node']);
       $variables['images'] = Hotel::GetImages($variables['node']);
       $variables['features'] = Hotel::GetContentBlocks($variables['node']);
+      $variables['testimonials'] = Hotel::GetTestimonials($variables['node']);
       $variables['next'] = $urls['next'];
       $variables['previous'] = $urls['previous'];
       $variables['hotelreviews'] = url('node/'.$variables['node']->field_destination['und'][0]['entity']->nid).'/hotel-reviews';
@@ -135,6 +136,11 @@ function feflip_preprocess_node(&$variables) {
       $variables['destination'] = $variables['node']->field_destination['und'][0]['entity']->nid;
       $variables['internalId'] = $variables['node']->nid;
       $variables['isSticky'] = true;
+
+      $destination = node_load($variables['node']->field_destination['und'][0]['entity']->nid);
+      $variables['destinationText'] = $destination->title . ', ' . $destination->field_country['und'][0]['value'];
+      $image = Helpers::GetMainImageFromFieldCollection($destination->field_images, $variables['destinationText'],'https://placehold.it/100x100', 'itinerary_route_icon');
+      $variables['image'] = $image;
   }
   elseif (isset($variables['node']) && ($variables['node']->type == 'post')) {
     $variables['theme_hook_suggestions'][] = 'node__post';
@@ -585,10 +591,22 @@ function get_header_main_navigation_menu($destinations=NULL){
         $navigationMenu .= drupal_render($form);
       }*/
     }
+    else if(strpos($key, '2218') !== FALSE)
+    {
+        $navigationMenu .= '<li>'
+						.'<a href="' .url($menu_item['link']['link_path']). '">'.$menu_item['link']['link_title'].'</a>'
+						.'<div id="help-info">'
+                        .'<div>'
+                        .'<h4>Need Help?</h4>'
+                        .'<p><a href="/contact">Email us</a> and check back for new destinations coming soon!</p>'
+                        .'</div>'
+						.'</div>'
+					    .'</li>';
+    }
     else
     {
 
-      $navigationMenu .= '<li><a href="'.url($menu_item['link']['link_path']).'">'.$menu_item['link']['link_title'].'</a>';
+      $navigationMenu .= '<li id="test"><a href="'.url($menu_item['link']['link_path']).'">'.$menu_item['link']['link_title'].'</a>';
         
       //only for hotel reviews and itineraries
       if ((strpos($key, '2029') !== FALSE || strpos($key, '1701') !== FALSE) && count($destinations) > 0)
@@ -597,7 +615,7 @@ function get_header_main_navigation_menu($destinations=NULL){
            foreach($destinations as $destination)
            {
                if ((strpos($key, '1701') !== FALSE) && !Destination::HasItinerary($destination['id']))
-                  continue;
+                   continue;
                $navigationMenu .= '<li><a href="'. $destination['url'] . (strpos($key, '2029') !== FALSE ? '/hotel-reviews' : '/itinerary').'">'.$destination['withcountry'].'</a></li>';
            }
            
