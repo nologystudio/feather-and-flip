@@ -200,11 +200,11 @@ class Hotel
                 $nodeAux['latitude'] = isset($node->field_ab_latitude['und'][0]['value']) ? $node->field_ab_latitude['und'][0]['value'] : '';
                 $nodeAux['longitude'] = isset($node->field_ab_longitude['und'][0]['value']) ? $node->field_ab_longitude['und'][0]['value'] : '';
                 $nodeAux['googlePlaceId'] = isset($node->field_google_place_id['und'][0]['value']) ? $node->field_google_place_id['und'][0]['value'] : '';
-                $nodeAux['associaton'] = '';
+                $nodeAux['association'] = '';
                 if (isset($node->field_association_to_interests['und'][0]['tid']))
                 {
                     $term = taxonomy_term_load($node->field_association_to_interests['und'][0]['tid']);
-                    if (isset($term)) $nodeAux['associaton'] = $term->name;
+                    if (isset($term)) $nodeAux['association'] = $term->name;
                 }
 
                 $adressBook[] = $nodeAux;

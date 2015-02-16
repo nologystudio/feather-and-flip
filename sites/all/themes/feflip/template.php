@@ -598,7 +598,7 @@ function get_header_main_navigation_menu($destinations=NULL){
 						.'<div id="help-info">'
                         .'<div>'
                         .'<h4>Need Help?</h4>'
-                        .'<p><a href="">Email us</a> and check back for new destinations coming soon!</p>'
+                        .'<p><a href="/contact">Email us</a> and check back for new destinations coming soon!</p>'
                         .'</div>'
 						.'</div>'
 					    .'</li>';
