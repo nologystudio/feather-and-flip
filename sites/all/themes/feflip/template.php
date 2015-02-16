@@ -591,6 +591,18 @@ function get_header_main_navigation_menu($destinations=NULL){
         $navigationMenu .= drupal_render($form);
       }*/
     }
+    else if(strpos($key, '2232') !== FALSE)
+    {
+        $navigationMenu .= '<li>'
+						.'<a href="' .url($menu_item['link']['link_path']). '">'.$menu_item['link']['link_title'].'</a>'
+						.'<div id="help-info">'
+                        .'<div>'
+                        .'<h4>Need Help?</h4>'
+                        .'<p><a href="">Email us</a> and check back for new destinations coming soon!</p>'
+                        .'</div>'
+						.'</div>'
+					    .'</li>';
+    }
     else
     {
 
