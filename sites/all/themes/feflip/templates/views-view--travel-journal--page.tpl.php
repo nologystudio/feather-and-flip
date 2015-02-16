@@ -24,6 +24,10 @@
                         $orig_date = strtotime($post->field_field_original_pubdate[0]['raw']['safe_value']);
                         $img_url = preg_replace('/\/(\d+)w\//', '/500w/', $post->field_field_original_image[0]['raw']['safe_value']);
                         $img_wh = (empty($img_url) ? array('', '') : getimagesize($img_url));
+
+                        if (!$img_wh){
+                            $img_wh = array('500', '300');
+                        }
                         
                         switch ($type) {
                                 case 'review': ?>
