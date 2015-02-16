@@ -136,6 +136,11 @@ function feflip_preprocess_node(&$variables) {
       $variables['destination'] = $variables['node']->field_destination['und'][0]['entity']->nid;
       $variables['internalId'] = $variables['node']->nid;
       $variables['isSticky'] = true;
+
+      $destination = node_load($variables['node']->field_destination['und'][0]['entity']->nid);
+      $variables['destinationText'] = $destination->title . ', ' . $destination->field_country['und'][0]['value'];
+      $image = Helpers::GetMainImageFromFieldCollection($destination->field_images, $variables['destinationText'],'http://placehold.it/100x100', 'itinerary_route_icon');
+      $variables['image'] = $image;
   }
   elseif (isset($variables['node']) && ($variables['node']->type == 'post')) {
     $variables['theme_hook_suggestions'][] = 'node__post';
@@ -589,7 +594,7 @@ function get_header_main_navigation_menu($destinations=NULL){
     else
     {
 
-      $navigationMenu .= '<li><a href="'.url($menu_item['link']['link_path']).'">'.$menu_item['link']['link_title'].'</a>';
+      $navigationMenu .= '<li id="test"><a href="'.url($menu_item['link']['link_path']).'">'.$menu_item['link']['link_title'].'</a>';
         
       //only for hotel reviews and itineraries
       if ((strpos($key, '2029') !== FALSE || strpos($key, '1701') !== FALSE) && count($destinations) > 0)

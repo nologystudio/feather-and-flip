@@ -185,7 +185,7 @@ class Hotel
 
         $nodes = $query->entityCondition('entity_type', 'node')
             ->entityCondition('bundle', 'address_book')
-            ->propertyCondition('status', 1)
+            //->propertyCondition('status', 1)
             ->fieldCondition('field_ab_destination','target_id', $destinationId, '=')
             ->execute();
 

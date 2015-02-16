@@ -55,9 +55,9 @@ if(isset($inputValues['service']) && !empty($inputValues['service']))
         <header>
             <a href="<?php echo $hotelreviews;?>" rel="all">
 	            <figure>
-					<img src="" alt="destination"/>
+					<img src="<?php echo $image['url'];?>" alt="destination"/>
 				</figure>
-				Destination, Country
+				<?php echo $destinationText;?>
             </a>
             <h1 class="middle-line"><?php echo $node->title;?></h1>
             <a href="<?php echo $previous;?>" rel="prev">previous hotel</a>
@@ -131,26 +131,22 @@ if(isset($inputValues['service']) && !empty($inputValues['service']))
 			</li>
 		</ul>
 	</section>
-	
+
+    <?php if (count($testimonials) > 0){?>
 	<section id="hotel-testimonials">
 		<header>
 			<h5>What you say: <?php echo $node->title; ?><span></span></h5>
 			<div class="divider"></div>
 		</header>
+        <?php foreach($testimonials as $testimonial){?>
 		<blockquote>
-			There are many variations of passages of Lorem Ipsum available
-			<footer>- Author</footer>
+			<?php echo $testimonial['testimonial'];?>
+			<footer>- <?php echo $testimonial['person'];?></footer>
 		</blockquote>
-		<blockquote>
-			There are many variations of passages of Lorem Ipsum available
-			<footer>- Author</footer>
-		</blockquote>
-		<blockquote>
-			There are many variations of passages of Lorem Ipsum available
-			<footer>- Author</footer>
-		</blockquote>
+        <?php }?>
 		<footer>
 			<button rel="load-more">load more</button>
 		</footer>
 	</section>
+    <?php } ?>
 </article>
