@@ -56,8 +56,8 @@ if(isset($inputValues['service']) && !empty($inputValues['service']))
             <a href="<?php echo $hotelreviews;?>" rel="all">
 	            <figure>
 					<img src="" alt="destination"/>
-					<figcaption>destination</figcaption>
 				</figure>
+				Destination, Country
             </a>
             <h1 class="middle-line"><?php echo $node->title;?></h1>
             <a href="<?php echo $previous;?>" rel="prev">previous hotel</a>
@@ -93,7 +93,7 @@ if(isset($inputValues['service']) && !empty($inputValues['service']))
                 <?php foreach($obj as $contentblock) {?>
                     <li>
                         <ul>
-                            <li id="<?php echo strtolower($contentblock['title']) ?>"><?php echo $contentblock['title'] ?></li>
+                            <li id="<?php echo strtolower($contentblock['title']) ?>"><span></span><?php echo $contentblock['title'] ?></li>
                             <?php foreach($contentblock['features'] as $feature) {?>
 							<li><span>&bull;</span><?php echo $feature; ?></li>
                             <?php } ?>
@@ -111,11 +111,11 @@ if(isset($inputValues['service']) && !empty($inputValues['service']))
 	    </header>
 		<section id="map" class="single"></section>
 	</section>
+	
 	<section id="hotel-info">
 		<ul>
 			<li id="address">
 				<?php if(count($node->field_adress_1) == 1) echo $node->field_adress_1['und'][0]['value']; ?>
-				<?php if(count($node->field_adress_2) == 1) echo $node->field_adress_2['und'][0]['value']; ?>
 			</li>
 			<li id="phone">
 				<?php if(count($node->field_phone_number) == 1) echo $node->field_phone_number['und'][0]['value']; ?>
@@ -127,6 +127,7 @@ if(isset($inputValues['service']) && !empty($inputValues['service']))
 					<a target="_blank" href="<?php echo getSocialLink('pinterest', url('node/'.$node->nid, array('absolute' => TRUE)), $images[0]['url'], $features[0][0]['features'][0]); ?>" rel="pinterest"></a>
 					<a target="_blank" href="<?php echo getSocialLink('google+', url('node/'.$node->nid, array('absolute' => TRUE))); ?>" rel="google-plus"></a>
 				</nav>
+				<span>share hotel</span>
 			</li>
 		</ul>
 	</section>
@@ -134,6 +135,7 @@ if(isset($inputValues['service']) && !empty($inputValues['service']))
 	<section id="hotel-testimonials">
 		<header>
 			<h5>What you say: <?php echo $node->title; ?><span></span></h5>
+			<div class="divider"></div>
 		</header>
 		<blockquote>
 			There are many variations of passages of Lorem Ipsum available

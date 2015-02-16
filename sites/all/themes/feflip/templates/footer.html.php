@@ -41,7 +41,17 @@
 			<div class="fixed-bar">
 				<a id="brand" href="/"><img src="<?php echo variable_get('relativePath'); ?>media/brand/feather-and-flip-black-logo.png" alt="Feather+flip"/></a>
 				<?php echo Helpers::GetSocialMediaMenu('black');?>
-
+				
+				<div id="ssl-label">
+					<table width="135" border="0" cellpadding="2" cellspacing="0" title="Click to Verify - This site chose Symantec SSL for secure e-commerce and confidential communications.">
+						<tr>
+							<td width="135" align="center" valign="top">
+								<script type="text/javascript" src="https://seal.websecurity.norton.com/getseal?host_name=www.featherandflip.com&amp;size=L&amp;use_flash=NO&amp;use_transparent=NO&amp;lang=en"></script>
+							</td>
+						</tr>
+					</table>
+				</div>
+								
 				<a id="tzell-brand" href="http://www.tzell.com/tzell/index.htm" target="_blank">
 					<small>Powered by</small>
 					<img src="<?php echo variable_get('relativePath'); ?>media/brand/tzell-logo.png" alt="Powered by Tzell Travel Group"/>
@@ -51,20 +61,8 @@
 			</div>
 		</footer>
 		
-		<!-- | i | Overlay engine ------------------------------------------------------------ -->
-		
-		<?php //if (!user_is_logged_in()){?>
-        <div class="call-to-action" ng-controller="MessengerCtrl" ng-include="messenger" ng-show="display"></div>
-		<?php //} ?>
-		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-		
-		
+		<div class="call-to-action" ng-controller="MessengerCtrl" ng-include="messenger" ng-show="display"></div>
 		<?php include 'script.html.php'; ?>
-		
-		<?php // Add autocomplete js files ?>
-	<!--	<script type="text/javascript" src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/misc/drupal.js"></script>
-		<script type="text/javascript" src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/misc/jquery.once.js?v=1.2"></script>
-	-->	
 		</body>
 		
 		</html>
