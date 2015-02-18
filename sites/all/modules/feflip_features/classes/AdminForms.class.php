@@ -140,13 +140,22 @@ class AdminForms
         foreach ($values['rooms']['info'] as $room)
             $numAdults += $room['adults'];
 
+        $sabreEnable = variable_get('sabre_enable');
 
-        $rateCodes = Hotel::GetHotelRateCodesBydestination($values['destination']);
-        //$rateCodes = array();
+        $sabre = array();
+        $expedia = array();
+
+        if ($sabreEnable == 1)
+        {
+            $rateCodes = Hotel::GetHotelRateCodesBydestination($values['destination']);
+            $sabre = $sabreService->ListHotelAvail($values['sabreCodes'],$rateCodes, $numAdults, $sabreChecking, $sabreCheckout);
+        }
+
+        $expedia = Expedia::GetHotelsByCode_XML($values['eanCodes'], $values['checkIn'], $values['checkOut'], $values['rooms']['info']);
 
         return array(
-            'sabre' => $sabreService->ListHotelAvail($values['sabreCodes'],$rateCodes, $numAdults, $sabreChecking, $sabreCheckout),
-            'expedia' => Expedia::GetHotelsByCode_XML($values['eanCodes'], $values['checkIn'], $values['checkOut'], $values['rooms']['info'])
+            'sabre' => $sabre,
+            'expedia' => $expedia
         );
     }
 

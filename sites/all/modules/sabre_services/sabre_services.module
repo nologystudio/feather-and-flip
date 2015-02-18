@@ -8,7 +8,7 @@
 */
 
 //if (empty(arg(0)))
-  //  sabre_services_soap_test();
+    //sabre_services_soap_test();
     //module_invoke_all('test');
 
 /**
@@ -18,6 +18,7 @@
  */
 function sabre_services_test()
 {
+    /*
 	if (module_exists('wsclient')):
 		$cid = base64_encode(variable_get('sabre_client_id'));
 		$cse = base64_encode(variable_get('sabre_client_secret'));
@@ -65,20 +66,22 @@ function sabre_services_test()
 		dpm($cse);
 		dpm($tok);
 	endif;
+    */
 }
 
 function sabre_services_soap_test()
 {
 	if (module_exists('wsclient'))
 	{
+        /*
 		$sabreService = new Sabre;
 		$star = '2015-06-01';
 		$end = '2015-06-05';
-		$hotelCode = '0056430';//'0050313' con este hotel funciona la reserva;
+		$hotelCode = '0050313';//'0050313' con este hotel funciona la reserva;
         $expediaHC = '113127';
 		$numPersonas = 1;
         $mail = 'mail@testing.com';
-
+        */
 
         //$codes = Hotel::GetHotelCodesByDestination(30);
         //dpm($codes);
@@ -100,6 +103,7 @@ function sabre_services_soap_test()
 
         /************************************* Prueba funcional de booking ***************************************/
 
+        /*
 
         $sessionInfo = $sabreService->CreateSession();
         $_SESSION['sabreSession'] = $sessionInfo;
@@ -108,25 +112,23 @@ function sabre_services_soap_test()
 
             $values = array(
                 'service'=>'sabre',
-                'roomCode'=>'1',
+                '$roomcode'=>'1',
                 'numUnit'=>'1',
                 'firstName'=>'TEST',
                 'lastName'=>'TEST',
                 'email'=>'mail@testing.com',
                 'phone'=>'123456',
-                'guaranteeType'=>'GDPST',
+                'guaranteeType'=>'G',
                 'creditCardCode'=>'VI',
                 'creditCardNumber'=>'4111111111111111',
                 'creditCardExpireDate'=>'2015-12',
-                'checkIn'=>$star,
-                'checkOut'=>$end
             );
 
             $result = $sabreService->HotelDescription($sessionInfo,$hotelCode, $numPersonas, $star, $end);
-            dpm($result);
+            //dpm($result);
             //$result = AdminForms::hotelBookingReservation($values);
             //$result = $sabreService->HotelBookReservation($sessionInfo,'1',1,'TEST', 'TEST',$mail,'123','G','VI','2015-12','4111111111111111');
-            //dpm($result);
+            dpm($result);
 
             //$result = $sabreService->CancelBooking($sessionInfo);
             //dpm($result);
@@ -138,6 +140,7 @@ function sabre_services_soap_test()
             $sabreService->CloseSession($sessionInfo);
             unset($_SESSION['sabreSession']);
         }
+        */
 
         /************************************* Fin prueba  **********************************************************/
 
@@ -275,7 +278,18 @@ function sabre_services_form($form, &$form_state) {
 		'#default_value' => variable_get('sabre_test_mode'),
 		'#description'   => t("Use the web service testing Sabre"),
 		'#required' => TRUE
-	);	
+	);
+    $form['sabre_enable'] = array(
+        '#type'          => 'select',
+        '#title'         => t('Sabre: Enable'),
+        '#options' 	 => array(
+            0 => t('No'),
+            1 => t('Yes'),
+        ),
+        '#default_value' => variable_get('sabre_enable'),
+        '#description'   => t("Enable or disable the use of Sabre"),
+        '#required' => TRUE
+    );
 
   return system_settings_form($form);
 }
