@@ -359,13 +359,22 @@ class Hotel
         if (isset($nodes['node']))
         {
             $hotelsNode = node_load_multiple(array_keys($nodes['node']));
+
+            $sabreEnable = variable_get('sabre_enable');
+            $codes['sabre'] = array();
+
             foreach($hotelsNode as $hotel)
             {
                 $wrapper = entity_metadata_wrapper('node', $hotel);
                 $sabreCode = $wrapper->field_hotelcode->value();
                 $eanCode = $wrapper->field_ean_hotelcode->value();
-                if(isset($sabreCode) && !empty($sabreCode))
-                    $codes['sabre'][] = trim($sabreCode);
+
+                if($sabreEnable == 1)
+                {
+                    if (isset($sabreCode) && !empty($sabreCode))
+                        $codes['sabre'][] = trim($sabreCode);
+                }
+
                 if (isset($eanCode) && !empty($eanCode))
                     $codes['expedia'][] = trim($eanCode);
             }
