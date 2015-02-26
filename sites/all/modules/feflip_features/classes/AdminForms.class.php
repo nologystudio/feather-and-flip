@@ -320,7 +320,11 @@ class AdminForms
             $result = $sabreService->HotelBookReservation($sessionInfo,$values['roomCode'], $values['numUnit'], $values['firstName'], $values['lastName'], $values['email'], $values['phone'],
                 $values['guaranteeType'], $values['creditCardCode'], $values['creditCardExpireDate'], $values['creditCardNumber']);
 
-            //watchdog('HotelBookingReservation', 'AdmiForm.class ===> '. '<pre>' . print_r( $result, true) . '</pre>');
+            if (isset($result->ApplicationResults->Success))
+                $result2 = $sabreService->EndTransaction($sessionInfo);
+
+            watchdog('HotelBookingReservation', 'AdmiForm.class result2===> '. '<pre>' . print_r( $result2, true) . '</pre>');
+            watchdog('HotelBookingReservation', 'AdmiForm.class Values===> '. '<pre>' . print_r( $values, true) . '</pre>');
 
             if (isset($_SESSION['sabreSession'])) {
                 try {
@@ -337,7 +341,8 @@ class AdminForms
                     'user_email'=>$values['email'],
                     'user_phoneNumber' =>$values['phone'],
                     'user_creditCard' => 'xxxxxxxxxxxx'. substr($values['creditCardNumber'], -4),
-                    'booking_id'=>$result->Hotel->BasicPropertyInfo->ConfirmationNumber,
+                    'booking_id'=>isset($result2->ItineraryRef->ID) ? $result2->ItineraryRef->ID : '',
+                    'booking_confirmation_number' => $result->Hotel->BasicPropertyInfo->ConfirmationNumber,
                     'booking_hotelName'=>$result->Hotel->BasicPropertyInfo->HotelName,
                     'booking_hotelContact'=>'',
                     'booking_ckeckIn'=>$values['checkIn'],

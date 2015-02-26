@@ -621,8 +621,10 @@ class Sabre
             $response = $service->TravelItineraryAddInfoRQ($args);
             //dpm($response);
             //$xmlRequest = $service->endpoint()->client()->__getLastRequest();
+            //watchdog('Sabre', 'TravelItineraryAddInfo XML RQ ===> '. '<pre>'. htmlspecialchars($this->ReadXML($xmlRequest)) .'</pre>');
             //dpm($this->ReadXML($xmlRequest));
             //$xmlResponse = $service->endpoint()->client()->__getLastResponse();
+            //watchdog('Sabre', 'TravelItineraryAddInfo XML RQ ===> '. '<pre>'. htmlspecialchars($this->ReadXML($xmlResponse)) .'</pre>');
             //dpm($this->ReadXML($xmlResponse));
             
             //dpm($response);
@@ -636,7 +638,7 @@ class Sabre
      }
      
      
-     public function TravelItineraryRead($sessionInfo)
+     public function TravelItineraryRead($sessionInfo, $pnrLocator)
      {
         $securityToken = $sessionInfo['SecurityToken'];
         $conversationId = $sessionInfo['ConversationId'];
@@ -657,8 +659,9 @@ class Sabre
         try
         {
             $args = array();
-            $args['MessagingDetails']['Transaction']['Code'] = 'PNR';
-            $args['Version'] = '2.2.0';
+            $args['MessagingDetails']['SubjectAreas']['SubjectArea'] = 'FULL';
+            $args['UniqueID']['ID'] = $pnrLocator;
+            $args['Version'] = '3.5.0';
             $response = $service->TravelItineraryReadRQ($args);
             
             //$xmlRequest = $service->endpoint()->client()->__getLastRequest();
@@ -700,12 +703,15 @@ class Sabre
         {  
             $args = array();
             $args['EndTransaction']['Ind'] = 'true';
-            $args['Itinerary']['Ind'] = 'false';
+            $args['EndTransaction']['Email']['Ind'] = 'true';
+            //$args['Source']['ReceivedFrom'] = 'SWS TEST';
             $args['Version'] = '2.0.4';
             $response = $service->EndTransactionRQ($args);
             //$xmlRequest = $service->endpoint()->client()->__getLastRequest();
+            //watchdog('Sabre', 'EndTransaction XML RQ ===> '. '<pre>'. htmlspecialchars($this->ReadXML($xmlRequest)) .'</pre>');
             //dpm($this->ReadXML($xmlRequest));
             //$xmlResponse = $service->endpoint()->client()->__getLastResponse();
+            //watchdog('Sabre', 'EndTransaction XML RS ===> '. '<pre>'. htmlspecialchars($this->ReadXML($xmlResponse)) .'</pre>');
             //dpm($this->ReadXML($xmlResponse));
             
             //dpm($response);

@@ -375,7 +375,7 @@ class Hotel
                         $codes['sabre'][] = trim($sabreCode);
                 }
 
-                if (isset($eanCode) && !empty($eanCode))
+                if (isset($eanCode) && !empty($eanCode) && $eanCode != '0000000')
                     $codes['expedia'][] = trim($eanCode);
             }
         }
