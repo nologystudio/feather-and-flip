@@ -595,7 +595,7 @@ class AdminForms
                     $image = Helpers::GetMainImageFromFieldCollection($node->field_images, $node->title,'http://placehold.it/100x100', 'itinerary_main_icon');
                     switch ($node->type) {
                         case 'destination':
-                            $payload['destinations'][] = array('title' => $node->title, 'image' => $image['url'], 'url' => '/'.drupal_get_path_alias('node/'.$node->nid.'/itinerary'));
+                            $payload['destinations'][] = array('title' => $node->title, 'image' => $image['url'], 'url' => '/'.drupal_get_path_alias('node/'.$node->nid.'/hotel-reviews'));
                             break;
                         case 'hotel':
                             $payload['hotels'][] = array('title' => $node->title, 'image' => $image['url'], 'url' => '/'.drupal_get_path_alias('node/'.$node->nid));
