@@ -174,7 +174,8 @@ function feflip_preprocess_views_view(&$variables) {
 
     $variables['slideImages'] = Destination::GetImagesForHomeSlideShow('view hotels');
     $destinations = Destination::GetAllDestination();
-    $variables['destinations'] = $destinations;
+    //$variables['destinations'] = $destinations;
+      $variables['collections'] = Collection::GetAllCollections();
     $variables['travel_journal'] = views_embed_view('travel_journal', 'page');
     $variables['main_navigation'] = get_header_main_navigation_menu($destinations);
   }
@@ -211,11 +212,14 @@ function feflip_preprocess_views_view(&$variables) {
     
       $variables['hotels'] = Hotel::HotelReviews($variables);
       $variables['main_navigation'] = get_header_main_navigation_menu();
+      $variables['destinationDescription'] = '';
       if(isset($variables['view']->args[0]))
       {
           $destination = node_load($variables['view']->args[0]);
           $images = Destination::GetAllImagesDestination($destination,'hotel reviews');
           $variables['destinationId'] = $destination->nid;
+
+          $variables['destinationDescription'] = isset($destination->field_description['und'][0]['value']) ? $destination->field_description['und'][0]['value'] : '';
       }
       $variables['slideImages'] = $images;
   }
@@ -259,6 +263,26 @@ function feflip_preprocess_views_view(&$variables) {
       $variables['destinationsbycontinent'] = $destinationbycontinent;
       $variables['destinations'] = $destinations;
       $variables['main_navigation'] = get_header_main_navigation_menu($destinations);
+  }
+  elseif($view->name == 'collections' && $view->current_display == 'page'){
+      $variables['hotels']  = Hotel::GetHotelCollections($variables);
+      $variables['main_navigation'] = get_header_main_navigation_menu();
+      $variables['title'] = 'Collections';
+      if(isset($variables['view']->args[0]))
+      {
+          $collection = node_load($variables['view']->args[0]);
+          $imageUrl = isset($collection->field_image) && count($collection->field_image) > 0 ? image_style_url('headerslideshow', $collection->field_image['und'][0]['uri']) : 'http://placehold.it/1280x800';
+          $sizeImage = getimagesize($imageUrl);
+          $images = array();
+          $images[] = array('url' => $imageUrl,
+              'text'  => $collection->title,
+              'subtitle' => 'collection',
+              'size'  => $sizeImage,
+          );
+
+          $variables['title'] = 'Collection: '.$collection->title;
+      }
+      $variables['slideImages'] = $images;
   }
     elseif($view->name == 'booking_info' && $view->current_display == 'page')
     {

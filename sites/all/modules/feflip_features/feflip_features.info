@@ -7,3 +7,4 @@ files[] = classes/AdminForms.class.php
 files[] = classes/Hotel.class.php
 files[] = classes/Itinerary.class.php
 files[] = classes/Helpers.class.php
+files[] = classes/Collection.class.php

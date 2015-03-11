@@ -63,18 +63,18 @@ finally
 
 <section id="start-your-journey">
         <header>
-            <h3 class="simple">check hotel rates</h3>
+            <h3></h3>
         </header>
         <div id="miss-slideshow" ng-controller="SlideshowCtrl">
             <ul>
-            <?php foreach($destinations as $key => $destination){ ?>
+            <?php foreach($collections as $key => $collection){ ?>
                 <li>
-                    <a rel="nofollow" id="destination-<?php echo $destination['id']; ?>" href="<?php echo $destination['url'].'/itinerary';?>" rel="destination">
+                    <a rel="nofollow" href="<?php echo $collection['url']?>" rel="destination">
                             <figure class="circle-mask">
-                                    <img src="<?php echo $destination['image']['url'];?>" alt="<?php echo $destination['destination']?>"/>
+                                    <img src="<?php echo $collection['image'];?>" alt=""/>
                                     <div class="border"></div>
                             </figure>
-                            <h2><?php echo $destination['destination']?></h2>
+                            <h2><?php echo $collection['title']?></h2>
                     </a>
                  </li>
                 <?php } ?>

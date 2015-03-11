@@ -43,7 +43,8 @@ class Hotel
                                   'url'         => url('node/'.$node->nid),
                                   'sabreCode'   => $wrapper->field_hotelcode->value(),
                                   'expediaCode' => $wrapper->field_ean_hotelcode->value(),
-                                  'categories'  => $categories
+                                  'categories'  => $categories,
+                                  'hotelDescription' => $wrapper->field_hotel_description->value()
                                   );
         }
         
@@ -381,6 +382,14 @@ class Hotel
         }
 
         return $codes;
+    }
+
+    public static function GetHotelCollections($variables)
+    {
+        $view = $variables['view'];
+        $nodes = self::getNodes($view);
+        $hotelsinfo = self::getHotelsInfo($nodes);
+        return $hotelsinfo;
     }
 
 
