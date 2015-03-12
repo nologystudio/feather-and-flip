@@ -35,6 +35,8 @@
 		<script type="text/javascript" charset="utf-8" src="<?php echo variable_get('relativePath'); ?>library/vendors/transit.min.js" ></script>
         <script type="text/javascript" charset="utf-8" src="<?php echo variable_get('relativePath'); ?>library/vendors/sly.min.js"></script>
 		<script type="text/javascript" charset="utf-8" src="<?php echo variable_get('relativePath'); ?>library/vendors/shuffle.min.js" ></script>
+		<script type="text/javascript" charset="utf-8" src="<?php echo variable_get('relativePath'); ?>library/vendors/jquery.placeholder.min.js"></script>
+		
 
         <script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.js'></script>
         <link   href='https://api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.css' rel='stylesheet'/>
