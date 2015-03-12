@@ -63,7 +63,7 @@ finally
 
 <section id="start-your-journey">
         <header>
-            <h3></h3>
+            <h3 class="simple">Collections</h3>
         </header>
         <div id="miss-slideshow" ng-controller="SlideshowCtrl">
             <ul>
