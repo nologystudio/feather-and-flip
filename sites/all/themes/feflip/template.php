@@ -174,8 +174,8 @@ function feflip_preprocess_views_view(&$variables) {
 
     $variables['slideImages'] = Destination::GetImagesForHomeSlideShow('view hotels');
     $destinations = Destination::GetAllDestination();
-    //$variables['destinations'] = $destinations;
-      $variables['collections'] = Collection::GetAllCollections();
+    $variables['destinations'] = $destinations;
+    $variables['collections'] = Collection::GetAllCollections();
     $variables['travel_journal'] = views_embed_view('travel_journal', 'page');
     $variables['main_navigation'] = get_header_main_navigation_menu($destinations);
   }

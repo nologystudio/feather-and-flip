@@ -103,11 +103,9 @@ if ($showPrice)
 
 ?>
 <?php if (isset($arg[2]) && $arg[2] != 'itinerary'): ?>
-<!--
     <section id="get-rates">
         <button id="get-rates">get rates</button>
     </section>
--->
 <?php endif; ?>
 <!-- | i | Booking engine: Landing ------------------------------------------------------- -->
 <?php if(count($inputValues) > 0){?>
@@ -116,7 +114,7 @@ if ($showPrice)
     <section id="booking-engine" ng-controller="BookingEngineCtrl" ng-include="bookingSearch" ng-init="initRate(0,<?php if(isset($destinationId)) echo $destinationId; else echo 0;?>,<?php if(isset($internalId)) echo $internalId; else echo 0;?>)"></section>
 <?php } ?>
 <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - -  -->
-<section id="hotel-reviews"<?php echo ((isset($arg[2]) && ($arg[2] == 'itinerary')) ? ' class="hidden"' : ''); ?>>
+<section id="hotel-reviews" <?php echo ((isset($arg[2]) && ($arg[2] == 'itinerary')) ? ' class="hidden"' : ''); ?>>
     <!--<header id="booking-header-engine">
 
             <!--<?php if(count($inputValues) > 0){?>
