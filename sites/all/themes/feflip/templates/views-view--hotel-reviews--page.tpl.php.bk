@@ -131,7 +131,7 @@
 		</div>
         <?php }?>
         <div class="wrapper">
-                <h2 class="middle-line"><?php echo $destinationDescription;?></h2>
+                <h1 class="middle-line">Hotel Reviews</h1>
                 <div id="filter-container">
 					<ul role="select" class="dark">
 						<li>Reset Filters</li>
@@ -171,9 +171,7 @@
                                 <span>not</span>
                                 <h4>available</h4>
                             </button>
-                        <?php } } else {?>
-                        	<h4 class="description"><?php echo $hotel['hotelDescription'];?></h4>
-                        <?php } ?>
+                        <?php } }?>
                 </a>
             <?php } ?>
         </div>

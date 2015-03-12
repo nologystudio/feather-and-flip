@@ -520,7 +520,7 @@
                           <td style="text-align: right; padding-bottom: 15px; border-bottom: dotted 1px #ffffff;">Total cost of stay</td>
                         </tr>
                         <tr>
-                          <td width="50%" style="font-size: 18px; padding-top: 15px;">Pay on arrival</td>
+                          <td width="50%" style="font-size: 18px; padding-top: 15px;">PAID</td>
                           <td style="text-align: right; font-size: 18px;  padding-top: 15px;"><?php echo $wrapper->field_rate->value(); ?></td>
                         </tr>
                       </table>
@@ -536,7 +536,7 @@
                     <td style="color:#333333; font-size:18px; font-weight:bold; line-height: 22px; text-transform: uppercase; ">Payment information</td>
                   </tr>
                   <tr>
-                    <td style="color:#333333; font-size:14px; line-height:22px; border-bottom: dotted 1px #333333; padding-bottom: 15px"></td>
+                    <td style="color:#333333; font-size:14px; line-height:22px; border-bottom: dotted 1px #333333; padding-bottom: 15px">We have charged your credit card for the full payment of this reservation.</td>
                   </tr>
                   <tr>
                     <td>

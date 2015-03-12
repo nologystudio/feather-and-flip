@@ -87,6 +87,9 @@
 			$scope.error = false;
 			$scope.resetPassword = false;
 		
+			// | i | Support placeholders for old IE...
+			$('input,textarea').placeholder();
+		
 		});
 		
 		/* ~ Calendar ~ */
@@ -1948,7 +1951,7 @@
 						newMarker.properties.review  	  = _d.review;
 						newMarker.properties.type  	      = _d.association.toLowerCase();
 						
-						if(_d.association.toLowerCase() != 'play') geoJson.push(newMarker);
+						geoJson.push(newMarker);
 					});
 					
 					// | i | Bind pop-up...

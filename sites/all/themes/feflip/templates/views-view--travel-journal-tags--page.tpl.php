@@ -50,6 +50,12 @@
                                 <?php break;
                          } ?>                        
                 <?php } ?>
+                <?php if (strpos($_SERVER['REQUEST_URI'], '/itinerary') === false) { ?>
+                    <article id="instagram-feed" class="quick-entry review">
+                            <h3></h3>
+                            <hr>
+                    </article>
+                <?php } ?>
         </div>
         <footer>
                 <a href="" class="section-button"></a>

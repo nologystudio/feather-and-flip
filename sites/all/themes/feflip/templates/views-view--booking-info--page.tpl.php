@@ -123,11 +123,7 @@
 	        <small><span>Total cost for entire stay in USD$</span>(Including tax recovery charges and service fees)</small>
 	        <ul id="payment" class="content col-2">
 		        <li class="black">Payment status</li>
-		        <?php if($booking['service'] == 'expedia') { ?>
-		        	<li>PAID</li>
-		        <?php } else { ?>
-		        	<li>Pay on arrival</li>
-		        <?php } ?>
+		        <li>PAID</li>
 	        </ul>
 	        <ul id="cost" class="content col-2">
 		        <li class="black">Total cost of stay</li>
@@ -137,9 +133,7 @@
         <div id="payment-info" class="module">
 	        <header>
 		        Payment Info
-		        <?php if($booking['service'] == 'expedia') { ?>
-		        	<h4>We have charged your credit card for the full payment of this reservation.</h4>
-		        <?php } ?>
+		        <h4>We have charged your credit card for the full payment of this reservation.</h4>
 			</header>
 	        <ul class="content">
 		        <li><span>Payment card name:</span><?php echo $booking['firstName'];?> <?php echo $booking['lastName'];?></li>

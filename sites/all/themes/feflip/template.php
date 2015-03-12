@@ -105,7 +105,7 @@ function feflip_preprocess_user_profile(&$variables)
         $variables['loadUser'] = $loadUser;
     }
     $images = array();
-    $images[] = array('url' => 'https://placehold.it/1280x800',
+    $images[] = array('url' => 'http://placehold.it/1280x800',
         'text' => 'User profile',
         'size' => array(1280,800));//getimagesize('http://placehold.it/1280x800'));
     $variables['slideImages'] = $images;
@@ -119,7 +119,7 @@ function feflip_preprocess_node(&$variables) {
          
   if (isset($variables['node']) && ($variables['node']->type == 'page')) {
         $variables['theme_hook_suggestions'][] = 'node__static';
-        $variables['slideImages'] =  Helpers::GetAllImagesFromFieldCollection($variables['node']->field_images, $variables['node']->title, 'https://placehold.it/1280x800', 'headerslideshow');
+        $variables['slideImages'] =  Helpers::GetAllImagesFromFieldCollection($variables['node']->field_images, $variables['node']->title, 'http://placehold.it/1280x800', 'headerslideshow');
   }
   elseif (isset($variables['node']) && ($variables['node']->type == 'hotel')){
       //Get navigation
@@ -131,7 +131,7 @@ function feflip_preprocess_node(&$variables) {
       $variables['previous'] = $urls['previous'];
       $variables['hotelreviews'] = url('node/'.$variables['node']->field_destination['und'][0]['entity']->nid).'/hotel-reviews';
       $images = array();
-      $images[] = Helpers::GetMainImageFromFieldCollection($variables['node']->field_images, $variables['node']->title,'https://placehold.it/1280x800', 'headerslideshow');
+      $images[] = Helpers::GetMainImageFromFieldCollection($variables['node']->field_images, $variables['node']->title,'http://placehold.it/1280x800', 'headerslideshow');
       $variables['slideImages'] = $images;
       $variables['destination'] = $variables['node']->field_destination['und'][0]['entity']->nid;
       $variables['internalId'] = $variables['node']->nid;
@@ -139,7 +139,7 @@ function feflip_preprocess_node(&$variables) {
 
       $destination = node_load($variables['node']->field_destination['und'][0]['entity']->nid);
       $variables['destinationText'] = $destination->title . ', ' . $destination->field_country['und'][0]['value'];
-      $image = Helpers::GetMainImageFromFieldCollection($destination->field_images, $variables['destinationText'],'https://placehold.it/100x100', 'itinerary_route_icon');
+      $image = Helpers::GetMainImageFromFieldCollection($destination->field_images, $variables['destinationText'],'http://placehold.it/100x100', 'itinerary_route_icon');
       $variables['image'] = $image;
   }
   elseif (isset($variables['node']) && ($variables['node']->type == 'post')) {
@@ -157,7 +157,7 @@ function feflip_preprocess_views_view(&$variables) {
   $destinations = NULL;
   
   $images = array();
-  $images[] = array('url'     => 'https://placehold.it/1280x800',
+  $images[] = array('url'     => 'http://placehold.it/1280x800',
                     'text'    => '',
                     'size' => array(1280,800));//getimagesize('http://placehold.it/1280x800'));
   
@@ -174,7 +174,8 @@ function feflip_preprocess_views_view(&$variables) {
 
     $variables['slideImages'] = Destination::GetImagesForHomeSlideShow('view hotels');
     $destinations = Destination::GetAllDestination();
-    $variables['destinations'] = $destinations;
+    //$variables['destinations'] = $destinations;
+      $variables['collections'] = Collection::GetAllCollections();
     $variables['travel_journal'] = views_embed_view('travel_journal', 'page');
     $variables['main_navigation'] = get_header_main_navigation_menu($destinations);
   }
@@ -211,11 +212,14 @@ function feflip_preprocess_views_view(&$variables) {
     
       $variables['hotels'] = Hotel::HotelReviews($variables);
       $variables['main_navigation'] = get_header_main_navigation_menu();
+      $variables['destinationDescription'] = '';
       if(isset($variables['view']->args[0]))
       {
           $destination = node_load($variables['view']->args[0]);
           $images = Destination::GetAllImagesDestination($destination,'hotel reviews');
           $variables['destinationId'] = $destination->nid;
+
+          $variables['destinationDescription'] = isset($destination->field_description['und'][0]['value']) ? $destination->field_description['und'][0]['value'] : '';
       }
       $variables['slideImages'] = $images;
   }
@@ -259,6 +263,26 @@ function feflip_preprocess_views_view(&$variables) {
       $variables['destinationsbycontinent'] = $destinationbycontinent;
       $variables['destinations'] = $destinations;
       $variables['main_navigation'] = get_header_main_navigation_menu($destinations);
+  }
+  elseif($view->name == 'collections' && $view->current_display == 'page'){
+      $variables['hotels']  = Hotel::GetHotelCollections($variables);
+      $variables['main_navigation'] = get_header_main_navigation_menu();
+      $variables['title'] = 'Collections';
+      if(isset($variables['view']->args[0]))
+      {
+          $collection = node_load($variables['view']->args[0]);
+          $imageUrl = isset($collection->field_image) && count($collection->field_image) > 0 ? image_style_url('headerslideshow', $collection->field_image['und'][0]['uri']) : 'http://placehold.it/1280x800';
+          $sizeImage = getimagesize($imageUrl);
+          $images = array();
+          $images[] = array('url' => $imageUrl,
+              'text'  => $collection->title,
+              'subtitle' => 'collection',
+              'size'  => $sizeImage,
+          );
+
+          $variables['title'] = $collection->title;
+      }
+      $variables['slideImages'] = $images;
   }
     elseif($view->name == 'booking_info' && $view->current_display == 'page')
     {
@@ -591,7 +615,7 @@ function get_header_main_navigation_menu($destinations=NULL){
         $navigationMenu .= drupal_render($form);
       }*/
     }
-    else if(strpos($key, '2218') !== FALSE)
+    else if(strpos($key, '2232') !== FALSE)
     {
         $navigationMenu .= '<li>'
 						.'<a href="' .url($menu_item['link']['link_path']). '">'.$menu_item['link']['link_title'].'</a>'
@@ -677,7 +701,7 @@ function feflip_html_head_alter(&$head_elements) {
 // Generate share links
 function getSocialLink($_network,$url, $img = '', $desc = '')
 {
-  if (strpos($url, 'https://') === false)
+  if (strpos($url, 'http://') === false)
     $url = 'http://'.$_SERVER['HTTP_HOST'].'/'.$url;
   switch($_network){
     case 'facebook':

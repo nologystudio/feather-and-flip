@@ -3,14 +3,28 @@
 <?php
 
 /***************************** Pruebas de rate codes *******************************************/
-/*
-$rates = Hotel::GetHotelRateCodesBydestination(142);
-dpm($rates);
+
+//$rates = Hotel::GetHotelRateCodesBydestination(142);
+//dpm($rates);
 $codes = Hotel::GetHotelCodesByDestination(142);
-$sabreService = new Sabre;
-$result = $sabreService->ListHotelAvail($codes['sabre'],$rates,2,'2015-01-11','2015-01-19');
+//dpm($codes['expedia']);
+//$sabreService = new Sabre;
+//$result = $sabreService->ListHotelAvail($codes['sabre'],$rates,2,'2015-01-11','2015-01-19');
+$rooms['rooms']['info'] = array('adults' => 1);
+$result = Expedia::GetHotelsByCode_XML($codes['expedia'], '03/11/2015', '03/19/2015',$rooms['rooms']['info']);
 dpm($result);
+/*
+if ($result['HotelListResponse']['moreResultsAvailable'])
+{
+    $result2 = Expedia::GetHotelsByCodePagings_XML($result['HotelListResponse']['cacheKey'], $result['HotelListResponse']['cacheLocation']);
+    dpm($result2);
+}
 */
+
+$result = Expedia::RoomAvailability_XML('193650','03/11/2015', '03/19/2015',$rooms['rooms']['info']);
+dpm($result);
+
+
 /*********************************** Fin de prueba *********************************************/
 
 /************************************* Prueba funcional de booking ***************************************/
@@ -63,18 +77,18 @@ finally
 
 <section id="start-your-journey">
         <header>
-            <h3></h3>
+            <h3 class="simple">check hotel rates</h3>
         </header>
         <div id="miss-slideshow" ng-controller="SlideshowCtrl">
             <ul>
-            <?php foreach($collections as $key => $collection){ ?>
+            <?php foreach($destinations as $key => $destination){ ?>
                 <li>
-                    <a rel="nofollow" href="<?php echo $collection['url']?>" rel="destination">
+                    <a rel="nofollow" id="destination-<?php echo $destination['id']; ?>" href="<?php echo $destination['url'].'/itinerary';?>" rel="destination">
                             <figure class="circle-mask">
-                                    <img src="<?php echo $collection['image'];?>" alt=""/>
+                                    <img src="<?php echo $destination['image']['url'];?>" alt="<?php echo $destination['destination']?>"/>
                                     <div class="border"></div>
                             </figure>
-                            <h2><?php echo $collection['title']?></h2>
+                            <h2><?php echo $destination['destination']?></h2>
                     </a>
                  </li>
                 <?php } ?>

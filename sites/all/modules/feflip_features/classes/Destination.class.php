@@ -116,11 +116,11 @@ class Destination
     }
 
     /**
-    *
-    *   Check if destination has an itinerary related
-    *   @param id_destination
-    *   @return boolean
-    */
+     *
+     *   Check if destination has an itinerary related
+     *   @param id_destination
+     *   @return boolean
+     */
     public static function HasItinerary($id_destination)
     {
         $efq = new EntityFieldQuery();

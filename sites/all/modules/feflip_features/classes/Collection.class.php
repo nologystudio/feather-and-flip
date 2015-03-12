@@ -1,0 +1,41 @@
+<?php
+
+class Collection
+{
+    private static function getCollectionsInfo($nodes)
+    {
+        $collections = array();
+
+        foreach($nodes as $node)
+        {
+            $image = isset($node->field_image) && count($node->field_image) > 0 ? image_style_url('itinerary_route_icon', $node->field_image['und'][0]['uri']) : 'http://placehold.it/300x300';
+            $collections[] = array('title' => $node->title,
+                'image' => $image,
+                'url' => drupal_get_path_alias('node/'.$node->nid . '/collection'));
+        }
+
+        return $collections;
+    }
+
+    private static function getCollections()
+    {
+        $efq = new EntityFieldQuery();
+        $result = $efq->entityCondition('entity_type', 'node')
+            ->entityCondition('bundle', 'collection')
+            ->propertyCondition('status', 1)
+            ->execute();
+        return $result;
+    }
+
+    public static function GetAllCollections()
+    {
+        $result = self::getCollections();
+        $collections = array();
+        if(isset($result['node']))
+        {
+            $nodes = node_load_multiple(array_keys($result['node']));
+            $collections = self::getCollectionsInfo($nodes);
+        }
+        return $collections;
+    }
+}

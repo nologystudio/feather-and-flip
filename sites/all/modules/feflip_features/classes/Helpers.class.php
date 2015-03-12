@@ -111,16 +111,14 @@ class Helpers
             else {
                 $img = '';
             }
-            // force https in image url
-            $x_url = preg_replace('/\/(\d+)w\//', '/1500w/', (string)$img);
-            $x_url = str_replace('http:', 'https:', $x_url);
+
             $rs[] = array(
                 'title'     => (string)$item->title,
                 'categories'  => (array)$item->category,
                 'pubDate'   => (string)$item->pubDate,
                 'url'       => (string)$item->link,
                 'description' => (string)$item->description,
-                'img'       => $x_url
+                'img'       => preg_replace('/\/(\d+)w\//', '/1500w/', (string)$img)
             );
         }
         return $rs;

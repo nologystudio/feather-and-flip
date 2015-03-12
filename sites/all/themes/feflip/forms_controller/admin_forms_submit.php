@@ -33,7 +33,7 @@
                 $subscribeNewsletter = (isset($input_values['subscribeNewsletter'])) ? $input_values['subscribeNewsletter'] : false;
                 if ($result && $subscribeNewsletter)
                     AdminForms::subscribeToNewsLetter($input_values, $errorNewsLetter);
-                
+
                 $obj = array('result'=>$result, 'error'=>$error);
 				echo json_encode($obj);
 				break;
