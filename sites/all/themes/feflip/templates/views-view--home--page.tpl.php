@@ -69,7 +69,7 @@ finally
             <ul>
             <?php foreach($collections as $key => $collection){ ?>
                 <li>
-                    <a rel="nofollow" href="<?php echo $collection['url']?>" rel="destination">
+                    <a href="<?php echo $collection['url']?>">
                             <figure class="circle-mask">
                                     <img src="<?php echo $collection['image'];?>" alt=""/>
                                     <div class="border"></div>
