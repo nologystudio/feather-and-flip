@@ -268,6 +268,7 @@ function feflip_preprocess_views_view(&$variables) {
       $variables['hotels']  = Hotel::GetHotelCollections($variables);
       $variables['main_navigation'] = get_header_main_navigation_menu();
       $variables['title'] = 'Collections';
+      $variables['collectionDescription'] = '';
       if(isset($variables['view']->args[0]))
       {
           $collection = node_load($variables['view']->args[0]);
@@ -279,6 +280,8 @@ function feflip_preprocess_views_view(&$variables) {
               'subtitle' => 'collection',
               'size'  => $sizeImage,
           );
+
+          $variables['collectionDescription'] = isset($collection->field_collec_description['und'][0]['value']) ? $collection->field_collec_description['und'][0]['value'] : '';
 
           $variables['title'] = $collection->title;
       }

@@ -131,7 +131,7 @@ if ($showPrice)
         </div>
     <?php }?>
     <div class="wrapper">
-        <h2 class="middle-line"><?php echo $title;?></h2>
+        <h2 class="middle-line"><?php echo $collectionDescription;?></h2>
         <div id="filter-container">
             <ul role="select" class="dark">
                 <li>Reset Filters</li>
