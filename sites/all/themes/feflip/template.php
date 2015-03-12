@@ -174,8 +174,8 @@ function feflip_preprocess_views_view(&$variables) {
 
     $variables['slideImages'] = Destination::GetImagesForHomeSlideShow('view hotels');
     $destinations = Destination::GetAllDestination();
-    //$variables['destinations'] = $destinations;
-      $variables['collections'] = Collection::GetAllCollections();
+    $variables['destinations'] = $destinations;
+    $variables['collections'] = Collection::GetAllCollections();
     $variables['travel_journal'] = views_embed_view('travel_journal', 'page');
     $variables['main_navigation'] = get_header_main_navigation_menu($destinations);
   }
@@ -267,7 +267,7 @@ function feflip_preprocess_views_view(&$variables) {
   elseif($view->name == 'collections' && $view->current_display == 'page'){
       $variables['hotels']  = Hotel::GetHotelCollections($variables);
       $variables['main_navigation'] = get_header_main_navigation_menu();
-      $variables['title'] = 'Collections';
+      $variables['collectionDescription'] = 'Collection';
       if(isset($variables['view']->args[0]))
       {
           $collection = node_load($variables['view']->args[0]);
@@ -280,7 +280,10 @@ function feflip_preprocess_views_view(&$variables) {
               'size'  => $sizeImage,
           );
 
-          $variables['title'] = $collection->title;
+          if(isset($collection->field_collec_description['und'][0]['value']))
+              $variables['collectionDescription'] = $collection->field_collec_description['und'][0]['value'];
+          else
+              $variables['collectionDescription'] = $collection->title;
       }
       $variables['slideImages'] = $images;
   }
