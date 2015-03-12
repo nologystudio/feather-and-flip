@@ -280,7 +280,7 @@ function feflip_preprocess_views_view(&$variables) {
               'size'  => $sizeImage,
           );
 
-          $variables['title'] = 'Collection: '.$collection->title;
+          $variables['title'] = $collection->title;
       }
       $variables['slideImages'] = $images;
   }
