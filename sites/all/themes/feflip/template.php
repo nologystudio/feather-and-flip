@@ -212,14 +212,14 @@ function feflip_preprocess_views_view(&$variables) {
     
       $variables['hotels'] = Hotel::HotelReviews($variables);
       $variables['main_navigation'] = get_header_main_navigation_menu();
-      $variables['destinationDescription'] = '';
+      $variables['destinationDescription'] = 'Hotel Reviews';
       if(isset($variables['view']->args[0]))
       {
           $destination = node_load($variables['view']->args[0]);
           $images = Destination::GetAllImagesDestination($destination,'hotel reviews');
           $variables['destinationId'] = $destination->nid;
 
-          $variables['destinationDescription'] = isset($destination->field_description['und'][0]['value']) ? $destination->field_description['und'][0]['value'] : '';
+          $variables['destinationDescription'] = isset($destination->field_description['und'][0]['value']) && !empty($destination->field_description['und'][0]['value']) ? $destination->field_description['und'][0]['value'] : 'Hotel Reviews';
       }
       $variables['slideImages'] = $images;
   }
@@ -280,7 +280,7 @@ function feflip_preprocess_views_view(&$variables) {
               'size'  => $sizeImage,
           );
 
-          if(isset($collection->field_collec_description['und'][0]['value']))
+          if(isset($collection->field_collec_description['und'][0]['value']) && !empty($collection->field_collec_description['und'][0]['value']))
               $variables['collectionDescription'] = $collection->field_collec_description['und'][0]['value'];
           else
               $variables['collectionDescription'] = $collection->title;
