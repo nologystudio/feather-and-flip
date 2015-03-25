@@ -135,7 +135,7 @@ if(isset($inputValues['service']) && !empty($inputValues['service']))
     <?php if (count($testimonials) > 0){?>
 	<section id="hotel-testimonials">
 		<header>
-			<h5>What you say<span></span></h5>
+			<h5>Recent Review<span></span></h5>
 			<div class="divider"></div>
 		</header>
         <?php foreach($testimonials as $testimonial){?>
