@@ -386,9 +386,22 @@ class Hotel
 
     public static function GetHotelCollections($variables)
     {
-        $view = $variables['view'];
-        $nodes = self::getNodes($view);
-        $hotelsinfo = self::getHotelsInfo($nodes);
+        $collectionId = $variables['view']->args[0];
+        $query = new EntityFieldQuery;
+        $nodes = $query->entityCondition('entity_type', 'node')
+            ->entityCondition('bundle', 'hotel')
+            ->propertyCondition('status', 1)
+            ->fieldCondition('field_collection','target_id', $collectionId, '=')
+            ->propertyOrderBy('title', 'ASC')
+            ->execute();
+
+        $hotelsinfo = array();
+        if (isset($nodes['node']))
+        {
+            $hotelsNode = node_load_multiple(array_keys($nodes['node']));
+            $hotelsinfo = self::getHotelsInfo($hotelsNode);
+        }
+
         return $hotelsinfo;
     }
 
