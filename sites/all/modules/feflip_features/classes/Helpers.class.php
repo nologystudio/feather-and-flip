@@ -144,6 +144,15 @@ class Helpers
                 $post->field_original_pubdate->set($rss_post['pubDate']);
                 $post->field_original_url->set($rss_post['url']);
                 $post->field_original_image->set($rss_post['img']);
+                /*if (!empty($rss_post['img'])) {
+                    $fname = strtolower(str_replace(' ', '-', $rss_post['title']));
+                    $idata = file_get_contents($rss_post['img']);
+                    $simg = file_put_contents('public://'.$fname.'.jpg', $idata);
+                    $img = file_get_contents('public://'.$fname.'.jpg');
+                    $fpath = drupal_realpath('public://'.$fname.'.jpg');
+                    watchdog('debug', $fpath);
+                    $post->field_image->file->set($fpath);
+                }*/
 
                 // Term reference
                 $tids = array();
