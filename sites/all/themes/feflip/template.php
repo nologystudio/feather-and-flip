@@ -618,7 +618,7 @@ function get_header_main_navigation_menu($destinations=NULL){
         $navigationMenu .= drupal_render($form);
       }*/
     }
-    else if(strpos($key, '2232') !== FALSE)
+    else if(strpos($key, '2218') !== FALSE)
     {
         $navigationMenu .= '<li>'
 						.'<a href="' .url($menu_item['link']['link_path']). '">'.$menu_item['link']['link_title'].'</a>'
@@ -632,22 +632,39 @@ function get_header_main_navigation_menu($destinations=NULL){
     }
     else
     {
+        $item_id = strtolower(str_replace(' ', '-', $menu_item['link']['link_title']));
+        $navigationMenu .= '<li id="'.$item_id.'"><a href="'.url($menu_item['link']['link_path']).'">'.$menu_item['link']['link_title'].'</a>';
+        $grouped = array();
 
-      $navigationMenu .= '<li id="test"><a href="'.url($menu_item['link']['link_path']).'">'.$menu_item['link']['link_title'].'</a>';
-        
-      //only for hotel reviews and itineraries
-      if ((strpos($key, '2029') !== FALSE || strpos($key, '1701') !== FALSE) && count($destinations) > 0)
-      {
-           $navigationMenu .= '<ul id="'.$menu_item['link']['options']['attributes']['title'].'">';
-           foreach($destinations as $destination)
-           {
-               if ((strpos($key, '1701') !== FALSE) && !Destination::HasItinerary($destination['id']))
-                   continue;
-               $navigationMenu .= '<li><a href="'. $destination['url'] . (strpos($key, '2029') !== FALSE ? '/hotel-reviews' : '/itinerary').'">'.$destination['withcountry'].'</a></li>';
-           }
-           
-           $navigationMenu .= '</ul>';
-      }
+        //only for hotel reviews and itineraries
+        if ((($item_id == 'hotel-reviews') || ($item_id == 'itineraries')) && count($destinations) > 0)
+        {
+            $navigationMenu .= '<ul id="'.$menu_item['link']['options']['attributes']['title'].'">';
+
+            foreach($destinations as $destination)
+            {
+                if (($item_id == 'itineraries') && !Destination::HasItinerary($destination['id']))
+                    continue;
+
+                if ($item_id == 'itineraries') {
+                    $navigationMenu .= '<li><a href="' . $destination['url'] . '/itinerary' . '">' . $destination['withcountry'] . '</a></li>';
+                } else {
+                    $grouped[$destination['continent']][] = $destination;
+                }
+            }
+            if ($item_id == 'hotel-reviews' && (count($grouped) > 0)) {
+                $navigationMenu .= '<div class="background"></div><div class="wrapper">';
+                foreach ($grouped as $c_value => $g_destinations) {
+                    $navigationMenu .= '<li><ul><li role="title">'.$c_value.'</li>';
+                    foreach ($g_destinations as $g_destination){
+                        $navigationMenu .= '<li><a href="'. $g_destination['url'] . '/hotel-reviews'.'">'.$g_destination['withcountry'].'</a></li>';
+                    }
+                    $navigationMenu .= '</ul></li>';
+                }
+                $navigationMenu .= '</div>';
+            }
+            $navigationMenu .= '</ul>';
+        }
     }
     $navigationMenu .= '</li>';
   }
