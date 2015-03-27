@@ -653,7 +653,7 @@ function get_header_main_navigation_menu($destinations=NULL){
                 }
             }
             if ($item_id == 'hotel-reviews' && (count($grouped) > 0)) {
-                $navigationMenu .= '<div class="wrapper">';
+                $navigationMenu .= '<div class="background"></div><div class="wrapper">';
                 foreach ($grouped as $c_value => $g_destinations) {
                     $navigationMenu .= '<li><ul><li role="title">'.$c_value.'</li>';
                     foreach ($g_destinations as $g_destination){
