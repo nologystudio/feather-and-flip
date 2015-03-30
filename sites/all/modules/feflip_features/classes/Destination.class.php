@@ -12,19 +12,23 @@ class Destination
      */
     private static function getAllDestinationNodes($filter_field='')
     {
-          $dest_view = views_get_view('start_your_journey');
-          // add filter criteria
-          $dest_view->set_display('page');
-          if(!empty($filter_field))
-                $dest_view->add_item($dest_view->current_display, 'filter', 'node', $filter_field, array('operator' => '=','value' => 1));
-          $dest_view->preview();
-          
-          $nodes = array();
-          
-          foreach($dest_view->result as $obj)
-                $nodes[] = node_load($obj->nid);
-        
-          return $nodes;
+
+        $query = new EntityFieldQuery;
+
+        $query = $query->entityCondition('entity_type', 'node')
+            ->entityCondition('bundle', 'destination')
+            ->propertyCondition('status', 1);
+
+        if(!empty($filter_field))
+            $query = $query->propertyCondition($filter_field, 1);
+
+        $queryResult = $query->execute();
+        $nodes = array();
+        if (isset($queryResult['node']))
+            $nodes = node_load_multiple(array_keys($queryResult['node']));
+
+        return $nodes;
+
     }
 
     private static function getDestinations($nodes)

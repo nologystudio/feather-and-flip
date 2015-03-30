@@ -8,19 +8,32 @@ class Itinerary
      *@return array Itinineraries info
      */
     public static function ItinerariesInfo($view)
-    {        
+    {
+        $destinationId = $view->args[0];
+
+        $query = new EntityFieldQuery;
+        $nodes = $query->entityCondition('entity_type', 'node')
+            ->entityCondition('bundle', 'itinerary')
+            ->propertyCondition('status', 1)
+            ->fieldCondition('field_destination','target_id', $destinationId, '=')
+            ->propertyOrderBy('title', 'ASC')
+            ->execute();
+
+        $node = null;
+        if (isset($nodes['node'])) {
+            $keys = array_keys($nodes['node']);
+            $node = node_load($keys[0]);
+        }
+
         $itineraryinfo['name'] = '';
         $itineraryinfo['destination'] = '';
         $itineraryinfo['description'] = '';
         $itineraryinfo['routes'] = array();
         
-        if (count($view->result) > 0 )
+        if (isset($node))
         {
-            $node = node_load($view->result[0]->nid);
             $wrapper = entity_metadata_wrapper('node', $node);
-            
 
-            
             $routes = array();
             foreach($wrapper->field_route->value() as $route)
             {
