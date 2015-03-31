@@ -296,6 +296,8 @@ function feflip_preprocess_views_view(&$variables) {
             'mail' => '...',
             'phone'=> '...',
             'hotelName' => '...',
+            'hotelPhone' => '...',
+            'hotelAddress' => '...',
             'checkIn' => '...',
             'checkOut'=> '...',
             'rate' => '...',
@@ -346,6 +348,8 @@ function feflip_preprocess_views_view(&$variables) {
             $booking['phone'] = isset($entity->field_phone_number ['und'][0]['value']) ? $entity->field_phone_number ['und'][0]['value'] : '...';
             $booking['mail'] =  isset($entity->field_email ['und'][0]['value']) ? $entity->field_email ['und'][0]['value'] : '...';
             $booking['hotelName'] =  isset($entity->field_hotel_name['und'][0]['value']) ? $entity->field_hotel_name['und'][0]['value'] : '...';
+            $booking['hotelAddress'] = isset($entity->field_hotel_address['und'][0]['value']) ? $entity->field_hotel_address['und'][0]['value'] : '...';
+            $booking['hotelPhone'] = isset($entity->field_hotel_contact['und'][0]['value']) ? $entity->field_hotel_contact['und'][0]['value'] : '...';
             $booking['checkIn'] =  isset($entity->field_check_in['und'][0]['value']) ? $entity->field_check_in['und'][0]['value'] : '...';
             $booking['checkOut'] =  isset($entity->field_check_out['und'][0]['value']) ? $entity->field_check_out['und'][0]['value'] : '...';
             $booking['rate'] =  isset($entity->field_rate['und'][0]['value']) ? $entity->field_rate['und'][0]['value'] : '...';
@@ -632,39 +636,22 @@ function get_header_main_navigation_menu($destinations=NULL){
     }
     else
     {
-        $item_id = strtolower(str_replace(' ', '-', $menu_item['link']['link_title']));
-        $navigationMenu .= '<li id="'.$item_id.'"><a href="'.url($menu_item['link']['link_path']).'">'.$menu_item['link']['link_title'].'</a>';
-        $grouped = array();
 
-        //only for hotel reviews and itineraries
-        if ((($item_id == 'hotel-reviews') || ($item_id == 'itineraries')) && count($destinations) > 0)
-        {
-            $navigationMenu .= '<ul id="'.$menu_item['link']['options']['attributes']['title'].'">';
-
-            foreach($destinations as $destination)
-            {
-                if (($item_id == 'itineraries') && !Destination::HasItinerary($destination['id']))
-                    continue;
-
-                if ($item_id == 'itineraries') {
-                    $navigationMenu .= '<li><a href="' . $destination['url'] . '/itinerary' . '">' . $destination['withcountry'] . '</a></li>';
-                } else {
-                    $grouped[$destination['continent']][] = $destination;
-                }
-            }
-            if ($item_id == 'hotel-reviews' && (count($grouped) > 0)) {
-                $navigationMenu .= '<div class="background"></div><div class="wrapper">';
-                foreach ($grouped as $c_value => $g_destinations) {
-                    $navigationMenu .= '<li><ul><li role="title">'.$c_value.'</li>';
-                    foreach ($g_destinations as $g_destination){
-                        $navigationMenu .= '<li><a href="'. $g_destination['url'] . '/hotel-reviews'.'">'.$g_destination['withcountry'].'</a></li>';
-                    }
-                    $navigationMenu .= '</ul></li>';
-                }
-                $navigationMenu .= '</div>';
-            }
-            $navigationMenu .= '</ul>';
-        }
+      $navigationMenu .= '<li id="test"><a href="'.url($menu_item['link']['link_path']).'">'.$menu_item['link']['link_title'].'</a>';
+        
+      //only for hotel reviews and itineraries
+      if ((strpos($key, '2029') !== FALSE || strpos($key, '1701') !== FALSE) && count($destinations) > 0)
+      {
+           $navigationMenu .= '<ul id="'.$menu_item['link']['options']['attributes']['title'].'">';
+           foreach($destinations as $destination)
+           {
+               if ((strpos($key, '1701') !== FALSE) && !Destination::HasItinerary($destination['id']))
+                   continue;
+               $navigationMenu .= '<li><a href="'. $destination['url'] . (strpos($key, '2029') !== FALSE ? '/hotel-reviews' : '/itinerary').'">'.$destination['withcountry'].'</a></li>';
+           }
+           
+           $navigationMenu .= '</ul>';
+      }
     }
     $navigationMenu .= '</li>';
   }

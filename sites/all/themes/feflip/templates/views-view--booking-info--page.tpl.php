@@ -51,9 +51,8 @@
         <div id="hotel" class="module">
 	        <header>Hotel <?php echo $booking['hotelName'];?></header>
 	        <ul class="content">
-		        <li><span>Address:</span>Address</li>
-		        <li><span>Phone:</span>Phone</li>
-		        <li><span>Fax:</span>Fax</li>
+		        <li><span>Address:</span><?php echo $booking['hotelAddress'];?></li>
+		        <li><span>Phone:</span><?php echo $booking['hotelPhone'];?></li>
 		        <li><span>Check-in:</span><?php echo $booking['checkIn'];?></li>
 		        <li><span>Check-out:</span><?php echo $booking['checkOut'];?></li>
 		        <li><span>Number of nights:</span><?php echo $booking['nights'];?></li>
@@ -123,7 +122,11 @@
 	        <small><span>Total cost for entire stay in USD$</span>(Including tax recovery charges and service fees)</small>
 	        <ul id="payment" class="content col-2">
 		        <li class="black">Payment status</li>
-		        <li>PAID</li>
+		        <?php if($booking['service'] == 'expedia') { ?>
+		        	<li>PAID</li>
+		        <?php } else { ?>
+		        	<li>Pay on arrival</li>
+		        <?php } ?>
 	        </ul>
 	        <ul id="cost" class="content col-2">
 		        <li class="black">Total cost of stay</li>
@@ -133,7 +136,9 @@
         <div id="payment-info" class="module">
 	        <header>
 		        Payment Info
-		        <h4>We have charged your credit card for the full payment of this reservation.</h4>
+		        <?php if($booking['service'] == 'expedia') { ?>
+		        	<h4>We have charged your credit card for the full payment of this reservation.</h4>
+		        <?php } ?>
 			</header>
 	        <ul class="content">
 		        <li><span>Payment card name:</span><?php echo $booking['firstName'];?> <?php echo $booking['lastName'];?></li>

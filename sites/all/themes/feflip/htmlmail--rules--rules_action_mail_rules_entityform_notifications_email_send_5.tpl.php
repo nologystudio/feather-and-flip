@@ -170,9 +170,8 @@
                   <tr>
                     <td style="padding-top: 15px; border-bottom: dotted 1px #333333; padding-bottom: 15px">
                       <table style="margin: 0; padding-top: 15px;border-collapse:collapse; color:#333333; font-size:14px; line-height: 22px;">
-                        <tr><td><span style="font-weight: bold; margin-right: 10px;">Address:</span><?php echo $wrapper->field_hotel_contact->value(); ?></td></tr>
-                        <tr><td><span style="font-weight: bold; margin-right: 10px;">Phone:</span>Phone</td></tr>
-                        <tr><td><span style="font-weight: bold; margin-right: 10px;">Fax:</span>Fax</td></tr>
+                        <tr><td><span style="font-weight: bold; margin-right: 10px;">Address:</span><?php echo $wrapper->field_hotel_address->value(); ?></td></tr>
+                        <tr><td><span style="font-weight: bold; margin-right: 10px;">Phone:</span><?php echo $wrapper->field_hotel_contact->value(); ?></td></tr>
                         <tr><td><span style="font-weight: bold; margin-right: 10px;">Check-in:</span><?php echo $wrapper->field_check_in->value(); ?></td></tr>
                         <tr><td><span style="font-weight: bold; margin-right: 10px;">Check-out:</span><?php echo $wrapper->field_check_out->value(); ?></td></tr>
                         <tr><td><span style="font-weight: bold; margin-right: 10px;">Number of nights:</span><?php echo count(explode('|', $wrapper->field_nights->value())); ?></td></tr>
@@ -406,9 +405,8 @@
                   <tr>
                     <td style="padding-top: 15px; border-bottom: dotted 1px #333333; padding-bottom: 15px">
                       <table style="margin: 0; padding-top: 15px;border-collapse:collapse; color:#333333; font-size:14px; line-height: 22px;">
-                        <tr><td><span style="font-weight: bold; margin-right: 10px;">Address:</span><?php echo $wrapper->field_hotel_contact->value(); ?></td></tr>
-                        <tr><td><span style="font-weight: bold; margin-right: 10px;">Phone:</span>Phone</td></tr>
-                        <tr><td><span style="font-weight: bold; margin-right: 10px;">Fax:</span>Fax</td></tr>
+                        <tr><td><span style="font-weight: bold; margin-right: 10px;">Address:</span><?php echo $wrapper->field_hotel_address->value(); ?></td></tr>
+                        <tr><td><span style="font-weight: bold; margin-right: 10px;">Phone:</span><?php echo $wrapper->field_hotel_contact->value(); ?></td></tr>
                         <tr><td><span style="font-weight: bold; margin-right: 10px;">Check-in:</span><?php echo $wrapper->field_check_in->value(); ?></td></tr>
                         <tr><td><span style="font-weight: bold; margin-right: 10px;">Check-out:</span><?php echo $wrapper->field_check_out->value(); ?></td></tr>
                         <tr><td><span style="font-weight: bold; margin-right: 10px;">Number of nights:</span><?php echo $wrapper->field_nights->value(); ?></td></tr>
@@ -520,7 +518,7 @@
                           <td style="text-align: right; padding-bottom: 15px; border-bottom: dotted 1px #ffffff;">Total cost of stay</td>
                         </tr>
                         <tr>
-                          <td width="50%" style="font-size: 18px; padding-top: 15px;">PAID</td>
+                          <td width="50%" style="font-size: 18px; padding-top: 15px;">Pay on arrival</td>
                           <td style="text-align: right; font-size: 18px;  padding-top: 15px;"><?php echo $wrapper->field_rate->value(); ?></td>
                         </tr>
                       </table>
@@ -536,7 +534,7 @@
                     <td style="color:#333333; font-size:18px; font-weight:bold; line-height: 22px; text-transform: uppercase; ">Payment information</td>
                   </tr>
                   <tr>
-                    <td style="color:#333333; font-size:14px; line-height:22px; border-bottom: dotted 1px #333333; padding-bottom: 15px">We have charged your credit card for the full payment of this reservation.</td>
+                    <td style="color:#333333; font-size:14px; line-height:22px; border-bottom: dotted 1px #333333; padding-bottom: 15px"></td>
                   </tr>
                   <tr>
                     <td>
