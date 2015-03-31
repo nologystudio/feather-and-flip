@@ -296,6 +296,8 @@ function feflip_preprocess_views_view(&$variables) {
             'mail' => '...',
             'phone'=> '...',
             'hotelName' => '...',
+            'hotelPhone' => '...',
+            'hotelAddress' => '...',
             'checkIn' => '...',
             'checkOut'=> '...',
             'rate' => '...',
@@ -346,6 +348,8 @@ function feflip_preprocess_views_view(&$variables) {
             $booking['phone'] = isset($entity->field_phone_number ['und'][0]['value']) ? $entity->field_phone_number ['und'][0]['value'] : '...';
             $booking['mail'] =  isset($entity->field_email ['und'][0]['value']) ? $entity->field_email ['und'][0]['value'] : '...';
             $booking['hotelName'] =  isset($entity->field_hotel_name['und'][0]['value']) ? $entity->field_hotel_name['und'][0]['value'] : '...';
+            $booking['hotelAddress'] =  isset($entity->field_hotel_address['und'][0]['value']) ? $entity->field_hotel_address['und'][0]['value'] : '...';
+            $booking['hotelPhone'] =  isset($entity->field_hotel_contact['und'][0]['value']) ? $entity->field_hotel_contact['und'][0]['value'] : '...';
             $booking['checkIn'] =  isset($entity->field_check_in['und'][0]['value']) ? $entity->field_check_in['und'][0]['value'] : '...';
             $booking['checkOut'] =  isset($entity->field_check_out['und'][0]['value']) ? $entity->field_check_out['und'][0]['value'] : '...';
             $booking['rate'] =  isset($entity->field_rate['und'][0]['value']) ? $entity->field_rate['und'][0]['value'] : '...';
