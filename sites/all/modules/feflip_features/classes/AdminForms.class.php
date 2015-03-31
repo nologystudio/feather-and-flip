@@ -3,8 +3,8 @@
 class AdminForms
 {
     const API = 'Mailchimp.php';
-    const APIKEY = /*'dced674ea5511297bee26bcfc6cead3b-us8';*/'eae1d5448b1a2cb751661162fd5011fd-us8';
-    const LISTID = /*'9539518750';*/'487e37ac3f';
+    const APIKEY = 'dced674ea5511297bee26bcfc6cead3b-us8';//'eae1d5448b1a2cb751661162fd5011fd-us8';
+    const LISTID = '9539518750';//'487e37ac3f';
 
 
     private static function encrypt_decrypt($action, $string) {
@@ -320,11 +320,7 @@ class AdminForms
             $result = $sabreService->HotelBookReservation($sessionInfo,$values['roomCode'], $values['numUnit'], $values['firstName'], $values['lastName'], $values['email'], $values['phone'],
                 $values['guaranteeType'], $values['creditCardCode'], $values['creditCardExpireDate'], $values['creditCardNumber']);
 
-            if (isset($result->ApplicationResults->Success))
-                $result2 = $sabreService->EndTransaction($sessionInfo);
-
-            watchdog('HotelBookingReservation', 'AdmiForm.class result2===> '. '<pre>' . print_r( $result2, true) . '</pre>');
-            watchdog('HotelBookingReservation', 'AdmiForm.class Values===> '. '<pre>' . print_r( $values, true) . '</pre>');
+            //watchdog('HotelBookingReservation', 'AdmiForm.class ===> '. '<pre>' . print_r( $result, true) . '</pre>');
 
             if (isset($_SESSION['sabreSession'])) {
                 try {
@@ -341,8 +337,7 @@ class AdminForms
                     'user_email'=>$values['email'],
                     'user_phoneNumber' =>$values['phone'],
                     'user_creditCard' => 'xxxxxxxxxxxx'. substr($values['creditCardNumber'], -4),
-                    'booking_id'=>isset($result2->ItineraryRef->ID) ? $result2->ItineraryRef->ID : '',
-                    'booking_confirmation_number' => $result->Hotel->BasicPropertyInfo->ConfirmationNumber,
+                    'booking_id'=>$result->Hotel->BasicPropertyInfo->ConfirmationNumber,
                     'booking_hotelName'=>$result->Hotel->BasicPropertyInfo->HotelName,
                     'booking_hotelContact'=>'',
                     'booking_ckeckIn'=>$values['checkIn'],
