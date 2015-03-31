@@ -337,7 +337,7 @@ class Expedia
      */
     public static function HotelBookReservation($hotelId, $checkin, $checkout,$roomConfig, $roomcode, $ratecode, $rateKey, $supplierType, $chargeableRate,
                                                 $firstname, $lastname, $email, $phone, $creditCardType, $creaditCardNumber, $creditCardIdentifier,
-                                                $creditCardExpirationMonth, $creditCardExpirationYear)
+                                                $creditCardExpirationMonth, $creditCardExpirationYear, $address, $city, $postalCode)
     {
         $service = wsclient_service_load('expedia__rest');
         $service->settings['http_headers'] = array(
@@ -402,11 +402,11 @@ class Expedia
         <creditCardExpirationYear>$creditCardExpirationYear</creditCardExpirationYear>
     </ReservationInfo>
     <AddressInfo>
-        <address1>travelnow</address1>
-        <city>Seattle</city>
-        <stateProvinceCode>WA</stateProvinceCode>
+        <address1>$address</address1>
+        <city>$city</city>
+        <stateProvinceCode>NY</stateProvinceCode>
         <countryCode>US</countryCode>
-        <postalCode>98004</postalCode>
+        <postalCode>$postalCode</postalCode>
     </AddressInfo>
 </HotelRoomReservationRequest>";
 
@@ -543,6 +543,7 @@ $xml = "<HotelRoomReservationRequest>
 
         }
         catch(Exception $e){
+            watchdog('Expedia Error', 'HotelBookReservation Error ===> '. $e->getMessage());
             return $e->getMessage();
         }
 

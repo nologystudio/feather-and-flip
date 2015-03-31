@@ -369,17 +369,24 @@ class AdminForms
 
             $result = Expedia::HotelBookReservation($values['hotelId'], $values['checkIn'], $values['checkOut'], $values['rooms']['info'],
                 $values['roomCode'], $values['rateCode'], $values['rateKey'], $values['supplierType'], $values['chargeableRate'], $values['firstName'], $values['lastName'], $values['email'], $values['phone'],
-                $values['creditCardCode'], $values['creditCardNumber'], $values['creditCardIdentifier'], $creditCardExpirationMonth, $creditCardExpirationYear);
+                $values['creditCardCode'], $values['creditCardNumber'], $values['creditCardIdentifier'], $creditCardExpirationMonth, $creditCardExpirationYear, $values['address'], $values['cityCode'], $values['postalCode'] );
 
-            //watchdog('HotelBookingReservation', 'Expedia.class ===> '. '<pre>' . print_r( $result, true) . '</pre>');
+            watchdog('HotelBookingReservation', 'Response Booking ===> '. '<pre>' . print_r( $result, true) . '</pre>');
 
             if(isset($result['HotelRoomReservationResponse']) && isset($result['HotelRoomReservationResponse']['processedWithConfirmation']) && isset($result['HotelRoomReservationResponse']['reservationStatusCode']) && $result['HotelRoomReservationResponse']['reservationStatusCode'] == 'CF')
             {
                 $nights = '';
                 if (isset($values['nightlyRates']))
                 {
-                    foreach($values['nightlyRates'] as $rate)
-                        $nights .= $rate['@rate'] . ' ' . $result['HotelRoomReservationResponse']['RateInfos']['RateInfo']['ChargeableRateInfo']['@currencyCode'] .  '|';
+                    if (!isset($values['nightlyRates']['@rate']))
+                    {
+                        foreach ($values['nightlyRates'] as $rate)
+                            $nights .= $rate['@rate'] . ' ' . $result['HotelRoomReservationResponse']['RateInfos']['RateInfo']['ChargeableRateInfo']['@currencyCode'] . '|';
+                    }
+                    else
+                    {
+                        $nights = $values['nightlyRates']['@rate'] . ' ' . $result['HotelRoomReservationResponse']['RateInfos']['RateInfo']['ChargeableRateInfo']['@currencyCode'] . '|';
+                    }
 
                     $nights = substr($nights,0, strlen($nights)-1);
                 }
@@ -393,7 +400,8 @@ class AdminForms
                     'booking_id'=>$result['HotelRoomReservationResponse']['itineraryId'],
                     'booking_confirmation_number' =>  is_array($result['HotelRoomReservationResponse']['confirmationNumbers']) ? $result['HotelRoomReservationResponse']['confirmationNumbers'][0] : $result['HotelRoomReservationResponse']['confirmationNumbers'],
                     'booking_hotelName'=>$result['HotelRoomReservationResponse']['hotelName'],
-                    'booking_hotelContact'=>'',
+                    'booking_hotelContact'=> isset($values['hotelPhone']) ? $values['hotelPhone'] : '',
+                    'hotel_address' => isset($values['hotelAddress']) ? $values['hotelAddress'] : '',
                     'booking_ckeckIn'=>$values['checkIn'],
                     'booking_checkOut'=>$values['checkOut'],
                     'booking_rate'=> $result['HotelRoomReservationResponse']['RateInfos']['RateInfo']['ChargeableRateInfo']['@total'] . ' ' . $result['HotelRoomReservationResponse']['RateInfos']['RateInfo']['ChargeableRateInfo']['@currencyCode'],
