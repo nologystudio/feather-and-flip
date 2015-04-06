@@ -147,6 +147,25 @@ class Helpers
                 $post->field_original_url->set($rss_post['url']);
                 $post->field_original_image->set($rss_post['img']);
 
+                if (!empty($rss_post['img'])) {
+
+                    $fname = urlencode(strtolower(str_replace(' ', '-', $rss_post['title']))) . '.jpg';
+                    $fpath = 'public://'.$fname;
+                    $idata = file_get_contents($rss_post['img']);
+                    file_put_contents($fpath, $idata);
+
+                    $file = new stdClass;
+                    $file->uid = '1';
+                    $file->filename = $fname;
+                    $file->uri = $fpath;
+                    $file->filemime = mime_content_type($fpath);
+                    $file->filesize = filesize($fpath);
+                    $file->status = 1;
+                    $file = file_save($file, FILE_EXISTS_REPLACE);
+
+                    $post->field_image->file->set($file);
+                }
+
                 // Term reference
                 $tids = array();
                 foreach ($rss_post['categories'] as $cat) {
