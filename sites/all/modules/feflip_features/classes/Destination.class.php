@@ -16,7 +16,8 @@ class Destination
 
         $query = $query->entityCondition('entity_type', 'node')
             ->entityCondition('bundle', 'destination')
-            ->propertyCondition('status', 1);
+            ->propertyCondition('status', 1)
+            ->propertyOrderBy('title', 'ASC');
 
         if(!empty($filter_field))
             $query = $query->propertyCondition($filter_field, 1);
