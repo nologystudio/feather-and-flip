@@ -51,6 +51,18 @@
 				$result = AdminForms::getDestinations();
 				echo json_encode($result);
 				break;
+            case 'collectionsRates':
+                //watchdog('Admin Forms Submit', 'CollectionRates Values ===> '. '<pre>' . print_r( $input_values, true) . '</pre>');
+                $next = drupal_get_path_alias('node/'. $input_values['collectionId'] . '/collection');
+                $result = AdminForms::getCollectionRates($input_values);
+
+                //watchdog('Admin Forms Submit', 'CollectionRates Result ===> '. '<pre>' . print_r( $result, true) . '</pre>');
+
+                $_SESSION['hotelRates'] = $result;
+                $_SESSION['inputValues'] = $input_values;
+
+                echo $next;
+                break;
 			case 'hotelRates':
                 $nextPage = '';
                 //watchdog('Admin Forms Submit', 'HotelRates ===> '. '<pre>' . print_r( $input_values, true) . '</pre>');

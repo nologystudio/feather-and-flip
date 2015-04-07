@@ -160,6 +160,64 @@ class AdminForms
     }
 
     /**
+     * Returns hotels rates of expedia and sabre (call webservice) from hotels collections
+     * @param $values
+     * @return array
+     */
+    static function getCollectionRates($values)
+    {
+        $sabreService = new Sabre;
+        $sabreEnable = variable_get('sabre_enable');
+
+        $sabre = array();
+        $expedia = array();
+
+        if (isset($values['hotelsId']))
+        {
+            $sabreCodes = array();
+            $eanCodes = array();
+            $rateCodes = array();
+
+            foreach($values['hotelsId'] as $hotelId)
+            {
+                $hotel = node_load($hotelId);
+                $wrapper = entity_metadata_wrapper('node', $hotel);
+
+                $sabreCode = $wrapper->field_hotelcode->value();
+                $eanCode = $wrapper->field_ean_hotelcode->value();
+                $rateCode = $wrapper->field_rate_code->value();
+
+                if (isset($sabreCode) && !empty($sabreCode) && $sabreCode != '0000000') $sabreCodes[] = trim($sabreCode);
+                if (isset($eanCode) && !empty($eanCode) && $eanCode != '0000000') $eanCodes[] = trim($eanCode);
+                if (isset($rateCode) && !empty($rateCode)) $rateCodes[] = $rateCode;
+            }
+
+            $date = explode("/", $values['checkIn']);
+            $sabreChecking = $date[2].'-'. $date[0].'-'.$date[1];
+            $date = explode("/", $values['checkOut']);
+            $sabreCheckout = $date[2].'-'. $date[0].'-'.$date[1];
+
+            // Sabre numAdults
+            $numAdults = 0;
+            foreach ($values['rooms']['info'] as $room)
+                $numAdults += $room['adults'];
+
+            if ($sabreEnable == 1)
+            {
+                $sabre = $sabreService->ListHotelAvail($sabreCodes, $rateCodes, $numAdults, $sabreChecking, $sabreCheckout);
+            }
+
+            $expedia = Expedia::GetHotelsByCode_XML($eanCodes, $values['checkIn'], $values['checkOut'], $values['rooms']['info']);
+
+        }
+
+        return array(
+            'sabre' => $sabre,
+            'expedia' => $expedia
+        );
+    }
+
+    /**
      * Cancel an existing booking
      * @param $values
      * @param $error
