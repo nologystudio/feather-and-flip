@@ -150,3 +150,5 @@ if(isset($inputValues['service']) && !empty($inputValues['service']))
 	</section>
     <?php } ?>
 </article>
+
+<?php if (isset($travel_journal)) print $travel_journal; ?>

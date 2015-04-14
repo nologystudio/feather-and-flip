@@ -141,6 +141,14 @@ function feflip_preprocess_node(&$variables) {
       $variables['destinationText'] = $destination->title . ', ' . $destination->field_country['und'][0]['value'];
       $image = Helpers::GetMainImageFromFieldCollection($destination->field_images, $variables['destinationText'],'http://placehold.it/100x100', 'itinerary_route_icon');
       $variables['image'] = $image;
+
+      // check if exist term with this destination name
+      $term = taxonomy_get_term_by_name($destination->title);
+      if (!empty($term)) {
+          $cat = array_shift($term);
+          $variables['travel_journal'] = views_embed_view('travel_journal_tags', 'page', $cat->tid);
+      }
+
   }
   elseif (isset($variables['node']) && ($variables['node']->type == 'post')) {
     $variables['theme_hook_suggestions'][] = 'node__post';
