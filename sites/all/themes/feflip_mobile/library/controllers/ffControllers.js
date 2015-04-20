@@ -24,7 +24,7 @@
         /* ~ Global ~ */
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
         
-        var globalPartialPath = (window.location.host == 'localhost:8888') ? '/feather-and-flip/library/partials/' : '/sites/all/themes/feflip/library/partials/';
+        var globalPartialPath = (window.location.host == 'localhost:8888') ? '/feather-and-flip/library/partials/' : '/sites/all/themes/feflip_mobile/library/partials/';
 		var formSubmit        = window.location.protocol + '//' + window.location.host + '/api/forms';
         
         /* ~ Controllers ~ */
@@ -539,45 +539,17 @@
 				            });
 						break;
 						case false:
-						
-							// | i | Set a request...
-							
-							var isCollection = $('section[id="hotel-reviews"]').data('collection');
-							var requestInfo;
-							
-							if(!_.isUndefined(isCollection)){
-									
-								var hotelIds = [];
-								
-								$('a.item').each(function(){
-									hotelIds.push($(this).data('internalid'));
-								});
-								
-								requestInfo = {
-									formID       :'collectionsRates',
-					                hotelsId     : hotelIds,
-					                collectionId : isCollection,
-					                checkIn      : $scope.bookingInfo.checkIn,
-					                checkOut     : $scope.bookingInfo.checkOut,
-					                rooms        : $scope.bookingInfo.rooms
-								}
-							}
-							else{
-								requestInfo = {
-									formID      :'hotelRates',
+							// | i | Make request...
+							$http({
+				                method : 'POST',
+				                url    : formSubmit,
+				                data   : $.param({
+					                formID      :'hotelRates',
 					                destination : $scope.bookingInfo.destination,
 					                checkIn     : $scope.bookingInfo.checkIn,
 					                checkOut    : $scope.bookingInfo.checkOut,
 					                rooms       : $scope.bookingInfo.rooms
-								}
-							}	
-							
-							// | i | Post a request...
-							
-							$http({
-				                method : 'POST',
-				                url    : formSubmit,
-				                data   : $.param(requestInfo),
+					            }),
 				                headers : { 
 				            		'Content-Type' : 'application/x-www-form-urlencoded'
 								},
@@ -586,8 +558,9 @@
 				            success(function(_data){
 					        	window.location.href = 'http://' + window.location.host + '/' + _data;
 					        }).
-				            error(function(_data,_status){});
-				            
+				            error(function(_data,_status){
+					            //console.log(_data);
+				            });
 						break;
 					}
 				}
@@ -927,6 +900,7 @@
 							hotelId       		  : $scope.availableRooms.hotelId,
 							hotelAddress          : $scope.availableRooms.hotelAddress,
 							hotelPhone            : $.trim($('li[id="phone"]').text()),
+							//hotelFax              : 'this is the fax',       
 							checkIn       		  : $scope.availableRooms.arrivalDate,
 							checkOut     	      : $scope.availableRooms.departureDate,
 							rooms         		  : $scope.bookingInfo.rooms,
@@ -1205,7 +1179,7 @@
 					newMarker.geometry.coordinates[0] = _d.longitude;
 					newMarker.geometry.coordinates[1] = _d.latitude;
 					newMarker.properties.title        = _d.destination;
-					newMarker.properties.icon.iconUrl = '/sites/all/themes/feflip/media/icons/destination-map-pin.png';
+					newMarker.properties.icon.iconUrl = '/sites/all/themes/feflip_mobile/media/icons/destination-map-pin.png';
 					newMarker.properties.image        = _d.image.url;
 					newMarker.properties.description  = _d.description;
 					newMarker.properties.url          = _d.maptourl;
@@ -1940,7 +1914,7 @@
 				    properties: {
 				        title : "",
 				        icon  : {
-				            iconUrl     : '/sites/all/themes/feflip/media/icons/destination-map-pin.png',
+				            iconUrl     : '/sites/all/themes/feflip_mobile/media/icons/destination-map-pin.png',
 				            iconSize    : [38,47], // size of the icon
 				            iconAnchor  : [19,47], // point of the icon which will correspond to marker's location
 				            popupAnchor : [0,-10], // point from which the popup should open relative to the iconAnchor
@@ -2000,7 +1974,7 @@
 						newMarker.properties.title        = _d.title;
 						newMarker.properties.phone        = _d.phone;
 						newMarker.properties.address      = _d.address;
-						newMarker.properties.icon.iconUrl = '/sites/all/themes/feflip/media/map/'+_d.association.toLowerCase()+'-pin.png';
+						newMarker.properties.icon.iconUrl = '/sites/all/themes/feflip_mobile/media/map/'+_d.association.toLowerCase()+'-pin.png';
 						newMarker.properties.review  	  = _d.review;
 						newMarker.properties.type  	      = _d.association.toLowerCase();
 						
