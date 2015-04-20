@@ -62,6 +62,7 @@ if(isset($inputValues['service']) && !empty($inputValues['service']))
             <h1 class="middle-line"><?php echo $node->title;?></h1>
             <a href="<?php echo $previous;?>" rel="prev">previous hotel</a>
             <a href="<?php echo $next;?>" rel="next">next hotel</a>
+            <h2><?php echo $node->field_contributor['und'][0]['value'] ;?></h2>
         </header>
         <div class="gallery-wrapper">
             <div id="hotel-gallery" class="one-item" ng-controller="SlideshowCtrl">
@@ -150,3 +151,5 @@ if(isset($inputValues['service']) && !empty($inputValues['service']))
 	</section>
     <?php } ?>
 </article>
+
+<?php if (isset($travel_journal)) print $travel_journal; ?>
