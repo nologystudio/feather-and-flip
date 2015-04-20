@@ -153,8 +153,15 @@ class Hotel
                 $contentblock = entity_load('field_collection_item',array($item['value']));
                 $contentblock = array_shift($contentblock);
                 $features = array();
-                
-                if (isset($contentblock->field_feature['und']) && count($contentblock->field_feature['und']) > 0)
+
+                if(isset($contentblock->field_description['und'][0]['value']) && !empty($contentblock->field_description['und'][0]['value']))
+                {
+                    $array = explode("<p>", $contentblock->field_description['und'][0]['value']);
+                    unset($array[0]);
+                    foreach($array as $item)
+                        $features[] = str_replace('</p>','', $item);
+                }
+                else if (isset($contentblock->field_feature['und']) && count($contentblock->field_feature['und']) > 0)
                 {
                     foreach($contentblock->field_feature['und'] as $feature)
                         $features[] = $feature['value'];
@@ -306,7 +313,18 @@ class Hotel
         if (isset($nodes['node']))
         {
             $nodes = node_load_multiple(array_keys($nodes['node']));
-            $hotels = self::getHotelsInfo($nodes);
+
+            foreach($nodes as $node)
+            {
+                $wrapper = entity_metadata_wrapper('node', $node);
+
+                $hotels[] = array(
+                    'id'          => $node->nid,
+                    'name'        => $wrapper->title->value(),
+                    'country'     => $wrapper->field_destination->field_country->value(),
+                    'url'         => url('node/'.$node->nid),
+                );
+            }
         }
         
         return $hotels;      

@@ -23,8 +23,8 @@ drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
 *	Redirect if mobile
 */
 if (Helpers::get_device_type() != 'desktop'){
-	header('Location: http://m.featherandflip.com');
-	exit();
+	//header('Location: http://m.featherandflip.com');
+	//exit();
 }
 
 menu_execute_active_handler();

@@ -18,7 +18,7 @@ class Itinerary
             ->fieldCondition('field_destination','target_id', $destinationId, '=')
             ->propertyOrderBy('title', 'ASC')
             ->execute();
-
+        
         $node = null;
         if (isset($nodes['node'])) {
             $keys = array_keys($nodes['node']);
