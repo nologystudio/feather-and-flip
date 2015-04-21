@@ -1,62 +1,4 @@
-        <?php 
         
-        /* ----------------------------------------------------------------------------------------------------------------
-            
-    * Project     : F+F
-    * Document    : header 
-    * Created on  : Oct 08, 2.014
-    * Version     : 1.0 
-    * Author      : Aday Henriquez
-    * Description : Global header html template
-    * Components  : Less
-    
-    -------------------------------------------------------------------------------------------------------------------
-       *          This code has been developed by Nology. in the awesome Canaries - www.nologystudio.com           *
-    -------------------------------------------------------------------------------------------------------------------
-   
-    * Log * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
--------------------------------------------------------------------------------------------------------------------
-*  
----------------------------------------------------------------------------------------------------------------- */ ?>
-
-        <?php 
-        
-        /* ------------------------------------------------------------------------------------------------------------- */
-        /* | i | Development configuration */
-        /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-        
-        $stageServer      = "54.164.51.183"; 
-        $productionServer = "feather+flip.com";
-        
-        $brandName       = variable_get('site_name');
-        $siteName        = variable_get('site_slogan');
-        $pageTitle       = $head_title_array['title'];
-         
-        $useLess = true;
-        $inDev   = true;
-        
-        /* ------------------------------------------------------------------------------------------------------------- */
-        /* | i | Global header configuration */
-        /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-        
-        // | i | jsTrigger: this get variable triggers functionalities in javascript...
-        $jsTrigger      = (isset($_GET['js']) ? $_GET['js'] : '');
-        // | i | Header...
-        $headerTitle    = $brandName.' | '.$pageTitle;
-
-        // | i | http://ogp.me | Opengraph protocol...
-        $opengraph      = true;
-        $twitterCard    = false;
-        // | i | Path & Media assets...
-
-        $logoPath       = "media/x-logo.png";
-        
-        $pageURL         = "";
-        $pageDescription = "";
-        $pageKeywords    = "";
-        $siteImage       = "";
-        
-        ?>
         
         <!DOCTYPE html>
         <!--[if lt IE 7]>      <html ng-app="ffApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -65,15 +7,12 @@
         <!--[if gt IE 8]><!--> <html ng-app="ffApp" class="no-js"> <!--<![endif]-->       
         
         <head>
-
-            <?php // | i | Social Media block... ?>
-            <?php echo $head; ?>
+			<?php echo $head; ?>
+            <meta content="initial-scale=0.9, minimum-scale=0.9, width=device-width, user-scalable=no" name="viewport">
             
             <title><?php echo $headerTitle; ?></title>
             <link rel="shortcut icon" href="/sites/all/themes/feflip/media/brand/favicon.ico" type="image/x-icon">
             <link rel="icon"          href="/sites/all/themes/feflip/media/brand/favicon.ico" type="image/x-icon">
-            
-            <?php // | i | Set-up scripts and Less files...  ?>
             
             <link   href='https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
             <link   rel="stylesheet"  href="<?php echo variable_get('relativePath'); ?>style/style-nology.css" title="style-nology" type="text/css" media="screen">

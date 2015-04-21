@@ -25,6 +25,7 @@
 			<div class="wrapper">
 				<div class="feather"></div>
 				<h1>Your Booking</h1>
+				<!--<p id="booking-error" ng-if="bookingError">{{bookingError}}</p>-->
 			</div>
 		</header>
 		
@@ -127,9 +128,13 @@
 						<span>Room and Rate/Night:</span>
 						<small>(excluding taxes and fees)</small>
 					</li>
-					<li ng-repeat="rate in roomSelection.RateInfos.RateInfo.ChargeableRateInfo.NightlyRatesPerRoom.NightlyRate">
+					<li ng-if="nightlyIsArray" ng-repeat="rate in roomSelection.RateInfos.RateInfo.ChargeableRateInfo.NightlyRatesPerRoom.NightlyRate">
 						<span>Night {{$index}}</span> 
 						<span>{{rate['@rate']}} {{roomSelection.RateInfos.RateInfo.ChargeableRateInfo['@currencyCode']}}</span>
+					</li>
+					<li ng-if="!nightlyIsArray">
+						<span>Night {{$index}}</span> 
+						<span>{{roomSelection.RateInfos.RateInfo.ChargeableRateInfo.NightlyRatesPerRoom.NightlyRate['@rate']}} {{roomSelection.RateInfos.RateInfo.ChargeableRateInfo['@currencyCode']}}</span>
 					</li>
 				</ul>
 				<ul id="total">

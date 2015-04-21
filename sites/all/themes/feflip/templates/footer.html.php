@@ -46,7 +46,7 @@
 					<table width="135" border="0" cellpadding="2" cellspacing="0" title="Click to Verify - This site chose Symantec SSL for secure e-commerce and confidential communications.">
 						<tr>
 							<td width="135" align="center" valign="top">
-								<script type="text/javascript" src="https://seal.websecurity.norton.com/getseal?host_name=www.featherandflip.com&amp;size=L&amp;use_flash=NO&amp;use_transparent=NO&amp;lang=en"></script>
+								<script type="text/javascript" src="https://seal.websecurity.norton.com/getseal?host_name=www.featherandflip.com&amp;size=L&amp;use_flash=YES&amp;use_transparent=YES&amp;lang=en"></script>
 							</td>
 						</tr>
 					</table>
@@ -63,6 +63,3 @@
 		
 		<div class="call-to-action" ng-controller="MessengerCtrl" ng-include="messenger" ng-show="display"></div>
 		<?php include 'script.html.php'; ?>
-		</body>
-		
-		</html>
