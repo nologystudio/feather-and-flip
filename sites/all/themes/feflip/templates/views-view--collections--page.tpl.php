@@ -114,7 +114,7 @@ if ($showPrice)
     <section id="booking-engine" ng-controller="BookingEngineCtrl" ng-include="bookingSearch" ng-init="initRate(0,<?php if(isset($destinationId)) echo $destinationId; else echo 0;?>,<?php if(isset($internalId)) echo $internalId; else echo 0;?>)"></section>
 <?php } ?>
 <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - -  -->
-<section id="hotel-reviews" <?php echo ((isset($arg[2]) && ($arg[2] == 'itinerary')) ? ' class="hidden"' : ''); ?>>
+<section id="hotel-reviews" <?php echo ((isset($arg[2]) && ($arg[2] == 'itinerary')) ? ' class="hidden"' : ''); echo (isset($arg[1])) ? ' data-collection="'.$arg[1].'"' : ''; ?>>
     <!--<header id="booking-header-engine">
 
             <!--<?php if(count($inputValues) > 0){?>
