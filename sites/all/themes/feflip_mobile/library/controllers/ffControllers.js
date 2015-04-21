@@ -8,7 +8,7 @@
 	    * Created on  : Oct 20, 2.014
 	    * Version     : 1.0 
 	    * Author      : Aday Henriquez
-	    * Description : angular controllers for desktop
+	    * Description : angular controllers
 	    
 	    -------------------------------------------------------------------------------------------------------------------
 	       *          This code has been developed by NOLOGY. in the awesome Canaries - www.nologystudio.com           *
@@ -61,27 +61,6 @@
 					});
 				}
 			});
-			
-			// | i | Sticky navigation trigger...
-			
-			if(!_nav.hasClass('sticky')){
-				$(window).scroll(function(){
-					if($(this).scrollTop() >= heightRef){
-						_nav.addClass('sticky');
-						//_eng.addClass('sticky').css({top:($(this).scrollTop()-540)+'px'});					
-					}else{
-						_nav.removeClass('sticky');
-						//_eng.removeClass('sticky').css({top:0});	
-					}
-				});
-			}
-			
-			setTimeout(function(){
-				$('#hotel-list').css({
-					width : $(window).width()+'px',
-					marginLeft  : -$('#hotel-reviews').offset().left + 'px'
-				});
-			},1000);
 		});
 		
 		/* ~ Body ~ */
@@ -1364,11 +1343,11 @@
 				}
 			});
 			
-			setTimeout(function(){
+			/*setTimeout(function(){
 				grid.shuffle({
 					itemSelector: '.quick-entry'
 				});
-			},1000);
+			},1000)*/
 			
 		});
 		
