@@ -216,9 +216,9 @@ $databases = array(
       'default' =>
         array(
           'database' => 'feflipdb',
-          'username' => 'fflip_u',
+          'username' => 'feflip_u',
           'password' => '4m_feflip_12=2d',
-          'host' => 'localhost',
+          'host' => 'developdb.cjjqpl4ywmi6.us-east-1.rds.amazonaws.com',
           'port' => '',
           'driver' => 'mysql',
           'prefix' => '',
