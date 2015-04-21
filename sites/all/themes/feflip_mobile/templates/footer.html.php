@@ -40,8 +40,6 @@
 			</nav>
 			<div class="fixed-bar">
 				<a id="brand" href="/"><img src="/<?php echo drupal_get_path('theme', 'feflip_mobile'); ?>/media/brand/feather-and-flip-black-logo.png" alt="Feather+flip"/></a>
-				<?php echo Helpers::GetSocialMediaMenu('black');?>
-				
 				<div id="ssl-label">
 					<table width="135" border="0" cellpadding="2" cellspacing="0" title="Click to Verify - This site chose Symantec SSL for secure e-commerce and confidential communications.">
 						<tr>
@@ -50,13 +48,12 @@
 							</td>
 						</tr>
 					</table>
-				</div>
-								
+				</div>			
 				<a id="tzell-brand" href="http://www.tzell.com/tzell/index.htm" target="_blank">
 					<small>Powered by</small>
 					<img src="/<?php echo drupal_get_path('theme', 'feflip_mobile'); ?>/media/brand/tzell-logo.png" alt="Powered by Tzell Travel Group"/>
 				</a>
-
+				<?php echo Helpers::GetSocialMediaMenu('black');?>
 				<small><?php echo date("Y"); ?> FEATHER+FLIP LLC. ALL RIGHTS RESERVED</small>
 			</div>
 		</footer>
