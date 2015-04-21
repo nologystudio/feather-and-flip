@@ -295,7 +295,6 @@
     overflow: hidden;
     display: block;
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-    /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
   }
   body > header button.nav-trigger {
     border: none;
@@ -413,13 +412,14 @@
     font-size: 18px;
     margin: 0 3px;
   }
-  body > header + div[id$="-gallery"] {
+  /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+  body > div[id$="-gallery"] {
     width: 100%;
-    height: 175px;
+    height: 200px;
     position: relative;
     float: left;
   }
-  body > header + div[id$="-gallery"] > ul {
+  body > div[id$="-gallery"] > ul {
     border: none;
     background: none;
     padding: 0;
@@ -427,15 +427,15 @@
     text-decoration: none;
     color: red;
     width: auto;
-    height: 175px;
+    height: 200px;
     position: relative;
     float: left;
     display: block;
     min-width: 100%;
   }
-  body > header + div[id$="-gallery"] > ul > li {
+  body > div[id$="-gallery"] > ul > li {
     width: 1280px;
-    height: 175px;
+    height: 200px;
     opacity: 0;
     filter: alpha(opacity=0);
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
@@ -443,19 +443,19 @@
     position: relative;
     float: left;
   }
-  body > header + div[id$="-gallery"] > ul > li article {
+  body > div[id$="-gallery"] > ul > li article {
     width: 100%;
-    height: 175px;
+    height: 200px;
     position: relative;
     float: left;
     display: block;
     overflow: hidden;
   }
-  body > header + div[id$="-gallery"] > ul > li article:first-child {
+  body > div[id$="-gallery"] > ul > li article:first-child {
     display: block;
     opacity: 1;
   }
-  body > header + div[id$="-gallery"] > ul > li article > figure {
+  body > div[id$="-gallery"] > ul > li article > figure {
     width: 100%;
     height: 100%;
     position: absolute;
@@ -467,12 +467,12 @@
     margin: 0;
     overflow: hidden;
   }
-  body > header + div[id$="-gallery"] > ul > li article > figure img {
+  body > div[id$="-gallery"] > ul > li article > figure img {
     width: 100%;
     height: auto;
     border: 0;
   }
-  body > header + div[id$="-gallery"] > ul > li article > div.info-wrapper {
+  body > div[id$="-gallery"] > ul > li article > div.info-wrapper {
     width: 100%;
     height: 80px;
     position: absolute;
@@ -483,11 +483,11 @@
     margin-left: -50%;
     display: block;
   }
-  body > header + div[id$="-gallery"] > ul > li article > div.info-wrapper.static {
+  body > div[id$="-gallery"] > ul > li article > div.info-wrapper.static {
     margin-top: -80px;
   }
-  body > header + div[id$="-gallery"] > ul > li article > div.info-wrapper a,
-  body > header + div[id$="-gallery"] > ul > li article > div.info-wrapper div {
+  body > div[id$="-gallery"] > ul > li article > div.info-wrapper a,
+  body > div[id$="-gallery"] > ul > li article > div.info-wrapper div {
     width: 100%;
     height: auto;
     -webkit-box-sizing: border-box;
@@ -505,18 +505,18 @@
     float: left;
     margin: 5px auto;
   }
-  body > header + div[id$="-gallery"] > ul > li article > div.info-wrapper a h1,
-  body > header + div[id$="-gallery"] > ul > li article > div.info-wrapper div h1,
-  body > header + div[id$="-gallery"] > ul > li article > div.info-wrapper a h2,
-  body > header + div[id$="-gallery"] > ul > li article > div.info-wrapper div h2,
-  body > header + div[id$="-gallery"] > ul > li article > div.info-wrapper a h3,
-  body > header + div[id$="-gallery"] > ul > li article > div.info-wrapper div h3,
-  body > header + div[id$="-gallery"] > ul > li article > div.info-wrapper a h4,
-  body > header + div[id$="-gallery"] > ul > li article > div.info-wrapper div h4,
-  body > header + div[id$="-gallery"] > ul > li article > div.info-wrapper a h5,
-  body > header + div[id$="-gallery"] > ul > li article > div.info-wrapper div h5,
-  body > header + div[id$="-gallery"] > ul > li article > div.info-wrapper a h6,
-  body > header + div[id$="-gallery"] > ul > li article > div.info-wrapper div h6 {
+  body > div[id$="-gallery"] > ul > li article > div.info-wrapper a h1,
+  body > div[id$="-gallery"] > ul > li article > div.info-wrapper div h1,
+  body > div[id$="-gallery"] > ul > li article > div.info-wrapper a h2,
+  body > div[id$="-gallery"] > ul > li article > div.info-wrapper div h2,
+  body > div[id$="-gallery"] > ul > li article > div.info-wrapper a h3,
+  body > div[id$="-gallery"] > ul > li article > div.info-wrapper div h3,
+  body > div[id$="-gallery"] > ul > li article > div.info-wrapper a h4,
+  body > div[id$="-gallery"] > ul > li article > div.info-wrapper div h4,
+  body > div[id$="-gallery"] > ul > li article > div.info-wrapper a h5,
+  body > div[id$="-gallery"] > ul > li article > div.info-wrapper div h5,
+  body > div[id$="-gallery"] > ul > li article > div.info-wrapper a h6,
+  body > div[id$="-gallery"] > ul > li article > div.info-wrapper div h6 {
     width: auto;
     height: auto;
     font-family: 'Lato', sans-serif;
@@ -528,15 +528,15 @@
     text-transform: uppercase;
     text-shadow: 1px 1px 0px black;
   }
-  body > header + div[id$="-gallery"] > ul > li article > div.info-wrapper a span,
-  body > header + div[id$="-gallery"] > ul > li article > div.info-wrapper div span {
+  body > div[id$="-gallery"] > ul > li article > div.info-wrapper a span,
+  body > div[id$="-gallery"] > ul > li article > div.info-wrapper div span {
     position: relative;
     float: left;
     display: block;
     clear: both;
   }
-  body > header + div[id$="-gallery"] > ul > li article > div.info-wrapper a span.rounded-btn,
-  body > header + div[id$="-gallery"] > ul > li article > div.info-wrapper div span.rounded-btn {
+  body > div[id$="-gallery"] > ul > li article > div.info-wrapper a span.rounded-btn,
+  body > div[id$="-gallery"] > ul > li article > div.info-wrapper div span.rounded-btn {
     width: auto;
     height: auto;
     font-family: 'Lato', sans-serif;
@@ -554,8 +554,8 @@
     float: none;
     display: table;
   }
-  body > header + div[id$="-gallery"] > ul > li article > div.info-wrapper a span.cursive,
-  body > header + div[id$="-gallery"] > ul > li article > div.info-wrapper div span.cursive {
+  body > div[id$="-gallery"] > ul > li article > div.info-wrapper a span.cursive,
+  body > div[id$="-gallery"] > ul > li article > div.info-wrapper div span.cursive {
     width: 100%;
     height: auto;
     font-family: 'Times', serif;
@@ -567,14 +567,14 @@
     margin: 5px 0 10px 0;
     text-shadow: 1px 1px 0px black;
   }
-  body > header + div[id$="-gallery"] > ul > li article > div.info-wrapper a:hover,
-  body > header + div[id$="-gallery"] > ul > li article > div.info-wrapper div:hover {
+  body > div[id$="-gallery"] > ul > li article > div.info-wrapper a:hover,
+  body > div[id$="-gallery"] > ul > li article > div.info-wrapper div:hover {
     opacity: 0.5;
     filter: alpha(opacity=50);
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
   }
-  body > header + div[id$="-gallery"] > button[rel] {
+  body > div[id$="-gallery"] > button[rel] {
     border: none;
     background: none;
     padding: 0;
@@ -608,26 +608,26 @@
     cursor: pointer;
     z-index: 1;
   }
-  body > header + div[id$="-gallery"] > button[rel][rel="left"] {
+  body > div[id$="-gallery"] > button[rel][rel="left"] {
     left: 50px;
   }
-  body > header + div[id$="-gallery"] > button[rel][rel="left"]:before {
+  body > div[id$="-gallery"] > button[rel][rel="left"]:before {
     content: '\23';
   }
-  body > header + div[id$="-gallery"] > button[rel][rel="right"] {
+  body > div[id$="-gallery"] > button[rel][rel="right"] {
     right: 50px;
   }
-  body > header + div[id$="-gallery"] > button[rel][rel="right"]:before {
+  body > div[id$="-gallery"] > button[rel][rel="right"]:before {
     content: '\24';
   }
-  body > header + div[id$="-gallery"] > button[rel]:hover {
+  body > div[id$="-gallery"] > button[rel]:hover {
     opacity: 1;
     filter: alpha(opacity=100);
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
     color: #333333;
   }
-  body > header + div[id$="-gallery"] > div[id$="-state-bar"] {
+  body > div[id$="-gallery"] > div[id$="-state-bar"] {
     width: 90px;
     height: 30px;
     position: absolute;
@@ -637,7 +637,7 @@
     padding: 40px 0px 20px 0px;
     z-index: 1;
   }
-  body > header + div[id$="-gallery"] > div[id$="-state-bar"] button {
+  body > div[id$="-gallery"] > div[id$="-state-bar"] button {
     border: none;
     background: none;
     padding: 0;
@@ -652,10 +652,10 @@
     cursor: pointer;
     color: white;
   }
-  body > header + div[id$="-gallery"] > div[id$="-state-bar"] button.on {
+  body > div[id$="-gallery"] > div[id$="-state-bar"] button.on {
     color: red;
   }
-  body > header + div[id$="-gallery"] button[rel] {
+  body > div[id$="-gallery"] button[rel] {
     display: none;
     opacity: 0;
   }
@@ -676,6 +676,7 @@
     z-index: 11;
     margin-top: 0;
     padding: 30px 0;
+    overflow: hidden;
   }
   body > nav[role="main-navigation"] div.wrapper {
     width: 100%;
@@ -909,7 +910,7 @@
     position: relative;
     float: left;
     padding-top: 30px;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
   }
   body > nav[role="main-navigation"] div.wrapper > ul > li > a + ul li {
@@ -1145,6 +1146,7 @@
     position: relative;
     float: left;
     cursor: default;
+    margin-top: 0;
   }
   body > nav[role="main-navigation"] div.wrapper > ul > li > a + div[id][id="help-info"] > div {
     width: 100%;
@@ -1155,6 +1157,7 @@
     background-color: #336666;
     position: relative;
     float: left;
+    padding-bottom: 15px;
   }
   body > nav[role="main-navigation"] div.wrapper > ul > li > a + div[id][id="help-info"] > div h4 {
     font-family: 'Lato', sans-serif;
@@ -1164,8 +1167,8 @@
     line-height: 'auto';
     position: relative;
     float: left;
-    width: 100%;
-    margin: 10px 0 5px 0;
+    width: 90%;
+    margin: 10px 5% 5px 5%;
     text-transform: uppercase;
     text-align: center;
   }
@@ -1224,7 +1227,7 @@
     float: left;
     display: block;
     overflow: hidden;
-    padding: 35px 0 0 0;
+    padding: 0;
   }
   body > nav[role="main-navigation"] div.wrapper > a[id="brand"] + ul li:first-child > a + ul div.wrapper > li {
     width: 100%;
@@ -3804,6 +3807,8 @@
   body > article > section[id="map-it"] > header nav[id] button[rel="move"] {
     font-size: 28px;
     margin-top: 90px;
+    display: none;
+    opacity: 0;
   }
   body > main[id][id="map-it"] > header nav[id] button[rel="move"]:before,
   body > section[id="map-it"] > header nav[id] button[rel="move"]:before,
@@ -4782,6 +4787,18 @@
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
   }
+  body > main[id][id="map-it"].full > header,
+  body > section[id="map-it"].full > header,
+  body > article[id="map-it"].full > header,
+  body > main[id] > section[id="map-it"].full > header,
+  body > section > section[id="map-it"].full > header,
+  body > article > section[id="map-it"].full > header {
+    top: auto;
+    left: auto;
+    position: relative;
+    float: left;
+    margin-top: 30px;
+  }
   body > main[id][id="map-it"].full > header h3,
   body > section[id="map-it"].full > header h3,
   body > article[id="map-it"].full > header h3,
@@ -4789,19 +4806,17 @@
   body > section > section[id="map-it"].full > header h3,
   body > article > section[id="map-it"].full > header h3 {
     background-size: 50px auto;
-    width: 300px;
-    top: 0;
-    margin-top: 15px;
     line-height: 70px;
-    margin-left: -130px;
+    padding-top: 50px;
+    background-position: center top;
   }
-  body > main[id][id="map-it"].full > header h3 ul[role="select"],
-  body > section[id="map-it"].full > header h3 ul[role="select"],
-  body > article[id="map-it"].full > header h3 ul[role="select"],
-  body > main[id] > section[id="map-it"].full > header h3 ul[role="select"],
-  body > section > section[id="map-it"].full > header h3 ul[role="select"],
-  body > article > section[id="map-it"].full > header h3 ul[role="select"] {
-    margin-top: 160px;
+  body > main[id][id="map-it"].full > header ul[role="select"],
+  body > section[id="map-it"].full > header ul[role="select"],
+  body > article[id="map-it"].full > header ul[role="select"],
+  body > main[id] > section[id="map-it"].full > header ul[role="select"],
+  body > section > section[id="map-it"].full > header ul[role="select"],
+  body > article > section[id="map-it"].full > header ul[role="select"] {
+    margin-top: 0;
   }
   body > main[id][id="map-it"].short > header h3,
   body > section[id="map-it"].short > header h3,
@@ -4824,6 +4839,7 @@
   body > article[id="travel-journal"] {
     background-color: #f5f6f6;
     padding-bottom: 5%;
+    padding-top: 15px;
   }
   body > main[id][id="travel-journal"] > header,
   body > section[id="travel-journal"] > header,

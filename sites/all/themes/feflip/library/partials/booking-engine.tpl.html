@@ -19,30 +19,24 @@
         * 
         ---------------------------------------------------------------------------------------------------------------- -->
 		
-		<!-- Step 1: Check-in + Check-out + Adults + Children + Rooms -->
-		
-		<div id="step-1" ng-if="state == 1" ng-include="stepTpl[state]"></div>
-		
 		<!-- Step 2: Price display -->
 		
-		<div id="step-2" ng-if="state == 2" ng-include="stepTpl[state]"></div>
+		<div id="step-2" ng-if="state == 2" ng-include="stepTpl[2]"></div>
 		
 		<!-- Step 3: Hotel room detail -->
 		
-		<div id="step-3" ng-if="state == 3" ng-include="stepTpl[state]"></div>
+		<div id="step-3" ng-if="state >= 3" ng-include="stepTpl[3]" ng-class="{'not-available':!bookingInfo.available}"></div>
 		
 		<!-- Step 4: Personal information -->
 		
-		<div id="step-4" ng-if="state == 4" ng-include="stepTpl[state]"></div>
+		<div id="step-4" ng-if="state == 4" ng-include="stepTpl[4]"></div>
 		
 		<!-- Step 5: Confirmation -->
 		
-		<div id="step-5" ng-if="state == 5" ng-include="stepTpl[state]"></div>
+		<div id="step-5" ng-if="state == 5" ng-include="stepTpl[5]"></div>
 		
-		<!-- Navigation -->
 		
-		<footer>
-			<button rel="go">go</button>
-		</footer>
+		
+		
 		
 		
