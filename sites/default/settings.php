@@ -211,19 +211,19 @@
  * @endcode
  */
 $databases = array (
-  'default' => 
-  array (
-    'default' => 
+  'default' =>
     array (
-      'database' => 'feflipdb',
-      'username' => 'feflip_u',
-      'password' => 'Gz3@v(Q4$!J=WN/',
-      'host' => 'localhost',
-      'port' => '',
-      'driver' => 'mysql',
-      'prefix' => '',
+      'default' =>
+        array (
+          'database' => 'feather_and_flip',
+          'username' => 'feflip_u',
+          'password' => 'feflip_p',
+          'host' => 'localhost',
+          'port' => '',
+          'driver' => 'mysql',
+          'prefix' => '',
+        ),
     ),
-  ),
 );
 
 /**
