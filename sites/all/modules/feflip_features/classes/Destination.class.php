@@ -73,9 +73,19 @@ class Destination
 
     public static function GetFooterDestinations()
     {
-         $nodes = self::getAllDestinationNodes('promote');
-         $destinations =  self::getDestinations($nodes);         
-         return $destinations; 
+        $nodes = self::getAllDestinationNodes('promote');
+        $destinations = array();
+        foreach ($nodes as $node) {
+            $wrapper = entity_metadata_wrapper('node', $node);
+            $destinations[] = array(
+                'id' => $node->nid,
+                'destination' => $wrapper->title->value(),
+                'withcountry' => $wrapper->title->value() . ', ' . $wrapper->field_country->value(),
+                'url' => url('node/' . $node->nid),
+            );
+        }
+        return $destinations;
+
     }
     
     public static function GetImagesForHomeSlideShow($subtitle)
