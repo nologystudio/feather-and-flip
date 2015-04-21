@@ -1,5 +1,5 @@
 # Ignore paths that contain user-generated content.
-sites/*/files
+# sites/*/files
 sites/*/private
 
 *.codekit
@@ -10,3 +10,5 @@ sites/*/private
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
+
+sites/default/settings.php
