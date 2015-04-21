@@ -103,8 +103,8 @@ if ($showPrice)
 
 ?>
 <?php if (isset($arg[2]) && $arg[2] != 'itinerary'): ?>
-    <section id="get-rates" style="background-color: white">
-        <button id="get-rates" style="visibility: hidden;">get rates</button>
+    <section id="get-rates">
+        <button id="get-rates">get rates</button>
     </section>
 <?php endif; ?>
 <!-- | i | Booking engine: Landing ------------------------------------------------------- -->
@@ -130,7 +130,7 @@ if ($showPrice)
             </div>
         </div>
     <?php }?>
-    <div class="wrapper" style="margin-top:-60px">
+    <div class="wrapper">
         <h2 class="middle-line"><?php echo $collectionDescription;?></h2>
         <div id="filter-container">
             <ul role="select" class="dark">
