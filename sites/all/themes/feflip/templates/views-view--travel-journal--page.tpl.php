@@ -26,6 +26,10 @@
                         if(isset($post->field_field_image[0]['raw']['uri']))
                             $img_url = image_style_url('post_image', $post->field_field_image[0]['raw']['uri']);
                         $img_wh = (empty($img_url) ? array('', '') : getimagesize($img_url));
+
+                        if (!$img_wh){
+                            $img_wh = array('500', '300');
+                        }
                         
                         switch ($type) {
                                 case 'review': ?>
@@ -40,7 +44,7 @@
                                 default: ?>
                                         <a class="quick-entry" data-size="<?php echo $img_wh[0].'x'.$img_wh[1]; ?>" target="_blank" href="<?php echo $post->field_field_original_url[0]['raw']['safe_value']; ?>">
                                                 <figure>
-                                                        <img src="<?php echo $img_url; ?>" alt=""/>
+                                                        <img style="width:<?php echo $img_wh[0].'px'; ?>;height:<?php echo $img_wh[1].'px'; ?>" src="<?php echo $img_url; ?>" alt=""/>
                                                 </figure>
                                                 <footer>
                                                         <h4><?php echo $post->node_title; ?></h4>
@@ -50,13 +54,6 @@
                                 <?php break;
                          } ?>                        
                 <?php } ?>
-                <article id="instagram-feed" class="quick-entry review" ng-controller="InstagramCtrl" ng-show="lastImage">
-                        <h3></h3>
-                        <hr>
-						<figure>
-						<img src="{{lastImage}}"/>
-					</figure>
-                </article>
         </div>
         <footer>
                 <a href="" class="section-button"></a>

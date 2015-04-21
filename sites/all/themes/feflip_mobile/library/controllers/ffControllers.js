@@ -42,6 +42,7 @@
 			var _o         = _nav.find('div.wrapper > ul > li');
 			var heightRef  = 480;
 			var navOptions = _o.toArray();
+			var navIsOn    = false;
 			
 			// | i | Dropdown effects...
 			
@@ -60,6 +61,14 @@
   						}
 					});
 				}
+			});
+			
+			$('.nav-trigger').on('click',function(){
+				
+				if(navIsOn) _nav.hide();
+				else _nav.show();
+				
+				navIsOn = !navIsOn;
 			});
 		});
 		

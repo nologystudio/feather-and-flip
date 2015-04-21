@@ -675,6 +675,9 @@ body > header + div[id$="-gallery"]:hover > button[rel] {
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
 }
+body > header + div[id$="-gallery"] ul li figure img {
+  min-height: 600px;
+}
 /* ------------------------------------------------------------------------------------------------------------- */
 /* ~ [N] Navigation ~ */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
