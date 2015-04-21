@@ -2,6 +2,23 @@
 
 class Hotel
 {
+    /**
+     *Returns nodes from result view
+     *@param $view
+     *@return array
+     */
+    /*
+    private static function getNodes($view)
+    {
+          $nodes = array();
+          
+          foreach($view->result as $obj)
+                $nodes[] = node_load($obj->nid);
+        
+          return $nodes;
+    }
+    */
+
     private static function getHotelsInfo($nodes)
     {
         $hotelsinfo = array();
@@ -42,6 +59,13 @@ class Hotel
      */
     public static function HotelReviews($variables)
     {
+        /*
+        $view = $variables['view'];
+        $nodes = self::getNodes($view);
+        $hotelsinfo = self::getHotelsInfo($nodes);        
+        return $hotelsinfo;
+        */
+
         $destinationId = $variables['view']->args[0];
         $query = new EntityFieldQuery;
         $nodes = $query->entityCondition('entity_type', 'node')
@@ -59,6 +83,7 @@ class Hotel
         }
 
         return $hotelsinfo;
+
     }
     
     
