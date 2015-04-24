@@ -3246,10 +3246,10 @@ body > article > section[id="map-it"] > aside nav ul li {
   font-family: 'Lato', sans-serif;
   font-weight: 300;
   color: #9cb1ad;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 'auto';
   text-transform: uppercase;
-  padding: 10px;
+  padding: 3.33333333px 10px;
   cursor: pointer;
 }
 body > main[id][id="map-it"] > aside nav ul li a,
@@ -3265,7 +3265,7 @@ body > article > section[id="map-it"] > aside nav ul li a {
   font-family: 'Lato', sans-serif;
   font-weight: 300;
   color: #9cb1ad;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 'auto';
   display: block;
   padding: 0;
@@ -3292,10 +3292,11 @@ body > article > section[id="map-it"] > aside nav ul li:first-child {
   font-family: 'Lato', sans-serif;
   font-weight: 400;
   color: #9cb1ad;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 'auto';
   border-bottom: solid 1px rgba(217, 223, 222, 0.4);
   margin-bottom: 20px;
+  padding: 10px;
 }
 body > main[id][id="map-it"] > aside nav ul li:last-child,
 body > section[id="map-it"] > aside nav ul li:last-child,
@@ -3304,7 +3305,6 @@ body > main[id] > section[id="map-it"] > aside nav ul li:last-child,
 body > section > section[id="map-it"] > aside nav ul li:last-child,
 body > article > section[id="map-it"] > aside nav ul li:last-child {
   padding-bottom: 30px;
-  border-bottom: solid 1px rgba(217, 223, 222, 0.4);
 }
 body > main[id][id="map-it"] > aside nav ul li:hover,
 body > section[id="map-it"] > aside nav ul li:hover,
@@ -3342,6 +3342,7 @@ body > article > section[id="map-it"] > aside nav figure {
   position: relative;
   float: left;
   padding: 0 15px 15px 15px;
+  display: none;
 }
 body > main[id][id="map-it"] > aside nav figure img,
 body > section[id="map-it"] > aside nav figure img,
@@ -3774,22 +3775,6 @@ body > article > section[id="map-it"] > section[id="hotel-list-by-continent"] di
   float: right;
   border-radius: 7px;
   display: block;
-}
-body > main[id][id="map-it"] > section[id="hotel-list-by-continent"] div.row ul:first-child,
-body > section[id="map-it"] > section[id="hotel-list-by-continent"] div.row ul:first-child,
-body > article[id="map-it"] > section[id="hotel-list-by-continent"] div.row ul:first-child,
-body > main[id] > section[id="map-it"] > section[id="hotel-list-by-continent"] div.row ul:first-child,
-body > section > section[id="map-it"] > section[id="hotel-list-by-continent"] div.row ul:first-child,
-body > article > section[id="map-it"] > section[id="hotel-list-by-continent"] div.row ul:first-child {
-  border-right: solid 1px rgba(217, 223, 222, 0.25);
-}
-body > main[id][id="map-it"] > section[id="hotel-list-by-continent"] div.row ul:last-child,
-body > section[id="map-it"] > section[id="hotel-list-by-continent"] div.row ul:last-child,
-body > article[id="map-it"] > section[id="hotel-list-by-continent"] div.row ul:last-child,
-body > main[id] > section[id="map-it"] > section[id="hotel-list-by-continent"] div.row ul:last-child,
-body > section > section[id="map-it"] > section[id="hotel-list-by-continent"] div.row ul:last-child,
-body > article > section[id="map-it"] > section[id="hotel-list-by-continent"] div.row ul:last-child {
-  border-left: solid 1px rgba(217, 223, 222, 0.25);
 }
 body > main[id][id="map-it"] > footer,
 body > section[id="map-it"] > footer,
@@ -6411,6 +6396,30 @@ body > main[id][id="hotel"] > section[id="features"] > ul + ul,
 body > section[id="hotel"] > section[id="features"] > ul + ul,
 body > article[id="hotel"] > section[id="features"] > ul + ul {
   padding-top: 0;
+}
+body > main[id][id="hotel"] > section[id="features"] footer,
+body > section[id="hotel"] > section[id="features"] footer,
+body > article[id="hotel"] > section[id="features"] footer {
+  width: 100%;
+  height: auto;
+  padding: 15px 0;
+}
+body > main[id][id="hotel"] > section[id="features"] footer small,
+body > section[id="hotel"] > section[id="features"] footer small,
+body > article[id="hotel"] > section[id="features"] footer small {
+  width: 100%;
+  height: auto;
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  color: #999999;
+  font-size: 12px;
+  line-height: 'auto';
+  position: relative;
+  margin: auto;
+  float: none;
+  max-width: 1040px;
+  text-align: right;
+  display: block;
 }
 body > main[id][id="hotel"] > section[id="map-it"] header,
 body > section[id="hotel"] > section[id="map-it"] header,

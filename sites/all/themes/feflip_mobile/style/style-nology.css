@@ -316,7 +316,7 @@
     margin-left: 7.5%;
   }
   body > header a[id="brand"] img {
-    width: 100%;
+    height: 55px;
   }
   body > header nav[id="social-media"] {
     width: 50%;
@@ -469,7 +469,7 @@
     display: block;
   }
   body > div[id$="-gallery"] > ul > li article > div.info-wrapper.static {
-    margin-top: -80px;
+    margin-top: -30px;
   }
   body > div[id$="-gallery"] > ul > li article > div.info-wrapper a,
   body > div[id$="-gallery"] > ul > li article > div.info-wrapper div {
@@ -2164,7 +2164,9 @@
   body > main[id][id="hotel-reviews"] > div.wrapper > h2,
   body > section[id="hotel-reviews"] > div.wrapper > h2,
   body > article[id="hotel-reviews"] > div.wrapper > h2 {
-    padding: 30px 0;
+    width: 90%;
+    padding: 15px 0;
+    margin-left: 5%;
   }
   body > main[id][id="hotel-reviews"] > div.wrapper > h2 p,
   body > section[id="hotel-reviews"] > div.wrapper > h2 p,
@@ -2270,7 +2272,7 @@
   body > section[id="hotel-reviews"] > div.wrapper *.item,
   body > article[id="hotel-reviews"] > div.wrapper *.item {
     width: 90%;
-    height: 300px;
+    height: auto;
     position: relative;
     float: left;
     display: block;
@@ -2287,7 +2289,7 @@
     text-decoration: none;
     color: red;
     width: 100%;
-    height: 100%;
+    height: auto;
     background-color: black;
     position: relative;
     float: left;
@@ -2543,6 +2545,20 @@
     padding: 10px 0;
     margin-top: 10px;
   }
+  body > main[id][id="hotel"] > section[id="detail"] > header h2,
+  body > section[id="hotel"] > section[id="detail"] > header h2,
+  body > article[id="hotel"] > section[id="detail"] > header h2 {
+    width: 100%;
+    height: auto;
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    color: #999999;
+    font-size: 12px;
+    line-height: 'auto';
+    position: relative;
+    float: left;
+    text-align: center;
+  }
   body > main[id][id="hotel"] > section[id="detail"] > header a,
   body > section[id="hotel"] > section[id="detail"] > header a,
   body > article[id="hotel"] > section[id="detail"] > header a {
@@ -2771,7 +2787,7 @@
   body > main[id][id="hotel"] > section[id="detail"] > div.gallery-wrapper > div[id="hotel-gallery"] > ul > li article > div.info-wrapper.static,
   body > section[id="hotel"] > section[id="detail"] > div.gallery-wrapper > div[id="hotel-gallery"] > ul > li article > div.info-wrapper.static,
   body > article[id="hotel"] > section[id="detail"] > div.gallery-wrapper > div[id="hotel-gallery"] > ul > li article > div.info-wrapper.static {
-    margin-top: -80px;
+    margin-top: -30px;
   }
   body > main[id][id="hotel"] > section[id="detail"] > div.gallery-wrapper > div[id="hotel-gallery"] > ul > li article > div.info-wrapper a,
   body > section[id="hotel"] > section[id="detail"] > div.gallery-wrapper > div[id="hotel-gallery"] > ul > li article > div.info-wrapper a,
@@ -3186,7 +3202,7 @@
     box-sizing: border-box;
     position: relative;
     float: left;
-    padding: 30px 0 30px 0;
+    padding: 15px 0;
     overflow: hidden;
   }
   body > main[id][id="hotel"] > section[id="features"] > ul:first-child,
@@ -3318,6 +3334,30 @@
   body > section[id="hotel"] > section[id="features"] > ul + ul,
   body > article[id="hotel"] > section[id="features"] > ul + ul {
     padding-top: 0;
+  }
+  body > main[id][id="hotel"] > section[id="features"] > footer,
+  body > section[id="hotel"] > section[id="features"] > footer,
+  body > article[id="hotel"] > section[id="features"] > footer {
+    width: 100%;
+    height: auto;
+    position: relative;
+    float: left;
+    padding: 0;
+  }
+  body > main[id][id="hotel"] > section[id="features"] > footer small,
+  body > section[id="hotel"] > section[id="features"] > footer small,
+  body > article[id="hotel"] > section[id="features"] > footer small {
+    width: 100%;
+    height: auto;
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    color: #999999;
+    font-size: 12px;
+    line-height: 'auto';
+    position: relative;
+    float: left;
+    text-align: center;
+    display: block;
   }
   body > main[id][id="hotel"] > section[id="map-it"] header,
   body > section[id="hotel"] > section[id="map-it"] header,
