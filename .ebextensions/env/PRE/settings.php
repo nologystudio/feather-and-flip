@@ -226,6 +226,55 @@ $databases = array(
     ),
 );
 
+/** Cache settings: */
+$conf['cache_backends'][] = 'sites/all/modules/memcache/memcache.inc';
+$conf['cache_default_class'] = 'MemCacheDrupal';
+$conf['cache_class_cache_form'] = 'DrupalDatabaseCache';
+$conf['memcache_key_prefix'] = '4612GBc1275O7f5';
+
+$conf['memcache_servers'] = array(
+  'develop.hlpt4i.0001.use1.cache.amazonaws.com:11211' => 'default'
+);
+
+$conf['memcache_bins'] = array(
+  'session' => 'session',
+  'users' => 'users',
+  'cache' => 'default',
+  'cache_bootstrap' => 'default',
+  'cache_field' => 'default',
+  'cache_filter' => 'default',
+  'cache_image' => 'default',
+  'cache_libraries' => 'default',
+  'cache_menu' => 'default',
+  'cache_page' => 'default',
+  'cache_path' => 'default',
+  'cache_rules' => 'default',
+  'cache_token' => 'default',
+  'cache_update' => 'default',
+  'cache_variable' => 'default',
+  'cache_views' => 'default',
+  'cache_views_data' => 'default',
+  'cache_entity_file' => 'entity',
+  'cache_entity_message' => 'entity',
+  'cache_entity_message_type' => 'entity',
+  'cache_entity_message_type_category' => 'entity',
+  'cache_entity_node' => 'entity',
+  'cache_entity_taxonomy_term' => 'entity',
+  'cache_entity_taxonomy_vocabulary' => 'entity',
+  'cache_entity_user' => 'entity',
+);
+
+$conf['session_inc'] = 'sites/all/modules/memcache/unstable/memcache-session.inc';
+$conf['cache_backends'][] = 'sites/all/modules/memcache/memcache.inc';
+$conf['cache_default_class'] = 'MemCacheDrupal';
+$conf['memcache_key_prefix'] = 'mc1';
+$conf['page_cache_without_database'] = TRUE;
+$conf['page_cache_invoke_hooks'] = FALSE;
+$conf['cache_class_cache_form'] = 'DrupalDatabaseCache';
+
+$conf['lock_inc'] = 'sites/all/modules/memcache/memcache-lock.inc';
+$conf['memcache_stampede_protection'] = TRUE;
+
 /**
  * Access control for update.php script.
  *
