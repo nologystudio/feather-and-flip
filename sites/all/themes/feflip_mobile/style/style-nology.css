@@ -3202,7 +3202,7 @@
     box-sizing: border-box;
     position: relative;
     float: left;
-    padding: 30px 0 30px 0;
+    padding: 15px 0;
     overflow: hidden;
   }
   body > main[id][id="hotel"] > section[id="features"] > ul:first-child,
@@ -3334,6 +3334,30 @@
   body > section[id="hotel"] > section[id="features"] > ul + ul,
   body > article[id="hotel"] > section[id="features"] > ul + ul {
     padding-top: 0;
+  }
+  body > main[id][id="hotel"] > section[id="features"] > footer,
+  body > section[id="hotel"] > section[id="features"] > footer,
+  body > article[id="hotel"] > section[id="features"] > footer {
+    width: 100%;
+    height: auto;
+    position: relative;
+    float: left;
+    padding: 0;
+  }
+  body > main[id][id="hotel"] > section[id="features"] > footer small,
+  body > section[id="hotel"] > section[id="features"] > footer small,
+  body > article[id="hotel"] > section[id="features"] > footer small {
+    width: 100%;
+    height: auto;
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    color: #999999;
+    font-size: 12px;
+    line-height: 'auto';
+    position: relative;
+    float: left;
+    text-align: center;
+    display: block;
   }
   body > main[id][id="hotel"] > section[id="map-it"] header,
   body > section[id="hotel"] > section[id="map-it"] header,
