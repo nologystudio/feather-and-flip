@@ -10,7 +10,7 @@
 			<?php echo $head; ?>
             <meta content="initial-scale=0.9, minimum-scale=0.9, width=device-width, user-scalable=no" name="viewport">
             
-            <title><?php echo $headerTitle; ?></title>
+            <title><?php echo $head_title; ?></title>
             <link rel="shortcut icon" href="/sites/all/themes/feflip/media/brand/favicon.ico" type="image/x-icon">
             <link rel="icon"          href="/sites/all/themes/feflip/media/brand/favicon.ico" type="image/x-icon">
             
@@ -29,6 +29,7 @@
 			
 			</script> 
         </head>
+        
         <?php   // Set ng-init for reset passw lightbox
             $reset_l = ((AdminForms::userIsLoggedIn() && isset($_GET['pass-reset-token']) && !empty($_GET['pass-reset-token'])) ? 'true' : 'false');
         ?>
