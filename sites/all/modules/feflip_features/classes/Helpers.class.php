@@ -9,21 +9,21 @@ class Helpers
     public static function GetAllImagesFromFieldCollection($fieldCollection, $imageText, $alternativeImage, $style)
     {
         $images = array();
-        
+
         if (isset($fieldCollection['und']) && count($fieldCollection['und']) > 0)
         {
-            
+
             foreach($fieldCollection['und'] as $item)
             {
                 $imageItems = entity_load('field_collection_item',array($item['value']));
                 $imageItems = array_shift($imageItems);
-    
+
                 if (isset($imageItems->field_mainimage['und']) && count($imageItems->field_mainimage['und']) > 0)
                 {
                     foreach($imageItems->field_mainimage['und'] as $image)
                     {
                         $url = image_style_url($style,$image['uri']);
-                        $sizeImage = getimagesize($url);
+                        $sizeImage = self::safeGetImageSize($url);
                         $images[] = array( 'url'      => image_style_url($style,$image['uri']),
                                            'text'     => $imageText,
                                            'size'  => $sizeImage,
@@ -32,42 +32,42 @@ class Helpers
                 }
             }
         }
-    
+
         if (count($images) == 0) $images[] = array('url'      => $alternativeImage,
                                                    'text'     => $imageText,
-                                                   'size'  => getimagesize($alternativeImage),
+                                                   'size'  => self::safeGetImageSize($alternativeImage),
                                                     'marble' => 'http://placehold.it/100x100');
-        
+
         return $images;
     }
 
     public static function GetMainImageFromFieldCollection($fieldCollection, $imageText, $alternativeImage, $style)
     {
         $image = NULL;
-        
+
         if (isset($fieldCollection['und']) && count($fieldCollection['und']) > 0)
         {
-            
+
             foreach($fieldCollection['und'] as $item)
             {
                 $imageItems = entity_load('field_collection_item',array($item['value']));
                 $imageItems = array_shift($imageItems);
-    
+
                 if (isset($imageItems->field_mainimage['und']) && count($imageItems->field_mainimage['und']) > 0 && $imageItems->field_main_image['und'][0]['value'] == 1)
                 {
                     $url = image_style_url($style,$imageItems->field_mainimage['und'][0]['uri']);
-                    $sizeImage = getimagesize($url);
+                    $sizeImage = self::safeGetImageSize($url);
                     $image = array( 'url'      => image_style_url($style,$imageItems->field_mainimage['und'][0]['uri']),
                                     'text'     => $imageText,
                                     'size'  => $sizeImage);
                 }
             }
         }
-    
+
         if (!isset($image)) $image = array('url'      => $alternativeImage,
-                                           'text'     => $imageText,   
-                                           'size'  => getimagesize($alternativeImage));
-        
+                                           'text'     => $imageText,
+                                           'size'  => self::safeGetImageSize($alternativeImage));
+
         return $image;
     }
 
@@ -222,19 +222,19 @@ class Helpers
         return $tid;
 
     }
-    
+
     public static function GetSocialMediaMenu($class)
     {
             $menu = menu_tree_all_data('menu-social-media-links');
-            
+
             $result = '<nav id="social-media" class="'.$class.'">';
             foreach ($menu as $key => $menu_item) {
                  $result .= '<a href="'.$menu_item['link']['link_path'].'" target="_blank" rel="'.strtolower($menu_item['link']['link_title']).'"></a>';
             }
-            
-            $result .= '</nav>';    
-                
-            return $result;          
+
+            $result .= '</nav>';
+
+            return $result;
     }
 
     /**
@@ -397,4 +397,12 @@ class Helpers
         }
         return $default;
     }
+
+  /**
+   * @param $url
+   * @return array
+   */
+  public static function safeGetImageSize($url) {
+    return (file_exists($url))?getimagesize($url):array('', '');
+  }
 }
