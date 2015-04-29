@@ -22,4 +22,7 @@ class Env {
   const SABRE_ARC_CODE = '';
   const SABRE_TEST_MODE = '';
   const SABRE_ENABLE = '';
+
+
+  const USE_CLOUDFRONT = FALSE;
 }

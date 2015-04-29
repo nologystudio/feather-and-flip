@@ -9,3 +9,4 @@ files[] = classes/Itinerary.class.php
 files[] = classes/Helpers.class.php
 files[] = classes/Profiler.class.php
 files[] = classes/Collection.class.php
+files[] = classes/Env.class.php
