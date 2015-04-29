@@ -12,7 +12,7 @@
             <?php // | i | Languages and Canonical... ?>
             <meta content="initial-scale=1, minimum-scale=1, width=device-width, user-scalable=no" name="viewport">
             
-            <title><?php echo $headerTitle; ?></title>
+            <title><?php echo $head_title; ?></title>
             <link rel="shortcut icon" href="/sites/all/themes/feflip_mobile/media/brand/favicon.ico" type="image/x-icon">
             <link rel="icon"          href="/sites/all/themes/feflip_mobile/media/brand/favicon.ico" type="image/x-icon">
                 
