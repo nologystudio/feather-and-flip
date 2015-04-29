@@ -56,8 +56,8 @@ class Helpers
                 if (isset($imageItems->field_mainimage['und']) && count($imageItems->field_mainimage['und']) > 0 && $imageItems->field_main_image['und'][0]['value'] == 1)
                 {
                     $url = image_style_url($style,$imageItems->field_mainimage['und'][0]['uri']);
-                    $sizeImage = self::safeGetImageSize($url);
-                    $image = array( 'url'      => image_style_url($style,$imageItems->field_mainimage['und'][0]['uri']),
+                    $sizeImage = Helpers::safeGetImageSize($url);
+                    $image = array( 'url'      => $url,
                                     'text'     => $imageText,
                                     'size'  => $sizeImage);
                 }
