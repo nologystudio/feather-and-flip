@@ -250,20 +250,17 @@ class Hotel
     public static function GetImages($node)
     {
         $images = array();
-
-        if (isset($node->field_images['und']) && count($node->field_images['und']) > 0)
-        {
-
-            foreach($node->field_images['und'] as $item)
+        if (isset($node->field_imagescdn['und']) && count($node->field_images['und']) > 0) {
+            foreach($node->field_imagescdn['und'] as $item)
             {
                 $contentblock = entity_load('field_collection_item',array($item['value']));
                 $contentblock = array_shift($contentblock);
 
-                if (isset($contentblock->field_mainimage['und']) && count($contentblock->field_mainimage['und']) > 0)
+                if (isset($contentblock->field_imagecdn['und']) && count($contentblock->field_imagecdn['und']) > 0)
                 {
-                    foreach($contentblock->field_mainimage['und'] as $image)
+                    foreach($contentblock->field_imagecdn['und'] as $image)
                     {
-                        $url = image_style_url('hotel_1040',$image['uri']);
+                        $url = image_style_url('hotel_1040', $image['uri']);
                         $imageSize = Helpers::safeGetImageSize($url);
                         $images[] = array( 'url'      => $url,
                                            'alt'  => $node->field_destination['und'][0]['entity']->title .', '.$node->field_destination['und'][0]['entity']->field_country['und'][0]['value'],
