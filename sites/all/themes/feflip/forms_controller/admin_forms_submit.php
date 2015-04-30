@@ -48,8 +48,7 @@
                 echo json_encode($obj);
                 break;
 			case 'getDestinations':
-				$result = AdminForms::getDestinations();
-				echo json_encode($result);
+              return getDestinations();
 				break;
             case 'collectionsRates':
                 //watchdog('Admin Forms Submit', 'CollectionRates Values ===> '. '<pre>' . print_r( $input_values, true) . '</pre>');
@@ -213,4 +212,13 @@
 		}
 	}
 
-?>
+function getDestinations() {
+  $result = cache_get('admin_forms_submit:getDestinations');
+  if (!$result) {
+    $result = AdminForms::getDestinations();
+    cache_set('admin_forms_submit:getDestinations', $result, 'cache', REQUEST_TIME + (3600 * 24 * 30 * 6));
+  } else {
+    $result = $result->data;
+  }
+  echo json_encode($result);
+}
