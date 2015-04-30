@@ -8,7 +8,7 @@ class Collection
 
         foreach($nodes as $node)
         {
-            $image = isset($node->field_image) && count($node->field_image) > 0 ? image_style_url('itinerary_route_icon', $node->field_image['und'][0]['uri']) : 'http://placehold.it/300x300';
+            $image = isset($node->field_simple_image_cdn) && count($node->field_simple_image_cdn) > 0 ? image_style_url('itinerary_route_icon', $node->field_simple_image_cdn['und'][0]['uri']) : 'http://placehold.it/300x300';
             $collections[] = array('title' => $node->title,
                 'image' => $image,
                 'url' => drupal_get_path_alias('node/'.$node->nid . '/collection'),

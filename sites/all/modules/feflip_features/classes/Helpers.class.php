@@ -18,16 +18,16 @@ class Helpers
                 $imageItems = entity_load('field_collection_item',array($item['value']));
                 $imageItems = array_shift($imageItems);
 
-                if (isset($imageItems->field_mainimage['und']) && count($imageItems->field_mainimage['und']) > 0)
+                if (isset($imageItems->field_image_cdn['und']) && count($imageItems->field_image_cdn['und']) > 0)
                 {
-                    foreach($imageItems->field_mainimage['und'] as $image)
+                    foreach($imageItems->field_image_cdn['und'] as $image)
                     {
                         $url = image_style_url($style,$image['uri']);
                         $sizeImage = self::safeGetImageSize($url);
                         $images[] = array( 'url'      => image_style_url($style,$image['uri']),
                                            'text'     => $imageText,
                                            'size'  => $sizeImage,
-                                            'marble' => image_style_url('itinerary_main_icon',$imageItems->field_mainimage['und'][0]['uri']));
+                                            'marble' => image_style_url('itinerary_main_icon',$imageItems->field_image_cdn['und'][0]['uri']));
                     }
                 }
             }
@@ -53,9 +53,9 @@ class Helpers
                 $imageItems = entity_load('field_collection_item',array($item['value']));
                 $imageItems = array_shift($imageItems);
 
-                if (isset($imageItems->field_main_image['und']) && count($imageItems->field_main_image['und']) > 0 && $imageItems->field_main_image['und'][0]['value'] == 1)
+                if (isset($imageItems->field_image_cdn['und']) && count($imageItems->field_image_cdn['und']) > 0 && $imageItems->field_main_image['und'][0]['value'] == 1)
                 {
-                    $url = image_style_url($style,$imageItems->field_mainimage['und'][0]['uri']);
+                    $url = image_style_url($style,$imageItems->field_image_cdn['und'][0]['uri']);
                     $sizeImage = Helpers::safeGetImageSize($url);
                     $image = array( 'url'      => $url,
                                     'text'     => $imageText,

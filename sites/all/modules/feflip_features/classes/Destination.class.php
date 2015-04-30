@@ -97,7 +97,7 @@ class Destination
          foreach($nodes as $node)
          {
              $wrapper = entity_metadata_wrapper('node', $node);
-             $image = Helpers::GetMainImageFromFieldCollection($node->field_images, $wrapper->title->value().', '.$wrapper->field_country->value(),'http://placehold.it/1280x800', 'headerslideshow');
+             $image = Helpers::GetMainImageFromFieldCollection($node->field_images_cdn, $wrapper->title->value().', '.$wrapper->field_country->value(),'http://placehold.it/1280x800', 'headerslideshow');
              $image['linkto'] = url('node/'.$node->nid) . '/hotel-reviews';
              $image['destination'] = $wrapper->title->value();
              $image['subtitle'] = $subtitle;
@@ -111,7 +111,7 @@ class Destination
     public static function  GetAllImagesDestination($destination, $subtitle)
     {
         $wrapper = entity_metadata_wrapper('node', $destination);
-        $images = Helpers::GetAllImagesFromFieldCollection($destination->field_images, $wrapper->title->value().', '.$wrapper->field_country->value(), 'http://placehold.it/1280x800', 'headerslideshow');
+        $images = Helpers::GetAllImagesFromFieldCollection($destination->field_images_cdn, $wrapper->title->value().', '.$wrapper->field_country->value(), 'http://placehold.it/1280x800', 'headerslideshow');
         for($i=0; $i < count($images); $i++)
             $images[$i]['subtitle'] = $subtitle;
         return $images;
