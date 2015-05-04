@@ -279,7 +279,7 @@ function feflip_preprocess_views_view(&$variables) {
       if(isset($variables['view']->args[0]))
       {
           $collection = node_load($variables['view']->args[0]);
-          $imageUrl = isset($collection->field_image) && count($collection->field_image) > 0 ? image_style_url('headerslideshow', $collection->field_image['und'][0]['uri']) : 'http://placehold.it/1280x800';
+          $imageUrl = isset($collection->field_simple_image_cdn) && count($collection->field_simple_image_cdn) > 0 ? image_style_url('headerslideshow', $collection->field_simple_image_cdn['und'][0]['uri']) : 'http://placehold.it/1280x800';
           $sizeImage = getimagesize($imageUrl);
           $images = array();
           $images[] = array('url' => $imageUrl,

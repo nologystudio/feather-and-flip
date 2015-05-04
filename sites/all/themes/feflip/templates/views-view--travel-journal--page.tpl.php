@@ -25,8 +25,10 @@
                         $img_url = '';//preg_replace('/\/(\d+)w\//', '/500w/', $post->field_field_original_image[0]['raw']['safe_value']);
                         if(isset($post->field_field_image[0]['raw']['uri']))
                             $img_url = image_style_url('post_image', $post->field_field_image[0]['raw']['uri']); //file_create_url($post->field_field_image[0]['raw']['uri']);
-                        $img_wh = (empty($img_url) ? array('', '') : Helpers::safeGetImageSize($img_url));
+                        //FIXME temporal change to load only S3 images.
+                        if (!strpos($img_url, 's3')) { $img_url = 'http://placehold.it/500x300'; }
 
+                        $img_wh = (empty($img_url) ? array('', '') : Helpers::safeGetImageSize($img_url));
                         if (!$img_wh){
                             $img_wh = array('500', '300');
                         }

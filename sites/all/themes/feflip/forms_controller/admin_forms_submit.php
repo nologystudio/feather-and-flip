@@ -213,7 +213,7 @@
 	}
 
 function getDestinations() {
-  $result = cache_get('admin_forms_submit:getDestinations');
+  $result = Helpers::getCacheIfNotExpired('admin_forms_submit:getDestinations');
   if (!$result) {
     $result = AdminForms::getDestinations();
     cache_set('admin_forms_submit:getDestinations', $result, 'cache', REQUEST_TIME + (3600 * 24 * 30 * 6));

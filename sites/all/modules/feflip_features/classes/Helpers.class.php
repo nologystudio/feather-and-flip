@@ -405,4 +405,16 @@ class Helpers
   public static function safeGetImageSize($url) {
     return (file_exists($url))?getimagesize($url):array('', '');
   }
+
+  /**
+   * @param string $cacheId Name of the cache
+   * @return bool FALSE if not cache found
+   */
+  public static function getCacheIfNotExpired($cacheId) {
+    $result = FALSE;
+    if (($cacheData = cache_get($cacheId)) && REQUEST_TIME < $cacheData->expire) {
+      $result = $cacheData;
+    }
+    return $result;
+  }
 }
