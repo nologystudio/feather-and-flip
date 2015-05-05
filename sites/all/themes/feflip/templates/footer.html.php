@@ -39,7 +39,7 @@
 				<?php echo $footer_fixed_menu; ?>
 			</nav>
 			<div class="fixed-bar">
-				<a id="brand" href="/"><img src="<?php echo variable_get('relativePath'); ?>media/brand/feather-and-flip-black-logo.png" alt="Feather+flip"/></a>
+				<a id="brand" href="/"><img src="//ds9464c56tfjs.cloudfront.net/media/feather-and-flip-black-logo.png" alt="Feather+flip"/></a>
 				<?php echo Helpers::GetSocialMediaMenu('black');?>
 				
 				<div id="ssl-label">
