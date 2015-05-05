@@ -111,7 +111,7 @@
   <tr style="height: 20px;"></tr>
   <tr align="center">
     <td valign="top" style="padding:0; margin:0">
-      <img style="width:300px; margin: auto;" src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/sites/all/themes/feflip/media/brand/feather-and-flip-black-logo.png"/>
+      <img style="width:300px; margin: auto;" src="//ds9464c56tfjs.cloudfront.net/media/feather-and-flip-black-logo.png"/>
     </td>
   </tr>
   <tr style="height: 20px;"></tr>
