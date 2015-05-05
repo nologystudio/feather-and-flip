@@ -51,7 +51,7 @@
 				</div>			
 				<a id="tzell-brand" href="http://www.tzell.com/tzell/index.htm" target="_blank">
 					<small>Powered by</small>
-					<img src="/<?php echo drupal_get_path('theme', 'feflip_mobile'); ?>/media/brand/tzell-logo.png" alt="Powered by Tzell Travel Group"/>
+					<img src="//ds9464c56tfjs.cloudfront.net/media/tzell-logo.png" alt="Powered by Tzell Travel Group"/>
 				</a>
 				<?php echo Helpers::GetSocialMediaMenu('black');?>
 				<small><?php echo date("Y"); ?> FEATHER+FLIP LLC. ALL RIGHTS RESERVED</small>
