@@ -29,4 +29,6 @@ if (Helpers::get_device_type() != 'desktop') {
 
 menu_execute_active_handler();
 
+echo '<h1>A</h1>';
+
 //echo '<h1>Result profiler:</h1>' . Profiler::generateResults().'<br/><br/><br/>';
