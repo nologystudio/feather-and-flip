@@ -12,5 +12,3 @@ sites/*/private
 !.elasticbeanstalk/*.global.yml
 
 sites/default/settings.php
-sites/default/files/media
-sites/default/files/styles
