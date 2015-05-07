@@ -155,53 +155,19 @@ function generateImages($node, $selected_image_styles) {
           foreach ($imageItems->field_image_cdn['und'] as $image) {
             foreach ($selected_image_styles as $key => $style) {
               $url = image_style_url($style, $image['uri']);
-              if (strpos($url, 'system/files/styles')) {
-                //FIXME background resize image
-                execBackgroundResize($url);
+              if ($position = strpos($url, 'system/files/styles')) {
+                execBackgroundResize($url, $position);
               }
-              //FIXME if url haven't contain 's3' string is necessary generate it.
-//              openURL($url);
-
-              /*
-               * $original = file_load($fid);
-foreach ($styles as $style_name) {
-  $derivative_uri = image_style_path($style_name, $original->uri);
-  image_style_create_derivative($style_name, $original->uri, $derivative_uri);
-}
-               */
             }
           }
         }
       }
     }
   }
-  /*
-   $images = array();
-
-   if (isset($fieldCollection['und']) && count($fieldCollection['und']) > 0)
-   {
-
-     foreach($fieldCollection['und'] as $item)
-     {
-       $imageItems = entity_load('field_collection_item',array($item['value']));
-       $imageItems = array_shift($imageItems);
-
-       if (isset($imageItems->field_image_cdn['und']) && count($imageItems->field_image_cdn['und']) > 0)
-       {
-         foreach($imageItems->field_image_cdn['und'] as $image)
-         {
-           $url = image_style_url($style,$image['uri']);
-  */
 }
 
-function execBackgroundResize($url) {
-  $command = "curl " . 'http://apellido.enfemenino.com/w/apellidos/apellido-asdasda.html';
+function execBackgroundResize($url, $position) {
+  $ottoURL = Env::OTTO_BASE_PATH . '/' . substr($url, $position);
+  $command = 'curl ' . $ottoURL;
   exec("$command > /dev/null &", $arrOutput);
-  /*
-  //FIXME cambiar la url para que el puerto sea el 81
-  $value = str_replace('http://localhost:8123/', 'http://develop-env-gh9776spcg.elasticbeanstalk.com/', $url);
-  $command = "curl " . $value;
-  exec("$command > /dev/null &", $arrOutput);
-  */
-  $a = 1;
 }
