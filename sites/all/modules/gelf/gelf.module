@@ -25,43 +25,25 @@ function gelf_permission() {
  */
 function gelf_watchdog($entry) {
   if (!gelf_require()) {
-    if(function_exists('user_access') && user_access('administer gelf')) {
+    if (function_exists('user_access') && user_access('administer gelf')) {
       drupal_set_message(t('GELF module requires the GELF PHP library to be installed.  View the README for installation instructions.'), 'error');
     }
     return;
   }
 
-  if($entry['severity'] > variable_get('gelf_severity', WATCHDOG_WARNING)) {
+  if ($entry['severity'] > variable_get('gelf_severity', WATCHDOG_WARNING)) {
     return;
   }
 
   $host = variable_get('gelf_host', 'localhost');
   $port = variable_get('gelf_port', 12201);
-  $send_as = variable_get('gelf_send_as', 'HOST');
 
-  if($send_as == 'HTTP_HOST') {
-    // The HTTP_HOST can be set to default in the case of a CLI script
-    if($_SERVER['HTTP_HOST'] == 'default') {
-      global $base_url;
-      $source_host = parse_url($base_url, PHP_URL_HOST);
-
-      // base_url is not set, fallback to hostname
-      if($source_host == 'default') {
-        $source_host = php_uname('n');
-      }
-    }
-    else {
-      $source_host = $_SERVER['HTTP_HOST'];
-    }
-  }
-  else {
-    $source_host = php_uname('n');
-  }
+  $source_host = calculateClientIp();
 
   $gelf = new GELFMessage();
   $message = filter_xss(is_null($entry['variables']) ? $entry['message'] : strtr($entry['message'], $entry['variables']));
   $short_msg_length = 100;
-  if(strlen($message) > $short_msg_length) {
+  if (strlen($message) > $short_msg_length) {
     $short_message = preg_replace('/\s+?(\S+)?$/u', '', substr($message, 0, $short_msg_length));
   }
   else {
@@ -86,7 +68,7 @@ function gelf_watchdog($entry) {
     $publisher->publish($gelf);
   }
   catch (UnexpectedValueException $e) {
-    if(function_exists('user_access') && user_access('administer gelf')) {
+    if (function_exists('user_access') && user_access('administer gelf')) {
       drupal_set_message(t('Failed to publish gelf message: %message', array('%message' => $e->getMessage())), 'error');
     }
   }
@@ -167,4 +149,39 @@ function gelf_require() {
   }
 
   return FALSE;
+}
+
+function calculateClientIp() {
+  if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+    $result = $_SERVER['HTTP_CLIENT_IP'];
+  }
+  elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+    $result = $_SERVER['HTTP_X_FORWARDED_FOR'];
+  }
+  else {
+    $result = $_SERVER['REMOTE_ADDR'];
+  }
+
+  if ($result == NULL) {
+    $send_as = variable_get('gelf_send_as', 'HOST');
+    if ($send_as == 'HTTP_HOST') {
+      // The HTTP_HOST can be set to default in the case of a CLI script
+      if ($_SERVER['HTTP_HOST'] == 'default') {
+        global $base_url;
+        $result = parse_url($base_url, PHP_URL_HOST);
+
+        // base_url is not set, fallback to hostname
+        if ($result == 'default') {
+          $result = php_uname('n');
+        }
+      }
+      else {
+        $result = $_SERVER['HTTP_HOST'];
+      }
+    }
+    else {
+      $result = php_uname('n');
+    }
+  }
+  return $result;
 }
