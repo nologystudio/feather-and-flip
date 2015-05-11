@@ -30,5 +30,6 @@ if (Helpers::get_device_type() != 'desktop') {
 menu_execute_active_handler();
 
 
-watchdog('Index.php', 'Probando graylog2', array(), $data, WATCHDOG_INFO);
+//watchdog('Index.php', 'Probando graylog2', array(), $data, WATCHDOG_INFO);
+//error_log('Testtttt- error_log');
 //echo '<h1>Result profiler:</h1>' . Profiler::generateResults().'<br/><br/><br/>';
