@@ -12,3 +12,4 @@ sites/*/private
 !.elasticbeanstalk/*.global.yml
 
 sites/default/settings.php
+sites/default/media/
