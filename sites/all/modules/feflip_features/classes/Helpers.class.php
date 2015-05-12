@@ -71,8 +71,10 @@ class Helpers
         return $image;
     }
 
-    // Import external rss
-    public static function ImportExternalRss()
+  /**
+   * Import external rss
+   */
+  public static function ImportExternalRss()
     {
         try {
             $rss = self::ParseExternalRss();

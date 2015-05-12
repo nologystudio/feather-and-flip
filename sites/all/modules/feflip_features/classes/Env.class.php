@@ -7,4 +7,7 @@ class Env {
 
   const OTTO_BASE_PATH = "http://otto-env.elasticbeanstalk.com/pre";
 
+  const MEMCACHE_GENERAL_HOST = 'localhost';
+  const MEMCACHE_GENERAL_PORT = 11211;
+
 }
