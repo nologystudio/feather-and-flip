@@ -250,8 +250,8 @@ class Hotel
     public static function GetImages($node)
     {
         $images = array();
-        if (isset($node->field_images_cdn['und']) && count($node->field_images_cdn['und']) > 0) {
-            foreach($node->field_images_cdn['und'] as $item)
+        if (isset($node->field_images['und']) && count($node->field_images['und']) > 0) {
+            foreach($node->field_images['und'] as $item)
             {
                 $contentblock = entity_load('field_collection_item',array($item['value']));
                 $contentblock = array_shift($contentblock);
