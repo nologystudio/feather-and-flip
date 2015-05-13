@@ -152,13 +152,7 @@
                 <a class="item<?php echo (!empty($hClasses) ? ' '.$hClasses : ''); ?>" href="<?php echo $hotel['url']; ?>"<?php echo (!empty($hotel['_service']) ? ' data-service="'.$hotel['_service'].'"' : ''); ?><?php echo (!empty($hotel['_service']) ? ' data-hotelId="'.$hotel[$hotel['_serviceCode']].'"' : ''); ?> data-internalId="<?php echo $hotel['id'] ?>"
                     <?php if (isset($hotel['expedia_rate'])){echo 'data-expedia = "'.$hotel['expedia_rate'] .' '. $hotel['expedia_curr'].'|' . $hotel['expediaCode'].'" ';} if (isset($hotel['sabre_rate'])){echo 'data-sabre = "'.$hotel['sabre_rate'] .' '. $hotel['sabre_curr'].'|' . $hotel['sabreCode'] .'"';}?>>
                     <figure>
-                      <?php
-                            //FIXME temporal change to load only S3 images.
-                          if (!strpos('S3', $hotel['image'])) { ?>
-                            <img src="http://placehold.it/350x300" alt="">
-                      <?php } else { ?>
-                        <img src="<?= $hotel['image'] ?>" alt=""/>
-                      <?php } ?>
+                        <img src="<?php echo $hotel['image'];?>" alt=""/>
                     </figure>
                     <div id="hotel-name">
                         <h2><?php echo $hotel['name'];?></h2>

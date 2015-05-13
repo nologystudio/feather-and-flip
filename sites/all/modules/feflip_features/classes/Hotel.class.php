@@ -256,9 +256,9 @@ class Hotel
                 $contentblock = entity_load('field_collection_item',array($item['value']));
                 $contentblock = array_shift($contentblock);
 
-                if (isset($contentblock->field_image_cdn['und']) && count($contentblock->field_image_cdn['und']) > 0)
+                if (isset($contentblock->field_mainimage['und']) && count($contentblock->field_mainimage['und']) > 0)
                 {
-                    foreach($contentblock->field_image_cdn['und'] as $image)
+                    foreach($contentblock->field_mainimage['und'] as $image)
                     {
                         $url = image_style_url('hotel_1040', $image['uri']);
                         $imageSize = Helpers::safeGetImageSize($url);

@@ -150,7 +150,7 @@ function generateImages($node, $selected_image_styles) {
       foreach ($fieldCollection['und'] as $item) {
         $imageItems = entity_load('field_collection_item', array($item['value']));
         $imageItems = array_shift($imageItems);
-
+        //FIXME change field_image_cdn to valid variable
         if (isset($imageItems->field_image_cdn['und']) && count($imageItems->field_image_cdn['und']) > 0) {
           foreach ($imageItems->field_image_cdn['und'] as $image) {
             foreach ($selected_image_styles as $key => $style) {

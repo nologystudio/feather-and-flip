@@ -139,7 +139,7 @@ function feflip_preprocess_node(&$variables) {
 
       $destination = node_load($variables['node']->field_destination['und'][0]['entity']->nid);
       $variables['destinationText'] = $destination->title . ', ' . $destination->field_country['und'][0]['value'];
-      $image = Helpers::GetMainImageFromFieldCollection($destination->field_imagescdn, $variables['destinationText'],'http://placehold.it/100x100', 'itinerary_route_icon');
+      $image = Helpers::GetMainImageFromFieldCollection($destination->field_images, $variables['destinationText'],'http://placehold.it/100x100', 'itinerary_route_icon');
       $variables['image'] = $image;
 
       // check if exist term with this destination name
