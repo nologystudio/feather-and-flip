@@ -41,7 +41,7 @@ function gelf_watchdog($entry) {
   $source_host = calculateClientIp();
 
   $gelf = new GELFMessage();
-  $message = filter_xss(is_null($entry['variables']) ? $entry['message'] : ($entry['message'] . ' ' . json_encode($entry['variables'])));
+  $message = filter_xss(is_null($entry['variables']) ? $entry['message'] : strtr($entry['message'], $entry['variables']));
   $short_msg_length = 100;
   if (strlen($message) > $short_msg_length) {
     $short_message = preg_replace('/\s+?(\S+)?$/u', '', substr($message, 0, $short_msg_length));
