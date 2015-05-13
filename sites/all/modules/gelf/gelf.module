@@ -41,7 +41,7 @@ function gelf_watchdog($entry) {
   $source_host = calculateClientIp();
 
   $gelf = new GELFMessage();
-  $message = filter_xss(is_null($entry['variables']) ? $entry['message'] : strtr($entry['message'], $entry['variables']));
+  $message = filter_xss(is_null($entry['variables']) ? $entry['message'] : ($entry['message'] . ' ' . json_encode($entry['variables'])));
   $short_msg_length = 100;
   if (strlen($message) > $short_msg_length) {
     $short_message = preg_replace('/\s+?(\S+)?$/u', '', substr($message, 0, $short_msg_length));
@@ -50,6 +50,7 @@ function gelf_watchdog($entry) {
     $short_message = $message;
   }
   $username = isset($entry['user']->name) ? $entry['user']->name : variable_get('anonymous', t('Anonymous'));
+  $serverHost = isset($_SERVER['PARAM1']) ? '[' . $_SERVER['PARAM1'] . '] ' . $_SERVER['HTTP_HOST'] : '[???] ' . $_SERVER['HTTP_HOST'];
   $gelf->setShortMessage($short_message);
   $gelf->setFullMessage($message);
   $gelf->setHost($source_host);
@@ -61,7 +62,7 @@ function gelf_watchdog($entry) {
   $gelf->setAdditional("Username", $username);
   $gelf->setAdditional("Uid", $entry['user']->uid);
   $gelf->setAdditional("Request_uri", $entry['request_uri']);
-  $gelf->setAdditional("Server_host", $_SERVER['HTTP_HOST']);
+  $gelf->setAdditional("Server_host", $serverHost);
   $gelf->setAdditional("Client_host", $entry['ip']);
   try {
     $publisher = new GELFMessagePublisher($host, $port);
