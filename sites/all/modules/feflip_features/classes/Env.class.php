@@ -10,4 +10,8 @@ class Env {
   const MEMCACHE_GENERAL_HOST = 'localhost';
   const MEMCACHE_GENERAL_PORT = 11211;
 
+
+  const CLOUDFRONT_ENABLED = TRUE;
+  const S3_BUCKET_NAME = "devfeatherflip";
+  const CLOUDFRONT_NAME = "d2gxyy20u4nycu";
 }
