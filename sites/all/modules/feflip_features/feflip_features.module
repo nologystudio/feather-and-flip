@@ -1,0 +1,155 @@
+<?php
+
+/**
+ * Implements hook_init().
+ * CORS configuration for serving resources to extenal calls
+ */
+function feflip_features_init() {
+	$method = $_SERVER['REQUEST_METHOD'];
+	if (isset($_SERVER['HTTP_ORIGIN'])) {
+		drupal_add_http_header('Access-Control-Allow-Origin', $_SERVER['HTTP_ORIGIN']);
+	}
+	if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS'])) {
+		drupal_add_http_header('Access-Control-Allow-Headers', $_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']);
+	}
+	if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_METHOD'])) {
+		drupal_add_http_header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+	}
+	if ($method == 'OPTIONS') {
+		exit;
+	}
+}
+
+/**
+ * Implements hook_admin_paths_alter().
+ */
+function feflip_features_admin_paths_alter(&$paths) {
+//   $paths['user'] = TRUE;
+//   $paths['user/*'] = TRUE;
+    $paths['entityform/*'] = TRUE;
+    $paths['entityform/*/edit'] = TRUE;
+}
+
+/**
+ * Implements hook_search_api_autocomplete_types().
+ */
+function feflip_features_search_api_autocomplete_types() {
+  $types['feflip_features'] = array(
+    'name' => t('feflip_features searches'),
+    'description' => t('Searches provided by the <em>Feather+Flip Features</em> module.'),
+    'list searches' => 'feflip_features_list_autocomplete_searches',
+    'create query' => 'feflip_features_create_autocomplete_query',
+    // OPTIONAL – only if you want additional search-specific options, like for Views:
+    //'config form' => 'MODULE_autocomplete_config_form',
+  );
+  return $types;
+}
+
+function feflip_features_list_autocomplete_searches(SearchApiIndex $index) {
+  $ret = array();
+  // If your module only provides one search, it's simple:
+  $ret['feflip_features']['name'] = t('feflip_features search');
+  // Otherwise, loop over all defined searches:
+  // foreach (… as $search) {
+  //   // Remember to use a proper prefix to avoid conflicts.
+  //   $id = 'feflip_features_' . $search->id;
+  //   $ret[$id]['name'] = $search->label;
+  //   // If the searches have additional options/information:
+  //   $ret[$id]['options']['custom'] = $search->options;
+  //}
+  return $ret;
+}
+
+function feflip_features_create_autocomplete_query(SearchApiAutocompleteSearch $search, $complete, $incomplete) {
+  $query = search_api_query($search->index_id);
+  if ($complete) {
+    $query->keys($complete);
+  }
+  if (!empty($search->options['custom']['extra'])) {
+    list($f, $v) = explode('=', $search->options['custom']['extra'], 2);
+    $query->condition($f, $v);
+  }
+  if (!empty($search->options['custom']['user_filters'])) {
+    foreach (explode("\n", $search->options['custom']['user_filters']) as $line) {
+      list($f, $v) = explode('=', $line, 2);
+      $query->condition($f, $v);
+    }
+  }
+  return $query;
+}
+
+function feflip_features_search_form(array $form, array &$form_state) {
+  // …
+  $form['keys'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Enter destination or hotel'),
+  );
+  // If there's only one search in your module, with ID "MODULE".
+  // Otherwise, get the proper ID, as assigned in MODULE_list_autocomplete_searches(),
+  // for the current search.
+  $autocomplete_id = 'feflip_features';
+  $search = search_api_autocomplete_search_load($autocomplete_id);
+  if ($search && $search->enabled) {
+    $search->alterElement($form['keys']);
+  }
+
+  return $form;
+}
+/**
+ * Implements hook_cron().
+ */
+function feflip_features_cron() {
+	// Rss import task
+	Helpers::ImportExternalRss();
+}
+
+/*
+*   Save a new booking
+*/
+function feflip_features_StoreBooking($args)
+{
+    global $user;
+    $entityform = entity_create('entityform', array(
+    'type' => 'booking',
+    'created' => time(),
+    'changed' => time(),
+    'language' => LANGUAGE_NONE,
+    'uid' => $user->uid));
+
+    $wrapper = entity_metadata_wrapper('entityform', $entityform);
+
+    //Fill fields
+    $wrapper->field_first_name      = (isset($args['user_first_name']) ? $args['user_first_name'] : '');
+    $wrapper->field_last_name       = (isset($args['user_last_name']) ? $args['user_last_name'] : '');
+    $wrapper->field_email           = (isset($args['user_email']) ? $args['user_email'] : '');
+    $wrapper->field_phone_number    = (isset($args['user_phoneNumber']) ? $args['user_phoneNumber'] : '');
+    $wrapper->field_credit_card     = (isset($args['user_creditCard']) ? $args['user_creditCard'] : '');
+    $wrapper->field_room_type       = (isset($args['booking_roomType']) ? $args['booking_roomType'] : '');
+    $wrapper->field_check_in        = (isset($args['booking_ckeckIn']) ? $args['booking_ckeckIn'] : '');
+    $wrapper->field_check_out       = (isset($args['booking_checkOut']) ? $args['booking_checkOut'] : '');
+    $wrapper->field_nights          = (isset($args['booking_nights']) ? $args['booking_nights'] : '');
+    $wrapper->field_rooms           = (isset($args['booking_rooms']) ? $args['booking_rooms'] : '');
+    $wrapper->field_adults          = (isset($args['booking_adults']) ? $args['booking_adults'] : '');
+    $wrapper->field_children        = (isset($args['booking_children']) ? $args['booking_children'] : '');
+    $wrapper->field_user_id         = $user->uid;
+    $wrapper->field_service         = (isset($args['booking_service']) ? $args['booking_service'] : '');
+    $wrapper->field_booking_id      = (isset($args['booking_id']) ? $args['booking_id'] : '');
+    $wrapper->field_hotel_name      = (isset($args['booking_hotelName']) ? $args['booking_hotelName'] : '');
+    $wrapper->field_hotel_contact   = (isset($args['booking_hotelContact']) ? $args['booking_hotelContact'] : '');
+    $wrapper->field_rate            = (isset($args['booking_rate']) ? $args['booking_rate'] : '');
+    $wrapper->field_adress_1        = (isset($args['user_address1']) ? $args['user_address1'] : '');
+    $wrapper->field_citycode        = (isset($args['user_citycode']) ? $args['user_citycode'] : '');
+    $wrapper->field_state_province_code = (isset($args['user_stateProvinceCode']) ? $args['user_stateProvinceCode'] : '');
+    $wrapper->field_countrycode     = (isset($args['user_countryCode']) ? $args['user_countryCode'] : '');
+    $wrapper->field_postal_code     = (isset($args['user_postalCode']) ? $args['user_postalCode'] : '');
+    $wrapper->field_tax_rate        = (isset($args['booking_tax_rate'])) ? $args['booking_tax_rate'] : '';
+    $wrapper->field_policy_cancel   = (isset($args['booking_policy_cancel'])) ? $args['booking_policy_cancel'] : '';
+    $wrapper->field_confirmation_number = (isset($args['booking_confirmation_number'])) ? $args['booking_confirmation_number'] : '';
+    $wrapper->field_user_ip = (isset($args['user_ip'])) ? $args['user_ip'] : '';
+    $wrapper->field_user_agent = (isset($args['user_agent'])) ? $args['user_agent'] : '';
+    $wrapper->field_hotel_address = (isset($args['hotel_address'])) ? $args['hotel_address'] : '';
+
+    //Done!
+    $wrapper->save();
+
+}

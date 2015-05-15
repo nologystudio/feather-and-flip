@@ -1,0 +1,86 @@
+		
+		
+			
+		<!-- ---------------------------------------------------------------------------------------------------------------
+         
+        * Project     : F+F
+        * Document    : be-search.tpl.html
+        * Created on  : 16 Nov, 2.014
+        * Version     : 1.0
+        * Author      : Aday
+        * Description : Booking engine search HTML template
+         
+        -------------------------------------------------------------------------------------------------------------------
+           *          This code has been developed by NOLOGY. in the awesome Canaries - www.nologystudio.com           *
+        -------------------------------------------------------------------------------------------------------------------
+         
+        * Log * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+        -------------------------------------------------------------------------------------------------------------------
+        * 
+        ---------------------------------------------------------------------------------------------------------------- -->
+		
+		<form id="booking-search">
+			<div class="wrapper">
+				<label for="check-in" ng-class="{'warning':!dateIsValid}">
+					<span>check in</span>
+					<input  type="text" name="check-in" value="{{bookingInfo.checkIn}}" ng-model="bookingInfo.checkIn" required/>
+					<button rel="up"   ng-click="changeCheckin('+')"></button>
+					<button rel="down" ng-click="changeCheckin('-')"></button>
+				</label>
+				<label for="check-out" ng-class="{'warning':!dateIsValid}" >
+					<span>check out</span>
+					<input  type="text" name="check-out" value="{{bookingInfo.checkOut}}" ng-model="bookingInfo.checkOut"/>
+					<button rel="up"   ng-click="changeCheckout('+')"></button>
+					<button rel="down" ng-click="changeCheckout('-')"></button>
+				</label>
+				<label for="rooms">
+					<span>rooms</span>
+					<input type="text" name="rooms" value="{{bookingInfo.rooms.number}}" ng-model="bookingInfo.rooms.number" maxlength="2" disabled="true"/>
+					<button rel="up"   ng-click="roomManager('+')"></button>
+					<button rel="down" ng-click="roomManager('-')"></button>
+				</label>
+				<label for="adults">
+					<span>adults</span>
+					<input type="text" name="adults" value="{{bookingInfo.rooms.info[0].adults}}" ng-model="bookingInfo.rooms.info[0].adults" maxlength="2" disabled="true"/>
+					<button rel="up"   ng-click="guestManager('adults',0,'+')"></button>
+					<button rel="down" ng-click="guestManager('adults',0,'-')" ></button>
+				</label>
+				<label for="children">
+					<span>children</span>
+					<input type="text" name="children" value="{{bookingInfo.rooms.info[0].children.number}}" ng-model="bookingInfo.rooms.info[0].children.number" maxlength="2" disabled="true"/>
+					<button rel="up"   ng-click="guestManager('children',0,'+')"></button>
+					<button rel="down" ng-click="guestManager('children',0,'-')"></button>
+				</label>
+				<input type="submit" ng-click="getRates()" value="get rates"/>
+			</div>
+			<div class="form-ui">
+				<div class="wrapper">
+					<ul id="room-select">
+						<li ng-click="setRooms(1)">1</li>
+						<li ng-click="setRooms(2)">2</li>
+						<li ng-click="setRooms(3)">3</li>
+						<li ng-click="setRooms(4)">4</li>
+						<li ng-click="setRooms(5)">5</li>
+					</ul>
+					<ul id="adult-select">
+						<li ng-click="setAdults(0)">0</li>
+						<li ng-click="setAdults(1)">1</li>
+						<li ng-click="setAdults(2)">2</li>
+						<li ng-click="setAdults(3)">3</li>
+						<li ng-click="setAdults(4)">4</li>
+						<li ng-click="setAdults(5)">5</li>
+					</ul>
+					<ul id="children-select">
+						<li ng-click="setChildren(0)">0</li>
+						<li ng-click="setChildren(1)">1</li>
+						<li ng-click="setChildren(2)">2</li>
+						<li ng-click="setChildren(3)">3</li>
+						<li ng-click="setChildren(4)">4</li>
+						<li ng-click="setChildren(5)">5</li>
+					</ul>
+				</div>
+			</div>
+		</form>
+		
+		
+		

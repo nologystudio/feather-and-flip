@@ -1,0 +1,4 @@
+name = GELF
+description = "Sends watchdog messages to Graylog2 using the GELF format."
+core = 7.x
+configure = admin/config/development/logging

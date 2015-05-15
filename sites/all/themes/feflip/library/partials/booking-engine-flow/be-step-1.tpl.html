@@ -1,0 +1,141 @@
+		
+		
+			
+		<!-- ---------------------------------------------------------------------------------------------------------------
+         
+        * Project     : F+F
+        * Document    : be-step-1.tpl.html
+        * Created on  : 8 Nov, 2.014
+        * Version     : 1.0
+        * Author      : Aday
+        * Description : Booking engine step 1 HTML template
+         
+        -------------------------------------------------------------------------------------------------------------------
+           *          This code has been developed by NOLOGY. in the awesome Canaries - www.nologystudio.com           *
+        -------------------------------------------------------------------------------------------------------------------
+         
+        * Log * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+        -------------------------------------------------------------------------------------------------------------------
+        * 
+        ---------------------------------------------------------------------------------------------------------------- -->
+		
+		<!-- Step 1: Check-in + Check-out + Adults + Children + Rooms -->
+		
+		<section id="dates">
+			<div class="error-header animated fadeInDown" ng-if="!dateIsValid">Please make sure you have selected
+   correct dates</div>
+			<header>select your dates</header>
+			<div id="calendar" class="animated fadeInUp" ng-controller="CalendarCtrl">
+				<div id="arrival-gallery" class="gallery-wrapper">
+					<ul id="arrival" class="month-gallery">
+						<li id="month-{{$index}}" class="month-container" ng-repeat="month in year">
+							<header>
+								<div class="month-title">{{month.name}}</div>
+								<small>mon</small>
+								<small>tue</small>
+								<small>wed</small>
+								<small>thu</small>
+								<small>fri</small>
+								<small>sat</small>
+								<small>sun</small>
+							</header>
+							<button ng-if="$index < month.order.start" ng-repeat="day in month.order.days" class="hidden"></button>
+							<button ng-repeat="(key,day) in month.order.days" data-date="{{day}}">{{key}}</button>
+						</li>
+					</ul>
+					<header>
+						<h6>Choose your arrival date</h6>
+						<nav>
+							<button rel="prev"></button>
+							<small></small>
+							<button rel="next"></button>
+						</nav>
+					</header>
+				</div>
+				<div id="departure-gallery" class="gallery-wrapper">
+					<ul id="departure" class="month-gallery">
+						<li id="month-{{$index}}" class="month-container" ng-repeat="month in year">
+							<header>
+								<div class="month-title">{{month.name}}</div>
+								<small>mon</small>
+								<small>tue</small>
+								<small>wed</small>
+								<small>thu</small>
+								<small>fri</small>
+								<small>sat</small>
+								<small>sun</small>
+							</header>
+							<button ng-if="$index < month.order.start" ng-repeat="day in month.order.days" class="hidden"></button>
+							<button ng-repeat="(key,day) in month.order.days" data-date="{{day}}">{{key}}</button>
+						</li>
+					</ul>
+					<header>
+						<h6>Choose your departure date</h6>
+						<nav>
+							<button rel="prev"></button>
+							<small></small>
+							<button rel="next"></button>
+						</nav>
+					</header>
+				</div>
+			</div>
+			<button rel="next" ng-show="stepOne = 1" ng-class="{greyout:!dateIsValid}" ng-click="!dateIsValid || checkStepOne()">continue</button>
+		</section>
+		<section id="rooms" class="animated fadeIn" ng-show="stepOne = 2">
+			<header>number of rooms</header>
+			<div class="wrapper">
+				<div class="counter">
+					<div class="counter-wrapper">
+						<input type="text" value="{{bookingInfo.rooms.number}}" ng-model="bookingInfo.rooms.number" readonly required/>
+						<nav>
+							<button rel="plus"  ng-click="roomManager('+')"></button>
+							<button rel="minus" ng-click="roomManager('-')"></button>
+						</nav>
+					</div>
+				</div>
+			</div>
+			<button rel="next" ng-show="stepOne = 2" ng-click="checkStepOne()">continue</button>
+		</section>
+		<section id="who-is-going" class="animated fadeIn" ng-repeat="room in bookingInfo.rooms.info" ng-show="stepOne = 3">
+			<h1 ng-if="$first">who's going?</h1>
+			<h2 ng-if="!$first">ROOM {{$index+1}}</h2>
+			<div class="wrapper">
+				<div id="adults" class="counter">
+					<small>Adults</small>
+					<div class="counter-wrapper">
+						<input type="text" value="{{room.adults}}" ng-model="room.adults" readonly required/>
+						<nav>
+							<button rel="plus"  ng-click="guestManager('adults',$index,'+')"></button>
+							<button rel="minus" ng-click="guestManager('adults',$index,'-')"></button>
+						</nav>
+					</div>
+				</div>
+				<div id="children" class="counter">
+					<small>Children</small>
+					<div class="counter-wrapper">
+						<input type="text" value="{{room.children.number}}" ng-model="room.children.number" readonly required/>
+						<nav>
+							<button rel="plus"  ng-click="guestManager('children',$index,'+')"></button>
+							<button rel="minus" ng-click="guestManager('children',$index,'-')"></button>
+						</nav>
+					</div>
+				</div>
+				<div id="children-age-wrapper" class="room-{{$index}}"ng-if="room.children.number > 0">
+					<div class="counter animated fadeIn" ng-repeat="child in room.children.ages track by $index">
+						<small>Age</small>
+						<div class="counter-wrapper">
+							<input type="number" value="{{child}}" ng-model="child" min="0" max="17" readonly required/>
+							<nav>
+								<button rel="plus"  ng-click="child = child + 1"></button><!-- geManager(child,'+') -->
+								<button rel="minus" ng-click="child = child - 1"></button><!-- ageManager(child,'-') -->
+							</nav>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<footer id="confirmation" ng-if="stepOne = 3">
+			<button rel="confirm" ng-class="{greyout:!dateIsValid}" ng-click="!dateIsValid || getRates()">go</button>
+		</footer>
+		
+		

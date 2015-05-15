@@ -1,0 +1,146 @@
+		
+		
+			
+		<!-- ---------------------------------------------------------------------------------------------------------------
+         
+        * Project     : F+F
+        * Document    : be-step-3.tpl.html
+        * Created on  : 8 Nov, 2.014
+        * Version     : 1.0
+        * Author      : Aday
+        * Description : Booking engine step 3 HTML template
+         
+        -------------------------------------------------------------------------------------------------------------------
+           *          This code has been developed by NOLOGY. in the awesome Canaries - www.nologystudio.com           *
+        -------------------------------------------------------------------------------------------------------------------
+         
+        * Log * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+        -------------------------------------------------------------------------------------------------------------------
+        * 
+        ---------------------------------------------------------------------------------------------------------------- -->
+		
+		<!-- Step 3: Hotel room detail -->
+		
+		<header id="not-available" ng-if="!bookingInfo.available" class="animated fadeInDown">
+			<h1>Sorry, there are no availabilities for these dates</h1>
+		</header>
+		
+		<header ng-if="service == 'expedia'">
+			<div class="wrapper">
+				<h1 class="middle-line">Available rates<br><span>Customer Support (646) 854-3386</span></h1>
+			</div>
+		</header>
+		
+		<ul id="search-result" ng-if="service == 'expedia'">
+			<li ng-repeat="room in availableRooms.HotelRoomResponse" id="expedia-room-{{$index}}">
+				<div class="room-wrapper">
+					<div class="left-col">
+						<h2>
+							{{room.RoomType.description}}
+							<button ng-click="expandRoom($index)" rel="see-rates">view more info</button>
+						</h2>
+						<!--<figure>
+							<img src="{{room.RoomImages.RoomImage.url}}"/>
+						</figure>-->
+					</div>
+					<div class="right-col">
+						<h3 ng-class="{short:room.RateInfos.RateInfo.nonRefundable}">{{room.RateInfos.RateInfo.ChargeableRateInfo['@maxNightlyRate']}} {{room.RateInfos.RateInfo.ChargeableRateInfo['@currencyCode']}} / Night
+						<small ng-if="room.RateInfos.RateInfo.nonRefundable">Non-refundable rate</small>
+						</h3>
+						<button ng-click="selectThis(room)" rel="see-rates">book this room</button>
+						<button ng-if="room.showRates" rel="plus"></button>
+					</div>
+				</div>
+				<ul id="room-rates">
+					<li>
+						<div class="room-wrapper">
+							<div class="left-col">
+								<h2>
+									<ul>
+										<li>
+											<span>Room type.</span>
+											<small>{{room.RoomType.description}}</small>
+										</li>
+										<li>
+											<span>Amenities.</span>
+											<small ng-repeat="item in room.RoomType.roomAmenities.RoomAmenity">{{item.amenity}}</small>
+										</li>
+										<li ng-if="room.ValueAdds" ng-switch on="room.ValueAdds.ValueAdd">
+											<span>Value Adds.</span>
+											<small ng-switch-when="room.ValueAdds.ValueAdd.length > 0" ng-repeat="item in room.ValueAdds.ValueAdd">{{item.description}}</small>
+											<small ng-switch-default>{{room.ValueAdds.ValueAdd.description}}</small>
+										</li>
+										<li>
+											<span>Check-in Instructions</span>
+											<small ng-bind-html="availableRooms.checkInInstructions"><!--{{availableRooms.checkInInstructions}}--></small>
+										</li>
+										<li>
+											<span>Notifications and fees.</span>
+											<small>{{room.RateInfos.RateInfo.cancellationPolicy}}</small>
+										</li>
+										<li>
+											<span>Total Tax Recovery Charges and Service Fees:</span>
+											<small>{{room.RateInfos.RateInfo.taxRate}} {{room.RateInfos.RateInfo.ChargeableRateInfo['@currencyCode']}}</small>
+										</li>
+									</ul>
+								</h2>
+							</div>
+							<div class="right-col"></div>
+						</div>
+					</li>
+				</ul>
+			</li>
+		</ul>
+		
+		<small id="expedia-disclaimer" ng-if="service == 'expedia'">The room rates listed are for double occupancy per room unless otherwise stated and exclude tax recovery charges and service fees.<br><a href="http://travel.ian.com/index.jsp?pageName=userAgreement&locale=en_US&cid=456134" target="_blank">EAN TERMS AND CONDITIONS</a></small>
+		
+		<!-- ----------------------------------------------------------------------------------------------------------- -->
+		
+		<header ng-if="service == 'sabre'">
+			<div class="wrapper">
+				<h1 class="middle-line">Available rates</h1>
+			</div>
+		</header>
+		
+		<ul id="search-result" ng-if="service == 'sabre'">
+			<li ng-repeat="room in availableRooms.RoomRates.RoomRate" id="sabre-room-{{$index}}">
+				<div class="room-wrapper">
+					<div class="left-col">
+						<h2>
+							{{room.AdditionalInfo.Text[0]}}
+							<button ng-click="expandRoom($index)" rel="see-rates">view more info</button>
+						</h2>
+					</div>
+					<div class="right-col">
+						<h3>{{room.Rates.Rate.Amount}} {{room.Rates.Rate.CurrencyCode}} / Night
+						<small ng-if="">Non-refundable rate</small>
+						</h3>
+						<button ng-click="selectThis(room)" rel="see-rates">book this room</button>
+						<button ng-if="room.showRates" rel="plus"></button>
+					</div>
+				</div>
+				<ul id="room-rates">
+					<li>
+						<div class="room-wrapper">
+							<div class="left-col">
+								<h2>
+									<ul>
+										<li>
+											<span>Room type.</span>
+											{{room.AdditionalInfo.Text[0]}} {{room.AdditionalInfo.Text[1]}}
+										</li>
+										<li>
+											<span>Notifications.</span>
+											{{availableRooms.BasicPropertyInfo.VendorMessages.Cancellation.Text[0]}} {{availableRooms.BasicPropertyInfo.VendorMessages.Guarantee.Text[0]}} 
+										</li>
+									</ul>
+								</h2>
+							</div>
+							<div class="right-col"></div>
+						</div>
+					</li>
+				</ul>
+			</li>
+		</ul>
+		
+		

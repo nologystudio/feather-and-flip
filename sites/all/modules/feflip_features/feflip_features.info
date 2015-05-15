@@ -1,0 +1,10 @@
+name = Feather & Flip features
+description = Add custom capabilities into feather and flip theme. Developed by <a target="_blank" href="http://nologystudio.com">NOLOGY.</a>
+core = 7.x
+configure = admin/config/feflip
+files[] = classes/Destination.class.php
+files[] = classes/AdminForms.class.php
+files[] = classes/Hotel.class.php
+files[] = classes/Itinerary.class.php
+files[] = classes/Helpers.class.php
+files[] = classes/Collection.class.php

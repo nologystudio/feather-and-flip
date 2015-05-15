@@ -1,0 +1,18 @@
+# Ignore paths that contain user-generated content.
+# sites/*/files
+sites/*/private
+
+*.codekit
+
+.idea
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
+
+sites/default/settings.php
+sites/default/files/media/
+sites/default/files/styles
+sites/default/files/thumbnails
+
