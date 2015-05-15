@@ -29,4 +29,6 @@ class Env {
   const CLOUDFRONT_ENABLED = TRUE;
   const S3_BUCKET_NAME = "devfeatherflip";
   const CLOUDFRONT_NAME = "d2gxyy20u4nycu";
+
+  const GOOGLE_ANALYTICS_CODE = '';
 }

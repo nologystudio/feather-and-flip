@@ -31,4 +31,6 @@ class Env {
   const CLOUDFRONT_ENABLED = TRUE;
   const S3_BUCKET_NAME = "featherandflip.com";
   const CLOUDFRONT_NAME = "ds9464c56tfjs";
+
+  const GOOGLE_ANALYTICS_CODE = 'UA-58755426-1';
 }
