@@ -44,14 +44,14 @@
 					<table width="135" border="0" cellpadding="2" cellspacing="0" title="Click to Verify - This site chose Symantec SSL for secure e-commerce and confidential communications.">
 						<tr>
 							<td width="135" align="center" valign="top">
-								<script type="text/javascript" src="https://seal.websecurity.norton.com/getseal?host_name=www.featherandflip.com&amp;size=L&amp;use_flash=NO&amp;use_transparent=NO&amp;lang=en"></script>
+								<script type="text/javascript" src="https://seal.websecurity.norton.com/getseal?host_name=m.featherandflip.com&amp;size=L&amp;use_flash=YES&amp;use_transparent=YES&amp;lang=en"></script>
 							</td>
 						</tr>
 					</table>
 				</div>			
 				<a id="tzell-brand" href="http://www.tzell.com/tzell/index.htm" target="_blank">
 					<small>Powered by</small>
-					<img src="//ds9464c56tfjs.cloudfront.net/media/tzell-logo.png" alt="Powered by Tzell Travel Group"/>
+					<img src="/<?php echo drupal_get_path('theme', 'feflip_mobile'); ?>/media/brand/tzell-logo.png" alt="Powered by Tzell Travel Group"/>
 				</a>
 				<?php echo Helpers::GetSocialMediaMenu('black');?>
 				<small><?php echo date("Y"); ?> FEATHER+FLIP LLC. ALL RIGHTS RESERVED</small>

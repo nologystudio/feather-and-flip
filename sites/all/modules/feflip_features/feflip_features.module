@@ -99,9 +99,8 @@ function feflip_features_search_form(array $form, array &$form_state) {
  * Implements hook_cron().
  */
 function feflip_features_cron() {
-  if (Lock::openAndLock('CRON_IMPORT_EXTERNAL_RSS')) {
-    Helpers::ImportExternalRss();
-  }
+	// Rss import task
+	Helpers::ImportExternalRss();
 }
 
 /*

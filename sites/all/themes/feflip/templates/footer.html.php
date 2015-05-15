@@ -39,14 +39,14 @@
 				<?php echo $footer_fixed_menu; ?>
 			</nav>
 			<div class="fixed-bar">
-				<a id="brand" href="/"><img src="//ds9464c56tfjs.cloudfront.net/media/feather-and-flip-black-logo.png" alt="Feather+flip"/></a>
+				<a id="brand" href="/"><img src="<?php echo variable_get('relativePath'); ?>media/brand/feather-and-flip-black-logo.png" alt="Feather+flip"/></a>
 				<?php echo Helpers::GetSocialMediaMenu('black');?>
 				
 				<div id="ssl-label">
 					<table width="135" border="0" cellpadding="2" cellspacing="0" title="Click to Verify - This site chose Symantec SSL for secure e-commerce and confidential communications.">
 						<tr>
 							<td width="135" align="center" valign="top">
-								<script type="text/javascript" src="https://seal.websecurity.norton.com/getseal?host_name=www.featherandflip.com&amp;size=L&amp;use_flash=NO&amp;use_transparent=NO&amp;lang=en"></script>
+								<script type="text/javascript" src="https://seal.websecurity.norton.com/getseal?host_name=www.featherandflip.com&amp;size=L&amp;use_flash=YES&amp;use_transparent=YES&amp;lang=en"></script>
 							</td>
 						</tr>
 					</table>
@@ -54,7 +54,7 @@
 								
 				<a id="tzell-brand" href="http://www.tzell.com/tzell/index.htm" target="_blank">
 					<small>Powered by</small>
-					<img src="//ds9464c56tfjs.cloudfront.net/media/tzell-logo.png" alt="Powered by Tzell Travel Group"/>
+					<img src="<?php echo variable_get('relativePath'); ?>media/brand/tzell-logo.png" alt="Powered by Tzell Travel Group"/>
 				</a>
 
 				<small><?php echo date("Y"); ?> FEATHER+FLIP LLC. ALL RIGHTS RESERVED</small>
@@ -63,6 +63,3 @@
 		
 		<div class="call-to-action" ng-controller="MessengerCtrl" ng-include="messenger" ng-show="display"></div>
 		<?php include 'script.html.php'; ?>
-		</body>
-		
-		</html>

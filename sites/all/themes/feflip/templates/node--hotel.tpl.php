@@ -102,7 +102,9 @@ if(isset($inputValues['service']) && !empty($inputValues['service']))
                 <?php } ?>    
             </ul>
         <?php } ?>
-        <footer><small><?php echo $node->field_contributor['und'][0]['value'] ;?></small></footer>
+        <footer>
+	        <small><?php echo $node->field_contributor['und'][0]['value'] ;?></small>
+        </footer>
     </section>
     
     <section id="map-it" class="short" <?php if (isset($destination) && !empty($destination)) echo 'data-destination = "'.$destination.'"';?>>

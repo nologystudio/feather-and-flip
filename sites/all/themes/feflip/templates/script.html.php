@@ -34,7 +34,7 @@
 
 		<script type="text/javascript" charset="utf-8" src="<?php echo variable_get('relativePath'); ?>library/vendors/transit.min.js" ></script>
         <script type="text/javascript" charset="utf-8" src="<?php echo variable_get('relativePath'); ?>library/vendors/sly.min.js"></script>
-		<script type="text/javascript" charset="utf-8" src="<?php echo variable_get('relativePath'); ?>library/vendors/shuffle.min.js"></script>
+		<script type="text/javascript" charset="utf-8" src="<?php echo variable_get('relativePath'); ?>library/vendors/shuffle.min.js" ></script>
 		<script type="text/javascript" charset="utf-8" src="<?php echo variable_get('relativePath'); ?>library/vendors/jquery.placeholder.min.js"></script>
 		
 

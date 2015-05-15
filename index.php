@@ -22,12 +22,15 @@ drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
 /*
 *	Redirect if mobile
 */
-if (Helpers::get_device_type() != 'desktop') {
-  //header('Location: http://m.featherandflip.com');
-  //exit();
+$detect = mobile_detect_get_object();
+$is_mobile = $detect->isMobile();
+if ($is_mobile && $_SERVER['HTTP_HOST'] != 'm.featherandflip.com'){
+	header('Location: https://m.featherandflip.com');
+	exit();
+}
+if (!$is_mobile && $_SERVER['HTTP_HOST'] == 'm.featherandflip.com'){
+	header('Location: https://www.featherandflip.com');
+	exit();
 }
 
 menu_execute_active_handler();
-
-
-//echo '<h1>Result profiler:</h1>' . Profiler::generateResults().'<br/><br/><br/>';

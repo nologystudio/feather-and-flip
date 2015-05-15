@@ -27,7 +27,7 @@
                         $img_url = '';
                         if(isset($post->field_field_image[0]['raw']['uri']))
                             $img_url = image_style_url('post_image', $post->field_field_image[0]['raw']['uri']);
-                        $img_wh = (empty($img_url) ? array('', '') : Helpers::safeGetImageSize($img_url));
+                        $img_wh = (empty($img_url) ? array('', '') : getimagesize($img_url));
                         
                         switch ($type) {
                                 case 'review': ?>
@@ -51,12 +51,6 @@
                                         </a>
                                 <?php break;
                          } ?>                        
-                <?php } ?>
-                <?php if (strpos($_SERVER['REQUEST_URI'], '/itinerary') === false && strpos($_SERVER['REQUEST_URI'], '/hotel-reviews') === false ) { ?>
-                    <article id="instagram-feed" class="quick-entry review">
-                            <h3></h3>
-                            <hr>
-                    </article>
                 <?php } ?>
         </div>
         <footer>

@@ -124,7 +124,7 @@
             <tr style="height:20px;"></tr>
             <tr align="center" style="border-bottom: dotted 1px #333333;">
               <td valign="top" style="padding-bottom: 30px;">
-                <img style="width:300px; margin: auto;" src="//ds9464c56tfjs.cloudfront.net/media/feather-and-flip-black-logo.png"/>
+                <img style="width:300px; margin: auto;" src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/sites/all/themes/feflip/media/brand/feather-and-flip-black-logo.png"/>
               </td>
             </tr>
             <tr style="height:20px;"></tr>
@@ -362,7 +362,7 @@
             <tr style="height:20px;"></tr>
             <tr align="center" style="border-bottom: dotted 1px #333333;">
               <td valign="top" style="padding-bottom: 30px;">
-                <img style="width:300px; margin: auto;" src="//ds9464c56tfjs.cloudfront.net/media/feather-and-flip-black-logo.png"/>
+                <img style="width:300px; margin: auto;" src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/sites/all/themes/feflip/media/brand/feather-and-flip-black-logo.png"/>
               </td>
             </tr>
             <tr style="height:20px;"></tr>
@@ -518,7 +518,7 @@
                           <td style="text-align: right; padding-bottom: 15px; border-bottom: dotted 1px #ffffff;">Total cost of stay</td>
                         </tr>
                         <tr>
-                          <td width="50%" style="font-size: 18px; padding-top: 15px;">PAID</td>
+                          <td width="50%" style="font-size: 18px; padding-top: 15px;">Pay on arrival</td>
                           <td style="text-align: right; font-size: 18px;  padding-top: 15px;"><?php echo $wrapper->field_rate->value(); ?></td>
                         </tr>
                       </table>
@@ -534,7 +534,7 @@
                     <td style="color:#333333; font-size:18px; font-weight:bold; line-height: 22px; text-transform: uppercase; ">Payment information</td>
                   </tr>
                   <tr>
-                    <td style="color:#333333; font-size:14px; line-height:22px; border-bottom: dotted 1px #333333; padding-bottom: 15px">We have charged your credit card for the full payment of this reservation.</td>
+                    <td style="color:#333333; font-size:14px; line-height:22px; border-bottom: dotted 1px #333333; padding-bottom: 15px"></td>
                   </tr>
                   <tr>
                     <td>

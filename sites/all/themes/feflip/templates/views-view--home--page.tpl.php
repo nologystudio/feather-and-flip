@@ -89,11 +89,9 @@ finally
 <!-- | i | Booking engine: Landing ------------------------------------------------------- -->
 <section id="booking-engine" ng-controller="BookingEngineCtrl" ng-include="bookingSearch"></section>
 <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - -  -->
-
 <?php
 // Print Travel journal section
 echo $travel_journal; ?>
-
 <section id="map-it" ng-controller="MapCtrl">
         <header>
                 <h3 class="icon compass">MAP IT<span> where to go now </span></h3>

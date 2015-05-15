@@ -551,10 +551,12 @@ function feflip_mobile_theme() {
 * @param filter_field
 * @return array()
 */
-//FIXME Error Cannot redeclare get_home_destinations()
-/*
 function get_home_destinations($filter_field = 'promote') {
-  //Get destinations promoted to frontpage altering the existing 'start_your_journey' view adding the promoted filter.
+  /*
+  * Get destinations promoted to frontpage altering the existing 'start_your_journey' view
+  * adding the promoted filter.
+  * 
+  */
   $dest_view = views_get_view('start_your_journey');
   // add filter criteria
   $dest_view->set_display('page');
@@ -563,14 +565,11 @@ function get_home_destinations($filter_field = 'promote') {
 
   return $dest_view->result;
 }
-*/
 
 /*
  * Get main navigation menu for header
  * @return string
  */
-//FIXME Error Cannot redeclare get_header_main_navigation_menu()
-/*
 function get_header_main_navigation_menu($destinations=NULL){
   
   if (!isset($destinations))
@@ -590,6 +589,12 @@ function get_header_main_navigation_menu($destinations=NULL){
       {
         $navigationMenu .= '<li><a href="'.url($menu_item['link']['link_path']).'">'.$menu_item['link']['link_title'].'</a>';
           if(isset($menu_item['below']) && count($menu_item['below']) > 0) {
+              /*$navigationMenu .= '<ul id="itinerary-list">';
+              foreach ($menu_item['below'] as $submenuItem) {
+                  $navigationMenu .= '<li><a href="'. url($submenuItem['link']['link_path']).'">'.$submenuItem['link']['link_title'].'</a></li>';
+              }
+              $navigationMenu .= '</ul>';*/
+
               $featherUser = Helpers::GetFeatherFlipUser();
               $bookings = Helpers::GetBookingInfoByUser();
 
@@ -614,6 +619,14 @@ function get_header_main_navigation_menu($destinations=NULL){
 						</div>';
           }
       }
+      /*
+      else
+      {
+        $navigationMenu .= '<li><a href="'.url($menu_item['link']['link_path']).'">'.$menu_item['link']['link_title'].'</a>';
+        // TODO: get feather and flip login form
+        $form = drupal_get_form('user_login');
+        $navigationMenu .= drupal_render($form);
+      }*/
     }
     else if(strpos($key, '2232') !== FALSE)
     {
@@ -670,14 +683,12 @@ function get_header_main_navigation_menu($destinations=NULL){
   
   return $navigationMenu;
 }
-*/
+
 
 /*
  * Get fixed menu in footer
  * @return string
  */
-//FIXME Error Cannot redeclare get_footer_fixed_menu()
-/*
 function get_footer_fixed_menu() {
   $f_menu = menu_tree_all_data('menu-footer-right');
   $output = '<ul>';
@@ -691,7 +702,6 @@ function get_footer_fixed_menu() {
   $output .= '</ul>';
   return $output;
 }
-*/
 
 // replace some metatags
 function feflip_mobile_html_head_alter(&$head_elements) {
@@ -719,8 +729,6 @@ function feflip_mobile_html_head_alter(&$head_elements) {
 }
 
 // Generate share links
-//FIXME Error Cannot redeclare getSocialLink()
-/*
 function getSocialLink($_network,$url, $img = '', $desc = '')
 {
   if (strpos($url, 'http://') === false)
@@ -741,7 +749,6 @@ function getSocialLink($_network,$url, $img = '', $desc = '')
     break;
   }
 }
-*/
 
 /**
  * Alter metatags before being cached.

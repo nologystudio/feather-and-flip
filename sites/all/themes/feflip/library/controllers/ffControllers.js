@@ -1294,7 +1294,7 @@
 			// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 			
 			$scope.displayMenu = function(){
-				//$('#map-it aside').toggleClass('on');
+				$('#map-it aside').toggleClass('on');
 			}
 			
 			// | i | Zoom continent...

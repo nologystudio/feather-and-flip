@@ -279,7 +279,7 @@ function feflip_preprocess_views_view(&$variables) {
       if(isset($variables['view']->args[0]))
       {
           $collection = node_load($variables['view']->args[0]);
-          $imageUrl = isset($collection->field_simple_image_cdn) && count($collection->field_simple_image_cdn) > 0 ? image_style_url('headerslideshow', $collection->field_simple_image_cdn['und'][0]['uri']) : 'http://placehold.it/1280x800';
+          $imageUrl = isset($collection->field_image) && count($collection->field_image) > 0 ? image_style_url('headerslideshow', $collection->field_image['und'][0]['uri']) : 'http://placehold.it/1280x800';
           $sizeImage = getimagesize($imageUrl);
           $images = array();
           $images[] = array('url' => $imageUrl,
@@ -356,8 +356,8 @@ function feflip_preprocess_views_view(&$variables) {
             $booking['phone'] = isset($entity->field_phone_number ['und'][0]['value']) ? $entity->field_phone_number ['und'][0]['value'] : '...';
             $booking['mail'] =  isset($entity->field_email ['und'][0]['value']) ? $entity->field_email ['und'][0]['value'] : '...';
             $booking['hotelName'] =  isset($entity->field_hotel_name['und'][0]['value']) ? $entity->field_hotel_name['und'][0]['value'] : '...';
-            $booking['hotelAddress'] =  isset($entity->field_hotel_address['und'][0]['value']) ? $entity->field_hotel_address['und'][0]['value'] : '...';
-            $booking['hotelPhone'] =  isset($entity->field_hotel_contact['und'][0]['value']) ? $entity->field_hotel_contact['und'][0]['value'] : '...';
+            $booking['hotelAddress'] = isset($entity->field_hotel_address['und'][0]['value']) ? $entity->field_hotel_address['und'][0]['value'] : '...';
+            $booking['hotelPhone'] = isset($entity->field_hotel_contact['und'][0]['value']) ? $entity->field_hotel_contact['und'][0]['value'] : '...';
             $booking['checkIn'] =  isset($entity->field_check_in['und'][0]['value']) ? $entity->field_check_in['und'][0]['value'] : '...';
             $booking['checkOut'] =  isset($entity->field_check_out['und'][0]['value']) ? $entity->field_check_out['und'][0]['value'] : '...';
             $booking['rate'] =  isset($entity->field_rate['und'][0]['value']) ? $entity->field_rate['und'][0]['value'] : '...';
@@ -630,7 +630,7 @@ function get_header_main_navigation_menu($destinations=NULL){
         $navigationMenu .= drupal_render($form);
       }*/
     }
-    else if(strpos($key, '2232') !== FALSE)
+    else if(strpos($key, '2218') !== FALSE)
     {
         $navigationMenu .= '<li>'
 						.'<a href="' .url($menu_item['link']['link_path']). '">'.$menu_item['link']['link_title'].'</a>'
@@ -666,6 +666,7 @@ function get_header_main_navigation_menu($destinations=NULL){
             }
             if ($item_id == 'hotel-reviews' && (count($grouped) > 0)) {
                 $navigationMenu .= '<div class="background"></div><div class="wrapper">';
+                ksort($grouped);
                 foreach ($grouped as $c_value => $g_destinations) {
                     $navigationMenu .= '<li><ul><li role="title">'.$c_value.'</li>';
                     foreach ($g_destinations as $g_destination){

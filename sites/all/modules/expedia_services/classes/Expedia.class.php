@@ -207,15 +207,11 @@ class Expedia
         $xml .= $rooms;
         $xml .= "</RoomGroup></HotelRoomAvailabilityRequest>";
 
-        //watchdog('Expedia', 'RoomAvailability_XML ===> '. '<pre>' . htmlspecialchars($xml) . '</pre>');
-
         $res = null;
         try {
 
 
             $res = $service->expedia__rest_room_avail_xml($xml);
-
-            watchdog('Expedia', 'RoomAvailability_XML ===> '. '<pre>' . print_r( $res, true) . '</pre>');
 
             /*
             if($service->type=='rest')

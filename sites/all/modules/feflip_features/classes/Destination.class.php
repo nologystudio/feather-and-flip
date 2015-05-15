@@ -12,12 +12,12 @@ class Destination
      */
     private static function getAllDestinationNodes($filter_field='')
     {
-
         $query = new EntityFieldQuery;
 
         $query = $query->entityCondition('entity_type', 'node')
             ->entityCondition('bundle', 'destination')
-            ->propertyCondition('status', 1);
+            ->propertyCondition('status', 1)
+            ->propertyOrderBy('title', 'ASC');
 
         if(!empty($filter_field))
             $query = $query->propertyCondition($filter_field, 1);
@@ -28,7 +28,6 @@ class Destination
             $nodes = node_load_multiple(array_keys($queryResult['node']));
 
         return $nodes;
-
     }
 
     private static function getDestinations($nodes)
@@ -86,6 +85,7 @@ class Destination
             );
         }
         return $destinations;
+
     }
     
     public static function GetImagesForHomeSlideShow($subtitle)

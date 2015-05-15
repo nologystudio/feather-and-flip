@@ -99,12 +99,6 @@ function file_entity_file_update($file) {
     // If the file has changed dimensions or a new file has been uploaded,
     // update any image field reference to this file and flush image style
     // derivatives.
-    if (!isset($file->metadata)) {
-      $file->metadata = array();
-    }
-    if (!isset($file->original->metadata)) {
-      $file->original->metadata = array();
-    }
     $file->metadata += array('width' => NULL, 'height' => NULL);
     $file->original->metadata += array('width' => NULL, 'height' => NULL);
     if ($file->filesize != $file->original->filesize || $file->metadata['width'] != $file->original->metadata['width'] || $file->metadata['height'] != $file->original->metadata['height']) {

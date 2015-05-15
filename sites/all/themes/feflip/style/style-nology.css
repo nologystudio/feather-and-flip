@@ -6415,8 +6415,11 @@ body > article[id="hotel"] > section[id="features"] footer small {
   font-size: 12px;
   line-height: 'auto';
   position: relative;
-  float: left;
-  text-align: center;
+  margin: auto;
+  float: none;
+  max-width: 1040px;
+  text-align: right;
+  display: block;
 }
 body > main[id][id="hotel"] > section[id="map-it"] header,
 body > section[id="hotel"] > section[id="map-it"] header,
@@ -10243,7 +10246,7 @@ body > section[id] *[id="booking-engine"] div[id="booking-reference"] > header d
 body > article[id] *[id="booking-engine"] div[id="booking-reference"] > header div.feather-logo {
   width: 100%;
   height: 125px;
-  background: transparent url('//ds9464c56tfjs.cloudfront.net/media/feather-and-flip-black-logo.png') no-repeat center center;
+  background: transparent url('../media/brand/feather-and-flip-black-logo.png') no-repeat center center;
   position: relative;
   float: left;
   border-bottom: dotted 1px #999999;
