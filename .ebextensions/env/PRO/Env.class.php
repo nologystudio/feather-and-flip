@@ -28,9 +28,7 @@ class Env {
   #const MEMCACHE_GENERAL_HOST = 'develop.hlpt4i.0001.use1.cache.amazonaws.com';
   #const MEMCACHE_GENERAL_PORT = 11211;
 
-  const USE_CLOUDFRONT = TRUE;
-
   const CLOUDFRONT_ENABLED = TRUE;
-  const S3_BUCKET_NAME = "featherflip.com";
+  const S3_BUCKET_NAME = "featherandflip.com";
   const CLOUDFRONT_NAME = "ds9464c56tfjs";
 }
