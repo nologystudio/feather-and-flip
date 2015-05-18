@@ -25,6 +25,7 @@ class Env {
   const SABRE_TEST_MODE = '';
   const SABRE_ENABLE = '';
 
+  const LOCK_MUTEX_ENABLED = FALSE;
   const MEMCACHE_GENERAL_HOST = 'localhost';
   const MEMCACHE_GENERAL_PORT = 11211;
 

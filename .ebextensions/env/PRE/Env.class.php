@@ -23,6 +23,7 @@ class Env {
   const SABRE_TEST_MODE = '';
   const SABRE_ENABLE = '';
 
+  const LOCK_MUTEX_ENABLED = TRUE;
   const MEMCACHE_GENERAL_HOST = 'develop.hlpt4i.0001.use1.cache.amazonaws.com';
   const MEMCACHE_GENERAL_PORT = 11211;
 
