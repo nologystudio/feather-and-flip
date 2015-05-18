@@ -391,4 +391,25 @@ class Helpers
         }
         return $default;
     }
+    
+    // Get promoted parametrized content
+    public static function get_promoted_content($type='')
+    {
+        if (!empty($type)) {
+            $query = new EntityFieldQuery;
+
+            $query = $query->entityCondition('entity_type', 'node')
+                ->entityCondition('bundle', $type)
+                ->propertyCondition('promote', 1)
+                ->propertyCondition('status', 1);
+            $queryResult = $query->execute();
+            $nodes = array();
+            if (isset($queryResult['node']))
+                $nodes = node_load_multiple(array_keys($queryResult['node']));
+            return $nodes;
+        }
+        else {
+            return array();
+        }
+    }
 }
