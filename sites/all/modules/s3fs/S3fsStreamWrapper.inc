@@ -456,6 +456,7 @@ class S3fsStreamWrapper implements DrupalStreamWrapperInterface {
     }
 
     if (Env::CLOUDFRONT_ENABLED) {
+      $url = str_replace('s3.amazonaws.com/' . Env::S3_BUCKET_NAME, Env::CLOUDFRONT_NAME . '.cloudfront.net', $url);
       $url = str_replace(Env::S3_BUCKET_NAME . '.s3.amazonaws.com', Env::CLOUDFRONT_NAME . '.cloudfront.net', $url);
     }
     return $url;
