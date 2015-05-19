@@ -25,10 +25,13 @@ class Env {
   const SABRE_TEST_MODE = '';
   const SABRE_ENABLE = '';
 
+  const LOCK_MUTEX_ENABLED = FALSE;
   const MEMCACHE_GENERAL_HOST = 'localhost';
   const MEMCACHE_GENERAL_PORT = 11211;
 
   const CLOUDFRONT_ENABLED = FALSE;
   const S3_BUCKET_NAME = "devfeatherflip";
   const CLOUDFRONT_NAME = "d2gxyy20u4nycu";
+
+  const GOOGLE_ANALYTICS_CODE = '';
 }

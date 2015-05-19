@@ -233,10 +233,10 @@ $conf['cache_class_cache_form'] = 'DrupalDatabaseCache';
 $conf['memcache_key_prefix'] = '4612GBc1275O7f5';
 
 $conf['memcache_servers'] = array(
-  'develop.hlpt4i.0001.use1.cache.amazonaws.com:11211' => 'default',
-  'develop.hlpt4i.0002.use1.cache.amazonaws.com:11211' => 'users',
-  'develop.hlpt4i.0003.use1.cache.amazonaws.com:11211' => 'session',
-  'develop.hlpt4i.0004.use1.cache.amazonaws.com:11211' => 'entity'
+  'production.hlpt4i.0001.use1.cache.amazonaws.com' => 'default',
+  'production.hlpt4i.0002.use1.cache.amazonaws.com' => 'users',
+  'production.hlpt4i.0003.use1.cache.amazonaws.com' => 'session',
+  'production.hlpt4i.0004.use1.cache.amazonaws.com' => 'entity'
 );
 
 $conf['memcache_bins'] = array(

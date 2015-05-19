@@ -9,10 +9,15 @@ class Lock {
    */
   public static function openAndLock($key, $time = 120) {
     $result = FALSE;
-    if ($memcache = self::openConnection()) {
-      if (!$memcache->get($key)) {
-        $result = $memcache->set($key, '<enabled>1</enabled>', FALSE, $time);
+    if (Env::LOCK_MUTEX_ENABLED) {
+      if ($memcache = self::openConnection()) {
+        if (!$memcache->get($key)) {
+          $result = $memcache->set($key, '<enabled>1</enabled>', FALSE, $time);
+        }
       }
+    }
+    else {
+      $result = TRUE;
     }
     return $result;
   }
