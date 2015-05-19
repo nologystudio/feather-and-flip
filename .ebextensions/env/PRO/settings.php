@@ -229,13 +229,18 @@ $databases = array(
 //----------------
 // Cache settings
 //----------------
-$conf['cache_inc'] = './sites/all/modules/memcache/memcache.inc';
+$conf['cache_backends'][] = 'sites/all/modules/memcache/memcache.inc';
+$conf['cache_default_class'] = 'MemCacheDrupal';
+$conf['cache_class_cache_form'] = 'DrupalDatabaseCache';
+$conf['memcache_key_prefix'] = '4612GBc1275O7f5';
+
 $conf['memcache_servers'] = array(
   'production.hlpt4i.0001.use1.cache.amazonaws.com:11211' => 'default',
   'production.hlpt4i.0002.use1.cache.amazonaws.com:11211' => 'users',
   'production.hlpt4i.0003.use1.cache.amazonaws.com:11211' => 'session',
   'production.hlpt4i.0004.use1.cache.amazonaws.com:11211' => 'entity'
 );
+
 $conf['memcache_bins'] = array(
   'session' => 'session',
   'users' => 'users',
@@ -267,38 +272,6 @@ $conf['memcache_bins'] = array(
   'cache_entity_user' => 'entity',
 );
 
-$conf['memcache_key_prefix'] = '4612GBc120497f5';
-$conf['authcache'] = array(
-  'default' => array(
-    'engine' => 'memcache',
-    'server' => array('production.hlpt4i.0004.use1.cache.amazonaws.com:11211'),
-    'shared' => TRUE,
-    'prefix' => '4612GBc120497f5',
-    'path' => 'files/filecache',
-    'static' => FALSE
-  )
-);
-
-/*
-$conf['cache_backends'][] = 'sites/all/modules/authcache/authcache.cache.inc';
-$conf['cache_backends'][] = 'sites/all/modules/authcache/modules/authcache_builtin/authcache_builtin.cache.inc';
-
-//Authcache should try to serve from cache without connecting to the DB.
-$conf['authcache_builtin_cache_without_database'] = TRUE;
-
-// Cache settings that are usually set in the 'performance' admin UI.
-$conf['page_compression'] = 1;
-$conf['page_cache_maximum_age'] = 600;
-
-// Tell Drupal that authcache keys should be stored in Memcached.
-$conf['cache_class_cache_authcache_key'] = 'MemCacheDrupal';
-
-// Tell Drupal that page cache should be stored in Memcached.
-$conf['cache_class_cache_page'] = 'MemCacheDrupal';
-
-$conf['cache_default_class'] = 'MemCacheDrupal';
-$conf['cache_class_cache_form'] = 'DrupalDatabaseCache';
-
 $conf['session_inc'] = 'sites/all/modules/memcache/unstable/memcache-session.inc';
 $conf['cache_backends'][] = 'sites/all/modules/memcache/memcache.inc';
 $conf['cache_default_class'] = 'MemCacheDrupal';
@@ -309,7 +282,6 @@ $conf['cache_class_cache_form'] = 'DrupalDatabaseCache';
 
 $conf['lock_inc'] = 'sites/all/modules/memcache/memcache-lock.inc';
 $conf['memcache_stampede_protection'] = TRUE;
-*/
 
 /**
  * Access control for update.php script.
