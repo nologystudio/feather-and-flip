@@ -184,6 +184,7 @@ function feflip_preprocess_views_view(&$variables) {
     $destinations = Destination::GetAllDestination();
     $variables['destinations'] = $destinations;
     $variables['collections'] = Collection::GetAllCollections();
+    $variables['press'] = Helpers::get_promoted_content('press');
     $variables['travel_journal'] = views_embed_view('travel_journal', 'page');
     $variables['main_navigation'] = get_header_main_navigation_menu($destinations);
   }
