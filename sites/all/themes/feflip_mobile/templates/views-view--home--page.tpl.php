@@ -94,6 +94,24 @@ finally
 // Print Travel journal section
 echo $travel_journal; ?>
 
+<section id="press">
+    <?php if (isset($press)) { ?>
+        <ul class="logo-gallery">
+            <?php foreach ($press as $nid => $press_node) { 
+                $press_wrapper = entity_metadata_wrapper('node', $press_node);
+                $press_id = str_replace(' ', '-', strtolower($press_wrapper->title->value()));
+                $press_src = file_create_url($press_wrapper->field_image->file->value()->uri);
+                $press_alt = $press_wrapper->title->value(); ?>
+                <li>
+                    <figure id="<?php echo $press_id; ?>">
+                        <img src="<?php echo $press_src; ?>" alt="<?php echo $press_alt; ?>"/>
+                    </figure>
+                </li>
+            <?php } ?>
+        </ul>
+    <?php } ?>
+</section>
+
 <section id="map-it" ng-controller="MapCtrl">
         <header>
                 <h3 class="icon compass">MAP IT<span> where to go now </span></h3>
