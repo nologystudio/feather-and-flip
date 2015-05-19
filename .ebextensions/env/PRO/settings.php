@@ -229,9 +229,23 @@ $databases = array(
 //----------------
 // Cache settings
 //----------------
+
+//When serving cached pages, do not bother connecting to the database.
+$conf['authcache_builtin_cache_without_database'] = TRUE;
+// Deliver gzip compressed pages if possible
+$conf['page_compression'] = 1;
+// Allow browsers to store the page for up to 10 minutes
+$conf['page_cache_maximum_age'] = 600;
+//Required configuration for Authcache Builtin Storage Backend.
+$conf['cache_backends'][] = 'sites/all/modules/authcache/authcache.cache.inc';
+$conf['cache_backends'][] = 'sites/all/modules/authcache/modules/authcache_builtin/authcache_builtin.cache.inc';
+
+//Memcache
 $conf['cache_backends'][] = 'sites/all/modules/memcache/memcache.inc';
 $conf['cache_default_class'] = 'MemCacheDrupal';
-$conf['cache_class_cache_form'] = 'DrupalDatabaseCache';
+$conf['cache_class_cache_page'] = 'MemCacheDrupal';
+$conf['cache_class_cache_authcache_key'] = 'MemCacheDrupal';
+$conf['cache_class_cache_bootstrap'] = 'MemCacheDrupal';
 $conf['memcache_key_prefix'] = '4612GBc1275O7f5';
 
 $conf['memcache_servers'] = array(
@@ -272,9 +286,8 @@ $conf['memcache_bins'] = array(
   'cache_entity_user' => 'entity',
 );
 
+/*
 $conf['session_inc'] = 'sites/all/modules/memcache/unstable/memcache-session.inc';
-$conf['cache_backends'][] = 'sites/all/modules/memcache/memcache.inc';
-$conf['cache_default_class'] = 'MemCacheDrupal';
 $conf['memcache_key_prefix'] = 'mc1';
 $conf['page_cache_without_database'] = TRUE;
 $conf['page_cache_invoke_hooks'] = FALSE;
@@ -282,7 +295,7 @@ $conf['cache_class_cache_form'] = 'DrupalDatabaseCache';
 
 $conf['lock_inc'] = 'sites/all/modules/memcache/memcache-lock.inc';
 $conf['memcache_stampede_protection'] = TRUE;
-
+*/
 /**
  * Access control for update.php script.
  *
