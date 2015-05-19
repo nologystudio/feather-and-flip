@@ -226,8 +226,25 @@ $databases = array(
     ),
 );
 
-/** Cache settings: */
-$conf['cache_backends'][] = 'sites/all/modules/memcache/memcache.inc';
+//----------------
+// Cache settings
+//----------------
+$conf['cache_backends'][] = 'sites/all/modules/authcache/authcache.cache.inc';
+$conf['cache_backends'][] = 'sites/all/modules/authcache/modules/authcache_builtin/authcache_builtin.cache.inc';
+
+//Authcache should try to serve from cache without connecting to the DB.
+$conf['authcache_builtin_cache_without_database'] = TRUE;
+
+// Cache settings that are usually set in the 'performance' admin UI.
+$conf['page_compression'] = 1;
+$conf['page_cache_maximum_age'] = 600;
+
+// Tell Drupal that authcache keys should be stored in Memcached.
+$conf['cache_class_cache_authcache_key'] = 'MemCacheDrupal';
+
+// Tell Drupal that page cache should be stored in Memcached.
+$conf['cache_class_cache_page'] = 'MemCacheDrupal';
+
 $conf['cache_default_class'] = 'MemCacheDrupal';
 $conf['cache_class_cache_form'] = 'DrupalDatabaseCache';
 $conf['memcache_key_prefix'] = '4612GBc1275O7f5';

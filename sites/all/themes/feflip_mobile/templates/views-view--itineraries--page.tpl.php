@@ -15,7 +15,7 @@
                                 </figure>
                                 <small>
                                         <div id="current-time">3:00 AM</div>
-                                        <div id="weather" data-weatherId="<?php echo $weather_id; ?>">25°F<span></span></div>
+                                        <div id="weather" data-weatherId="<?php echo $weather_id; ?>">25ï¿½F<span></span></div>
                                 </small>
                         </li>
                         
@@ -69,10 +69,10 @@
                     $desc = strip_tags($itinerary['routes'][0]['description']);
                     $desc = str_replace('&nbsp;', ' ', $desc);
                     ?>
-                    <a target="_blank" href="<?php echo getSocialLink('twitter', url('node/'.$arg[1].'/itinerary', array('absolute' => TRUE))); ?>" rel="twitter"></a>
-                    <a target="_blank" href="<?php echo getSocialLink('facebook', url('node/'.$arg[1].'/itinerary', array('absolute' => TRUE))); ?>" rel="facebook"></a>
-                    <a target="_blank" href="<?php echo getSocialLink('pinterest', url('node/'.$arg[1].'/itinerary', array('absolute' => TRUE)), $slideImages[0]['url'], text_summary($desc).' ...'); ?>" rel="pinterest"></a>
-                    <a target="_blank" href="<?php echo getSocialLink('google+', url('node/'.$arg[1].'/itinerary', array('absolute' => TRUE))); ?>" rel="google-plus"></a>
+                    <a target="_blank" href="<?php echo getSocialLinkMobile('twitter', url('node/'.$arg[1].'/itinerary', array('absolute' => TRUE))); ?>" rel="twitter"></a>
+                    <a target="_blank" href="<?php echo getSocialLinkMobile('facebook', url('node/'.$arg[1].'/itinerary', array('absolute' => TRUE))); ?>" rel="facebook"></a>
+                    <a target="_blank" href="<?php echo getSocialLinkMobile('pinterest', url('node/'.$arg[1].'/itinerary', array('absolute' => TRUE)), $slideImages[0]['url'], text_summary($desc).' ...'); ?>" rel="pinterest"></a>
+                    <a target="_blank" href="<?php echo getSocialLinkMobile('google+', url('node/'.$arg[1].'/itinerary', array('absolute' => TRUE))); ?>" rel="google-plus"></a>
 				</nav>
 				<button rel="see-hotel-reviews">Go to Hotel Reviews</button>
 			</footer>
