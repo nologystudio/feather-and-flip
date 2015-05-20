@@ -855,7 +855,7 @@ function preprocessHomePage(&$variables) {
   }
   else {
     $cacheResultData = $cacheResult->data;
-    $variables['slideImages'] = $cacheResultData['slidesImages'];
+    $variables['slideImages'] = $cacheResultData['slideImages'];
     $variables['destinations'] = $cacheResultData['destinations'];
     $variables['collections'] = $cacheResultData['collections'];
     $variables['press'] = $cacheResultData['press'];
