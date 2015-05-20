@@ -193,21 +193,7 @@ function feflip_preprocess_views_view(&$variables) {
 
   // Home View
   if ($view->name == 'home' && $view->current_display == 'page') {
-
-    /* 
-    * Collect data for the destinations slideshow.
-    */
-    //$variables['home_dests_slideshow'] = get_home_destinations('promote_to_slideshow');
-    //$variables['home_dests'] = get_home_destinations();
-    //$variables['home_dests_map'] = get_home_destinations('promote_to_map');
-
-    $variables['slideImages'] = Destination::GetImagesForHomeSlideShow('view hotels');
-    $destinations = Destination::GetAllDestination();
-    $variables['destinations'] = $destinations;
-    $variables['collections'] = Collection::GetAllCollections();
-    $variables['press'] = Helpers::get_promoted_content('press');
-    $variables['travel_journal'] = views_embed_view('travel_journal', 'page');
-    $variables['main_navigation'] = get_header_main_navigation_menu($destinations);
+    preprocessHomePage($variables);
   }
   elseif (($view->name == 'travel_journal' || $view->name == 'travel_journal_tags') && $view->current_display == 'page') {
     if (!empty($view->result)) {
@@ -851,5 +837,29 @@ function feflip_metatag_metatags_view_alter(&$output, $instance) {
         'metatag_og:image_0',
       );
     }
+  }
+}
+
+
+function preprocessHomePage(&$variables) {
+  $cacheResult = Helpers::getCacheIfNotExpired('feflip_template_php::preprocess_home_page');
+  if (!$cacheResult) {
+    $variables['slideImages'] = Destination::GetImagesForHomeSlideShow('view hotels');
+    $destinations = Destination::GetAllDestination();
+    $variables['destinations'] = $destinations;
+    $variables['collections'] = Collection::GetAllCollections();
+    $variables['press'] = Helpers::get_promoted_content('press');
+    $variables['travel_journal'] = views_embed_view('travel_journal', 'page');
+    $variables['main_navigation'] = get_header_main_navigation_menu($destinations);
+    cache_set('feflip_template_php::preprocess_home_page', $variables, 'cache', REQUEST_TIME + (3600 * 24 * 30 * 6));
+  }
+  else {
+    $cacheResultData = $cacheResult->data;
+    $variables['slideImages'] = $cacheResultData['slidesImages'];
+    $variables['destinations'] = $cacheResultData['destinations'];
+    $variables['collections'] = $cacheResultData['collections'];
+    $variables['press'] = $cacheResultData['press'];
+    $variables['travel_journal'] = $cacheResultData['travel_journal'];
+    $variables['main_navigation'] = $cacheResultData['main_navigation'];
   }
 }
