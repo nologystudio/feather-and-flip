@@ -57,7 +57,7 @@ function feflip_mobile_preprocess_html(&$variables) {
 function feflip_mobile_process_html(&$variables) {
 
   //Load footer fixed menu
-  $variables['footer_fixed_menu'] = get_footer_fixed_menu();
+  $variables['footer_fixed_menu'] = get_footer_fixed_menu_mobile();
   //Load footer destination
   $variables['footer_destinations_menu'] = Destination::GetFooterDestinations();
   //Load footer hotels
@@ -107,7 +107,7 @@ function feflip_mobile_preprocess_user_profile(&$variables)
         'text' => 'User profile',
         'size' => array(1280,800));//getimagesize('http://placehold.it/1280x800'));
     $variables['slideImages'] = $images;
-    $variables['main_navigation'] = get_header_main_navigation_menu();
+    $variables['main_navigation'] = get_header_main_navigation_menu_mobile();
 }
 
 /**
@@ -153,7 +153,7 @@ function feflip_mobile_preprocess_node(&$variables) {
   }
   
   //Load navigation main menu
-  $variables['main_navigation'] = get_header_main_navigation_menu();
+  $variables['main_navigation'] = get_header_main_navigation_menu_mobile();
 }
 
 /* Add customized classes by block, view.. */
@@ -184,7 +184,7 @@ function feflip_mobile_preprocess_views_view(&$variables) {
     $variables['collections'] = Collection::GetAllCollections();
     $variables['press'] = Helpers::get_promoted_content('press');
     $variables['travel_journal'] = views_embed_view('travel_journal', 'page');
-    $variables['main_navigation'] = get_header_main_navigation_menu($destinations);
+    $variables['main_navigation'] = get_header_main_navigation_menu_mobile($destinations);
   }
   elseif (($view->name == 'travel_journal' || $view->name == 'travel_journal_tags') && $view->current_display == 'page') {
     if (!empty($view->result)){
@@ -211,14 +211,14 @@ function feflip_mobile_preprocess_views_view(&$variables) {
             ));
         }
         $variables['blank'] = true;
-        $variables['main_navigation'] = get_header_main_navigation_menu();
+        $variables['main_navigation'] = get_header_main_navigation_menu_mobile();
         $variables['slideImages'] = $images;
     }
   }
   elseif ($view->name == 'hotel_reviews' && $view->current_display == 'page'){
     
       $variables['hotels'] = Hotel::HotelReviews($variables);
-      $variables['main_navigation'] = get_header_main_navigation_menu();
+      $variables['main_navigation'] = get_header_main_navigation_menu_mobile();
       $variables['destinationDescription'] = 'Hotel Reviews';
       if(isset($variables['view']->args[0]))
       {
@@ -232,7 +232,7 @@ function feflip_mobile_preprocess_views_view(&$variables) {
   }
   elseif($view->name == 'itineraries' && $view->current_display == 'page'){
       $variables['itinerary'] =  Itinerary::ItinerariesInfo($view);
-      $variables['main_navigation'] = get_header_main_navigation_menu();
+      $variables['main_navigation'] = get_header_main_navigation_menu_mobile();
       if(isset($variables['view']->args[0]))
       {
           $destination = node_load($variables['view']->args[0]);
@@ -269,11 +269,11 @@ function feflip_mobile_preprocess_views_view(&$variables) {
 
       $variables['destinationsbycontinent'] = $destinationbycontinent;
       $variables['destinations'] = $destinations;
-      $variables['main_navigation'] = get_header_main_navigation_menu($destinations);
+      $variables['main_navigation'] = get_header_main_navigation_menu_mobile($destinations);
   }
   elseif($view->name == 'collections' && $view->current_display == 'page'){
       $variables['hotels']  = Hotel::GetHotelCollections($variables);
-      $variables['main_navigation'] = get_header_main_navigation_menu();
+      $variables['main_navigation'] = get_header_main_navigation_menu_mobile();
       $variables['collectionDescription'] = 'Collection';
       if(isset($variables['view']->args[0]))
       {
@@ -379,7 +379,7 @@ function feflip_mobile_preprocess_views_view(&$variables) {
 
         $variables['booking'] = $booking;
         $variables['slideImages'] = $images;
-        $variables['main_navigation'] = get_header_main_navigation_menu($destinations);
+        $variables['main_navigation'] = get_header_main_navigation_menu_mobile($destinations);
     }
   
 }
@@ -552,7 +552,7 @@ function feflip_mobile_theme() {
 * @param filter_field
 * @return array()
 */
-function get_home_destinations($filter_field = 'promote') {
+function get_home_destinations_mobile($filter_field = 'promote') {
   /*
   * Get destinations promoted to frontpage altering the existing 'start_your_journey' view
   * adding the promoted filter.
@@ -571,7 +571,7 @@ function get_home_destinations($filter_field = 'promote') {
  * Get main navigation menu for header
  * @return string
  */
-function get_header_main_navigation_menu($destinations=NULL){
+function get_header_main_navigation_menu_mobile($destinations=NULL){
   
   if (!isset($destinations))
       $destinations =  Destination::GetAllDestination();
@@ -690,7 +690,7 @@ function get_header_main_navigation_menu($destinations=NULL){
  * Get fixed menu in footer
  * @return string
  */
-function get_footer_fixed_menu() {
+function get_footer_fixed_menu_mobile() {
   $f_menu = menu_tree_all_data('menu-footer-right');
   $output = '<ul>';
   $output .= '<li><span class="icon ff"></span>feather + flip</li>';
@@ -730,7 +730,7 @@ function feflip_mobile_html_head_alter(&$head_elements) {
 }
 
 // Generate share links
-function getSocialLink($_network,$url, $img = '', $desc = '')
+function getSocialLinkMobile($_network,$url, $img = '', $desc = '')
 {
   if (strpos($url, 'http://') === false)
     $url = 'http://'.$_SERVER['HTTP_HOST'].'/'.$url;
