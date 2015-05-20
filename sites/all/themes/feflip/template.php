@@ -842,7 +842,8 @@ function feflip_metatag_metatags_view_alter(&$output, $instance) {
 
 
 function preprocessHomePage(&$variables) {
-  $cacheResult = Helpers::getCacheIfNotExpired('feflip_template_php::preprocess_home_page');
+  $cacheId = 'feflip_template_php::preprocess_home_page_' . $GLOBALS['user']->uid;
+  $cacheResult = Helpers::getCacheIfNotExpired($cacheId, 'cache_blocks_page');
   if (!$cacheResult) {
     $variables['slideImages'] = Destination::GetImagesForHomeSlideShow('view hotels');
     $destinations = Destination::GetAllDestination();
@@ -851,7 +852,7 @@ function preprocessHomePage(&$variables) {
     $variables['press'] = Helpers::get_promoted_content('press');
     $variables['travel_journal'] = views_embed_view('travel_journal', 'page');
     $variables['main_navigation'] = get_header_main_navigation_menu($destinations);
-    cache_set('feflip_template_php::preprocess_home_page', $variables, 'cache', REQUEST_TIME + (3600 * 24 * 30 * 6));
+    cache_set($cacheId, $variables, 'cache_blocks_page', REQUEST_TIME + (3600 * 24 * 30 * 6));
   }
   else {
     $cacheResultData = $cacheResult->data;
