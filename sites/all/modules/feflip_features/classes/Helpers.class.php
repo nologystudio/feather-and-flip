@@ -431,11 +431,12 @@ class Helpers
 
   /**
    * @param string $cacheId Name of the cache
+   * @param string $cacheBin Name of the cache bin
    * @return bool FALSE if not cache found
    */
-  public static function getCacheIfNotExpired($cacheId) {
+  public static function getCacheIfNotExpired($cacheId, $cacheBin = 'cache') {
     $result = FALSE;
-    if (($cacheData = cache_get($cacheId)) && REQUEST_TIME < $cacheData->expire) {
+    if (($cacheData = cache_get($cacheId, $cacheBin)) && REQUEST_TIME < $cacheData->expire) {
       $result = $cacheData;
     }
     return $result;

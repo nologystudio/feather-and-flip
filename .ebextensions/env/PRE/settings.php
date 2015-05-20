@@ -265,6 +265,8 @@ $conf['memcache_bins'] = array(
   'cache_entity_taxonomy_term' => 'entity',
   'cache_entity_taxonomy_vocabulary' => 'entity',
   'cache_entity_user' => 'entity',
+  'cache_image_sizes' => 'entity',
+  'cache_blocks_page' => 'entity'
 );
 
 $conf['session_inc'] = 'sites/all/modules/memcache/unstable/memcache-session.inc';
