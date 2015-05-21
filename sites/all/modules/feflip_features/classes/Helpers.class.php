@@ -430,12 +430,14 @@ class Helpers
     $cacheId = $url;
     $cacheResult = self::getCacheIfNotExpired($cacheId, 'cache_image_sizes');
     if (!$cacheResult) {
-      $response = file_get_contents(Env::OTTO_URL . '/size?' . http_build_query(array('url' => $url)));
+      $ottoRequestURL = Env::OTTO_URL . '/size?' . drupal_http_build_query(array('url' => $url));
+      $response = file_get_contents($ottoRequestURL);
       if ($response) {
         $json = drupal_json_decode($response);
         $result = array($json['width'], $json['height']);
         cache_set($cacheId, $result, 'cache_image_sizes', REQUEST_TIME + self::SECONDS_IN_A_YEAR);
       } else {
+        watchdog('Otto image size', 'Error trying to get image from Otto response: %response - url: %imageURL', array('%response' => $response, '%imageURL' => $ottoRequestURL), WATCHDOG_WARNING);
         $result = array('', '');
       }
     } else {
