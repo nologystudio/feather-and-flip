@@ -204,7 +204,7 @@ function feflip_mobile_preprocess_views_view(&$variables) {
             $images = array(array(
                 'url' => $post->field_field_original_image[0]['raw']['safe_value'],
                 'text' => $post->node_title,
-                'size' => (!empty($post->field_field_original_image[0]['raw']['safe_value']) ? getimagesize($post->field_field_original_image[0]['raw']['safe_value']) : array(0, 0)),
+                'size' => (!empty($post->field_field_original_image[0]['raw']['safe_value']) ? Helpers::safeGetImageSize($post->field_field_original_image[0]['raw']['safe_value']) : array(0, 0)),
                 'linkto' => $post->field_field_original_url[0]['raw']['safe_value'],
                 'btntext' => 'read more',
                 'subtitle' => date('F, Y', $orig_date)
@@ -279,7 +279,7 @@ function feflip_mobile_preprocess_views_view(&$variables) {
       {
           $collection = node_load($variables['view']->args[0]);
           $imageUrl = isset($collection->field_image) && count($collection->field_image) > 0 ? image_style_url('headerslideshow', $collection->field_image['und'][0]['uri']) : 'http://placehold.it/1280x800';
-          $sizeImage = getimagesize($imageUrl);
+          $sizeImage = Helpers::safeGetImageSize($imageUrl);
           $images = array();
           $images[] = array('url' => $imageUrl,
               'text'  => $collection->title,

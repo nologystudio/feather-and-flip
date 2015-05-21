@@ -288,7 +288,7 @@ class Hotel
                     foreach($contentblock->field_mainimage['und'] as $image)
                     {
                         $url = image_style_url('hotel_1040',$image['uri']);
-                        $imageSize = getimagesize($url);
+                        $imageSize = Helpers::safeGetImageSize($url);
                         $images[] = array( 'url'      => $url,
                                            'alt'  => $node->field_destination['und'][0]['entity']->title .', '.$node->field_destination['und'][0]['entity']->field_country['und'][0]['value'],
                                            'size'   => $imageSize);
@@ -298,7 +298,7 @@ class Hotel
             }
         }
 
-        if (count($images) == 0) $images[] = array('url' => "http://placehold.it/1040x650", 'alt' => 'City, Country', 'size' => getimagesize("http://placehold.it/1040x650"));
+        if (count($images) == 0) $images[] = array('url' => "http://placehold.it/1040x650", 'alt' => 'City, Country', 'size' => Helpers::safeGetImageSize("http://placehold.it/1040x650"));
         
         return $images;
     }

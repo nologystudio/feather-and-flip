@@ -230,36 +230,22 @@ $databases = array(
 // Cache settings
 //----------------
 
-//When serving cached pages, do not bother connecting to the database.
-$conf['authcache_builtin_cache_without_database'] = TRUE;
-// Deliver gzip compressed pages if possible
 $conf['page_compression'] = 1;
-// Allow browsers to store the page for up to 10 minutes
 $conf['page_cache_maximum_age'] = 600;
-//Required configuration for Authcache Builtin Storage Backend.
 $conf['cache_backends'][] = 'sites/all/modules/memcache/memcache.inc';
-$conf['cache_backends'][] = 'sites/all/modules/authcache/authcache.cache.inc';
-$conf['cache_backends'][] = 'sites/all/modules/authcache/modules/authcache_builtin/authcache_builtin.cache.inc';
-
 $conf['cache_default_class'] = 'MemCacheDrupal';
-$conf['cache_class_cache_page'] = 'MemCacheDrupal';
-$conf['cache_class_cache_authcache_key'] = 'MemCacheDrupal';
-$conf['cache_class_cache_bootstrap'] = 'MemCacheDrupal';
-$conf['memcache_key_prefix'] = '4612GBc1275O7f5';
+$conf['memcache_key_prefix'] = '46215Bc1275O7f5';
 
 $conf['memcache_servers'] = array(
-  'production.hlpt4i.0001.use1.cache.amazonaws.com:11211' => 'default',
-  'production.hlpt4i.0002.use1.cache.amazonaws.com:11211' => 'users',
-  'production.hlpt4i.0003.use1.cache.amazonaws.com:11211' => 'session',
-  'production.hlpt4i.0004.use1.cache.amazonaws.com:11211' => 'entity'
+  'localhost:11211' => 'default',
 );
 
 $conf['memcache_bins'] = array(
-  'session' => 'session',
-  'users' => 'users',
+  'session' => 'default',
+  'users' => 'default',
   'cache' => 'default',
   'cache_block' => 'default',
-  'cache_content' => 'content',
+  'cache_content' => 'default',
   'cache_form' => 'default',
   'cache_page' => 'default',
   'cache_bootstrap' => 'default',
@@ -275,17 +261,18 @@ $conf['memcache_bins'] = array(
   'cache_variable' => 'default',
   'cache_views' => 'default',
   'cache_views_data' => 'default',
-  'cache_entity_file' => 'entity',
-  'cache_entity_message' => 'entity',
-  'cache_entity_message_type' => 'entity',
-  'cache_entity_message_type_category' => 'entity',
-  'cache_entity_node' => 'entity',
-  'cache_entity_taxonomy_term' => 'entity',
-  'cache_entity_taxonomy_vocabulary' => 'entity',
-  'cache_entity_user' => 'entity',
+  'cache_entity_file' => 'default',
+  'cache_entity_message' => 'default',
+  'cache_entity_message_type' => 'default',
+  'cache_entity_message_type_category' => 'default',
+  'cache_entity_node' => 'default',
+  'cache_entity_taxonomy_term' => 'default',
+  'cache_entity_taxonomy_vocabulary' => 'default',
+  'cache_entity_user' => 'default',
+  'cache_image_sizes' => 'default',
+  'cache_blocks_page' => 'default'
 );
 
-/*
 $conf['session_inc'] = 'sites/all/modules/memcache/unstable/memcache-session.inc';
 $conf['memcache_key_prefix'] = 'mc1';
 $conf['page_cache_without_database'] = TRUE;
@@ -294,7 +281,6 @@ $conf['cache_class_cache_form'] = 'DrupalDatabaseCache';
 
 $conf['lock_inc'] = 'sites/all/modules/memcache/memcache-lock.inc';
 $conf['memcache_stampede_protection'] = TRUE;
-*/
 
 /**
  * Access control for update.php script.
