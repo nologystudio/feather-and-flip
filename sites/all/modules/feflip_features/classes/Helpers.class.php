@@ -430,7 +430,7 @@ class Helpers
     $cacheId = $url;
     $cacheResult = self::getCacheIfNotExpired($cacheId, 'cache_image_sizes');
     if (!$cacheResult) {
-      $response = file_get_contents(Env::OTTO_URL . '/size?url='.$url);
+      $response = file_get_contents(Env::OTTO_URL . '/size?' . http_build_query(array('url' => $url)));
       if ($response) {
         $json = drupal_json_decode($response);
         $result = array($json['width'], $json['height']);
