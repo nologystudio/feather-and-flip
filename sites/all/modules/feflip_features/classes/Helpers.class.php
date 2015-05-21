@@ -431,9 +431,13 @@ class Helpers
     $cacheResult = self::getCacheIfNotExpired($cacheId, 'cache_image_sizes');
     if (!$cacheResult) {
       $response = file_get_contents(Env::OTTO_URL . '/size?url='.$url);
-      $json = drupal_json_decode($response);
-      $result = array($json['width'], $json['height']);
-      cache_set($cacheId, $result, 'cache_image_sizes', REQUEST_TIME + self::SECONDS_IN_A_YEAR);
+      if ($response) {
+        $json = drupal_json_decode($response);
+        $result = array($json['width'], $json['height']);
+        cache_set($cacheId, $result, 'cache_image_sizes', REQUEST_TIME + self::SECONDS_IN_A_YEAR);
+      } else {
+        $result = array('', '');
+      }
     } else {
       $result = $cacheResult->data;
     }
