@@ -196,6 +196,7 @@ function feflip_preprocess_views_view(&$variables) {
     preprocessHomePage($variables);
   }
   elseif (($view->name == 'travel_journal' || $view->name == 'travel_journal_tags') && $view->current_display == 'page') {
+    //TODO optimize: It's possible cache this content?
     if (!empty($view->result)) {
       //$post = array_shift($view->result);
 
@@ -212,11 +213,12 @@ function feflip_preprocess_views_view(&$variables) {
 
       if (isset($post)) {
         $orig_date = strtotime($post->field_field_original_pubdate[0]['raw']['safe_value']);
+
         $images = array(
           array(
             'url' => $post->field_field_original_image[0]['raw']['safe_value'],
             'text' => $post->node_title,
-            'size' => (!empty($post->field_field_original_image[0]['raw']['safe_value']) ? getimagesize($post->field_field_original_image[0]['raw']['safe_value']) : array(0, 0)),
+            'size' => (!empty($post->field_field_original_image[0]['raw']['safe_value']) ? Helpers::safeGetImageSize($post->field_field_original_image[0]['raw']['safe_value']) : array(0, 0)),
             'linkto' => $post->field_field_original_url[0]['raw']['safe_value'],
             'btntext' => 'read more',
             'subtitle' => date('F, Y', $orig_date)
@@ -290,7 +292,7 @@ function feflip_preprocess_views_view(&$variables) {
     if (isset($variables['view']->args[0])) {
       $collection = node_load($variables['view']->args[0]);
       $imageUrl = isset($collection->field_image) && count($collection->field_image) > 0 ? image_style_url('headerslideshow', $collection->field_image['und'][0]['uri']) : 'http://placehold.it/1280x800';
-      $sizeImage = getimagesize($imageUrl);
+      $sizeImage = Helpers::safeGetImageSize($imageUrl);
       $images = array();
       $images[] = array(
         'url' => $imageUrl,
@@ -850,6 +852,7 @@ function preprocessHomePage(&$variables) {
     $variables['destinations'] = $destinations;
     $variables['collections'] = Collection::GetAllCollections();
     $variables['press'] = Helpers::get_promoted_content('press');
+    //TODO Optimize It's possible?
     $variables['travel_journal'] = views_embed_view('travel_journal', 'page');
     $variables['main_navigation'] = get_header_main_navigation_menu($destinations);
     cache_set($cacheId, $variables, 'cache_blocks_page', REQUEST_TIME + (3600 * 24 * 30 * 6));

@@ -55,7 +55,7 @@ class Itinerary
                 {
                     $url = image_style_url('itinerary_1040',$image->field_mainimage['und'][0]['uri']);
                     $images[] = array('url'     => $url,
-                                      'size' => getimagesize($url)
+                                      'size' => Helpers::safeGetImageSize($url)
                                       );
                 }
             }

@@ -24,13 +24,13 @@ drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
 */
 $detect = mobile_detect_get_object();
 $is_mobile = $detect->isMobile();
-if ($is_mobile && $_SERVER['HTTP_HOST'] != 'm.featherandflip.com'){
-	header('Location: https://m.featherandflip.com');
-	exit();
+if ($is_mobile && $_SERVER['HTTP_HOST'] != 'm.featherandflip.com') {
+  header('Location: https://m.featherandflip.com');
+  exit();
 }
-if (!$is_mobile && $_SERVER['HTTP_HOST'] == 'm.featherandflip.com'){
-	header('Location: https://www.featherandflip.com');
-	exit();
+if (!$is_mobile && $_SERVER['HTTP_HOST'] == 'm.featherandflip.com') {
+  header('Location: https://www.featherandflip.com');
+  exit();
 }
 
 menu_execute_active_handler();

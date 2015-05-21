@@ -2,6 +2,7 @@
 
 class Helpers
 {
+  const SECONDS_IN_A_YEAR = 31536000;
 
     // Fixed configuration values
     const RSS_URL = 'http://blog.featherandflip.com/?format=rss';
@@ -426,7 +427,17 @@ class Helpers
    * @return array
    */
   public static function safeGetImageSize($url) {
-    return (file_exists($url))?getimagesize($url):array('', '');
+    $cacheId = $url;
+    $cacheResult = self::getCacheIfNotExpired($cacheId, 'cache_image_sizes');
+    if (!$cacheResult) {
+      $response = file_get_contents(Env::OTTO_URL . '/size?url='.$url);
+      $json = drupal_json_decode($response);
+      $result = array($json['width'], $json['height']);
+      cache_set($cacheId, $result, 'cache_image_sizes', REQUEST_TIME + self::SECONDS_IN_A_YEAR);
+    } else {
+      $result = $cacheResult->data;
+    }
+    return $result;
   }
 
   /**

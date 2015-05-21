@@ -33,4 +33,6 @@ class Env {
   const CLOUDFRONT_NAME = "d2gxyy20u4nycu";
 
   const GOOGLE_ANALYTICS_CODE = '';
+
+  const OTTO_URL = 'http://otto.featherandflip.com/dev';
 }
