@@ -52,34 +52,42 @@ class Hotel {
   }
 
   /**
-   *Return info to show in hotelreviews page
+   * Return info to show in hotelreviews page
+   * @param $variables
    * @return array Hotels info hotel name, distination and image
    */
   public static function HotelReviews($variables) {
-    /*
-    $view = $variables['view'];
-    $nodes = self::getNodes($view);
-    $hotelsinfo = self::getHotelsInfo($nodes);
-    return $hotelsinfo;
-    */
-
     $destinationId = $variables['view']->args[0];
-    $query = new EntityFieldQuery;
-    $nodes = $query->entityCondition('entity_type', 'node')
-      ->entityCondition('bundle', 'hotel')
-      ->propertyCondition('status', 1)
-      ->fieldCondition('field_destination', 'target_id', $destinationId, '=')
-      ->propertyOrderBy('title', 'ASC')
-      ->execute();
+    $cacheId = 'Hotel_class_php::HotelReviews_' . $destinationId;
+    $cacheResult = Helpers::getCacheIfNotExpired($cacheId, 'cache_blocks_page');
+    if (!$cacheResult) {
+      /*
+      $view = $variables['view'];
+      $nodes = self::getNodes($view);
+      $hotelsinfo = self::getHotelsInfo($nodes);
+      return $hotelsinfo;
+      */
+      $query = new EntityFieldQuery;
+      $nodes = $query->entityCondition('entity_type', 'node')
+        ->entityCondition('bundle', 'hotel')
+        ->propertyCondition('status', 1)
+        ->fieldCondition('field_destination', 'target_id', $destinationId, '=')
+        ->propertyOrderBy('title', 'ASC')
+        ->execute();
 
-    $hotelsinfo = array();
-    if (isset($nodes['node'])) {
-      $hotelsNode = node_load_multiple(array_keys($nodes['node']));
-      $hotelsinfo = self::getHotelsInfo($hotelsNode);
+      if (isset($nodes['node'])) {
+        $hotelsNode = node_load_multiple(array_keys($nodes['node']));
+        $result = self::getHotelsInfo($hotelsNode);
+        cache_set($cacheId, $result, 'cache_blocks_page', REQUEST_TIME + (3600 * 12)); //12 hours cache
+      }
+      else {
+        $result = array();
+      }
     }
-
-    return $hotelsinfo;
-
+    else {
+      $result = $cacheResult->data;
+    }
+    return $result;
   }
 
 
