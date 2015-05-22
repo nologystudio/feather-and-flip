@@ -847,23 +847,25 @@ function preprocessHomePage(&$variables) {
   $cacheId = 'feflip_template_php::preprocess_home_page_' . $GLOBALS['user']->uid;
   $cacheResult = Helpers::getCacheIfNotExpired($cacheId, 'cache_blocks_page');
   if (!$cacheResult) {
-    $variables['slideImages'] = Destination::GetImagesForHomeSlideShow('view hotels');
+    //TODO Optimize It's possible?
     $destinations = Destination::GetAllDestination();
     $variables['destinations'] = $destinations;
     $variables['collections'] = Collection::GetAllCollections();
     $variables['press'] = Helpers::get_promoted_content('press');
     //TODO Optimize It's possible?
     $variables['travel_journal'] = views_embed_view('travel_journal', 'page');
-    $variables['main_navigation'] = get_header_main_navigation_menu($destinations);
-    cache_set($cacheId, $variables, 'cache_blocks_page', REQUEST_TIME + (3600 * 24 * 30 * 6));
+    cache_set($cacheId, $variables, 'cache_blocks_page', REQUEST_TIME + (3600 * 12)); //12 hours cache
   }
   else {
     $cacheResultData = $cacheResult->data;
-    $variables['slideImages'] = $cacheResultData['slideImages'];
     $variables['destinations'] = $cacheResultData['destinations'];
     $variables['collections'] = $cacheResultData['collections'];
     $variables['press'] = $cacheResultData['press'];
     $variables['travel_journal'] = $cacheResultData['travel_journal'];
-    $variables['main_navigation'] = $cacheResultData['main_navigation'];
   }
+  //SlideImages - for all users equals
+  $variables['slideImages'] = Destination::GetImagesForHomeSlideShow('view hotels');
+
+  //SlideImages - Different for each user
+  $variables['main_navigation'] = get_header_main_navigation_menu($variables['destinations']);
 }
