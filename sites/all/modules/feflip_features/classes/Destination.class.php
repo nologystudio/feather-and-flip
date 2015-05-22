@@ -65,9 +65,16 @@ class Destination {
    * @return array
    */
   public static function GetAllDestination() {
-    $nodes = self::getAllDestinationNodes('');
-    $destinations = self::getDestinations($nodes);
-    return $destinations;
+    $cacheResult = Helpers::getCacheIfNotExpired('Destination_class_php::GetAllDestination', 'cache_blocks_page');
+    if (!$cacheResult) {
+      $nodes = self::getAllDestinationNodes('');
+      $result = self::getDestinations($nodes);
+      cache_set('Destination_class_php::GetAllDestination', $result, 'cache_blocks_page', REQUEST_TIME + (3600 * 24)); //1 day cache
+    }
+    else {
+      $result = $cacheResult->data;
+    }
+    return $result;
   }
 
   public static function GetFooterDestinations() {

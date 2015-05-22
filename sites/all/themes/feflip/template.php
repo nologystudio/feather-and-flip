@@ -844,12 +844,9 @@ function feflip_metatag_metatags_view_alter(&$output, $instance) {
 
 
 function preprocessHomePage(&$variables) {
-  $cacheId = 'feflip_template_php::preprocess_home_page_' . $GLOBALS['user']->uid;
+  $cacheId = 'feflip_template_php::preprocess_home_page';
   $cacheResult = Helpers::getCacheIfNotExpired($cacheId, 'cache_blocks_page');
   if (!$cacheResult) {
-    //TODO Optimize It's possible?
-    $destinations = Destination::GetAllDestination();
-    $variables['destinations'] = $destinations;
     $variables['collections'] = Collection::GetAllCollections();
     $variables['press'] = Helpers::get_promoted_content('press');
     //TODO Optimize It's possible?
@@ -858,13 +855,13 @@ function preprocessHomePage(&$variables) {
   }
   else {
     $cacheResultData = $cacheResult->data;
-    $variables['destinations'] = $cacheResultData['destinations'];
     $variables['collections'] = $cacheResultData['collections'];
     $variables['press'] = $cacheResultData['press'];
     $variables['travel_journal'] = $cacheResultData['travel_journal'];
   }
   //SlideImages - for all users equals
   $variables['slideImages'] = Destination::GetImagesForHomeSlideShow('view hotels');
+  $variables['destinations'] = Destination::GetAllDestination();
 
   //SlideImages - Different for each user
   $variables['main_navigation'] = get_header_main_navigation_menu($variables['destinations']);
