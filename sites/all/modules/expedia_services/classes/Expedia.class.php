@@ -10,6 +10,7 @@ class Expedia
 	public static function CityHotels($city, $country = '')
 	{
 		$service = wsclient_service_load('expedia__rest');
+        $service->global_parameters['sig']['default value'] = self::GetSignature();
 		$service->settings['http_headers'] = array(
 			'Content-Type' => array('multipart/form-data'),
 		);
@@ -34,6 +35,7 @@ class Expedia
     public static function GetHotelsByCode($hotelCodes, $checkin, $checkout, $roomConfig)
     {
         $service = wsclient_service_load('expedia__rest');
+        $service->global_parameters['sig']['default value'] = self::GetSignature();
         $service->settings['http_headers'] = array(
             'Content-Type' => array('multipart/form-data'),
         );
@@ -63,6 +65,7 @@ class Expedia
     public static function GetHotelsByCode_XML($hotelCodes, $checkin, $checkout, $roomConfig)
     {
         $service = wsclient_service_load('expedia__rest');
+        $service->global_parameters['sig']['default value'] = self::GetSignature();
         $service->settings['http_headers'] = array(
             'Content-Type' => array('multipart/form-data'),
         );
@@ -129,6 +132,7 @@ class Expedia
 	public static function GetHotelInfo($hid)
 	{
 		$service = wsclient_service_load('expedia__rest');
+        $service->global_parameters['sig']['default value'] = self::GetSignature();
 		$service->settings['http_headers'] = array(
 			'Content-Type' => array('multipart/form-data'),
 		);
@@ -149,6 +153,7 @@ class Expedia
 	public static function RoomAvailability($hotelId, $checkin, $checkout, $roomConfig)
 	{
 		$service = wsclient_service_load('expedia__rest');
+        $service->global_parameters['sig']['default value'] = self::GetSignature();
 		$service->settings['http_headers'] = array(
 			'Content-Type' => array('multipart/form-data'),
 		);
@@ -176,6 +181,7 @@ class Expedia
     public static function RoomAvailability_XML($hotelId, $checkin, $checkout, $roomConfig)
     {
         $service = wsclient_service_load('expedia__rest');
+        $service->global_parameters['sig']['default value'] = self::GetSignature();
         $service->settings['http_headers'] = array(
             'Content-Type' => array('multipart/form-data'),
         );
@@ -245,6 +251,7 @@ class Expedia
     public static function CancelBooking_XML($itineraryId, $confirmationNumber, $email)
     {
         $service = wsclient_service_load('expedia__rest');
+        $service->global_parameters['sig']['default value'] = self::GetSignature();
         $service->settings['http_headers'] = array(
             'Content-Type' => array('multipart/form-data'),
         );
@@ -272,6 +279,7 @@ class Expedia
     public static function PaymentTypes_XML($hotelId, $supplierType, $rateType)
     {
         $service = wsclient_service_load('expedia__rest');
+        $service->global_parameters['sig']['default value'] = self::GetSignature();
         $service->settings['http_headers'] = array(
             'Content-Type' => array('multipart/form-data'),
         );
@@ -340,6 +348,7 @@ class Expedia
                                                 $creditCardExpirationMonth, $creditCardExpirationYear, $address, $city, $postalCode)
     {
         $service = wsclient_service_load('expedia__rest');
+        $service->global_parameters['sig']['default value'] = self::GetSignature();
         $service->settings['http_headers'] = array(
             //'Content-Type' => array('multipart/form-data'),
             'Content-Type' => array('application/x-www-form-urlencoded')
@@ -604,5 +613,13 @@ $xml = "<HotelRoomReservationRequest>
 	    $dom->loadXML($xml);
 	    $dom->formatOutput = TRUE;
 	    return $dom->saveXml();
-	 }	
+	 }
+
+    private static function GetSignature()
+    {
+        $apiKey = variable_get('expedia_key');
+        $secret = variable_get('expedia_shared_secret');
+        $timestamp = gmdate('U');
+        return md5($apiKey . $secret . $timestamp);
+    }
 }
