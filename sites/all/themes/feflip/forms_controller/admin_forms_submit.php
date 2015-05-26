@@ -193,6 +193,7 @@
                 AdminForms::ContactSubmit($input_values);
                 break;
             case 'addressBook':
+              //TODO optmize
                 $destinationId = isset($input_values['destinationID']) ? $input_values['destinationID'] : null;
                 $result = AdminForms::AddressBookByDestination($destinationId);
                 echo json_encode($result);
@@ -213,10 +214,10 @@
 	}
 
 function getDestinations() {
-  $result = Helpers::getCacheIfNotExpired('admin_forms_submit:getDestinations');
+  $result = Helpers::getCacheIfNotExpired('admin_forms_submit:getDestinations', 'cache_blocks_page');
   if (!$result) {
     $result = AdminForms::getDestinations();
-    cache_set('admin_forms_submit:getDestinations', $result, 'cache', REQUEST_TIME + (3600 * 24 * 30 * 6));
+    cache_set('admin_forms_submit:getDestinations', $result, 'cache_blocks_page', REQUEST_TIME + (3600 * 24)); //1 day
   } else {
     $result = $result->data;
   }

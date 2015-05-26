@@ -140,33 +140,7 @@ function feflip_preprocess_node(&$variables) {
     $variables['slideImages'] = Helpers::GetAllImagesFromFieldCollection($variables['node']->field_images, $variables['node']->title, 'http://placehold.it/1280x800', 'headerslideshow');
   }
   elseif (isset($variables['node']) && ($variables['node']->type == 'hotel')) {
-    //Get navigation
-    $urls = Hotel::NextPreviousUrlHotel($variables['node']);
-    $variables['images'] = Hotel::GetImages($variables['node']);
-    $variables['features'] = Hotel::GetContentBlocks($variables['node']);
-    $variables['testimonials'] = Hotel::GetTestimonials($variables['node']);
-    $variables['next'] = $urls['next'];
-    $variables['previous'] = $urls['previous'];
-    $variables['hotelreviews'] = url('node/' . $variables['node']->field_destination['und'][0]['entity']->nid) . '/hotel-reviews';
-    $images = array();
-    $images[] = Helpers::GetMainImageFromFieldCollection($variables['node']->field_images, $variables['node']->title, 'http://placehold.it/1280x800', 'headerslideshow');
-    $variables['slideImages'] = $images;
-    $variables['destination'] = $variables['node']->field_destination['und'][0]['entity']->nid;
-    $variables['internalId'] = $variables['node']->nid;
-    $variables['isSticky'] = TRUE;
-
-    $destination = node_load($variables['node']->field_destination['und'][0]['entity']->nid);
-    $variables['destinationText'] = $destination->title . ', ' . $destination->field_country['und'][0]['value'];
-    $image = Helpers::GetMainImageFromFieldCollection($destination->field_images, $variables['destinationText'], 'http://placehold.it/100x100', 'itinerary_route_icon');
-    $variables['image'] = $image;
-
-    // check if exist term with this destination name
-    $term = taxonomy_get_term_by_name($destination->title);
-    if (!empty($term)) {
-      $cat = array_shift($term);
-      $variables['travel_journal'] = views_embed_view('travel_journal_tags', 'page', $cat->tid);
-    }
-
+    feflip_preprocess_node_hotel($variables);
   }
   elseif (isset($variables['node']) && ($variables['node']->type == 'post')) {
     $variables['theme_hook_suggestions'][] = 'node__post';
@@ -252,7 +226,7 @@ function feflip_preprocess_views_view(&$variables) {
       // weather code
       $wrapper = entity_metadata_wrapper('node', $destination);
       $variables['weather_id'] = $wrapper->field_weather_id->value();
-
+      //TODO optimize??
       $images = Destination::GetAllImagesDestination($destination, $variables['itinerary']['name']);
       // check if exist term with this destination name
       $term = taxonomy_get_term_by_name($destination->title);
@@ -580,7 +554,7 @@ function get_home_destinations($filter_field = 'promote') {
  * @return string
  */
 function get_header_main_navigation_menu($destinations = NULL) {
-
+  //TODO Optimize!
   if (!isset($destinations)) {
     $destinations = Destination::GetAllDestination();
   }
@@ -844,26 +818,75 @@ function feflip_metatag_metatags_view_alter(&$output, $instance) {
 
 
 function preprocessHomePage(&$variables) {
-  $cacheId = 'feflip_template_php::preprocess_home_page_' . $GLOBALS['user']->uid;
+  $cacheId = 'feflip_template_php::preprocess_home_page';
   $cacheResult = Helpers::getCacheIfNotExpired($cacheId, 'cache_blocks_page');
   if (!$cacheResult) {
-    $variables['slideImages'] = Destination::GetImagesForHomeSlideShow('view hotels');
-    $destinations = Destination::GetAllDestination();
-    $variables['destinations'] = $destinations;
     $variables['collections'] = Collection::GetAllCollections();
     $variables['press'] = Helpers::get_promoted_content('press');
     //TODO Optimize It's possible?
     $variables['travel_journal'] = views_embed_view('travel_journal', 'page');
-    $variables['main_navigation'] = get_header_main_navigation_menu($destinations);
-    cache_set($cacheId, $variables, 'cache_blocks_page', REQUEST_TIME + (3600 * 24 * 30 * 6));
+    cache_set($cacheId, $variables, 'cache_blocks_page', REQUEST_TIME + (3600 * 12)); //12 hours cache
   }
   else {
     $cacheResultData = $cacheResult->data;
-    $variables['slideImages'] = $cacheResultData['slideImages'];
-    $variables['destinations'] = $cacheResultData['destinations'];
     $variables['collections'] = $cacheResultData['collections'];
     $variables['press'] = $cacheResultData['press'];
     $variables['travel_journal'] = $cacheResultData['travel_journal'];
-    $variables['main_navigation'] = $cacheResultData['main_navigation'];
   }
+  //SlideImages - for all users equals
+  $variables['slideImages'] = Destination::GetImagesForHomeSlideShow('view hotels');
+  $variables['destinations'] = Destination::GetAllDestination();
+
+  //SlideImages - Different for each user
+  $variables['main_navigation'] = get_header_main_navigation_menu($variables['destinations']);
+}
+
+
+function feflip_preprocess_node_hotel(&$variables) {
+  $cacheId = "template.php::feflip_preprocess_node_hotel_" . $variables['node']->nid;
+  $cacheResult = Helpers::getCacheIfNotExpired($cacheId, 'cache_blocks_page');
+  if (!$cacheResult) {
+    $result = array();
+
+    $result['images'] = Hotel::GetImages($variables['node']);
+    $result['features'] = Hotel::GetContentBlocks($variables['node']);
+    $result['testimonials'] = Hotel::GetTestimonials($variables['node']);
+
+    $urls = Hotel::NextPreviousUrlHotel($variables['node']);
+    $result['next'] = $urls['next'];
+    $result['previous'] = $urls['previous'];
+    $result['hotelreviews'] = url('node/' . $variables['node']->field_destination['und'][0]['entity']->nid) . '/hotel-reviews';
+    $result['slideImages'] = Helpers::GetMainImageFromFieldCollection($variables['node']->field_images, $variables['node']->title, 'http://placehold.it/1280x800', 'headerslideshow');
+    $result['destination'] = $variables['node']->field_destination['und'][0]['entity']->nid;
+    $result['internalId'] = $variables['node']->nid;
+
+    $destination = node_load($variables['node']->field_destination['und'][0]['entity']->nid);
+    $result['destinationText'] = $destination->title . ', ' . $destination->field_country['und'][0]['value'];
+    $result['image'] = Helpers::GetMainImageFromFieldCollection($destination->field_images, $variables['destinationText'], 'http://placehold.it/100x100', 'itinerary_route_icon');
+
+    // check if exist term with this destination name
+    $term = taxonomy_get_term_by_name($destination->title);
+    if (!empty($term)) {
+      $cat = array_shift($term);
+      $result['travel_journal'] = views_embed_view('travel_journal_tags', 'page', $cat->tid);
+    }
+    cache_set($cacheId, $result, 'cache_blocks_page', REQUEST_TIME + (3600 * 24 * 30 * 12)); //1 year
+  }
+  else {
+    $result = $cacheResult->data;
+  }
+  //Load data
+  $variables['images'] = $result['images'];
+  $variables['features'] = $result['features'];
+  $variables['testimonials'] = $result['testimonials'];
+  $variables['next'] = $result['next'];
+  $variables['previous'] = $result['previous'];
+  $variables['hotelreviews'] = $result['hotelreviews'];
+  $variables['slideImages'] = $result['slideImages'];
+  $variables['destination'] = $result['destination'];
+  $variables['internalId'] = $result['internalId'];
+  $variables['isSticky'] = TRUE;
+  $variables['destinationText'] = $result['destinationText'];
+  $variables['image'] = $result['image'];
+  $variables['travel_journal'] = $result['travel_journal'];
 }
