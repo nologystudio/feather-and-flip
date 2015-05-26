@@ -862,7 +862,7 @@ function feflip_preprocess_node_hotel(&$variables) {
 
     $destination = node_load($variables['node']->field_destination['und'][0]['entity']->nid);
     $result['destinationText'] = $destination->title . ', ' . $destination->field_country['und'][0]['value'];
-    $result['image'] = Helpers::GetMainImageFromFieldCollection($destination->field_images, $variables['destinationText'], 'http://placehold.it/100x100', 'itinerary_route_icon');
+    $result['image'] = Helpers::GetMainImageFromFieldCollection($destination->field_images, $result['destinationText'], 'http://placehold.it/100x100', 'itinerary_route_icon');
 
     // check if exist term with this destination name
     $term = taxonomy_get_term_by_name($destination->title);
@@ -888,5 +888,7 @@ function feflip_preprocess_node_hotel(&$variables) {
   $variables['isSticky'] = TRUE;
   $variables['destinationText'] = $result['destinationText'];
   $variables['image'] = $result['image'];
-  $variables['travel_journal'] = $result['travel_journal'];
+  if (isset($result['travel_journal'])) {
+    $variables['travel_journal'] = $result['travel_journal'];
+  }
 }
