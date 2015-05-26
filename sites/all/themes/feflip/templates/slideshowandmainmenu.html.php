@@ -54,7 +54,7 @@
                         <?php $form = drupal_get_form('feflip_features_search_form'); ?>
                         <?php //echo drupal_render($form); ?>
                         <form id="search" ng-controller="SearchCtrl">
-							<input type="text" placeholder="Enter destination or hotel" ng-keyup="searchSubmit()" value="{{userSearch}}" ng-model="userSearch"/>
+							<input type="text" placeholder="Enter destination or hotel" ng-keyup="searchSubmit()" ng-model="userSearch"/>
 							<input type="submit" ng-click="searchSubmit()" value=""/>
 							<ul ng-if="showResult" ng-class="{'show':showResult}">
 								<li class="no-result" ng-if="noResult">

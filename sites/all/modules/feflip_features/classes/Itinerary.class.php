@@ -33,9 +33,7 @@ class Itinerary
         if (isset($node))
         {
             $wrapper = entity_metadata_wrapper('node', $node);
-            
 
-            
             $routes = array();
             foreach($wrapper->field_route->value() as $route)
             {

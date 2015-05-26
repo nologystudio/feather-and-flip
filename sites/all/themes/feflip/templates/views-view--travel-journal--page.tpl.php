@@ -44,7 +44,7 @@
                                 default: ?>
                                         <a class="quick-entry" data-size="<?php echo $img_wh[0].'x'.$img_wh[1]; ?>" target="_blank" href="<?php echo $post->field_field_original_url[0]['raw']['safe_value']; ?>">
                                                 <figure>
-                                                        <img src="<?php echo $img_url; ?>" alt=""/>
+                                                        <img style="width:<?php echo $img_wh[0].'px'; ?>;height:<?php echo $img_wh[1].'px'; ?>" src="<?php echo $img_url; ?>" alt=""/>
                                                 </figure>
                                                 <footer>
                                                         <h4><?php echo $post->node_title; ?></h4>
