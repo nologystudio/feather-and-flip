@@ -32,7 +32,7 @@ class Env {
   const S3_BUCKET_NAME = "devfeatherflip";
   const CLOUDFRONT_NAME = "d2gxyy20u4nycu";
 
-  const GOOGLE_ANALYTICS_CODE = '';
+  const GOOGLE_ANALYTICS_CODE = 'AAAAA';
 
   const OTTO_URL = 'http://otto.featherandflip.com/dev';
 }
