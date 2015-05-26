@@ -59,19 +59,19 @@
 									<ul>
 										<li>
 											<span>Room type.</span>
-											<small>{{room.RoomType.description}}</small>
+											<small class="center">{{room.RoomType.description}}</small>
 										</li>
 										<li>
 											<span>Amenities.</span>
 											<small ng-repeat="item in room.RoomType.roomAmenities.RoomAmenity">{{item.amenity}}</small>
 										</li>
-										<li ng-if="room.ValueAdds" ng-switch on="room.ValueAdds.ValueAdd">
+										<li ng-if="room.ValueAdds" ng-switch on="room.ValueAdds.ValueAdd" ng-if="room.ValueAdds.ValueAdd.description != ''">
 											<span>Value Adds.</span>
 											<small ng-switch-when="room.ValueAdds.ValueAdd.length > 0" ng-repeat="item in room.ValueAdds.ValueAdd">{{item.description}}</small>
 											<small ng-switch-default>{{room.ValueAdds.ValueAdd.description}}</small>
 										</li>
 										<li>
-											<span>Check-in Instructions</span>
+											<span>Check-in Instructions.</span>
 											<small ng-bind-html="availableRooms.checkInInstructions"><!--{{availableRooms.checkInInstructions}}--></small>
 										</li>
 										<li>
@@ -80,7 +80,7 @@
 										</li>
 										<li>
 											<span>Total Tax Recovery Charges and Service Fees:</span>
-											<small>{{room.RateInfos.RateInfo.taxRate}} {{room.RateInfos.RateInfo.ChargeableRateInfo['@currencyCode']}}</small>
+											<small class="center">{{room.RateInfos.RateInfo.taxRate}} {{room.RateInfos.RateInfo.ChargeableRateInfo['@currencyCode']}}</small>
 										</li>
 									</ul>
 								</h2>
