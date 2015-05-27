@@ -11,3 +11,4 @@ files[] = classes/Profiler.class.php
 files[] = classes/Collection.class.php
 files[] = classes/Env.class.php
 files[] = classes/Lock.class.php
+files[] = classes/HTMLMailSystem__MandrillMailSystem.mail.inc
