@@ -103,7 +103,7 @@ if(isset($inputValues['service']) && !empty($inputValues['service']))
             </ul>
         <?php } ?>
         <footer>
-	        <small><?php echo $node->field_contributor['und'][0]['value'] ;?></small>
+	        <small><?php echo (isset($node->field_contributor['und']) ? $node->field_contributor['und'][0]['value'] : ''); ?></small>
         </footer>
     </section>
     
