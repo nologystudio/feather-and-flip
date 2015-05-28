@@ -14,7 +14,7 @@
             <link rel="shortcut icon" href="/sites/all/themes/feflip_mobile/media/brand/favicon.ico" type="image/x-icon">
             <link rel="icon"          href="/sites/all/themes/feflip_mobile/media/brand/favicon.ico" type="image/x-icon">
                 
-            <link   rel="image_src"    href="<?php echo drupal_get_path('theme', 'feflip_mobile').'/media/sharing/'.$siteImage.'.jpg'; ?>">
+            <link   rel="image_src"    href="<?php echo drupal_get_path('theme', 'feflip_mobile').'/media/brand/feather-and-flip-black-logo.png'; ?>">
             <link   href='https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900' rel='stylesheet' type='text/css'>
             <link   rel="stylesheet"  href="/<?php echo drupal_get_path('theme', 'feflip_mobile'); ?>/style/style-nology.css" title="style-nology" type="text/css" media="screen">
             <script src="/<?php echo drupal_get_path('theme', 'feflip_mobile'); ?>/library/vendors/modernizr.custom.f+f.js"></script>
