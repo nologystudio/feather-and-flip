@@ -1636,7 +1636,6 @@
 					transformRequest: angular.identity
 	            }).
 	            success(function(_data){
-		            //console.log(_data);
 		            $scope.theHotels = _data;
 		            setHotels();
 		        }).
@@ -1654,7 +1653,8 @@
 			}
 			
 			$scope.displayAddress = function(_address){
-				map.setView([_address.latitude,_address.longitude],16);
+				map.setView([_address.latitude,_address.longitude],20);
+				
 			}
 			
 			$scope.filterMap = function(_filter){
@@ -1679,10 +1679,6 @@
 				$scope.displayMenu = !$scope.displayMenu;
 				
 				if(!$scope.displayMenu){
-					/*setTimeout(function(){
-						$scope.step = 1;
-						$Scope.bookFilter = undefined;
-					},500);*/
 				}
 			}
 			
@@ -1732,10 +1728,10 @@
 		/* ~ Blog ~ */
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 		
-		ffAppControllers.controller('BlogCtrl',function($scope,$element){
+		ffAppControllers.controller('BlogCtrl',function($scope,$element,$timeout){
 			
 			var grid    = $('.feed-wrapper');
-			var entries = $('#travel-journal').find('a.quick-entry').toArray();
+			var entries = $('a.quick-entry').toArray();
 			
 			angular.forEach(entries,function(_e){
 				
@@ -1753,12 +1749,11 @@
 				}
 			});
 			
-			setTimeout(function(){
+			$timeout(function(){
 				grid.shuffle({
 					itemSelector: '.quick-entry'
 				});
-			},1000);
-			
+			},0);
 		});
 		
 		/* ~ Instagram ~ */
@@ -2140,7 +2135,7 @@
 		/* ~ Gallery ~ */
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 		
-		ffAppControllers.controller('SlideshowCtrl',function($scope,$element,$http){
+		ffAppControllers.controller('SlideshowCtrl',function($scope,$element,$http,$timeout){
 			
 			var gFrame = $('#'+$element[0].id);
 			var lBtn   = gFrame.find('*[rel="left"]');
@@ -2153,41 +2148,69 @@
 				rBtn = $('div.gallery-ui *[rel="right"]');
 			}
 			
-			switch(gFrame.hasClass('one-item')){
-				case false:
-					/*gFrame.sly({
-						horizontal    : true,
-						itemNav       : 'basic',
-						activateOn    : 'click',
-						mouseDragging : 1,
-						touchDragging : 1,
-						smart         : 1,
-						startAt       : 0,
-						scrollBy      : 1,
-						speed         : 300,
-						elasticBounds : 1,
-						activatePageOn: 'click',
-						prevPage      : lBtn,
-						nextPage      : rBtn
-					});*/
-				break;
-				case true:
-				
-					// | i | This resizes the images within the main gallery...
-					/* ------------------------------------------------------------------------------------------------- */
-					if(gFrame.hasClass('main')) 
-						gFrame.find('li').css({'width':$(window).width()+'px'});
-					/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+			$timeout(function(){
+				switch(gFrame.hasClass('one-item')){
+					case false:
+						/*gFrame.sly({
+							horizontal    : true,
+							itemNav       : 'basic',
+							activateOn    : 'click',
+							mouseDragging : 1,
+							touchDragging : 1,
+							smart         : 1,
+							startAt       : 0,
+							scrollBy      : 1,
+							speed         : 300,
+							elasticBounds : 1,
+							activatePageOn: 'click',
+							prevPage      : lBtn,
+							nextPage      : rBtn
+						});*/
+					break;
+					case true:
 					
-					if(!gFrame.hasClass('main')){
-						gFrame
-						.find('li')
-						.delay(300)
-						.transit({opacity:1},function(){
-							gFrame.sly({
+						// | i | This resizes the images within the main gallery...
+						/* ------------------------------------------------------------------------------------------------- */
+						if(gFrame.hasClass('main')) 
+							gFrame.find('li').css({'width':$(window).width()+'px'});
+						/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+						
+						if(!gFrame.hasClass('main')){
+							gFrame
+							.find('li')
+							.delay(300)
+							.transit({opacity:1},function(){
+								gFrame.sly({
+									horizontal     : 1,
+									itemNav        : 'centered',
+									activateOn     : 'click',
+									smart          : 1,
+									activateMiddle : 1,
+									mouseDragging  : 1,
+									touchDragging  : 1,
+									releaseSwing   : 1,
+									startAt        : 0,
+									scrollBy       : 1,
+									speed          : 500,
+									elasticBounds  : 1,
+									pagesBar       : $('div.gallery-ui ul.pages'),
+									activatePageOn : 'click',
+									cycleBy        : 'items',  
+									cycleInterval  : 7000,
+									pauseOnHover   : true,
+									startPaused    : false, 
+									prev           : lBtn,
+									next           : rBtn
+								});
+							});
+						}else{
+							gFrame
+							.find('li')
+							.delay(300)
+							.transit({opacity:1},function(){
+								gFrame.sly({
 								horizontal     : 1,
-								itemNav        : 'centered',
-								activateOn     : 'click',
+								itemNav        : 'forceCentered',
 								smart          : 1,
 								activateMiddle : 1,
 								mouseDragging  : 1,
@@ -2205,38 +2228,18 @@
 								startPaused    : false, 
 								prev           : lBtn,
 								next           : rBtn
+								});
 							});
+						}
+						
+						$(window).on('resize',function(){
+							gFrame.sly('reload');
 						});
-					}else{
-						gFrame
-						.find('li')
-						.delay(300)
-						.transit({opacity:1},function(){
-							gFrame.sly({
-							horizontal     : 1,
-							itemNav        : 'forceCentered',
-							smart          : 1,
-							activateMiddle : 1,
-							mouseDragging  : 1,
-							touchDragging  : 1,
-							releaseSwing   : 1,
-							startAt        : 0,
-							scrollBy       : 1,
-							speed          : 500,
-							elasticBounds  : 1,
-							pagesBar       : $('div.gallery-ui ul.pages'),
-							activatePageOn : 'click',
-							cycleBy        : 'items',  
-							cycleInterval  : 7000,
-							pauseOnHover   : true,
-							startPaused    : false, 
-							prev           : lBtn,
-							next           : rBtn
-							});
-						});
-					}
-				break;
-			}
+						
+					break;
+				}
+			},0);
+			
 		});
 		
 		/* ~ Search ~ */
