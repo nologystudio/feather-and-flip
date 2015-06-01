@@ -42,6 +42,8 @@ class Destination {
       $wrapper = entity_metadata_wrapper('node', $node);
       $image = Helpers::GetMainImageFromFieldCollection($node->field_images, $wrapper->title->value() . ', ' . $wrapper->field_country->value(), 'http://placehold.it/300x300', $style); //"http://placehold.it/300x300";
       // Add destination address book info
+      $ab_result = AdminForms::AddressBookByDestination($node->nid);
+      $ab_cats = array_unique(array_column($ab_result, 'association'));
       $categories = array();
       if (isset($node->field_addressbook_summary['und']) && (count($node->field_addressbook_summary['und']) > 0)) {
           foreach ($node->field_addressbook_summary['und'] as $ab_key => $ab_value) {
@@ -51,8 +53,10 @@ class Destination {
               $book_dsc = '';
               $term = taxonomy_term_load($abook->field_association_to_interests['und'][0]['tid']);
               if (isset($term)) $book_name = $term->name;
-              $book_dsc = $abook->field_addressbook_description['und'][0]['value'];
-              $categories[] = array('name' => strtolower($book_name), 'dsc' => $book_dsc);
+              if (in_array($book_name, $ab_cats)) {
+                  $book_dsc = $abook->field_addressbook_description['und'][0]['value'];
+                  $categories[] = array('name' => strtolower($book_name), 'dsc' => $book_dsc);
+              }
           }
       }
       $destinations[] = array(
