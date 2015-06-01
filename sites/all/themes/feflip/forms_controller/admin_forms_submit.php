@@ -198,6 +198,11 @@
                 $result = AdminForms::AddressBookByDestination($destinationId);
                 echo json_encode($result);
                 break;
+            case 'destinationHotels':
+                $destinationId = isset($input_values['destinationID']) ? $input_values['destinationID'] : null;
+                $result = Hotel::GetHotelsByDestination($destinationId);
+                echo json_encode($result);
+                break;
             case 'resetPassw':
                 $result = AdminForms::ResetPassw($input_values['userEmail'], $error);
                 $obj = array('result'=>$result, 'error'=>$error);
