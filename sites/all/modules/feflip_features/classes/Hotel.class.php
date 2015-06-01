@@ -44,7 +44,9 @@ class Hotel {
         'sabreCode' => $wrapper->field_hotelcode->value(),
         'expediaCode' => $wrapper->field_ean_hotelcode->value(),
         'categories' => $categories,
-        'hotelDescription' => $wrapper->field_hotel_description->value()
+        'hotelDescription' => $wrapper->field_hotel_description->value(),
+        'latitude'    => $wrapper->field_latitude->value(),
+        'longitude'   => $wrapper->field_longitude->value()
       );
     }
 
