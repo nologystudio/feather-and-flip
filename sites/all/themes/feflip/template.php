@@ -34,6 +34,9 @@ function feflip_preprocess_html(&$variables) {
         if (isset($arg[0]) && $arg[0] == 'map-it') {
           variable_set('pageID', 'map-it');
         }
+        else if (isset($arg[2]) && $arg[2] == 'city-guide') {
+            variable_set('pageID', 'map-it');
+        }
         else {
           if (array_search('node-type-hotel', $variables['classes_array']) !== FALSE) {
             variable_set('pageID', 'hotel');
@@ -258,6 +261,16 @@ function feflip_preprocess_views_view(&$variables) {
     $variables['destinationsbycontinent'] = $destinationbycontinent;
     $variables['destinations'] = $destinations;
     $variables['main_navigation'] = get_header_main_navigation_menu($destinations);
+  }
+  elseif($view->name == 'city_guides' && $view->current_display == 'page') {
+      $destinations = Destination::GetAllDestination();
+
+      $destinationbycontinent = array();
+      foreach ($destinations as $destination)
+          $destinationbycontinent[$destination['continent']][] = $destination;
+      $variables['destinationsbycontinent'] = $destinationbycontinent;
+      $variables['destinations'] = $destinations;
+      $variables['main_navigation'] = get_header_main_navigation_menu($destinations);
   }
   elseif ($view->name == 'collections' && $view->current_display == 'page') {
     $variables['hotels'] = Hotel::GetHotelCollections($variables);
@@ -564,7 +577,7 @@ function get_header_main_navigation_menu($destinations = NULL) {
   $main_menu = menu_tree_all_data('menu-main-navigation');
 
   foreach ($main_menu as $key => $menu_item) {
-
+    if ($menu_item['link']['hidden']) continue;
     // if user is logged in and is the 'my account' item, render user menu inside
     if (strpos($key, '1703') !== FALSE) {
       if (user_is_logged_in()) {
@@ -627,7 +640,7 @@ function get_header_main_navigation_menu($destinations = NULL) {
         $grouped = array();
 
         //only for hotel reviews and itineraries
-        if ((($item_id == 'hotel-reviews') || ($item_id == 'itineraries')) && count($destinations) > 0) {
+        if ((($item_id == 'hotel-reviews') || ($item_id == 'itineraries') || ($item_id == 'city-guides')) && count($destinations) > 0) {
           $navigationMenu .= '<ul id="' . $menu_item['link']['options']['attributes']['title'] . '">';
 
           foreach ($destinations as $destination) {
@@ -642,13 +655,23 @@ function get_header_main_navigation_menu($destinations = NULL) {
               $grouped[$destination['continent']][] = $destination;
             }
           }
-          if ($item_id == 'hotel-reviews' && (count($grouped) > 0)) {
+          if (($item_id == 'hotel-reviews' || $item_id == 'city-guides') && (count($grouped) > 0)) {
             $navigationMenu .= '<div class="background"></div><div class="wrapper">';
             ksort($grouped);
             foreach ($grouped as $c_value => $g_destinations) {
               $navigationMenu .= '<li><ul><li role="title">' . $c_value . '</li>';
               foreach ($g_destinations as $g_destination) {
-                $navigationMenu .= '<li><a href="' . $g_destination['url'] . '/hotel-reviews' . '">' . $g_destination['withcountry'] . '</a></li>';
+                  if ($item_id == 'city-guides') {
+                      $al_internal = 'node/'.$g_destination['id'].'/city-guide';
+                      $al_aliased = str_replace('/', '', $g_destination['url']) . '/city-guide';
+                      $guide_paths = array('source' => $al_internal, 'alias' => $al_aliased);
+                      if (!drupal_lookup_path('alias', $al_internal))
+                          path_save($guide_paths);
+                      $navigationMenu .= '<li><a href="'. $g_destination['url'] . '/city-guide'.'">'.$g_destination['withcountry'].'</a></li>';
+                  }
+                  else {
+                      $navigationMenu .= '<li><a href="'. $g_destination['url'] . '/hotel-reviews'.'">'.$g_destination['withcountry'].'</a></li>';
+                  }
               }
               $navigationMenu .= '</ul></li>';
             }

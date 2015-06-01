@@ -81,7 +81,10 @@
 			$scope.loading = false;
 			$scope.error = false;
 			$scope.resetPassword = false;
-		
+			
+			$('li#hotel-reviews > a, li#city-guides > a').on('click',function(){
+				return false;
+			});
 		});
 		
 		/* ~ Calendar ~ */
@@ -1121,10 +1124,10 @@
 			        continuousWorld: false,
 			        noWrap: false
 			    }
-			}).setView([21.043,-84.683],5);
+			}).setView([50.402,5.801],3);
 			
 			//map.dragging.disable();
-			map.touchZoom.disable();
+			//map.touchZoom.disable();
 			//map.doubleClickZoom.disable();
 			map.scrollWheelZoom.disable();
 			// | i | Disable tap handler, if present.
@@ -1328,13 +1331,404 @@
 			
 		});
 		
+		ffAppControllers.controller('FullMapCtrl',function($scope,$element,$http){
+			
+			L.mapbox.accessToken = 'pk.eyJ1Ijoibm9sb2d5IiwiYSI6IkFBdm5aVEkifQ.ItKi4oQ1-kPhJhedS4QmNg';
+			
+			var map  = L.mapbox.map('map','nology.k0cicjhd',{
+				zoomControl: true,
+				attributionControl: false,
+			    tileLayer: {
+			        continuousWorld: false,
+			        noWrap: false
+			    }
+			}).setView([40,0],2);
+			
+			map.touchZoom.disable();
+			map.doubleClickZoom.disable();
+			map.scrollWheelZoom.disable();
+			// | i | Disable tap handler, if present.
+			if(map.tap) map.tap.disable();
+			
+			var destLayer  = L.mapbox.featureLayer().addTo(map);
+			var bookLayer  = L.mapbox.featureLayer().addTo(map);
+			var hotelLayer = L.mapbox.featureLayer().addTo(map);
+			var geoJson    = [];
+			var bookJson   = [];
+			var hotelJson  = [];
+			
+			$scope.theOrigin = $('#map-it').data('origin');
+			$scope.displayMenu  = false;
+			$scope.destinations = {};
+			$scope.weatherSpots = {};
+			$scope.theBook      = {};
+			$scope.theHotels    = {};
+			$scope.bookFilter   = undefined;
+			
+			$scope.selectedDestination;
+			
+			// | i | Retrieve destinations...
+			// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+			
+			$scope.retrieveDestinations = function(){
+				$http({
+	                method : 'POST',
+	                url    : formSubmit,
+	                data   : $.param({formID:'getDestinations'}),
+	                headers : { 
+	            		'Content-Type' : 'application/x-www-form-urlencoded'
+					},
+					transformRequest: angular.identity
+	            }).
+	            success(function(_data){
+		            $scope.destinations = _data;
+		            $scope.addDestinations();
+		            //$scope.getWeatherData();
+		        }).
+	            error(function(_data,_status){
+	            });
+            }
+            
+            // | i | Add destination markers to map...
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+			
+			$scope.addDestinations = function(){
+				
+				var markerType = {
+				    type     : "Feature",
+				    geometry : {
+				        type        : "Point",
+				        coordinates : [0,0]
+				    },
+				    properties: {
+				        title : "",
+				        clickable : false,
+				        icon  : {
+				            iconUrl     : "",
+				            iconSize    : [38,47], // size of the icon
+				            iconAnchor  : [19,47], // point of the icon which will correspond to marker's location
+				            popupAnchor : [0,-10], // point from which the popup should open relative to the iconAnchor
+				            className   : "ff-Pin"
+				        }
+				    }
+				}
+				
+				angular.forEach($scope.destinations,function(_d){
+					
+					var newMarker = angular.copy(markerType);
+					
+					newMarker.geometry.coordinates[0] = _d.longitude;
+					newMarker.geometry.coordinates[1] = _d.latitude;
+					newMarker.properties.title        = _d.destination;
+					newMarker.properties.destination  = _d;
+					newMarker.properties.icon.iconUrl = '/sites/all/themes/feflip/media/icons/destination-map-pin.png';
+					newMarker.properties.image        = _d.image.url;
+					newMarker.properties.description  = _d.description;
+					newMarker.properties.url          = _d.maptourl;
+					
+					if(_.isUndefined($scope.theOrigin)) 
+						geoJson.push(newMarker);
+					else if(!_.isUndefined($scope.theOrigin) && $scope.theOrigin == _d.id) 
+						$scope.displayDestination(_d);
+				});
+				
+				destLayer.on('layeradd', function(_e){
+				    
+				    var marker       = _e.layer,
+				        feature      = marker.feature,
+						popupContent = '<a href="'+feature.properties.url+'" class="expanded-destination-pin"><figure><img src="'+feature.properties.image+'"/></figure><p>'+feature.properties.description+'</p><small>more...</small></a>';
+					
+				    marker.setIcon(L.icon(feature.properties.icon));
+					
+					marker.on('click',function(){
+						$scope.displayDestination(feature.properties.destination);
+					});
+					
+					// | i | Go to destination in case it's defined...
+					
+					if(!_.isUndefined($scope.theOrigin))
+						$scope.displayDestination(feature.properties.destination);
+					
+					marker.bindPopup(popupContent,{
+				        closeButton  : false,
+				        minWidth     : 300,
+				        zoomAnimation: true,
+				        keepInView   : false,
+				        autoPan      : true,
+				        closeOnClick : true
+				    });
+				});
+				
+				destLayer.setGeoJSON(geoJson);
+			};
+			
+			// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+			// | i | Address book...
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+			
+			$scope.getAddressBookPerDestination = function(_d,_filter){
+				
+				// 1. Zoom the specific area...
+				
+				map.setView([_d.latitude,_d.longitude],13);
+				bookJson = [];
+				
+				// 2. Set book for that destination...
+				
+				var markerType = {
+				    type     : "Feature",
+				    geometry : {
+				        type        : "Point",
+				        coordinates : [0,0]
+				    },
+				    properties: {
+				        title : "",
+				        icon  : {
+				            iconUrl     : "",
+				            iconSize    : [43,54], // size of the icon
+				            iconAnchor  : [22,54], // point of the icon which will correspond to marker's location
+				            popupAnchor : [0,-10], // point from which the popup should open relative to the iconAnchor
+				            className   : "ab-Pin"
+				        }
+				    }
+				}
+				
+				var setBook = function(){
+					
+					// | i | Attach pins to map...
+	            
+		            angular.forEach($scope.theBook,function(_d){
+						
+						var newMarker = angular.copy(markerType);
+						
+						newMarker.geometry.coordinates[0] = _d.longitude;
+						newMarker.geometry.coordinates[1] = _d.latitude;
+						newMarker.properties.title        = _d.title;
+						newMarker.properties.phone        = _d.phone;
+						newMarker.properties.address      = _d.address;
+						newMarker.properties.icon.iconUrl = '/sites/all/themes/feflip/media/map/'+_d.association.toLowerCase()+'-pin.png';
+						newMarker.properties.review  	  = _d.review;
+						newMarker.properties.type  	      = _d.association.toLowerCase();
+						
+						if(!_.isUndefined(_filter) && _filter == _d.association.toLowerCase()) bookJson.push(newMarker);
+						else bookJson.push(newMarker);
+					});
+					
+					// | i | Bind pop-up...
+					
+					bookLayer.on('layeradd', function(_e){
+					    
+					    var marker       = _e.layer,
+					        feature      = marker.feature,
+							popupContent = '<div class="vertical '+feature.properties.type+'"><h1>'+feature.properties.title+'</h1>'+feature.properties.review+'</div>';
+						
+					    marker.setIcon(L.icon(feature.properties.icon));
+					   
+						if(feature.properties.type != undefined){
+						    marker.bindPopup(popupContent,{
+						        closeButton  : false,
+						        minWidth     : 300,
+						        zoomAnimation: true,
+						        keepInView   : false,
+						        autoPan      : true
+						    });
+					    }
+					});
+					
+					bookLayer.setGeoJSON(bookJson);
+				}
+				
+				$http({
+	                method : 'POST',
+	                url    : formSubmit,
+	                data   : $.param({formID:'addressBook',destinationID:_d.id}),
+	                headers : { 
+	            		'Content-Type' : 'application/x-www-form-urlencoded'
+					},
+					transformRequest: angular.identity
+	            }).
+	            success(function(_data){
+		            $scope.theBook = _data;
+		            setBook();
+		        }).
+	            error(function(_data,_status){});
+			}
+			
+			// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+			// | i | Hotels...
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+           
+			$scope.getHotelsByDestination = function(_d){
+				
+				// 1. Set hotels for that destination...
+				
+				var markerType = {
+				    type     : "Feature",
+				    geometry : {
+				        type        : "Point",
+				        coordinates : [0,0]
+				    },
+				    properties: {
+				        title     : "",
+				        icon      : {
+				            iconUrl     : "",
+				            iconSize    : [43,54], // size of the icon
+				            iconAnchor  : [22,54], // point of the icon which will correspond to marker's location
+				            popupAnchor : [0,-10], // point from which the popup should open relative to the iconAnchor
+				            className   : "ab-Pin"
+				        }
+				    }
+				}
+				
+				var setHotels = function(){
+					
+					angular.forEach($scope.theHotels,function(_d){
+					
+						var newMarker = angular.copy(markerType);
+						
+						newMarker.geometry.coordinates[0] = _d.longitude;
+						newMarker.geometry.coordinates[1] = _d.latitude;
+						newMarker.properties.title        = _d.name;
+						newMarker.properties.icon.iconUrl = '/sites/all/themes/feflip/media/icons/destination-map-pin.png';
+						newMarker.properties.image        = _d.image;
+						newMarker.properties.description  = _d.hotelDescription;
+						newMarker.properties.url          = _d.url;
+						
+						hotelJson.push(newMarker);
+					});
+					
+					hotelLayer.on('layeradd',function(_e){
+				    
+					    var marker       = _e.layer,
+					        feature      = marker.feature,
+							popupContent = '<a href="'+feature.properties.url+'" class="expanded-destination-pin"><figure><img src="'+feature.properties.image+'"/></figure><p>'+feature.properties.title+'<br>'+feature.properties.description+'</p><small>go to hotel...</small></a>';
+						
+					    marker.setIcon(L.icon(feature.properties.icon));
+						
+						marker.on('click',function(){
+							//$scope.displayDestination(feature.properties.destination);
+						});
+						
+						marker.bindPopup(popupContent,{
+					        closeButton  : false,
+					        minWidth     : 300,
+					        zoomAnimation: true,
+					        keepInView   : false,
+					        autoPan      : true,
+					        closeOnClick : true
+					    });
+					});
+					
+					hotelLayer.setGeoJSON(hotelJson);
+				}
+				
+				// Get hotels per destination...
+				
+				$http({
+	                method : 'POST',
+	                url    : formSubmit,
+	                data   : $.param({formID:'destinationHotels',destinationID:_d.id}),
+	                headers : { 
+	            		'Content-Type' : 'application/x-www-form-urlencoded'
+					},
+					transformRequest: angular.identity
+	            }).
+	            success(function(_data){
+		            $scope.theHotels = _data;
+		            setHotels();
+		        }).
+	            error(function(_data,_status){});
+			};
+			
+			// | i | Specific functionalities...
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+			
+			$scope.displayDestination = function(_destination){
+				$scope.step = 2;
+				$scope.selectedDestination = _destination;
+				$scope.getAddressBookPerDestination(_destination);
+				$scope.getHotelsByDestination(_destination);
+			}
+			
+			$scope.displayAddress = function(_address){
+				map.setView([_address.latitude,_address.longitude],20);
+			}
+			
+			$scope.filterMap = function(_filter){
+				$scope.step = 3;
+				$scope.bookFilter = angular.lowercase(_filter);
+				$scope.getAddressBookPerDestination($scope.selectedDestination,$scope.bookFilter);
+			}
+			
+			$scope.printList = function(){
+			}
+			
+			$scope.zoomMap = function(_a){
+				map.setView([_a.latitude,_a.longitude],16);
+			}
+			
+			$scope.filterAddress = function(_a){ 
+				return angular.lowercase(_a.association) === $scope.bookFilter;
+			};
+			
+			$scope.displayAside = function(){
+				
+				$scope.displayMenu = !$scope.displayMenu;
+				
+				if(!$scope.displayMenu){
+				}
+			}
+			
+			// | i | Zoom continent...
+			// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+			
+			$scope.zoomContinent = function(_c){
+				switch(_c){
+					case 'northamerica':
+						map.setView([43.005,-106.436],4);
+					break;
+					case 'southamerica':
+						map.setView([-19.891,-65.479],4);
+					break;
+					case 'caribbean':
+						map.setView([21.043,-84.683],5);
+					break;
+					case 'africa':
+						map.setView([3.513,21.973],4);
+					break;
+					case 'asia':
+						map.setView([53.015,73.828],3);
+					break;
+					case 'oceania':
+						map.setView([-15.284,125.42],4);
+					break;
+					case 'europe':
+						map.setView([50.402,5.801],4);
+					break;
+					default: 
+						map.setView([40,0],2);
+					break;
+				}
+			}
+			
+			// | i | Filter hook...
+			$('ul[role="select"] li').on('click',function(){
+				$scope.zoomContinent($(this).text().toLowerCase().replace(' ',''));
+			});
+			
+			// | i | All destinations getter...
+			// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+			
+			$scope.retrieveDestinations();
+		});
+		
 		/* ~ Blog ~ */
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 		
 		ffAppControllers.controller('BlogCtrl',function($scope,$element){
 			
 			var grid    = $('.feed-wrapper');
-			var entries = $('#travel-journal').find('a.quick-entry').toArray();
+			var entries = $('a.quick-entry').toArray();
 			
 			angular.forEach(entries,function(_e){
 				
@@ -1351,13 +1745,6 @@
 					});
 				}
 			});
-			
-			/*setTimeout(function(){
-				grid.shuffle({
-					itemSelector: '.quick-entry'
-				});
-			},1000)*/
-			
 		});
 		
 		/* ~ Instagram ~ */
@@ -1739,7 +2126,7 @@
 		/* ~ Gallery ~ */
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 		
-		ffAppControllers.controller('SlideshowCtrl',function($scope,$element,$http){
+		ffAppControllers.controller('SlideshowCtrl',function($scope,$element,$http,$timeout){
 			
 			var gFrame = $('#'+$element[0].id);
 			var lBtn   = gFrame.find('*[rel="left"]');
@@ -1752,41 +2139,69 @@
 				rBtn = $('div.gallery-ui *[rel="right"]');
 			}
 			
-			switch(gFrame.hasClass('one-item')){
-				case false:
-					/*gFrame.sly({
-						horizontal    : true,
-						itemNav       : 'basic',
-						activateOn    : 'click',
-						mouseDragging : 1,
-						touchDragging : 1,
-						smart         : 1,
-						startAt       : 0,
-						scrollBy      : 1,
-						speed         : 300,
-						elasticBounds : 1,
-						activatePageOn: 'click',
-						prevPage      : lBtn,
-						nextPage      : rBtn
-					});*/
-				break;
-				case true:
-				
-					// | i | This resizes the images within the main gallery...
-					/* ------------------------------------------------------------------------------------------------- */
-					if(gFrame.hasClass('main')) 
-						gFrame.find('li').css({'width':$(window).width()+'px'});
-					/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+			$timeout(function(){
+				switch(gFrame.hasClass('one-item')){
+					case false:
+						/*gFrame.sly({
+							horizontal    : true,
+							itemNav       : 'basic',
+							activateOn    : 'click',
+							mouseDragging : 1,
+							touchDragging : 1,
+							smart         : 1,
+							startAt       : 0,
+							scrollBy      : 1,
+							speed         : 300,
+							elasticBounds : 1,
+							activatePageOn: 'click',
+							prevPage      : lBtn,
+							nextPage      : rBtn
+						});*/
+					break;
+					case true:
 					
-					if(!gFrame.hasClass('main')){
-						gFrame
-						.find('li')
-						.delay(300)
-						.transit({opacity:1},function(){
-							gFrame.sly({
+						// | i | This resizes the images within the main gallery...
+						/* ------------------------------------------------------------------------------------------------- */
+						if(gFrame.hasClass('main')) 
+							gFrame.find('li').css({'width':$(window).width()+'px'});
+						/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+						
+						if(!gFrame.hasClass('main')){
+							gFrame
+							.find('li')
+							.delay(300)
+							.transit({opacity:1},function(){
+								gFrame.sly({
+									horizontal     : 1,
+									itemNav        : 'centered',
+									activateOn     : 'click',
+									smart          : 1,
+									activateMiddle : 1,
+									mouseDragging  : 1,
+									touchDragging  : 1,
+									releaseSwing   : 1,
+									startAt        : 0,
+									scrollBy       : 1,
+									speed          : 500,
+									elasticBounds  : 1,
+									pagesBar       : $('div.gallery-ui ul.pages'),
+									activatePageOn : 'click',
+									cycleBy        : 'items',  
+									cycleInterval  : 7000,
+									pauseOnHover   : true,
+									startPaused    : false, 
+									prev           : lBtn,
+									next           : rBtn
+								});
+							});
+						}else{
+							gFrame
+							.find('li')
+							.delay(300)
+							.transit({opacity:1},function(){
+								gFrame.sly({
 								horizontal     : 1,
-								itemNav        : 'centered',
-								activateOn     : 'click',
+								itemNav        : 'forceCentered',
 								smart          : 1,
 								activateMiddle : 1,
 								mouseDragging  : 1,
@@ -1804,38 +2219,17 @@
 								startPaused    : false, 
 								prev           : lBtn,
 								next           : rBtn
+								});
 							});
+						}
+						
+						$(window).on('resize',function(){
+							gFrame.sly('reload');
 						});
-					}else{
-						gFrame
-						.find('li')
-						.delay(300)
-						.transit({opacity:1},function(){
-							gFrame.sly({
-							horizontal     : 1,
-							itemNav        : 'forceCentered',
-							smart          : 1,
-							activateMiddle : 1,
-							mouseDragging  : 1,
-							touchDragging  : 1,
-							releaseSwing   : 1,
-							startAt        : 0,
-							scrollBy       : 1,
-							speed          : 500,
-							elasticBounds  : 1,
-							pagesBar       : $('div.gallery-ui ul.pages'),
-							activatePageOn : 'click',
-							cycleBy        : 'items',  
-							cycleInterval  : 7000,
-							pauseOnHover   : true,
-							startPaused    : false, 
-							prev           : lBtn,
-							next           : rBtn
-							});
-						});
-					}
-				break;
-			}
+						
+					break;
+				}
+			},0);
 		});
 		
 		/* ~ Search ~ */

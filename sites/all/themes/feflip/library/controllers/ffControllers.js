@@ -35,13 +35,14 @@
 		/* ~ Main navigation ~ */
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 		
-		ffAppControllers.controller('NavCtrl',function($scope){
+		ffAppControllers.controller('NavCtrl',function($scope,$timeout){
 			
 			var _nav       = $('nav[role="main-navigation"]');
 			var _eng       = $('*[id="get-rates"]');
 			var _o         = _nav.find('div.wrapper > ul > li');
 			var heightRef  = 480;
 			var navOptions = _o.toArray();
+			var increments 
 			
 			// | i | Dropdown effects...
 			
@@ -62,6 +63,23 @@
 				}
 			});
 			
+			$scope.setNavigation = function(){
+				
+				var hoteInc  = (_nav.hasClass('sticky')) ? 65 : 35;
+				var guideInc = (_nav.hasClass('sticky')) ? 50 : 20;
+				
+				$('#hotel-list').css({
+					width : $(window).width()+'px',
+					marginLeft  : -$('#hotel-reviews').offset().left + 'px',
+					backgroundPosition: ($('#hotel-reviews').offset().left+hoteInc) +'px top'
+				});
+				$('#city-guides-list').css({
+					width : $(window).width()+'px',
+					marginLeft  : -$('#city-guides').offset().left + 'px',
+					backgroundPosition: ($('#city-guides').offset().left+guideInc) +'px top'
+				});
+			}
+			
 			// | i | Sticky navigation trigger...
 			
 			if(!_nav.hasClass('sticky')){
@@ -73,14 +91,12 @@
 						_nav.removeClass('sticky');
 						//_eng.removeClass('sticky').css({top:0});	
 					}
+					$scope.setNavigation();
 				});
 			}
 			
 			setTimeout(function(){
-				$('#hotel-list').css({
-					width : $(window).width()+'px',
-					marginLeft  : -$('#hotel-reviews').offset().left + 'px'
-				});
+				$scope.setNavigation();
 			},1000);
 		});
 		
@@ -93,7 +109,19 @@
 			$scope.loading = false;
 			$scope.error = false;
 			$scope.resetPassword = false;
-		
+			
+			if($('section#hotel-reviews').size() > 0)
+				$('li#hotel-reviews > a').addClass('on');
+			
+			if($('section#map').size() > 0)
+				$('li#city-guides > a').addClass('on');
+				
+			if($('section#travel-journal').size() > 0)
+				$('li#travel-journal > a').addClass('on');
+				
+			$('li#hotel-reviews > a, li#city-guides > a').on('click',function(){
+				return false;
+			});
 		});
 		
 		/* ~ Calendar ~ */
@@ -1366,6 +1394,7 @@
 			var bookJson   = [];
 			var hotelJson  = [];
 			
+			$scope.theOrigin = $('#map-it').data('origin');
 			$scope.displayMenu  = false;
 			$scope.destinations = {};
 			$scope.weatherSpots = {};
@@ -1389,7 +1418,6 @@
 					transformRequest: angular.identity
 	            }).
 	            success(function(_data){
-		            //console.log(_data);
 		            $scope.destinations = _data;
 		            $scope.addDestinations();
 		            //$scope.getWeatherData();
@@ -1435,7 +1463,10 @@
 					newMarker.properties.description  = _d.description;
 					newMarker.properties.url          = _d.maptourl;
 					
-					geoJson.push(newMarker);
+					if(_.isUndefined($scope.theOrigin)) 
+						geoJson.push(newMarker);
+					else if(!_.isUndefined($scope.theOrigin) && $scope.theOrigin == _d.id) 
+						$scope.displayDestination(_d);
 				});
 				
 				destLayer.on('layeradd', function(_e){
@@ -1449,6 +1480,11 @@
 					marker.on('click',function(){
 						$scope.displayDestination(feature.properties.destination);
 					});
+					
+					// | i | Go to destination in case it's defined...
+					
+					if(!_.isUndefined($scope.theOrigin))
+						$scope.displayDestination(feature.properties.destination);
 					
 					marker.bindPopup(popupContent,{
 				        closeButton  : false,
@@ -1471,7 +1507,7 @@
 				
 				// 1. Zoom the specific area...
 				
-				map.setView([_d.latitude,_d.longitude],14);
+				map.setView([_d.latitude,_d.longitude],13);
 				bookJson = [];
 				
 				// 2. Set book for that destination...
@@ -1549,7 +1585,6 @@
 					transformRequest: angular.identity
 	            }).
 	            success(function(_data){
-		            //console.log(_data);
 		            $scope.theBook = _data;
 		            setBook();
 		        }).
@@ -1654,7 +1689,6 @@
 			
 			$scope.displayAddress = function(_address){
 				map.setView([_address.latitude,_address.longitude],20);
-				
 			}
 			
 			$scope.filterMap = function(_filter){
