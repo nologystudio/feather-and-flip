@@ -41,6 +41,20 @@ class Destination {
     foreach ($nodes as $node) {
       $wrapper = entity_metadata_wrapper('node', $node);
       $image = Helpers::GetMainImageFromFieldCollection($node->field_images, $wrapper->title->value() . ', ' . $wrapper->field_country->value(), 'http://placehold.it/300x300', $style); //"http://placehold.it/300x300";
+      // Add destination address book info
+      $categories = array();
+      if (isset($node->field_addressbook_summary['und']) && (count($node->field_addressbook_summary['und']) > 0)) {
+          foreach ($node->field_addressbook_summary['und'] as $ab_key => $ab_value) {
+              $abook = entity_load('field_collection_item',array($ab_value['value']));
+              $abook = $abook[$ab_value['value']];
+              $book_name = '';
+              $book_dsc = '';
+              $term = taxonomy_term_load($abook->field_association_to_interests['und'][0]['tid']);
+              if (isset($term)) $book_name = $term->name;
+              $book_dsc = $abook->field_addressbook_description['und'][0]['value'];
+              $categories[] = array('name' => strtolower($book_name), 'dsc' => $book_dsc);
+          }
+      }
       $destinations[] = array(
         'id' => $node->nid,
         'destination' => $wrapper->title->value(),
@@ -53,7 +67,8 @@ class Destination {
         'longitude' => $wrapper->field_longitude->value(),
         'description' => isset($wrapper->field_description->value()['safe_value']) ? $wrapper->field_description->value()['safe_value'] : '',
         'maptourl' => drupal_get_path_alias('node/' . $node->nid . '/hotel-reviews'),
-        'weatherid' => $wrapper->field_weather_id->value()
+        'weatherid' => $wrapper->field_weather_id->value(),
+        'summaries' => $categories
       );
     }
 
