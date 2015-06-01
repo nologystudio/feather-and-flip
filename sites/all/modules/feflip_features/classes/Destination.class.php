@@ -44,6 +44,7 @@ class Destination {
       // Add destination address book info
       $ab_result = AdminForms::AddressBookByDestination($node->nid);
       $ab_cats = array_unique(array_column($ab_result, 'association'));
+      $ax_categories = array();
       $categories = array();
       if (isset($node->field_addressbook_summary['und']) && (count($node->field_addressbook_summary['und']) > 0)) {
           foreach ($node->field_addressbook_summary['und'] as $ab_key => $ab_value) {
@@ -55,9 +56,12 @@ class Destination {
               if (isset($term)) $book_name = $term->name;
               if (in_array($book_name, $ab_cats)) {
                   $book_dsc = $abook->field_addressbook_description['und'][0]['value'];
-                  $categories[] = array('name' => strtolower($book_name), 'dsc' => $book_dsc);
+                  $ax_categories[strtolower($book_name)] = $book_dsc;
               }
           }
+      }
+      foreach ($ab_cats as $ab_cat){
+          $categories[] = array('name' => strtolower($ab_cat), 'dsc' => (isset($ax_categories[strtolower($ab_cat)]) ? $ax_categories[strtolower($ab_cat)] : ''));
       }
       $destinations[] = array(
         'id' => $node->nid,
