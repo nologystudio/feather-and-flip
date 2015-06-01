@@ -1133,7 +1133,7 @@
 			        continuousWorld: false,
 			        noWrap: false
 			    }
-			}).setView([21.043,-84.683],5);
+			}).setView([50.402,5.801],4);
 			
 			//map.dragging.disable();
 			map.touchZoom.disable();
@@ -1359,15 +1359,18 @@
 			// | i | Disable tap handler, if present.
 			if(map.tap) map.tap.disable();
 			
-			var destLayer = L.mapbox.featureLayer().addTo(map);
-			var bookLayer = L.mapbox.featureLayer().addTo(map);
-			var geoJson   = [];
-			var bookJson  = [];
+			var destLayer  = L.mapbox.featureLayer().addTo(map);
+			var bookLayer  = L.mapbox.featureLayer().addTo(map);
+			var hotelLayer = L.mapbox.featureLayer().addTo(map);
+			var geoJson    = [];
+			var bookJson   = [];
+			var hotelJson  = [];
 			
 			$scope.displayMenu  = false;
 			$scope.destinations = {};
 			$scope.weatherSpots = {};
 			$scope.theBook      = {};
+			$scope.theHotels    = {};
 			$scope.bookFilter   = undefined;
 			
 			$scope.selectedDestination;
@@ -1386,7 +1389,7 @@
 					transformRequest: angular.identity
 	            }).
 	            success(function(_data){
-		            console.log(_data);
+		            //console.log(_data);
 		            $scope.destinations = _data;
 		            $scope.addDestinations();
 		            //$scope.getWeatherData();
@@ -1408,6 +1411,7 @@
 				    },
 				    properties: {
 				        title : "",
+				        clickable : false,
 				        icon  : {
 				            iconUrl     : "",
 				            iconSize    : [38,47], // size of the icon
@@ -1444,21 +1448,22 @@
 					
 					marker.on('click',function(){
 						$scope.displayDestination(feature.properties.destination);
-						
-				    });
-				    
-				    marker.bindPopup(popupContent,{
+					});
+					
+					marker.bindPopup(popupContent,{
 				        closeButton  : false,
 				        minWidth     : 300,
 				        zoomAnimation: true,
-				        keepInView   : true,
-				        autoPan      : true
+				        keepInView   : false,
+				        autoPan      : true,
+				        closeOnClick : true
 				    });
 				});
 				
 				destLayer.setGeoJSON(geoJson);
 			};
 			
+			// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 			// | i | Address book...
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 			
@@ -1466,8 +1471,8 @@
 				
 				// 1. Zoom the specific area...
 				
-				map.setView([_d.latitude,_d.longitude],10);
-				//map.removeLayer(destLayer);
+				map.setView([_d.latitude,_d.longitude],14);
+				bookJson = [];
 				
 				// 2. Set book for that destination...
 				
@@ -1525,7 +1530,7 @@
 						        closeButton  : false,
 						        minWidth     : 300,
 						        zoomAnimation: true,
-						        keepInView   : true,
+						        keepInView   : false,
 						        autoPan      : true
 						    });
 					    }
@@ -1544,11 +1549,99 @@
 					transformRequest: angular.identity
 	            }).
 	            success(function(_data){
+		            //console.log(_data);
 		            $scope.theBook = _data;
 		            setBook();
 		        }).
 	            error(function(_data,_status){});
 			}
+			
+			// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+			// | i | Hotels...
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+           
+			$scope.getHotelsByDestination = function(_d){
+				
+				// 1. Set hotels for that destination...
+				
+				var markerType = {
+				    type     : "Feature",
+				    geometry : {
+				        type        : "Point",
+				        coordinates : [0,0]
+				    },
+				    properties: {
+				        title     : "",
+				        icon      : {
+				            iconUrl     : "",
+				            iconSize    : [43,54], // size of the icon
+				            iconAnchor  : [22,54], // point of the icon which will correspond to marker's location
+				            popupAnchor : [0,-10], // point from which the popup should open relative to the iconAnchor
+				            className   : "ab-Pin"
+				        }
+				    }
+				}
+				
+				var setHotels = function(){
+					
+					angular.forEach($scope.theHotels,function(_d){
+					
+						var newMarker = angular.copy(markerType);
+						
+						newMarker.geometry.coordinates[0] = _d.longitude;
+						newMarker.geometry.coordinates[1] = _d.latitude;
+						newMarker.properties.title        = _d.name;
+						newMarker.properties.icon.iconUrl = '/sites/all/themes/feflip/media/icons/destination-map-pin.png';
+						newMarker.properties.image        = _d.image;
+						newMarker.properties.description  = _d.hotelDescription;
+						newMarker.properties.url          = _d.url;
+						
+						hotelJson.push(newMarker);
+					});
+					
+					hotelLayer.on('layeradd',function(_e){
+				    
+					    var marker       = _e.layer,
+					        feature      = marker.feature,
+							popupContent = '<a href="'+feature.properties.url+'" class="expanded-destination-pin"><figure><img src="'+feature.properties.image+'"/></figure><p>'+feature.properties.title+'<br>'+feature.properties.description+'</p><small>go to hotel...</small></a>';
+						
+					    marker.setIcon(L.icon(feature.properties.icon));
+						
+						marker.on('click',function(){
+							//$scope.displayDestination(feature.properties.destination);
+						});
+						
+						marker.bindPopup(popupContent,{
+					        closeButton  : false,
+					        minWidth     : 300,
+					        zoomAnimation: true,
+					        keepInView   : false,
+					        autoPan      : true,
+					        closeOnClick : true
+					    });
+					});
+					
+					hotelLayer.setGeoJSON(hotelJson);
+				}
+				
+				// Get hotels per destination...
+				
+				$http({
+	                method : 'POST',
+	                url    : formSubmit,
+	                data   : $.param({formID:'destinationHotels',destinationID:_d.id}),
+	                headers : { 
+	            		'Content-Type' : 'application/x-www-form-urlencoded'
+					},
+					transformRequest: angular.identity
+	            }).
+	            success(function(_data){
+		            //console.log(_data);
+		            $scope.theHotels = _data;
+		            setHotels();
+		        }).
+	            error(function(_data,_status){});
+			};
 			
 			// | i | Specific functionalities...
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -1557,10 +1650,11 @@
 				$scope.step = 2;
 				$scope.selectedDestination = _destination;
 				$scope.getAddressBookPerDestination(_destination);
+				$scope.getHotelsByDestination(_destination);
 			}
 			
 			$scope.displayAddress = function(_address){
-				map.setView([_address.latitude,_address.longitude],13);
+				map.setView([_address.latitude,_address.longitude],16);
 			}
 			
 			$scope.filterMap = function(_filter){
@@ -1573,8 +1667,12 @@
 			}
 			
 			$scope.zoomMap = function(_a){
-				map.setView([_a.latitude,_a.longitude],4);
+				map.setView([_a.latitude,_a.longitude],16);
 			}
+			
+			$scope.filterAddress = function(_a){ 
+				return angular.lowercase(_a.association) === $scope.bookFilter;
+			};
 			
 			$scope.displayAside = function(){
 				
