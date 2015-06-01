@@ -1636,7 +1636,6 @@
 					transformRequest: angular.identity
 	            }).
 	            success(function(_data){
-		            //console.log(_data);
 		            $scope.theHotels = _data;
 		            setHotels();
 		        }).
@@ -1654,7 +1653,8 @@
 			}
 			
 			$scope.displayAddress = function(_address){
-				map.setView([_address.latitude,_address.longitude],16);
+				map.setView([_address.latitude,_address.longitude],20);
+				
 			}
 			
 			$scope.filterMap = function(_filter){
@@ -1679,10 +1679,6 @@
 				$scope.displayMenu = !$scope.displayMenu;
 				
 				if(!$scope.displayMenu){
-					/*setTimeout(function(){
-						$scope.step = 1;
-						$Scope.bookFilter = undefined;
-					},500);*/
 				}
 			}
 			
@@ -1732,10 +1728,10 @@
 		/* ~ Blog ~ */
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 		
-		ffAppControllers.controller('BlogCtrl',function($scope,$element){
+		ffAppControllers.controller('BlogCtrl',function($scope,$element,$timeout){
 			
 			var grid    = $('.feed-wrapper');
-			var entries = $('#travel-journal').find('a.quick-entry').toArray();
+			var entries = $('a.quick-entry').toArray();
 			
 			angular.forEach(entries,function(_e){
 				
@@ -1753,12 +1749,11 @@
 				}
 			});
 			
-			setTimeout(function(){
+			$timeout(function(){
 				grid.shuffle({
 					itemSelector: '.quick-entry'
 				});
-			},1000);
-			
+			},0);
 		});
 		
 		/* ~ Instagram ~ */
@@ -2240,6 +2235,7 @@
 						$(window).on('resize',function(){
 							gFrame.sly('reload');
 						});
+						
 					break;
 				}
 			},0);
