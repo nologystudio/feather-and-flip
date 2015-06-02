@@ -659,6 +659,9 @@ function get_header_main_navigation_menu_mobile($destinations=NULL){
         $navigationMenu .= '<li id="'.$item_id.'"><a href="'.url($menu_item['link']['link_path']).'">'.$menu_item['link']['link_title'].'</a>';
         $grouped = array();
 
+        // TODO Temporal fix
+        if ($item_id == 'city-guides') continue;
+
         //only for hotel reviews and itineraries
         if ((($item_id == 'hotel-reviews') || ($item_id == 'itineraries') || ($item_id == 'city-guides')) && count($destinations) > 0)
         {
