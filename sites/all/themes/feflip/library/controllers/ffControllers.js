@@ -1418,10 +1418,6 @@
 					transformRequest: angular.identity
 	            }).
 	            success(function(_data){
-<<<<<<< HEAD
-		            //console.log(_data);
-=======
->>>>>>> release/0.0.7
 		            $scope.destinations = _data;
 		            $scope.addDestinations();
 		            //$scope.getWeatherData();
@@ -1485,14 +1481,11 @@
 						$scope.displayDestination(feature.properties.destination);
 					});
 					
-<<<<<<< HEAD
-=======
 					// | i | Go to destination in case it's defined...
 					
 					if(!_.isUndefined($scope.theOrigin))
 						$scope.displayDestination(feature.properties.destination);
 					
->>>>>>> release/0.0.7
 					marker.bindPopup(popupContent,{
 				        closeButton  : false,
 				        minWidth     : 300,
@@ -1514,11 +1507,7 @@
 				
 				// 1. Zoom the specific area...
 				
-<<<<<<< HEAD
-				map.setView([_d.latitude,_d.longitude],14);
-=======
 				map.setView([_d.latitude,_d.longitude],13);
->>>>>>> release/0.0.7
 				bookJson = [];
 				
 				// 2. Set book for that destination...
@@ -1596,7 +1585,6 @@
 					transformRequest: angular.identity
 	            }).
 	            success(function(_data){
-		            //console.log(_data);
 		            $scope.theBook = _data;
 		            setBook();
 		        }).
@@ -1701,10 +1689,6 @@
 			
 			$scope.displayAddress = function(_address){
 				map.setView([_address.latitude,_address.longitude],20);
-<<<<<<< HEAD
-				
-=======
->>>>>>> release/0.0.7
 			}
 			
 			$scope.filterMap = function(_filter){
