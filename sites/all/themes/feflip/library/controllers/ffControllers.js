@@ -119,7 +119,7 @@
 			if($('section#travel-journal').size() > 0)
 				$('li#travel-journal > a').addClass('on');
 				
-			$('li#hotel-reviews > a, li#city-guides > a').on('click',function(){
+			$('li#hotel-reviews > a').on('click',function(){
 				return false;
 			});
 		});

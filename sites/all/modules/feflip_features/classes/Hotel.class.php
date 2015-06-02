@@ -45,8 +45,8 @@ class Hotel {
         'expediaCode' => $wrapper->field_ean_hotelcode->value(),
         'categories' => $categories,
         'hotelDescription' => $wrapper->field_hotel_description->value(),
-        'latitude'    => $wrapper->field_latitude->value(),
-        'longitude'   => $wrapper->field_longitude->value()
+        'latitude' => $wrapper->field_latitude->value(),
+        'longitude' => $wrapper->field_longitude->value()
       );
     }
 
@@ -356,22 +356,30 @@ class Hotel {
    * @return array
    */
   public static function GetHotelsByDestination($destinationID) {
-    $query = new EntityFieldQuery;
+    $cacheId = 'Hotel_class_php::GetHotelsByDestination_' . $destinationID;
+    $cacheResult = Helpers::getCacheIfNotExpired($cacheId, 'cache_blocks_page');
+    if (!$cacheResult) {
+      $query = new EntityFieldQuery;
 
-    $nodes = $query->entityCondition('entity_type', 'node')
-      ->entityCondition('bundle', 'hotel')
-      ->propertyCondition('status', 1)
-      ->fieldCondition('field_destination', 'target_id', $destinationID, '=')
-      ->execute();
+      $nodes = $query->entityCondition('entity_type', 'node')
+        ->entityCondition('bundle', 'hotel')
+        ->propertyCondition('status', 1)
+        ->fieldCondition('field_destination', 'target_id', $destinationID, '=')
+        ->execute();
 
-    $hotels = array();
+      $hotels = array();
 
-    if (isset($nodes['node'])) {
-      $hotelsNode = node_load_multiple(array_keys($nodes['node']));
-      $hotels = self::getHotelsInfo($hotelsNode);
+      if (isset($nodes['node'])) {
+        $hotelsNode = node_load_multiple(array_keys($nodes['node']));
+        $hotels = self::getHotelsInfo($hotelsNode);
+      }
+
+      cache_set($cacheId, $hotels, 'cache_blocks_page', REQUEST_TIME + (3600 * 12)); //12 hours cache
     }
-
-    return $hotels;
+    else {
+      $result = $cacheResult->data;
+    }
+    return $result;
   }
 
   /**
