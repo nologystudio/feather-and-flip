@@ -1395,7 +1395,7 @@
 			var hotelJson  = [];
 			
 			$scope.theOrigin    = (window.location.pathname.split('/')[1] == 'map-it') ? undefined : window.location.pathname.split('/')[1];
-			$scope.displayMenu  = false;
+			$scope.displayMenu  = true;
 			$scope.destinations = {};
 			$scope.weatherSpots = {};
 			$scope.theBook      = {};
@@ -1462,8 +1462,6 @@
 					newMarker.properties.image        = _d.image.url;
 					newMarker.properties.description  = _d.description;
 					newMarker.properties.url          = _d.maptourl;
-					
-					console.log(_d);
 					
 					if(_.isUndefined($scope.theOrigin)) 
 						geoJson.push(newMarker);
