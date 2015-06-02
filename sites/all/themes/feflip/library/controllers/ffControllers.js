@@ -1463,8 +1463,6 @@
 					newMarker.properties.description  = _d.description;
 					newMarker.properties.url          = _d.maptourl;
 					
-					console.log(_d);
-					
 					if(_.isUndefined($scope.theOrigin)) 
 						geoJson.push(newMarker);
 					else if(!_.isUndefined($scope.theOrigin) && $scope.theOrigin == _d.url.split('/')[1]) 
