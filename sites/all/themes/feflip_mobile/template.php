@@ -281,7 +281,7 @@ function feflip_mobile_preprocess_views_view(&$variables) {
           $destinationbycontinent[$destination['continent']][] = $destination;
       $variables['destinationsbycontinent'] = $destinationbycontinent;
       $variables['destinations'] = $destinations;
-      $variables['main_navigation'] = get_header_main_navigation_menu($destinations);
+      $variables['main_navigation'] = get_header_main_navigation_menu_mobile($destinations);
   }
   elseif($view->name == 'collections' && $view->current_display == 'page'){
       $variables['hotels']  = Hotel::GetHotelCollections($variables);
@@ -658,6 +658,7 @@ function get_header_main_navigation_menu_mobile($destinations=NULL){
         $item_id = strtolower(str_replace(' ', '-', $menu_item['link']['link_title']));
         $navigationMenu .= '<li id="'.$item_id.'"><a href="'.url($menu_item['link']['link_path']).'">'.$menu_item['link']['link_title'].'</a>';
         $grouped = array();
+
 
         //only for hotel reviews and itineraries
         if ((($item_id == 'hotel-reviews') || ($item_id == 'itineraries') || ($item_id == 'city-guides')) && count($destinations) > 0)
