@@ -1394,7 +1394,7 @@
 			var bookJson   = [];
 			var hotelJson  = [];
 			
-			$scope.theOrigin = $('#map-it').data('origin');
+			$scope.theOrigin    = (window.location.pathname.split('/')[1] == 'map-it') ? undefined : window.location.pathname.split('/')[1];
 			$scope.displayMenu  = false;
 			$scope.destinations = {};
 			$scope.weatherSpots = {};
@@ -1463,9 +1463,11 @@
 					newMarker.properties.description  = _d.description;
 					newMarker.properties.url          = _d.maptourl;
 					
+					console.log(_d);
+					
 					if(_.isUndefined($scope.theOrigin)) 
 						geoJson.push(newMarker);
-					else if(!_.isUndefined($scope.theOrigin) && $scope.theOrigin == _d.id) 
+					else if(!_.isUndefined($scope.theOrigin) && $scope.theOrigin == _d.url.split('/')[1]) 
 						$scope.displayDestination(_d);
 				});
 				
