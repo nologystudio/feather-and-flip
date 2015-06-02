@@ -1395,7 +1395,7 @@
 			var hotelJson  = [];
 			
 			$scope.theOrigin    = (window.location.pathname.split('/')[1] == 'map-it') ? undefined : window.location.pathname.split('/')[1];
-			$scope.displayMenu  = false;
+			$scope.displayMenu  = true;
 			$scope.destinations = {};
 			$scope.weatherSpots = {};
 			$scope.theBook      = {};
