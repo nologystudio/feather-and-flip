@@ -358,6 +358,7 @@ class Hotel {
   public static function GetHotelsByDestination($destinationID) {
     $cacheId = 'Hotel_class_php::GetHotelsByDestination_' . $destinationID;
     $cacheResult = Helpers::getCacheIfNotExpired($cacheId, 'cache_blocks_page');
+    $result = array();
     if (!$cacheResult) {
       $query = new EntityFieldQuery;
 
@@ -367,14 +368,12 @@ class Hotel {
         ->fieldCondition('field_destination', 'target_id', $destinationID, '=')
         ->execute();
 
-      $hotels = array();
-
       if (isset($nodes['node'])) {
         $hotelsNode = node_load_multiple(array_keys($nodes['node']));
-        $hotels = self::getHotelsInfo($hotelsNode);
+        $result = self::getHotelsInfo($hotelsNode);
       }
 
-      cache_set($cacheId, $hotels, 'cache_blocks_page', REQUEST_TIME + (3600 * 12)); //12 hours cache
+      cache_set($cacheId, $result, 'cache_blocks_page', REQUEST_TIME + (3600 * 12)); //12 hours cache
     }
     else {
       $result = $cacheResult->data;
