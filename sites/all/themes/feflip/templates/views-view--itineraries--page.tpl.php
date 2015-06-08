@@ -15,7 +15,7 @@
                                 </figure>
                                 <small>
                                         <div id="current-time">3:00 AM</div>
-                                        <div id="weather" data-weatherId="<?php echo $weather_id; ?>">25°F<span></span></div>
+                                        <div id="weather" data-weatherId="<?php echo $weather_id; ?>">25ï¿½F<span></span></div>
                                 </small>
                         </li>
                         
@@ -29,17 +29,19 @@
                     <h3><?php echo $itinerary['description'];?></h3>
                     <!-- Gallery starts here -->
 					<div id="itinerary-gallery" class="one-item" ng-controller="SlideshowCtrl">
-                		<ul>
-						<?php foreach($itinerary['images'] as $image){ ?>
-                        <li>
-                            <article>
-                                <figure>
-                                    <img src="<?php echo $image['url'];?>" alt=""/>
-                                </figure>
-                            </article>
-                        </li>
-						<?php } ?>
-                		</ul>
+                        <?php if (isset($itinerary['images'])) { ?>
+                            <ul>
+                            <?php foreach($itinerary['images'] as $image){ ?>
+                            <li>
+                                <article>
+                                    <figure>
+                                        <img src="<?php echo $image['url'];?>" alt=""/>
+                                    </figure>
+                                </article>
+                            </li>
+                            <?php } ?>
+                            </ul>
+                        <?php } ?>
 						<button rel="left"></button>
 						<button rel="right"></button>
             		</div> 

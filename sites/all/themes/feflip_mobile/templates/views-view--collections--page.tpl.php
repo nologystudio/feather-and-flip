@@ -126,7 +126,7 @@ if ($showPrice)
     <?php if($showNotAvailable){?>
         <div role="header" class="not-available">
             <div>
-                <h6>Sorry, there are no availabilities for these dates</h6>
+                <h6>Don't see what you're looking for? Online availability isn't always accurate.<br /><a href="/contact">Contact our team</a> and we'll check with the hotel directly for you.</h6>
             </div>
         </div>
     <?php }?>

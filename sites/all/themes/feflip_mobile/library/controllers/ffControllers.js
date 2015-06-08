@@ -82,7 +82,7 @@
 			$scope.error = false;
 			$scope.resetPassword = false;
 			
-			$('li#hotel-reviews > a').on('click',function(){
+			$('li#hotel-reviews > a, li#city-guides > a').on('click',function(){
 				return false;
 			});
 		});
@@ -1358,7 +1358,7 @@
 			var hotelJson  = [];
 			
 			$scope.theOrigin    = (window.location.pathname.split('/')[1] == 'map-it') ? undefined : window.location.pathname.split('/')[1];//$('#map-it').data('origin');
-			$scope.displayMenu  = true;
+			$scope.displayMenu  = false;
 			$scope.destinations = {};
 			$scope.weatherSpots = {};
 			$scope.theBook      = {};

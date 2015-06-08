@@ -9,19 +9,20 @@
                 <button rel="move"></button>
             </nav>
             <ul role="select">
-                    <li>filter by continent</li>
-                    <li>North America</li>
-                    <li>South America</li>
-                    <li>Caribbean</li>
-                    <li>Africa</li>
-                    <li>Europe</li>
-                    <li>Asia</li>
-                    <li>Oceania</li>
+                <li>filter by continent</li>
+                <li>North America</li>
+                <li>South America</li>
+                <li>Caribbean</li>
+                <li>Africa</li>
+                <li>Europe</li>
+                <li>Asia</li>
+                <li>Oceania</li>
             </ul>
             <button rel="full-screen"></button>
-            <!--<div id="address-filter" class="animated fadeIn" ng-if="">
-	            <button ng-repeat="type in selectedDestination.summaries" rel="{{type.name}}" ng-click="filterMap(type.name)"  ng-class="{'on':bookFilter == type.name}"></button>
-	        </div>-->
+            <div id="address-filter" class="animated fadeIn" ng-if="step == 3">
+		        <small>Filter by category</small>
+	            <button ng-repeat="type in selectedDestination.summaries" rel="{{type.name}}" ng-click="filterMap(type.name)" ng-class="{'on':bookFilter == type.name}"></button>
+	        </div>
     </header>
     <section id="map" ng-click="displayMenu = false"></section>
     <aside class="destination-block" ng-class="{'on':displayMenu}">
@@ -53,7 +54,7 @@
 		    </li>
 		    <li id="step-2">
 		    	<header>
-			    	<button rel="menu" ng-click="step = 1"></button>
+			    	<button rel="menu" ng-click="step = 1" ng-if="!theOrigin"></button>
 			    	<figure>
 			    		<img ng-src="{{selectedDestination.image.url}}" alt="{{selectedDestination.destination}}"/>
 			    	</figure>
@@ -81,7 +82,7 @@
 			   		<button rel="print" ng-click="printList()"></button>
 			   	</aside>
 		    	<ul>
-			    	<li ng-repeat="address in theBook" ng-click="displayAddress(address)"  ng-click="zoomMap(address)" ng-if="filterAddress(address)">
+			    	<li ng-repeat="address in theBook" ng-click="displayAddress(address)" ng-click="zoomMap(address)" ng-if="filterAddress(address)" ng-class="{'on':selectedAB == address.title}" data-title="{{address.title}}">
 			    		<p>
 				    		<span>{{address.title}}</span>
 				    		<span ng-bind-html="address.review"></span>
