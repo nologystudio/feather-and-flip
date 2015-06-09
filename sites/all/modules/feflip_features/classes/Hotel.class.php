@@ -235,10 +235,16 @@ class Hotel {
         $nodeAux['googlePlaceId'] = isset($node->field_google_place_id['und'][0]['value']) ? $node->field_google_place_id['und'][0]['value'] : '';
         $nodeAux['association'] = '';
         if (isset($node->field_association_to_interests['und'][0]['tid'])) {
-          $term = taxonomy_term_load($node->field_association_to_interests['und'][0]['tid']);
-          if (isset($term)) {
-            $nodeAux['association'] = $term->name;
-          }
+            $term = taxonomy_term_load($node->field_association_to_interests['und'][0]['tid']);
+            if (isset($term)) {
+                // TODO temporal category fix for mobile
+                $detect = mobile_detect_get_object();
+                if (($term->name == 'Do') && $detect->isMobile())
+                    $axname = 'Play';
+                else
+                    $axname = $term->name;
+                $nodeAux['association'] = $axname;
+            }
         }
 
         $adressBook[] = $nodeAux;
