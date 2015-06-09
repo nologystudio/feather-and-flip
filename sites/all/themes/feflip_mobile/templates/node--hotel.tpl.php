@@ -39,7 +39,7 @@ if(isset($inputValues['service']) && !empty($inputValues['service']))
     <?php $h_disclaimer = ''; ?>
 <?php } else { ?>
     <?php $h_class = ' class="not-available-on-ean"'; ?>
-    <?php $h_disclaimer = '<div role="header" class="not-available"><div><h6>Unfortunately this hotel doesn\'t accept online bookings, but <a href="/contact">let us know</a> your dates and we\'ll check with them directly to get your best options.</h6></div></div>'; ?>
+    <?php $h_disclaimer = '<div role="header" class="not-available"><div><h6>Unfortunately this hotel doesn\'t accept online bookings. <a href="/contact">Email us</a> your dates and we\'ll check availability for you.</h6></div></div>'; ?>
 <?php } ?>
 
 <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
