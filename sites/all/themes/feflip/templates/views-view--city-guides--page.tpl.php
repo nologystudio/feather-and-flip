@@ -2,12 +2,16 @@
 
 <section id="map-it" class="full" ng-controller="FullMapCtrl" data-origin="<?php echo arg(1); ?>">
     <header class="animated fadeInUp">
-            <h3 class="icon compass">MAP IT</h3>
-            <nav id="zoom">
-                <button rel="zoom-in"></button>
-                <button rel="zoom-out"></button>
-                <button rel="move"></button>
-            </nav>
+        <h3 class="icon compass">MAP IT</h3>
+        <nav id="zoom">
+            <button rel="zoom-in"></button>
+            <button rel="zoom-out"></button>
+            <button rel="move"></button>
+        </nav>
+        <div id="address-filter" class="animated fadeIn">
+	        <small>Filter by category</small>
+            <button ng-repeat="type in selectedDestination.summaries" rel="{{type.name}}" ng-click="filterMap(type.name)" ng-class="{'on':bookFilter == type.name}"></button>
+        </div>
     </header>
     <section id="map" ng-click="displayMenu = false"></section>
     <aside class="destination-block" ng-class="{'on':displayMenu}">
@@ -67,7 +71,7 @@
 			   		<button rel="print" ng-click="printList()"></button>
 			   	</aside>
 		    	<ul>
-			    	<li ng-repeat="address in theBook" ng-click="displayAddress(address)"  ng-click="zoomMap(address)" ng-if="filterAddress(address)">
+			    	<li ng-repeat="address in theBook" ng-click="displayAddress(address)" ng-click="zoomMap(address)" ng-if="filterAddress(address)" ng-class="{'on':selectedAB == address.title}" data-title="{{address.title}}">
 			    		<p>
 				    		<span>{{address.title}}</span>
 				    		<span ng-bind-html="address.review"></span>

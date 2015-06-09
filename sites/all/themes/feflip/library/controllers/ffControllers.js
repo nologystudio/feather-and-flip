@@ -110,15 +110,6 @@
 			$scope.error = false;
 			$scope.resetPassword = false;
 			
-			if($('section#hotel-reviews').size() > 0)
-				$('li#hotel-reviews > a').addClass('on');
-			
-			if($('section#map').size() > 0)
-				$('li#city-guides > a').addClass('on');
-				
-			if($('section#travel-journal').size() > 0)
-				$('li#travel-journal > a').addClass('on');
-				
 			$('li#hotel-reviews > a').on('click',function(){
 				return false;
 			});
@@ -1368,12 +1359,13 @@
 			
 		});
 		
-		ffAppControllers.controller('FullMapCtrl',function($scope,$element,$http){
+		ffAppControllers.controller('FullMapCtrl',function($scope,$element,$http,$timeout){
+			
 			
 			L.mapbox.accessToken = 'pk.eyJ1Ijoibm9sb2d5IiwiYSI6IkFBdm5aVEkifQ.ItKi4oQ1-kPhJhedS4QmNg';
 			
 			var map  = L.mapbox.map('map','nology.k0cicjhd',{
-				zoomControl: true,
+				zoomControl: false,
 				attributionControl: false,
 			    tileLayer: {
 			        continuousWorld: false,
@@ -1381,6 +1373,7 @@
 			    }
 			}).setView([40,0],2);
 			
+			new L.Control.Zoom({ position: 'topright' }).addTo(map)
 			map.touchZoom.disable();
 			map.doubleClickZoom.disable();
 			map.scrollWheelZoom.disable();
@@ -1395,7 +1388,7 @@
 			var hotelJson  = [];
 			
 			$scope.theOrigin    = (window.location.pathname.split('/')[1] == 'map-it') ? undefined : window.location.pathname.split('/')[1];
-			$scope.displayMenu  = true;
+			$scope.displayMenu  = false;
 			$scope.destinations = {};
 			$scope.weatherSpots = {};
 			$scope.theBook      = {};
@@ -1403,6 +1396,7 @@
 			$scope.bookFilter   = undefined;
 			
 			$scope.selectedDestination;
+			$scope.selectedAB
 			
 			// | i | Retrieve destinations...
 			// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -1507,8 +1501,11 @@
 				
 				// 1. Zoom the specific area...
 				
+				map.removeLayer(bookLayer);
 				map.setView([_d.latitude,_d.longitude],13);
-				bookJson = [];
+				
+				bookJson  = [];
+				bookLayer = L.mapbox.featureLayer().addTo(map);
 				
 				// 2. Set book for that destination...
 				
@@ -1548,7 +1545,7 @@
 						newMarker.properties.type  	      = _d.association.toLowerCase();
 						
 						if(!_.isUndefined(_filter) && _filter == _d.association.toLowerCase()) bookJson.push(newMarker);
-						else bookJson.push(newMarker);
+						else if(_.isUndefined(_filter)) bookJson.push(newMarker);
 					});
 					
 					// | i | Bind pop-up...
@@ -1560,6 +1557,22 @@
 							popupContent = '<div class="vertical '+feature.properties.type+'"><h1>'+feature.properties.title+'</h1>'+feature.properties.review+'</div>';
 						
 					    marker.setIcon(L.icon(feature.properties.icon));
+					    
+					    marker.on('click',function(){
+						   $scope.displayMenu = true;
+						   $scope.step = 3;
+						   $scope.selectedAB = this.feature.properties.title;
+						   $scope.bookFilter = this.feature.properties.type;
+						   $scope.$apply();
+						   
+						   // Scroll list...
+						   
+						   var _li  = $('li[data-title="'+$scope.selectedAB+'"]');
+						   var _pos = _li.offset().top - (_li.height()+30);
+						   
+						   $('#step-3 ul').scrollTop(_pos);
+						   
+						});
 					   
 						if(feature.properties.type != undefined){
 						    marker.bindPopup(popupContent,{
@@ -1587,6 +1600,9 @@
 	            success(function(_data){
 		            $scope.theBook = _data;
 		            setBook();
+		            $timeout(function(){
+			            $scope.displayMenu = true;
+		            },500);
 		        }).
 	            error(function(_data,_status){});
 			}
@@ -1705,15 +1721,11 @@
 			}
 			
 			$scope.filterAddress = function(_a){ 
-				return angular.lowercase(_a.association) === $scope.bookFilter;
+				return _a.association.toLowerCase() === $scope.bookFilter;
 			};
 			
 			$scope.displayAside = function(){
-				
 				$scope.displayMenu = !$scope.displayMenu;
-				
-				if(!$scope.displayMenu){
-				}
 			}
 			
 			// | i | Zoom continent...

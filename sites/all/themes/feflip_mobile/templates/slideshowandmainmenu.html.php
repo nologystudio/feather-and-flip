@@ -34,6 +34,7 @@
         
         <div id="main-header-gallery" class="one-item main" ng-controller="SlideshowCtrl">
 			<ul>
+                <?php if (!isset($slideImages)) $slideImages = array(); ?>
 			    <?php foreach($slideImages as $image){ ?>
 				    <li>
 				        <article>

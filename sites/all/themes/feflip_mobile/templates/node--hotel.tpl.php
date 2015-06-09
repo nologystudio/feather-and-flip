@@ -25,21 +25,27 @@ if(isset($inputValues['service']) && !empty($inputValues['service']))
 
 ?>
 
-<section id="get-rates">
-	<button id="get-rates">get rates</button>
-</section>
-
-<!-- | i | Booking engine: Landing --------------------------------------------------------------------------------------------------------------- -->
-
-<?php if(count($inputValues) > 0){?>
-	<section id="booking-engine" ng-controller="BookingEngineCtrl" ng-include="bookingSearch" ng-init='init(<?php echo json_encode($inputValues);?>,0)'></section>
+<?php if (isset($node->field_ean_hotelcode['und']) && !empty($node->field_ean_hotelcode['und'][0]['value'])) { ?>
+    <section id="get-rates">
+        <button id="get-rates">get rates</button>
+    </section>
+    <!-- | i | Booking engine: Landing --------------------------------------------------------------------------------------------------------------- -->
+    <?php if(count($inputValues) > 0){?>
+        <section id="booking-engine" ng-controller="BookingEngineCtrl" ng-include="bookingSearch" ng-init='init(<?php echo json_encode($inputValues);?>,0)'></section>
+    <?php } else { ?>
+        <section id="booking-engine" ng-controller="BookingEngineCtrl" ng-include="bookingSearch" ng-init="initRate(0,<?php if(isset($destination)) echo $destination; else echo 0;?>,<?php if(isset($internalId)) echo $internalId; else echo 0;?>)"></section>
+    <?php } ?>
+    <?php $h_class = ''; ?>
+    <?php $h_disclaimer = ''; ?>
 <?php } else { ?>
-	<section id="booking-engine" ng-controller="BookingEngineCtrl" ng-include="bookingSearch" ng-init="initRate(0,<?php if(isset($destination)) echo $destination; else echo 0;?>,<?php if(isset($internalId)) echo $internalId; else echo 0;?>)"></section>
+    <?php $h_class = ' class="not-available-on-ean"'; ?>
+    <?php $h_disclaimer = '<div role="header" class="not-available"><div><h6>Unfortunately this hotel doesn\'t accept online bookings. <a href="/contact">Email us</a> your dates and we\'ll check availability for you.</h6></div></div>'; ?>
 <?php } ?>
 
 <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
-<article id="hotel" <?php echo $datas ?> ng-controller="HotelCtrl" ng-init="loadMap(<?php echo isset($node->field_latitude['und'][0]['value']) ? $node->field_latitude['und'][0]['value'] : '0'; ?>,<?php echo isset($node->field_longitude['und'][0]['value']) ? $node->field_longitude['und'][0]['value'] : '0'; ?>)">
+<article id="hotel" <?php echo $datas ?> ng-controller="HotelCtrl" ng-init="loadMap(<?php echo isset($node->field_latitude['und'][0]['value']) ? $node->field_latitude['und'][0]['value'] : '0'; ?>,<?php echo isset($node->field_longitude['und'][0]['value']) ? $node->field_longitude['und'][0]['value'] : '0'; ?>)"<?php echo $h_class; ?>>
+    <?php echo $h_disclaimer; ?>
 	
     <!-- | i | Booking engine: Room detail ------------------------------------------------------------------------------------------------------ -->
     
