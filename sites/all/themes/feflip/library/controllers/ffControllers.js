@@ -110,15 +110,6 @@
 			$scope.error = false;
 			$scope.resetPassword = false;
 			
-			if($('section#hotel-reviews').size() > 0)
-				$('li#hotel-reviews > a').addClass('on');
-			
-			if($('section#map').size() > 0)
-				$('li#city-guides > a').addClass('on');
-				
-			if($('section#travel-journal').size() > 0)
-				$('li#travel-journal > a').addClass('on');
-				
 			$('li#hotel-reviews > a').on('click',function(){
 				return false;
 			});
@@ -1580,6 +1571,7 @@
 						   var _pos = _li.offset().top - (_li.height()+30);
 						   
 						   $('#step-3 ul').scrollTop(_pos);
+						   
 						});
 					   
 						if(feature.properties.type != undefined){

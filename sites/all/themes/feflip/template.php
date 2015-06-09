@@ -636,7 +636,16 @@ function get_header_main_navigation_menu($destinations = NULL) {
       }
       else {
         $item_id = strtolower(str_replace(' ', '-', $menu_item['link']['link_title']));
-        $navigationMenu .= '<li id="' . $item_id . '"><a href="' . url($menu_item['link']['link_path']) . '">' . $menu_item['link']['link_title'] . '</a>';
+        $iclass = '';
+        $arg = arg();
+        if (isset($arg[2]) && ($arg[2] == $item_id)) $iclass = ' class="on"';
+        elseif (isset($arg[2]) && ($arg[2] == 'collection')) $iclass = '';
+        elseif (isset($arg[2]) && ($arg[2] == 'city-guide') && ($item_id == 'city-guides')) $iclass = ' class="on"';
+        elseif (isset($arg[0]) && ($arg[0] == 'node') && ($item_id == 'hotel-reviews') && !isset($arg[2])) $iclass = ' class="on"';
+        elseif (isset($arg[0]) && ($arg[0] == 'map-it') && ($item_id == 'city-guides')) $iclass = ' class="on"';
+        elseif (isset($arg[0]) && ($arg[0] == $item_id)) $iclass = ' class="on"';
+        else $iclass = '';
+        $navigationMenu .= '<li id="' . $item_id . '"'.$iclass.'><a href="' . url($menu_item['link']['link_path']) . '">' . $menu_item['link']['link_title'] . '</a>';
         $grouped = array();
 
         //only for hotel reviews and itineraries
