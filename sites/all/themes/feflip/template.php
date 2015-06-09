@@ -645,7 +645,7 @@ function get_header_main_navigation_menu($destinations = NULL) {
         elseif (isset($arg[0]) && ($arg[0] == 'map-it') && ($item_id == 'city-guides')) $iclass = ' class="on"';
         elseif (isset($arg[0]) && ($arg[0] == $item_id)) $iclass = ' class="on"';
         else $iclass = '';
-        $navigationMenu .= '<li id="' . $item_id . '"'.$iclass.'><a href="' . url($menu_item['link']['link_path']) . '">' . $menu_item['link']['link_title'] . '</a>';
+        $navigationMenu .= '<li id="' . $item_id . '"><a href="' . url($menu_item['link']['link_path']) . '"'.$iclass.'>' . $menu_item['link']['link_title'] . '</a>';
         $grouped = array();
 
         //only for hotel reviews and itineraries
