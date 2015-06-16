@@ -28,6 +28,7 @@
 				<small ng-show="type == 'sign-in'">Back to<button id="sign-in" ng-click="switcher('sign-up')">sign up</button></small>
 				<small ng-show="type == 'reset-password'">Back to<button id="sign-in" ng-click="switcher('sign-in')">sign in</button></small>
 				<button ng-if="type == 'change-password'" rel="close" ng-click="closeOverlay()"></button>
+				<button ng-if="type != 'change-password'" rel="close" class="small" ng-click="closeOverlay()">close</button>
 			</header>
 			<!-- Callback messages -->
 			<div id="response-messages" ng-show="rMessage">

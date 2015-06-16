@@ -1,14 +1,14 @@
-
-
-
+		
+		
+			
 		/* ----------------------------------------------------------------------------------------------------------------
 		    
 	    * Project     : F+F
-	    * Document    : f+f-app.js  
+	    * Document    : less/style
 	    * Created on  : Oct 08, 2.014
 	    * Version     : 1.0 
 	    * Author      : Aday Henriquez
-	    * Description : global App javascript file
+	    * Description : This less file manages all the importers for specific devices and resolutions
 	    
 	    -------------------------------------------------------------------------------------------------------------------
 	       *          This code has been developed by NOLOGY. in the awesome Canaries - www.nologystudio.com           *
@@ -18,39 +18,17 @@
         -------------------------------------------------------------------------------------------------------------------
         *  
         ---------------------------------------------------------------------------------------------------------------- */
-        
-        'use strict';
-        
-        /* ------------------------------------------------------------------------------------------------------------- */
-		/* ~ App level ~ */
+		
+		/* ------------------------------------------------------------------------------------------------------------- */
+		/* ~ All ~ */
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 		
-		angular.module('ffApp',[
-			'ngRoute',
-			'ngSanitize',
-			'ngCookies',
-			'ffControllers'
-		]);
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-              
+		@import 'reset/normalize.css';
+		@import 'tools/animate.min.css';
+		@import 'global/main';
+		
+		
+		
 		
 		
 		
