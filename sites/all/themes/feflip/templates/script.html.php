@@ -31,6 +31,7 @@
 		<script type="text/javascript" charset="utf-8" src="<?php echo variable_get('relativePath'); ?>library/vendors/angular/angular.min.js"></script>
 		<script type="text/javascript" charset="utf-8" src="<?php echo variable_get('relativePath'); ?>library/vendors/angular/angular-route.min.js"></script>
 		<script type="text/javascript" charset="utf-8" src="<?php echo variable_get('relativePath'); ?>library/vendors/angular/angular-sanitize.min.js"></script>
+		<script type="text/javascript" charset="utf-8" src="<?php echo variable_get('relativePath'); ?>library/vendors/angular/angular-cookies.min.js"></script>
 
 		<script type="text/javascript" charset="utf-8" src="<?php echo variable_get('relativePath'); ?>library/vendors/transit.min.js" ></script>
         <script type="text/javascript" charset="utf-8" src="<?php echo variable_get('relativePath'); ?>library/vendors/sly.min.js"></script>

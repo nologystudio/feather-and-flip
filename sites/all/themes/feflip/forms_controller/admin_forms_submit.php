@@ -15,6 +15,8 @@
         //drupal_settings_initialize();
 
 		//watchdog('FormsController', 'formID ===> '.$_POST['formID']);
+        if (!isset($_SESSION))
+            session_start();
 
 		$form_id = $_POST['formID'];
 

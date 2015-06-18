@@ -213,7 +213,7 @@
 		/* ~ Booking ~ */
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 			
-		ffAppControllers.controller('BookingEngineCtrl',function($scope,$http){
+		ffAppControllers.controller('BookingEngineCtrl',function($scope,$rootScope,$http){
 			
 			$scope.path          = globalPartialPath + 'booking-engine-flow/';
 			$scope.state         = 0;
@@ -877,6 +877,8 @@
 				//console.log('Room');
 				//console.log($scope.roomSelection);	
 				
+				// | i | Display overlay if the user is not logged in...
+				$rootScope.$emit('display-overlay','');
 				// | i | Scroll down to the checkout...
 				$('html,body').delay(300).animate({scrollTop:scrollPosition},600);
 				// | i | Get Payment types...
@@ -898,7 +900,6 @@
 		            }).
 		            success(function(_data){
 			            $scope.allowPayments = _data;
-			            //console.log($scope.allowPayments);
 			        }).
 		            error(function(_data,_status){
 		            });
@@ -911,7 +912,9 @@
 			}
 			
 			$scope.checkCustomerInfo = function(){
-				return true;
+				// | i | Emit event to display overlay in case te user is not logged-in..
+				$rootScope.$emit('display-overlay','');
+				return $scope.$parent.user;
 			}
 			
 			$scope.getAdultNumber = function(){
@@ -1828,7 +1831,7 @@
 		/* ~ Messenger ~ */
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 		
-		ffAppControllers.controller('MessengerCtrl',function($scope,$element){
+		ffAppControllers.controller('MessengerCtrl',function($scope,$rootScope,$element,$cookies){
 			
 			var messageType     = ['hidden','signup','loading'];
 			
@@ -1842,16 +1845,18 @@
 			$scope.changePassword = false;
 			
 			$scope.triggerOverlay = function(){
-				switch($scope.triggerState){
-					case 'hidden':
-						$scope.display = false;
-					break;
-					case 'loading':
-						$scope.display = true;
-					break;
-					default:
-						$scope.display = true;
-					break;
+				if($cookies.get('overlay') != 'hidden'){
+					switch($scope.triggerState){
+						case 'hidden':
+							$scope.display = false;
+						break;
+						case 'loading':
+							$scope.display = true;
+						break;
+						default:
+							$scope.display = true;
+						break;
+					}
 				}
 			}
 			
@@ -1887,6 +1892,16 @@
 				}
 			});
 			
+			// | i | Bind cookie event...
+			
+			$rootScope.$on('display-overlay',function(_e,_data){
+				if(!$scope.$parent.user){
+					$cookies.put('overlay','signup',{path:'/'});
+					$scope.triggerState = messageType[1];
+					$scope.triggerOverlay();
+				}
+			});
+			
 			// | i | Trigger password request...
 			
 			$('#change-password').on('click',function(){
@@ -1898,7 +1913,7 @@
 		/* ~ Sign-up ~ */
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 		
-		ffAppControllers.controller('RegistrationCtrl',function($scope,$http){
+		ffAppControllers.controller('RegistrationCtrl',function($scope,$http,$cookies){
 			
 			$scope.response		 = ['success','error','error-in-login'];
 			$scope.types   		 = ['sign-up','sign-in','response','reset-password','new-password','change-password']; 
@@ -1945,6 +1960,7 @@
 					$scope.$parent.$parent.resetPassword = false;
 					$scope.$parent.$parent.triggerState = 'hidden';
 					$scope.$parent.$parent.$apply();
+					$cookies.put('overlay','hidden',{path:'/'});
 				});
 			}
 			
@@ -2035,8 +2051,7 @@
 					transformRequest: angular.identity
 	            }).
 	            success(function(_data){
-		            //console.log(_data);
-		            switch(_data.error){
+		        	switch(_data.error){
 			            case '':
 			            	$('#password-form').transition({opacity:0},function(){
 				            	$scope.rMessage = 'reset-password-success'; 
@@ -2049,8 +2064,7 @@
 		            }
 	            }).
 	            error(function(_data){
-		            //console.log(_data);
-	            });
+		        });
 			}
 			
 			// | i | Triggers for password recovery...

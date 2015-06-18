@@ -1,14 +1,14 @@
 
 
-
+	
 		/* ----------------------------------------------------------------------------------------------------------------
 		    
-	    * Project     : F+F
-	    * Document    : f+f-app.js  
-	    * Created on  : Oct 08, 2.014
+	    * Project     : themeNOLOGY.
+	    * Document    : less/style
+	    * Created on  : June 26, 2.013
 	    * Version     : 1.0 
 	    * Author      : Aday Henriquez
-	    * Description : global App javascript file
+	    * Description : IE specific adjustments
 	    
 	    -------------------------------------------------------------------------------------------------------------------
 	       *          This code has been developed by NOLOGY. in the awesome Canaries - www.nologystudio.com           *
@@ -19,39 +19,19 @@
         *  
         ---------------------------------------------------------------------------------------------------------------- */
         
-        'use strict';
-        
-        /* ------------------------------------------------------------------------------------------------------------- */
-		/* ~ App level ~ */
-		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-		
-		angular.module('ffApp',[
-			'ngRoute',
-			'ngSanitize',
-			'ngCookies',
-			'ffControllers'
-		]);
-        
-        
-        
-        
+        html.lt-ie9 body
+		{
+			& > header
+			{
+			} 
+			
+			& > nav ul
+			{
+			}
+			
+			& > section
+			{
+			}
+		}
         
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-              
-		
-		
-		
-		
