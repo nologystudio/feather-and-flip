@@ -22,6 +22,7 @@
             <div id="address-filter" class="animated fadeIn" ng-if="step == 3">
 		        <small>Filter by category</small>
 	            <button ng-repeat="type in selectedDestination.summaries" rel="{{type.name}}" ng-click="filterMap(type.name)" ng-class="{'on':bookFilter == type.name}"></button>
+	            <button ng-click="filterMap(undefined)">view all</button>
 	        </div>
     </header>
     <section id="map" ng-click="displayMenu = false"></section>
