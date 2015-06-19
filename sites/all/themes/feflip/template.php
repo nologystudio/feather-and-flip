@@ -746,8 +746,8 @@ function feflip_html_head_alter(&$head_elements) {
 
 // Generate share links
 function getSocialLink($_network, $url, $img = '', $desc = '') {
-  if (strpos($url, 'http://') === FALSE) {
-    $url = 'http://' . $_SERVER['HTTP_HOST'] . '/' . $url;
+  if (strpos($url, 'https://') === FALSE) {
+    $url = 'https://' . $_SERVER['HTTP_HOST'] . '/' . $url;
   }
   switch ($_network) {
     case 'facebook':
