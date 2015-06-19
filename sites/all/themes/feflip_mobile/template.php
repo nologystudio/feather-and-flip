@@ -755,8 +755,8 @@ function feflip_mobile_html_head_alter(&$head_elements) {
 // Generate share links
 function getSocialLinkMobile($_network,$url, $img = '', $desc = '')
 {
-  if (strpos($url, 'http://') === false)
-    $url = 'http://'.$_SERVER['HTTP_HOST'].'/'.$url;
+  if (strpos($url, 'https://') === false)
+    $url = 'https://'.$_SERVER['HTTP_HOST'].'/'.$url;
   switch($_network){
     case 'facebook':
     return 'http://www.facebook.com/sharer.php?u='.urlencode($url);
