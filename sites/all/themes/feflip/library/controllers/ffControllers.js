@@ -213,7 +213,7 @@
 		/* ~ Booking ~ */
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 			
-		ffAppControllers.controller('BookingEngineCtrl',function($scope,$rootScope,$http){
+		ffAppControllers.controller('BookingEngineCtrl',function($scope,$rootScope,$cookies,$http){
 			
 			$scope.path          = globalPartialPath + 'booking-engine-flow/';
 			$scope.state         = 0;
@@ -429,6 +429,7 @@
 					$(this).addClass('on');
 					$scope.dateValidation();
 				});
+				
 				$('#departure button[data-date]').on('click',function(_e){
 					$scope.bookingInfo.checkOut = $(this).data('date');
 					$('#departure button[data-date]').removeClass();
@@ -481,7 +482,6 @@
 						if(_type == 'children'){
 							$scope.bookingInfo.rooms.info[_index].children.number++;
 							$scope.bookingInfo.rooms.info[_index].children.ages.push(0);
-							//console.log($scope.bookingInfo.rooms.info[_index].children.ages);
 						}
 					break;
 					case '-':
@@ -616,14 +616,17 @@
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 		
 			$scope.init = function(_obj,_state){
-				if(!_.isEmpty(_obj)) $scope.bookingInfo = _obj;
+				
+				if(!_.isEmpty(_obj))
+					$scope.bookingInfo = _obj;
+				
 				$scope.state = _state;
 			}
 			
 			$scope.initRate = function(_state,_dest,_id){
 				$scope.state = _state;
 				$scope.bookingInfo.destination = _dest;
-				$scope.bookingInfo.internalId  = _id;
+				$scope.bookingInfo.internalId = _id;
 			}
 			
 			$('#hotel-reviews a.item').click(function(_e){
@@ -708,10 +711,21 @@
 		
 			$scope.getRoomInfo = function(){
 				
-				var _s         = $('article[id="hotel"]');
-				var _result    = _s.data('result');
+				var _s       = $('article[id="hotel"]');
+				var _result  = _s.data('result');
+				var _service = _s.data('service');
+				var _booking = localStorage.getItem('booking');
 				
-				$scope.service = _s.data('service');
+				// | i | Retrieve cookie in case it exists...
+				if(_.isUndefined(_result) && !_.isNull(_booking)){
+					_result = JSON.parse(localStorage.getItem('booking'));
+					$scope.service = 'expedia';
+					localStorage.removeItem('booking');
+				}
+				else if(!_.isUndefined(_result) && _.isNull(_booking)){
+					localStorage.setItem('booking',JSON.stringify(_result));
+					$scope.service = _service;
+				}
 				
 				switch($scope.service){
 					case 'expedia':
@@ -723,9 +737,6 @@
 						$scope.availableRooms = _result.RoomStay;
 					break;
 				}
-				
-				//console.log('Available Rooms');
-				//console.log($scope.availableRooms);
 			};
 		
 		/* ~ Step 4 ~ Check-out*/
@@ -870,6 +881,7 @@
 			$scope.selectThis = function(_room){
 				
 				var scrollPosition   = $('#step-3').height() + $('#step-3').offset().top - 48;
+				
 				$scope.state         = 4;	
 				$scope.roomSelection = _room;	
 				$scope.nightlyIsArray= _.isArray($scope.roomSelection.RateInfos.RateInfo.ChargeableRateInfo.NightlyRatesPerRoom.NightlyRate);
@@ -968,7 +980,7 @@
 							creditCardIdentifier  : $scope.customer.cardId,
 							creditCardExpireDate  : $scope.customer.cardYear + '-' + $scope.customer.cardMonth
 						});
-						console.log(finalBooking);
+						
 					break;
 					case 'sabre':
 					
@@ -2000,7 +2012,7 @@
 					transformRequest: angular.identity
 	            }).
 	            success(function(_data){
-		            if(_data.result) window.location.href = 'http://' + window.location.host + '';
+		            if(_data.result) window.location.reload();
 		            else{
 			            $scope.loading = false;
 			            $scope.signInError = 'The user or password is incorrect';
