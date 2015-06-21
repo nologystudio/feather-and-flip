@@ -167,7 +167,7 @@
 				</label>
 				<label for="user-phone">
 					Phone
-					<input type="text" name="user-phone" pattern="[0-9]" ng-model="customer.phone" required/>
+					<input type="text" name="user-phone" ng-pattern="/^\d+$/" ng-model="customer.phone" required/>
 				</label>
 				<!-- | i | Billing information -->
 				<small>Billing information</small>

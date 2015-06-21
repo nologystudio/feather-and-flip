@@ -22,7 +22,7 @@
             <div id="address-filter" class="animated fadeIn" ng-if="step == 3">
 		        <small>Filter by category</small>
 	            <button ng-repeat="type in selectedDestination.summaries" rel="{{type.name}}" ng-click="filterMap(type.name)" ng-class="{'on':bookFilter == type.name}"></button>
-	            <button ng-click="filterMap(undefined)">view all</button>
+				<button ng-click="filterMap(undefined)" class="view-all" ng-if="bookFilter">view all</button>
 	        </div>
     </header>
     <section id="map" ng-click="displayMenu = false"></section>
@@ -75,11 +75,12 @@
 		    </li>
 		    <li id="step-3">
 		    	<header>
-			    	<h1 class="{{bookFilter}}">{{bookFilter}}</h1>
-		    	</header>
+			    	<h1 class="{{bookFilter}}">{{bookFilter != undefined ? bookFilter : "all"}}</h1>
+			    </header>
 		   		<aside>
 			   		<button rel="menu" ng-click="step = 2"></button>
 			   		<button ng-repeat="type in selectedDestination.summaries" rel="{{type.name}}" ng-click="filterMap(type.name)"  ng-class="{'on':bookFilter == type.name}"></button>
+			   		<button ng-click="filterMap(undefined)" ng-class="{'on':bookFilter == undefined}" class="view-all">view all</button>
 			   		<button rel="print" ng-click="printList()"></button>
 			   	</aside>
 		    	<ul>

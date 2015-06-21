@@ -110,8 +110,16 @@
 			$scope.error = false;
 			$scope.resetPassword = false;
 			
+			// | i | Prevent click for some main nav links...
+			
 			$('li#hotel-reviews > a').on('click',function(){
 				return false;
+			});
+			
+			// | i | This event forces the browser to stay at the very top...
+			
+			$(window).on('beforeunload',function(){
+				$(window).scrollTop(0);
 			});
 		});
 		
@@ -213,7 +221,7 @@
 		/* ~ Booking ~ */
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 			
-		ffAppControllers.controller('BookingEngineCtrl',function($scope,$rootScope,$cookies,$http){
+		ffAppControllers.controller('BookingEngineCtrl',function($scope,$rootScope,$http){
 			
 			$scope.path          = globalPartialPath + 'booking-engine-flow/';
 			$scope.state         = 0;
@@ -717,12 +725,14 @@
 				var _booking = localStorage.getItem('booking');
 				
 				// | i | Retrieve cookie in case it exists...
+				
 				if(_.isUndefined(_result) && !_.isNull(_booking)){
 					_result = JSON.parse(localStorage.getItem('booking'));
 					$scope.service = 'expedia';
 					localStorage.removeItem('booking');
 				}
-				else if(!_.isUndefined(_result) && _.isNull(_booking)){
+				else if(!_.isUndefined(_result)){
+					localStorage.removeItem('booking');
 					localStorage.setItem('booking',JSON.stringify(_result));
 					$scope.service = _service;
 				}
@@ -767,7 +777,7 @@
 					field  = $('*[name="user-cardnumber"]'),
 					lhError= $('#lh-error');
 					
-				//if(!_.isUndefined(_n)){
+				if(!_.isUndefined(_n)){
 					
 					//_n = _n.replace(/\D/g,"");
 	 
@@ -794,7 +804,7 @@
 						field.addClass('warning');
 						lhError.show();
 					}
-				//}
+				}
 				
 				// | i | Credit Card Type: http://developer.ean.com/general-info/valid-credit-card-types/
 				/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
@@ -1033,9 +1043,7 @@
 			            var _s = 'http://' + window.location.host + '/booking-info/';
 			            var _e = 'http://' + window.location.host + '/booking-error';
 			            
-			            //console.log(_data);
-						
-						switch($scope.service){
+			            switch($scope.service){
 							case 'expedia':
 								if(!_.isUndefined(_data)){
 									if(!_.isUndefined(_data.HotelRoomReservationResponse.EanWsError)){
@@ -1057,8 +1065,7 @@
 						}
 			        }).
 		            error(function(_data,_status){
-			            //console.log(_data);
-		            });
+			        });
 				}
 			};
 			
@@ -1135,8 +1142,7 @@
 			            success(function(_data){
 				            switch(_data.error.toLowerCase()){
 					            case '': 
-									// Response: Success
-									window.location.reload();
+					            	window.location.reload();
 					            break;
 					            case 'missing parameters':
 					            case 'method not implemented (sabre)':
@@ -1736,7 +1742,7 @@
 			}
 			
 			$scope.filterAddress = function(_a){ 
-				return _a.association.toLowerCase() === $scope.bookFilter;
+				return (_a.association.toLowerCase() === $scope.bookFilter || _.isUndefined($scope.bookFilter)) ? true : false;
 			};
 			
 			$scope.displayAside = function(){
@@ -1911,6 +1917,7 @@
 					$cookies.put('overlay','signup',{path:'/'});
 					$scope.triggerState = messageType[1];
 					$scope.triggerOverlay();
+					$('.call-to-action').transition({opacity:1});
 				}
 			});
 			
@@ -1968,10 +1975,11 @@
 			
 			$scope.closeOverlay = function(){
 				$('.call-to-action').transition({opacity:0},function(){
-					$scope.$parent.$parent.display = false;
-					$scope.$parent.$parent.resetPassword = false;
-					$scope.$parent.$parent.triggerState = 'hidden';
-					$scope.$parent.$parent.$apply();
+					//console.log($scope.$parent.$parent);
+					$scope.$parent.$parent.$parent.display = false;
+					$scope.$parent.$parent.$parent.resetPassword = false;
+					$scope.$parent.$parent.$parent.triggerState = 'hidden';
+					$scope.$parent.$parent.$parent.$apply();
 					$cookies.put('overlay','hidden',{path:'/'});
 				});
 			}
@@ -2012,8 +2020,9 @@
 					transformRequest: angular.identity
 	            }).
 	            success(function(_data){
-		            if(_data.result) window.location.reload();
-		            else{
+		            if(_data.result)
+			            window.location.reload();
+			        else{
 			            $scope.loading = false;
 			            $scope.signInError = 'The user or password is incorrect';
 			        }
@@ -2046,8 +2055,7 @@
 				            break;
 			            }
 		            }).
-		            error(function(_data){
-		            });
+		            error(function(_data){ });
 				}
 				else _p.addClass('warning');
 			} 
