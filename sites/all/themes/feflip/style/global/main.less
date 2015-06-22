@@ -1325,7 +1325,7 @@
 						@width: 5 * @ref-padding + @unit;
 						@height: @ref-padding;
 						
-						.set-size(200px,auto);
+						.set-size(240px,auto);
 						.set-pos(absolute);
 						overflow: visible;
 						color: @grey-1;
@@ -1381,6 +1381,14 @@
 							{ 
 								.set-icon('noteworthy');
 								background-position: center 7px !important;
+							}
+							
+							&.view-all
+							{
+								width: auto;
+								padding: 0 2 * @unit;
+								text-transform: uppercase;
+								#font > .l-normal(10px,@grey-1);
 							}
 						}
 						
@@ -2255,6 +2263,23 @@
 													//.set-pos(absolute);
 													.hide();
 													bottom: 0;
+												}
+												
+												&.view-all
+												{
+													.set-size(100%,30px);
+													.set-opacity(1);
+													.animate-opacity();
+													.performance();
+													#font > .l-normal(8px,@color-1); 
+													text-align: center;
+													text-transform: uppercase;
+													
+													&:hover,
+													&.on
+													{
+														.set-opacity(0.5);
+													}
 												}
 												
 												&[rel="menu"]
