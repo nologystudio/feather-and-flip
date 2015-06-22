@@ -1417,7 +1417,7 @@
 			$scope.bookFilter   = undefined;
 			
 			$scope.selectedDestination;
-			$scope.selectedAB
+			$scope.selectedAB;
 			
 			// | i | Retrieve destinations...
 			// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -1735,6 +1735,11 @@
 			}
 			
 			$scope.printList = function(){
+			}
+			
+			$scope.goToFullList = function(){
+				$scope.step = 1;
+				console.log('entrada');
 			}
 			
 			$scope.zoomMap = function(_a){
