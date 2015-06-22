@@ -641,7 +641,7 @@ function get_header_main_navigation_menu_mobile($destinations=NULL){
         $navigationMenu .= '<li id="sign-in"><a href="/">Sign In</a>';
       }
     }
-    else if(strpos($key, '2232') !== FALSE)
+    else if((strpos($key, '2232') !== FALSE) || (strpos($menu_item['link']['link_title'], 'need help') !== FALSE))
     {
         $navigationMenu .= '<li>'
 						.'<a href="' .url($menu_item['link']['link_path']). '">'.$menu_item['link']['link_title'].'</a>'
