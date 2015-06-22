@@ -623,7 +623,7 @@ function get_header_main_navigation_menu($destinations = NULL) {
       }
     }
     else {
-      if (strpos($key, '2218') !== FALSE) {
+      if ((strpos($key, '2218') !== FALSE) || (strpos($menu_item['link']['link_title'], 'need help') !== FALSE)) {
         $navigationMenu .= '<li>'
           . '<a href="' . url($menu_item['link']['link_path']) . '">' . $menu_item['link']['link_title'] . '</a>'
           . '<div id="help-info">'
