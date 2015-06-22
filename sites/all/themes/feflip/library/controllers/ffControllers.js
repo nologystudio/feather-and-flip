@@ -119,7 +119,7 @@
 			// | i | This event forces the browser to stay at the very top...
 			
 			$(window).on('beforeunload',function(){
-				$(window).scrollTop(0);
+				//$(window).scrollTop(0);
 			});
 		});
 		
@@ -1417,7 +1417,7 @@
 			$scope.bookFilter   = undefined;
 			
 			$scope.selectedDestination;
-			$scope.selectedAB
+			$scope.selectedAB;
 			
 			// | i | Retrieve destinations...
 			// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -1737,6 +1737,11 @@
 			$scope.printList = function(){
 			}
 			
+			$scope.goToFullList = function(){
+				$scope.step = 1;
+				console.log('entrada');
+			}
+			
 			$scope.zoomMap = function(_a){
 				map.setView([_a.latitude,_a.longitude],16);
 			}
@@ -1923,9 +1928,18 @@
 			
 			// | i | Trigger password request...
 			
-			$('#change-password').on('click',function(){
+			$('#change-password').on('click',function(_e){
 				$scope.changePassword = true;
 				$scope.$apply();
+				_e.preventDefault();
+			});
+			
+			// | i | Trigger password request...
+			
+			$('#sign-in').on('click',function(_e){
+				$rootScope.$emit('display-overlay','');
+				$scope.$apply();
+				_e.preventDefault();
 			});
 		});
 		
@@ -1975,7 +1989,6 @@
 			
 			$scope.closeOverlay = function(){
 				$('.call-to-action').transition({opacity:0},function(){
-					//console.log($scope.$parent.$parent);
 					$scope.$parent.$parent.$parent.display = false;
 					$scope.$parent.$parent.$parent.resetPassword = false;
 					$scope.$parent.$parent.$parent.triggerState = 'hidden';

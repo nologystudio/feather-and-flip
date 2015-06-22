@@ -44,7 +44,7 @@
 			    </li>
 			    <li id="step-2">
 			    	<header>
-				    	<button rel="menu" ng-click="step = 1" ng-if="!theOrigin"></button>
+				    	<button rel="menu" ng-click="goToFullList()" ng-if="!theOrigin"></button>
 				    	<figure>
 				    		<img ng-src="{{selectedDestination.image.url}}" alt="{{selectedDestination.destination}}"/>
 				    	</figure>
