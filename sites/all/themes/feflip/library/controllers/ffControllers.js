@@ -1923,9 +1923,17 @@
 			
 			// | i | Trigger password request...
 			
-			$('#change-password').on('click',function(){
+			$('#change-password').on('click',function(_e){
 				$scope.changePassword = true;
 				$scope.$apply();
+				_e.preventDefault();
+			});
+			
+			// | i | Trigger password request...
+			
+			$('#sign-in').on('click',function(_e){
+				$rootScope.$emit('display-overlay','');
+				_e.preventDefault();
 			});
 		});
 		
