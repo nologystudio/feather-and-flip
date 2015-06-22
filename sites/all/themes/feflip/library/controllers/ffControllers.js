@@ -119,7 +119,7 @@
 			// | i | This event forces the browser to stay at the very top...
 			
 			$(window).on('beforeunload',function(){
-				$(window).scrollTop(0);
+				//$(window).scrollTop(0);
 			});
 		});
 		
@@ -1933,6 +1933,7 @@
 			
 			$('#sign-in').on('click',function(_e){
 				$rootScope.$emit('display-overlay','');
+				$scope.$apply();
 				_e.preventDefault();
 			});
 		});
@@ -1983,7 +1984,6 @@
 			
 			$scope.closeOverlay = function(){
 				$('.call-to-action').transition({opacity:0},function(){
-					//console.log($scope.$parent.$parent);
 					$scope.$parent.$parent.$parent.display = false;
 					$scope.$parent.$parent.$parent.resetPassword = false;
 					$scope.$parent.$parent.$parent.triggerState = 'hidden';
