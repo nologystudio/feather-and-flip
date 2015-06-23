@@ -1,4 +1,4 @@
-<?php if (!drupal_is_front_page() && (strpos($_SERVER['REQUEST_URI'], '/itinerary') === false) && (strpos($_SERVER['REQUEST_URI'], '/hotel-reviews') === false)) include 'slideshowandmainmenu.html.php'; ?>
+<?php if (!drupal_is_front_page() && (strpos($_SERVER['REQUEST_URI'], '/itinerary') === false) && (strpos($_SERVER['REQUEST_URI'], '/hotel-reviews') === false) && (strpos($_SERVER['REQUEST_URI'], '/city-guide') === false)) include 'slideshowandmainmenu.html.php'; ?>
 <section id="travel-journal" ng-controller="BlogCtrl"<?php echo ((strpos($_SERVER['REQUEST_URI'], '/itinerary') !== false || (strpos($_SERVER['REQUEST_URI'], '/hotel-reviews') !== false)) ? ' class="related"' : ''); ?>>
         <header>
                 <h3 class="icon feather">TRAVEL<span> journal </span></h3>
