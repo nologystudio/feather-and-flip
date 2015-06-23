@@ -181,7 +181,7 @@
         <button rel="load-more">load more</button>
     </footer>
 </section>
-
+<?php if (isset($travel_journal) && !empty($travel_journal)) print $travel_journal; ?>
 <div class="service-overlay">
 			<div class="content">
 				<button rel="close"></button>
