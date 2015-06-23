@@ -86,3 +86,4 @@
 	    </div>
     </aside>
 </section>
+<?php if (isset($travel_journal) && !empty($travel_journal)) print $travel_journal; ?>
