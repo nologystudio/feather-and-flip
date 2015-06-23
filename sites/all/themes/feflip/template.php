@@ -223,8 +223,16 @@ function feflip_preprocess_views_view(&$variables) {
     // check if exist term with this destination name
     $term = taxonomy_get_term_by_name($destination->title);
     if (!empty($term)) {
-      $cat = array_shift($term);
-      $variables['travel_journal'] = views_embed_view('travel_journal_tags', 'page', $cat->tid);
+        $cat = array_shift($term);
+        $tjview = views_get_view('travel_journal_tags');
+        $tjview->set_display('view_block_name');
+        $tjview->set_arguments(array($cat->tid));
+        $tjview->execute();
+        $tjCount = count($tjview->result);
+        if ($tjCount > 0)
+            $variables['travel_journal'] = views_embed_view('travel_journal_tags', 'page', $cat->tid);
+        else
+            $variables['travel_journal'] = '';
     }
   }
   elseif ($view->name == 'itineraries' && $view->current_display == 'page') {
@@ -283,7 +291,15 @@ function feflip_preprocess_views_view(&$variables) {
       $term = taxonomy_get_term_by_name($dest->title);
       if (!empty($term)) {
           $cat = array_shift($term);
-          $variables['travel_journal'] = views_embed_view('travel_journal_tags', 'page', $cat->tid);
+          $tjview = views_get_view('travel_journal_tags');
+          $tjview->set_display('view_block_name');
+          $tjview->set_arguments(array($cat->tid));
+          $tjview->execute();
+          $tjCount = count($tjview->result);
+          if ($tjCount > 0)
+            $variables['travel_journal'] = views_embed_view('travel_journal_tags', 'page', $cat->tid);
+          else
+              $variables['travel_journal'] = '';
       }
   }
   elseif ($view->name == 'collections' && $view->current_display == 'page') {

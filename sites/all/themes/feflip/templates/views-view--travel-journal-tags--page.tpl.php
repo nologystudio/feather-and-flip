@@ -4,7 +4,7 @@
                 <h3 class="icon feather">TRAVEL<span> journal </span></h3>
         </header>
         <div class="feed-wrapper">
-                <?php if (strpos($_SERVER['REQUEST_URI'], '/itinerary') === false && strpos($_SERVER['REQUEST_URI'], '/hotel-reviews') === false) { ?>
+                <?php if (strpos($_SERVER['REQUEST_URI'], '/itinerary') === false && strpos($_SERVER['REQUEST_URI'], '/hotel-reviews') === false && strpos($_SERVER['REQUEST_URI'], '/city-guide') === false) { ?>
                     <div id="newsletter-signup" class="quick-entry" ng-controller="NewsletterCtrl" ng-switch="currentStatus">
                         <h3>Join the adventure</h3>
                         <hr>
