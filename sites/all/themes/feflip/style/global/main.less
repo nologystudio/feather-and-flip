@@ -3551,6 +3551,30 @@
 						}
 					}
 				}
+				
+				& > div.city-guide-block
+				{
+					.set-size(100%);
+					.set-bgc(@press-bg-color);
+					.box-sizing();
+					padding: @ref-padding;
+					
+					a
+					{
+						#ui-set-button > .rounded(@color-2,18px);
+						#align > .center;
+						.set-opacity(1);
+						.animate-opacity();
+						.performance();
+						margin: 0 auto 1px auto;
+						width: 240px;
+						
+						&:hover
+						{
+							.set-opacity(0.5);
+						}
+					}
+				}
 			}
 			
 			&[id="itinerary"] + section[id="hotel-reviews"]
@@ -6654,7 +6678,6 @@
 			}
 			
 			&.confirmation,
-			&.map-it,
 			&.error
 			{
 				& > header,
@@ -6722,7 +6745,13 @@
 			
 			&.map-it
 			{
-				& > section[id]
+				& > header,
+				& > div[id="main-header-gallery"]
+				{
+					.hide();
+				}
+				
+				& > section[id="map-it"]
 				{
 					margin-top: 0px !important;
 					padding-top: 60px;
