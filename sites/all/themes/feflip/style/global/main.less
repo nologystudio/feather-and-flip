@@ -3257,7 +3257,7 @@
 			
 			&[id="hotel-reviews"]
 			{
-				padding-bottom: @s-b-padding;
+				padding-bottom: 0;//@s-b-padding;
 				
 				&.hidden
 				{
@@ -3313,6 +3313,8 @@
 				& > div.wrapper
 				{
 					width: @global-wrapper-width + 6 * @unit;
+					overflow: hidden;
+					padding-bottom: 60px;
 					
 					& > h2
 					{
@@ -3557,7 +3559,7 @@
 					.set-size(100%);
 					.set-bgc(@press-bg-color);
 					.box-sizing();
-					padding: @ref-padding;
+					padding: @ref-padding/2;
 					
 					a
 					{
@@ -3567,7 +3569,7 @@
 						.animate-opacity();
 						.performance();
 						margin: 0 auto 1px auto;
-						width: 240px;
+						min-width: 320px;
 						
 						&:hover
 						{
