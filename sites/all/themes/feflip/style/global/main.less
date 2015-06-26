@@ -3558,19 +3558,71 @@
 				& > div.city-guide-block
 				{
 					.set-size(100%);
-					.set-bgc(@press-bg-color);
+					.set-bgc(@grey-1);
 					.box-sizing();
+					#align > .left;
+					overflow: hidden;
 					padding: @ref-padding/2;
 					
 					a
 					{
-						#ui-set-button > .rounded(@color-2,18px);
+						#ui-set-button > .rounded(transparent,16px);
 						#align > .center;
 						.set-opacity(1);
 						.animate-opacity();
 						.performance();
 						margin: 0 auto 1px auto;
 						min-width: 320px;
+						overflow: hidden;
+						display: block;
+						
+						div.icons
+						{
+							@size: 25px;
+							@icon-size: @size - 7px;
+							
+							.set-size();
+							#align > .center;
+							display: table;
+							padding-bottom: 2 * @unit;
+							
+							span
+							{
+								@n-size: 1.2 * @size;
+								
+								.set-size(@n-size,@n-size);
+								#align > .left;
+								margin: @unit;
+								padding: @unit;
+								overflow: hidden;
+								border-radius: @n-size;
+								
+								&[id="eat-icon"]
+								{
+									.set-bg(black,'@{media-url}map/eat-icon.png'); 
+									background-size: auto @icon-size;
+									background-position: center 9px;
+								}
+								
+								&[id="shop-icon"]
+								{
+									.set-bg(black,'@{media-url}map/shop-icon.png'); 
+									background-size: auto @icon-size;
+								}
+								
+								&[id="play-icon"]
+								{
+									.set-bg(black,'@{media-url}map/play-icon.png');
+									background-size: auto @icon-size;
+								}
+								
+								&[id="mustsee-icon"]
+								{
+									.set-bg(black,'@{media-url}map/mustsee-icon.png');
+									background-size: auto @icon-size;
+								}
+							}
+						}
 						
 						&:hover
 						{

@@ -169,6 +169,16 @@
             </a>
         <?php } ?>
     </div>
-    <!--<div class="city-guide-block"><a href="">View our city guide for...</a></div>-->
+    <div class="city-guide-block">
+	    <a href="">
+		    <div class="icons">
+			    <span id="eat-icon"></span>
+			    <span id="shop-icon"></span>
+			    <span id="play-icon"></span>
+			    <span id="mustsee-icon"></span>
+		    </div>
+	    	Where to Eat, Shop and Play
+	    </a>
+	</div>
 </section>
 <?php if (isset($travel_journal) && !empty($travel_journal)) print $travel_journal; ?>
