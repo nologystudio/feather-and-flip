@@ -109,9 +109,9 @@
 <?php endif; ?>
 <!-- | i | Booking engine: Landing ------------------------------------------------------- -->
 <?php if(count($inputValues) > 0){?>
-<section id="booking-engine" ng-controller="BookingEngineCtrl" ng-include="bookingSearch" ng-init='init(<?php echo json_encode($inputValues);?>,0)'></section>
+	<section id="booking-engine" ng-controller="BookingEngineCtrl" ng-include="bookingSearch" ng-init='init(<?php echo json_encode($inputValues);?>,0)'></section>
 <?php } else { ?>
-<section id="booking-engine" ng-controller="BookingEngineCtrl" ng-include="bookingSearch" ng-init="initRate(0,<?php if(isset($destinationId)) echo $destinationId; else echo 0;?>,<?php if(isset($internalId)) echo $internalId; else echo 0;?>)"></section>
+	<section id="booking-engine" ng-controller="BookingEngineCtrl" ng-include="bookingSearch" ng-init="initRate(0,<?php if(isset($destinationId)) echo $destinationId; else echo 0;?>,<?php if(isset($internalId)) echo $internalId; else echo 0;?>)"></section>
 <?php } ?>
 <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - -  -->
 <section id="hotel-reviews"<?php echo ((isset($arg[2]) && ($arg[2] == 'itinerary')) ? ' class="hidden"' : ''); ?>>
@@ -169,6 +169,6 @@
             </a>
         <?php } ?>
     </div>
-    <div class="city-guide-block"><a href="">View our city guide for...</a></div>
+    <!--<div class="city-guide-block"><a href="">View our city guide for...</a></div>-->
 </section>
 <?php if (isset($travel_journal) && !empty($travel_journal)) print $travel_journal; ?>
