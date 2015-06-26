@@ -220,6 +220,20 @@ function feflip_preprocess_views_view(&$variables) {
       $variables['destinationDescription'] = isset($destination->field_description['und'][0]['value']) && !empty($destination->field_description['und'][0]['value']) ? $destination->field_description['und'][0]['value'] : 'Hotel Reviews';
     }
     $variables['slideImages'] = $images;
+    // check if exist term with this destination name
+    $term = taxonomy_get_term_by_name($destination->title);
+    if (!empty($term)) {
+        $cat = array_shift($term);
+        $tjview = views_get_view('travel_journal_tags');
+        $tjview->set_display('view_block_name');
+        $tjview->set_arguments(array($cat->tid));
+        $tjview->execute();
+        $tjCount = count($tjview->result);
+        if ($tjCount > 0)
+            $variables['travel_journal'] = views_embed_view('travel_journal_tags', 'page', $cat->tid);
+        else
+            $variables['travel_journal'] = '';
+    }
   }
   elseif ($view->name == 'itineraries' && $view->current_display == 'page') {
     $variables['itinerary'] = Itinerary::ItinerariesInfo($view);
@@ -271,6 +285,22 @@ function feflip_preprocess_views_view(&$variables) {
       $variables['destinationsbycontinent'] = $destinationbycontinent;
       $variables['destinations'] = $destinations;
       $variables['main_navigation'] = get_header_main_navigation_menu($destinations);
+
+      // check if exist term with this destination name
+      $dest = node_load(arg(1));
+      $term = taxonomy_get_term_by_name($dest->title);
+      if (!empty($term)) {
+          $cat = array_shift($term);
+          $tjview = views_get_view('travel_journal_tags');
+          $tjview->set_display('view_block_name');
+          $tjview->set_arguments(array($cat->tid));
+          $tjview->execute();
+          $tjCount = count($tjview->result);
+          if ($tjCount > 0)
+            $variables['travel_journal'] = views_embed_view('travel_journal_tags', 'page', $cat->tid);
+          else
+              $variables['travel_journal'] = '';
+      }
   }
   elseif ($view->name == 'collections' && $view->current_display == 'page') {
     $variables['hotels'] = Hotel::GetHotelCollections($variables);

@@ -84,7 +84,7 @@
 			   		<button rel="print" ng-click="printList()"></button>
 			   	</aside>
 		    	<ul>
-			    	<li ng-repeat="address in theBook" ng-click="displayAddress(address)" ng-click="zoomMap(address)" ng-if="filterAddress(address)" ng-class="{'on':selectedAB == address.title}" data-title="{{address.title}}">
+			    	<li ng-repeat="address in theBook | orderBy:'title'" ng-click="displayAddress(address)" ng-click="zoomMap(address)" ng-if="filterAddress(address)" ng-class="{'on':selectedAB == address.title}" data-title="{{address.title}}">
 			    		<p>
 				    		<span>{{address.title}}</span>
 				    		<span ng-bind-html="address.review"></span>
