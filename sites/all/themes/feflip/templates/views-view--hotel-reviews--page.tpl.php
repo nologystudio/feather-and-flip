@@ -170,7 +170,7 @@
         <?php } ?>
     </div>
     <div class="city-guide-block">
-	    <a href="/<?php echo strtolower(str_replace(' ', '-', $hotel['destination'])); ?>/city-guide">
+	    <a href="<?php echo str_replace('hotel-reviews', 'city-guide', $_SERVER['REQUEST_URI']); ?>">
 		    <div class="icons">
 			    <span id="eat-icon"></span>
 			    <span id="shop-icon"></span>
