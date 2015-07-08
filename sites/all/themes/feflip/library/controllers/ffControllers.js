@@ -2176,7 +2176,7 @@
 			
 			$scope.filterHotels = function(_cat){
 				// | i | F+F category exception...
-				if(_cat == 'f+f favorites') _cat = _cat.split(' ')[1];
+				if(_cat == 'f+f favorites' || _cat == 'passported favorites') _cat = _cat.split(' ')[1];
 				// 1. Hide none-category hotels...
 				angular.forEach(_hotels,function(_h){
 					if(!$(_h).hasClass(_cat)) $(_h).remove();
