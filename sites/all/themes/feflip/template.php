@@ -736,7 +736,7 @@ function get_header_main_navigation_menu($destinations = NULL) {
 function get_footer_fixed_menu() {
   $f_menu = menu_tree_all_data('menu-footer-right');
   $output = '<ul>';
-  $output .= '<li><span class="icon ff"></span>feather + flip</li>';
+  $output .= '<li><span class="icon ff"></span>Passported</li>';
   foreach ($f_menu as $key => $menu_item) {
     if ((strpos($key, '2205') !== FALSE) || (strpos($key, '2208') !== FALSE)) {
       $output .= '<li><a href="' . url($menu_item['link']['link_path']) . '" target="_blank">' . $menu_item['link']['link_title'] . '</a></li>';
