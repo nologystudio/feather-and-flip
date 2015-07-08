@@ -32,7 +32,7 @@
                                             <?php if(isset($image['subtitle'])){ ?>
                                                 <span class="cursive"><?php echo $image['subtitle']; ?></span>
                                             <?php } ?>
-                                            <span class="rounded-btn small">Find out where to Eat, Shop and Play</span>
+                                            <!--<span class="rounded-btn small">Find out where to Eat, Shop and Play</span>-->
                                         </a>
                                     <?php } else { ?>
                                         <div>
