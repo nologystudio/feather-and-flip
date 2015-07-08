@@ -56,10 +56,6 @@ DirectoryIndex index.php index.html index.htm
 <IfModule mod_rewrite.c>
   RewriteEngine on
 
-  # REDIRECT TO PASSPORTED DOMAIN
-  RewriteCond %{HTTP_HOST} !passported.com$ [NC]
-  RewriteRule ^(.*)$ http://www.passported.com/$1 [L,R=301]
-
   RewriteCond %{HTTP_HOST} !^m\.
   RewriteCond %{HTTP_HOST} !^www\.
   RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [L,R=301]
