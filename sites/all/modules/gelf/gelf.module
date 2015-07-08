@@ -50,7 +50,8 @@ function gelf_watchdog($entry) {
     $short_message = $message;
   }
   $username = isset($entry['user']->name) ? $entry['user']->name : variable_get('anonymous', t('Anonymous'));
-  $serverHost = isset($_SERVER['PARAM1']) ? '[' . $_SERVER['PARAM1'] . '] ' . $_SERVER['HTTP_HOST'] : '[???] ' . $_SERVER['HTTP_HOST'];
+  $environment = isset($_SERVER['PARAM1']) ? $_SERVER['PARAM1'] : '[???] ';
+  $serverHost = '[' . $environment . '] ' . $_SERVER['HTTP_HOST'];
   $gelf->setShortMessage($short_message);
   $gelf->setFullMessage($message);
   $gelf->setHost($source_host);
@@ -64,6 +65,7 @@ function gelf_watchdog($entry) {
   $gelf->setAdditional("Request_uri", $entry['request_uri']);
   $gelf->setAdditional("Server_host", $serverHost);
   $gelf->setAdditional("Client_host", $entry['ip']);
+  $gelf->setAdditional("Environment", $environment);
   try {
     $publisher = new GELFMessagePublisher($host, $port);
     $publisher->publish($gelf);

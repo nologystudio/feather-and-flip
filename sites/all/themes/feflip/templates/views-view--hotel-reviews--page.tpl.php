@@ -124,6 +124,9 @@
     <?php }?>
     <div class="wrapper">
         <h2 class="middle-line"><?php echo $destinationDescription;?></h2>
+        <a rel="city-guide" href="<?php echo str_replace('hotel-reviews', 'city-guide', $_SERVER['REQUEST_URI']); ?>">
+			Find out where to Eat, Shop and Play
+    	</a>
         <div id="filter-container">
 			<ul role="select" class="dark">
 				<li>Reset Filters</li>
@@ -169,6 +172,5 @@
             </a>
         <?php } ?>
     </div>
-    <!--<div class="city-guide-block"><a href="">View our city guide for...</a></div>-->
 </section>
 <?php if (isset($travel_journal) && !empty($travel_journal)) print $travel_journal; ?>

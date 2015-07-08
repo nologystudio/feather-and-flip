@@ -124,12 +124,12 @@
             <tr style="height:20px;"></tr>
             <tr align="center" style="border-bottom: dotted 1px #333333;">
               <td valign="top" style="padding-bottom: 30px;">
-                <img style="width:300px; margin: auto;" src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/sites/all/themes/feflip/media/brand/feather-and-flip-black-logo.png"/>
+                <img style="width:300px; margin: auto;" src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/sites/all/themes/feflip/media/brand/passported-black-logo.png"/>
               </td>
             </tr>
             <tr style="height:20px;"></tr>
             <tr style="border-bottom: dotted 1px #333333;">
-              <td style="text-transform: uppercase; font-size: 14px; color: #333333; line-height: 22px; padding-bottom: 20px;">Thank you for booking with Feather+Flip and the Expedia Affiliate Network. We only recommend hotels we know and love, and we hope you feel the same way. Read on for your confirmation number, hotel cancellation policy and contact details.</td>
+              <td style="text-transform: uppercase; font-size: 14px; color: #333333; line-height: 22px; padding-bottom: 20px;">Thank you for booking with Passported and the Expedia Affiliate Network. We only recommend hotels we know and love, and we hope you feel the same way. Read on for your confirmation number, hotel cancellation policy and contact details.</td>
             </tr>
             <tr style="height:30px;"></tr>
             <tr>
@@ -141,7 +141,7 @@
                     </td>
                   </tr>
                   <tr>
-                    <td style="color:#333333; font-size:14px; line-height: 22px; border-bottom: dotted 1px #333333; padding-bottom: 15px">The booking you recently made on the featherandflip.com website is confirmed. Your reservation details are below.</td>
+                    <td style="color:#333333; font-size:14px; line-height: 22px; border-bottom: dotted 1px #333333; padding-bottom: 15px">The booking you recently made on the passported.com website is confirmed. Your reservation details are below.</td>
                   </tr>
                   <tr>
                     <td style="color:#333333; font-size:18px; line-height: 22px; padding-top: 15px"><span style="font-weight: bold; margin-right: 10px;">Customer Name:</span> <?php echo $wrapper->field_first_name->value().' '.$wrapper->field_last_name->value(); ?></td>
@@ -156,7 +156,7 @@
                     <td style="color:#333333; font-size:12px; line-height: 18px; padding-top: 15px">Please refer to your Itinerary Number if you contact customer service for any reason.</td>
                   </tr>
                   <tr>
-                    <td style="color:#333333; font-size:12px; line-height: 18px; padding-top: 15px"><a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/booking-info/<?php echo $wrapper->field_booking_id->value(); ?>" style="color:#7b8c88; text-decoration: none;">View your booking in your Feather+Flip account</a></td>
+                    <td style="color:#333333; font-size:12px; line-height: 18px; padding-top: 15px"><a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/booking-info/<?php echo $wrapper->field_booking_id->value(); ?>" style="color:#7b8c88; text-decoration: none;">View your booking in your Passported account</a></td>
                   </tr>
                 </table>
               </td>
@@ -362,12 +362,12 @@
             <tr style="height:20px;"></tr>
             <tr align="center" style="border-bottom: dotted 1px #333333;">
               <td valign="top" style="padding-bottom: 30px;">
-                <img style="width:300px; margin: auto;" src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/sites/all/themes/feflip/media/brand/feather-and-flip-black-logo.png"/>
+                <img style="width:300px; margin: auto;" src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/sites/all/themes/feflip/media/brand/passported-black-logo.png"/>
               </td>
             </tr>
             <tr style="height:20px;"></tr>
             <tr style="border-bottom: dotted 1px #333333;">
-              <td style="text-transform: uppercase; font-size: 14px; color: #333333; line-height: 22px; padding-bottom: 20px;">Thank you for booking with Feather+Flip and Tzell Travel Group. We only recommend hotels we know and love, and we hope you feel the same way. Read on for your confirmation number, hotel cancellation policy and contact details.</td>
+              <td style="text-transform: uppercase; font-size: 14px; color: #333333; line-height: 22px; padding-bottom: 20px;">Thank you for booking with Passported and Tzell Travel Group. We only recommend hotels we know and love, and we hope you feel the same way. Read on for your confirmation number, hotel cancellation policy and contact details.</td>
             </tr>
             <tr style="height:30px;"></tr>
             <tr>
@@ -379,7 +379,7 @@
                     </td>
                   </tr>
                   <tr>
-                    <td style="color:#333333; font-size:14px; line-height: 22px; border-bottom: dotted 1px #333333; padding-bottom: 15px">The booking you recently made on the featherandflip.com website is confirmed. Your reservation details are below.</td>
+                    <td style="color:#333333; font-size:14px; line-height: 22px; border-bottom: dotted 1px #333333; padding-bottom: 15px">The booking you recently made on the passported.com website is confirmed. Your reservation details are below.</td>
                   </tr>
                   <tr>
                     <td style="color:#333333; font-size:18px; line-height: 22px; padding-top: 15px"><span style="font-weight: bold; margin-right: 10px;">Customer Name:</span> <?php echo $wrapper->field_first_name->value().' '.$wrapper->field_last_name->value(); ?></td>

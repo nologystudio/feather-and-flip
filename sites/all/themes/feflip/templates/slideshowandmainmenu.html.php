@@ -26,15 +26,25 @@
 	                                    <?php } ?>
 	                                </a>
 	                            <?php } else { ?>
-	                                <div>
-	                                    <h1><?php if(isset($image['text'])) echo $image['text']; else echo 'city, country'; ?></h1>
-	                                    <?php if(isset($image['subtitle'])){ ?>
-	                                    <span class="cursive"><?php echo $image['subtitle']; ?></span>
-	                                    <?php } ?>
-	                                    <?php if(isset($image['btntext'])){?>
-	                                    <span class="rounded-btn"><?php echo $image['btntext'];?></span>
-	                                    <?php } ?>
-	                                </div>
+                                    <?php if (strpos($_SERVER['REQUEST_URI'], 'hotel-reviews') !== FALSE) { ?>
+                                        <a href="<?php echo str_replace('hotel-reviews', 'city-guide', $_SERVER['REQUEST_URI']); ?>">
+                                            <h1><?php if(isset($image['text'])) echo $image['text']; else echo 'city, country'; ?></h1>
+                                            <?php if(isset($image['subtitle'])){ ?>
+                                                <span class="cursive"><?php echo $image['subtitle']; ?></span>
+                                            <?php } ?>
+                                            <!--<span class="rounded-btn small">Find out where to Eat, Shop and Play</span>-->
+                                        </a>
+                                    <?php } else { ?>
+                                        <div>
+                                            <h1><?php if(isset($image['text'])) echo $image['text']; else echo 'city, country'; ?></h1>
+                                            <?php if(isset($image['subtitle'])){ ?>
+                                            <span class="cursive"><?php echo $image['subtitle']; ?></span>
+                                            <?php } ?>
+                                            <?php if(isset($image['btntext'])){?>
+                                            <span class="rounded-btn"><?php echo $image['btntext'];?></span>
+                                            <?php } ?>
+                                        </div>
+                                    <?php } ?>
 	                            <?php } ?>
 	                        </div>
 	                    </article>
