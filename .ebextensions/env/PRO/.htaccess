@@ -64,8 +64,10 @@ DirectoryIndex index.php index.html index.htm
   RewriteCond %{HTTP_HOST} !^www\.
   RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [L,R=301]
 
-  RewriteCond %{HTTP:X-Forwarded-Proto} https
-  RewriteRule ^(.*)$ http://%{SERVER_NAME}/$1 [L,R=301]
+  RewriteCond %{HTTPS} on
+  RewriteRule (.*) http://%{HTTP_HOST}%{REQUEST_URI}
+  #RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  #RewriteRule ^(.*)$ https://%{SERVER_NAME}/$1 [L,R=301]
 
   # Custom Rules for F+F forms
   RewriteRule ^api/forms$ /sites/all/themes/feflip/forms_controller/admin_forms_submit.php [L,QSA]
