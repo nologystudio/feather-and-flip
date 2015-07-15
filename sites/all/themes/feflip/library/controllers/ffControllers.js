@@ -1242,15 +1242,18 @@
 					
 					var newMarker = angular.copy(markerType);
 					
-					newMarker.geometry.coordinates[0] = _d.longitude;
-					newMarker.geometry.coordinates[1] = _d.latitude;
-					newMarker.properties.title        = _d.destination;
-					newMarker.properties.icon.iconUrl = '/sites/all/themes/feflip/media/icons/destination-map-pin.png';
-					newMarker.properties.image        = _d.image.url;
-					newMarker.properties.description  = _d.description;
-					newMarker.properties.url          = _d.maptourl;
+					if(_.isNumber(_d.longitude) && _.isNumber(_d.latitude)){
 					
-					geoJson.push(newMarker);
+						newMarker.geometry.coordinates[0] = _d.longitude;
+						newMarker.geometry.coordinates[1] = _d.latitude;
+						newMarker.properties.title        = _d.destination;
+						newMarker.properties.icon.iconUrl = '/sites/all/themes/feflip/media/icons/destination-map-pin.png';
+						newMarker.properties.image        = _d.image.url;
+						newMarker.properties.description  = _d.description;
+						newMarker.properties.url          = _d.maptourl;
+						
+						geoJson.push(newMarker);
+					}
 				});
 				
 				destLayer.on('layeradd', function(_e){
@@ -1469,19 +1472,22 @@
 					
 					var newMarker = angular.copy(markerType);
 					
-					newMarker.geometry.coordinates[0] = _d.longitude;
-					newMarker.geometry.coordinates[1] = _d.latitude;
-					newMarker.properties.title        = _d.destination;
-					newMarker.properties.destination  = _d;
-					newMarker.properties.icon.iconUrl = '/sites/all/themes/feflip/media/icons/destination-map-pin.png';
-					newMarker.properties.image        = _d.image.url;
-					newMarker.properties.description  = _d.description;
-					newMarker.properties.url          = _d.maptourl;
+					if(_.isNumber(_d.longitude) && _.isNumber(_d.latitude)){
 					
-					if(_.isUndefined($scope.theOrigin)) 
-						geoJson.push(newMarker);
-					else if(!_.isUndefined($scope.theOrigin) && $scope.theOrigin == _d.url.split('/')[1]) 
-						$scope.displayDestination(_d);
+						newMarker.geometry.coordinates[0] = _d.longitude;
+						newMarker.geometry.coordinates[1] = _d.latitude;
+						newMarker.properties.title        = _d.destination;
+						newMarker.properties.destination  = _d;
+						newMarker.properties.icon.iconUrl = '/sites/all/themes/feflip/media/icons/destination-map-pin.png';
+						newMarker.properties.image        = _d.image.url;
+						newMarker.properties.description  = _d.description;
+						newMarker.properties.url          = _d.maptourl;
+						
+						if(_.isUndefined($scope.theOrigin)) 
+							geoJson.push(newMarker);
+						else if(!_.isUndefined($scope.theOrigin) && $scope.theOrigin == _d.url.split('/')[1]) 
+							$scope.displayDestination(_d);
+					}
 				});
 				
 				destLayer.on('layeradd', function(_e){
@@ -1556,7 +1562,8 @@
 						
 						var newMarker = angular.copy(markerType);
 						
-						if(!_.isNull(_d.longitude) && !_.isNull(_d.latitude) && !_.isUndefined(_d.longitude) && !_.isUndefined(_d.latitude)){
+						if(_.isNumber(_d.longitude) && _.isNumber(_d.latitude)){
+							
 							newMarker.geometry.coordinates[0] = _d.longitude;
 							newMarker.geometry.coordinates[1] = _d.latitude;
 							newMarker.properties.title        = _d.title;
@@ -1663,15 +1670,19 @@
 					
 						var newMarker = angular.copy(markerType);
 						
-						newMarker.geometry.coordinates[0] = _d.longitude;
-						newMarker.geometry.coordinates[1] = _d.latitude;
-						newMarker.properties.title        = _d.name;
-						newMarker.properties.icon.iconUrl = '/sites/all/themes/feflip/media/icons/destination-map-pin.png';
-						newMarker.properties.image        = _d.image;
-						newMarker.properties.description  = _d.hotelDescription;
-						newMarker.properties.url          = _d.url;
+						if(_.isNumber(_d.longitude) && _.isNumber(_d.latitude)){
 						
-						hotelJson.push(newMarker);
+							newMarker.geometry.coordinates[0] = _d.longitude;
+							newMarker.geometry.coordinates[1] = _d.latitude;
+							newMarker.properties.title        = _d.name;
+							newMarker.properties.icon.iconUrl = '/sites/all/themes/feflip/media/icons/destination-map-pin.png';
+							newMarker.properties.image        = _d.image;
+							newMarker.properties.description  = _d.hotelDescription;
+							newMarker.properties.url          = _d.url;
+							
+							hotelJson.push(newMarker);
+						
+						}
 					});
 					
 					hotelLayer.on('layeradd',function(_e){
@@ -2484,16 +2495,19 @@
 						
 						var newMarker = angular.copy(markerType);
 						
-						newMarker.geometry.coordinates[0] = _d.longitude;
-						newMarker.geometry.coordinates[1] = _d.latitude;
-						newMarker.properties.title        = _d.title;
-						newMarker.properties.phone        = _d.phone;
-						newMarker.properties.address      = _d.address;
-						newMarker.properties.icon.iconUrl = '/sites/all/themes/feflip/media/map/'+_d.association.toLowerCase()+'-pin.png';
-						newMarker.properties.review  	  = _d.review;
-						newMarker.properties.type  	      = _d.association.toLowerCase();
+						if(_.isNumber(_d.longitude) && _.isNumber(_d.latitude)){
 						
-						geoJson.push(newMarker);
+							newMarker.geometry.coordinates[0] = _d.longitude;
+							newMarker.geometry.coordinates[1] = _d.latitude;
+							newMarker.properties.title        = _d.title;
+							newMarker.properties.phone        = _d.phone;
+							newMarker.properties.address      = _d.address;
+							newMarker.properties.icon.iconUrl = '/sites/all/themes/feflip/media/map/'+_d.association.toLowerCase()+'-pin.png';
+							newMarker.properties.review  	  = _d.review;
+							newMarker.properties.type  	      = _d.association.toLowerCase();
+							
+							geoJson.push(newMarker);
+						}
 					});
 					
 					// | i | Bind pop-up...
