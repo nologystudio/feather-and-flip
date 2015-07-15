@@ -1380,7 +1380,7 @@
 			
 		});
 		
-		ffAppControllers.controller('FullMapCtrl',function($scope,$element,$http,$timeout){
+		ffAppControllers.controller('FullMapCtrl',function($scope,$element,$http,$timeout,$log){
 			
 			
 			L.mapbox.accessToken = 'pk.eyJ1Ijoibm9sb2d5IiwiYSI6IkFBdm5aVEkifQ.ItKi4oQ1-kPhJhedS4QmNg';
@@ -1556,17 +1556,20 @@
 						
 						var newMarker = angular.copy(markerType);
 						
-						newMarker.geometry.coordinates[0] = _d.longitude;
-						newMarker.geometry.coordinates[1] = _d.latitude;
-						newMarker.properties.title        = _d.title;
-						newMarker.properties.phone        = _d.phone;
-						newMarker.properties.address      = _d.address;
-						newMarker.properties.icon.iconUrl = '/sites/all/themes/feflip/media/map/'+_d.association.toLowerCase()+'-pin.png';
-						newMarker.properties.review  	  = _d.review;
-						newMarker.properties.type  	      = _d.association.toLowerCase();
-						
-						if(!_.isUndefined(_filter) && _filter == _d.association.toLowerCase()) bookJson.push(newMarker);
-						else if(_.isUndefined(_filter)) bookJson.push(newMarker);
+						if(!_.isNull(_d.longitude) && !_.isNull(_d.latitude) && !_.isUndefined(_d.longitude) && !_.isUndefined(_d.latitude)){
+							newMarker.geometry.coordinates[0] = _d.longitude;
+							newMarker.geometry.coordinates[1] = _d.latitude;
+							newMarker.properties.title        = _d.title;
+							newMarker.properties.phone        = _d.phone;
+							newMarker.properties.address      = _d.address;
+							newMarker.properties.icon.iconUrl = '/sites/all/themes/feflip/media/map/'+_d.association.toLowerCase()+'-pin.png';
+							newMarker.properties.review  	  = _d.review;
+							newMarker.properties.type  	      = _d.association.toLowerCase();
+							
+							if(!_.isUndefined(_filter) && _filter == _d.association.toLowerCase()) bookJson.push(newMarker);
+							else if(_.isUndefined(_filter)) bookJson.push(newMarker);
+						}
+						else $log.error(_d.title);
 					});
 					
 					// | i | Bind pop-up...
