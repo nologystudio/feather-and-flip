@@ -1242,7 +1242,7 @@
 					
 					var newMarker = angular.copy(markerType);
 					
-					if(_.isNumber(_d.longitude) && _.isNumber(_d.latitude)){
+					if(_.isNumber(parseFloat(_d.longitude)) && _.isNumber(parseFloat(_d.latitude))){
 					
 						newMarker.geometry.coordinates[0] = _d.longitude;
 						newMarker.geometry.coordinates[1] = _d.latitude;
@@ -1472,10 +1472,6 @@
 					
 					var newMarker = angular.copy(markerType);
 					
-					console.log(_.isNumber(_d.longitude));
-					console.log(_d.longitude);
-					console.log(parseFloat(_d.longitude)); 
-					
 					if(_.isNumber(parseFloat(_d.longitude)) && _.isNumber(parseFloat(_d.latitude))){
 					
 						newMarker.geometry.coordinates[0] = _d.longitude;
@@ -1566,7 +1562,7 @@
 						
 						var newMarker = angular.copy(markerType);
 						
-						if(_.isNumber(_d.longitude) && _.isNumber(_d.latitude)){
+						if(_.isNumber(parseFloat(_d.longitude)) && _.isNumber(parseFloat(_d.latitude))){
 							
 							newMarker.geometry.coordinates[0] = _d.longitude;
 							newMarker.geometry.coordinates[1] = _d.latitude;
@@ -1580,7 +1576,7 @@
 							if(!_.isUndefined(_filter) && _filter == _d.association.toLowerCase()) bookJson.push(newMarker);
 							else if(_.isUndefined(_filter)) bookJson.push(newMarker);
 						}
-						else $log.error(_d.title);
+						else $log.warning("This address book has not been placed on the map:" + _d.title);
 					});
 					
 					// | i | Bind pop-up...
@@ -1674,7 +1670,7 @@
 					
 						var newMarker = angular.copy(markerType);
 						
-						if(_.isNumber(_d.longitude) && _.isNumber(_d.latitude)){
+						if(_.isNumber(parseFloat(_d.longitude)) && _.isNumber(parseFloat(_d.latitude))){
 						
 							newMarker.geometry.coordinates[0] = _d.longitude;
 							newMarker.geometry.coordinates[1] = _d.latitude;
@@ -2499,7 +2495,7 @@
 						
 						var newMarker = angular.copy(markerType);
 						
-						if(_.isNumber(_d.longitude) && _.isNumber(_d.latitude)){
+						if(_.isNumber(parseFloat(_d.longitude)) && _.isNumber(parseFloat(_d.latitude))){
 						
 							newMarker.geometry.coordinates[0] = _d.longitude;
 							newMarker.geometry.coordinates[1] = _d.latitude;
