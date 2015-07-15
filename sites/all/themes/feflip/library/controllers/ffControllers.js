@@ -1472,7 +1472,11 @@
 					
 					var newMarker = angular.copy(markerType);
 					
-					if(_.isNumber(_d.longitude) && _.isNumber(_d.latitude)){
+					console.log(_.isNumber(_d.longitude));
+					console.log(_d.longitude);
+					console.log(parseFloat(_d.longitude)); 
+					
+					if(_.isNumber(parseFloat(_d.longitude)) && _.isNumber(parseFloat(_d.latitude))){
 					
 						newMarker.geometry.coordinates[0] = _d.longitude;
 						newMarker.geometry.coordinates[1] = _d.latitude;
