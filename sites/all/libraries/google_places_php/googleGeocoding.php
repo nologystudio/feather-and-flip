@@ -1,5 +1,4 @@
 <?php
-namespace Mills\GooglePlaces;
 
 class googleGeocoding {
 

@@ -1,8 +1,4 @@
 <?php
-namespace Mills\GooglePlaces;
-
-use Kdyby\Curl\CurlSender;
-use Kdyby\Curl\Request;
 
 class googlePlaces {
 
