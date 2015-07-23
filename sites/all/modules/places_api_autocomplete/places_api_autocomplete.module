@@ -1,5 +1,5 @@
 <?php
-
+require_once('sites/all/libraries/google_places_php/googlePlaces.php');
 /**
  * @file
  * Google Places API autocomplete module.
@@ -80,7 +80,7 @@ function places_api_autocomplete($field_name = 'global', $entity_type = NULL, $b
 
     // Map the results in the format drupal autocomplete API needs it.
     foreach ($result as $place) {
-      $matches[$place->description] = check_plain($place->description);
+        $matches[$place->description.', '.$place->place_id] = check_plain($place->description.', '.$place->place_id);
     }
   }
 
@@ -180,14 +180,195 @@ function places_api_autocomplete_field_widget_form(&$form, &$form_state, $field,
   $element['value'] = array(
     '#type' => 'textfield',
     '#title' => $instance['label'],
+    '#suffix' => '<div id="gplaces-div"></div>',
     '#default_value' => isset($items[$delta]['value']) ? $items[$delta]['value'] : NULL,
     '#size' => $instance['widget']['settings']['size'],
     '#maxlength' => $field['settings']['max_length'],
     '#attributes' => array('class' => array('text-full')),
     '#autocomplete_path' => 'places/autocomplete/' . $instance['field_name'] . '/' . $instance['entity_type'] . '/' . $instance['bundle'],
+    '#ajax' => array(
+        'callback' => 'after_places_select',
+        'wrapper' => 'gplaces-div'),
   );
 
   return $element;
+}
+
+function after_places_select($form, &$form_state) {
+    $gp_result = $form_state['values']['field_google_place_id']['und'][0]['value'];
+    if (empty($gp_result)){
+        return '<div id="gplaces-div"></div>';
+    }
+    else {
+        $api_key = variable_get('places_api_autocomplete_key', NULL);
+        $values = explode(', ', $gp_result);
+        $place_id = end($values);
+
+        $googlePlaces = isset($googlePlaces) ? $googlePlaces : new googlePlaces($api_key);
+        $googlePlaces->setPlaceId($place_id);
+        $details = $googlePlaces->details();
+        if (!empty($details['errors'])) {
+            foreach($details['errors'] as $error) { watchdog('gp', $error); }
+            return '<div id="gplaces-div"></div>';
+        }
+        $components_to_save = array(
+            'address_components',
+            'geometry',
+            'icon',
+            'international_phone_number',
+            'name',
+            'types',
+            'url',
+            'website',
+            'price_level',
+            'photos'
+        );
+        if (!isset($details) || !isset($details['result']) || empty($details['result'])) { return '<div id="gplaces-div"></div>'; }
+        foreach($details['result'] as $component => $value) {
+            if (!in_array($component, $components_to_save)) {
+                unset($details['result'][$component]);
+            }
+        }
+        $place = $details['result'];
+        //watchdog('gp', 'Loaded place from Google: ' . $place['name']);
+
+        // geofield
+        if (isset($place['geometry'])) {
+            $lat = $place['geometry']['location']['lat'];
+            $lon = $place['geometry']['location']['lng'];
+        }
+
+        // addressfield
+        if (isset($place['address_components'])) {
+            // Locate the country code.
+            $country_code = null;
+            foreach ($place['address_components'] as $component) {
+                foreach ($component['types'] as $type) {
+                    if ($type == 'country') {
+                        $country_code = $component['short_name'];
+                        break;
+                    }
+                }
+            }
+            $country = '';
+            $thoroughfare = '';
+            $premise = '';
+            $locality = '';
+            $administrative_area = '';
+            $postal_code = '';
+            foreach ($place['address_components'] as $component) {
+                foreach ($component['types'] as $type) {
+                    switch ($type) {
+                        case 'street_number':
+                            if (!empty($thoroughfare)) {
+                                $thoroughfare = $component['long_name'] . ' ' . $thoroughfare;
+                            }
+                            else { $thoroughfare = $component['long_name']; }
+                            break;
+                        case 'route':
+                            if (!empty($thoroughfare)) {
+                                switch ($country_code) {
+                                    case 'AT': // Austria
+                                    case 'DE': // Germany
+                                        $thoroughfare = $component['long_name'] . ' ' . $thoroughfare;
+                                        break;
+                                    default:
+                                        $thoroughfare .= ' ' . $component['long_name'];
+                                        break;
+                                }
+                            }
+                            else { $thoroughfare = $component['long_name']; }
+                            break;
+                        case 'locality':
+                            $locality = $component['long_name'];
+                            break;
+                        case 'administrative_area_level_1':
+                            $administrative_area = $component['short_name'];
+                            break;
+                        case 'country':
+                            $country = $component['short_name'];
+                            break;
+                        case 'postal_code':
+                            $postal_code = $component['long_name'];
+                            break;
+                    }
+                }
+            }
+            $address = array(
+                'country' => $country,
+                'thoroughfare' => $thoroughfare,
+                'premise' => $premise,
+                'locality' => $locality,
+                'administrative_area' => $administrative_area,
+                'postal_code' => $postal_code
+            );
+        }
+
+        // telephone
+        $telephone = '';
+        if (isset($place['international_phone_number'])) {
+            $telephone = $place['international_phone_number'];
+        }
+
+        // website
+        $website = '';
+        if (isset($place['website'])) {
+            $website = $place['website'];
+        }
+
+        // url (google plus)
+        $gplus_url = '';
+        if (isset($place['url'])) {
+            $gplus_url = $place['url'];
+        }
+
+        // icon
+        $icon = '';
+        if (isset($place['icon'])) {
+            $icon = $place['icon'];
+        }
+
+        // types
+        $categories = array();
+        if (isset($place['types'])) {
+            foreach ($place['types'] as $delta => $type) {
+                $categories[] = $type;
+            }
+        }
+
+        // price level
+        $price_level = '';
+        if (isset($place['price_level'])) {
+            $price_level = $place['price_level'];
+        }
+
+        // photo(s)
+        $photos = array();
+        if (isset($place['photos'])) {
+            $photo_count = sizeof($place['photos']);
+            for ($i = 0; $i < $photo_count; $i++) {
+                $photos[] = $place['photos'][$i]['photo_reference'];
+            }
+        }
+
+        $out = '<b>Latitude:</b> '.$lat.'<b style="margin-left:4em;">Longitude:</b> '.$lon.'<br /><br />';
+        $out .= '<b>Address:</b><br />';
+        $out .= '<i>Country:</i> '.$address['country'].'<i style="margin-left:4em;">Thoroughfare: </i> '.$address['thoroughfare'].'</br>';
+        $out .= '<i>Premise:</i> '.$address['premise'].'<i style="margin-left:4em;">Locality: </i> '.$address['locality'].'</br>';
+        $out .= '<i>Administrative area:</i> '.$address['administrative_area'].'<i style="margin-left:4em;">Postal code: </i> '.$address['postal_code'].'</br></br>';
+        $out .= '<b>Telephone:</b> '.$telephone.'<br /><br />';
+        $out .= '<b>Website:</b> '.$website.'<b style="margin-left:4em;">Google+:</b> '.$gplus_url.'<br />';
+        $out .= '<b>GooglePlaces icon:</b> '.$icon.'<br /><br />';
+        $out .= '<b>Categories:</b> '.implode(', ', $categories).'<br />';
+        $out .= '<b>Price level:</b> '.$price_level.'<br /><br />';
+        $out .= '<b>Photo references:</b><br />';
+        foreach ($photos as $pref) {
+            $out .= '<img src="'.$googlePlaces->photo($pref).'&maxheight=200" style="max-width:200px;max-height:200px;width: auto;height: auto;" />';
+        }
+
+
+        return '<div id="gplaces-div"><hr style="margin: 7px;">'.$out.'<br /><hr style="margin: 7px;"></div>';
+    }
 }
 
 /**
