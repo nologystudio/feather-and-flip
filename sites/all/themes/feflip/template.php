@@ -17,6 +17,12 @@ function feflip_preprocess_html(&$variables) {
   $error_node = array('html__node__288', 'html__node__332', 'html__node__333');
   $arg = arg();
 
+  // Signup slug and lightbox behaviour
+  if (($_SERVER['REQUEST_URI'] == '/sign-up') && !user_is_logged_in())
+    setcookie('overlay', 'signup');
+  else
+    setcookie('overlay', 'hidden');
+
   variable_set('pageID', 'global');
 
   if (drupal_is_front_page()) {
