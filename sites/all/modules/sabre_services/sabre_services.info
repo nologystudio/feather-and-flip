@@ -1,7 +1,0 @@
-name = Sabre Services
-description = Allows easy integration with Sabre Api. Developed by <a target="_blank" href="http://nologystudio.com">NOLOGY.</a>
-core = 7.x
-dependencies[] = wsclient
-;dependencies[] = oauth
-files[] = classes/Sabre.class.php
-configure = admin/config/services/sabre
