@@ -1,0 +1,790 @@
+		
+		
+			
+		/* ----------------------------------------------------------------------------------------------------------------
+		    
+	    * Project     : Passported
+	    * Document    : less/style 
+	    * Created on  : Ago 01, 2.015
+	    * Version     : 1.0 
+	    * Author      : Aday Henriquez
+	    * Description : This less file manages the global style
+	    
+	    -------------------------------------------------------------------------------------------------------------------
+	       *          This code has been developed by NOLOGY. in the awesome Canaries - www.nologystudio.com           *
+	    -------------------------------------------------------------------------------------------------------------------
+	   
+	    * Log * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+        -------------------------------------------------------------------------------------------------------------------
+        *  
+        ---------------------------------------------------------------------------------------------------------------- */
+		/* ~ Global Variables and Importers ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */	
+		
+		@media-url: '../media/';
+		@unit: 5px;
+		@content-padding: 30px;
+		@global-width: 100%;
+		@wrapper-width: 1040px;
+		@header-height: 90px;
+		@gutter: 30px;
+		
+		@grid-1: @wrapper-width/1;
+		@grid-2: @wrapper-width/2;
+		@grid-3: @wrapper-width/3;
+		@grid-4: @wrapper-width/4;
+		@grid-5: @wrapper-width/5;
+		@grid-6: @wrapper-width/6;
+		@grid-7: @wrapper-width/7;
+		@grid-8: @wrapper-width/8;
+		
+		/* ~ Color ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+		
+		@color-1: #333333;
+		@color-2: #cdd3d2;
+		@color-3: #576468;
+		@color-4: #3e474a;
+		@color-5: #7795a0;
+		@color-6: #f0f2f2;
+		@color-7: #dee4e3;
+		@color-8: #202121;  
+		
+		@warning-color: orange;
+		@shadow-color: #cccccc;
+		
+		/* ~ Importers ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+		
+		@import 'fonts';
+		@import 'tools';
+		@import 'passported-ui';
+		
+		/* ------------------------------------------------------------------------------------------------------------- */
+		/* ~ UI ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+		
+		/* ------------------------------------------------------------------------------------------------------------- */
+		/* ~ Main style ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+		
+		html, 
+		body
+		{
+		}
+		
+		html
+		{}
+		
+		body
+		{
+			#font > .lato(12px,@color-1,100);
+			overflow-x: hidden;
+		}
+		
+		body
+		{
+			& > header,
+			& > nav,
+			& > aside,
+			& > main,
+			& > section,
+			& > footer
+			{}
+		}
+		
+		/* ------------------------------------------------------------------------------------------------------------- */
+		/* ~ Reset ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+		
+		*
+		{
+			outline: none;
+		}
+		
+		*[data-animate]
+		{
+			.set-opacity(1);
+			.performance();
+		}
+		
+		ul
+		{
+			list-style: none;
+			margin: 0;
+			padding: 0;
+		}
+		
+		/* ------------------------------------------------------------------------------------------------------------- */
+		/* ~ UI ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+		
+		.ui-grid();
+		.ui-actions();
+		
+		/* ------------------------------------------------------------------------------------------------------------- */
+		/* ~ Header ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+		
+		body > header
+		{
+			.set-size(100%,@header-height);
+			.set-pos(fixed);
+			.set-coord(0,0);
+			.set-bgc(@color-8);
+			overflow: hidden;
+			z-index: 5;
+			
+			& > a:first-child
+			{
+				.set-size(300px,100%);
+				.set-pos(absolute);
+				.set-coord(0,0);
+				text-decoration: none;
+				
+				figure
+				{
+					margin: 0;
+					padding: 0;
+					
+					img
+					{}
+					
+					figcaption
+					{
+						#font > .times(12px,white);
+					}
+				}
+			}
+			
+			nav
+			{
+				.set-size(100%,@header-height);
+				display: block;
+				
+				div.wrapper
+				{
+					.set-size();
+					overflow: hidden;
+					
+					&.align-right
+					{
+						.set-pos(absolute);
+						top: 0;
+						right: 0;
+					}
+				}
+				
+				a
+				{
+					.set-size(auto,@header-height);
+					#font > .lato(12px,@color-5,400);
+					#align > .left;
+					padding: 0 @content-padding;
+					text-transform: uppercase;
+					display: block;
+					text-decoration: none;
+					line-height: @header-height;
+					overflow: hidden;
+					
+					&[id^="sign-"]
+					{
+						#font > .times(12px,white);
+						line-height: @header-height;
+						text-transform: lowercase;
+						
+						&[id*='up']
+						{
+							.set-bgc(black);	
+						}
+					}
+				}
+			}
+		}
+		
+		/* ------------------------------------------------------------------------------------------------------------- */
+		/* ~ Sections ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+		
+		body > main[id],
+		body > section[id]
+		{
+			@m: 600px;
+			@main-height: @m + @header-height + 2 * @content-padding;
+			
+			.set-size(100%);
+			#align > .left;
+			display: block;
+			
+			&[id="passported-intro"]
+			{
+				.set-bgs(auto,100%);
+				.set-pos(fixed);
+				height: @main-height;
+				overflow: hidden;
+				z-index: 1;
+				
+				& > ul
+				{
+					.set-size(100%,100%);
+					#align > .left;
+					overflow: hidden;
+					
+					& > li
+					{
+						.set-size(100%,100%);
+						.set-bg(@color-7,'@{media-url}backgrounds/passported-main.jpg',no-repeat,center,bottom);
+						.box-sizing();
+						#align > .left;
+						padding-top: 2 * @header-height;
+						overflow: hidden;
+						
+						&:first-child
+						{
+							h1
+							{
+								.set-size(100%);
+								#font > .lato(42px,white,300);
+								#align > .left;
+								text-transform: uppercase;
+								text-align: center;
+								display: block;
+								margin-bottom: 1.5 * @content-padding;
+							}
+							
+							ul
+							{
+								.set-size();
+								
+								li
+								{
+									@s: 160px;
+									
+									.set-size(@s + 4 * @content-padding);
+									#align > .left;
+									margin: 0 @content-padding;
+									overflow: hidden;
+									
+									h2
+									{
+										
+										.set-size(@s,@s);
+										.set-bgc(fadeout(@color-4,10%));
+										.animate-all();
+										.performance();
+										#font > .times(30px,white);
+										#align > .center;
+										overflow: hidden;
+										cursor: pointer;
+										border-radius: @s;
+										line-height: @s;
+										text-align: center;
+										
+										&:hover
+										{
+											.set-bgc(fadeout(@color-4,0%));
+										}
+									}
+									
+									h3
+									{
+										.set-size(100%);
+										.box-sizing();
+										#font > .lato(14px,white,400);
+										padding: 0 @content-padding/2;
+										margin-top: @content-padding;
+										display: block;
+										text-transform: uppercase;
+										text-align: center;
+										line-height: 22px;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			&[id="map"]
+			{
+				.set-bgc(white);
+				height: @m;
+				margin-top: @main-height;
+				overflow: hidden;
+				z-index: 2;
+				
+				header,
+				footer
+				{
+					.set-size(100%,100px);
+					.set-pos(absolute);
+				}
+				
+				aside
+				{
+					.set-size(50%,100%);
+					.set-bgc(white);
+					.set-pos(absolute);
+					.animate-all();
+					.performance();
+					box-shadow: 0 0 @content-padding @shadow-color;
+					overflow: hidden;
+					
+					button.aside-trigger
+					{
+						@w: 50px;
+						@h: 100px;
+						
+						.reset();
+						.set-size(@w,@h);
+						
+						svg
+						{
+							.set-size(@w,@h);
+							
+							path
+							{
+								fill: @color-1;
+							}
+						}
+					}
+					
+					&.left
+					{
+						left: 0;
+						
+						&.on
+						{
+							left: 0;
+						}
+					}
+					
+					&.right
+					{
+						right: -50%;
+						
+						&.on
+						{
+							right: 0;
+						}
+					}
+					
+				}
+				
+				footer
+				{
+					bottom: 0;
+					display: none;
+				}
+				
+				div[id="google-maps-container"]
+				{
+					.set-size(100%,100%);
+					#align > .left;
+					display: block;
+					overflow: hidden;
+				}			
+			}
+			
+			&[id="travel-journal"]
+			{
+				.set-size(100%,@m);
+				.set-bgc(@color-6);
+				overflow: hidden;
+				z-index: 2;
+				box-shadow: 0 0 @content-padding @shadow-color;
+				
+				header
+				{
+					.set-size(@wrapper-width);
+					#align > .center;
+					overflow: hidden;
+					
+					h4
+					{
+						#font > .lato(36px,@color-1,700);
+						text-align: center;
+						text-transform: uppercase;
+						padding-top: @content-padding;
+						line-height: auto;
+						margin-bottom: @content-padding/2;
+						
+						span
+						{
+							#font > .times(18px,@color-1);
+							clear: both;
+							display: block;
+							text-transform: none;
+						}
+					}
+				}
+				
+				div[id="feed"]
+				{
+					.set-size(@grid-1 + 3 * @gutter);
+					padding: 0 @content-padding;
+					overflow: visible;
+					
+					div.feed-wrapper
+					{
+						.set-size(100%);
+						.set-bgc(@color-1);
+						#align > .left;
+						overflow: hidden;
+					}
+					
+					*.quick-entry
+					{
+						@block-margin: @content-padding;
+							
+						.set-size(@grid-3);
+						.box-sizing();
+						.set-box-shadow(@shadow-color,0,0,@gutter);
+						.set-bgc(@color-2);
+						#align > .left;
+						margin: @gutter;
+						overflow: hidden;
+						
+						figure
+						{
+							.reset();
+							.set-size(100%);
+							.set-bg(@color-2);
+							#align > .left;
+							display: block;
+							
+							img
+							{
+								.set-size(100%);
+								#align > .left;
+							}
+						}
+						
+						figure + footer
+						{
+							.set-size(100%);
+							.set-pos(absolute);
+							.set-bgc(fadeout(@color-2,50%));
+							.box-sizing();
+							bottom: 0;
+							padding: @block-margin/2 @block-margin;
+						}
+						
+						h3,h4,time
+						{
+							.set-size(100%);
+							#align > .left;
+							clear: both;
+							text-align: center;
+						}
+						
+						h3
+						{
+							#font > .lato(24px,white,300);
+							text-transform: uppercase;
+							margin-bottom: @block-margin/2;
+						}
+						
+						h4
+						{
+							#font > .times(20px,white);
+						}
+						
+						time
+						{
+							#font > .lato(12px,white,400);
+							text-transform: uppercase;
+							font-style: normal;
+							margin-top: @unit;
+						}
+						
+						hr
+						{
+							width: 50%;
+							margin: auto;
+							border: 0;
+							border-top: solid 1px fadeout(white,50%);
+						}
+						
+						hr + h4
+						{
+							margin-top: @block-margin/2;
+						}
+						
+						// Featured article block...
+						
+						&.featured
+						{
+							width: 100%;
+						}
+						
+						// Newsletter block style...
+						
+						&[id="newsletter-signup"]
+						{
+							padding: @block-margin @block-margin/2;
+							min-height: 290px;
+							
+							form
+							{
+								.set-size(100%);
+								#align > .left;
+								
+								small
+								{
+									#font > .times(30px,white);
+									width: 100%;
+									display: block;
+									padding: @content-padding 0;
+									text-align: center;
+								}
+								
+								input
+								{
+									.reset();
+									.set-size(100%);
+									#align > .left;
+									
+									&[type="email"],
+									&[type="text"],
+									&[type="password"]
+									{
+										.box-sizing();
+										//#ui-set-input > .input-text(@color-4);
+										margin: @content-padding 0;
+										border: solid 1px @color-4;
+										
+										&.placeholder
+										{
+											color: @color-4;
+										}
+									}
+									
+									&[type="submit"]
+									{
+										#font > .lato(32px,white,300);
+										text-transform: uppercase;
+										
+										&.disabled
+										{
+											.set-opacity(0.5);
+										}
+									}
+									
+									&.ng-invalid.ng-dirty
+									{
+										border-color: @warning-color;
+									}
+								}
+							}
+						}
+					}
+				}
+				
+				footer
+				{
+					.set-size(100%,@header-height);
+				}
+			}
+			
+			&[id="press"]
+			{
+				.set-bgc(@color-7);	
+				padding: 2 * @content-padding;
+				z-index: 4;
+				
+				ul.logo-gallery
+				{
+					.set-size();
+					#align > .center;
+					display: table;
+					overflow: hidden;
+					
+					li
+					{
+						.set-size(auto);
+						.box-sizing();
+						#align > .left;
+						padding: @content-padding/2;
+						
+						a,
+						figure
+						{
+							@h: 24px;
+							
+							.reset();
+							.set-size(100%,@h);
+							#align > .left;
+							
+							img
+							{
+								.set-size(auto,@h);
+								#align > .left;
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		/* ------------------------------------------------------------------------------------------------------------- */
+		/* ~ Footer ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+		
+		body > footer
+		{
+			.set-size(100%);
+			.set-bgc(black);
+			#align > .left;
+			overflow: hidden;
+			
+			& > nav
+			{
+				@vertical-padding: 2 * @content-padding;
+				
+				.set-size(@wrapper-width);
+				.box-sizing();
+				#align > .center;
+				display: block;
+				padding: @content-padding 0 @vertical-padding 0;
+				overflow: hidden;
+				
+				ul
+				{
+					.set-size(@grid-3);
+					.box-sizing();
+					#align > .left;
+					padding: @content-padding/2;
+					overflow: hidden;
+					
+					li
+					{
+						.set-size(100%);
+						.box-sizing();
+						#align > .left;
+						padding-top: @gutter;
+						overflow: hidden;
+						
+						&:first-child
+						{
+							#font > .lato(24px,@color-2,300);
+							.set-bgc(black);
+							text-transform: uppercase;
+							border-bottom: solid 1px fadeout(@color-2,50%);
+							padding: 60px 0 10px 50px;
+							margin-bottom: 10px;
+							
+							span
+							{
+								@size: 100px; 
+								@bg-size: 30px;
+								
+								.set-size(@size/2,@size);
+								.set-pos(absolute);
+								bottom: @gutter;
+								left: @unit;
+								
+								&.popular
+								{
+									.set-bg(transparent,'@{media-url}icons/hotel-pin-icon.svg',no-repeat,left,bottom);
+									.set-bgs(@bg-size);
+								}
+								
+								&.destinations
+								{
+									.set-bg(transparent,'@{media-url}icons/destination-pin-icon.svg',no-repeat,left,bottom);
+									.set-bgs(@bg-size);
+								}
+								
+								&.passported
+								{
+									.set-bg(transparent,'@{media-url}icons/feather-icon.svg',no-repeat,left,bottom);
+									.set-bgs(auto,80%);
+								}
+							}
+						}
+												
+						a
+						{
+							.set-size(100%);
+							.set-opacity(1);
+							.animate-opacity();
+							.box-sizing();
+							#font > .lato(12px,@color-2,300);
+							text-transform: uppercase;
+							padding-left: @gutter; 
+							
+							&:hover
+							{
+								.set-opacity(0.75);
+							}
+						}
+					}
+				}
+			}
+			
+			& > div.fixed-bar
+			{
+				@height: 130px;
+				
+				.set-size(100%,@height);
+				.box-sizing();
+				.set-bgc(@color-7);
+				#align > .left;
+				padding: 0 @content-padding;
+				
+				a[id$="brand"]
+				{
+					.set-size(auto,100%);
+					.set-pos(absolute);
+					.set-coord(@content-padding,0);
+					
+					img
+					{
+						.reset();
+						.set-size(auto,70%);
+						margin-top: 5%;
+					}
+					
+					&[id="tzell-brand"]
+					{
+						right: @content-padding;
+						left: auto;
+						display: none;
+						
+						small
+						{
+							.reset();
+							.set-pos(absolute);
+							#font > .lato(10px,black,400);
+							top: @content-padding;
+						}
+						
+						img
+						{
+							height: 35%;
+							margin-top: 35%;
+						}
+					}
+				}
+				
+				& > nav[id="social-media"]
+				{
+					.set-size();
+					.ui-set-social-media-nav(black);
+					#align > .center;
+					display: table;
+					margin-top: 45px;
+				}
+				
+				& > small
+				{
+					.set-size(100%);
+					#align > .left;
+					#font > .lato(10px,black,400);
+					text-align: center; 
+					padding: 1.5 * @content-padding 0 0 0;
+				}
+			}
+		}
+		

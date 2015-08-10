@@ -1,7 +1,7 @@
 
 
 	<!DOCTYPE html>
-	<html ng-app="passportedApp">
+	<html ng-app="ppApp">
 		<head>
 			<base href="/feather-and-flip/">
 			<title>Passported</title>
@@ -18,12 +18,12 @@
 			<meta property="og:image"       content="">
 			<meta property="og:description" content="">
 			<!-- Included Google Fonts -->
-			<link href='https://fonts.googleapis.com/css?family=Lato:100,300,900' rel='stylesheet' type='text/css'>
+			<link href='https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900' rel='stylesheet' type='text/css'>
 			<!-- Less Files comes here -->
 			<link rel="stylesheet/less" href="style/style-nology.less" title="style-nology" type="text/css" media="screen">
 			<script type="text/javascript" src="library/vendors/less.min.js"></script>
 			<!-- Modernizer and IE specyfic files -->  
-			<script src="library/vendors/modernizr.custom.passported.js"></script>
+			<script src="library/vendors/modernizr.custom.pp.js"></script>
 			<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVp6xJDq_xg96DdjO3S1wmByGNmYoK4XQ"></script>
 		</head>
 		<body ng-view ng-controller="AppController">
@@ -38,12 +38,16 @@
 					</figure>
 				</a>
 				<nav>
-					<a id="city-guides"    href="#/city-guides" data-animate="3">city guides</a>
-					<a id="travel-journal" href="#/city-guides" data-animate="4">travel journal</a>
-					<a id="book-hotels"    href="#/book-hotels" data-animate="5">book hotels</a>
-					<a id="search"         href="#/search"      data-animate="6">search</a>
-					<a id="sign-in"        href="#/sign-in"     data-animate="7">sign in</a>
-					<a id="sign-up"        href="#/sign-up"     data-animate="8">sign up</a>
+					<div class="wrapper align-center">
+						<a id="city-guides"    href="#/city-guides"    data-animate="3">city guides</a>
+						<a id="travel-journal" href="#/travel-journal" data-animate="4">travel journal</a>
+						<a id="book-hotels"    href="#/book-hotels"    data-animate="5">book hotels</a>
+						<a id="search"         href="#/search"         data-animate="6">search</a>
+					</div>
+					<div class="wrapper align-right">
+						<a id="sign-in" href="#/sign-in" data-animate="7">sign in</a>
+						<a id="sign-up" href="#/sign-up" data-animate="8">sign up</a>
+					</div>
 				</nav>
 			</header>
 			
@@ -53,18 +57,18 @@
 				<ul>
 					<li>
 						<h1 data-animate="1">Sophisticated family travel<br>simplified</h1>
-						<ul>
+						<ul class="align-center">
 							<li>
 								<h2 data-animate="2">Plan</h2>
-								<h3 data-animate="3">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book</h3>
+								<h3 data-animate="3">We help you find the ideal destination and hotel for your particular FAMILY needs</h3>
 							</li>
 							<li>
 								<h2 data-animate="4">Explore</h2>
-								<h3 data-animate="5">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book</h3>
+								<h3 data-animate="5">We have parent-scouted picks and itineraries that you can customize</h3>
 							</li>
 							<li>
 								<h2 data-animate="6">Book</h2>
-								<h3 data-animate="7">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book</h3>
+								<h3 data-animate="7">We book your hotel. You can call or e-mail our hotel expert</h3>
 							</li>
 						</ul>
 					</li>
@@ -74,25 +78,84 @@
 			<!-- Map -->
 			
 			<section id="map" ng-controller="MapController">
-				<header>
-					<h4 data-animate="1"></h4>
-				</header>
-				<aside class="left"></aside>
-				<div id="google-maps-container" data-animate="2"></div>
-				<aside class="right" ng-controller="BookController"></aside>
-				<footer></footer>
+				<div id="google-maps-container" data-animate="1"></div>
+				<aside class="left"  ng-controller="ItineraryController">
+					<ul>
+						<li></li>
+						<li></li>
+						<li></li>
+					</ul>
+					<button class="aside-trigger" ng-click="" data-animate="2">
+						<span class="icon-"></span>
+						<svg>
+							<path d="M 0,0 L 50,50 L 0,100 L 0,0"/>
+						</svg>
+					</button>
+				</aside>
+				<aside class="right" ng-controller="BookController" data-animate="3">
+					<div class=""
+					<button class="aside-trigger" ng-click="">
+						<span class="icon-"></span>
+						<svg>
+							<path d="M 0,0 L 50,50 L 0,100 L 0,0"/>
+						</svg>
+					</button>
+				</aside>
 			</section>
 			
 			<!-- Blog -->
 			
 			<section id="travel-journal" ng-controller="BlogController">
 				<header>
-					<h4 data-animate="1">Travel Journal</h4>
+					<h4 data-animate="1">Travel <span>journal</span></h4>
 				</header>
-				<div class="grid-wrapper">
-					<a href=""></a>	
+				<div id="feed" class="grid-1 align-center">
+					<a class="quick-entry featured" href="" target="_blank">
+						<figure>
+                            <img src="https://ds9464c56tfjs.cloudfront.net/styles/post_image/s3/summer_travel_giveaway.png?itok=dMMIgEwP" alt=""/>
+                        </figure>
+                        <footer>
+                            <h4>Summer Travel Giveaway</h4>
+                            <time datetime="2015-08-03 00:00">August, 2015</time>
+                        </footer>
+					</a>
+					<div class="grid-wrapper">
+						<div id="newsletter-signup" class="quick-entry" ng-controller="NewsletterCtrl">
+		                    <h3>Join the adventure</h3>
+								<hr>
+		                    <h4 ng-if="currentStatus == 'still'">Sign up for our newsletter</h4>
+		                    <form name="newsletterForm">
+		                        <small id="error"   class="animated fadeInUp" ng-if="currentStatus == 'error'">We're sorry,<br>an error has occurred</small>
+		                        <small id="success" class="animated fadeInUp" ng-if="currentStatus == 'success'">Thanks!</small>
+		                        <input name="user-email" type="email" ng-if="currentStatus == 'still'" placeholder="Your email address" ng-model="signUpData.userEmail" required/>
+		                        <input type="submit" ng-if="currentStatus == 'still'" value="submit" ng-class="{disabled:!newsletterForm.$valid}" ng-click="!newsletterForm.$valid || regSubmit()"/>
+		                    </form>
+	                	</div>
+						<a class="quick-entry review" href="http://blog.featherandflip.com/travel-journal/2014/11/25/featured-hotel-mandarin-oriental-miami" target="_blank">
+                            <h3> Mandarin Oriental, Miami</h3>
+                            	<hr>
+                            <h4>Featured Hotel</h4>
+                            <time datetime="2014-11-25 15:44">November, 2014</time>
+                        </a>
+                        <a class="quick-entry" target="_blank" href="http://blog.passported.com/travel-journal/2015/8/3/summer-travel-giveaway">
+                            <figure>
+                                <img src="https://ds9464c56tfjs.cloudfront.net/styles/post_image/s3/summer_travel_giveaway.png?itok=dMMIgEwP" alt=""/>
+                            </figure>
+                            <footer>
+                                <h4>Summer Travel Giveaway</h4>
+                                <time datetime="2015-08-03 00:00">August, 2015</time>
+                            </footer>
+                        </a>
+					</div>
 				</div>
-				<footer></footer>
+				<footer>
+					<button ng-click="viewAll()">
+						<span>view all</span>
+						<svg>
+							<path d="M 0,0 L 100,0 L 50,50 L 0,0"/>
+						</svg>
+					</button>
+				</footer>
 			</section>
 			
 			<!-- Press -->
@@ -105,7 +168,7 @@
 						</figure>
                     </li>
                 </ul>
-			</section>
+            </section>
 			
 			<!-- Footer -->
 			
@@ -149,6 +212,7 @@
 			</footer>
 			
 			<script src="library/vendors/jquery-2.1.3.min.js"></script>
+<!-- 			<script src="library/vendors/isotope.min.js"></script> -->
 			<script src="library/vendors/moment.min.js"></script>
 			<script src="library/vendors/underscore.min.js"></script>
 			<script src="library/vendors/transit.min.js"></script>
@@ -160,9 +224,11 @@
 			<script src="library/vendors/angular-route.min.js"></script>
 			<script src="library/vendors/angular-resource.min.js"></script>
 			
+			<!--
 			<script src="library/pp-directives.js"></script>
 			<script src="library/pp-controllers.js"></script>
 			<script src="library/pp-app.js"></script>
+			-->
 			
 		</body>
 	</html>

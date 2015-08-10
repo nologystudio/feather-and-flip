@@ -1,0 +1,115 @@
+		
+		
+			
+		/* ----------------------------------------------------------------------------------------------------------------
+		    
+	    * Project     : Passported
+	    * Document    : less/style 
+	    * Created on  : Ago 01, 2.015
+	    * Version     : 1.0 
+	    * Author      : Aday Henriquez
+	    * Description : This less file manages specific guide style classes
+	    
+	    -------------------------------------------------------------------------------------------------------------------
+	       *          This code has been developed by NOLOGY. in the awesome Canaries - www.nologystudio.com           *
+	    -------------------------------------------------------------------------------------------------------------------
+	   
+	    * Log * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+        -------------------------------------------------------------------------------------------------------------------
+        *  
+        ---------------------------------------------------------------------------------------------------------------- */
+		
+		.ui-grid()
+		{
+			.set-grid-width(@n)
+			{
+				width: @wrapper-width/@n;
+			}
+			
+			.grid-1 { .set-grid-width(1);  }
+			.grid-2 { .set-grid-width(2);  }
+			.grid-3 { .set-grid-width(3);  }
+			.grid-4 { .set-grid-width(4);  }
+			.grid-5 { .set-grid-width(5);  }
+			.grid-6 { .set-grid-width(6);  }
+			.grid-8 { .set-grid-width(8);  }
+			.grid-10{ .set-grid-width(10); }
+			.grid-12{ .set-grid-width(12); }
+		}
+		
+		.ui-actions()
+		{
+			*.align-center
+			{
+				#align > .center;
+				display: table;
+			}
+			
+			*.align-right
+			{
+				#align > .right;
+			}
+		}
+		
+		.ui-buttons()
+		{
+		}
+		
+		.ui-set-circle-mask(@size)
+		{
+			&
+			{
+				.reset();
+				.set-size(@size,@size);
+				border-radius: @size;
+				overflow: hidden;
+				background-color: transparent;
+				
+				// | i | This fix the issue with the mask in Safari
+				//-webkit-mask-image: -webkit-radial-gradient(circle,transparent,transparent);
+				
+				img
+				{
+					.set-size(100%,100%);
+					#align > .left;
+				}
+			}
+		}
+		
+		.ui-set-social-media-nav(@color:white,@btn-size:34px)
+		{
+			& > a
+			{
+				.set-size();
+				.set-opacity(1);
+				.animate-opacity();
+// 				#font > .ic(@btn-size,@color,@btn-size);
+				#align > .left;
+				display: block;
+				margin: 0 @unit;
+				
+				.set-icon(@icon)
+				{
+					&:before
+					{
+						content: '\@{icon}';
+					}
+				}
+				
+				&[rel="facebook"]   { .set-icon('e0aa'); }
+				&[rel="twitter"]    { .set-icon('e0ab'); }
+				&[rel="pinterest"]  { .set-icon('e0ac'); }
+				&[rel="instagram"]  { .set-icon('e0b1'); }
+				&[rel="google-plus"]{ .set-icon('e0ad'); }
+				
+				&:hover
+				{
+					.set-opacity(0.5);
+				}
+			}
+		}
+		
+		
+
+		
+		

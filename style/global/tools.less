@@ -1,0 +1,383 @@
+		
+		
+			
+		/* ----------------------------------------------------------------------------------------------------------------
+		    
+	    * Project     : NEMO
+	    * Document    : less/style 
+	    * Created on  : Jul 22, 2.015
+	    * Version     : 1.0 
+	    * Author      : Aday Henriquez
+	    * Description : This less file manages global classes to speed up dev
+	    
+	    -------------------------------------------------------------------------------------------------------------------
+	       *          This code has been developed by NOLOGY. in the awesome Canaries - www.nologystudio.com           *
+	    -------------------------------------------------------------------------------------------------------------------
+	   
+	    * Log * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+        -------------------------------------------------------------------------------------------------------------------
+        *  
+        ---------------------------------------------------------------------------------------------------------------- */
+		/* ~ Size ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+		
+		.set-size(@width:auto,@height:auto)
+		{
+			width: @width;
+			height: @height;
+		}
+		
+		/* ------------------------------------------------------------------------------------------------------------- */
+		/* ~ Background ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+		
+		.set-bg(@color:#ccc,@url:'',@repeat:no-repeat,@x:center,@y:center)
+		{
+			background: @color url('@{url}') @repeat @x @y;
+		}
+		
+		.set-bgs(@w:auto,@h:auto)
+		{
+			background-size: @w @h;
+		}
+		
+		.set-bgc(@color)
+		{
+			background-color: @color;
+		}
+		
+		/* ------------------------------------------------------------------------------------------------------------- */
+		/* ~ Set cross browser rgba ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+		
+		.set-bg-RGBA(@color,@rgba)
+		{
+			background-color: @color;
+			background-color: @rgba;	
+		}
+		
+		.set-color-RGBA(@color,@rgba)
+		{
+			color: @color;
+			color: @rgba;	
+		}
+		
+		/* ------------------------------------------------------------------------------------------------------------- */
+		/* ~ Box sizing ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+		
+		.box-sizing()
+		{
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;  
+			box-sizing: border-box; 
+		}
+		
+		/* ------------------------------------------------------------------------------------------------------------- */
+		/* ~ Background Gradient ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+		
+		.set-bg-gradient(@color-top:black,@color-bottom:#333)
+		{
+			background-color: transparent;
+			background-image: -webkit-gradient(linear,left top,left bottom,from(@color-top),to(@color-bottom));
+			background-image: -webkit-linear-gradient(top,@color-top,@color-bottom);
+			background-image: -ms-linear-gradient(top,@color-top,@color-bottom);
+			background-image: -moz-linear-gradient(top,@color-top,@color-bottom);
+			background-image: -o-linear-gradient(top,@color-top,@color-bottom);
+			background-image: linear-gradient(to bottom,@color-top,@color-bottom);
+		}
+		
+		.set-vertical-bg-gradient(@color-top:black,@color-bottom:#333,@sequence-a:20%,@sequence-b:80%)
+		{
+			background-color: transparent;
+			background-image: -webkit-linear-gradient(top,@color-top,@color-bottom @sequence-a,@color-bottom @sequence-b,@color-top);
+			background-image: -ms-linear-gradient(top,@color-top,@color-bottom @sequence-a,@color-bottom @sequence-b,@color-top);
+			background-image: -moz-linear-gradient(to bottom,@color-top,@color-bottom @sequence-a, @color-bottom @sequence-b,@color-top);
+			background-image: -o-linear-gradient(top,@color-top,@color-bottom @sequence-a,@color-bottom @sequence-b,@color-top);
+			background-image: linear-gradient(to bottom,@color-top,@color-bottom @sequence-a, @color-bottom @sequence-b,@color-top);
+		}
+				
+		/* ------------------------------------------------------------------------------------------------------------- */
+		/* ~ Round corners ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+		
+		.set-round-corners(@radius)
+		{
+			-moz-border-radius: @radius;
+			-webkit-border-radius: @radius;
+			border-radius: @radius;
+			background-clip: padding-box;
+		}
+		
+		/* ------------------------------------------------------------------------------------------------------------- */
+		/* ~ Position ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+		
+		.set-pos(@type:relative)
+		{
+			position: @type;
+		}
+		
+		.set-coord(@x:0,@y:0)
+		{
+			top: @y;
+			left: @x;
+		}
+		
+		/* ------------------------------------------------------------------------------------------------------------- */
+		/* ~ Set opacity ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+		
+		.ie-opacity(@opacity)
+		{
+			 filter     : alpha(opacity=@opacity); 
+			 -ms-filter : "progid:DXImageTransform.Microsoft.Alpha(Opacity=@{opacity})";
+			 filter     : progid:DXImageTransform.Microsoft.Alpha(Opacity=@opacity);
+		}
+		
+		.set-opacity(@opacity)
+		{
+			opacity: @opacity;
+			.ie-opacity(@opacity*100);
+		}
+		
+		/* ------------------------------------------------------------------------------------------------------------- */
+		/* ~ Alignment ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+		
+		#align
+		{
+			.left
+			{
+				.set-pos();
+				float: left;
+			}
+			
+			.right
+			{
+				.set-pos();
+				float: right;
+			}
+			
+			.center
+			{
+				.set-pos();
+				margin: auto;
+				float: none;
+			}
+			
+			.absolute-center(@top,@left)
+			{
+				top: 50%;
+				left: 50%;
+				margin-top: -@top/2;
+				margin-left: -@left/2;
+			}
+		}
+		
+		/* ------------------------------------------------------------------------------------------------------------- */
+		/* ~ Box Shadow ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+		
+		.set-box-shadow(@color,@x:0,@y:0,@ext:0)
+		{
+			box-shadow: @x @y @ext @color;
+		}
+		
+		/* ------------------------------------------------------------------------------------------------------------- */
+		/* ~ Resets ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+		
+		.reset()
+		{
+			border: none;
+			background: none;
+			padding: 0;
+			margin: 0;
+			text-decoration: none;
+			color: black;
+			display: block;
+		}
+		
+		/* ------------------------------------------------------------------------------------------------------------- */
+		/* ~ Hide/Show ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+		
+		.hide(@opacity:0)
+		{
+			display: none;
+			opacity: @opacity;
+		}
+		
+		.show(@opacity:1)
+		{
+			display: block;
+			opacity: @opacity;
+		}
+		
+		/* ------------------------------------------------------------------------------------------------------------- */
+		/* ~ Scale ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+		
+		.scale(@scale)
+		{
+			-webkit-transform: scale(@scale);
+			-moz-transform:    scale(@scale);
+			-ms-transform:     scale(@scale);
+			-o-transform:      scale(@scale); 
+			transform:         scale(@scale);
+		}
+		
+		/* ------------------------------------------------------------------------------------------------------------- */
+		/* ~ Transitions ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+		
+		.animate-opacity()
+		{
+			-webkit-transition: opacity 0.2s ease-in-out;
+			-moz-transition:    opacity 0.2s ease-in-out;
+			-o-transition:      opacity 0.2s ease-in-out;
+			transition:         opacity 0.2s ease-in-out;
+		}
+		
+		.animate-opacity-effect(@opacity:0.7)
+		{
+			opacity: @opacity;
+			-webkit-transition: opacity 0.2s ease-in-out;
+			-moz-transition:    opacity 0.2s ease-in-out;
+			-o-transition:      opacity 0.2s ease-in-out;
+			transition:         opacity 0.2s ease-in-out;
+			
+			&:hover,
+			&:active
+			{
+				opacity: 1;
+			}
+		}
+		
+		.animate-color()
+		{
+			-webkit-transition: color 0.1s ease-in-out;  
+			-moz-transition:    color 0.1s ease-in-out;  
+			-o-transition:      color 0.1s ease-in-out;  
+			transition:         color 0.1s ease-in-out; 
+		}
+		
+		.animate-bg-color()
+		{
+			 -webkit-transition: background-color 0.1s ease-in-out;
+			 -moz-transition: background-color 0.1s ease-in-out;
+			 -o-transition: background-color 0.1s ease-in-out;
+			 -ms-transition: background-color 0.1s ease-in-out;
+			 transition: background-color 0.1s ease-in-out;
+		}
+		
+		.animate-all()
+		{
+			-webkit-transition: all 0.5s ease-in-out;  
+			-moz-transition:    all 0.5s ease-in-out;  
+			-o-transition:      all 0.5s ease-in-out;  
+			transition:         all 0.5s ease-in-out; 
+		}
+		
+		.set-animation(@duration,@delay)
+		{
+			-webkit-animation-duration: @duration;
+			-webkit-animation-delay: @delay;
+			
+			-moz-animation-duration: @duration;
+			-moz-animation-delay: @delay;
+			
+			-o-animation-duration: @duration;
+			-o-animation-delay: @delay;
+			
+			-ms-animation-duration: @duration;
+			-ms-animation-delay: @delay;
+		}
+		
+		/* ------------------------------------------------------------------------------------------------------------- */
+		/* ~ Columns ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+		
+		.set-columns(@columns,@gap)
+		{
+			-webkit-column-count: @columns;  
+			-webkit-column-gap: @gap;
+			-moz-column-count: @columns;    
+			-moz-column-gap: @gap;
+			column-count: @columns;          
+			column-gap: @gap;
+		}
+		
+		/* ------------------------------------------------------------------------------------------------------------- */
+		/* ~ Development tools ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+		
+		.browser-fixes()
+		{
+			-webkit-backface-visibility: hidden;
+		}
+		
+		.chrome-fix()
+		{
+			-webkit-transform: scale3d(1,1,1);
+		}
+		
+		.mask-fix()
+		{
+			-webkit-mask-image: -webkit-radial-gradient(circle, white, black);
+		}
+		
+		/* ------------------------------------------------------------------------------------------------------------- */
+		/* ~ Placeholder color ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+		
+		.set-placeholder-style(@color)
+		{
+			&::-webkit-input-placeholder{ color: @color; }
+			&:-moz-placeholder          { color: @color; }
+			&::-moz-placeholder         { color: @color; }
+			&:-ms-input-placeholder     { color: @color; }
+		}
+		
+		.performance()
+		{
+			-webkit-transform: translate3d(0, 0, 0);
+			-moz-transform: translate3d(0, 0, 0);
+			-ms-transform: translate3d(0, 0, 0);
+			transform: translate3d(0, 0, 0);
+		}
+		
+		/* ------------------------------------------------------------------------------------------------------------- */
+		/* ~ Specific styling ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+		
+		.rotation()
+		{
+			-webkit-animation: rotate 1s infinite linear;
+			-moz-animation:    rotate 1s infinite linear;
+			-ms-animation:     rotate 1s infinite linear;
+			-o-transition:     rotate 1s infinite linear;
+			animation:         rotate 1s infinite linear;
+			
+			@-webkit-keyframes rotate{
+				from { -webkit-transform: rotate(0deg);   }
+				to   { -webkit-transform: rotate(360deg); }
+			}
+			
+			@-moz-keyframes rotate{
+				from { -moz-transform: rotate(0deg);   }
+				to   { -moz-transform: rotate(360deg); }
+			}
+			
+			@-o-keyframes rotate{
+				from { -o-transform: rotate(0deg);   }
+				to   { -o-transform: rotate(360deg); }
+			}
+			
+			@keyframes rotate{
+				from { transform: rotate(0deg);   }
+				to   { transform: rotate(360deg); }
+			}	
+		}
