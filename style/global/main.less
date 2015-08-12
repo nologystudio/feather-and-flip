@@ -50,8 +50,21 @@
 		@color-7: #dee4e3;
 		@color-8: #202121;  
 		
+		@ff-color-0: #f5f6f6;
+		@ff-color-1: #d9dfdE;
+		@ff-color-2: #9cb1ad;
+		@ff-color-3: #96a8a4;
+		@ff-color-4: #7b8c88;
+		@ff-color-5: #545958;
+		@ff-color-6: #708c84;
+		@ff-color-7: #336666;
+		
 		@warning-color: orange;
 		@shadow-color: #cccccc;
+		@grey-1:  #333333;
+		@grey-2:  #999999;
+		@grey-3:  #666666;
+		@grey-4:  #CCCCCC;
 		
 		/* ~ Importers ~ */
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
@@ -123,6 +136,7 @@
 		
 		.ui-grid();
 		.ui-actions();
+		.ui-components();
 		.ui-form();
 		
 		/* ------------------------------------------------------------------------------------------------------------- */
@@ -140,9 +154,9 @@
 			
 			& > a:first-child
 			{
-				.set-size(@grid-4,100%);
+				.set-size(270px,100%);
 				.set-pos(absolute);
-				.set-coord(0,0);
+				.set-coord(@content-padding,0);
 				.set-opacity(1);
 				.animate-opacity();
 				text-decoration: none;
@@ -158,8 +172,8 @@
 					object
 					{
 						#align > .left;
-						width: @grid-4;
-						margin: 15px 0 0;
+						width: 230px;
+						margin: 20px 0 0;
 					}
 					
 					figcaption
@@ -198,7 +212,7 @@
 				{
 					.set-size(auto,@header-height);
 					.animate-color();
-					#font > .lato(12px,@color-5,400);
+					#font > .lato(13px,@color-5,400);
 					#align > .left;
 					padding: 0 @content-padding;
 					text-transform: uppercase;
@@ -215,14 +229,15 @@
 					
 					&[id^="sign-"]
 					{
-						#font > .gar(14px,white);
+						#font > .gar(15px,@color-5);
 						.animate-all();
 						line-height: @header-height;
 						text-transform: none;
 						
 						&[id*='up']
 						{
-							.set-bgc(black);	
+							.set-bgc(black);
+							color: white;	
 						}
 						
 						&:hover
@@ -645,7 +660,7 @@
 						.set-size(@grid-3);
 						.box-sizing();
 						.set-box-shadow(@shadow-color,0,0,@gutter);
-						.set-bgc(@color-2);
+						.set-bgc(@ff-color-2);
 						.performance();
 						.set-opacity(0);
 						#align > .left;
@@ -656,7 +671,7 @@
 						{
 							.reset();
 							.set-size(100%);
-							.set-bg(@color-2);
+							.set-bg(@ff-color-2);
 							#align > .left;
 							display: block;
 							
@@ -671,7 +686,7 @@
 						{
 							.set-size(100%);
 							.set-pos(absolute);
-							.set-bgc(fadeout(@color-2,50%));
+							.set-bgc(fadeout(@ff-color-2,50%));
 							.box-sizing();
 							bottom: 0;
 							padding: @block-margin/2 @block-margin;
@@ -759,11 +774,11 @@
 									{
 										.box-sizing();
 										margin: @content-padding 0;
-										border: solid 1px @color-4;
+										border: solid 1px @ff-color-4;
 										
 										&.placeholder
 										{
-											color: @color-4;
+											color: @ff-color-4;
 										}
 									}
 									
@@ -790,7 +805,9 @@
 				
 				footer
 				{
-					.set-size(100%,50px);
+					@h: 50px;
+					
+					.set-size(100%,@h);
 					.set-bgc(@color-7);
 					.set-pos(absolute);
 					bottom: 0;
@@ -798,14 +815,21 @@
 					button
 					{
 						.reset();
-						.set-size(100px,50px);
+						.set-size(100px,@h);
 						.set-pos(absolute);
+						.animate-all();
+						.performance();
 						#align > .center;
 						bottom: 0;
 						
 						span
 						{
+							.set-size(100%);
 							.set-pos(absolute);
+							#font > .lato(10px,@color-3,400);
+							text-transform: uppercase;
+							line-height: @h/2;
+							text-align: center;
 						}
 						
 						svg
@@ -816,6 +840,79 @@
 							}
 						}
 					}
+				}
+			}
+			
+			&[id="inspiration"]
+			{
+				.set-bgc(@color-6);
+				z-index: 2;
+				padding: @content-padding;
+				
+				header
+				{
+					.set-size(100%,@header-height);
+					#align > .left;
+					
+					h4
+					{
+						@ornament-width: 80px;
+						
+						.set-size(360px);
+						.set-bg(transparent,'@{media-url}icons/feather-grey-icon.svg',no-repeat,72%,center);
+						.set-bgs(auto,40px);
+						#font > .gar(18px,@color-1);
+						#align > .center;
+						text-align: center;
+						display: block;
+						overflow: hidden;
+						padding: @content-padding 0;
+						
+						&:before
+						{
+							.set-size(@ornament-width,1px);
+							.set-bgc(@grey-4);
+							.set-pos(absolute);
+							.set-coord(0,50%);
+							content: '';
+							display: block;
+						}
+						
+						&:after
+						{
+							.set-size(@ornament-width,1px);
+							.set-bgc(@grey-4);
+							.set-pos(absolute);
+							.set-coord(auto,50%);
+							content: '';
+							right: 0;
+							display: block;
+						}
+					}
+				}
+				
+				
+				div.wrapper
+				{
+					.set-size(100%);
+					#align > .left;
+					margin-bottom: @content-padding;
+					
+					ul
+					{
+						width: 47%;
+						
+						&:last-child
+						{
+							float: right;
+						}
+					}
+					
+				}
+				
+				button.go-btn
+				{
+					margin: @content-padding auto;
 				}
 			}
 			
@@ -976,15 +1073,15 @@
 					object
 					{
 						.reset();
-						.set-size(300px);
-						margin-top: 13%;
+						.set-size(225px);
+						margin-top: 20%;
+						margin-left: @content-padding;
 					}
 					
 					&[id="tzell-brand"]
 					{
 						right: @content-padding;
 						left: auto;
-						display: none;
 						
 						small
 						{
@@ -1008,7 +1105,7 @@
 					.ui-set-social-media-nav(black);
 					#align > .center;
 					display: table;
-					margin-top: 45px;
+					margin-top: 52px;
 				}
 				
 				& > small
@@ -1017,7 +1114,7 @@
 					#align > .left;
 					#font > .lato(10px,black,400);
 					text-align: center; 
-					padding: @content-padding 0 0 0;
+					padding: @content-padding - @unit 0 0 0;
 				}
 			}
 		}

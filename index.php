@@ -21,8 +21,11 @@
 			<!-- Included Google Fonts -->
 			<link href='https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900' rel='stylesheet' type='text/css'>
 			<!-- Less Files comes here -->
+<!--
 			<link rel="stylesheet/less" href="style/style-nology.less" title="style-nology" type="text/css" media="screen">
 			<script type="text/javascript" src="library/vendors/less.min.js"></script>
+-->
+			<link rel="stylesheet" href="style/style-nology.css" title="style-nology" type="text/css" media="screen">
 			<!-- Modernizer and IE specyfic files -->  
 			<script src="library/vendors/modernizr.custom.pp.js"></script>
 			<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVp6xJDq_xg96DdjO3S1wmByGNmYoK4XQ"></script>
@@ -34,7 +37,7 @@
 			<header>
 				<a href="/">
 					<figure>
-						<object data="/feather-and-flip/media/brand/passported-logo.svg" type="image/svg+xml" alt="Passported, kid friendly travel for grown-ups" data-animate="1"></object>
+						<img src="/feather-and-flip/media/brand/passported-logo.svg" type="image/svg+xml" alt="Passported, kid friendly travel for grown-ups" data-animate="1"/> 						
 						<figcaption data-animate="2">Kid friendly travel for grown-ups</figcaption>
 					</figure>
 				</a>
@@ -143,20 +146,26 @@
 			
 			<!-- inspiration -->
 			
-			<section id="inspiration"  ng-if="">
+			<section id="inspiration">
 				<div class="grid-2 align-center">
 					<header>
 						<h4>Let us Inspire you</h4>
 					</header>
 					<div class="wrapper">
-						<ul>
-							<li>Pick the type of place</li>
+						<ul class="select">
+							<li>
+								<span class="icon">&#xe03a;</span>
+								Pick the type of place
+							</li>
 						</ul>
-						<ul>
-							<li>Pick a season</li>
+						<ul class="select">
+							<li>
+								<span class="icon">&#xe03a;</span>
+								Pick a season
+							</li>
 						</ul>
 					</div>
-					<button ng-click="">Go</button>
+					<button class="go-btn align-center" ng-click="">Go</button>
 				</div>
 			</section>
 			
@@ -255,7 +264,7 @@
 				</nav>
 				<div class="fixed-bar">
 					<a id="brand" href="/">
-						<object data="/feather-and-flip/media/brand/passported-black-logo.svg" type="image/svg+xml" alt="Passported, kid friendly travel for grown-ups"></object>
+						<img src="/feather-and-flip/media/brand/passported-black-logo.svg" type="image/svg+xml" alt="Passported, kid friendly travel for grown-ups"/>
 					</a>
 					<nav id="social-media" class="black">
 						<a href="https://twitter.com/Passported" target="_blank" rel="twitter"></a>
