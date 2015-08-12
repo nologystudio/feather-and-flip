@@ -343,6 +343,12 @@ $scope.map = new google.maps.Map(document.getElementById('map'),mapOptions);
 	    
 	    ppControllers.controller('NewsletterController',function($scope,$log,$timeout){
 		});
+	    
+	    /* ------------------------------------------------------------------------------------------------------------- */
+	    
+	    ppControllers.controller('SearchController',function($scope,$log,$timeout){
+		});
+		
 		
 		
 	    

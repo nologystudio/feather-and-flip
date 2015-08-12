@@ -114,11 +114,26 @@
 			
 			<!-- how it works -->
 			
-			<section id="how-it-works" ng-if=""></section>
+			<section id="how-it-works">
+				<header>
+					<h4>How it<span>works</span></h4>
+				</header>
+				<div class="grid-2 align-center">
+					<a class="quick-entry featured" href="" target="_blank">
+						<figure>
+                            <img src="https://ds9464c56tfjs.cloudfront.net/styles/post_image/s3/summer_travel_giveaway.png?itok=dMMIgEwP" alt=""/>
+                        </figure>
+                        <footer>
+                            <h4>Summer Travel Giveaway</h4>
+                            <time datetime="2015-08-03 00:00">August, 2015</time>
+                        </footer>
+					</a>
+				</div>
+			</section>
 			
 			<!-- Map -->
 			
-			<section id="map" ng-controller="MapController">
+			<section id="map" ng-controller="MapController" ng-if="">
 				<div id="google-maps-container" data-animate="1"></div>
 				<aside class="left" ng-class="{'on':showAside}" ng-controller="ItineraryController">
 					<ul>
