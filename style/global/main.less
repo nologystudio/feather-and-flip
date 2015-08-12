@@ -27,7 +27,7 @@
 		@global-width: 100%;
 		@wrapper-width: 1040px;
 		@header-height: 90px;
-		@gutter: 30px;
+		@gutter: 10px;
 		
 		@grid-1: @wrapper-width/1;
 		@grid-2: @wrapper-width/2;
@@ -78,6 +78,8 @@
 		
 		body
 		{
+			.set-bgc(@color-1);
+			.set-opacity(0);
 			#font > .lato(12px,@color-1,100);
 			overflow-x: hidden;
 		}
@@ -104,7 +106,7 @@
 		
 		*[data-animate]
 		{
-			.set-opacity(1);
+			.set-opacity(0);
 			.performance();
 		}
 		
@@ -121,9 +123,10 @@
 		
 		.ui-grid();
 		.ui-actions();
+		.ui-form();
 		
 		/* ------------------------------------------------------------------------------------------------------------- */
-		/* ~ Header ~ */
+		/* ~ Header & Navigation ~ */
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 		
 		body > header
@@ -137,23 +140,39 @@
 			
 			& > a:first-child
 			{
-				.set-size(300px,100%);
+				.set-size(@grid-4,100%);
 				.set-pos(absolute);
 				.set-coord(0,0);
+				.set-opacity(1);
+				.animate-opacity();
 				text-decoration: none;
 				
 				figure
 				{
+					.set-size();
+					#align > .left;
 					margin: 0;
-					padding: 0;
-					
-					img
-					{}
+					padding: 0 0 0 @content-padding/2;
+				
+					img,
+					object
+					{
+						#align > .left;
+						width: @grid-4;
+						margin: 15px 0 0;
+					}
 					
 					figcaption
 					{
-						#font > .times(12px,white);
+						#align > .right;
+						#font > .gar(12px,white);
+						margin-top: -@unit;
 					}
+				}
+				
+				&:hover
+				{
+					.set-opacity(0.5);
 				}
 			}
 			
@@ -178,6 +197,7 @@
 				a
 				{
 					.set-size(auto,@header-height);
+					.animate-color();
 					#font > .lato(12px,@color-5,400);
 					#align > .left;
 					padding: 0 @content-padding;
@@ -187,19 +207,98 @@
 					line-height: @header-height;
 					overflow: hidden;
 					
+					&.feather-icon
+					{
+						.set-bg(transparent,'@{media-url}icons/feather-white-icon.svg',no-repeat,right,center);
+						.set-bgs(auto,50%);
+					}
+					
 					&[id^="sign-"]
 					{
-						#font > .times(12px,white);
+						#font > .gar(14px,white);
+						.animate-all();
 						line-height: @header-height;
-						text-transform: lowercase;
+						text-transform: none;
 						
 						&[id*='up']
 						{
 							.set-bgc(black);	
 						}
+						
+						&:hover
+						{
+							transform: rotate(-360deg);
+						}
+					}
+					
+					&:hover
+					{
+						color: white;
 					}
 				}
 			}
+		}
+		
+		body > div.dropdown-wrapper
+		{
+			.set-size(100%,0);
+			.box-sizing();
+			.set-pos(fixed);
+			.set-coord(0,@header-height);
+			.set-bgc(@color-3);
+			.animate-all();
+			.performance();
+			padding: 0 @content-padding;
+			z-index: 6;
+			
+			div.arrow
+			{
+				@s: 20px;
+				
+				.set-size(@s,0);
+				.set-pos(absolute);
+				.set-coord(0,0);
+				.set-opacity(1);
+				.animate-all();
+				overflow: hidden;
+				
+				svg
+				{
+					.set-size(@s,@s);
+					#align > .left;
+					
+					path
+					{
+						fill: @color-3;
+					}
+				}
+				
+				&.on
+				{
+					height: @s;
+					top: -@s;
+				}
+			}
+			
+			&.light
+			{
+				.set-bgc(white);
+				
+				div.arrow svg path
+				{
+					fill: white;
+				}
+			}
+			
+			& > nav[id="city-guides-list"]
+			{
+				.set-size(@grid-1);
+				.set-bgc(red);
+				#align > .center;
+			}
+			
+			& > form[name="searchForm"]
+			{}
 		}
 		
 		/* ------------------------------------------------------------------------------------------------------------- */
@@ -236,7 +335,7 @@
 						.set-bg(@color-7,'@{media-url}backgrounds/passported-main.jpg',no-repeat,center,bottom);
 						.box-sizing();
 						#align > .left;
-						padding-top: 2 * @header-height;
+						padding-top: 1.5 * @header-height;
 						overflow: hidden;
 						
 						&:first-child
@@ -270,9 +369,7 @@
 										
 										.set-size(@s,@s);
 										.set-bgc(fadeout(@color-4,10%));
-										.animate-all();
-										.performance();
-										#font > .times(30px,white);
+										#font > .gar(30px,white);
 										#align > .center;
 										overflow: hidden;
 										cursor: pointer;
@@ -280,9 +377,31 @@
 										line-height: @s;
 										text-align: center;
 										
+										&:after
+										{
+											.set-size(@s,@s);
+											.set-pos(absolute);
+											.set-coord(0,0);
+											.set-bg(@color-5,'@{media-url}icons/feather-grey-icon.svg');
+											.set-opacity(0);
+											.animate-all();
+											.performance();
+											z-index: 0;
+											content: '';
+											display: block;
+											overflow: hidden;
+										}
+										
 										&:hover
 										{
-											.set-bgc(fadeout(@color-4,0%));
+											&:after
+											{
+												.set-opacity(0.75);
+												transform: scale(1.5);
+											}
+											
+											& + h3
+											{}
 										}
 									}
 									
@@ -290,6 +409,7 @@
 									{
 										.set-size(100%);
 										.box-sizing();
+										.animate-all();
 										#font > .lato(14px,white,400);
 										padding: 0 @content-padding/2;
 										margin-top: @content-padding;
@@ -305,9 +425,16 @@
 				}
 			}
 			
+			&[id="how-it-works"]
+			{
+				.set-bgc(white);
+				height: @m;
+			}
+			
 			&[id="map"]
 			{
 				.set-bgc(white);
+				box-shadow: 0 0 @content-padding @color-1;
 				height: @m;
 				margin-top: @main-height;
 				overflow: hidden;
@@ -322,46 +449,116 @@
 				
 				aside
 				{
+					@btn-w: 50px;
+					@btn-h: 100px;
+					
 					.set-size(50%,100%);
 					.set-bgc(white);
 					.set-pos(absolute);
 					.animate-all();
 					.performance();
-					box-shadow: 0 0 @content-padding @shadow-color;
 					overflow: hidden;
 					
 					button.aside-trigger
 					{
-						@w: 50px;
-						@h: 100px;
-						
 						.reset();
-						.set-size(@w,@h);
+						.set-size(@btn-w,@btn-h);
+						.set-pos(absolute);
+						
+						span
+						{
+							.set-size(75%,100%);
+							.set-pos(absolute);
+							.animate-all();
+							.performance();
+							#font > .ic(18px,white);
+							line-height: @btn-h - 2px;
+							transform-origin: center center;
+						}
 						
 						svg
 						{
-							.set-size(@w,@h);
+							.set-size(@btn-w,@btn-h);
 							
 							path
 							{
 								fill: @color-1;
 							}
 						}
+						
+						&:hover
+						{
+							span
+							{
+								transform: rotate(0deg);
+							}
+						}
 					}
 					
 					&.left
 					{
-						left: 0;
+						left: -50%;
+						padding-right: @btn-w;
+						
+						button
+						{
+							right: 0;
+							top: 50%;
+							margin-top: -@btn-h/2;
+							
+							span
+							{
+								transform: rotate(180deg);
+							}
+						}
+						
+						ul
+						{
+							.set-size(100%,100%);
+							.set-bgc(white);
+							.animate-all();
+							#align > .left;
+							margin: 0;
+							overflow: hidden;
+							display: block;
+						}
 						
 						&.on
 						{
 							left: 0;
+							
+							button
+							{
+								span
+								{
+									transform: rotate(0deg);
+								}
+								
+								&:hover
+								{
+									span
+									{
+										transform: rotate(180deg);
+									}
+								}
+							}
+							
+							ul
+							{
+								box-shadow: 0 0 @content-padding @shadow-color;
+							}
 						}
 					}
 					
 					&.right
 					{
 						right: -50%;
+						padding-left: @btn-w;
+						
+						button
+						{
+							left: 0;
+						}
 						
 						&.on
 						{
@@ -388,8 +585,9 @@
 			
 			&[id="travel-journal"]
 			{
-				.set-size(100%,@m);
+				.set-size(100%);
 				.set-bgc(@color-6);
+				#align > .left;
 				overflow: hidden;
 				z-index: 2;
 				box-shadow: 0 0 @content-padding @shadow-color;
@@ -398,20 +596,27 @@
 				{
 					.set-size(@wrapper-width);
 					#align > .center;
-					overflow: hidden;
+					clear: both;
+					overflow: visible;
+					margin-bottom: 2 * @content-padding;
 					
 					h4
 					{
+						.set-size(100%);
+						.set-bg(transparent,'@{media-url}icons/feather-grey-icon.svg',no-repeat,60%,top);
+						.set-opacity(0);
 						#font > .lato(36px,@color-1,700);
 						text-align: center;
 						text-transform: uppercase;
-						padding-top: @content-padding;
+						padding-top: @content-padding/2;
 						line-height: auto;
 						margin-bottom: @content-padding/2;
+						display: block;
+						overflow: hidden;
 						
 						span
 						{
-							#font > .times(18px,@color-1);
+							#font > .gar(18px,@color-1);
 							clear: both;
 							display: block;
 							text-transform: none;
@@ -441,6 +646,8 @@
 						.box-sizing();
 						.set-box-shadow(@shadow-color,0,0,@gutter);
 						.set-bgc(@color-2);
+						.performance();
+						.set-opacity(0);
 						#align > .left;
 						margin: @gutter;
 						overflow: hidden;
@@ -487,7 +694,7 @@
 						
 						h4
 						{
-							#font > .times(20px,white);
+							#font > .gar(20px,white);
 						}
 						
 						time
@@ -516,6 +723,7 @@
 						&.featured
 						{
 							width: 100%;
+							margin: 0;
 						}
 						
 						// Newsletter block style...
@@ -532,7 +740,7 @@
 								
 								small
 								{
-									#font > .times(30px,white);
+									#font > .gar(30px,white);
 									width: 100%;
 									display: block;
 									padding: @content-padding 0;
@@ -550,7 +758,6 @@
 									&[type="password"]
 									{
 										.box-sizing();
-										//#ui-set-input > .input-text(@color-4);
 										margin: @content-padding 0;
 										border: solid 1px @color-4;
 										
@@ -583,7 +790,32 @@
 				
 				footer
 				{
-					.set-size(100%,@header-height);
+					.set-size(100%,50px);
+					.set-bgc(@color-7);
+					.set-pos(absolute);
+					bottom: 0;
+					
+					button
+					{
+						.reset();
+						.set-size(100px,50px);
+						.set-pos(absolute);
+						#align > .center;
+						bottom: 0;
+						
+						span
+						{
+							.set-pos(absolute);
+						}
+						
+						svg
+						{
+							path
+							{
+								fill: @color-6;
+							}
+						}
+					}
 				}
 			}
 			
@@ -637,6 +869,7 @@
 			.set-bgc(black);
 			#align > .left;
 			overflow: hidden;
+			z-index: 4;
 			
 			& > nav
 			{
@@ -739,11 +972,12 @@
 					.set-pos(absolute);
 					.set-coord(@content-padding,0);
 					
-					img
+					img,
+					object
 					{
 						.reset();
-						.set-size(auto,70%);
-						margin-top: 5%;
+						.set-size(300px);
+						margin-top: 13%;
 					}
 					
 					&[id="tzell-brand"]
@@ -783,7 +1017,7 @@
 					#align > .left;
 					#font > .lato(10px,black,400);
 					text-align: center; 
-					padding: 1.5 * @content-padding 0 0 0;
+					padding: @content-padding 0 0 0;
 				}
 			}
 		}

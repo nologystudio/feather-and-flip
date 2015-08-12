@@ -23,12 +23,24 @@
 		
 		@font-face
 		{
-			font-family: 'font-solid';
-		    src: url('@{path}font-solid.eot');
-		    src: url('@{path}font-solid.eot?#iefix') format('embedded-opentype'),
-		         url('@{path}font-solid.woff') format('woff'),
-		         url('@{path}font-solid.ttf') format('truetype'),
-		         url('@{path}font-solid.svg#font-solid') format('svg');
+			font-family: 'G-italic';
+		    src: url('@{path}garamond-bold-italic.eot');
+		    src: url('@{path}garamond-bold-italic.eot?#iefix') format('embedded-opentype'),
+		         url('@{path}garamond-bold-italic.woff') format('woff'),
+		         url('@{path}garamond-bold-italic.ttf') format('truetype'),
+		         url('@{path}garamond-bold-italic.svg#G-italic') format('svg');
+		    font-weight: normal;
+		    font-style: normal;
+		}
+		
+		@font-face
+		{
+			font-family: 'icons';
+		    src: url('@{path}icon-webfont.eot');
+		    src: url('@{path}icon-webfont.eot?#iefix') format('embedded-opentype'),
+		         url('@{path}icon-webfont.woff') format('woff'),
+		         url('@{path}icon-webfont.ttf') format('truetype'),
+		         url('@{path}icon-webfont.svg#icons') format('svg');
 		    font-weight: normal;
 		    font-style: normal;
 		}
@@ -59,9 +71,9 @@
 				.browser-fixes();
 			}
 			
-			.times(@size,@color)
+			.gar(@size,@color)
 			{
-				font: normal @size 'Times',serif;
+				font: normal @size 'G-italic',serif;
 				color: @color;
 				font-style: italic;
 				.browser-fixes();
@@ -69,7 +81,7 @@
 			
 			.ic(@size,@color)
 			{
-				font: normal @size 'font-solid';
+				font: normal @size 'icons';
 				color: @color;
 				font-style: normal;
 				font-weight: normal;
@@ -81,7 +93,7 @@
 		
 		[class^="icon-"],[class*="icon-"]
 		{
-			font-family: 'font-solid';
+			font-family: 'icons';
 			speak: none;
 			font-style: normal;
 			font-weight: normal;

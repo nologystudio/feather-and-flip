@@ -76,17 +76,18 @@
 			}
 		}
 		
-		.ui-set-social-media-nav(@color:white,@btn-size:34px)
+		.ui-set-social-media-nav(@color:white,@btn-size:28px)
 		{
 			& > a
 			{
 				.set-size();
 				.set-opacity(1);
 				.animate-opacity();
-// 				#font > .ic(@btn-size,@color,@btn-size);
+				#font > .ic(@btn-size,@color);
 				#align > .left;
 				display: block;
 				margin: 0 @unit;
+				text-decoration: none;
 				
 				.set-icon(@icon)
 				{
@@ -106,6 +107,22 @@
 				{
 					.set-opacity(0.5);
 				}
+			}
+		}
+		
+		.ui-form()
+		{
+			input,
+			textarea,
+			label
+			{}
+			
+			input
+			{
+				&[type="text"],
+				&[type="email"],
+				&[type="password"]
+				{}
 			}
 		}
 		

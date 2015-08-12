@@ -1,7 +1,7 @@
 
 
 	<!DOCTYPE html>
-	<html ng-app="ppApp">
+	<html ng-app="ppApp" class="no-js">
 		<head>
 			<base href="/feather-and-flip/">
 			<title>Passported</title>
@@ -9,8 +9,9 @@
 			<meta name="description" content="Passported">  
 			<meta name="robots" content="noindex,nofollow">
 			<!-- Icons -->
-		    <link rel="icon" type="image/png" href="media/favicons/favicon-32x32.png" sizes="32x32">
-		    <link rel="icon" type="image/png" href="main/media/favicons/favicon-16x16.png" sizes="16x16">
+		    <link rel="icon" type="image/png" href="media/favicons/passported-favicon-64x64.png" sizes="64x64">
+		    <link rel="icon" type="image/png" href="media/favicons/passported-favicon-32x32.png" sizes="32x32">
+		    <link rel="icon" type="image/png" href="main/media/favicons/passported-favicon-16x16.png" sizes="16x16">
 			<!-- Open Graph data -->
 			<meta property="og:title"       content="">
 			<meta property="og:type"        content="">
@@ -26,30 +27,63 @@
 			<script src="library/vendors/modernizr.custom.pp.js"></script>
 			<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVp6xJDq_xg96DdjO3S1wmByGNmYoK4XQ"></script>
 		</head>
-		<body ng-view ng-controller="AppController">
+		<body ng-controller="AppController">
 			
 			<!-- Header -->
 			
 			<header>
 				<a href="/">
 					<figure>
-						<img src="/media/brand/passported-logo.png" alt="Passported, kid friendly travel for grown-ups" data-animate="1"/>
+						<object data="/feather-and-flip/media/brand/passported-logo.svg" type="image/svg+xml" alt="Passported, kid friendly travel for grown-ups" data-animate="1"></object>
 						<figcaption data-animate="2">Kid friendly travel for grown-ups</figcaption>
 					</figure>
 				</a>
 				<nav>
 					<div class="wrapper align-center">
-						<a id="city-guides"    href="#/city-guides"    data-animate="3">city guides</a>
-						<a id="travel-journal" href="#/travel-journal" data-animate="4">travel journal</a>
-						<a id="book-hotels"    href="#/book-hotels"    data-animate="5">book hotels</a>
-						<a id="search"         href="#/search"         data-animate="6">search</a>
+						<a id="city-guides" href="#/city-guides"    class="subnav" data-animate="3">city guides</a>
+						<a id="blog"        href="#/travel-journal" data-animate="4">travel journal</a>
+						<a id="book-hotels" href="#/book-hotels"    data-animate="5">book hotels</a>
+						<a id="search"      href="#/search"         class="subnav" data-animate="6">search</a>
 					</div>
 					<div class="wrapper align-right">
-						<a id="sign-in" href="#/sign-in" data-animate="7">sign in</a>
-						<a id="sign-up" href="#/sign-up" data-animate="8">sign up</a>
+						<a id="sign-in" href="#/sign-in" data-animate="7">Sign in</a>
+						<a id="sign-up" href="#/sign-up" data-animate="8">Sign up</a>
 					</div>
 				</nav>
 			</header>
+		
+			<!-- City Guide Navigation -->
+		
+			<div class="dropdown-wrapper">
+				<div class="arrow">
+					<svg>
+						<path d="M 10,10 L 20,20 L 0,20 L 10,10"/>
+					</svg>
+				</div>
+				<ul>
+					<li>
+						<nav id="city-guides-list">
+							<ul>
+								<li></li>
+								<li><a href=""></a></li>
+							</ul>
+							<ul>
+								<li></li>
+								<li><a href=""></a></li>
+							</ul>
+							<ul>
+								<li></li>
+								<li><a href=""></a></li>
+							</ul>
+							<ul>
+								<li></li>
+								<li><a href=""></a></li>
+							</ul>
+						</nav>
+					</li>
+					<li></li>
+				</ul>
+			</div>
 			
 			<!-- Main Block -->
 			
@@ -58,15 +92,15 @@
 					<li>
 						<h1 data-animate="1">Sophisticated family travel<br>simplified</h1>
 						<ul class="align-center">
-							<li>
+							<li ng-click="goTo('plan')">
 								<h2 data-animate="2">Plan</h2>
 								<h3 data-animate="3">We help you find the ideal destination and hotel for your particular FAMILY needs</h3>
 							</li>
-							<li>
+							<li ng-click="goTo('explore')">
 								<h2 data-animate="4">Explore</h2>
 								<h3 data-animate="5">We have parent-scouted picks and itineraries that you can customize</h3>
 							</li>
-							<li>
+							<li ng-click="goTo('book')">
 								<h2 data-animate="6">Book</h2>
 								<h3 data-animate="7">We book your hotel. You can call or e-mail our hotel expert</h3>
 							</li>
@@ -75,32 +109,55 @@
 				</ul>
 			</main>
 			
+			<!-- how it works -->
+			
+			<section id="how-it-works" ng-if=""></section>
+			
 			<!-- Map -->
 			
 			<section id="map" ng-controller="MapController">
 				<div id="google-maps-container" data-animate="1"></div>
-				<aside class="left"  ng-controller="ItineraryController">
+				<aside class="left" ng-class="{'on':showAside}" ng-controller="ItineraryController">
 					<ul>
 						<li></li>
 						<li></li>
 						<li></li>
 					</ul>
-					<button class="aside-trigger" ng-click="" data-animate="2">
-						<span class="icon-"></span>
+					<button class="aside-trigger" ng-click="openAside()" data-animate="2">
+						<span>&#x23;</span>
 						<svg>
 							<path d="M 0,0 L 50,50 L 0,100 L 0,0"/>
 						</svg>
 					</button>
 				</aside>
-				<aside class="right" ng-controller="BookController" data-animate="3">
+				<aside class="right" ng-class="{'on':showAside}" ng-controller="BookingController">
 					<div class=""
-					<button class="aside-trigger" ng-click="">
-						<span class="icon-"></span>
+					<button class="aside-trigger" ng-click="openAside()" data-animate="3">
+						<span>&#x23;</span>
 						<svg>
 							<path d="M 0,0 L 50,50 L 0,100 L 0,0"/>
 						</svg>
 					</button>
 				</aside>
+			</section>
+			
+			<!-- inspiration -->
+			
+			<section id="inspiration"  ng-if="">
+				<div class="grid-2 align-center">
+					<header>
+						<h4>Let us Inspire you</h4>
+					</header>
+					<div class="wrapper">
+						<ul>
+							<li>Pick the type of place</li>
+						</ul>
+						<ul>
+							<li>Pick a season</li>
+						</ul>
+					</div>
+					<button ng-click="">Go</button>
+				</div>
 			</section>
 			
 			<!-- Blog -->
@@ -109,8 +166,8 @@
 				<header>
 					<h4 data-animate="1">Travel <span>journal</span></h4>
 				</header>
-				<div id="feed" class="grid-1 align-center">
-					<a class="quick-entry featured" href="" target="_blank">
+				<div id="feed" class="grid-1 align-center" >
+					<a class="quick-entry featured" href="" target="_blank" data-animate="2">
 						<figure>
                             <img src="https://ds9464c56tfjs.cloudfront.net/styles/post_image/s3/summer_travel_giveaway.png?itok=dMMIgEwP" alt=""/>
                         </figure>
@@ -120,7 +177,7 @@
                         </footer>
 					</a>
 					<div class="grid-wrapper">
-						<div id="newsletter-signup" class="quick-entry" ng-controller="NewsletterCtrl">
+						<div id="newsletter-signup" class="quick-entry" ng-controller="NewsletterController">
 		                    <h3>Join the adventure</h3>
 								<hr>
 		                    <h4 ng-if="currentStatus == 'still'">Sign up for our newsletter</h4>
@@ -198,7 +255,7 @@
 				</nav>
 				<div class="fixed-bar">
 					<a id="brand" href="/">
-						<img src="/media/brand/passported-black-logo.png" alt="Passported, kid friendly travel for grown-ups"/>
+						<object data="/feather-and-flip/media/brand/passported-black-logo.svg" type="image/svg+xml" alt="Passported, kid friendly travel for grown-ups"></object>
 					</a>
 					<nav id="social-media" class="black">
 						<a href="https://twitter.com/Passported" target="_blank" rel="twitter"></a>
@@ -212,23 +269,21 @@
 			</footer>
 			
 			<script src="library/vendors/jquery-2.1.3.min.js"></script>
-<!-- 			<script src="library/vendors/isotope.min.js"></script> -->
 			<script src="library/vendors/moment.min.js"></script>
 			<script src="library/vendors/underscore.min.js"></script>
 			<script src="library/vendors/transit.min.js"></script>
+			<script src="library/vendors/imagesloaded.min.js"></script>
 			<script src="library/vendors/retina.min.js"></script>
 			<script src="library/vendors/waypoints.min.js"></script>
+			
 			<script src="library/vendors/angular.min.js"></script>
 			<script src="library/vendors/angular-cookies.min.js"></script>
 			<script src="library/vendors/angular-sanitize.min.js"></script>
 			<script src="library/vendors/angular-route.min.js"></script>
 			<script src="library/vendors/angular-resource.min.js"></script>
 			
-			<!--
 			<script src="library/pp-directives.js"></script>
 			<script src="library/pp-controllers.js"></script>
 			<script src="library/pp-app.js"></script>
-			-->
-			
 		</body>
 	</html>
