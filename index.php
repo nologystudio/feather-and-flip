@@ -21,10 +21,6 @@
 			<!-- Included Google Fonts -->
 			<link href='https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900' rel='stylesheet' type='text/css'>
 			<!-- Less Files comes here -->
-<!--
-			<link rel="stylesheet/less" href="style/style-nology.less" title="style-nology" type="text/css" media="screen">
-			<script type="text/javascript" src="library/vendors/less.min.js"></script>
--->
 			<link rel="stylesheet" href="style/style-nology.css" title="style-nology" type="text/css" media="screen">
 			<!-- Modernizer and IE specyfic files -->  
 			<script src="library/vendors/modernizr.custom.pp.js"></script>
@@ -63,29 +59,61 @@
 						<path d="M 10,10 L 20,20 L 0,20 L 10,10"/>
 					</svg>
 				</div>
-				<ul>
-					<li>
-						<nav id="city-guides-list">
-							<ul>
-								<li></li>
-								<li><a href=""></a></li>
-							</ul>
-							<ul>
-								<li></li>
-								<li><a href=""></a></li>
-							</ul>
-							<ul>
-								<li></li>
-								<li><a href=""></a></li>
-							</ul>
-							<ul>
-								<li></li>
-								<li><a href=""></a></li>
-							</ul>
-						</nav>
-					</li>
-					<li></li>
-				</ul>
+				<nav id="city-guides-list">
+					<!-- Caribbean -->
+					<ul>
+						<li>Caribbean</li>
+						<li><a href="/anguilla/city-guide">Anguilla, British West Indies</a></li>
+						<li><a href="/antigua/city-guide">Antigua, West Indies</a></li>
+						<li><a href="/bermuda/city-guide">Bermuda, British Territories</a></li>
+						<li><a href="/harbour-island/city-guide">Harbour Island, Bahamas</a></li>
+						<li><a href="/puerto-rico/city-guide">Puerto Rico, U.S.A.</a></li>
+						<li><a href="/st-barths/city-guide">St. Barth's, French West Indies</a></li><
+					</ul>
+					<!-- Europe -->
+					<ul>
+						<li>Europe</li>
+						<li><a href="/amsterdam/city-guide">Amsterdam, Netherlands</a></li>
+						<li><a href="/barcelona/city-guide">Barcelona, Spain</a></li>
+						<li><a href="/ibiza/city-guide">Ibiza, Spain</a></li>
+						<li><a href="/istanbul/city-guide">Istanbul, Turkey</a></li>
+						<li><a href="/london/city-guide">London, England</a></li>
+						<li><a href="/mykonos/city-guide">Mykonos, Greece</a></li>
+						<li><a href="/paris/city-guide">Paris, France</a></li>
+						<li><a href="/reykjavik/city-guide">Reykjavik, Iceland</a></li>
+						<li><a href="/rome/city-guide">Rome, Italy</a></li>
+						<li><a href="/st-tropez/city-guide">St. Tropez, France</a></li>
+						<li><a href="/cotswolds/city-guide">The Cotswolds, England</a></li>
+						<li><a href="/venice/city-guide">Venice, Italy</a></li>
+					</ul>
+					<!-- North America -->
+					<ul>
+						<li>North America</li>
+						<li><a href="/aspen/city-guide">Aspen, USA</a></li>
+						<li><a href="/boston/city-guide">Boston, USA</a></li>
+						<li><a href="/charleston/city-guide">Charleston, USA</a></li>
+						<li><a href="/jackson-hole/city-guide">Jackson Hole, USA</a></li>
+						<li><a href="/los-angeles/city-guide">Los Angeles, USA</a></li>
+						<li><a href="/miami/city-guide">Miami, FL</a></li>
+						<li><a href="/new-york-city/city-guide">New York City, USA</a></li>
+						<li><a href="/park-city/city-guide">Park City, Utah</a></li>
+						<li><a href="/punta-mita/city-guide">Punta Mita, Mexico</a></li>
+						<li><a href="/san-francisco/city-guide">San Francisco, USA</a></li>
+						<li><a href="/southern-standouts/city-guide">Southern Standouts, USA</a></li>
+						<li><a href="/tulum-and-riviera-maya/city-guide">Tulum and Riviera Maya, Mexico</a></li>
+						<li><a href="/vail/city-guide">Vail, USA</a></li>
+						<li><a href="/washington-dc/city-guide">Washington DC, USA</a></li>
+						<li><a href="/whistler/city-guide">Whistler, Canada </a></li>
+					</ul>
+					<!-- South America -->
+					<ul>
+						<li>South America</li>
+						<li><a href="/buenos-aires/city-guide">Buenos Aires, Argentina</a></li>
+						<li><a href="/cartagena/city-guide">Cartagena, Colombia</a></li>
+						<li><a href="/chilean-patagonia/city-guide">Chilean Patagonia, Chile</a></li>
+						<li><a href="/santiago/city-guide">Santiago, Chile</a></li></ul>
+					</ul>
+				</nav>
 			</div>
 			
 			<!-- Main Block -->
@@ -116,18 +144,20 @@
 			
 			<section id="how-it-works">
 				<header>
-					<h4>How it<span>works</span></h4>
+					<h4 data-animate="1">Title<span>title</span></h4>
 				</header>
-				<div class="grid-2 align-center">
-					<a class="quick-entry featured" href="" target="_blank">
-						<figure>
-                            <img src="https://ds9464c56tfjs.cloudfront.net/styles/post_image/s3/summer_travel_giveaway.png?itok=dMMIgEwP" alt=""/>
-                        </figure>
-                        <footer>
-                            <h4>Summer Travel Giveaway</h4>
-                            <time datetime="2015-08-03 00:00">August, 2015</time>
-                        </footer>
-					</a>
+				<div class="promoted-grid align-center">
+					<?php for($i=0;$i<9;$i++): ?>
+						<a class="quick-entry" href="#" target="_blank" data-animate="<?php echo $i+2; ?>">
+							<figure>
+	                            <img src="https://ds9464c56tfjs.cloudfront.net/styles/post_image/s3/summer_travel_giveaway.png?itok=dMMIgEwP" alt=""/>
+	                        </figure>
+	                        <footer>
+	                            <h4>Summer Travel Giveaway</h4>
+	                            <time datetime="2015-08-03 00:00">August, 2015</time>
+	                        </footer>
+						</a>
+					<?php endfor; ?>
 				</div>
 			</section>
 			
@@ -190,18 +220,20 @@
 				<header>
 					<h4 data-animate="1">Travel <span>journal</span></h4>
 				</header>
-				<div id="feed" class="grid-1 align-center" >
+				<div id="feed" class="align-center">
 					<a class="quick-entry featured" href="" target="_blank" data-animate="2">
-						<figure>
-                            <img src="https://ds9464c56tfjs.cloudfront.net/styles/post_image/s3/summer_travel_giveaway.png?itok=dMMIgEwP" alt=""/>
-                        </figure>
-                        <footer>
-                            <h4>Summer Travel Giveaway</h4>
-                            <time datetime="2015-08-03 00:00">August, 2015</time>
-                        </footer>
+						<div class="mask">
+							<figure>
+	                            <img src="https://ds9464c56tfjs.cloudfront.net/styles/post_image/s3/summer_travel_giveaway.png?itok=dMMIgEwP" alt=""/>
+	                        </figure>
+	                        <footer>
+	                            <h4>Summer Travel Giveaway</h4>
+	                            <time datetime="2015-08-03 00:00">August, 2015</time>
+	                        </footer>
+						</div>
 					</a>
 					<div class="grid-wrapper">
-						<div id="newsletter-signup" class="quick-entry" ng-controller="NewsletterController">
+						<div id="newsletter-signup" class="quick-entry" ng-controller="NewsletterController" data-animate="3">
 		                    <h3>Join the adventure</h3>
 								<hr>
 		                    <h4 ng-if="currentStatus == 'still'">Sign up for our newsletter</h4>
@@ -212,13 +244,13 @@
 		                        <input type="submit" ng-if="currentStatus == 'still'" value="submit" ng-class="{disabled:!newsletterForm.$valid}" ng-click="!newsletterForm.$valid || regSubmit()"/>
 		                    </form>
 	                	</div>
-						<a class="quick-entry review" href="http://blog.featherandflip.com/travel-journal/2014/11/25/featured-hotel-mandarin-oriental-miami" target="_blank">
+						<a class="quick-entry review" href="http://blog.featherandflip.com/travel-journal/2014/11/25/featured-hotel-mandarin-oriental-miami" target="_blank" data-animate="4">
                             <h3> Mandarin Oriental, Miami</h3>
                             	<hr>
                             <h4>Featured Hotel</h4>
                             <time datetime="2014-11-25 15:44">November, 2014</time>
                         </a>
-                        <a class="quick-entry" target="_blank" href="http://blog.passported.com/travel-journal/2015/8/3/summer-travel-giveaway">
+                        <a class="quick-entry" target="_blank" href="http://blog.passported.com/travel-journal/2015/8/3/summer-travel-giveaway" data-animate="5">
                             <figure>
                                 <img src="https://ds9464c56tfjs.cloudfront.net/styles/post_image/s3/summer_travel_giveaway.png?itok=dMMIgEwP" alt=""/>
                             </figure>
@@ -282,12 +314,11 @@
 						<img src="/feather-and-flip/media/brand/passported-black-logo.svg" type="image/svg+xml" alt="Passported, kid friendly travel for grown-ups"/>
 					</a>
 					<nav id="social-media" class="black">
-						<a href="https://twitter.com/Passported" target="_blank" rel="twitter"></a>
-						<a href="https://www.facebook.com/featherandflip" target="_blank" rel="facebook"></a>
-						<a href="http://instagram.com/featherandflip" target="_blank" rel="instagram"></a>
-						<a href="http://www.pinterest.com/featherandflip" target="_blank" rel="pinterest"></a>
-						<a href="https://plus.google.com/+Featherandflipkids/posts" target="_blank" rel="google-plus"></a>
-					</nav>				
+						<a href="https://twitter.com/passported" target="_blank" rel="twitter"></a>
+						<a href="https://www.facebook.com/getpassported" target="_blank" rel="facebook"></a>
+						<a href="http://instagram.com/getpassported" target="_blank" rel="instagram"></a>
+						<a href="http://www.pinterest.com/passported" target="_blank" rel="pinterest"></a>
+					</nav>			
 					<small>2015 PASSPORTED ALL RIGHTS RESERVED</small>
 				</div>
 			</footer>

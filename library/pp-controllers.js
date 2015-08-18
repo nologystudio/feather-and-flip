@@ -56,7 +56,6 @@
 			        
 			        var _t = $(this);
 			        
-			        $location.path('');
 			        $timeout(function(){_t.find('*[data-animate="1"]').addClass('animated fadeInUp')},200);
 					$timeout(function(){_t.find('*[data-animate="2"]').addClass('animated fadeInUp')},400);
 					$timeout(function(){_t.find('*[data-animate="3"]').addClass('animated fadeInUp')},600);
@@ -67,30 +66,52 @@
 					
 		        },{ offset: '0%' });  
 		        
+		        $('#how-it-works').waypoint(function(){
+			        
+			        var _t = $(this);
+			        
+			        $timeout(function(){_t.find('*[data-animate="1"]').addClass('animated fadeInUp')},200);
+					$timeout(function(){_t.find('*[data-animate="2"]').addClass('animated fadeIn')},400);
+					$timeout(function(){_t.find('*[data-animate="3"]').addClass('animated fadeIn')},600);
+					$timeout(function(){_t.find('*[data-animate="4"]').addClass('animated fadeIn')},800);
+					$timeout(function(){_t.find('*[data-animate="5"]').addClass('animated fadeIn')},1000);
+					$timeout(function(){_t.find('*[data-animate="6"]').addClass('animated fadeIn')},1200);
+					$timeout(function(){_t.find('*[data-animate="7"]').addClass('animated fadeIn')},1400);
+					$timeout(function(){_t.find('*[data-animate="8"]').addClass('animated fadeIn')},1600);
+					$timeout(function(){_t.find('*[data-animate="9"]').addClass('animated fadeIn')},1800);
+					$timeout(function(){_t.find('*[data-animate="10"]').addClass('animated fadeIn')},2000);
+					
+		        },{ offset: '50%' });  
+		        
 		        $('#map').waypoint(function(){
 			        
 			        var _t = $(this);
 			        
 			        $log.info('The map is visible now');
-			        $location.path('map');
 			        triggerGoogleEvent('map');
 			        
 			        $timeout(function(){_t.find('*[data-animate="1"]').addClass('animated fadeIn')},200);
 			        $timeout(function(){_t.find('*[data-animate="2"]').addClass('animated fadeInLeft')},400);
 			        $timeout(function(){_t.find('*[data-animate="3"]').addClass('animated fadeInRight')},600);
 			        
-		        },{ offset: '50%' }); 
+		        },{ offset: '10%' }); 
 		        
 		        $('#travel-journal').waypoint(function(){
 			        
 			        var _t = $(this);
 			        
 			        $log.info('The blog is visible now');
-			        $location.path('travel-journal');
 					triggerGoogleEvent('travel-journal');
 					
 			    	$timeout(function(){_t.find('*[data-animate="1"]').addClass('animated fadeInUp')},200);
 			    	$timeout(function(){_t.find('*[data-animate="2"]').addClass('animated fadeIn')},400);
+			    	$timeout(function(){_t.find('*[data-animate="3"]').addClass('animated fadeIn')},600);
+			    	$timeout(function(){_t.find('*[data-animate="4"]').addClass('animated fadeIn')},800);
+			    	$timeout(function(){_t.find('*[data-animate="5"]').addClass('animated fadeIn')},1000);
+			    	$timeout(function(){_t.find('*[data-animate="6"]').addClass('animated fadeIn')},1200);
+			    	$timeout(function(){_t.find('*[data-animate="7"]').addClass('animated fadeIn')},1400);
+			    	$timeout(function(){_t.find('*[data-animate="8"]').addClass('animated fadeIn')},1600);
+			    	$timeout(function(){_t.find('*[data-animate="9"]').addClass('animated fadeIn')},1800);
 			    	
 			    },{ offset: '75%' });
 		        
@@ -99,7 +120,6 @@
 			        var _t = $(this);
 			        
 			        $log.info('The press block is visible now');
-			        $location.path('press');
 					triggerGoogleEvent('press');
 					
 			        $timeout(function(){_t.find('*[data-animate="1"]').addClass('animated fadeInDown')},200);
@@ -118,8 +138,6 @@
 			        var _t = $(this);
 			        
 			        $log.info('The footer is visible now');
-			        $location.path('');
-			        
 			        $timeout(function(){_t.find('*[data-animate="1"]').addClass('animated fadeInDown')},200);
 			        
 		        },{ offset: '75%' });
@@ -129,6 +147,7 @@
 		        
 		        var _t 			= $('div.dropdown-wrapper');
 		        var _a			= _t.find('div.arrow');
+		        var _n 			= $('#city-guides-list');
 		        var _d          = 300;
 		        var wHeight     = ($(window).height() - 90);
 		        var userControl = false;
@@ -169,6 +188,7 @@
 					    	if(userControl){
 						    	_t.show().transition({height:wHeight + 'px'});
 						    	_a.css({left:middlePoint+'px'}).addClass('on');
+						    	_n.addClass('on');
 						    }	
 				    	},_d);
 			    	}
@@ -185,6 +205,7 @@
 						    	_t.transition({height:0},function(){
 							    	_t.hide();
 						    	});
+						    	_n.removeClass('on');
 						    }
 				    	},_d);
 			    	}
@@ -231,8 +252,8 @@
 		    var initialize = function(){
 			    
 			    var mapOptions = {
-					zoom: 2,
-					center: new google.maps.LatLng(40.455127,-3.677942),
+					zoom: 10,
+					center: new google.maps.LatLng(40.777422,-73.968887),
 					panControl: true,
 					zoomControl: true,
 					mapTypeControl: false,
@@ -266,7 +287,7 @@
 					},{
 						featureType: 'water',
 						stylers: [
-							{ color: '#D8DCDB' }
+							{ color: '#BBCAD0' }
 						]
 					},{
 						featureType: 'road',
@@ -297,11 +318,9 @@
 				var styledMapOptions = {
 				    name: 'Passported'
 				};
-				
-			    /*
-$scope.map = new google.maps.Map(document.getElementById('map'),mapOptions);
+			    
+				$scope.map = new google.maps.Map(document.getElementById('google-maps-container'),mapOptions);
 			    $scope.map.mapTypes.set(mapID,new google.maps.StyledMapType(ppMapStyle,styledMapOptions));
-*/
 			}
 		    
 		    $timeout(function(){
@@ -342,6 +361,54 @@ $scope.map = new google.maps.Map(document.getElementById('map'),mapOptions);
 		/* ------------------------------------------------------------------------------------------------------------- */
 	    
 	    ppControllers.controller('NewsletterController',function($scope,$log,$timeout){
+		    
+		    var mcService = '';
+			var status    = ['still','success','error'];
+			
+			$scope.currentStatus = status[0];
+			$scope.signUpData    = {
+				userEmail : ''
+			}
+			
+			// Input checker...
+			
+			$scope.checkChangedInput = function(_i){
+				
+				var displayWarning = function(_id,_state){
+					
+					var _t = $('*[name$="-'+_id.split('user')[1].toLowerCase()+'"]');
+					var _c = 'warning';
+					
+					if(_state) _t.addClass(_c);
+					else _t.removeClass(_c);
+				}
+				
+				angular.forEach($scope.data,function(_v,_id){
+					displayWarning(_id,angular.isUndefined(_v));
+				});
+			}
+			
+			// Submit form...
+			
+			$scope.regSubmit = function(){
+				if($scope.signUpData.userEmail != ''){
+					$http({
+		                method : 'POST',
+		                url    : formSubmit,
+		                data   : $.param({formID:'newsletterForm','userEmail':$scope.signUpData.userEmail}),
+		                headers : { 
+		            		'Content-Type' : 'application/x-www-form-urlencoded'
+						},
+						transformRequest: angular.identity
+		            }).
+		            success(function(_data){
+			        	$scope.currentStatus = status[1];
+		            }).
+		            error(function(){
+			        	$scope.currentStatus = status[2];
+		            });
+				}
+			}
 		});
 	    
 	    /* ------------------------------------------------------------------------------------------------------------- */
