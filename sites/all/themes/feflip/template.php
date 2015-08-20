@@ -18,7 +18,7 @@ function feflip_preprocess_html(&$variables) {
   $arg = arg();
 
   // Signup slug and lightbox behaviour
-  if (($_SERVER['REQUEST_URI'] == '/sign-up') && !user_is_logged_in())
+  if ((($_SERVER['REQUEST_URI'] == '/sign-up') || ($_SERVER['REQUEST_URI'] == '/sign-in')) && !user_is_logged_in())
     setcookie('overlay', 'signup');
   else
     setcookie('overlay', 'hidden');
