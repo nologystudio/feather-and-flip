@@ -154,3 +154,87 @@ function feflip_features_StoreBooking($args)
     $wrapper->save();
 
 }
+
+// ************************************ //
+// CUSTOM FIELD COLLECTION VIEWS RENDER //
+// ************************************ //
+function feflip_features_services_request_postprocess_alter($controller, $args, &$result) {
+    $source = $controller['file']['module'];
+    if ($source == 'services_views'){
+        foreach ($result as $key => $item) {
+            if (isset($item->images)) {
+                $item->images = parse_field_images($item->images);
+            }
+            if (isset($item->content_blocks)) {
+                $item->content_blocks = parse_field_content_blocks($item->content_blocks);
+            }
+            if (isset($item->testimonials)) {
+                $item->testimonials = parse_field_testimonials($item->testimonials);
+            }
+        }
+    }
+}
+
+function parse_field_images($images) {
+    $res = array();
+    foreach ($images as $key => $item) {
+        $html = new simple_html_dom();
+        $html->load($item);
+        $items = array();
+        foreach ($html->find('div.view-content div') as $image) {
+            $json_image = $image->find('div.json_image', 0)->plaintext;
+            if (is_null($json_image) || empty($json_image)) continue;
+            $json_ismain = (bool)$image->find('div.json_ismain', 0)->plaintext;
+            $json_caption = $image->find('div.json_caption', 0)->plaintext;
+            $json_date = $image->find('div.json_date', 0)->plaintext;
+            $items[] = array(
+                'src' => $json_image,
+                'is_main' => $json_ismain,
+                'caption' => $json_caption,
+                'date' => $json_date,
+            );
+        }
+        $res[] = $items;
+    }
+    return $res;
+}
+
+function parse_field_content_blocks($blocks) {
+    $res = array();
+    foreach ($blocks as $key => $item) {
+        $html = new simple_html_dom();
+        $html->load($item);
+        $items = array();
+        foreach ($html->find('div.view-content div') as $block) {
+            $json_title = $block->find('div.json_title', 0)->plaintext;
+            if (is_null($json_title)) continue;
+            $json_description = $block->find('div.json_description', 0)->innertext;
+            $json_features = $block->find('div.json_features', 0)->innertext;
+            $features = explode('@@', $json_features);
+            $new_block = array('title' => $json_title, 'description' => $json_description, 'features' => $features);
+            if (in_array($new_block, $items)) continue;
+            $items[] = $new_block;
+        }
+        $res[] = $items;
+    }
+    return $res;
+}
+
+function parse_field_testimonials($testimonials) {
+    $res = array();
+    foreach ($testimonials as $key => $item) {
+        $html = new simple_html_dom();
+        $html->load($item);
+        $items = array();
+        foreach ($html->find('div.view-content div') as $block) {
+            $json_author = $block->find('div.json_author', 0)->plaintext;
+            if (is_null($json_author)) continue;
+            $json_description = $block->find('div.json_description', 0)->innertext;
+            $new_block = array('author' => $json_author, 'description' => $json_description);
+            if (in_array($new_block, $items)) continue;
+            $items[] = $new_block;
+        }
+        $res[] = $items;
+    }
+    return $res;
+}
