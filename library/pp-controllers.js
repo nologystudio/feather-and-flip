@@ -66,6 +66,15 @@
 					
 		        },{ offset: '0%' });  
 		        
+		        $('#inspiration').waypoint(function(){
+			        
+			        var _t = $(this);
+			        
+			        $timeout(function(){_t.find('*[data-animate="1"]').addClass('animated fadeIn')},200);
+					$timeout(function(){_t.find('*[data-animate="2"]').addClass('animated fadeIn')},600);
+					
+		        },{ offset: '75%' });  
+		        
 		        $('#how-it-works').waypoint(function(){
 			        
 			        var _t = $(this);
@@ -148,6 +157,7 @@
 		        var _t 			= $('div.dropdown-wrapper');
 		        var _a			= _t.find('div.arrow');
 		        var _n 			= $('#city-guides-list');
+		        var _s 			= $('#search-block');
 		        var _d          = 300;
 		        var wHeight     = ($(window).height() - 90);
 		        var userControl = false;
@@ -172,24 +182,38 @@
 			    	mouseover: function(){
 				    	
 				    	var middlePoint = $(this).offset().left + 30 - 10 + $(this).width()/2;
+				    	var _element;
 				    	
 				    	userControl = true;
 				    	
 				    	switch($(this).attr('id')){
 					    	case 'city-guides':
 					    		_t.removeClass('light');
+					    		_element = 'city-guides';
 					    	break;
 					    	case 'search':
 					    		_t.addClass('light');
+					    		_element = 'search';
 					    	break;
 				    	}
 				    	
 				    	setTimeout(function(){
 					    	if(userControl){
-						    	_t.show().transition({height:wHeight + 'px'});
+						    	//_t.show().transition({height:wHeight + 'px'});
 						    	_a.css({left:middlePoint+'px'}).addClass('on');
-						    	_n.addClass('on');
-						    }	
+						    	// 1. City Guides
+						    	if(_element == 'city-guides'){ 
+							    	_t.show().transition({height:wHeight + 'px'});
+						    		_n.show().transition({opacity:1});
+						    		_s.hide();
+						    	}
+						    	// 2. Search
+						    	if(_element == 'search'){ 
+							    	_t.show().transition({height:260 + 'px'});
+						    		_s.show().transition({opacity:1});
+						    		_n.hide();
+						    	}
+						    }
 				    	},_d);
 			    	}
 		        });
@@ -202,10 +226,18 @@
 				    	setTimeout(function(){
 					    	if(!userControl){
 						    	_a.removeClass('on');
+						    	// Dropdown...
 						    	_t.transition({height:0},function(){
 							    	_t.hide();
 						    	});
-						    	_n.removeClass('on');
+						    	// City Guide...
+						    	_n.transition({opacity:0},function(){
+							    	_n.hide();
+						    	});
+						    	// Search..
+						    	_s.transition({opacity:0},function(){
+							    	_s.hide();
+						    	});
 						    }
 				    	},_d);
 			    	}
@@ -323,6 +355,54 @@
 			    $scope.map.mapTypes.set(mapID,new google.maps.StyledMapType(ppMapStyle,styledMapOptions));
 			}
 		    
+		    $scope.addMarkers = function(_id,_data){
+			    switch(_id){
+				    case 'destinations':
+				    	_.map(_data,function(_d){
+						    var destination = new google.maps.Marker({
+								position: {
+									lat: Number(_d.lat),
+									lng: Number(_d.lon)
+								},
+								map: $scope.map,
+								title: _d.name
+								//icon: ''
+							});
+							
+							destination.addListener('click',function(){
+								$scope.map.setZoom(15);
+								$scope.map.setCenter(marker.getPosition());
+							});
+					    });
+				    break;
+				    case 'guide':
+				    	console.log(_data);
+				    	/*_.map(_data,function(_d){
+						    var destination = new google.maps.Marker({
+								position: {
+									lat: Number(_d.lat),
+									lng: Number(_d.lon)
+								},
+								map: $scope.map,
+								title: _d.name
+								//icon: ''
+							});
+							
+							var infowindow = new google.maps.InfoWindow({
+								content: _d.name
+							});
+							
+							destination.addListener('click',function(){
+								//$scope.map.setZoom(15);
+								//$scope.map.setCenter(marker.getPosition());
+								infowindow.open($scope.map,destination);
+							});
+							
+					    });*/
+				    break;
+			    }
+		    }
+		    
 		    $timeout(function(){
 				setMapHeight(); 
 				initialize();
@@ -333,12 +413,28 @@
 			});
 		});
 		
-		ppControllers.controller('ItineraryController',function($scope,$log,$timeout){
+		ppControllers.controller('ItineraryController',function($scope,$log,$timeout,$resource){
 			
+			var destSrc = $resource('https://stage.passported.com/api/content/destinations.json');
+			
+			$scope.step = 1;
 			$scope.showAside = false;
+			$scope.pick;
 			
 			$scope.openAside = function(){
 				$scope.showAside = !$scope.showAside;	
+			}
+			
+			$scope.destinations = destSrc.query({},function(_data){
+				console.log(_data);
+				$scope.$parent.addMarkers('destinations',_data);
+			});
+			
+			$scope.displayDestination = function(_d){
+				console.log(_d);
+				$scope.pick = _d;
+				$scope.$parent.addMarkers('guide',_d);
+				$scope.step = 2;
 			}
 		});
 		

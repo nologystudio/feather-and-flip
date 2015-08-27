@@ -114,6 +114,9 @@
 						<li><a href="/santiago/city-guide">Santiago, Chile</a></li></ul>
 					</ul>
 				</nav>
+				<div id="search-block">
+					
+				</div>
 			</div>
 			
 			<!-- Main Block -->
@@ -192,25 +195,44 @@
 			<!-- inspiration -->
 			
 			<section id="inspiration">
-				<div class="grid-2 align-center">
-					<header>
-						<h4>Let us Inspire you</h4>
-					</header>
-					<div class="wrapper">
-						<ul class="select">
-							<li>
-								<span class="icon">&#xe03a;</span>
-								Pick the type of place
-							</li>
-						</ul>
-						<ul class="select">
-							<li>
-								<span class="icon">&#xe03a;</span>
-								Pick a season
-							</li>
-						</ul>
+				<button ng-click="viewAll()">
+					<span></span>
+					<svg>
+						<path d="M 50,0 L 100,50 L 0,50 L 50,0" fill="red"/>
+					</svg>
+				</button>
+				<div class="wrapper grid-2 align-center">
+					<div id="search-destination">
+						<header>
+							<h4 class="larger">Search a destination</h4>
+						</header>
+						<div class="wrapper">
+							<form>
+								<input type="text" class="rounded" placeholder="Enter your destination or hotel"/>
+							</form>
+						</div>
 					</div>
-					<button class="go-btn align-center" ng-click="">Go</button>
+					<div id="let-us-inspire">
+						<header>
+							<h4>Let us Inspire you</h4>
+						</header>
+						<div class="wrapper">
+							<ul class="select">
+								<li>
+									<span class="icon">&#xe03a;</span>
+									Pick the type of place
+								</li>
+							</ul>
+							<ul class="select">
+								<li>
+									<span class="icon">&#xe03a;</span>
+									Pick a season
+								</li>
+							</ul>
+						</div>
+						<button class="go-btn" ng-click="">Go</button>
+						<button class="clear-btn" ng-click="">Clear</button>
+					</div>
 				</div>
 			</section>
 			

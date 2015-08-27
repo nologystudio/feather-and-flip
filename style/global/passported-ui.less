@@ -236,9 +236,6 @@
 				overflow: hidden;
 				background-color: transparent;
 				
-				// | i | This fix the issue with the mask in Safari
-				//-webkit-mask-image: -webkit-radial-gradient(circle,transparent,transparent);
-				
 				img
 				{
 					.set-size(100%,100%);
@@ -249,12 +246,13 @@
 		
 		.ui-components()
 		{
-			.go-btn
+			.go-btn,
+			.clear-btn
 			{
 				@s: 60px;
 				
 				.ui-set-circle-mask(@s);
-				.set-bgc(@color-3);
+				.set-bgc(@color-5);
 				.animate-opacity();
 				.set-opacity(1);
 				.performance();
@@ -267,6 +265,11 @@
 				{
 					.set-opacity(0.5);
 				}
+			}
+			
+			.clear-btn
+			{
+				.set-bgc(@color-2);
 			}
 			
 			.select,
@@ -389,6 +392,148 @@
 						{
 							color: fadeout(@font-color,50%);
 						}
+					}
+					
+					&.rounded
+					{
+						.set-size(100%);
+						.box-sizing();
+						.set-placeholder-style(@color-4);
+						#align > .left;
+						#font > .lato(12px,@color-4,700);
+						background-color: transparent;
+						line-height: 27px;
+						text-transform: uppercase;
+						padding: @content-padding/2;
+						border: solid 2px @color-5;
+						border-radius: @content-padding;
+						text-align: left;
+						overflow: hidden;
+					}
+				}
+			}
+		}
+		
+		.ui-search()
+		{
+			&
+			{
+				& > div.wrapper
+				{
+					.set-size(@grid-1 + 120px);
+					#align > .center;
+					margin-bottom: @content-padding;
+					overflow: hidden;
+					
+					header
+					{
+						.set-size(100%,@header-height);
+						#align > .left;
+						
+						h4
+						{
+							@ornament-width: 80px;
+							
+							.set-size(360px);
+							.set-bg(transparent,'@{media-url}icons/feather-grey-icon.svg',no-repeat,72%,center);
+							.set-bgs(auto,40px);
+							#font > .gar(18px,@color-1);
+							#align > .center;
+							text-align: center;
+							display: block;
+							overflow: hidden;
+							padding: @content-padding 0;
+							
+							&:before
+							{
+								.set-size(@ornament-width,1px);
+								.set-bgc(@grey-4);
+								.set-pos(absolute);
+								.set-coord(0,50%);
+								content: '';
+								display: block;
+							}
+							
+							&:after
+							{
+								.set-size(@ornament-width,1px);
+								.set-bgc(@grey-4);
+								.set-pos(absolute);
+								.set-coord(auto,50%);
+								content: '';
+								right: 0;
+								display: block;
+							}
+							
+							&.larger
+							{
+								background-position: 74% center;
+							}
+						}
+					}
+					
+					& > div
+					{
+						.set-opacity(0);
+						#align > .left;
+						display: block;
+						
+						&[id="searh-destination"]
+						{
+							.set-size(100%/3);
+						}
+						
+						&[id="let-us-inspire"]
+						{
+							.set-size(700px);
+							#align > .right;
+							
+							header
+							{
+								h4
+								{
+									#align > .left;
+									margin-left: 60px + 5px;
+								}	
+							}
+							
+							ul
+							{
+								width: 33%;
+								#align > .left;
+								
+								&:first-child
+								{
+									margin-right: @content-padding/2;
+								}
+							}
+							
+							button
+							{
+								#align > .left;
+								margin: 0 @content-padding/2;
+								
+								&:last-child
+								{
+									margin-left: 0;
+								}
+							}
+						}
+					}
+				}
+				
+				button
+				{
+					#align > .right;
+					
+					&.go-btn
+					{
+						margin: @content-padding auto;
+					}
+					
+					&.clear-btn
+					{
+						margin: @content-padding auto;
 					}
 				}
 			}
