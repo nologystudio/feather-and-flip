@@ -171,6 +171,16 @@ function feflip_features_services_request_postprocess_alter($controller, $args, 
             if (isset($item->testimonials)) {
                 $item->testimonials = parse_field_testimonials($item->testimonials);
             }
+            if (isset($item->addressbook_reference) && !empty($item->addressbook_reference)){
+                $abook = node_load($item->addressbook_reference);
+                if (!is_null($abook)){
+                    $item->addressbook_reference = array(
+                        'name' => $abook->title,
+                        'lat' => $abook->field_ab_latitude['und'][0]['value'],
+                        'lon' => $abook->field_ab_longitude['und'][0]['value']
+                    );
+                }
+            }
         }
     }
 }
