@@ -2047,8 +2047,10 @@
 					transformRequest: angular.identity
 	            }).
 	            success(function(_data){
-		            if(_data.result)
+		            if(_data.result){
+			            $cookies.put('is_signup','true',{path:'/'});
 			            window.location.reload();
+		            }   
 			        else{
 			            $scope.loading = false;
 			            $scope.signInError = 'The user or password is incorrect';
