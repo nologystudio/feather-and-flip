@@ -1844,7 +1844,7 @@
 		/* ~ Sign-up ~ */
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 		
-		ffAppControllers.controller('RegistrationCtrl',function($scope,$http){
+		ffAppControllers.controller('RegistrationCtrl',function($scope,$http,$cookies){
 			
 			$scope.response		 = ['success','error','error-in-login'];
 			$scope.types   		 = ['sign-up','sign-in','response','reset-password','new-password','change-password']; 
@@ -1930,7 +1930,10 @@
 					transformRequest: angular.identity
 	            }).
 	            success(function(_data){
-		            if(_data.result) window.location.href = 'http://' + window.location.host + '';
+		            if(_data.result){
+			            $cookies.put('is_signup','true',{path:'/'});
+			            window.location.reload();
+			        }
 		            else{
 			            $scope.loading = false;
 			            $scope.signInError = 'The user or password is incorrect';
