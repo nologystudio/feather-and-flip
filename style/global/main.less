@@ -721,9 +721,13 @@
 										div.wrapper
 										{
 											.set-size(100%);
+											.set-bg(transparent,'@{media-url}icons/feather-grey-icon.svg',no-repeat,62%,top);
+											.set-bgs(auto,30px);
 											#align > .left;
+											padding: @unit 0 0 0;
 											border-bottom: solid 1px @color-7;
 											padding-bottom: @content-padding;
+											overflow: visible;
 											
 											h1,
 											h2
@@ -736,7 +740,6 @@
 											h1
 											{
 												#font > .gar(16px,@color-1);
-												.set-bgc()
 											}
 											
 											h2
@@ -758,7 +761,7 @@
 										.set-size(100%,100%);
 										.box-sizing();
 										#align > .left;
-										padding: 2 * @content-padding;
+										padding: 0 2 * @content-padding;
 										overflow: auto;
 										
 										& > li
@@ -766,7 +769,7 @@
 											.set-size(100%);
 											#align > .left;
 											padding: @content-padding/2 0;
-											border-bottom: 1px solid fadeout(@color-2,75%);
+											border-bottom: solid 1px @color-7;
 										}
 									}
 									
@@ -800,6 +803,11 @@
 														border: 0;
 														display: block;
 														margin-right: 2 * @unit;
+														
+														img
+														{
+															.set-size(auto,100%);
+														}
 													}
 													
 													div[role="figcaption"]
@@ -822,15 +830,28 @@
 														
 														h2
 														{
-															#font > .lato(12px,@color-2,700);
+															#font > .lato(14px,@color-1,700);
 															text-transform: uppercase;
 														}
 														
 														h3
 														{
-															#font > .lato(10px,@color-3,300);
-															line-height: 14px;
+															#font > .lato(12px,@color-3,400);
+															line-height: 18px;
 														}
+													}
+													
+													div.right-arrow
+													{
+														@s: 20px;
+														
+														.set-size(@s,@s);
+														.set-pos(absolute);
+														.set-bgc(@color-6);
+														border-radius: @s;
+														right: @content-padding/2;
+														top: 50%;
+														margin-top: -@s/2;
 													}
 													
 													&:hover,
@@ -849,6 +870,11 @@
 												}
 											}
 										}
+									}
+									
+									&[id="step-2"]
+									{
+										
 									}
 								}
 							}
