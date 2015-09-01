@@ -435,10 +435,10 @@
 					& > li
 					{
 						.set-size(100%,100%);
-						.set-bg(@color-7,'@{media-url}backgrounds/passported-main.jpg',no-repeat,center,-300px);
+						.set-bg(@color-7,'@{media-url}backgrounds/passported-main.jpg',no-repeat,center,-470px);
 						.box-sizing();
 						#align > .left;
-						padding-top: 1.5 * @header-height;
+						padding-top: @header-height + 6 * @unit;
 						overflow: hidden;
 						
 						&:first-child
@@ -446,13 +446,12 @@
 							h1
 							{
 								.set-size(100%);
-								#font > .lato(26px,@color-4,300);
+								#font > .lato(26px,white,300);
 								#align > .left;
 								text-transform: uppercase;
 								text-align: center;
 								display: block;
-								margin-bottom: 1.5 * @content-padding;
-								display: none;
+								margin-bottom: 1 * @content-padding;
 							}
 							
 							ul
@@ -461,7 +460,7 @@
 								
 								li
 								{
-									@s: 140px;
+									@s: 130px;
 									
 									.set-size(@s + 4 * @content-padding);
 									#align > .left;
@@ -502,7 +501,7 @@
 											&:after
 											{
 												.set-opacity(0.75);
-												transform: scale(1.5);
+												transform: scale(1.2);
 											}
 											
 											& + h3
@@ -700,11 +699,6 @@
 								&.step-2{ left: -@width; 	 }
 								&.step-3{ left: -2 * @width; }
 								
-								& > header
-								{
-									.set-pos(absolute);
-								}	
-								
 								& > li
 								{
 									@p: 2 * @content-padding;
@@ -716,6 +710,43 @@
 									overflow: hidden;
 									box-shadow: none;
 									padding: @p @btn-w @p 0;
+									
+									& > header
+									{
+										.set-size(100%);
+										.box-sizing();
+										#align > .left;
+										padding: 0 2 * @content-padding;
+										
+										div.wrapper
+										{
+											.set-size(100%);
+											#align > .left;
+											border-bottom: solid 1px @color-7;
+											padding-bottom: @content-padding;
+											
+											h1,
+											h2
+											{
+												text-align: center;
+												margin: 0;
+												padding: 0;
+											}
+											
+											h1
+											{
+												#font > .gar(16px,@color-1);
+												.set-bgc()
+											}
+											
+											h2
+											{
+												#font > .lato(16px,@color-3,400);
+												text-transform: uppercase;
+												margin-top: @unit;
+											}
+										}
+									}
 									
 									&:first-child
 									{

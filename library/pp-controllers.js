@@ -376,7 +376,7 @@
 					    });
 				    break;
 				    case 'guide':
-				    	console.log(_data);
+				    	//console.log(_data);
 				    	/*_.map(_data,function(_d){
 						    var destination = new google.maps.Marker({
 								position: {
@@ -415,10 +415,10 @@
 		
 		ppControllers.controller('ItineraryController',function($scope,$log,$timeout,$resource){
 			
-			var destSrc = $resource('https://stage.passported.com/api/content/destinations.json');
+			var destSrc = $resource('https://www.passported.com/api/content/destinations.json');
 			
 			$scope.step = 1;
-			$scope.showAside = false;
+			$scope.showAside = true;
 			$scope.pick;
 			
 			$scope.openAside = function(){
@@ -442,7 +442,7 @@
 	    
 	    ppControllers.controller('BookingController',function($scope,$log,$timeout){
 		   
-		    $scope.showAside = false;
+		    $scope.showRightAside = false;
 			
 			$scope.openAside = function(){
 				$scope.showAside = !$scope.showAside;	
