@@ -249,7 +249,7 @@
 			.go-btn,
 			.clear-btn
 			{
-				@s: 60px;
+				@s: 50px;
 				
 				.ui-set-circle-mask(@s);
 				.set-bgc(@color-5);
@@ -257,7 +257,7 @@
 				.set-opacity(1);
 				.performance();
 				#align > .center;
-				#font > .lato(12px,white,700);
+				#font > .lato(11px,white,700);
 				display: block;
 				text-transform: uppercase;
 				
@@ -281,7 +281,7 @@
 				#font > .lato(12px,@color-4,700);
 				line-height: 17px;
 				text-transform: uppercase;
-				padding: @content-padding/1.5;
+				padding: @content-padding/2;
 				border: solid 2px @color-5;
 				border-radius: @content-padding;
 				text-align: left;
@@ -289,9 +289,10 @@
 				
 				span.icon
 				{
-					#font > .ic(16px,@color-4);
+					#font > .ic(14px,@color-4);
 					#align > .left;
-					margin-right: @content-padding/2;
+					line-height: 16px;
+					padding-right: @content-padding/2;
 					text-align: center;
 					display: block;
 				}
@@ -402,7 +403,7 @@
 						#align > .left;
 						#font > .lato(12px,@color-4,700);
 						background-color: transparent;
-						line-height: 27px;
+						line-height: 17px;
 						text-transform: uppercase;
 						padding: @content-padding/2;
 						border: solid 2px @color-5;
@@ -427,7 +428,7 @@
 					
 					header
 					{
-						.set-size(100%,@header-height);
+						.set-size(100%,@header-height - @content-padding/3);
 						#align > .left;
 						
 						h4

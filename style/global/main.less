@@ -446,12 +446,13 @@
 							h1
 							{
 								.set-size(100%);
-								#font > .lato(42px,@color-4,300);
+								#font > .lato(26px,@color-4,300);
 								#align > .left;
 								text-transform: uppercase;
 								text-align: center;
 								display: block;
 								margin-bottom: 1.5 * @content-padding;
+								display: none;
 							}
 							
 							ul
@@ -460,7 +461,7 @@
 								
 								li
 								{
-									@s: 160px;
+									@s: 140px;
 									
 									.set-size(@s + 4 * @content-padding);
 									#align > .left;
@@ -960,7 +961,7 @@
 				.ui-search();
 				#align > .left;
 				z-index: 2;
-				padding: @content-padding;
+				padding: @content-padding/2 @content-padding;
 				
 				button[id="pointer"]
 				{

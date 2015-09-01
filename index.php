@@ -121,6 +121,8 @@
 			
 			<!-- Main Block -->
 			
+			<!-- Main Block -->
+		
 			<main id="passported-intro">
 				<ul>
 					<li>
@@ -143,6 +145,44 @@
 				</ul>
 			</main>
 			
+			<!-- inspiration -->
+			
+			<section id="inspiration">
+				<div class="wrapper grid-2 align-center">
+					<div id="search-destination" data-animate="1">
+						<header>
+							<h4 class="larger">Search a destination</h4>
+						</header>
+						<div class="wrapper">
+							<form>
+								<input type="text" class="rounded" placeholder="Enter your destination or hotel"/>
+							</form>
+						</div>
+					</div>
+					<div id="let-us-inspire"  data-animate="1">
+						<header>
+							<h4>Let us Inspire you</h4>
+						</header>
+						<div class="wrapper">
+							<ul class="select">
+								<li>
+									<span class="icon">&#xe03a;</span>
+									Pick the type of place
+								</li>
+							</ul>
+							<ul class="select">
+								<li>
+									<span class="icon">&#xe03a;</span>
+									Pick a season
+								</li>
+							</ul>
+						</div>
+						<button class="go-btn" ng-click="">Go</button>
+						<button class="clear-btn" ng-click="">Clear</button>
+					</div>
+				</div>
+			</section>
+			
 			<!-- how it works -->
 			
 			<section id="how-it-works">
@@ -150,15 +190,15 @@
 					<h4 data-animate="1">Title<span>title</span></h4>
 				</header>
 				<div class="promoted-grid align-center">
-					<?php for($i=0;$i<9;$i++): ?>
+					<?php for($i=0;$i<6;$i++): ?>
 						<a class="quick-entry" href="#" target="_blank" data-animate="<?php echo $i+2; ?>">
 							<figure>
-	                            <img src="https://ds9464c56tfjs.cloudfront.net/styles/post_image/s3/summer_travel_giveaway.png?itok=dMMIgEwP" alt=""/>
-	                        </figure>
-	                        <footer>
-	                            <h4>Summer Travel Giveaway</h4>
-	                            <time datetime="2015-08-03 00:00">August, 2015</time>
-	                        </footer>
+		                        <img src="https://ds9464c56tfjs.cloudfront.net/styles/post_image/s3/summer_travel_giveaway.png?itok=dMMIgEwP" alt=""/>
+		                    </figure>
+		                    <footer>
+		                        <h4>Summer Travel Giveaway</h4>
+		                        <time datetime="2015-08-03 00:00">August, 2015</time>
+		                    </footer>
 						</a>
 					<?php endfor; ?>
 				</div>
@@ -192,49 +232,7 @@
 				</aside>
 			</section>
 			
-			<!-- inspiration -->
 			
-			<section id="inspiration">
-				<button ng-click="viewAll()">
-					<span></span>
-					<svg>
-						<path d="M 50,0 L 100,50 L 0,50 L 50,0" fill="red"/>
-					</svg>
-				</button>
-				<div class="wrapper grid-2 align-center">
-					<div id="search-destination">
-						<header>
-							<h4 class="larger">Search a destination</h4>
-						</header>
-						<div class="wrapper">
-							<form>
-								<input type="text" class="rounded" placeholder="Enter your destination or hotel"/>
-							</form>
-						</div>
-					</div>
-					<div id="let-us-inspire">
-						<header>
-							<h4>Let us Inspire you</h4>
-						</header>
-						<div class="wrapper">
-							<ul class="select">
-								<li>
-									<span class="icon">&#xe03a;</span>
-									Pick the type of place
-								</li>
-							</ul>
-							<ul class="select">
-								<li>
-									<span class="icon">&#xe03a;</span>
-									Pick a season
-								</li>
-							</ul>
-						</div>
-						<button class="go-btn" ng-click="">Go</button>
-						<button class="clear-btn" ng-click="">Clear</button>
-					</div>
-				</div>
-			</section>
 			
 			<!-- Blog -->
 			
@@ -246,12 +244,12 @@
 					<a class="quick-entry featured" href="" target="_blank" data-animate="2">
 						<div class="mask">
 							<figure>
-	                            <img src="https://ds9464c56tfjs.cloudfront.net/styles/post_image/s3/summer_travel_giveaway.png?itok=dMMIgEwP" alt=""/>
-	                        </figure>
-	                        <footer>
-	                            <h4>Summer Travel Giveaway</h4>
-	                            <time datetime="2015-08-03 00:00">August, 2015</time>
-	                        </footer>
+		                        <img src="https://ds9464c56tfjs.cloudfront.net/styles/post_image/s3/summer_travel_giveaway.png?itok=dMMIgEwP" alt=""/>
+		                    </figure>
+		                    <footer>
+		                        <h4>Summer Travel Giveaway</h4>
+		                        <time datetime="2015-08-03 00:00">August, 2015</time>
+		                    </footer>
 						</div>
 					</a>
 					<div class="grid-wrapper">
@@ -265,22 +263,22 @@
 		                        <input name="user-email" type="email" ng-if="currentStatus == 'still'" placeholder="Your email address" ng-model="signUpData.userEmail" required/>
 		                        <input type="submit" ng-if="currentStatus == 'still'" value="submit" ng-class="{disabled:!newsletterForm.$valid}" ng-click="!newsletterForm.$valid || regSubmit()"/>
 		                    </form>
-	                	</div>
+		            	</div>
 						<a class="quick-entry review" href="http://blog.featherandflip.com/travel-journal/2014/11/25/featured-hotel-mandarin-oriental-miami" target="_blank" data-animate="4">
-                            <h3> Mandarin Oriental, Miami</h3>
-                            	<hr>
-                            <h4>Featured Hotel</h4>
-                            <time datetime="2014-11-25 15:44">November, 2014</time>
-                        </a>
-                        <a class="quick-entry" target="_blank" href="http://blog.passported.com/travel-journal/2015/8/3/summer-travel-giveaway" data-animate="5">
-                            <figure>
-                                <img src="https://ds9464c56tfjs.cloudfront.net/styles/post_image/s3/summer_travel_giveaway.png?itok=dMMIgEwP" alt=""/>
-                            </figure>
-                            <footer>
-                                <h4>Summer Travel Giveaway</h4>
-                                <time datetime="2015-08-03 00:00">August, 2015</time>
-                            </footer>
-                        </a>
+		                    <h3> Mandarin Oriental, Miami</h3>
+		                    	<hr>
+		                    <h4>Featured Hotel</h4>
+		                    <time datetime="2014-11-25 15:44">November, 2014</time>
+		                </a>
+		                <a class="quick-entry" target="_blank" href="http://blog.passported.com/travel-journal/2015/8/3/summer-travel-giveaway" data-animate="5">
+		                    <figure>
+		                        <img src="https://ds9464c56tfjs.cloudfront.net/styles/post_image/s3/summer_travel_giveaway.png?itok=dMMIgEwP" alt=""/>
+		                    </figure>
+		                    <footer>
+		                        <h4>Summer Travel Giveaway</h4>
+		                        <time datetime="2015-08-03 00:00">August, 2015</time>
+		                    </footer>
+		                </a>
 					</div>
 				</div>
 				<footer>
