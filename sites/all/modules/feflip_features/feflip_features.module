@@ -181,6 +181,9 @@ function feflip_features_services_request_postprocess_alter($controller, $args, 
                     );
                 }
             }
+            if (isset($item->google_place_id) && !empty($item->google_place_id)) {
+                $item->google_place_id = parse_field_google_place($item->google_place_id);
+            }
         }
     }
 }
@@ -192,7 +195,9 @@ function parse_field_images($images) {
         $html->load($item);
         $items = array();
         foreach ($html->find('div.view-content div') as $image) {
-            $json_image = $image->find('div.json_image', 0)->plaintext;
+            $ax = $image->find('div.json_image', 0);
+            if (!$ax) continue;
+            $json_image = $ax->plaintext;
             if (is_null($json_image) || empty($json_image)) continue;
             $json_ismain = (bool)$image->find('div.json_ismain', 0)->plaintext;
             $json_caption = $image->find('div.json_caption', 0)->plaintext;
@@ -247,4 +252,12 @@ function parse_field_testimonials($testimonials) {
         $res[] = $items;
     }
     return $res;
+}
+
+function parse_field_google_place($src) {
+    $res = explode(', ', $src);
+    if ($res){
+        return end($res);
+    }
+    return array();
 }
