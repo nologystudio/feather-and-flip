@@ -376,29 +376,38 @@
 					    });
 				    break;
 				    case 'guide':
-				    	//console.log(_data);
-				    	/*_.map(_data,function(_d){
-						    var destination = new google.maps.Marker({
-								position: {
-									lat: Number(_d.lat),
-									lng: Number(_d.lon)
-								},
-								map: $scope.map,
-								title: _d.name
-								//icon: ''
+				    
+				    	var zoom   = (_data.zoom_level.length == 0) ? 12 : Number(_data.zoom_level);
+						var latLng = (_data.addressbook_reference.length == 0) ? [_data.lat,_data.lon] : [_data.addressbook_reference.lat,_data.addressbook_reference.lon];
+						var detail = [_data.guide,_data.hotels];
+					    
+				    	_.map(detail,function(_d){
+					    	_.map(_d,function(_p){
+						    	
+						    	var pin = new google.maps.Marker({
+									position: {
+										lat: Number(_p.lat),
+										lng: Number(_p.lon)
+									},
+									map: $scope.map,
+									title: _p.title
+								});
+								
+								var infowindow = new google.maps.InfoWindow({
+									content: _p.short_review
+								});
+								
+								pin.addListener('click',function(){
+									$scope.map.setZoom(20);
+									$scope.map.setCenter(pin.getPosition());
+									infowindow.open($scope.map,pin);
+								});
 							});
-							
-							var infowindow = new google.maps.InfoWindow({
-								content: _d.name
-							});
-							
-							destination.addListener('click',function(){
-								//$scope.map.setZoom(15);
-								//$scope.map.setCenter(marker.getPosition());
-								infowindow.open($scope.map,destination);
-							});
-							
-					    });*/
+					    });
+						
+					    $scope.map.setCenter(new google.maps.LatLng(Number(latLng[0]),Number(latLng[1])));
+					    $scope.map.setZoom(zoom);
+					    
 				    break;
 			    }
 		    }
@@ -415,9 +424,18 @@
 		
 		ppControllers.controller('ItineraryController',function($scope,$log,$timeout,$resource){
 			
-			var destSrc = $resource('https://www.passported.com/api/content/destinations.json');
+			var destSrc  = $resource('https://www.passported.com/api/content/destinations.json');
+			var abookSrc = $resource('https://www.passported.com/api/content/address-books.json');
+			var hotelSrc = $resource('https://www.passported.com/api/content/hotels.json');
+			var itSrc    = $resource('https://gostage.passported.com/api/v2/location');
 			
-			$scope.step = 1;
+			//GET https://gostage.passported.com/api/v2/location?name=Paris
+			//This will return a list of itineraries for New York:
+			//GET https://gostage.passported.com/api/v2/location?name=New+York+City
+			//This will return a single itinerary based on id:
+			//GET https://gostage.passported.com/api/v2/itinerary?id=64
+		    
+		    $scope.step = 1;
 			$scope.showAside = true;
 			$scope.pick;
 			
@@ -431,9 +449,30 @@
 			});
 			
 			$scope.displayDestination = function(_d){
-				console.log(_d);
+				
 				$scope.pick = _d;
-				$scope.$parent.addMarkers('guide',_d);
+				
+				// 1. Bonvoyaging Itinerary...
+				
+				/*itSrc.query({'name':_d.name.replace(' ','+')},function(_data){
+					console.log(_data);
+				});*/
+				
+				// 2. Address Books
+				
+				abookSrc.query({'destination':_d.id},function(_data){
+					
+					$scope.pick.guide = _data;
+				
+					// 3. Hotels
+			
+					hotelSrc.query({'destination':_d.id},function(_data){
+						$scope.pick.hotels = _data;
+						$scope.$parent.addMarkers('guide',_d);
+						console.log(_data);
+					});
+				});
+				
 				$scope.step = 2;
 			}
 		});
@@ -452,6 +491,9 @@
 		/* ------------------------------------------------------------------------------------------------------------- */
 	    
 	    ppControllers.controller('BlogController',function($scope,$log,$timeout){
+		});
+	    
+	    ppControllers.controller('PromotedController',function($scope,$log,$timeout,$resource){
 		});
 		
 		/* ------------------------------------------------------------------------------------------------------------- */

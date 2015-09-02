@@ -130,6 +130,12 @@
 			padding: 0;
 		}
 		
+		h1,h2,h3,h4,h5,h6
+		{
+			margin: 0;
+			padding: 0;
+		}
+		
 		/* ------------------------------------------------------------------------------------------------------------- */
 		/* ~ UI ~ */
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
@@ -667,6 +673,7 @@
 							right: 0;
 							top: 50%;
 							margin-top: -@btn-h/2;
+							z-index: 1;
 							
 							span
 							{
@@ -681,6 +688,7 @@
 							.set-coord(-@btn-w,0);
 							padding: 0;
 							overflow: hidden;
+							z-index: 2;
 							
 							& > ul
 							{
@@ -874,7 +882,284 @@
 									
 									&[id="step-2"]
 									{
+										@aside-width: 50px;
 										
+										padding-top: 0;
+										padding-bottom: 0;
+										
+										& > aside
+										{
+											.set-size(@aside-width,100%);
+											.set-pos(absolute);
+											.set-coord();
+											display: block;
+											border-right: solid 1px @color-2;
+											z-index: 2;
+											
+											button
+											{
+												.reset();
+												.set-size(@aside-width,@aside-width);
+												.set-bgc(@color-4);
+												#align > .left;
+												margin-bottom: 1px;
+												display: block;
+												
+												&[rel="menu"]
+												{}
+												
+												&[rel="print"]
+												{}
+												
+												&.view-all
+												{}
+											}	
+										}
+										
+										div.wrapper
+										{
+											.set-size(100%,100%);
+											.box-sizing();
+											#align > .left;
+											z-index: 1;
+											overflow: scroll;
+											margin-top: 0;
+											padding-left: @aside-width;
+											
+											& > header,
+											& > ul,
+											& > ul li
+											{
+												.set-size(100%);
+												.box-sizing();
+												#align > .left;
+											}
+											
+											& > header
+											{
+												figure
+												{
+													.set-size(100%);
+													.box-sizing();
+													margin: 0;
+													padding: 0;
+													z-index: 1;
+													
+													img
+													{
+														width: 100%;
+													}
+												}
+												
+												h1
+												{
+													.set-size(100%);
+													.set-pos(absolute);
+													.set-coord(0,50%);
+													#font > .lato(36px,white,900);
+													margin-top: -20px;
+													text-align: center;
+													text-transform: uppercase;
+													text-transform: 0 2px 2px @color-1;
+													z-index: 2;
+												}
+												
+												nav
+												{
+													.set-size();
+													.ui-set-social-media-nav(red,28px);
+													#align > .center;
+													display: table;
+													z-index: 3;
+												}
+											}
+											
+											& > ul
+											{
+												list-style: none;
+												padding-left: @aside-width;
+												
+												& > li
+												{
+													.set-circle-btn(@s)
+													{
+														.set-size(@s,@s);
+														#align > .left;
+														border-radius: @s;
+														border: solid 2px @color-5;
+														overflow: hidden;
+														
+														&.download-btn
+														{}
+														
+														&.share-btn
+														{}
+														
+														&.plan-btn
+														{}
+													}
+													
+													&[id="the-trip-block"]
+													{
+														a
+														{
+															@s: 100px;
+															
+															.set-size(@s,@s);
+															.set-opacity(1);
+															.animate-opacity();
+															.performance();
+															#font > .lato(12px,@color-1,900);
+															margin: @content-padding/2 auto;
+															text-decoration: none;
+															display: block;
+															
+															div.circle-outline-icon
+															{
+																.set-circle-btn(100px);
+																margin-bottom: @unit;
+															}
+															
+															&:hover
+															{
+																.set-opacity(0.5);
+															}
+														}
+													}
+													
+													&[id="destination-block"]
+													{
+														button
+														{
+															.reset();
+															.set-circle-btn(50px);
+															.set-pos(absolute);
+															
+															&.share-btn
+															{
+																left: 0;
+															}
+															
+															&.download-btn
+															{
+																right: 0;
+															}
+														}
+														
+														h2,
+														h3,
+														small
+														{
+															.set-size(100%);
+															#align > .left;
+														}
+														
+														h2
+														{
+															#font > .lato(12px,@color-1,900);
+														}
+														
+														h3
+														{
+															#font > .lato(12px,@color-1,700);
+														}
+														
+														small
+														{
+															#font > .lato(12px,@color-1,700);
+														}
+													}
+													
+													&[id="hotel-block"]
+													{
+														header,
+														article,
+														article > *,
+														div.slideshow
+														{
+															.set-size(100%);
+															#align > .left;
+														}
+														
+														header
+														{
+															div.filter
+															{
+																button.radio-btn
+																{
+																	span
+																	{}
+																}
+															}
+														}
+														
+														article
+														{
+															header
+															{
+																h4
+																{
+																	#font > .lato(36px,white,900);
+																}
+																
+																h5
+																{
+																	#font > .lato(36px,white,900);
+																}
+																
+																p
+																{
+																	#font > .lato(36px,white,900);
+																}
+																
+																button
+																{}
+															}
+															
+															div.slideshow
+															{
+																@h: 200px;
+																
+																height: @h;
+																
+																ul
+																{
+																	.set-size(100%,100%);
+																	#align > .left;
+																	overflow: hidden;
+																	
+																	li
+																	{
+																		.set-size(100%,100%);
+																		#align > .left;
+																	
+																		img
+																		{
+																			#align > .left;
+																			height: @h;
+																		}
+																	}
+																}
+															}
+															
+															p
+															{
+																div.divider
+																{}
+																
+																ul
+																{
+																	li
+																	{
+																		#font > .lato(36px,white,900);
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
 									}
 								}
 							}

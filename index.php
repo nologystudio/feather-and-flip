@@ -183,7 +183,7 @@
 								    		<small></small>
 								    		<h3 ng-bind-html="pick.description"></h3>
 								    	</li>
-								    	<li id="hotel-block">
+								    	<li id="hotel-block" ng-repeat="hotel in pick.hotels">
 								    		<header>
 									    		Section
 									    		<div class="filter">
@@ -194,25 +194,27 @@
 								    		</header>
 								    		<article>
 							    				<header>
-									    			<h4>Hotel name</h4>
-									    			<h5>Address</h5>
-									    			<p>Phone Number</p>
-									    			<button>Book now</button>
+									    			<h4>{{hotel.name}}</h4>
+									    			<h5>{{hotel.address_1}}</h5>
+									    			<p>{{hotel.phone_number}}</p>
+									    			<button ng-click="book(hotel.id)">Book now</button>
 								    			</header>
 								    			<div class="slideshow">
 									    			<ul>
-										    			<li>
-															<img src="" alt=""/>
+										    			<li ng-repeat="image in hotel.images[0]">
+															<img ng-src="{{image.src}}" alt=""/>
 														</li>
 									    			</ul>
 								    			</div>
-								    			<p>
-									    			<div class="divicer bests">Type</div>
+								    			<p ng-repeat="content in hotel.content_blocks[0]">
+									    			<div class="divicer bests">{{content.title}}</div>
 									    			<ul>
-										    			<li>Description line</li>
+										    			<li ng-bind-html="content.description"></li>
 									    			</ul>
 								    			</p>
 							    			</article>
+								    	</li>
+								    	<li id="address-block" ng-repeat="address in pick.guide">
 								    	</li>
 							    	</ul>
 						    	</div>
@@ -438,7 +440,7 @@
 			<script src="library/vendors/underscore.min.js"></script>
 			<script src="library/vendors/transit.min.js"></script>
 			<script src="library/vendors/imagesloaded.min.js"></script>
-			<script src="library/vendors/retina.min.js"></script>
+<!-- 			<script src="library/vendors/retina.min.js"></script> -->
 			<script src="library/vendors/waypoints.min.js"></script>
 			
 			<script src="library/vendors/angular.min.js"></script>
