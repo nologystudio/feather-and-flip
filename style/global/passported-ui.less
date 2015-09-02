@@ -267,6 +267,17 @@
 				}
 			}
 			
+			.circle-btn
+			{
+				@s: 60px;
+				
+				.set-size(@s,@s);
+				#align > .left;
+				border-radius: @s;
+				border: solid 1px @color-3;
+				overflow: hidden;
+			}
+			
 			.clear-btn
 			{
 				.set-bgc(@color-2);
@@ -296,6 +307,23 @@
 					text-align: center;
 					display: block;
 				}
+			}
+			
+			&.rounded-btn
+			{
+				.set-size(100%);
+				.box-sizing();
+				.set-placeholder-style(@color-4);
+				#align > .left;
+				#font > .lato(12px,@color-4,700);
+				background-color: transparent;
+				line-height: 17px;
+				text-transform: uppercase;
+				padding: @content-padding/2;
+				border: solid 2px @color-2;
+				border-radius: @content-padding;
+				text-align: center;
+				overflow: hidden;
 			}
 			
 			/*.select
@@ -411,6 +439,11 @@
 						text-align: left;
 						overflow: hidden;
 					}
+				}
+				
+				textarea
+				{
+					resize: none;
 				}
 			}
 		}

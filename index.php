@@ -150,7 +150,7 @@
 						    </li>
 						    <li id="step-2">
 						    	<aside>
-							    	<button rel="menu" ng-click="step = 2"></button>
+							    	<button rel="menu" ng-click="goTo(1)"></button>
 							   		<button ng-repeat="type in selectedDestination.summaries" rel="{{type.name}}" ng-click="filterMap(type.name)" ng-class="{'on':bookFilter == type.name}"></button>
 							   		<button ng-click="filterMap(undefined)" ng-class="{'on':bookFilter == undefined}" class="view-all">view all</button>
 							   		<button rel="print" ng-click="printList()"></button>
@@ -162,11 +162,11 @@
 								    	</figure>
 								    	<h1>{{pick.name}}</h1>
 								    	<nav>
-									    	<a href="/city-guides}"></a>
-									    	<a href=""></a>
-									    	<a href=""></a>
-									    	<a href=""></a>
-									    	<a href=""></a>
+									    	<a href="" rel="facebook"></a>
+									    	<a href="" rel="twitter"></a>
+									    	<a href="" rel="pinterest"></a>
+									    	<a href="" rel="google-plus"></a>
+									    	<a href="" rel="instagram"></a>
 									    </nav>
 							    	</header>
 							    	<ul>
@@ -180,23 +180,26 @@
 								    		<button class="circle-outline-icon download-btn"></button>
 								    		<button class="circle-outline-icon share-btn"></button>
 								    		<h2>{{pick.name}}, {{pick.country}}</h2>
-								    		<small></small>
+								    		<small>{{pick.lat}} Lat, {{pick.lon}} Lon</small>
 								    		<h3 ng-bind-html="pick.description"></h3>
 								    	</li>
-								    	<li id="hotel-block" ng-repeat="hotel in pick.hotels">
+								    	<li id="hotel-block" >
 								    		<header>
-									    		Section
-									    		<div class="filter">
-										    		<button class="radio-btn">
-										    			Type<span></span>
-										    		</button>
+									    		STAY
+									    		<div class="filter-wrapper">
+										    		<div class="filter">
+											    		<button class="radio-btn">
+											    			Type<span></span>
+											    		</button>
+										    		</div>
 									    		</div>
 								    		</header>
-								    		<article>
+								    		<article ng-repeat="hotel in pick.hotels">
 							    				<header>
 									    			<h4>{{hotel.name}}</h4>
 									    			<h5>{{hotel.address_1}}</h5>
 									    			<p>{{hotel.phone_number}}</p>
+									    			<h6>{{hotel.short_description}}</h6>
 									    			<button ng-click="book(hotel.id)">Book now</button>
 								    			</header>
 								    			<div class="slideshow">
@@ -207,19 +210,42 @@
 									    			</ul>
 								    			</div>
 								    			<p ng-repeat="content in hotel.content_blocks[0]">
-									    			<div class="divicer bests">{{content.title}}</div>
+									    			<div class="divider bests">{{content.title}}</div>
 									    			<ul>
 										    			<li ng-bind-html="content.description"></li>
 									    			</ul>
 								    			</p>
 							    			</article>
 								    	</li>
-								    	<li id="address-block" ng-repeat="address in pick.guide">
-								    	</li>
+								    	<li id="guide">
+											<header>
+									    		Section
+									    		<div class="filter-wrapper">
+										    		<div class="filter">
+											    		<button class="radio-btn">
+											    			<span></span>
+											    			filter
+											    		</button>
+										    		</div>
+									    		</div>
+								    		</header>
+								    		<ul>
+									    		<li ng-repeat="address in pick.guide">
+									    			<div class="icon"></div>
+									    			<h4>{{address.title}}</h4>
+									    			<h5 ng-bind-html="address.short_review"></h5>
+									    			<footer>
+										    			<span class="tel" ng-if="address.phone_number">{{address.phone_number}}</span>
+										    			<a href="" ng-if="">read more</a>
+									    			</footer>
+									    		</li>
+								    		</ul>
+										</li>
 							    	</ul>
 						    	</div>
 						    </li>
 				    	</ul>
+
 				    </div>
 					<button class="aside-trigger" ng-click="openAside()" data-animate="2">
 						<span>&#x23;</span>
@@ -228,14 +254,72 @@
 						</svg>
 					</button>
 				</aside>
-				<aside class="right" ng-controller="BookingController" ng-class="{'on':showRightAside}" ng-if="">
-					<div class="wrapper"></div>
-					<button class="aside-trigger" ng-click="openAside()" data-animate="3">
-						<span>&#x23;</span>
-						<svg>
-							<path d="M 0,0 L 50,50 L 0,100 L 0,0"/>
-						</svg>
-					</button>
+				<aside class="right" ng-controller="BookingController" ng-class="{'on':showRightAside}">
+					<div class="wrapper">
+						<button rel="close" ng-click="openAside()"></button>
+				    	<ul>
+						    <li id="step-1">
+								<header>
+							    	<div class="wrapper">
+								    	<h1>Contact us</h1>
+								    	<h2>Consult our hotel experts</h2>
+							    	</div>
+						    	</header>
+						    	<ul>
+							    	<li id="email-entry">
+							    		Drop us an e-mail or fill out the form below
+							    		<a href="" class="icon circle-btn"></a>
+							    	</li>
+							    	<li>
+							    		<form>
+								    		<ul>
+									    		<li>
+									    			<div id="date-picker">
+										    			<button class="rounded-btn">Start Date</button>
+										    			<button class="rounded-btn">End Date</button>
+									    			</div>
+									    		</li>
+									    		<li>
+									    			<label>Number of Adults</label>
+									    			<div class="circle-input-wrapper">
+									    				<input type="text" value="1"/>
+									    			</div>
+									    		</li>
+									    		<li>
+									    			<label>Number of Children</label>
+									    			<div class="circle-input-wrapper">
+									    				<input type="text" value="1"/>
+									    			</div>
+									    		</li>
+									    		<li>
+									    			<label>Budget per Night<label>
+									    			<div class="budget-check">
+										    			400$-800$
+										    			<span></span>
+									    			</div>
+									    			<div class="budget-check">
+										    			800$-1200$
+										    			<span></span>
+									    			</div>
+									    			<div class="budget-check">
+										    			1200$+
+										    			<span></span>
+									    			</div>
+									    			<input type="text" class="rounded" placeholder="other"/>
+									    		</li>
+									    		<li>
+									    			<textarea placeholder="Prefer connecting rooms or a suite? Any favorite hotels will help us pick your perfect match for this trip. Let us know here."></textarea>
+									    		</li>
+									    		<li>
+									    			<button id="submit" class="rounded-btn">send</button>
+									    		</li>
+								    		</ul>
+							    		</form>
+							    	</li>
+						    	</ul>
+						    </li>
+				    	</ul>
+					</div>
 				</aside>
 			</section>
 			

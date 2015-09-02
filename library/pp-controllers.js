@@ -103,7 +103,7 @@
 			        $timeout(function(){_t.find('*[data-animate="2"]').addClass('animated fadeInLeft')},400);
 			        $timeout(function(){_t.find('*[data-animate="3"]').addClass('animated fadeInRight')},600);
 			        
-		        },{ offset: '10%' }); 
+		        },{ offset: '30%' }); 
 		        
 		        $('#travel-journal').waypoint(function(){
 			        
@@ -358,6 +358,7 @@
 		    $scope.addMarkers = function(_id,_data){
 			    switch(_id){
 				    case 'destinations':
+				    	console.log(_data);
 				    	_.map(_data,function(_d){
 						    var destination = new google.maps.Marker({
 								position: {
@@ -422,7 +423,7 @@
 			});
 		});
 		
-		ppControllers.controller('ItineraryController',function($scope,$log,$timeout,$resource){
+		ppControllers.controller('ItineraryController',function($scope,$log,$timeout,$resource,$rootScope){
 			
 			var destSrc  = $resource('https://www.passported.com/api/content/destinations.json');
 			var abookSrc = $resource('https://www.passported.com/api/content/address-books.json');
@@ -434,17 +435,24 @@
 			//GET https://gostage.passported.com/api/v2/location?name=New+York+City
 			//This will return a single itinerary based on id:
 			//GET https://gostage.passported.com/api/v2/itinerary?id=64
-		    
-		    $scope.step = 1;
-			$scope.showAside = true;
+			
+			$scope.step = 1;
+			$scope.showAside = false;
 			$scope.pick;
 			
 			$scope.openAside = function(){
 				$scope.showAside = !$scope.showAside;	
 			}
 			
+			$scope.goTo = function(_state){
+				$scope.step = _state;
+			}
+			
+			$scope.book = function(_hotel){
+				$rootScope.$emit('open-booking');
+			}
+			
 			$scope.destinations = destSrc.query({},function(_data){
-				console.log(_data);
 				$scope.$parent.addMarkers('destinations',_data);
 			});
 			
@@ -469,7 +477,7 @@
 					hotelSrc.query({'destination':_d.id},function(_data){
 						$scope.pick.hotels = _data;
 						$scope.$parent.addMarkers('guide',_d);
-						console.log(_data);
+						console.log($scope.pick);
 					});
 				});
 				
@@ -479,13 +487,19 @@
 		
 		/* ------------------------------------------------------------------------------------------------------------- */
 	    
-	    ppControllers.controller('BookingController',function($scope,$log,$timeout){
+	    ppControllers.controller('BookingController',function($scope,$log,$timeout,$rootScope){
 		   
 		    $scope.showRightAside = false;
 			
 			$scope.openAside = function(){
-				$scope.showAside = !$scope.showAside;	
+				$scope.showRightAside = !$scope.showRightAside;	
 			}
+			
+			$rootScope.$on('open-booking',function(_e,_data){
+				$scope.showRightAside = true;
+				console.log(_e);
+				console.log(_data);
+			});
 		});
 		
 		/* ------------------------------------------------------------------------------------------------------------- */
