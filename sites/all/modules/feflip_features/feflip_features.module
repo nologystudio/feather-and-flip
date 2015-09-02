@@ -184,6 +184,9 @@ function feflip_features_services_request_postprocess_alter($controller, $args, 
             if (isset($item->google_place_id) && !empty($item->google_place_id)) {
                 $item->google_place_id = parse_field_google_place($item->google_place_id);
             }
+            if (isset($item->guide_categories) && !empty($item->guide_categories)) {
+                $item->guide_categories = parse_field_guide_categories($item->guide_categories);
+            }
         }
     }
 }
@@ -260,4 +263,21 @@ function parse_field_google_place($src) {
         return end($res);
     }
     return array();
+}
+
+function parse_field_guide_categories($catlist) {
+    $res = array();
+    foreach ($catlist as $key => $item) {
+        $html = new simple_html_dom();
+        $html->load($item);
+        foreach ($html->find('ul.shs-hierarchy') as $cat) {
+            $json_parent = $cat->find('li.shs-parent', 0)->plaintext;
+            $json_child = $cat->find('li.shs-term-selected', 0)->plaintext;
+            if (empty($json_parent))
+                $res[$json_child] = array();
+            else
+                $res[$json_parent][] = $json_child;
+        }
+    }
+    return $res;
 }
