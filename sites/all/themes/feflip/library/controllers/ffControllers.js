@@ -2049,10 +2049,10 @@
 	            success(function(_data){
 		            if(_data.result){
 			            
-			            var _rf = $(document)[0].referrer.split('passported.com');
+			            var _rf = $(document)[0].referrer.split('.passported.com');
 			            
 			            $cookies.put('is_signup','true',{path:'/'});
-			            if(_rf.length > 0) window.location = $(document)[0].referrer;
+			            if(_rf.length > 1) window.location = $(document)[0].referrer;
 			            else window.location.reload();
 		            } 
 			        else{
