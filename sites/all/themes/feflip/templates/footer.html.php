@@ -39,10 +39,10 @@
 				<?php echo $footer_fixed_menu; ?>
 			</nav>
 			<div class="fixed-bar">
-				<a id="brand" href="/"><img src="<?php echo variable_get('relativePath'); ?>media/brand/passported-black-logo.png" alt="PASSPORTED"/></a>
+				<a id="brand" href="/"><img src="<?php echo variable_get('relativePath'); ?>media/brand/feather-and-flip-black-logo.png" alt="Feather+flip"/></a>
 				<?php echo Helpers::GetSocialMediaMenu('black');?>
 				
-				<!--<div id="ssl-label">
+				<div id="ssl-label">
 					<table width="135" border="0" cellpadding="2" cellspacing="0" title="Click to Verify - This site chose Symantec SSL for secure e-commerce and confidential communications.">
 						<tr>
 							<td width="135" align="center" valign="top">
@@ -50,14 +50,14 @@
 							</td>
 						</tr>
 					</table>
-				</div>-->
+				</div>
 								
 				<a id="tzell-brand" href="http://www.tzell.com/tzell/index.htm" target="_blank">
 					<small>Powered by</small>
 					<img src="<?php echo variable_get('relativePath'); ?>media/brand/tzell-logo.png" alt="Powered by Tzell Travel Group"/>
 				</a>
 
-				<small><?php echo date("Y"); ?> PASSPORTED ALL RIGHTS RESERVED</small>
+				<small><?php echo date("Y"); ?> FEATHER+FLIP LLC. ALL RIGHTS RESERVED</small>
 			</div>
 		</footer>
 		

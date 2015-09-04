@@ -8,7 +8,6 @@
 	<script type="text/javascript" charset="utf-8" src="/<?php echo drupal_get_path('theme', 'feflip_mobile'); ?>/library/vendors/angular/angular.min.js"></script>
 	<script type="text/javascript" charset="utf-8" src="/<?php echo drupal_get_path('theme', 'feflip_mobile'); ?>/library/vendors/angular/angular-route.min.js"></script>
 	<script type="text/javascript" charset="utf-8" src="/<?php echo drupal_get_path('theme', 'feflip_mobile'); ?>/library/vendors/angular/angular-sanitize.min.js"></script>
-	<script type="text/javascript" charset="utf-8" src="/<?php echo drupal_get_path('theme', 'feflip_mobile'); ?>library/vendors/angular/angular-cookies.min.js"></script>
 	<script type="text/javascript" charset="utf-8" src="/<?php echo drupal_get_path('theme', 'feflip_mobile'); ?>/library/vendors/transit.min.js" ></script>
 	<script type="text/javascript" charset="utf-8" src="/<?php echo drupal_get_path('theme', 'feflip_mobile'); ?>/library/vendors/sly.min.js"></script>
 	<script type="text/javascript" charset="utf-8" src="/<?php echo drupal_get_path('theme', 'feflip_mobile'); ?>/library/vendors/shuffle.min.js"></script>

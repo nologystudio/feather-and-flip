@@ -1242,18 +1242,15 @@
 					
 					var newMarker = angular.copy(markerType);
 					
-					if(_.isNumber(parseFloat(_d.longitude)) && _.isNumber(parseFloat(_d.latitude))){
+					newMarker.geometry.coordinates[0] = _d.longitude;
+					newMarker.geometry.coordinates[1] = _d.latitude;
+					newMarker.properties.title        = _d.destination;
+					newMarker.properties.icon.iconUrl = '/sites/all/themes/feflip/media/icons/destination-map-pin.png';
+					newMarker.properties.image        = _d.image.url;
+					newMarker.properties.description  = _d.description;
+					newMarker.properties.url          = _d.maptourl;
 					
-						newMarker.geometry.coordinates[0] = _d.longitude;
-						newMarker.geometry.coordinates[1] = _d.latitude;
-						newMarker.properties.title        = _d.destination;
-						newMarker.properties.icon.iconUrl = '/sites/all/themes/feflip/media/icons/destination-map-pin.png';
-						newMarker.properties.image        = _d.image.url;
-						newMarker.properties.description  = _d.description;
-						newMarker.properties.url          = _d.maptourl;
-						
-						geoJson.push(newMarker);
-					}
+					geoJson.push(newMarker);
 				});
 				
 				destLayer.on('layeradd', function(_e){
@@ -1383,7 +1380,7 @@
 			
 		});
 		
-		ffAppControllers.controller('FullMapCtrl',function($scope,$element,$http,$timeout,$log){
+		ffAppControllers.controller('FullMapCtrl',function($scope,$element,$http,$timeout){
 			
 			
 			L.mapbox.accessToken = 'pk.eyJ1Ijoibm9sb2d5IiwiYSI6IkFBdm5aVEkifQ.ItKi4oQ1-kPhJhedS4QmNg';
@@ -1472,22 +1469,19 @@
 					
 					var newMarker = angular.copy(markerType);
 					
-					if(_.isNumber(parseFloat(_d.longitude)) && _.isNumber(parseFloat(_d.latitude))){
+					newMarker.geometry.coordinates[0] = _d.longitude;
+					newMarker.geometry.coordinates[1] = _d.latitude;
+					newMarker.properties.title        = _d.destination;
+					newMarker.properties.destination  = _d;
+					newMarker.properties.icon.iconUrl = '/sites/all/themes/feflip/media/icons/destination-map-pin.png';
+					newMarker.properties.image        = _d.image.url;
+					newMarker.properties.description  = _d.description;
+					newMarker.properties.url          = _d.maptourl;
 					
-						newMarker.geometry.coordinates[0] = _d.longitude;
-						newMarker.geometry.coordinates[1] = _d.latitude;
-						newMarker.properties.title        = _d.destination;
-						newMarker.properties.destination  = _d;
-						newMarker.properties.icon.iconUrl = '/sites/all/themes/feflip/media/icons/destination-map-pin.png';
-						newMarker.properties.image        = _d.image.url;
-						newMarker.properties.description  = _d.description;
-						newMarker.properties.url          = _d.maptourl;
-						
-						if(_.isUndefined($scope.theOrigin)) 
-							geoJson.push(newMarker);
-						else if(!_.isUndefined($scope.theOrigin) && $scope.theOrigin == _d.url.split('/')[1]) 
-							$scope.displayDestination(_d);
-					}
+					if(_.isUndefined($scope.theOrigin)) 
+						geoJson.push(newMarker);
+					else if(!_.isUndefined($scope.theOrigin) && $scope.theOrigin == _d.url.split('/')[1]) 
+						$scope.displayDestination(_d);
 				});
 				
 				destLayer.on('layeradd', function(_e){
@@ -1562,21 +1556,17 @@
 						
 						var newMarker = angular.copy(markerType);
 						
-						if(_.isNumber(parseFloat(_d.longitude)) && _.isNumber(parseFloat(_d.latitude))){
-							
-							newMarker.geometry.coordinates[0] = _d.longitude;
-							newMarker.geometry.coordinates[1] = _d.latitude;
-							newMarker.properties.title        = _d.title;
-							newMarker.properties.phone        = _d.phone;
-							newMarker.properties.address      = _d.address;
-							newMarker.properties.icon.iconUrl = '/sites/all/themes/feflip/media/map/'+_d.association.toLowerCase()+'-pin.png';
-							newMarker.properties.review  	  = _d.review;
-							newMarker.properties.type  	      = _d.association.toLowerCase();
-							
-							if(!_.isUndefined(_filter) && _filter == _d.association.toLowerCase()) bookJson.push(newMarker);
-							else if(_.isUndefined(_filter)) bookJson.push(newMarker);
-						}
-						else $log.warning("This address book has not been placed on the map:" + _d.title);
+						newMarker.geometry.coordinates[0] = _d.longitude;
+						newMarker.geometry.coordinates[1] = _d.latitude;
+						newMarker.properties.title        = _d.title;
+						newMarker.properties.phone        = _d.phone;
+						newMarker.properties.address      = _d.address;
+						newMarker.properties.icon.iconUrl = '/sites/all/themes/feflip/media/map/'+_d.association.toLowerCase()+'-pin.png';
+						newMarker.properties.review  	  = _d.review;
+						newMarker.properties.type  	      = _d.association.toLowerCase();
+						
+						if(!_.isUndefined(_filter) && _filter == _d.association.toLowerCase()) bookJson.push(newMarker);
+						else if(_.isUndefined(_filter)) bookJson.push(newMarker);
 					});
 					
 					// | i | Bind pop-up...
@@ -1670,19 +1660,15 @@
 					
 						var newMarker = angular.copy(markerType);
 						
-						if(_.isNumber(parseFloat(_d.longitude)) && _.isNumber(parseFloat(_d.latitude))){
+						newMarker.geometry.coordinates[0] = _d.longitude;
+						newMarker.geometry.coordinates[1] = _d.latitude;
+						newMarker.properties.title        = _d.name;
+						newMarker.properties.icon.iconUrl = '/sites/all/themes/feflip/media/icons/destination-map-pin.png';
+						newMarker.properties.image        = _d.image;
+						newMarker.properties.description  = _d.hotelDescription;
+						newMarker.properties.url          = _d.url;
 						
-							newMarker.geometry.coordinates[0] = _d.longitude;
-							newMarker.geometry.coordinates[1] = _d.latitude;
-							newMarker.properties.title        = _d.name;
-							newMarker.properties.icon.iconUrl = '/sites/all/themes/feflip/media/icons/destination-map-pin.png';
-							newMarker.properties.image        = _d.image;
-							newMarker.properties.description  = _d.hotelDescription;
-							newMarker.properties.url          = _d.url;
-							
-							hotelJson.push(newMarker);
-						
-						}
+						hotelJson.push(newMarker);
 					});
 					
 					hotelLayer.on('layeradd',function(_e){
@@ -2047,14 +2033,7 @@
 					transformRequest: angular.identity
 	            }).
 	            success(function(_data){
-<<<<<<< HEAD
 		            if(_data.result) window.location.href = $(document)[0].referrer; // window.location.reload();
-=======
-		            if(_data.result){
-			            $cookies.put('is_signup','true',{path:'/'});
-			            window.location.reload();
-		            }   
->>>>>>> origin/develop
 			        else{
 			            $scope.loading = false;
 			            $scope.signInError = 'The user or password is incorrect';
@@ -2196,7 +2175,7 @@
 			
 			$scope.filterHotels = function(_cat){
 				// | i | F+F category exception...
-				if(_cat == 'f+f favorites' || _cat == 'passported favorites') _cat = _cat.split(' ')[1];
+				if(_cat == 'f+f favorites') _cat = _cat.split(' ')[1];
 				// 1. Hide none-category hotels...
 				angular.forEach(_hotels,function(_h){
 					if(!$(_h).hasClass(_cat)) $(_h).remove();
@@ -2501,19 +2480,16 @@
 						
 						var newMarker = angular.copy(markerType);
 						
-						if(_.isNumber(parseFloat(_d.longitude)) && _.isNumber(parseFloat(_d.latitude))){
+						newMarker.geometry.coordinates[0] = _d.longitude;
+						newMarker.geometry.coordinates[1] = _d.latitude;
+						newMarker.properties.title        = _d.title;
+						newMarker.properties.phone        = _d.phone;
+						newMarker.properties.address      = _d.address;
+						newMarker.properties.icon.iconUrl = '/sites/all/themes/feflip/media/map/'+_d.association.toLowerCase()+'-pin.png';
+						newMarker.properties.review  	  = _d.review;
+						newMarker.properties.type  	      = _d.association.toLowerCase();
 						
-							newMarker.geometry.coordinates[0] = _d.longitude;
-							newMarker.geometry.coordinates[1] = _d.latitude;
-							newMarker.properties.title        = _d.title;
-							newMarker.properties.phone        = _d.phone;
-							newMarker.properties.address      = _d.address;
-							newMarker.properties.icon.iconUrl = '/sites/all/themes/feflip/media/map/'+_d.association.toLowerCase()+'-pin.png';
-							newMarker.properties.review  	  = _d.review;
-							newMarker.properties.type  	      = _d.association.toLowerCase();
-							
-							geoJson.push(newMarker);
-						}
+						geoJson.push(newMarker);
 					});
 					
 					// | i | Bind pop-up...

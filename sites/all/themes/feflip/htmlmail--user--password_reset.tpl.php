@@ -111,7 +111,7 @@
   <tr style="height: 20px;"></tr>
   <tr align="center">
     <td valign="top" style="padding:0; margin:0">
-      <img style="width:300px; margin: auto;" src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/sites/all/themes/feflip/media/brand/passported-black-logo.png"/>
+      <img style="width:300px; margin: auto;" src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/sites/all/themes/feflip/media/brand/feather-and-flip-black-logo.png"/>
     </td>
   </tr>
   <tr style="height: 20px; border-bottom:dotted 1px #333333;"><td></td></tr>
@@ -125,7 +125,7 @@
   </tr>-->
   <tr>
     <td style="padding: 0; padding-top:20px; margin:0; font-family: Arial,sans-serif; font-size:16px; color:#333333; line-height: 22px; text-align: left ">
-      <p style="color:#333333 !important;">A request to reset the password for your account has been made at PASSPORTED.<br>
+      <p style="color:#333333 !important;">A request to reset the password for your account has been made at FEATHER+FLIP.<br>
         You may now log in by clicking this link or copying and pasting it to your browser:<br>
         <a style="color:#333333; text-decoration: none; font-style: normal; font-weight: bold;" href="<?php echo $body; ?>"><?php echo $body; ?></a><br>
         This link can only be used once to log in and will lead you to a page where you can set your password. It expires after one day and nothing will happen if it's not used.
@@ -134,7 +134,7 @@
   </tr>
   <tr>
     <td style="padding-bottom:20px; margin:0; font-size:16px; border-bottom:dotted 1px #333333; color:#333333; font-family: Times,serif; font-style: italic; line-height: 22px; text-align: left ">
-      <p>PASSPORTED team</p>
+      <p>FEATHER+FLIP team</p>
     </td>
   </tr>
   <tr style="height: 20px;">
@@ -142,7 +142,7 @@
   </tr>
   <tr align="center">
     <td style="padding:20px; margin:0; font-size:16px;font-family: Arial,sans-serif; color:#333333; line-height: 22px; text-align: center " align="center">
-      <a href="http://www.passported.com" style="text-decoration: none; text-align: center; font-size: 12px; text-transform: uppercase; padding: 20px; background-color: #333333; color: white;">Go to Passported</a>
+      <a href="http://www.featherandflip.com" style="text-decoration: none; text-align: center; font-size: 12px; text-transform: uppercase; padding: 20px; background-color: #333333; color: white;">Go to F+F</a>
     </td>
   </tr>
   <tr style="height: 50px;"></tr>

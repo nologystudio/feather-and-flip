@@ -198,11 +198,11 @@
 						<span>starting from</span>
 						<h4>1000$</h4>
 					</button>
-					<small>*book with passported</small>
+					<small>*book with feather+flip</small>
 				</div>
 				<footer>
 					<sup>*</sup>
-					Passported perks may include free breakfasts, room upgrades and spa credits at partner hotels.
+					Feather+Flip perks may include free breakfasts, room upgrades and spa credits at partner hotels.
 				</footer>
 			</div>
 		</div>

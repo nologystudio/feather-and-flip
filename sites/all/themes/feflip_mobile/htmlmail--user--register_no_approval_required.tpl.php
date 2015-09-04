@@ -111,13 +111,13 @@
   <tr style="height: 20px;"></tr>
   <tr align="center">
     <td valign="top" style="padding:0; margin:0">
-      <img style="width:300px; margin: auto;" src="//ds9464c56tfjs.cloudfront.net/media/passported-black-logo.png"/>
+      <img style="width:300px; margin: auto;" src="//ds9464c56tfjs.cloudfront.net/media/feather-and-flip-black-logo.png"/>
     </td>
   </tr>
   <tr style="height: 20px;"></tr>
   <tr style="height: 20px; border-top:solid 1px #333333; ">
     <td style="padding:10px; margin:0; font-size:22px; font-style: italic; color:#333333; font-weight:bold; text-align: center;">
-      Welcome to Passported beta!
+      Welcome to Feather+Flip beta!
     </td>
   </tr>
   <tr>
@@ -127,7 +127,7 @@
     <td style="padding:20px; margin:0; font-family: Arial,sans-serif; font-size:16px; color:#333333; line-height: 22px; text-align: left ">
       <p>Welcome to the family.<br>
 
-Thank you for creating your account with Passported,  we're so excited to have you as one of our launch members. With your log in details you now have access to:
+Thank you for creating your account with Feather+Flip,  we're so excited to have you as one of our launch members. With your log in details you now have access to:
       </p>
     </td>
   </tr>
@@ -135,7 +135,7 @@ Thank you for creating your account with Passported,  we're so excited to have y
     <td style="padding:0 20px 20px 20px; border-bottom:dotted 1px #333333;" align="center">
       <table style="width:600px; margin:auto; font-family: Arial,sans-serif;  font-size:12px; line-height:18px; padding:0; border-collapse:collapse; ">
         <tr>
-          <td style="text-transform: uppercase; font-weight: bold; ">&bull; Exclusive rates and perks at Passported-favorite hotels</td>
+          <td style="text-transform: uppercase; font-weight: bold; ">&bull; Exclusive rates and perks at F+F-favorite hotels</td>
         </tr>
         <tr>
           <td style="text-transform: uppercase; font-weight: bold;">&bull; Tailored travel advice from our editors</td>
@@ -157,7 +157,7 @@ Thank you for creating your account with Passported,  we're so excited to have y
   </tr>
   <tr>
     <td style="padding:20px; margin:0; font-size:16px; border-bottom:dotted 1px #333333; color:#333333; font-family: Times,serif; font-style: italic; line-height: 22px; text-align: left ">
-      <p>Questions? Comments? We'd love to hear from you. Email <a href="mailto:info@passported.com" style="font-weight:bold; color:#333333">info@passported.com</a>, tweet us, Facebook message us, use #passported to share your family travel adventures on Instagram, or send us a postcard: 25 Broadway, 9th Floor, New York NY 10004.
+      <p>Questions? Comments? We'd love to hear from you. Email <a href="mailto:info@featherandflip.com" style="font-weight:bold; color:#333333">info@featherandflip.com</a>, tweet us, Facebook message us, use #featherandflip to share your family travel adventures on Instagram, or send us a postcard: 25 Broadway, 9th Floor, New York NY 10004.
       </p>
     </td>
   </tr>
@@ -166,7 +166,7 @@ Thank you for creating your account with Passported,  we're so excited to have y
   </tr>
   <tr align="center">
     <td style="padding:20px; margin:0; font-size:16px;font-family: Arial,sans-serif; color:#333333; line-height: 22px; text-align: center " align="center">
-      <a href="http://www.passported.com" style="text-decoration: none; text-align: center; font-size: 12px; text-transform: uppercase; padding: 20px; background-color: #333333; color: white;">Go to Passported</a>
+      <a href="http://www.featherandflip.com" style="text-decoration: none; text-align: center; font-size: 12px; text-transform: uppercase; padding: 20px; background-color: #333333; color: white;">Go to F+F</a>
     </td>
   </tr>
   <tr style="height: 50px;"></tr>

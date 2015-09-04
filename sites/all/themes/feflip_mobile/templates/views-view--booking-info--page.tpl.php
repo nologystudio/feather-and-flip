@@ -5,9 +5,9 @@
         <header>
             <div class="feather-logo"></div>
             <?php if($booking['service'] == 'expedia') {?>
-            <h3>Thank you for booking with Passported and the Expedia Affiliate Network. We only recommend hotels we know and love, and we hope you feel the same way. Read on for your confirmation number, hotel cancellation policy and contact details.</h3>
+            <h3>Thank you for booking with Feather+Flip and the Expedia Affiliate Network. We only recommend hotels we know and love, and we hope you feel the same way. Read on for your confirmation number, hotel cancellation policy and contact details.</h3>
 		    <?php } else { ?>
-                <h3>Thank you for booking with Passported and Tzell Travel Group. We only recommend hotels we know and love, and we hope you feel the same way. Read on for your confirmation number, hotel cancellation policy and contact details.</h3>
+                <h3>Thank you for booking with Feather+Flip and Tzell Travel Group. We only recommend hotels we know and love, and we hope you feel the same way. Read on for your confirmation number, hotel cancellation policy and contact details.</h3>
             <?php } ?>
         </header>
 		<?php if (!empty($booking['cancellationNumber'])) { ?>

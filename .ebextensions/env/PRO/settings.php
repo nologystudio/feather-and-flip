@@ -337,7 +337,7 @@ $drupal_hash_salt = 'S54q2JK9ak4-fEJkH_iE-RDpjUpVInANsyxGx8TVNQs';
  * It is not allowed to have a trailing slash; Drupal will add it
  * for you.
  */
-$base_url = 'https://www.passported.com';  // NO trailing slash!
+$base_url = 'https://www.featherandflip.com';  // NO trailing slash!
 
 /**
  * PHP settings:
@@ -394,7 +394,7 @@ ini_set('session.cookie_lifetime', 2000000);
  * between your various domains. Make sure to always start the $cookie_domain
  * with a leading dot, as per RFC 2109.
  */
-$cookie_domain = '.passported.com';
+$cookie_domain = 'www.featherandflip.com';
 
 /**
  * Variable overrides:

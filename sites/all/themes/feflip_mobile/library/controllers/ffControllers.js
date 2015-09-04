@@ -1844,7 +1844,7 @@
 		/* ~ Sign-up ~ */
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 		
-		ffAppControllers.controller('RegistrationCtrl',function($scope,$http,$cookies){
+		ffAppControllers.controller('RegistrationCtrl',function($scope,$http){
 			
 			$scope.response		 = ['success','error','error-in-login'];
 			$scope.types   		 = ['sign-up','sign-in','response','reset-password','new-password','change-password']; 
@@ -1930,10 +1930,7 @@
 					transformRequest: angular.identity
 	            }).
 	            success(function(_data){
-		            if(_data.result){
-			            $cookies.put('is_signup','true',{path:'/'});
-			            window.location.reload();
-			        }
+		            if(_data.result) window.location.href = 'http://' + window.location.host + '';
 		            else{
 			            $scope.loading = false;
 			            $scope.signInError = 'The user or password is incorrect';
@@ -2078,7 +2075,7 @@
 			
 			$scope.filterHotels = function(_cat){
 				// | i | F+F category exception...
-				if(_cat == 'f+f favorites' || _cat == 'passported favorites') _cat = _cat.split(' ')[1];
+				if(_cat == 'f+f favorites') _cat = _cat.split(' ')[1];
 				// 1. Hide none-category hotels...
 				angular.forEach(_hotels,function(_h){
 					if(!$(_h).hasClass(_cat)) $(_h).remove();
