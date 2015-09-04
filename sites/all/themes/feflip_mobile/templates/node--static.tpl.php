@@ -42,7 +42,7 @@
 <section id="contact" class="static" ng-controller="ContactCtrl">
 	<header>
 		<h1>Use your words</h1>
-		<h2>for questions about feather+flip or to reach our editorial or sales team, please fill out our contact form.</h2>
+		<h2>for questions about passported or to reach our editorial or sales team, please fill out our contact form.</h2>
 	</header>
 	<h4 ng-if="success" class="animated fadeInDown">Thank you for contacting us.</h4>
 	<form id="contact-form" name="contactForm">
@@ -94,7 +94,7 @@
 						<img src="/sites/all/themes/feflip_mobile/media/about/henley-vazquez.jpg" alt="HENLEY VAZQUEZ, CEO/CO-FOUNDER"/>
 					</figure>
 					<h3>HENLEY VAZQUEZ, CEO/CO-FOUNDER</h3>
-					<p>Henley’s decade of experience in the travel industry includes Town & Country Travel, National Geographic Traveler, Departures, Ultratravel and Indagare. Despite  her background, she found planning trips for her own family frustrating, and every parent she knew shared the same problems. Henley joined forces with the Feather+Flip team to create a website where families could easily decide where to stay, which room to reserve and what to do while they are there - all quickly bookable online. Her motto: life is too short for bad hotels. Henley lives in New York City with her husband and two children and graduated from Princeton University.</p>
+					<p>Henley’s decade of experience in the travel industry includes Town & Country Travel, National Geographic Traveler, Departures, Ultratravel and Indagare. Despite  her background, she found planning trips for her own family frustrating, and every parent she knew shared the same problems. Henley joined forces with the Passported team to create a website where families could easily decide where to stay, which room to reserve and what to do while they are there - all quickly bookable online. Her motto: life is too short for bad hotels. Henley lives in New York City with her husband and two children and graduated from Princeton University.</p>
 				</li>
                 <li>
                 	<figure>

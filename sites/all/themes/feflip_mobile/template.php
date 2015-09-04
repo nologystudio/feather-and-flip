@@ -15,6 +15,12 @@ function feflip_mobile_preprocess_html(&$variables) {
     $error_node = array ('html__node__288', 'html__node__332', 'html__node__333');
     $arg = arg();
 
+    // Signup slug and lightbox behaviour
+    if ((($_SERVER['REQUEST_URI'] == '/sign-up') || ($_SERVER['REQUEST_URI'] == '/sign-in')) && !user_is_logged_in())
+        setcookie('overlay', 'signup');
+    else
+        setcookie('overlay', 'hidden');
+
     variable_set('pageID', 'global');
         
 	if (drupal_is_front_page())
@@ -716,7 +722,7 @@ function get_header_main_navigation_menu_mobile($destinations=NULL){
 function get_footer_fixed_menu_mobile() {
   $f_menu = menu_tree_all_data('menu-footer-right');
   $output = '<ul>';
-  $output .= '<li><span class="icon ff"></span>feather + flip</li>';
+  $output .= '<li><span class="icon ff"></span>Passported</li>';
   foreach ($f_menu as $key => $menu_item) {
       if ((strpos($key, '2205') !== FALSE) || (strpos($key, '2208') !== FALSE))
           $output .= '<li><a href="' . url($menu_item['link']['link_path']) . '" target="_blank">' . $menu_item['link']['link_title'] . '</a></li>';
