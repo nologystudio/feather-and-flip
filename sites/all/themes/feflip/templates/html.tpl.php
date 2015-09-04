@@ -14,7 +14,7 @@
             <link rel="shortcut icon" href="/sites/all/themes/feflip/media/brand/favicon.ico" type="image/x-icon">
             <link rel="icon"          href="/sites/all/themes/feflip/media/brand/favicon.ico" type="image/x-icon">
 
-            <link   rel="image_src"    href="<?php echo drupal_get_path('theme', 'feflip').'/media/brand/feather-and-flip-black-logo.png'; ?>">
+            <link   rel="image_src"    href="<?php echo drupal_get_path('theme', 'feflip').'/media/brand/passported-black-logo.png'; ?>">
             <link   href='https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
             <link   rel="stylesheet"  href="<?php echo variable_get('relativePath'); ?>style/style-nology.css" title="style-nology" type="text/css" media="screen">
             <script src="<?php echo variable_get('relativePath'); ?>library/vendors/modernizr.custom.f+f.js"></script>
@@ -29,6 +29,26 @@
 			  ga('send', 'pageview');
 
 			</script>
+
+            <?php // Facebook pixel control
+                $envcontrol = Env::GOOGLE_ANALYTICS_CODE; ?>
+            <?php if (!empty($envcontrol) && user_is_logged_in() && isset($_COOKIE['is_signup']) && ($_COOKIE['is_signup'] == 'true')) { ?>
+                <script>(function() {
+                    var _fbq = window._fbq || (window._fbq = []);
+                    if (!_fbq.loaded) {
+                        var fbds = document.createElement('script');
+                        fbds.async = true;
+                        fbds.src = '//connect.facebook.net/en_US/fbds.js';
+                        var s = document.getElementsByTagName('script')[0];
+                        s.parentNode.insertBefore(fbds, s);
+                        _fbq.loaded = true;
+                    }
+                    })();
+                    window._fbq = window._fbq || [];
+                    window._fbq.push(['track', '6035954624252', {'value':'0.01','currency':'USD'}]);
+                </script>
+                <noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=6035954624252&amp;cd[value]=0.01&amp;cd[currency]=USD&amp;noscript=1" /></noscript>
+            <?php setcookie('is_signup', 'false'); } ?>
         </head>
 
         <?php   // Set ng-init for reset passw lightbox
