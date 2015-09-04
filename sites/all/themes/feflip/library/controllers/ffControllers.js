@@ -2048,9 +2048,13 @@
 	            }).
 	            success(function(_data){
 		            if(_data.result){
+			            
+			            var _rf = $(document)[0].referrer.split('passported.com');
+			            
 			            $cookies.put('is_signup','true',{path:'/'});
-			            window.location.reload();
-		            }   
+			            if(_rf.length > 0) window.location = $(document)[0].referrer;
+			            else window.location.reload();
+		            } 
 			        else{
 			            $scope.loading = false;
 			            $scope.signInError = 'The user or password is incorrect';
