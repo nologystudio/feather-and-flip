@@ -2033,8 +2033,7 @@
 					transformRequest: angular.identity
 	            }).
 	            success(function(_data){
-		            if(_data.result)
-			            window.location.reload();
+		            if(_data.result) window.location.href = $(document)[0].referrer; // window.location.reload();
 			        else{
 			            $scope.loading = false;
 			            $scope.signInError = 'The user or password is incorrect';
