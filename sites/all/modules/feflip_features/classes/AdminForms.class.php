@@ -776,6 +776,35 @@ class AdminForms
 
         return $addressbooks;
     }
+
+    /**
+     * Submit entity form contact in drupal
+     * @param $inputValues
+     */
+    static function PassBookSubmit($inputValues)
+    {
+        global $user;
+        $entityform = entity_create('entityform', array(
+            'type' => 'book_hotel',
+            'created' => time(),
+            'changed' => time(),
+            'language' => LANGUAGE_NONE,
+            'uid' => $user->uid));
+
+        $wrapper = entity_metadata_wrapper('entityform', $entityform);
+
+        //Fill fields
+        $wrapper->field_contact_email       = $inputValues['email'];
+        $wrapper->field_start_date          = $inputValues['start_date'];
+        $wrapper->field_end_date            = $inputValues['end_date'];
+        $wrapper->field_adults              = $inputValues['adults'];
+        $wrapper->field_children            = $inputValues['children'];
+        $wrapper->field_budget_ratio        = $inputValues['budget'];
+        $wrapper->field_contact_message     = $inputValues['message'];
+
+        //Done!
+        $wrapper->save();
+    }
 }
 
 ?>
