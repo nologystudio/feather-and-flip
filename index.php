@@ -194,7 +194,7 @@
 										    		</div>
 									    		</div>
 								    		</header>
-								    		<article ng-repeat="hotel in pick.hotels">
+								    		<article id="hotel" ng-repeat="hotel in pick.hotels">
 							    				<header>
 									    			<h4>{{hotel.name}}</h4>
 									    			<h5>{{hotel.address_1}}</h5>
@@ -209,12 +209,12 @@
 														</li>
 									    			</ul>
 								    			</div>
-								    			<p ng-repeat="content in hotel.content_blocks[0]">
-									    			<div class="divider bests">{{content.title}}</div>
+								    			<div id="curated" ng-repeat="content in hotel.content_blocks[0]">
+									    			<div class="divider {{content.title}}">{{content.title}}</div>
 									    			<ul>
-										    			<li ng-bind-html="content.description"></li>
+										    			<li ng-repeat="feature in content.features" ng-bind-html="feature"></li>
 									    			</ul>
-								    			</p>
+								    			</div>
 							    			</article>
 								    	</li>
 								    	<li id="guide">
@@ -235,7 +235,7 @@
 									    			<h4>{{address.title}}</h4>
 									    			<h5 ng-bind-html="address.short_review"></h5>
 									    			<footer>
-										    			<span class="tel" ng-if="address.phone_number">{{address.phone_number}}</span>
+										    			<span class="tel" ng-if="!checkPhoneNumber(address.phone_number)">{{address.phone_number}}</span>
 										    			<a href="" ng-if="">read more</a>
 									    			</footer>
 									    		</li>
@@ -306,6 +306,18 @@
 										    			<span></span>
 									    			</div>
 									    			<input type="text" class="rounded" placeholder="other"/>
+									    		</li>
+									    		<li>
+									    			<label>Name</label>
+									    			<input type="text"/>
+									    		</li>
+									    		<li>
+									    			<label>Last Name</label>
+									    			<input type="text"/>
+									    		</li>
+									    		<li>
+									    			<label>Email</label>
+									    			<input type="email"/>
 									    		</li>
 									    		<li>
 									    			<textarea placeholder="Prefer connecting rooms or a suite? Any favorite hotels will help us pick your perfect match for this trip. Let us know here."></textarea>

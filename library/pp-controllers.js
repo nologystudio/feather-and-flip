@@ -456,6 +456,10 @@
 				$scope.$parent.addMarkers('destinations',_data);
 			});
 			
+			$scope.checkPhoneNumber = function(_p){
+				return _.isArray(_p);
+			}
+			
 			$scope.displayDestination = function(_d){
 				
 				$scope.pick = _d;
