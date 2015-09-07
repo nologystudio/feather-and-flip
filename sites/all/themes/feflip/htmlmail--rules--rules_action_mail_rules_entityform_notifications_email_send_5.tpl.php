@@ -107,9 +107,13 @@
  * =========================================================== End instructions.
  */ ?>
 
-<?php if ($params['subject'] == 'Passported New reservation'): // Admin notification ?>
-  <?php print_r($params['message']); ?>
-<?php elseif ($params['subject'] == 'Passported Contact'): // Admin contact notification ?>
+<?php if ($params['subject'] == 'Passported New reservation'){ // Admin notification ?>
+  <?php print_r($params['message']); } ?>
+<?php if ($params['subject'] == 'Passported - New Book request'){ // Admin book hotel notification ?>
+  <?php print_r($params['message']); } ?>
+<?php if ($params['subject'] == 'Passported - Thank you'){ // Admin book hotel notification ?>
+  <?php print_r($params['message']); } ?>
+<?php if ($params['subject'] == 'Passported Contact'): // Admin contact notification ?>
   <?php print_r($params['message']); ?>
 <?php else: // Booking notification to customer ?>
   <?php
