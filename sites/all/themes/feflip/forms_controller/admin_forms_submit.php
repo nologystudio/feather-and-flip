@@ -194,6 +194,9 @@
             case 'contact':
                 AdminForms::ContactSubmit($input_values);
                 break;
+            case 'bookHotel':
+                AdminForms::PassBookSubmit($input_values);
+                break;
             case 'addressBook':
               //TODO optmize
                 $destinationId = isset($input_values['destinationID']) ? $input_values['destinationID'] : null;
