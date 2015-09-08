@@ -107,14 +107,11 @@
  * =========================================================== End instructions.
  */ ?>
 
-<?php if ($params['subject'] == 'Passported New reservation'){ // Admin notification ?>
-  <?php print_r($params['message']); } ?>
-<?php if ($params['subject'] == 'Passported - New Book request'){ // Admin book hotel notification ?>
-  <?php print_r($params['message']); } ?>
-<?php if ($params['subject'] == 'Passported - Thank you'){ // Admin book hotel notification ?>
-  <?php print_r($params['message']); } ?>
-<?php if ($params['subject'] == 'Passported Contact'): // Admin contact notification ?>
-  <?php print_r($params['message']); ?>
+<?php if (($params['subject'] == 'Passported New reservation') ||
+    ($params['subject'] == 'Passported - New Book request') ||
+    ($params['subject'] == 'Passported - Thank you') ||
+    ($params['subject'] == 'Passported Contact')):
+    print_r($params['message']); ?>
 <?php else: // Booking notification to customer ?>
   <?php
     $entity = entity_load('entityform', array($params['message']));
