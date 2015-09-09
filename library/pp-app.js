@@ -57,7 +57,8 @@
 			'ngCookies',
 			'ngSanitize',
 			'ppServices',
-			'ppControllers'
+			'ppComponents',
+			'ppControllers'			
 		]).
 		config(function($routeProvider,$locationProvider,$interpolateProvider){
 			$locationProvider.html5Mode(false);

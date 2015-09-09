@@ -21,6 +21,7 @@
         
         'use strict';
         
+        var formSubmit    = window.location.protocol + '//' + window.location.host + '/api/forms';
         var ppControllers = angular.module('ppControllers',[]);
         
         /* ------------------------------------------------------------------------------------------------------------- */
@@ -74,6 +75,20 @@
 					$timeout(function(){_t.find('*[data-animate="2"]').addClass('animated fadeIn')},600);
 					
 		        },{ offset: '75%' });  
+		        
+		        $('#inspiration').waypoint(function(){
+			        
+			        var _t = $(this);
+			        
+			        _t.toggleClass('fixed');
+			        
+			        $(window).scroll(function(){
+				        if(_t.hasClass('fixed')){
+					        var _h = $(this).scrollTop() - 620; 
+					        if(_h > 180) _t.addClass('compressed'); 
+				        }
+			        });
+			    },{ offset: '90px' });  
 		        
 		        $('#how-it-works').waypoint(function(){
 			        
@@ -487,16 +502,74 @@
 				
 				$scope.step = 2;
 			}
+			
+			$rootScope.$on('filter',function(_d){
+				console.log('test');
+			});
 		});
 		
 		/* ------------------------------------------------------------------------------------------------------------- */
 	    
 	    ppControllers.controller('BookingController',function($scope,$log,$timeout,$rootScope){
 		   
-		    $scope.showRightAside = false;
+			var bookingData = {
+			    formID: 'bookHotel',
+			    destination: '',
+			    hotel: '',
+			    name: undefined,
+			    last: undefined,
+			    email: undefined,
+			    start_date: undefined,
+			    end_date: undefined,
+			    adults: 0,
+			    children: 0,
+			    budget: undefined,
+			    message: undefined
+		    }
+		    
+		    $scope.showRightAside = true;
+		    $scope.booking = angular.copy(bookingData);
 			
 			$scope.openAside = function(){
+				
 				$scope.showRightAside = !$scope.showRightAside;	
+				
+				// Reset object...
+				
+				if(!$scope.showRightAside)
+					$scope.booking = angular.copy(bookingData);
+			}
+			
+			$scope.setter = {
+				checkButtons: function(){
+					$('*.budget-check').on('click',function(){
+						$(this).find('span').toggleClass('on');
+					});
+				},
+				date: function(){
+				},
+				budget: function(_price){
+					$scope.booking.budget = _price;
+				}
+			}
+			
+			$scope.submit = function(){
+				
+				console.log($scope.booking);
+				
+				$http({
+	                method  : 'POST',
+	                url     : formSubmit,
+	                data    : $.param($scope.booking),
+	                headers : { 
+	            		'Content-Type' : 'application/x-www-form-urlencoded'
+					},
+					transformRequest: angular.identity
+	            }).
+	            success(function(_data){
+		        	console.log(_data);
+	            }).
+	            error(function(){});
 			}
 			
 			$rootScope.$on('open-booking',function(_e,_data){
@@ -504,6 +577,10 @@
 				console.log(_e);
 				console.log(_data);
 			});
+			
+			$timeout(function(){
+				$scope.setter.checkButtons();
+			},0);
 		});
 		
 		/* ------------------------------------------------------------------------------------------------------------- */

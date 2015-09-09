@@ -531,14 +531,20 @@
 								}	
 							}
 							
-							ul
+							div.wrapper
 							{
-								width: 33%;
+								.set-size(80%);
 								#align > .left;
 								
-								&:first-child
+								ul
 								{
-									margin-right: @content-padding/2;
+									width: 47%;
+									#align > .left;
+									
+									&:first-child
+									{
+										margin-right: @content-padding/2;
+									}
 								}
 							}
 							

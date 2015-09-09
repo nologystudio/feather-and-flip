@@ -63,7 +63,7 @@
 		@ff-color-7: #336666;
 		
 		@warning-color: orange;
-		@shadow-color: #cccccc;
+		@shadow-color: fadeout(#333333,50%);
 		@grey-1:  #333333;
 		@grey-2:  #999999;
 		@grey-3:  #666666;
@@ -420,7 +420,7 @@
 		body > main[id],
 		body > section[id]
 		{
-			@m: 600px;
+			@m: 620px;
 			@main-height: @m + @header-height;
 			
 			.set-size(100%);
@@ -447,7 +447,7 @@
 						.set-bg(@color-7,'@{media-url}backgrounds/passported-main.jpg',no-repeat,center,-470px);
 						.box-sizing();
 						#align > .left;
-						padding-top: @header-height + 6 * @unit;
+						padding-top: @m/2 - @header-height - 2 * @unit;
 						overflow: hidden;
 						
 						&:first-child
@@ -455,12 +455,12 @@
 							h1
 							{
 								.set-size(100%);
-								#font > .lato(26px,white,300);
+								#font > .lato(42px,white,300);
 								#align > .left;
 								text-transform: uppercase;
 								text-align: center;
 								display: block;
-								margin-bottom: 1 * @content-padding;
+								margin-bottom: 2 * @content-padding;
 							}
 							
 							ul
@@ -469,7 +469,7 @@
 								
 								li
 								{
-									@s: 130px;
+									@s: 160px;
 									
 									.set-size(@s + 4 * @content-padding);
 									#align > .left;
@@ -539,10 +539,15 @@
 				
 				& + *
 				{
-					margin-top: @main-height - 200px;;
+					margin-top: @main-height;
 					z-index: 2;
 				}
-			}
+				
+				& + *.fixed
+				{
+					margin-top: 0
+				}
+			}	
 			
 			&[id="how-it-works"],
 			&[id="travel-journal"]
@@ -1171,12 +1176,12 @@
 																	span
 																	{
 																		@s: 15px;
-																		@color: @color-2;
+																		@color: @color-3;
 																		
 																		.set-circle-btn(@s);
 																		#align > .right;
 																		margin-left: 2 * @unit;
-																		border-color: @color !important;
+																		border-color: @color-2 !important;
 																		
 																		&.on
 																		{
@@ -1717,14 +1722,9 @@
 						&.on
 						{
 							right: 0;
-							
-							& > div.wrapper
-							{
-								box-shadow: 0 0 @content-padding @shadow-color;
-							}
+							box-shadow: 0 0 @content-padding @shadow-color;
 						}
 					}
-					
 				}
 				
 				footer
@@ -1815,12 +1815,15 @@
 			
 			&[id="inspiration"]
 			{
-				.set-size(100%);
+				@h: 180px;
+				
+				.set-size(100%,@h);
 				.set-bgc(@color-6);
 				.ui-search();
 				#align > .left;
 				z-index: 2;
 				padding: @content-padding/2 @content-padding;
+				overflow: hidden;
 				
 				button[id="pointer"]
 				{
@@ -1832,10 +1835,90 @@
 					
 					svg
 					{
-						
 						path
 						{
 							fill: @color-6;
+						}
+					}
+				}
+				
+				div.wrapper > div[id="let-us-inspire"]
+				{
+					.set-size(540px);
+					#align > .center;
+					overflow: hidden;
+					
+					header
+					{
+						margin-bottom: 10px;
+						
+						h4
+						{
+							margin: auto;
+							#align > .center;
+						}
+						
+						&:after
+						{
+							@s: 20px;
+							
+							.set-size(@s,@s);
+							.set-pos(absolute);
+							.set-bgc(@color-2);
+							bottom: 0;
+							left: 50%;
+							margin-left: -@s/2;
+							display: block;
+							content: '';
+						}
+					}
+					
+					div.wrapper
+					{
+						width: 100%;
+						
+						ul
+						{
+							width: 48%;
+							margin: 0;
+							
+							&:first-child
+							{
+								margin-right: 4%;
+							}
+						}
+						
+					}
+					
+					button.go-btn
+					{
+						margin-left: @content-padding/2;
+						display: none;
+					}
+				}
+				
+				&.fixed
+				{
+					.set-pos(fixed);
+					top: @header-height;
+					z-index: 3;
+				
+					& + section[id="how-it-works"]
+					{
+						.performance();
+						margin-top: @main-height + @h + @content-padding;
+						z-index: 2;
+					}
+					
+					&.compressed
+					{
+						div.wrapper
+						{
+							div[id="let-us-inspire"]
+							{
+								header
+								{}
+							}
 						}
 					}
 				}

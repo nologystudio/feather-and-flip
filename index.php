@@ -114,10 +114,25 @@
 						<li><a href="/santiago/city-guide">Santiago, Chile</a></li></ul>
 					</ul>
 				</nav>
-				<div id="search-block"></div>
+				<div id="search-block">
+					<div class="wrapper">
+						<div id="search-destination">
+							<header>
+								<h4 class="larger">Search a destination</h4>
+							</header>
+							<div class="wrapper">
+								<form>
+									<input type="text" class="rounded" placeholder="Enter your destination or hotel"/>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 			
 			<?php $page = 'map'; ?>
+			
+			<?php if($page == 'map'): ?>
 			
 			<!-- Map -->
 			
@@ -193,7 +208,7 @@
 								    		<header>
 									    		STAY
 									    		<div class="filter-wrapper">
-										    		<div class="filter">
+										    		<div pp-filter filter-state="false" id="{{type}}" class="filter">
 											    		<button class="radio-btn">
 											    			Type<span></span>
 											    		</button>
@@ -229,7 +244,7 @@
 											<header>
 									    		Section
 									    		<div class="filter-wrapper">
-										    		<div class="filter">
+										    		<div pp-filter filter-state="false" id="{{filter}}" class="filter">
 											    		<button class="radio-btn">
 											    			<span></span>
 											    			filter
@@ -279,8 +294,12 @@
 							    		<a href="" class="icon circle-btn"></a>
 							    	</li>
 							    	<li>
-							    		<form>
+							    		<form name="bookingForm">
 								    		<ul>
+									    		<li>
+									    			<h1></h1>
+									    			<h2></h2>
+									    		</li>
 									    		<li>
 									    			<div id="date-picker">
 										    			<button class="rounded-btn">Start Date</button>
@@ -290,48 +309,48 @@
 									    		<li>
 									    			<label>Number of Adults</label>
 									    			<div class="circle-input-wrapper">
-									    				<input type="text" value="1"/>
+									    				<input type="text" ng-model="booking.adults" ng-pattern="/^[0-9]+$/" ng-maxlength="1" required/>
 									    			</div>
 									    		</li>
 									    		<li>
 									    			<label>Number of Children</label>
 									    			<div class="circle-input-wrapper">
-									    				<input type="text" value="1"/>
+									    				<input type="text" ng-model="booking.children" ng-pattern="/^[0-9]+$/"/>
 									    			</div>
 									    		</li>
 									    		<li>
 									    			<label>Budget per Night<label>
-									    			<div class="budget-check">
+									    			<div class="budget-check" ng-click="setter.budget('400$-800$')">
 										    			400$-800$
 										    			<span></span>
 									    			</div>
-									    			<div class="budget-check">
+									    			<div class="budget-check" ng-click="setter.budget('800$-1200$')">
 										    			800$-1200$
 										    			<span></span>
 									    			</div>
-									    			<div class="budget-check">
+									    			<div class="budget-check" ng-click="setter.budget('1200$+')">
 										    			1200$+
 										    			<span></span>
 									    			</div>
-									    			<input type="text" class="rounded" placeholder="other"/>
+									    			<input type="text" class="rounded" placeholder="other" ng-model="booking.budget"/>
 									    		</li>
 									    		<li class="add-border">
 									    			<div class="half-wrapper">
 									    				<label for="user-name" class="clear">Name</label>
-														<input id="user-name" type="text" class="rounded"/>
+														<input id="user-name" type="text" class="rounded" ng-model="booking.name" required/>
 									    			</div>
 									    			<div class="half-wrapper">
 									    				<label for="user-last" class="clear">Last Name</label>
-														<input id="user-last" type="text" class="rounded"/>
+														<input id="user-last" type="text" class="rounded" ng-model="booking.last" required/>
 									    			</div>
 									    			<label for="user-email" class="clear">Email</label>
-									    			<input id="user-email" type="email" class="rounded"/>
+									    			<input id="user-email" type="email" class="rounded" ng-model="booking.email" ng-pattern="/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/" required/>
 									    		</li>
 									    		<li>
-									    			<textarea placeholder="Prefer connecting rooms or a suite? Any favorite hotels will help us pick your perfect match for this trip. Let us know here."></textarea>
+									    			<textarea placeholder="Prefer connecting rooms or a suite? Any favorite hotels will help us pick your perfect match for this trip. Let us know here." ng-model="booking.message" required/></textarea>
 									    		</li>
 									    		<li>
-									    			<button id="submit" class="rounded-btn">send</button>
+									    			<button id="submit" class="rounded-btn" ng-class="{'off':!bookingForm.$valid}" ng-click="submit()">send</button>
 									    		</li>
 								    		</ul>
 							    		</form>
@@ -343,9 +362,11 @@
 				</aside>
 			</section>
 			
-			<!-- Main Block -->
+			<?php endif; ?>
 			
 			<?php if($page == 'home'): ?>
+			
+			<!-- Main Block -->
 		
 			<main id="passported-intro">
 				<ul>
@@ -373,16 +394,6 @@
 			
 			<section id="inspiration">
 				<div class="wrapper grid-2 align-center">
-					<div id="search-destination" data-animate="1">
-						<header>
-							<h4 class="larger">Search a destination</h4>
-						</header>
-						<div class="wrapper">
-							<form>
-								<input type="text" class="rounded" placeholder="Enter your destination or hotel"/>
-							</form>
-						</div>
-					</div>
 					<div id="let-us-inspire"  data-animate="1">
 						<header>
 							<h4>Let us Inspire you</h4>
@@ -401,8 +412,10 @@
 								</li>
 							</ul>
 						</div>
+						<!-- 
 						<button class="go-btn" ng-click="">Go</button>
-						<button class="clear-btn" ng-click="">Clear</button>
+						<button class="clear-btn" ng-click="">Clear</button> 
+						-->
 					</div>
 				</div>
 			</section>
