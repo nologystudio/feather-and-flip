@@ -30,7 +30,7 @@
 		@gutter: 10px;
 		
 		@left-panel-width: 640px;
-		@right-panel-width: 400px;
+		@right-panel-width: 420px;
 		
 		@grid-1: @wrapper-width/1;
 		@grid-2: @wrapper-width/2;
@@ -721,19 +721,19 @@
 									display: block;
 									overflow: hidden;
 									box-shadow: none;
-									padding: @p 0 @p 0;
+									padding: @p 0;
 									
 									& > header
 									{
 										.set-size(100%);
 										.box-sizing();
 										#align > .left;
-										padding: 0 2 * @content-padding;
+										padding: 0 @content-padding;
 										
 										div.wrapper
 										{
 											.set-size(100%);
-											.set-bg(transparent,'@{media-url}icons/feather-grey-icon.svg',no-repeat,62%,top);
+											.set-bg(transparent,'@{media-url}icons/feather-grey-icon.svg',no-repeat,65%,top);
 											.set-bgs(auto,30px);
 											#align > .left;
 											padding: @unit 0 0 0;
@@ -773,7 +773,7 @@
 										.set-size(100%,100%);
 										.box-sizing();
 										#align > .left;
-										padding: 0 2 * @content-padding;
+										padding: 0 @content-padding;
 										overflow: auto;
 										
 										& > li
@@ -895,6 +895,7 @@
 										{
 											.set-size(@aside-width,100%);
 											.set-pos(absolute);
+											.set-bgc(white);
 											.set-coord();
 											display: block;
 											border-right: solid 1px @color-6;
@@ -961,8 +962,8 @@
 													.set-size(100%);
 													.set-pos(absolute);
 													.set-coord(0,50%);
-													#font > .lato(60px,white,700);
-													margin-top: -30px;
+													#font > .lato(42px,white,700);
+													margin-top: -20px;
 													text-align: center;
 													text-transform: uppercase;
 													text-shadow: 0 2px 2px @color-1;
@@ -972,9 +973,10 @@
 												nav
 												{
 													.set-size();
-													.ui-set-social-media-nav(red,36px);
-													#align > .center;
-													display: table;
+													.ui-set-social-media-nav(white,36px);
+													.set-pos(absolute);
+													#align > .absolute-center(40px,230px);
+													margin-top: 45px;
 													z-index: 3;
 												}
 											}
@@ -982,7 +984,7 @@
 											& > ul
 											{
 												list-style: none;
-												padding: 0 @aside-width;
+												padding: 0 @content-padding;
 												
 												& > li
 												{
@@ -1041,6 +1043,8 @@
 													
 													&[id="destination-block"]
 													{
+														@m: @content-padding/2;
+														
 														padding: 2 * @content-padding 0;
 														
 														button
@@ -1048,19 +1052,16 @@
 															@s: 40px;
 															
 															.reset();
-															.set-size(2 * @s,@s);
+															.set-size(3 * @s,@s);
 															.set-pos(absolute);
 															top: @content-padding;
-															background-color: red;
-															overflow: hidden;
 															
 															div.circle
 															{
 																.set-circle-btn(@s);
-																.set-bgc(@color-7);
 																#align > .left;
 																border: solid 1px @color-2;
-																margin: 0 @unit;
+																margin: 0;
 															}
 															
 															span
@@ -1076,7 +1077,7 @@
 																div.circle
 																{
 																	#align > .left;
-																	margin-right: @content-padding/2;
+																	margin-right: @m/2;
 																}
 																
 																span
@@ -1092,7 +1093,7 @@
 																div.circle
 																{	
 																	#align > .right;
-																	margin-left: @content-padding/2;
+																	margin-left: @m/2;
 																}
 																
 																span
@@ -1115,6 +1116,7 @@
 															#font > .lato(20px,@color-3,400);
 															text-transform: uppercase;
 															text-align: center;
+															margin-bottom: @content-padding/2;
 														}
 														
 														h3
@@ -1251,15 +1253,37 @@
 															div.slideshow
 															{
 																@h: 240px;
-																@left: -4 * @content-padding - 2 * @unit;
+																@left: -3 * @content-padding;
 																
 																.set-size(@left-panel-width,@h);
-																.set-bgc(@color-7);
-																margin-left: @left;
-																margin-top: @content-padding/2;
-																margin-bottom: @content-padding;
+																.set-bgc(white);
+																#align > .left;
+																margin: @content-padding/2 0 @content-padding @left;
 																display: block;
 																overflow: hidden;
+																
+																button
+																{
+																	@s: 30px;
+																	
+																	.reset();
+																	.set-size(@s,@s);
+																	.set-bgc(grey);
+																	.set-pos(absolute);
+																	top: 50%;
+																	margin-top: -@s/2;
+																	z-index: 2;
+																	
+																	&[rel="right"]
+																	{
+																		right: @s;
+																	}
+																	
+																	&[rel="left"]
+																	{
+																		left: @s;
+																	}
+																}
 																
 																ul
 																{
@@ -1267,17 +1291,26 @@
 																	.set-pos(absolute);
 																	.set-coord();
 																	overflow: hidden;
+																	z-index: 1;
 																	
 																	li
 																	{
 																		.set-size(auto,@h);
+																		.set-opacity(0.5);
+																		.animate-opacity();
+																		.performance();
 																		#align > .left;
 																		margin: 0 1px;
-																	
+																		
 																		img
 																		{
 																			.set-size(auto,@h);
 																			#align > .left;
+																		}
+																		
+																		&:first-child
+																		{
+																			.set-opacity(1);
 																		}
 																	}
 																}
@@ -1423,7 +1456,7 @@
 						{
 							left: 0;
 							
-							button
+							& > button
 							{
 								span
 								{
@@ -1450,8 +1483,7 @@
 					{
 						width: @right-panel-width;
 						right: -@right-panel-width;
-						padding-right: 0;
-						padding-left: 0;
+						padding: 0;
 						
 						button[rel="close"]
 						{
@@ -1477,6 +1509,7 @@
 								.set-size(100%,100%);
 								border-bottom: 0;
 								overflow: auto;
+								left: 0;
 								
 								li[id="step-1"]
 								{
@@ -1516,6 +1549,10 @@
 												{
 													li
 													{
+														.set-size(100%);
+														#align > .left;
+														display: block;
+														
 														div[id="date-picker"]
 														{
 															margin-top: @content-padding/2;
@@ -1538,6 +1575,11 @@
 															#font > .lato(14px,@color-3,400);
 															margin: @content-padding 0 @content-padding/2;
 															text-align: center;
+															
+															&.clear
+															{
+																margin-top: @content-padding/2;
+															}
 														}
 														
 														div.circle-input-wrapper
@@ -1602,11 +1644,17 @@
 																display: block;
 																margin-top: @content-padding;
 															}
+															
+															&[id="user-email"]
+															{
+																width: 98%;
+																margin-left: 1%;
+															}
 														}
 														
 														textarea
 														{
-															.set-size(100%);
+															.set-size(98%);
 															.box-sizing();
 															.set-placeholder-style(@color-2);
 															#font > .lato(14px,@color-3,400);
@@ -1614,7 +1662,7 @@
 															padding: @content-padding;
 															border: solid 1px @color-2;
 															border-radius: @content-padding;
-															margin-top: @content-padding;
+															margin: @content-padding 1% 0 1%;
 															display: block;
 														}
 														
@@ -1625,6 +1673,25 @@
 															#align > .center;
 															color: white;
 															margin-top: @content-padding;
+														}
+														
+														div.half-wrapper
+														{
+															.set-size(48%);
+															#align > .left;
+															margin: 0 1%;
+															overflow: hidden;
+															
+															label,
+															input
+															{
+																width: 100%;
+															}
+														}
+														
+														&.add-border
+														{
+															border-top: solid 1px @color-7;
 														}
 													}
 												}

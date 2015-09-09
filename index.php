@@ -177,13 +177,19 @@
 								    		</a>
 								    	</li>
 								    	<li id="destination-block">
-								    		<button class="circle-outline-icon download-btn"></button>
-								    		<button class="circle-outline-icon share-btn"></button>
+								    		<button class="circle-outline-icon download-btn">
+								    			<div class="circle"></div>
+								    			<span>download</span>
+								    		</button>
+								    		<button class="circle-outline-icon share-btn">
+								    			<div class="circle"></div>
+								    			<span>share</span>
+								    		</button>
 								    		<h2>{{pick.name}}, {{pick.country}}</h2>
 								    		<small>{{pick.lat}} Lat, {{pick.lon}} Lon</small>
 								    		<h3 ng-bind-html="pick.description"></h3>
 								    	</li>
-								    	<li id="hotel-block" >
+								    	<li id="hotel-block">
 								    		<header>
 									    		STAY
 									    		<div class="filter-wrapper">
@@ -208,6 +214,8 @@
 															<img ng-src="{{image.src}}" alt=""/>
 														</li>
 									    			</ul>
+									    			<button rel="right"></button>
+									    			<button rel="left"></button>
 								    			</div>
 								    			<div id="curated" ng-repeat="content in hotel.content_blocks[0]">
 									    			<div class="divider {{content.title}}">{{content.title}}</div>
@@ -307,17 +315,17 @@
 									    			</div>
 									    			<input type="text" class="rounded" placeholder="other"/>
 									    		</li>
-									    		<li>
-									    			<label>Name</label>
-									    			<input type="text"/>
-									    		</li>
-									    		<li>
-									    			<label>Last Name</label>
-									    			<input type="text"/>
-									    		</li>
-									    		<li>
-									    			<label>Email</label>
-									    			<input type="email"/>
+									    		<li class="add-border">
+									    			<div class="half-wrapper">
+									    				<label for="user-name" class="clear">Name</label>
+														<input id="user-name" type="text" class="rounded"/>
+									    			</div>
+									    			<div class="half-wrapper">
+									    				<label for="user-last" class="clear">Last Name</label>
+														<input id="user-last" type="text" class="rounded"/>
+									    			</div>
+									    			<label for="user-email" class="clear">Email</label>
+									    			<input id="user-email" type="email" class="rounded"/>
 									    		</li>
 									    		<li>
 									    			<textarea placeholder="Prefer connecting rooms or a suite? Any favorite hotels will help us pick your perfect match for this trip. Let us know here."></textarea>
