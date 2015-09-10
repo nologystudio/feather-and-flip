@@ -9,6 +9,8 @@
 	<script src="<?php echo drupal_get_path('theme', 'passported'); ?>/library/vendors/imagesloaded.min.js"></script>
 	<script src="<?php echo drupal_get_path('theme', 'passported'); ?>/library/vendors/retina.min.js"></script>
 	<script src="<?php echo drupal_get_path('theme', 'passported'); ?>/library/vendors/waypoints.min.js"></script>
+	<script src="<?php echo drupal_get_path('theme', 'passported'); ?>/library/vendors/sly.min.js"></script>
+	<script src="<?php echo drupal_get_path('theme', 'passported'); ?>/library/vendors/shuffle.min.js"></script>
 	
 	<script src="<?php echo drupal_get_path('theme', 'passported'); ?>/library/vendors/angular.min.js"></script>
 	<script src="<?php echo drupal_get_path('theme', 'passported'); ?>/library/vendors/angular-cookies.min.js"></script>

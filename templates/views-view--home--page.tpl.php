@@ -5,15 +5,15 @@
 	<main id="passported-intro">
 		<ul>
 			<li>
-				<h1 data-animate="1">Sophisticated family travel<br>simplified</h1>
+				<h1 data-animate="1">Sophisticated family travel simplified</h1>
 				<ul class="align-center">
 					<li ng-click="goTo('plan')">
 						<h2 data-animate="2">Plan</h2>
-						<h3 data-animate="3">We help you find the ideal destination and hotel for your particular FAMILY needs</h3>
+						<h3 data-animate="3">Find the ideal destination and hotel for your particular FAMILY needs</h3>
 					</li>
 					<li ng-click="goTo('explore')">
 						<h2 data-animate="4">Explore</h2>
-						<h3 data-animate="5">We have parent-scouted picks and itineraries that you can customize</h3>
+						<h3 data-animate="5">Parent-scouted picks and itineraries that you can customize</h3>
 					</li>
 					<li ng-click="goTo('book')">
 						<h2 data-animate="6">Book</h2>
@@ -27,12 +27,6 @@
 	<!-- inspiration -->
 	
 	<section id="inspiration">
-		<button id="pointer" ng-click="viewAll()">
-			<span></span>
-			<svg>
-				<path d="M 50,0 L 100,50 L 0,50 L 50,0"/>
-			</svg>
-		</button>
 		<div class="wrapper grid-2 align-center">
 			<div id="search-destination" data-animate="1">
 				<header>

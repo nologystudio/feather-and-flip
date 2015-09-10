@@ -51,3 +51,29 @@
 				}
 			}
 		});
+		
+		ppComponents.directive('ppHotelGallery',function(){
+			return {
+		    	restrict  : 'EA',
+		    	replace   : false,
+		    	controller: function($scope){
+		        },
+				link : function($scope,$element,_attrs){
+					$element.sly({
+						horizontal    : true,
+						itemNav       : 'basic',
+						activateOn    : 'click',
+						mouseDragging : 1,
+						touchDragging : 1,
+						smart         : 1,
+						startAt       : 0,
+						scrollBy      : 1,
+						speed         : 300,
+						elasticBounds : 1,
+						activatePageOn: 'click'
+						//prevPage      : lBtn,
+						//nextPage      : rBtn
+					});
+				}
+			}
+		});

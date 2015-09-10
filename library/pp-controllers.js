@@ -21,7 +21,7 @@
         
         'use strict';
         
-        var formSubmit    = window.location.protocol + '//' + window.location.host + '/api/forms';
+        var formSubmit    = 'https://stage.passported.com/api/forms'; //window.location.protocol + '//' + window.location.host + '/api/forms';
         var ppControllers = angular.module('ppControllers',[]);
         
         /* ------------------------------------------------------------------------------------------------------------- */
@@ -30,7 +30,7 @@
 	       
 	    	/* Layout & Tools
 	        - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-	        
+	       
 	        var triggerGoogleEvent = function(_s){
 // 				ga('send','event','ux','scroll',_s);
 	        }
@@ -78,7 +78,7 @@
 		        
 		        $('#inspiration').waypoint(function(){
 			        
-			        var _t = $(this);
+			       /* var _t = $(this);
 			        
 			        _t.toggleClass('fixed');
 			        
@@ -87,7 +87,8 @@
 					        var _h = $(this).scrollTop() - 620; 
 					        if(_h > 180) _t.addClass('compressed'); 
 				        }
-			        });
+			        });*/
+			        
 			    },{ offset: '90px' });  
 		        
 		        $('#how-it-works').waypoint(function(){
@@ -288,6 +289,8 @@
 	    ppControllers.controller('MapController',function($scope,$log,$timeout){
 		    
 		    $scope.map;
+		    $scope.lat = 40.777422;
+		    $scope.lon = -73.968887;
 		    
 		    var mapID = 'passported';
 		    var setMapHeight = function(){
@@ -300,7 +303,7 @@
 			    
 			    var mapOptions = {
 					zoom: 10,
-					center: new google.maps.LatLng(40.777422,-73.968887),
+					center: new google.maps.LatLng($scope.lat,$scope.lon),
 					panControl: true,
 					zoomControl: true,
 					mapTypeControl: false,
@@ -308,8 +311,13 @@
 					scaleControl: true,
 					streetViewControl: true,
 					overviewMapControl: false,
+					panControl: false,
+					panControlOptions: {
+						position: google.maps.ControlPosition.TOP_RIGHT
+					},
 				    zoomControlOptions: {
 				    	style: google.maps.ZoomControlStyle.SMALL,
+				    	position: google.maps.ControlPosition.RIGHT_TOP
 				    },
 				    mapTypeControlOptions: {
 						mapTypeIds: [google.maps.MapTypeId.ROADMAP,mapID]
@@ -371,6 +379,9 @@
 			}
 		    
 		    $scope.addMarkers = function(_id,_data){
+			    
+			    var _path = '/sites/all/themes/passported/media/icons/';
+			    
 			    switch(_id){
 				    case 'destinations':
 				    	console.log(_data);
@@ -381,13 +392,13 @@
 									lng: Number(_d.lon)
 								},
 								map: $scope.map,
-								title: _d.name
-								//icon: ''
+								title: _d.name,
+								icon: _path + 'map-pin-icon.svg'
 							});
 							
 							destination.addListener('click',function(){
 								$scope.map.setZoom(15);
-								$scope.map.setCenter(marker.getPosition());
+								$scope.map.setCenter(destination.getPosition());
 							});
 					    });
 				    break;
@@ -400,21 +411,25 @@
 				    	_.map(detail,function(_d){
 					    	_.map(_d,function(_p){
 						    	
+						    	console.log(_p);
+						    	
 						    	var pin = new google.maps.Marker({
 									position: {
 										lat: Number(_p.lat),
 										lng: Number(_p.lon)
 									},
 									map: $scope.map,
-									title: _p.title
+									title: _p.title,
+									icon: _path + 'map-pin-icon.svg'
 								});
 								
 								var infowindow = new google.maps.InfoWindow({
-									content: _p.short_review
+									content: '<div class="in-map"><h1>'+_p.title+'</h1><h2>'+_p.short_review+'</h2></div>',
+									maxWidth: 200
 								});
 								
 								pin.addListener('click',function(){
-									$scope.map.setZoom(20);
+									$scope.map.setZoom(16);
 									$scope.map.setCenter(pin.getPosition());
 									infowindow.open($scope.map,pin);
 								});
@@ -451,9 +466,39 @@
 			//This will return a single itinerary based on id:
 			//GET https://gostage.passported.com/api/v2/itinerary?id=64
 			
-			$scope.step = 1;
+			$scope.cityGuideID;
+			$scope.step = (_.isUndefined($scope.cityGuideID)) ? 1 : 2;
 			$scope.showAside = false;
 			$scope.pick;
+			
+			// Tools
+			
+			$scope.check = {
+				phone: function(_p){
+					return _.isArray(_p);
+				},
+				features: function(_d){
+					return _.isArray(_d);
+				},
+				icon: function(_icon){
+					
+					var _i = _icon.toLowerCase();
+				
+					switch(_i){
+						case 'basics': case'bedtime':
+							_i = 'icon-passported-imago';
+						break;
+						case 'do': case'shop': case 'eat': case 'noteworthy':
+							_i = 'icon-passported-imago';
+						break;
+					}
+					
+					return _i;
+				}
+			}
+			
+			/* Open/Close panel
+	        - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 			
 			$scope.openAside = function(){
 				$scope.showAside = !$scope.showAside;	
@@ -463,17 +508,8 @@
 				$scope.step = _state;
 			}
 			
-			$scope.book = function(_hotel){
-				$rootScope.$emit('open-booking');
-			}
-			
-			$scope.destinations = destSrc.query({},function(_data){
-				$scope.$parent.addMarkers('destinations',_data);
-			});
-			
-			$scope.checkPhoneNumber = function(_p){
-				return _.isArray(_p);
-			}
+			/* Destinations
+	        - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 			
 			$scope.displayDestination = function(_d){
 				
@@ -481,9 +517,11 @@
 				
 				// 1. Bonvoyaging Itinerary...
 				
-				/*itSrc.query({'name':_d.name.replace(' ','+')},function(_data){
-					console.log(_data);
-				});*/
+				if(window.location.host == 'stage.passported.com' || window.location.host == 'www.passported.com'){
+					itSrc.query({'name':_d.name.replace(' ','+')},function(_data){
+						console.log(_data);
+					});
+				}
 				
 				// 2. Address Books
 				
@@ -501,16 +539,33 @@
 				});
 				
 				$scope.step = 2;
+				$('#step-2').delay(2000).transition({opacity:1},'slow');
+			}
+			
+			if(_.isUndefined($scope.cityGuideID)){
+				$scope.destinations = destSrc.query({},function(_data){
+					$scope.$parent.addMarkers('destinations',_data);
+				});
+			}else{
+				$scope.pick = destSrc.query({id:$scope.cityGuideID},function(_data){
+					$scope.displayDestination(_data[0]);
+				});
+			}
+			
+			/* Books
+			- - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+			
+			$scope.book = function(_hotel){
+				$rootScope.$emit('open-booking',[_hotel]);
 			}
 			
 			$rootScope.$on('filter',function(_d){
-				console.log('test');
 			});
 		});
 		
 		/* ------------------------------------------------------------------------------------------------------------- */
 	    
-	    ppControllers.controller('BookingController',function($scope,$log,$timeout,$rootScope){
+	    ppControllers.controller('BookingController',function($scope,$log,$timeout,$http,$rootScope){
 		   
 			var bookingData = {
 			    formID: 'bookHotel',
@@ -524,10 +579,11 @@
 			    adults: 0,
 			    children: 0,
 			    budget: undefined,
+			    specific_budget: undefined,
 			    message: undefined
 		    }
 		    
-		    $scope.showRightAside = true;
+		    $scope.showRightAside = false;
 		    $scope.booking = angular.copy(bookingData);
 			
 			$scope.openAside = function(){
@@ -557,6 +613,10 @@
 				
 				console.log($scope.booking);
 				
+				$('aside.right #step-1 ul li').transition({opacity:0},function(){
+					$(this).hide();
+				});
+				
 				$http({
 	                method  : 'POST',
 	                url     : formSubmit,
@@ -567,15 +627,17 @@
 					transformRequest: angular.identity
 	            }).
 	            success(function(_data){
-		        	console.log(_data);
+		            console.log(_data);
+		            $('#booking-message').show().transition({opacity:1});
 	            }).
 	            error(function(){});
 			}
 			
 			$rootScope.$on('open-booking',function(_e,_data){
 				$scope.showRightAside = true;
-				console.log(_e);
-				console.log(_data);
+				$scope.booking.destination = _data[0].destination;
+				$scope.booking.hotel = _data[0].name;
+				console.log(_data[0]);
 			});
 			
 			$timeout(function(){
@@ -586,6 +648,15 @@
 		/* ------------------------------------------------------------------------------------------------------------- */
 	    
 	    ppControllers.controller('BlogController',function($scope,$log,$timeout){
+		    
+		    var grid    = $('.grid-wrapper');
+			var entries = $('*.quick-entry').toArray();
+			
+			$timeout(function(){
+				//grid.shuffle({
+				//	itemSelector: '.quick-entry'
+				//});
+			},0);
 		});
 	    
 	    ppControllers.controller('PromotedController',function($scope,$log,$timeout,$resource){
@@ -648,6 +719,54 @@
 	    
 	    ppControllers.controller('SearchController',function($scope,$log,$timeout){
 		});
+		
+		/* ------------------------------------------------------------------------------------------------------------- */
+		
+		ppControllers.controller('ContactController',function($scope,$http){
+			
+			$scope.data = {
+				userName       : '',
+				userLast       : '',
+				userEmail      : '',
+				userDepartment : '',
+				userSubject    : '',
+				userMessage    : ''
+			}
+			
+			$scope.success = false;
+			
+			$scope.submitContact = function(){
+				
+				var formData = {
+					formID    : 'contact',
+					firstName : $scope.data.userName,
+					lastName  : $scope.data.userLast,
+					email     : $scope.data.userEmail,
+					department: $scope.data.userDepartment,
+					subject   : $scope.data.userSubject,
+					message   : $scope.data.userMessage
+				}
+				
+				$http({
+	                method : 'POST',
+	                url    : formSubmit,
+	                data   : $.param(formData),
+	                headers : { 
+	            		'Content-Type' : 'application/x-www-form-urlencoded'
+					},
+					transformRequest: angular.identity
+	            }).
+	            success(function(_data){
+		           	$('#contact-form').transition({opacity:0},function(){
+			             $scope.success = true;
+			             $scope.$apply();
+		            });
+		        }).
+	            error(function(){
+	            });
+			};
+		});
+		
 		
 		
 		

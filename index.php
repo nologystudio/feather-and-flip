@@ -126,11 +126,32 @@
 								</form>
 							</div>
 						</div>
+						<div id="let-us-inspire">
+							<header>
+								<h4>Let us Inspire you</h4>
+							</header>
+							<div class="wrapper">
+								<ul class="select">
+									<li>
+										<span class="icon">&#xe03a;</span>
+										Pick the type of place
+									</li>
+								</ul>
+								<ul class="select">
+									<li>
+										<span class="icon">&#xe03a;</span>
+										Pick a season
+									</li>
+								</ul>
+							</div>
+							<button class="go-btn" ng-click="">Go</button>
+							<button class="clear-btn" ng-click="">Clear</button> 
+						</div>
 					</div>
 				</div>
 			</div>
 			
-			<?php $page = 'map'; ?>
+			<?php $page = 'home'; ?>
 			
 			<?php if($page == 'map'): ?>
 			
@@ -138,7 +159,7 @@
 			
 			<section id="map" ng-controller="MapController">
 				<div id="google-maps-container" data-animate="1"></div>
-				<aside class="left" ng-class="{'on':showAside}" ng-controller="ItineraryController">
+				<aside class="left on" ng-class="{'on':showAside}" ng-controller="ItineraryController">
 					<div class="wrapper">
 				    	<ul ng-class="{'step-1':step == 1,'step-2':step == 2,'step-3':step == 3}">
 						    <li id="step-1">
@@ -158,47 +179,55 @@
 									    		<h2>{{place.name}}</h2>
 									    		<h3 ng-bind-html="place.description"></h3>
 											</div>
-											<div class="right-arrow"></div>
+											<div class="right-arrow icon-right-circle-full"></div>
 							    		</button>
 							    	</li>
 						    	</ul>
 						    </li>
-						    <li id="step-2">
+						    <li id="step-2"class="animated fadeIn">
 						    	<aside>
-							    	<button rel="menu" ng-click="goTo(1)"></button>
-							   		<button ng-repeat="type in selectedDestination.summaries" rel="{{type.name}}" ng-click="filterMap(type.name)" ng-class="{'on':bookFilter == type.name}"></button>
-							   		<button ng-click="filterMap(undefined)" ng-class="{'on':bookFilter == undefined}" class="view-all">view all</button>
+							    	<button rel="menu" ng-click="goTo(1)" class="icon-back"></button>
+									<!-- 							   	
+									<button ng-repeat="type in selectedDestination.summaries" rel="{{type.name}}" ng-click="filterMap(type.name)" ng-class="{'on':bookFilter == type.name}"></button>
+									-->
+									<button rel="hotel" class="icon-hotel-circle"></button>
+									<button rel="eat" class="icon-eat-circle"></button>
+									<button rel="play" class="icon-itinerary-circle"></button>
+									<button rel="shop" class="icon-shopping-circle"></button>
+									<button rel="noteworthy" class="icon-places-circle"></button>
+									<button rel="spot" class="icon-sights-circle"></button>
+									<button ng-click="filterMap(undefined)" ng-class="{'on':bookFilter == undefined}" class="view-all">View all</button>
 							   		<button rel="print" ng-click="printList()"></button>
 						    	</aside>
 						    	<div class="wrapper">
 							    	<header>
 								    	<figure>
-								    		<img ng-src="{{pick.images[0][0].src}}"/>
+								    		<img ng-src="{{pick.images[0][0].src}}" class="animated fadeIn"/>
 								    	</figure>
 								    	<h1>{{pick.name}}</h1>
 								    	<nav>
-									    	<a href="" rel="facebook"></a>
-									    	<a href="" rel="twitter"></a>
-									    	<a href="" rel="pinterest"></a>
-									    	<a href="" rel="google-plus"></a>
-									    	<a href="" rel="instagram"></a>
+									    	<a href="" rel="facebook" class="icon-facebook-circle"></a>
+									    	<a href="" rel="twitter" class="icon-twitter-circle"></a>
+									    	<a href="" rel="pinterest" class="icon-pinterest-circle"></a>
+									    	<a href="" rel="instagram" class="icon-instagram-circle"></a>
+									    	<a href="" rel="google-plus" class="icon-google-circle"></a>
 									    </nav>
 							    	</header>
 							    	<ul>
 								    	<li id="the-trip-block">
 								    		<a href="">
-									    		<div class="circle-outline-icon plan-btn"></div>
+									    		<div class="circle-outline-icon plan-btn icon-edit"></div>
 									    		Plan your trip
 								    		</a>
 								    	</li>
 								    	<li id="destination-block">
 								    		<button class="circle-outline-icon download-btn">
-								    			<div class="circle"></div>
-								    			<span>download</span>
+								    			<div class="circle icon-email-circle"></div>
+								    			<span>Share url</span>
 								    		</button>
 								    		<button class="circle-outline-icon share-btn">
-								    			<div class="circle"></div>
-								    			<span>share</span>
+								    			<div class="circle icon-download-circle"></div>
+								    			<span>Download</span>
 								    		</button>
 								    		<h2>{{pick.name}}, {{pick.country}}</h2>
 								    		<small>{{pick.lat}} Lat, {{pick.lon}} Lon</small>
@@ -208,6 +237,11 @@
 								    		<header>
 									    		STAY
 									    		<div class="filter-wrapper">
+										    		<div pp-filter filter-state="true" id="{{type}}" class="filter">
+											    		<button class="radio-btn">
+											    			View all<span></span>
+											    		</button>
+										    		</div>
 										    		<div pp-filter filter-state="false" id="{{type}}" class="filter">
 											    		<button class="radio-btn">
 											    			Type<span></span>
@@ -216,12 +250,13 @@
 									    		</div>
 								    		</header>
 								    		<article id="hotel" ng-repeat="hotel in pick.hotels">
+									    		<div class="icon-hotel"></div>
 							    				<header>
-									    			<h4>{{hotel.name}}</h4>
+								    				<h4>{{hotel.name}}</h4>
 									    			<h5>{{hotel.address_1}}</h5>
-									    			<p>{{hotel.phone_number}}</p>
+									    			<p><span class="icon-phone"></span>{{hotel.phone_number}}</p>
 									    			<h6>{{hotel.short_description}}</h6>
-									    			<button ng-click="book(hotel.id)">Book now</button>
+									    			<button ng-click="book(hotel)">Book now<span class="icon-right-circle-full"></span></button>
 								    			</header>
 								    			<div class="slideshow">
 									    			<ul>
@@ -229,12 +264,21 @@
 															<img ng-src="{{image.src}}" alt=""/>
 														</li>
 									    			</ul>
-									    			<button rel="right"></button>
-									    			<button rel="left"></button>
+									    			<button rel="right" class=""></button>
+									    			<button rel="left" class=""></button>
 								    			</div>
 								    			<div id="curated" ng-repeat="content in hotel.content_blocks[0]">
-									    			<div class="divider {{content.title}}">{{content.title}}</div>
-									    			<ul>
+									    			<div class="divider {{content.title}}">
+										    			<span class="icon-{{getIcon(content.title)}}"></span>
+										    			{{content.title}}
+										    			<div class="line"></div>
+										    		</div>
+													<!-- Rich text -->
+									    			<ul ng-if="checkHotelFeatures(content.description)">
+										    			<li ng-bind-html="content.description"></li>
+										    		</ul>
+													<!-- Plain text -->
+									    			<ul ng-if="!checkHotelFeatures(content.description)">
 										    			<li ng-repeat="feature in content.features" ng-bind-html="feature"></li>
 									    			</ul>
 								    			</div>
@@ -244,6 +288,11 @@
 											<header>
 									    		Section
 									    		<div class="filter-wrapper">
+										    		<div pp-filter filter-state="true" id="{{type}}" class="filter">
+											    		<button class="radio-btn">
+											    			View all<span></span>
+											    		</button>
+										    		</div>
 										    		<div pp-filter filter-state="false" id="{{filter}}" class="filter">
 											    		<button class="radio-btn">
 											    			<span></span>
@@ -254,7 +303,7 @@
 								    		</header>
 								    		<ul>
 									    		<li ng-repeat="address in pick.guide">
-									    			<div class="icon"></div>
+									    			<div class="icon icon-{{getIcon(address.assoc_interests)}}"></div>
 									    			<h4>{{address.title}}</h4>
 									    			<h5 ng-bind-html="address.short_review"></h5>
 									    			<footer>
@@ -271,7 +320,7 @@
 
 				    </div>
 					<button class="aside-trigger" ng-click="openAside()" data-animate="2">
-						<span>&#x23;</span>
+						<span class="icon-arrow-right"></span>
 						<svg>
 							<path d="M 0,0 L 50,50 L 0,100 L 0,0"/>
 						</svg>
@@ -286,12 +335,20 @@
 							    	<div class="wrapper">
 								    	<h1>Contact us</h1>
 								    	<h2>Consult our hotel experts</h2>
+								    	<div class="destination-hotel-wrapper">
+									    	<h3>{{booking.destination}}</h3>
+								    		<h4>{{booking.hotel}}</h4>
+								    	</div>
 							    	</div>
 						    	</header>
 						    	<ul>
+							    	<li id="booking-message">
+							    		<h5>Lorem Ipsum</h5>
+									    <h6>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.</h6>
+							    	</li>
 							    	<li id="email-entry">
 							    		Drop us an e-mail or fill out the form below
-							    		<a href="" class="icon circle-btn"></a>
+							    		<a href="mailto:info@passported.com" class="icon circle-btn icon-email"></a>
 							    	</li>
 							    	<li>
 							    		<form name="bookingForm">
@@ -302,8 +359,8 @@
 									    		</li>
 									    		<li>
 									    			<div id="date-picker">
-										    			<button class="rounded-btn">Start Date</button>
-										    			<button class="rounded-btn">End Date</button>
+										    			<button class="rounded-btn icon-calendar">Start Date</button>
+										    			<button class="rounded-btn icon-calendar">End Date</button>
 									    			</div>
 									    		</li>
 									    		<li>
@@ -332,7 +389,7 @@
 										    			1200$+
 										    			<span></span>
 									    			</div>
-									    			<input type="text" class="rounded" placeholder="other" ng-model="booking.budget"/>
+									    			<input type="text" class="rounded" placeholder="other" ng-model="booking.specific_budget"/>
 									    		</li>
 									    		<li class="add-border">
 									    			<div class="half-wrapper">
