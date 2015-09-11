@@ -21,7 +21,7 @@
         
         'use strict';
         
-        var formSubmit    = 'https://stage.passported.com/api/forms'; //window.location.protocol + '//' + window.location.host + '/api/forms';
+        var formSubmit    = 'https://www.passported.com/api/forms'; //window.location.protocol + '//' + window.location.host + '/api/forms';
         var ppControllers = angular.module('ppControllers',[]);
         
         /* ------------------------------------------------------------------------------------------------------------- */
@@ -468,7 +468,7 @@
 			
 			$scope.cityGuideID;
 			$scope.step = (_.isUndefined($scope.cityGuideID)) ? 1 : 2;
-			$scope.showAside = false;
+			$scope.showAside = true;
 			$scope.pick;
 			
 			// Tools
@@ -717,7 +717,70 @@
 	    
 	    /* ------------------------------------------------------------------------------------------------------------- */
 	    
-	    ppControllers.controller('SearchController',function($scope,$log,$timeout){
+	    ppControllers.controller('SearchController',function($scope,$log,$http,$timeout){
+		    
+		    var timer;
+		    
+		    $scope.userSearch = '';
+			$scope.destinations;
+			$scope.hotels;
+			$scope.showResult = false;
+			$scope.noResult   = false;
+			
+			$scope.reset = function(){
+				//$scope.result      = {}; 
+				//$scope.noResult    = false;
+				$scope.userSearch = '';
+				$scope.$apply();
+			};
+			
+			$scope.searchSubmit = function(){
+				
+				var searchAction = function(){
+					
+					console.log($scope.userSearch);
+					
+					$http({
+		                method  : 'POST',
+		                url     : formSubmit,
+			            data    : $.param({formID:'customSearch',key:$scope.userSearch}),
+		                headers : { 
+		            		'Content-Type' : 'application/x-www-form-urlencoded'
+						},
+						transformRequest: angular.identity
+		            }).
+		            success(function(_data){
+			            
+			            console.log(_data);
+			            
+			            /*if(_data.destinations.length > 0 || _data.hotels.length > 0){
+				            $scope.showResult   = true;
+				            $scope.destinations = _data.destinations;
+				            $scope.hotels       = _data.hotels;
+				        }
+			            else if($scope.userSearch.split('').length > 0){
+				            $scope.showResult   = true;
+				            $scope.noResult     = true;
+				        }
+			            else{
+				        	$scope.showResult   = false; 
+							$scope.noResult     = false;
+			            }*/
+		            }).
+		            error(function(){
+		            });
+				}
+				
+				if(timer) clearTimeout(timer);
+				
+				timer = setTimeout(function(){
+					if($scope.userSearch != '') searchAction();
+					//else $scope.reset();
+				},500); 
+			}
+		});
+		
+		ppControllers.controller('InspirationController',function($scope,$log,$http,$timeout){
 		});
 		
 		/* ------------------------------------------------------------------------------------------------------------- */

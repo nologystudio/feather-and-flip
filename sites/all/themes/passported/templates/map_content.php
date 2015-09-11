@@ -1,5 +1,5 @@
 <div id="google-maps-container" data-animate="1"></div>
-<aside class="left on" ng-class="{'on':showAside}" ng-controller="ItineraryController">
+<aside class="left" ng-class="{'on':showAside}" ng-controller="ItineraryController">
 	<div class="wrapper">
     	<ul ng-class="{'step-1':step == 1,'step-2':step == 2,'step-3':step == 3}">
 		    <li id="step-1">
@@ -27,7 +27,6 @@
 		    <li id="step-2">
 		    	<aside>
 			    	<button rel="menu" ng-click="goTo(1)" ng-if="!cityGuideID" class="icon-back"></button>
-					 							   	
 					<button ng-repeat="type in selectedDestination.summaries" rel="{{type.name}}" ng-click="filterMap(type.name)" ng-class="{'on':bookFilter == type.name}"></button>
 					
 					<!--<button rel="hotel" class="icon-hotel-circle"></button>
@@ -100,7 +99,7 @@
 					    			<h6>{{hotel.short_description}}</h6>
 					    			<button ng-click="book(hotel)">Book now<span class="icon-right-circle-full"></span></button>
 				    			</header>
-				    			<div class="slideshow">
+				    			<div pp-hotel-gallery class="slideshow">
 					    			<ul>
 						    			<li ng-repeat="image in hotel.images[0]">
 											<img ng-src="{{image.src}}" alt=""/>
