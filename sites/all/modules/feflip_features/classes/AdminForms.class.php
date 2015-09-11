@@ -647,7 +647,7 @@ class AdminForms
             $result = $efq->entityCondition('entity_type', 'node')
                 ->entityCondition('bundle', array('destination', 'hotel'), 'IN')
                 ->propertyCondition('status', 1)
-                ->propertyCondition('title', $key, 'CONTAINS')
+                ->propertyCondition('title', $key, 'STARTS_WITH')
                 ->propertyOrderBy('title', 'ASC')
                 ->execute();
             if (isset($result['node']) && !empty($result['node'])){
@@ -656,10 +656,21 @@ class AdminForms
                     $image = Helpers::GetMainImageFromFieldCollection($node->field_images, $node->title,'http://placehold.it/100x100', 'itinerary_main_icon');
                     switch ($node->type) {
                         case 'destination':
-                            $payload['destinations'][] = array('title' => $node->title, 'image' => $image['url'], 'url' => '/'.drupal_get_path_alias('node/'.$node->nid.'/hotel-reviews'));
+                            $payload['destinations'][] = array(
+                                'title' => $node->title,
+                                'image' => $image['url'],
+                                'url' => '/'.drupal_get_path_alias('node/'.$node->nid.'/hotel-reviews'),
+                                'guide_url' => '/'.drupal_get_path_alias('node/'.$node->nid.'/city-guide'),
+                            );
                             break;
                         case 'hotel':
-                            $payload['hotels'][] = array('title' => $node->title, 'image' => $image['url'], 'url' => '/'.drupal_get_path_alias('node/'.$node->nid));
+                            $payload['hotels'][] = array(
+                                'title' => $node->title,
+                                'image' => $image['url'],
+                                'url' => '/'.drupal_get_path_alias('node/'.$node->nid),
+                                'guide_url' => '/'.drupal_get_path_alias('node/'.$node->field_destination['und'][0]['target_id'].'/city-guide').'?hotel='.$node->nid,
+                                'hotel_id' => $node->nid,
+                            );
                             break;
                         default:
                             break;
