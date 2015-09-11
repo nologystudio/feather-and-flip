@@ -1,0 +1,235 @@
+@font-face {
+	font-family: 'passported-icons';
+	src:url('../../fonts/passported-icons.eot');
+	src:url('../../fonts/passported-icons.eot?#iefix') format('embedded-opentype'),
+		url('../../fonts/passported-icons.ttf') format('truetype'),
+		url('../../fonts/passported-icons.woff') format('woff'),
+		url('../../fonts/passported-icons.svg#passported-icons') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+	font-family: 'passported-icons';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.icon-arrow-left:before {
+	content: "\e600";
+}
+.icon-arrow-right:before {
+	content: "\e601";
+}
+.icon-back:before {
+	content: "\e602";
+}
+.icon-next:before {
+	content: "\e603";
+}
+.icon-down-circle-full:before {
+	content: "\e604";
+}
+.icon-left-circle-full:before {
+	content: "\e605";
+}
+.icon-right-circle-full:before {
+	content: "\e606";
+}
+.icon-up-circle-full:before {
+	content: "\e607";
+}
+.icon-bests:before {
+	content: "\e608";
+}
+.icon-bests-circle:before {
+	content: "\e609";
+}
+.icon-buts:before {
+	content: "\e60a";
+}
+.icon-buts-circle:before {
+	content: "\e60b";
+}
+.icon-calendar:before {
+	content: "\e60c";
+}
+.icon-calendar-circle:before {
+	content: "\e60d";
+}
+.icon-download:before {
+	content: "\e60e";
+}
+.icon-download-circle:before {
+	content: "\e60f";
+}
+.icon-eat:before {
+	content: "\e610";
+}
+.icon-eat-circle:before {
+	content: "\e611";
+}
+.icon-edit:before {
+	content: "\e612";
+}
+.icon-edit-circle:before {
+	content: "\e613";
+}
+.icon-edit-image:before {
+	content: "\e614";
+}
+.icon-edit-image-circle:before {
+	content: "\e615";
+}
+.icon-email:before {
+	content: "\e616";
+}
+.icon-email-circle:before {
+	content: "\e617";
+}
+.icon-facebook:before {
+	content: "\e618";
+}
+.icon-facebook-circle:before {
+	content: "\e619";
+}
+.icon-google:before {
+	content: "\e61a";
+}
+.icon-google-circle:before {
+	content: "\e61b";
+}
+.icon-hotel:before {
+	content: "\e61c";
+}
+.icon-hotel-circle:before {
+	content: "\e61d";
+}
+.icon-instagram:before {
+	content: "\e61e";
+}
+.icon-instagram-circle:before {
+	content: "\e61f";
+}
+.icon-itinerary-2:before {
+	content: "\e620";
+}
+.icon-itinerary-2-circle:before {
+	content: "\e621";
+}
+.icon-itinerary:before {
+	content: "\e622";
+}
+.icon-itinerary-circle:before {
+	content: "\e623";
+}
+.icon-noteworthy:before {
+	content: "\e624";
+}
+.icon-noteworthy-circle:before {
+	content: "\e625";
+}
+.icon-pinterest-2:before {
+	content: "\e626";
+}
+.icon-pinterest-2-circle:before {
+	content: "\e627";
+}
+.icon-pinterest:before {
+	content: "\e628";
+}
+.icon-pinterest-circle:before {
+	content: "\e629";
+}
+.icon-places:before {
+	content: "\e62a";
+}
+.icon-places-circle:before {
+	content: "\e62b";
+}
+.icon-refresh:before {
+	content: "\e62c";
+}
+.icon-refresh-circle:before {
+	content: "\e62d";
+}
+.icon-search:before {
+	content: "\e62e";
+}
+.icon-search-circle:before {
+	content: "\e62f";
+}
+.icon-settings:before {
+	content: "\e630";
+}
+.icon-settings-circle:before {
+	content: "\e631";
+}
+.icon-shopping:before {
+	content: "\e632";
+}
+.icon-shopping-circle:before {
+	content: "\e633";
+}
+.icon-sights:before {
+	content: "\e634";
+}
+.icon-sights-circle:before {
+	content: "\e635";
+}
+.icon-social-btn:before {
+	content: "\e636";
+}
+.icon-social-circle:before {
+	content: "\e637";
+}
+.icon-twitter:before {
+	content: "\e638";
+}
+.icon-twitter-circle:before {
+	content: "\e639";
+}
+.icon-weibo:before {
+	content: "\e63a";
+}
+.icon-weibo-circle:before {
+	content: "\e63b";
+}
+.icon-youtube:before {
+	content: "\e63c";
+}
+.icon-youtube-circle:before {
+	content: "\e63d";
+}
+.icon-reply:before {
+	content: "\e63e";
+}
+.icon-send:before {
+	content: "\e63f";
+}
+.icon-phone:before {
+	content: "\e640";
+}
+.icon-feather-reflected:before {
+	content: "\e644";
+}
+.icon-feather:before {
+	content: "\e645";
+}
+.icon-passported-imago:before {
+	content: "\e641";
+}
+.icon-passported-vertical:before {
+	content: "\e642";
+}
+.icon-passported-horizontal:before {
+	content: "\e643";
+}
