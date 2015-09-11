@@ -40,29 +40,22 @@
 		
 		<div id="search-block">
 			<div class="wrapper">
-				<?php if (drupal_is_front_page()): ?>
-					<div id="search-destination">
-						<header>
-							<h4 class="larger">Search a destination</h4>
-						</header>
-						<div class="wrapper">
-							<form>
-								<input type="text" class="rounded" placeholder="Enter your destination or hotel"/>
-							</form>
-						</div>
+				<div id="search-destination" ng-controller="SearchController">
+					<header>
+						<h4 class="larger">Search a destination</h4>
+					</header>
+					<div class="wrapper">
+						<form>
+							<input type="text" class="rounded" ng-model="userSearch" ng-change="searchSubmit()" placeholder="Enter your destination"/>
+						</form>
 					</div>
-				<?php else: ?>
-					<div id="search-destination">
-						<header>
-							<h4 class="larger">Search a destination</h4>
-						</header>
-						<div class="wrapper">
-							<form>
-								<input type="text" class="rounded" placeholder="Enter your destination or hotel"/>
-							</form>
-						</div>
-					</div>
-					<div id="let-us-inspire">
+					<ul id="search-result">
+						<li>text<a href="/contact">link</a></li>
+						<li ng-repeat="destination in destinations">{{destination.title}}</li>
+					</ul>
+				</div>
+				<?php if(!drupal_is_front_page()): ?>
+					<div id="let-us-inspire" ng-controller="InspirationController">>
 						<header>
 							<h4>Let us Inspire you</h4>
 						</header>
@@ -80,8 +73,8 @@
 								</li>
 							</ul>
 						</div>
-						<button class="go-btn" ng-click="">Go</button>
-						<button class="clear-btn" ng-click="">Clear</button>
+						<button class="go-btn" ng-click="" ng-if="">Go</button>
+						<button class="clear-btn" ng-click="" ng-if="">Clear</button>
 					</div>
 				<?php endif; ?>
 			</div>

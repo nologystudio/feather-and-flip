@@ -515,6 +515,25 @@
 						&[id="searh-destination"]
 						{
 							.set-size(100%/3);
+							
+							div.wrapper
+							{
+								ul[id="search-result"]
+								{
+									.set-size(100%);
+									.set-bgc(red);
+									#align > .left;
+									padding: @content-padding;
+									
+									li
+									{
+										#font > .lato(12px,@color-3,700);
+										text-transform: uppercase;
+										padding: @unit;
+										border-bottom: solid 1px @color-7;
+									}
+								}
+							}
 						}
 						
 						&[id="let-us-inspire"]

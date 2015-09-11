@@ -28,7 +28,22 @@
 	
 	<section id="inspiration">
 		<div class="wrapper grid-2 align-center">
-			<div id="let-us-inspire"  data-animate="1">
+			<div id="search-destination" ng-controller="SearchController">
+					<header>
+						<h4 class="larger">Search a destination</h4>
+					</header>
+					<div class="wrapper">
+						<form>
+							<input type="text" class="rounded" ng-model="userSearch" ng-change="searchSubmit()" placeholder="Enter your destination"/>
+						</form>
+					</div>
+					<ul id="search-result">
+						<li>text<a href="/contact">link</a></li>
+						<li ng-repeat="destination in destinations">{{destination.title}}</li>
+					</ul>
+				</div>
+
+			<div id="let-us-inspire" data-animate="1">
 				<header>
 					<h4>Let us Inspire you</h4>
 				</header>

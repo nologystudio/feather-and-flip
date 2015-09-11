@@ -116,13 +116,13 @@
 				</nav>
 				<div id="search-block">
 					<div class="wrapper">
-						<div id="search-destination">
+						<div id="search-destination" ng-controller="SearchController">
 							<header>
 								<h4 class="larger">Search a destination</h4>
 							</header>
 							<div class="wrapper">
 								<form>
-									<input type="text" class="rounded" placeholder="Enter your destination or hotel"/>
+									<input type="text" class="rounded" ng-model="userSearch" ng-change="searchSubmit()" placeholder="Enter your destination or hotel"/>
 								</form>
 							</div>
 						</div>
@@ -151,7 +151,7 @@
 				</div>
 			</div>
 			
-			<?php $page = 'home'; ?>
+			<?php $page = 'map'; ?>
 			
 			<?php if($page == 'map'): ?>
 			
