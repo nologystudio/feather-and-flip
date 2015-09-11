@@ -1,5 +1,5 @@
 <div id="google-maps-container" data-animate="1"></div>
-<aside class="left on" ng-class="{'on':showAside}" ng-controller="ItineraryController">
+<aside class="left" ng-class="{'on':showAside}" ng-controller="ItineraryController">
 	<div class="wrapper">
     	<ul ng-class="{'step-1':step == 1,'step-2':step == 2,'step-3':step == 3}">
 		    <li id="step-1">

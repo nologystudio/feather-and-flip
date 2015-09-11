@@ -468,7 +468,7 @@
 			
 			$scope.cityGuideID;
 			$scope.step = (_.isUndefined($scope.cityGuideID)) ? 1 : 2;
-			$scope.showAside = false;
+			$scope.showAside = true;
 			$scope.pick;
 			
 			// Tools
