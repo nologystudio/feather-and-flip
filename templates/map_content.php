@@ -28,16 +28,7 @@
 		    	<aside>
 			    	<button rel="menu" ng-click="goTo(1)" ng-if="!cityGuideID" class="icon-back"></button>
 					<button ng-repeat="type in selectedDestination.summaries" rel="{{type.name}}" ng-click="filterMap(type.name)" ng-class="{'on':bookFilter == type.name}"></button>
-					
-					<!--<button rel="hotel" class="icon-hotel-circle"></button>
-					<button rel="eat" class="icon-eat-circle"></button>
-					<button rel="play" class="icon-itinerary-circle"></button>
-					<button rel="shop" class="icon-shopping-circle"></button>
-					<button rel="noteworthy" class="icon-places-circle"></button>
-					<button rel="spot" class="icon-sights-circle"></button>
-					<button ng-click="filterMap(undefined)" ng-class="{'on':bookFilter == undefined}" class="view-all">View all</button>
-			   		<button rel="print" ng-click="printList()"></button>-->
-		    	</aside>
+				</aside>
 		    	<div class="wrapper">
 			    	<header>
 				    	<figure>
@@ -53,16 +44,6 @@
 				    		</a>
 				    	</li>
 				    	<li id="destination-block">
-<!--
-				    		<button class="circle-outline-icon download-btn">
-				    			<div class="circle icon-email-circle"></div>
-				    			<span>Share url</span>
-				    		</button>
-				    		<button class="circle-outline-icon share-btn">
-				    			<div class="circle icon-download-circle"></div>
-				    			<span>Download</span>
-				    		</button>
--->
 							<nav>
 						    	<a href="" rel="facebook" class="icon-facebook-circle"></a>
 						    	<a href="" rel="twitter" class="icon-twitter-circle"></a>

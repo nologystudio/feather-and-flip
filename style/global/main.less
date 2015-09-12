@@ -550,7 +550,8 @@
 			}	
 			
 			&[id="how-it-works"],
-			&[id="travel-journal"]
+			&[id="travel-journal"],
+			&[id="newsletter"]
 			{
 				header
 				{
@@ -1928,6 +1929,14 @@
 					overflow: hidden;
 				}	
 				
+				& > section[id="press"]
+				{
+					padding-top: @content-padding;
+				}
+				
+				// Specific styling...
+				// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+				
 				&.city-guides
 				{
 					aside.left
@@ -1964,13 +1973,6 @@
 				overflow: hidden;
 				z-index: 2;
 				box-shadow: 0 0 @content-padding @shadow-color;
-				
-				header
-				{
-					h4
-					{
-					}
-				}
 				
 				div[id="feed"]
 				{
@@ -2033,11 +2035,12 @@
 				
 				.set-size(100%,@h);
 				.set-bgc(@color-6);
+				.box-sizing();
 				.ui-search();
 				#align > .left;
-				z-index: 2;
-				padding: @content-padding/2 @content-padding;
-				overflow: hidden;
+				z-index: 3;
+				padding: @unit @content-padding;
+				overflow: visible;
 				
 				button[id="pointer"]
 				{
@@ -2078,12 +2081,12 @@
 							
 							.set-size(@s,@s);
 							.set-pos(absolute);
-							.set-bgc(@color-2);
+							#font > .ic(12px,@color-3);
 							bottom: 0;
 							left: 50%;
 							margin-left: -@s/2;
 							display: block;
-							content: '';
+							content: '\e60f';
 						}
 					}
 					
@@ -2107,7 +2110,7 @@
 					button.go-btn
 					{
 						margin-left: @content-padding/2;
-						display: none;
+						display: block;
 					}
 				}
 				
@@ -2132,6 +2135,84 @@
 							{
 								header
 								{}
+							}
+						}
+					}
+				}
+			}
+			
+			&[id="newsletter"]
+			{
+				@h: 220px;
+				
+				.set-size(100%,@h);
+				.box-sizing();
+				.set-bgc(@color-7);
+				#align > .left;
+				padding: 0 @content-padding;
+				overflow: hidden;
+				z-index: 2;
+				
+				div.wrapper
+				{
+					header
+					{
+						margin-bottom: 25px;
+						
+						h4
+						{
+							.set-bg(transparent,'@{media-url}icons/feather-grey-icon.svg',no-repeat,59%,center);
+							.set-bgs(auto,50px);
+							font-size: 22px;
+						}
+					}
+					
+					form
+					{
+						.set-size(600px);
+						#align > .center;
+						overflow: hidden;
+						
+						small
+						{
+							#font > .lato(22px,@color-1,300);
+							width: 100%;
+							display: block;
+							padding: @unit 0;
+							text-align: center;
+							text-transform: uppercase;
+						}
+						
+						input
+						{
+							.set-size(330px);
+							#align > .left;
+							
+							&[type="email"],
+							&[type="text"],
+							&[type="password"]
+							{
+								.box-sizing();
+								.set-bgc(transparent);
+								margin: @unit @content-padding/2;
+								margin-left: 4.5 * @content-padding;
+							}
+							
+							&.ng-invalid.ng-dirty
+							{
+								border-color: @warning-color;
+								color: @warning-color;
+							}
+						}
+						
+						button.go-btn
+						{
+							#align > .left;
+							margin: @unit 0;
+							
+							&.disabled
+							{
+								.set-opacity(0.5);
 							}
 						}
 					}
@@ -2632,10 +2713,28 @@
 				& > nav[id="social-media"]
 				{
 					.set-size();
-					.ui-set-social-media-nav(black);
+					.ui-set-social-media-nav(white);
 					#align > .center;
 					display: table;
-					margin-top: 52px;
+					margin-top: 46px;
+					
+					a
+					{
+						@s: 40px;
+						
+						.set-size(@s,@s);
+						.set-bgc(black);
+						border-radius: @content-padding;
+						
+						&:before
+						{
+							width: 100%;
+							font-size: 14px;
+							text-align: center;
+							line-height: @s;
+							display: block;
+						}
+					}
 				}
 				
 				& > small

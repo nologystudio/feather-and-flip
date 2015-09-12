@@ -108,6 +108,15 @@
 					
 		        },{ offset: '50%' });  
 		        
+		        $('#newsletter').waypoint(function(){
+			        
+			        var _t = $(this);
+			        
+			        $timeout(function(){_t.find('*[data-animate="1"]').addClass('animated fadeInUp')},200);
+					$timeout(function(){_t.find('*[data-animate="2"]').addClass('animated fadeInUp')},600);
+					
+		        },{ offset: '75%' });  
+		        
 		        $('#map').waypoint(function(){
 			        
 			        var _t = $(this);
@@ -750,19 +759,17 @@
 						transformRequest: angular.identity
 		            }).
 		            success(function(_data){
-			            
-			            console.log(_data);
-			            
 			            if(_data.destinations.length > 0 || _data.hotels.length > 0){
 				            $scope.showResult   = true;
 				            $scope.destinations = _data.destinations;
-				            $scope.hotels       = _data.hotels;
+							$scope.hotels       = _data.hotels;
 				        }
 			            else if($scope.userSearch.split('').length > 0){
 				            $scope.showResult   = true;
 				            $scope.noResult     = true;
 				        }
 			            else{
+				           
 				        	$scope.showResult   = false; 
 							$scope.noResult     = false;
 			            }
@@ -774,8 +781,7 @@
 				if(timer) clearTimeout(timer);
 				
 				timer = setTimeout(function(){
-					if($scope.userSearch != '') searchAction();
-					//else $scope.reset();
+					searchAction();
 				},500); 
 			}
 		});

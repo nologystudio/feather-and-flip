@@ -298,14 +298,20 @@
 				text-align: left;
 				overflow: hidden;
 				
-				span.icon
+				li
 				{
-					#font > .ic(14px,@color-4);
-					#align > .left;
-					line-height: 16px;
-					padding-right: @content-padding/2;
-					text-align: center;
-					display: block;
+					&:first-child
+					{
+						span[class^="icon-"]
+						{
+							.performance();
+							#font > .ic(14px,@color-3);
+							#align > .left;
+							margin-right: @content-padding/2;
+							line-height: 16px;
+							display: block;
+						}
+					}
 				}
 			}
 			
@@ -325,35 +331,6 @@
 				text-align: center;
 				overflow: hidden;
 			}
-			
-			/*.select
-			{
-				.set-size();
-				.box-sizing();
-				#align > .left;
-				#font > .lato(12px,@color-4,700);
-				text-transform: uppercase;
-				padding: @content-padding/2;
-				border: solid 2px @color-5;
-				border-radius: @content-padding;
-				text-align: left;
-				overflow: hidden;
-				
-				li
-				{
-					&:first-child
-					{
-						span.icon
-						{
-							#font > .ic(16px,@color-4);
-							#align > .left;
-							margin-right: @content-padding/2;
-							text-align: center;
-							display: block;
-						}
-					}
-				}
-			}*/
 		}
 		
 		.ui-set-social-media-nav(@color:white,@btn-size:28px)
@@ -368,20 +345,6 @@
 				display: block;
 				margin: 0 @unit;
 				text-decoration: none;
-				
-				.set-icon(@icon)
-				{
-					&:before
-					{
-						content: '\@{icon}';
-					}
-				}
-				
-				//&[rel="facebook"]   { .set-icon('e0aa'); }
-				//&[rel="twitter"]    { .set-icon('e0ab'); }
-				//&[rel="pinterest"]  { .set-icon('e0ac'); }
-				//&[rel="instagram"]  { .set-icon('e0b1'); }
-				//&[rel="google-plus"]{ .set-icon('e0ad'); }
 				
 				&:hover
 				{
@@ -457,7 +420,7 @@
 					.set-size(@grid-1 + 120px);
 					#align > .center;
 					margin-bottom: @content-padding;
-					overflow: hidden;
+					overflow: visible;
 					
 					header
 					{
@@ -512,25 +475,103 @@
 						#align > .left;
 						display: block;
 						
-						&[id="searh-destination"]
+						&[id="search-destination"]
 						{
+							@m: 20px;
+							
 							.set-size(100%/3);
 							
-							div.wrapper
+							form
 							{
-								ul[id="search-result"]
+								input
+								{
+									padding-left: @content-padding + @m !important;	
+								}
+								
+								span.icon-search
+								{
+									.set-pos(absolute);
+									top: 96px;
+									left: @m;
+									
+									&:before
+									{
+										font-size: 18px;
+										color: @color-3;
+									}
+								}
+							}
+							
+							ul[id="search-result"]
+							{
+								@m-ref: @content-padding - @unit;
+								
+								.set-size(90%,auto);
+								.box-sizing();
+								.set-bgc(white);
+								.set-pos(absolute);
+								top: 130px;
+								box-shadow: 0 0 @m-ref @color-2;
+								padding: @m-ref;
+								margin: @unit 0 @m-ref 5%;
+								border-radius: 2 * @unit;
+								overflow-y: scroll;
+								max-height: 400px;
+								
+								li
 								{
 									.set-size(100%);
-									.set-bgc(red);
-									#align > .left;
-									padding: @content-padding;
+									#font > .lato(14px,@color-3,700);
+									padding: @unit 0;
 									
-									li
+									&.title
 									{
-										#font > .lato(12px,@color-3,700);
-										text-transform: uppercase;
-										padding: @unit;
+										#font > .gar(14px,@color-1);
+										padding-top: @content-padding/2;
 										border-bottom: solid 1px @color-7;
+										
+										& + li
+										{
+											margin-top: 7px;
+										}
+										
+										&[id="contact-us"]
+										{
+											padding-top: 0 !important;
+											border: 0;
+											padding-bottom: @content-padding/3;
+											
+											a
+											{
+												span
+												{
+													.set-pos(absolute);
+													right: @m-ref;
+													top: @m-ref;
+													
+													&:before
+													{
+														font-size: 18px;
+													}
+												}
+											}
+											
+											&:only-child
+											{
+												padding-bottom: 0;
+											}
+										}
+									}
+									
+									a
+									{
+										#font > .lato(14px,@color-3,400);
+										text-decoration: none;
+										
+										&:hover
+										{
+											.set-opacity(0.5);
+										}
 									}
 								}
 							}

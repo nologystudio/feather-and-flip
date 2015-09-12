@@ -46,12 +46,26 @@
 					</header>
 					<div class="wrapper">
 						<form>
+							<span class="icon-search"></span>
 							<input type="text" class="rounded" ng-model="userSearch" ng-change="searchSubmit()" placeholder="Enter your destination"/>
 						</form>
 					</div>
-					<ul id="search-result">
-						<li>text<a href="/contact">link</a></li>
-						<li ng-repeat="destination in destinations">{{destination.title}}</li>
+					<ul id="search-result" ng-if="showResult" class="animated fadeIn">
+						<li id="contact-us" class="title">
+							<a href="/contact">Don't see what you are looking for?<br>Contact our team for help<span class="icon-right-circle-full"></span></a>
+						</li>
+						<div class="result-wrapper" ng-if="destinations.length > 0">
+							<li class="title">Destinations</li>
+							<li ng-repeat="destination in destinations">
+								<a href="{{destination.guide_url}}">{{destination.title}}</a>
+							</li>
+						</div>
+						<div class="result-wrapper" ng-if="hotels.length > 0">
+							<li class="title">Hotels</li>
+							<li ng-repeat="hotel in hotels">
+								<a href="{{hotel.guide_url}}">{{hotel.title}}</a>
+							</li>
+						</div>
 					</ul>
 				</div>
 				<?php if(!drupal_is_front_page()): ?>

@@ -28,43 +28,32 @@
 	
 	<section id="inspiration">
 		<div class="wrapper grid-2 align-center">
-			<div id="search-destination" ng-controller="SearchController">
-					<header>
-						<h4 class="larger">Search a destination</h4>
-					</header>
-					<div class="wrapper">
-						<form>
-							<input type="text" class="rounded" ng-model="userSearch" ng-change="searchSubmit()" placeholder="Enter your destination"/>
-						</form>
-					</div>
-					<ul id="search-result">
-						<li>text<a href="/contact">link</a></li>
-						<li ng-repeat="destination in destinations">{{destination.title}}</li>
-					</ul>
-				</div>
-
-			<div id="let-us-inspire" data-animate="1">
+			<div id="let-us-inspire" ng-controller="InspirationController" data-animate="1">
 				<header>
 					<h4>Let us Inspire you</h4>
 				</header>
 				<div class="wrapper">
-					<ul class="select">
+					<ul pp-inspiration-select class="select" data-options="option 1|option 2|option 3|option 4">
 						<li>
-							<span class="icon icon-down-circle-full">&#xe03a;</span>
+							<span class="icon icon-down-circle-full"></span>
 							Pick the type of place
+							<ul>
+								<li>option 1</li>
+								<li>option 2</li>
+								<li>option 3</li>
+								<li>option 4</li>
+							</ul>
 						</li>
 					</ul>
-					<ul class="select">
+					<ul pp-inspiration-select class="select" data-options="option 1|option 2|option 3|option 4">
 						<li>
 							<span class="icon icon-down-circle-full"></span>
 							Pick a season
 						</li>
 					</ul>
 				</div>
-				<!-- 
 				<button class="go-btn" ng-click="">Go</button>
 				<button class="clear-btn" ng-click="">Clear</button> 
-				-->
 			</div>
 		</div>
 	</section>
@@ -106,6 +95,22 @@
 					</a>
 				<?php $i++; } ?>
 			<?php endif; ?>			
+		</div>
+	</section>
+	
+	<!-- newsletter -->
+	
+	<section id="newsletter" ng-controller="NewsletterController">
+		<div class="wrapper">
+			<header>
+				<h4 data-animate="1">Join the adventure<span>Sign up for our newsletter</span></h4>
+			</header>
+			<form name="newsletterForm" data-animate="2">
+                <small id="error"   class="animated fadeInUp" ng-if="currentStatus == 'error'">We're sorry, an error has occurred</small>
+                <small id="success" class="animated fadeInUp" ng-if="currentStatus == 'success'">Thanks!</small>
+                <input name="user-email" class="rounded" type="email" ng-if="currentStatus == 'still'" placeholder="Your email address" ng-model="signUpData.userEmail" required/>
+                <button class="go-btn" ng-if="currentStatus == 'still'" ng-class="{disabled:!newsletterForm.$valid}" ng-click="!newsletterForm.$valid || regSubmit()">GO</button>
+            </form>
 		</div>
 	</section>
 	
