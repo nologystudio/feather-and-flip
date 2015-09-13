@@ -81,7 +81,7 @@
 			        $timeout(function(){_t.find('*[data-animate="1"]').addClass('animated fadeIn')},200);
 					$timeout(function(){_t.find('*[data-animate="2"]').addClass('animated fadeIn')},600);
 					
-		        },{ offset: '75%' });  
+		        },{ offset: '100%' });  
 		        
 		        $('#inspiration').waypoint(function(){
 			        
@@ -308,6 +308,7 @@
 		    $scope.map;
 		    $scope.lat = 40.777422;
 		    $scope.lon = -73.968887;
+		    $scope.inspirationSearch;
 		    
 		    var mapID = 'passported';
 		    var setMapHeight = function(){
@@ -401,7 +402,6 @@
 			    
 			    switch(_id){
 				    case 'destinations':
-				    	//console.log(_data);
 				    	_.map(_data,function(_d){
 						    var destination = new google.maps.Marker({
 								position: {
@@ -460,7 +460,7 @@
 		    
 		    $timeout(function(){
 				setMapHeight(); 
-				//initialize();
+				initialize();
 			},0);
 			
 			$(window).on('resize',function(){
@@ -468,7 +468,7 @@
 			});
 		});
 		
-		ppControllers.controller('ItineraryController',function($scope,$log,$timeout,$resource,$rootScope){
+		ppControllers.controller('ItineraryController',function($scope,$log,$timeout,$resource,$location,$routeParams,$rootScope){
 			
 			var destSrc  = $resource('https://www.passported.com/api/content/destinations.json');
 			var abookSrc = $resource('https://www.passported.com/api/content/address-books.json');
@@ -483,7 +483,6 @@
 			
 			$scope.itineraryIsReady;
 			$scope.cityGuideID;
-			$scope.inspirationSearch;
 			$scope.step = (_.isUndefined($scope.cityGuideID)) ? 1 : 2;
 			$scope.showAside = true;
 			$scope.pick;
@@ -535,7 +534,7 @@
 				// 1. Bonvoyaging Itinerary...
 				
 				if(window.location.host == 'stage.passported.com' || window.location.host == 'www.passported.com'){
-					itSrc.get({'name':_d.name.replace(' ','+')},function(_data){
+					itSrc.get({'name':_d.name},function(_data){
 						console.log(_data);
 					});
 				}
@@ -545,27 +544,62 @@
 				abookSrc.query({'destination':_d.id},function(_data){
 					
 					$scope.pick.guide = _data;
-				
+					
+					_.map(_data,function(_a){
+						if(!_.isArray(_a.google_place_id)){
+							
+							var place = new google.maps.places.PlacesService($scope.map);
+							
+							place.getDetails({placeId:_a.google_place_id},function(_place,_status){
+								if(_status == google.maps.places.PlacesServiceStatus.OK){
+									
+									console.log(_a);
+									console.log(_place);
+									
+									_a.title 		= _place.name;
+									_a.lat 			= _place.geometry.location.G;
+									_a.lon 			= _place.geometry.location.K;
+									_a.phone_number = _place.formatted_phone_number;
+									_a.address 		= _place.formatted_address;
+									_a.website 		= _place.website;
+								};
+							});
+						}
+					});
+					
 					// 3. Hotels
 			
 					hotelSrc.query({'destination':_d.id},function(_data){
 						$scope.pick.hotels = _data;
 						$scope.$parent.addMarkers('guide',_d);
-						console.log($scope.pick);
+						//console.log($scope.pick);
 					});
 				});
 				
 				$scope.step = 2;
-				$('#step-2').delay(2000).transition({opacity:1},'slow');
+				
+				$('#step-2').delay(2000).transition({opacity:1},'slow',function(){
+					$scope.itineraryIsReady = true;
+					$scope.$apply();
+				});
 			}
 			
-			if(_.isUndefined($scope.cityGuideID)){
+			if(_.isUndefined($scope.cityGuideID) && _.isUndefined($scope.inspirationSearch)){
 				$scope.destinations = destSrc.query({},function(_data){
 					$scope.$parent.addMarkers('destinations',_data);
 				});
-			}else{
+			}
+			else if(!_.isUndefined($scope.cityGuideID)){
 				$scope.pick = destSrc.query({id:$scope.cityGuideID},function(_data){
 					$scope.displayDestination(_data[0]);
+				});
+			}
+			else if(!_.isUndefined($scope.inspirationSearch)){
+				
+				var _s = $location.search();
+				
+				$scope.destinations = destSrc.query({place_type:_s.place,season:_s.season},function(_data){
+					$scope.$parent.addMarkers('destinations',_data);
 				});
 			}
 			
@@ -920,7 +954,7 @@
 			};
 			
 			$scope.submitInspiration = function(){
-				//$cookies.putObject('inspiration','signup',{path:'/'});
+				window.location = window.location.origin + '/inspiration/#/?place=' + $scope.search.place + '&season=' + $scope.search.season;
 			};
 		});
 		

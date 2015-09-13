@@ -33,13 +33,13 @@
 					<h4>Let us Inspire you</h4>
 				</header>
 				<div class="wrapper">
-					<div pp-inspiration-select id="place-select" class="select" data-options="option 1|option 2|option 3|option 4">
+					<div pp-inspiration-select id="place-select" class="select" data-options="adventure|beach|city|countryside|ski">
 						<header>
 							<span class="icon-down-circle-full"></span>
 							<h5>Pick the type of place</h5>
 						</header>
 					</div>
-					<div pp-inspiration-select id="season-select" class="select" data-options="option 1|option 2|option 3|option 4">
+					<div pp-inspiration-select id="season-select" class="select" data-options="spring|summer|winter|fall">
 						<header>
 							<span class="icon-down-circle-full"></span>
 							<h5>Pick a season</h5>

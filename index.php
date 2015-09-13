@@ -19,12 +19,12 @@
 			<meta property="og:image"       content="">
 			<meta property="og:description" content="">
 			<!-- Included Google Fonts -->
-<!-- 			<link href='https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900' rel='stylesheet' type='text/css'> -->
+ 			<link href='https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900' rel='stylesheet' type='text/css'>
 			<!-- Less Files comes here -->
 			<link rel="stylesheet" href="style/style-nology.css" title="style-nology" type="text/css" media="screen">
 			<!-- Modernizer and IE specyfic files -->  
 			<script src="library/vendors/modernizr.custom.pp.js"></script>
-<!-- 			<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVp6xJDq_xg96DdjO3S1wmByGNmYoK4XQ"></script> -->
+ 			<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVp6xJDq_xg96DdjO3S1wmByGNmYoK4XQ&libraries=places"></script>
 		</head>
 		<body ng-controller="AppController" data-state="sign-in" ng-init="user = false;view = ''">
 			
@@ -33,7 +33,7 @@
 			<header>
 				<a href="/">
 					<figure>
-						<img src="/feather-and-flip/media/brand/passported-logo.svg" type="image/svg+xml" alt="Passported, kid friendly travel for grown-ups" data-animate="1"/> 						
+						<img src="/feather-and-flip/media/brand/passported-logo.svg" type="image/svg+xml" alt="Passported, kid friendly travel for grown-ups" data-animate="1"/> 
 						<figcaption data-animate="2">Kid friendly travel for grown-ups</figcaption>
 					</figure>
 				</a>
@@ -45,10 +45,8 @@
 						<a id="search"      href="#/search"         class="subnav" data-animate="6">search</a>
 					</div>
 					<div class="wrapper align-right">
-						<a id="user" href="https://go.passported.com/user/voyages" data-animate="7">user name</a>
-						<a id="sign-out" href="/user/logout" data-animate="8">Sign out</a>
-						<!--<a id="sign-in" href="/sign-in" data-animate="7">Sign in</a>
-						<a id="sign-up" href="/sign-up" data-animate="8">Sign up</a>-->
+						<a id="sign-out" href="/user/logout" data-animate="7">sign out</a>
+						<a id="user" href="https://go.passported.com/user/voyages" data-animate="8">user name</a>
 					</div>
 				</nav>
 			</header>
@@ -142,7 +140,7 @@
 				</div>
 			</div>
 			
-			<?php $page = 'home'; ?>
+			<?php $page = 'map'; ?>
 			
 			<?php if($page == 'map'): ?>
 			
@@ -190,18 +188,20 @@
 									<button ng-click="filterMap(undefined)" ng-class="{'on':bookFilter == undefined}" class="view-all">View all</button>
 							   		<button rel="print" ng-click="printList()"></button>
 						    	</aside>
-						    	<div class="wrapper" ng-if="destinationIsReady">
+						    	<div class="wrapper" ng-if="itineraryIsReady">
 							    	<header>
 								    	<figure>
 								    		<img ng-src="{{pick.images[0][0].src}}" class="animated fadeIn"/>
 								    	</figure>
 								    	<h1>{{pick.name}}</h1>
 								    	<nav>
+<!--
 									    	<a pp-social-media-link rel="facebook" class="icon-facebook-circle"></a>
 									    	<a pp-social-media-link rel="twitter" class="icon-twitter-circle"></a>
 									    	<a pp-social-media-link pp-social-media-image="{{pick.images[0][0].src}}" pp-social-media-desc="{{place.description}}" rel="pinterest" class="icon-pinterest-circle"></a>
 									    	<a pp-social-media-link rel="instagram" class="icon-instagram-circle"></a>
 									    	<a pp-social-media-link rel="google-plus" class="icon-google-circle"></a>
+-->
 									    </nav>
 							    	</header>
 							    	<ul>
@@ -298,9 +298,11 @@
 									    			<h4>{{address.title}}</h4>
 									    			<h5 ng-bind-html="address.short_review"></h5>
 									    			<footer>
-										    			<span class="tel" ng-if="!checkPhoneNumber(address.phone_number)">{{address.phone_number}}</span>
-										    			<a href="" ng-if="">read more</a>
-									    			</footer>
+										    			<span class="tel" ng-if="!check.phone(address.phone_number)">{{address.phone_number}}</span>
+										    			<span class="url">
+										    				<a href="{{address.website}}" target="_blank">{{address.website}}</a>
+										    			</span>
+										    		</footer>
 									    		</li>
 								    		</ul>
 										</li>

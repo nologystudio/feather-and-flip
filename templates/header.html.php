@@ -5,7 +5,8 @@
 	<header>
 		<a href="/">
 			<figure>
-				<img src="<?php echo drupal_get_path('theme', 'passported'); ?>/media/brand/passported-logo.svg" type="image/svg+xml" alt="Passported, kid friendly travel for grown-ups" data-animate="1"/> 								<figcaption data-animate="2">Kid friendly travel for grown-ups</figcaption>
+				<img src="<?php echo drupal_get_path('theme', 'passported'); ?>/media/brand/passported-logo.svg" type="image/svg+xml" alt="Passported, kid friendly travel for grown-ups" data-animate="1"/> 								
+				<figcaption data-animate="2">Kid friendly travel for grown-ups</figcaption>
 			</figure>
 		</a>
 		<nav>
@@ -20,8 +21,8 @@
 					<a id="sign-in" href="/sign-in" data-animate="7">Sign in</a>
 					<a id="sign-up" href="/sign-up" data-animate="8">Sign up</a>
 				<?php else: ?>
-					<a id="user" href="https://go.passported.com/user/voyages" data-animate="7">user name</a>
-					<a id="sign-out" href="/user/logout" data-animate="8">Sign out</a>
+					<a id="sign-out" href="/user/logout" data-animate="7">Sign out</a>
+					<a id="user" href="https://go.passported.com/user/voyages" data-animate="8">user name</a>
 				<?php endif; ?>
 			</div>
 		</nav>
@@ -74,13 +75,13 @@
 							<h4>Let us Inspire you</h4>
 						</header>
 						<div class="wrapper">
-							<div pp-inspiration-select id="place-select" class="select" data-options="option 1|option 2|option 3|option 4">
+							<div pp-inspiration-select id="place-select" class="select" data-options="adventure|beach|city|countryside|ski">
 								<header>
 									<span class="icon-down-circle-full"></span>
 									<h5>Pick the type of place</h5>
 								</header>
 							</div>
-							<div pp-inspiration-select id="season-select" class="select" data-options="option 1|option 2|option 3|option 4">
+							<div pp-inspiration-select id="season-select" class="select" data-options="spring|summer|winter|fall">
 								<header>
 									<span class="icon-down-circle-full"></span>
 									<h5>Pick a season</h5>

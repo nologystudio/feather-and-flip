@@ -29,7 +29,7 @@
 			    	<button rel="menu" ng-click="goTo(1)" ng-if="!cityGuideID" class="icon-back"></button>
 					<button ng-repeat="type in selectedDestination.summaries" rel="{{type.name}}" ng-click="filterMap(type.name)" ng-class="{'on':bookFilter == type.name}"></button>
 				</aside>
-		    	<div class="wrapper" ng-if="destinationIsReady">
+		    	<div class="wrapper" ng-if="itineraryIsReady">
 			    	<header>
 				    	<figure>
 				    		<img ng-src="{{pick.images[0][0].src}}" class="animated fadeIn"/>
@@ -130,7 +130,9 @@
 					    			<h5 ng-bind-html="address.short_review"></h5>
 					    			<footer>
 						    			<span class="tel" ng-if="!check.phone(address.phone_number)">{{address.phone_number}}</span>
-						    			<a href="" ng-if="">read more</a>
+						    			<span class="url">
+						    				<a href="{{address.website}}" target="_blank">{{address.website}}</a>
+						    			</span>
 					    			</footer>
 					    		</li>
 				    		</ul>
@@ -180,7 +182,7 @@
 					    		<li>
 					    			<div id="date-picker">
 						    			<button class="rounded-btn icon-calendar">{{booking.start_date ? booking.start_date : "Start Date"}}</button>
-						    			<button class="rounded-btn icon-calendar">{{booking.start_date ? booking.end_date : "End Date"}}</button>
+						    			<button class="rounded-btn icon-calendar">{{booking.end_date ? booking.end_date : "End Date"}}</button>
 					    			</div>
 					    			<div id="calendar" class="animated fadeIn" ng-if="showCalendar" ng-controller="CalendarController">
 										<div id="arrival-gallery" class="gallery-wrapper">

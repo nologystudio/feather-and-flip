@@ -237,7 +237,8 @@
 						.set-bgs(auto,50%);
 					}
 					
-					&[id^="sign-"]
+					&[id^="sign-"],
+					&[id="user"]
 					{
 						#font > .gar(15px,@color-5);
 						.animate-all();
@@ -249,11 +250,12 @@
 							.set-bgc(black);
 							color: white;	
 						}
-						
-						&:hover
-						{
-							//transform: rotate(-360deg);
-						}
+					}
+					
+					&[id="user"]
+					{
+						.set-bgc(black);
+						color: white;
 					}
 					
 					&:hover
@@ -420,7 +422,7 @@
 		body > main[id],
 		body > section[id]
 		{
-			@m: 620px;
+			@m: 440px;
 			@main-height: @m + @header-height;
 			
 			.set-size(100%);
@@ -447,7 +449,7 @@
 						.set-bg(@color-7,'@{media-url}backgrounds/passported-main.jpg',no-repeat,center,@header-height);
 						.box-sizing();
 						#align > .left;
-						padding-top: @m/2 - @header-height - 2 * @unit;
+						padding-top: @m/2 - @header-height + 2 * @unit;
 						overflow: hidden;
 						
 						&:first-child
@@ -455,12 +457,12 @@
 							h1
 							{
 								.set-size(100%);
-								#font > .lato(42px,white,300);
+								#font > .lato(38px,white,300);
 								#align > .left;
 								text-transform: uppercase;
 								text-align: center;
 								display: block;
-								margin-bottom: 2 * @content-padding;
+								margin-bottom: 40px;
 							}
 							
 							ul
@@ -1549,16 +1551,22 @@
 																	display: block;
 																	
 																	span.tel,
+																	span.url
 																	a
 																	{
 																		#font > .lato(12px,@color-3,700);
 																		#align > .left;
-																		margin-right: @content-padding;
+																		margin-right: 2 * @unit;
 																	}
 																	
 																	a
 																	{
 																		text-decoration: none;
+																		
+																		&:hover
+																		{
+																			text-decoration: underline;
+																		}
 																	}
 																}
 																
@@ -1911,9 +1919,18 @@
 														{
 															.set-size(50%);
 															.set-bgc(@color-3);
+															.set-opacity(1);
+															.animate-opacity();
 															#align > .center;
 															color: white;
 															margin-top: @content-padding;
+															margin-left: 25%;
+															border: 0;
+															
+															&.off
+															{
+																.set-opacity(0.5);
+															}
 														}
 														
 														div.half-wrapper
@@ -2008,7 +2025,15 @@
 				}
 				
 				&.single-destination
-				{}		
+				{}
+				
+				// Press tweaking...
+				// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+				
+				& + section[id="press"]
+				{
+					padding-top: @content-padding + 2 * @unit;
+				}		
 			}
 			
 			&[id="travel-journal"]
@@ -2085,7 +2110,7 @@
 				.ui-search();
 				#align > .left;
 				z-index: 3;
-				padding: @unit @content-padding;
+				padding: 0 @content-padding;
 				overflow: visible;
 				
 				button[id="pointer"]

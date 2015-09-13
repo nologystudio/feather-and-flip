@@ -9,15 +9,15 @@
 				<ul class="align-center">
 					<li ng-click="goTo('plan')">
 						<h2 data-animate="2">Plan</h2>
-						<h3 data-animate="3">Find the ideal destination and hotel for your particular FAMILY needs</h3>
+						<a href="/city-guides"><h3 data-animate="3">Find the ideal destination and hotel for your particular FAMILY needs</h3></a>
 					</li>
 					<li ng-click="goTo('explore')">
 						<h2 data-animate="4">Explore</h2>
-						<h3 data-animate="5">Parent-scouted picks and itineraries that you can customize</h3>
+						<a href="https://go.passported.com"><h3 data-animate="5">Parent-scouted picks and itineraries that you can customize</h3></a>
 					</li>
 					<li ng-click="goTo('book')">
 						<h2 data-animate="6">Book</h2>
-						<h3 data-animate="7">We book your hotel. You can call or e-mail our hotel expert</h3>
+						<a href="/book"><h3 data-animate="7">We book your hotel. You can call or e-mail our hotel expert</h3></a>
 					</li>
 				</ul>
 			</li>
@@ -28,32 +28,25 @@
 	
 	<section id="inspiration">
 		<div class="wrapper grid-2 align-center">
-			<div id="let-us-inspire" ng-controller="InspirationController" data-animate="1">
+			<div id="let-us-inspire" data-animate="1">
 				<header>
 					<h4>Let us Inspire you</h4>
 				</header>
 				<div class="wrapper">
-					<ul pp-inspiration-select class="select" data-options="option 1|option 2|option 3|option 4">
-						<li>
-							<span class="icon icon-down-circle-full"></span>
-							Pick the type of place
-							<ul>
-								<li>option 1</li>
-								<li>option 2</li>
-								<li>option 3</li>
-								<li>option 4</li>
-							</ul>
-						</li>
-					</ul>
-					<ul pp-inspiration-select class="select" data-options="option 1|option 2|option 3|option 4">
-						<li>
-							<span class="icon icon-down-circle-full"></span>
-							Pick a season
-						</li>
-					</ul>
+					<div pp-inspiration-select id="place-select" class="select" data-options="adventure|beach|city|countryside|ski">
+						<header>
+							<span class="icon-down-circle-full"></span>
+							<h5>Pick the type of place</h5>
+						</header>
+					</div>
+					<div pp-inspiration-select id="season-select" class="select" data-options="spring|summer|winter|fall">
+						<header>
+							<span class="icon-down-circle-full"></span>
+							<h5>Pick a season</h5>
+						</header>
+					</div>
 				</div>
-				<button class="go-btn" ng-click="">Go</button>
-				<button class="clear-btn" ng-click="">Clear</button> 
+				<button class="go-btn animated fadeIn" ng-click="submitInspiration()" ng-if="search.season && search.place">Go</button>
 			</div>
 		</div>
 	</section>
@@ -67,19 +60,11 @@
 				<span>On</span>
 			</h4>
 		</header>
-		<div class="promoted-grid align-center">
+		<div class="promoted-grid align-center" ng-controller="PromotedController">
 			<?php $i = 0; ?>
 			<?php if (isset($itineraries) && !empty($itineraries)): ?>
 				<?php foreach ($itineraries as $itinerary) { ?>
-					<a data-id="<?php echo $itinerary; ?>" data-animate="<?php echo $i+2; ?>">
-						<figure>
-	                        <img />
-	                    </figure>
-	                    <footer>
-	                        <h4></h4>
-	                        <time></time>
-	                    </footer>
-					</a>
+					<a pp-promoted-itinerary id="<?php echo $itinerary; ?>" data-animate="<?php echo $i+2; ?>"></a>
 				<?php $i++; } ?>
 			<?php endif; ?>
 			<?php if (isset($destinations) && !empty($destinations)): ?>

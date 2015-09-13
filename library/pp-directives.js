@@ -52,6 +52,34 @@
 			}
 		});
 		
+		ppComponents.directive('ppPromotedItinerary',function(){
+			return {
+				restrict : 'E',
+		    	replace : true,
+		    	template : '<a href=""><figure><img /></figure><footer><h4></h4><time></time></footer></a>',
+		    	controller: function($scope,$resource){
+			    	
+			    	//$scope.itinerary;
+			    	
+			    	//$scope.getItinerary = function(_id){
+				    	
+				    	//var itSrc = $resource('https://gostage.passported.com/api/v2/location');
+				    	
+						/*
+				    	itSrc.get({'name':},function(_data){
+							console.log(_data);
+						});
+						*/
+						
+				    	//console.log(_id);
+			    	//}
+	            },
+				link : function($scope,$element,_attrs){
+					//$scope.getItinerary($element.data('id')):
+				}
+			}
+		});
+		
 		ppComponents.directive('ppHotelGallery',function(){
 			return {
 		    	restrict  : 'EA',
@@ -76,7 +104,7 @@
 								scrollBy      : 1,
 								speed         : 300,
 								elasticBounds : 1,
-								activatePageOn: 'click'
+								activatePageOn: 'click',
 								prevPage      : lBtn,
 								nextPage      : rBtn
 							});
