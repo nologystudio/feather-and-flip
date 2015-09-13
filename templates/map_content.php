@@ -169,32 +169,81 @@
 			    	</li>
 			    	<li id="email-entry">
 			    		Drop us an e-mail or fill out the form below
-			    		<a href="mailto:info@passported.com" class="icon circle-btn icon-email"></a>
+			    		<a href="/contact" class="icon circle-btn icon-email" target="_blank"></a>
 			    	</li>
 			    	<li>
 			    		<form name="bookingForm">
-				    		
 				    		<ul>
 					    		<li>
-					    			<h1></h1>
-					    			<h2></h2>
-					    		</li>
-					    		<li>
 					    			<div id="date-picker">
-						    			<button class="rounded-btn icon-calendar">Start Date</button>
-						    			<button class="rounded-btn icon-calendar">End Date</button>
+						    			<button class="rounded-btn icon-calendar">{{booking.start_date ? booking.start_date : "Start Date"}}</button>
+						    			<button class="rounded-btn icon-calendar">{{booking.start_date ? booking.end_date : "End Date"}}</button>
 					    			</div>
+					    			<div id="calendar" class="animated fadeInUp" ng-controller="CalendarController">
+										<div id="arrival-gallery" class="gallery-wrapper">
+											<ul id="arrival" class="month-gallery">
+												<li id="month-{{$index}}" class="month-container" ng-repeat="month in year">
+													<header>
+														<div class="month-title">{{month.name}}</div>
+														<small>mon</small>
+														<small>tue</small>
+														<small>wed</small>
+														<small>thu</small>
+														<small>fri</small>
+														<small>sat</small>
+														<small>sun</small>
+													</header>
+													<button ng-if="$index < month.order.start" ng-repeat="day in month.order.days" class="hidden"></button>
+													<button ng-repeat="(key,day) in month.order.days" data-date="{{day}}" ng-click="booking.start_date = day">{{key}}</button>
+												</li>
+											</ul>
+											<header>
+												<h6>Choose your arrival date</h6>
+												<nav>
+													<button rel="prev"></button>
+													<small></small>
+													<button rel="next"></button>
+												</nav>
+											</header>
+										</div>
+										<div id="departure-gallery" class="gallery-wrapper">
+											<ul id="departure" class="month-gallery">
+												<li id="month-{{$index}}" class="month-container" ng-repeat="month in year">
+													<header>
+														<div class="month-title">{{month.name}}</div>
+														<small>mon</small>
+														<small>tue</small>
+														<small>wed</small>
+														<small>thu</small>
+														<small>fri</small>
+														<small>sat</small>
+														<small>sun</small>
+													</header>
+													<button ng-if="$index < month.order.start" ng-repeat="day in month.order.days" class="hidden"></button>
+													<button ng-repeat="(key,day) in month.order.days" data-date="{{day}}" ng-click="booking.end_date = day">{{key}}</button>
+												</li>
+											</ul>
+											<header>
+												<h6>Choose your departure date</h6>
+												<nav>
+													<button rel="prev"></button>
+													<small></small>
+													<button rel="next"></button>
+												</nav>
+											</header>
+										</div>
+									</div>
 					    		</li>
 					    		<li>
 					    			<label>Number of Adults</label>
 					    			<div class="circle-input-wrapper">
-					    				<input type="text" ng-model="booking.adults" ng-pattern="/^[0-9]+$/" ng-maxlength="1" required/>
+					    				<input type="text" ng-model="booking.adults" ng-pattern="/^[0-9]+$/" maxlength="1" required/>
 					    			</div>
 					    		</li>
 					    		<li>
 					    			<label>Number of Children</label>
 					    			<div class="circle-input-wrapper">
-					    				<input type="text" ng-model="booking.children" ng-pattern="/^[0-9]+$/"/>
+					    				<input type="text" ng-model="booking.children" ng-pattern="/^[0-9]+$/" maxlength="1"/>
 					    			</div>
 					    		</li>
 					    		<li>

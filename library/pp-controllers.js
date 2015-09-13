@@ -393,7 +393,7 @@
 			    
 			    switch(_id){
 				    case 'destinations':
-				    	console.log(_data);
+				    	//console.log(_data);
 				    	_.map(_data,function(_d){
 						    var destination = new google.maps.Marker({
 								position: {
@@ -419,8 +419,6 @@
 					    
 				    	_.map(detail,function(_d){
 					    	_.map(_d,function(_p){
-						    	
-						    	console.log(_p);
 						    	
 						    	var pin = new google.maps.Marker({
 									position: {
@@ -527,7 +525,7 @@
 				// 1. Bonvoyaging Itinerary...
 				
 				if(window.location.host == 'stage.passported.com' || window.location.host == 'www.passported.com'){
-					itSrc.query({'name':_d.name.replace(' ','+')},function(_data){
+					itSrc.get({'name':_d.name.replace(' ','+')},function(_data){
 						console.log(_data);
 					});
 				}
@@ -651,6 +649,95 @@
 			
 			$timeout(function(){
 				$scope.setter.checkButtons();
+			},0);
+		});
+	    
+	    ppControllers.controller('CalendarController',function($scope,$log,$timeout){
+		    
+		    var aFrame  = $('#arrival-gallery');
+			var dFrame  = $('#departure-gallery');
+			
+			$scope.year = [];
+			
+			$scope.getMonth = function(_m,_y){
+				
+				var _year     = _y;
+				var start     = new Date(_year,_m,1);
+				var end       = new Date(_year,_m,moment(_year+"-"+(_m+1),"YYYY-MM").daysInMonth());
+				var yearRange = moment().range(start,end);
+				var month     = {
+					start : (start.getDay() == 0) ? 6 : start.getDay()-1,
+					days  : {}
+				};
+				
+				yearRange.by('days',function(_m){
+					month.days[moment(_m._d).format('DD')] = moment(_m._d).format('MM/DD/YYYY');
+				});
+
+				return month;
+			}
+			
+			$scope.buildYear = function(){
+				
+				var year  = moment().get('year');
+				var month = moment().get('month');
+				var start = new Date(year,month,1);
+				var end   = new Date(year+1,month,moment((year+1)+"-"+month,"YYYY-MM").daysInMonth());
+				var range = moment().range(start,end);
+				var theYear = [];
+				
+				range.by('months',function(_m){
+					
+					var _month = moment(_m._d).get('month');
+					var _year  = moment(_m._d).get('year');
+					
+					$scope.year.push({
+						name  : moment(_m._d).format('MMMM') + ' ' + _year,
+						order : $scope.getMonth(_month,_year)
+					});
+				});
+			}
+			
+			$timeout(function(){
+				$scope.buildYear();
+				/*aFrame.sly({
+					horizontal     : 1,
+					itemNav        : 'forceCentered',
+					smart          : 1,
+					activateMiddle : 1,
+					mouseDragging  : 1,
+					touchDragging  : 0,
+					releaseSwing   : 1,
+					startAt        : 0,
+					scrollBy       : 1,
+					speed          : 500,
+					elasticBounds  : 1, 
+					prev           : aFrame.find('*[rel="prev"]'),
+					next           : aFrame.find('*[rel="next"]')
+				});
+				dFrame.sly({
+					horizontal     : 1,
+					itemNav        : 'forceCentered',
+					smart          : 1,
+					activateMiddle : 1,
+					mouseDragging  : 1,
+					touchDragging  : 0,
+					releaseSwing   : 1,
+					startAt        : 0,
+					scrollBy       : 1,
+					speed          : 500,
+					elasticBounds  : 1, 
+					prev           : dFrame.find('*[rel="prev"]'),
+					next           : dFrame.find('*[rel="next"]')
+				});
+				
+				aFrame.find('*[rel="prev"]').on('click',function(){
+					dFrame.find('*[rel="prev"]').trigger('click');
+				});
+				
+				aFrame.find('*[rel="next"]').on('click',function(){
+					dFrame.find('*[rel="next"]').trigger('click');
+				});*/
 			},0);
 		});
 		
@@ -785,6 +872,8 @@
 				},500); 
 			}
 		});
+		
+		/* ------------------------------------------------------------------------------------------------------------- */
 		
 		ppControllers.controller('InspirationController',function($scope,$log,$http,$timeout){
 		});
