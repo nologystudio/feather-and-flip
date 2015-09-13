@@ -641,7 +641,170 @@
 		
 		.ui-calendar()
 		{
-			
+			@day-size: 27px;
+			@day-m: 2px;
+			@w: 7 * (@day-size + 2 * @day-m);
+				
+			div.gallery-wrapper
+			{
+				.set-size(@w,auto);
+				.set-bgc(transparent);
+				#align > .left;
+				overflow: hidden;
+				padding: 0;
+				margin: 0 @unit;
+				
+				& > header
+				{
+					.set-size(100%);
+					.set-pos(absolute);
+					top: 0;
+					background-color: transparent !important;
+					
+					h6
+					{
+						.set-size(100%);
+						.set-bgc(transparent);
+						#font > .lato(12px,@color-3,400);
+						text-align: center;
+						text-transform: uppercase;
+						display: none;
+					}
+					
+					nav
+					{
+						.set-size(auto);
+						#align > .center;
+						padding: 2 * @unit 0;
+						display: table;
+						overflow: hidden;
+						
+						small
+						{
+							.set-size(100px,30px);
+							#font > .lato(16px,@color-3,400);
+							#align > .left;
+							margin: 0 @content-padding;
+							text-align: center;
+							text-transform: uppercase;
+						}
+						
+						button[rel]
+						{
+							@s: 20px;
+							
+							.reset();
+							.animate-color();
+							.set-size(@s,@s);
+							#align > .left;
+							color: @color-3;
+							
+							&:hover
+							{
+								color: @color-4;
+							}
+						}
+					}
+				}
+				
+				ul.month-gallery
+				{
+					.reset();
+					.set-size(@w,175px);
+					#align > .left;
+					padding: 0;
+					margin: 0;
+					display: block;
+					overflow: hidden;
+					padding-top: 40px;
+					
+					li[id].month-container
+					{
+						.set-size(@w);
+						#align > .left;
+						display: block;
+						margin: 0;
+						padding: 0;
+						
+						& > header
+						{
+							.set-size(100%);
+							#align > .left;
+							background-color: transparent;
+							margin-bottom: @unit;
+							
+							div.month-title
+							{
+								.set-size(100%);
+								.set-pos(absolute);
+								#font > .lato(16px,@color-3,400);
+								text-align: center;
+								top: -30px;
+								text-transform: capitalize;
+								display: block;
+							}
+							
+							small
+							{
+								.set-size(@day-size + 2 * @day-m);
+								#font > .lato(10px,@color-3,700);
+								#align > .left;
+								text-align: center;
+								margin-bottom: @unit;
+								text-transform: uppercase;
+							}
+						}
+						
+						button
+						{
+							.set-circle-btn(@s,@fs,@bc,@brc:@color-7,@fc:@color-3)
+							{
+								.set-size(@s,@s);
+								.set-bgc(@bc);
+								#align > .left;
+								overflow: hidden;
+								border: solid 2px @brc;
+								border-radius: @s;
+								color: @fc;
+								font-size: @fs;
+							}
+							
+							.animate-all();
+							.performance();
+							.set-circle-btn(@day-size,18px,transparent,@color-7,@color-3);
+							#font > .lato(12px,@color-3,400);
+							#align > .left;
+							margin: @day-m;
+							border-width: 1px;
+							
+							&[id="sat"],
+							&[id="sun"]
+							{
+								.set-bgc(fadeout(@color-2,75%));
+							}
+							
+							&.hidden
+							{
+								visibility: hidden;
+							}
+							
+							&:hover,
+							&.on
+							{
+								.set-bgc(@color-5);
+								color: white;
+							}
+							
+							&.warning
+							{
+								.set-bgc(fadeout(@warning-color,80%));
+								border-color: @warning-color;
+								color: @warning-color;
+							}
+						}
+					}
+				}
+			}
 		}
 		
 		

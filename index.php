@@ -19,14 +19,14 @@
 			<meta property="og:image"       content="">
 			<meta property="og:description" content="">
 			<!-- Included Google Fonts -->
-			<link href='https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900' rel='stylesheet' type='text/css'>
+<!-- 			<link href='https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900' rel='stylesheet' type='text/css'> -->
 			<!-- Less Files comes here -->
 			<link rel="stylesheet" href="style/style-nology.css" title="style-nology" type="text/css" media="screen">
 			<!-- Modernizer and IE specyfic files -->  
 			<script src="library/vendors/modernizr.custom.pp.js"></script>
-			<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVp6xJDq_xg96DdjO3S1wmByGNmYoK4XQ"></script>
+<!-- 			<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVp6xJDq_xg96DdjO3S1wmByGNmYoK4XQ"></script> -->
 		</head>
-		<body ng-controller="AppController">
+		<body ng-controller="AppController" data-state="sign-in" ng-init="user = false;view = ''">
 			
 			<!-- Header -->
 			
@@ -45,8 +45,8 @@
 						<a id="search"      href="#/search"         class="subnav" data-animate="6">search</a>
 					</div>
 					<div class="wrapper align-right">
-						<a id="sign-in" href="#/sign-in" data-animate="7">Sign in</a>
-						<a id="sign-up" href="#/sign-up" data-animate="8">Sign up</a>
+						<a id="sign-in" href="/sign-in" data-animate="7">Sign in</a>
+						<a id="sign-up" href="/sign-up" data-animate="8">Sign up</a>
 					</div>
 				</nav>
 			</header>
@@ -317,7 +317,10 @@
 				</aside>
 				<aside class="right" ng-controller="BookingController" ng-class="{'on':showRightAside}">
 					<div class="wrapper">
-						<button rel="close" ng-click="openAside()"></button>
+						<div class="error" ng-if="error" class="animated fadeInDown">
+							<span>{{error}}</span>
+						</div>
+						<button class="icon-close" ng-click="openAside()"></button>
 				    	<ul>
 						    <li id="step-1">
 								<header>
@@ -351,7 +354,7 @@
 										    			<button class="rounded-btn icon-calendar">{{booking.start_date ? booking.start_date : "Start Date"}}</button>
 										    			<button class="rounded-btn icon-calendar">{{booking.end_date ? booking.end_date : "End Date"}}</button>
 									    			</div>
-									    			<div id="calendar" class="animated fadeInUp" ng-controller="CalendarController">
+									    			<div id="calendar" class="animated fadeIn" ng-if="showCalendar" ng-controller="CalendarController">
 														<div id="arrival-gallery" class="gallery-wrapper">
 															<ul id="arrival" class="month-gallery">
 																<li id="month-{{$index}}" class="month-container" ng-repeat="month in year">
@@ -366,15 +369,15 @@
 																		<small>sun</small>
 																	</header>
 																	<button ng-if="$index < month.order.start" ng-repeat="day in month.order.days" class="hidden"></button>
-																	<button ng-repeat="(key,day) in month.order.days" data-date="{{day}}">{{key}}</button>
+																	<button ng-repeat="(key,day) in month.order.days" data-date="{{day}}" class="arrival">{{key}}</button>
 																</li>
 															</ul>
 															<header>
 																<h6>Choose your arrival date</h6>
 																<nav>
-																	<button rel="prev"></button>
+																	<button rel="prev" class="icon-left-circle-full"></button>
 																	<small></small>
-																	<button rel="next"></button>
+																	<button rel="next" class="icon-right-circle-full"></button>
 																</nav>
 															</header>
 														</div>
@@ -392,15 +395,15 @@
 																		<small>sun</small>
 																	</header>
 																	<button ng-if="$index < month.order.start" ng-repeat="day in month.order.days" class="hidden"></button>
-																	<button ng-repeat="(key,day) in month.order.days" data-date="{{day}}">{{key}}</button>
+																	<button ng-repeat="(key,day) in month.order.days" data-date="{{day}}" class="departure">{{key}}</button>
 																</li>
 															</ul>
 															<header>
 																<h6>Choose your departure date</h6>
 																<nav>
-																	<button rel="prev"></button>
+																	<button rel="prev" class="icon-left-circle-full"></button>
 																	<small></small>
-																	<button rel="next"></button>
+																	<button rel="next" class="icon-right-circle-full"></button>
 																</nav>
 															</header>
 														</div>
@@ -665,6 +668,8 @@
 					<small>2015 PASSPORTED ALL RIGHTS RESERVED</small>
 				</div>
 			</footer>
+			
+			<div class="call-to-action" ng-controller="CallToActionController" ng-include="overlayTpl" ng-show="display"></div>
 			
 			<script src="library/vendors/jquery-2.1.3.min.js"></script>
 			<script src="library/vendors/moment.min.js"></script>

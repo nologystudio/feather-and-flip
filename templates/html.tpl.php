@@ -24,7 +24,8 @@
 			<script src="<?php echo drupal_get_path('theme','passported'); ?>/library/vendors/modernizr.custom.pp.js"></script>
 			<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVp6xJDq_xg96DdjO3S1wmByGNmYoK4XQ"></script>
 		</head>
-		<body ng-controller="AppController">
+		
+		<body ng-controller="AppController" ng-init="user = false;view = ''">
 			
 			<?php include 'header.html.php'; ?>
 			<?php echo $page; ?>

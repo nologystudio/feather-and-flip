@@ -150,7 +150,10 @@
 </aside>
 <aside class="right" ng-controller="BookingController" ng-class="{'on':showRightAside}">
 	<div class="wrapper">
-		<button rel="close" ng-click="openAside()"></button>
+		<div class="error" ng-if="error" class="animated fadeInDown">
+			<span>{{error}}</span>
+		</div>
+		<button class="icon-close" ng-click="openAside()"></button>
     	<ul>
 		    <li id="step-1">
 				<header>
@@ -179,7 +182,7 @@
 						    			<button class="rounded-btn icon-calendar">{{booking.start_date ? booking.start_date : "Start Date"}}</button>
 						    			<button class="rounded-btn icon-calendar">{{booking.start_date ? booking.end_date : "End Date"}}</button>
 					    			</div>
-					    			<div id="calendar" class="animated fadeInUp" ng-controller="CalendarController">
+					    			<div id="calendar" class="animated fadeIn" ng-if="showCalendar" ng-controller="CalendarController">
 										<div id="arrival-gallery" class="gallery-wrapper">
 											<ul id="arrival" class="month-gallery">
 												<li id="month-{{$index}}" class="month-container" ng-repeat="month in year">
@@ -194,15 +197,15 @@
 														<small>sun</small>
 													</header>
 													<button ng-if="$index < month.order.start" ng-repeat="day in month.order.days" class="hidden"></button>
-													<button ng-repeat="(key,day) in month.order.days" data-date="{{day}}" ng-click="booking.start_date = day">{{key}}</button>
+													<button ng-repeat="(key,day) in month.order.days" data-date="{{day}}" class="arrival">{{key}}</button>
 												</li>
 											</ul>
 											<header>
 												<h6>Choose your arrival date</h6>
 												<nav>
-													<button rel="prev"></button>
+													<button rel="prev" class="icon-left-circle-full"></button>
 													<small></small>
-													<button rel="next"></button>
+													<button rel="next" class="icon-right-circle-full"></button>
 												</nav>
 											</header>
 										</div>
@@ -220,15 +223,15 @@
 														<small>sun</small>
 													</header>
 													<button ng-if="$index < month.order.start" ng-repeat="day in month.order.days" class="hidden"></button>
-													<button ng-repeat="(key,day) in month.order.days" data-date="{{day}}" ng-click="booking.end_date = day">{{key}}</button>
+													<button ng-repeat="(key,day) in month.order.days" data-date="{{day}}" class="departure">{{key}}</button>
 												</li>
 											</ul>
 											<header>
 												<h6>Choose your departure date</h6>
 												<nav>
-													<button rel="prev"></button>
+													<button rel="prev" class="icon-left-circle-full"></button>
 													<small></small>
-													<button rel="next"></button>
+													<button rel="next" class="icon-right-circle-full"></button>
 												</nav>
 											</header>
 										</div>

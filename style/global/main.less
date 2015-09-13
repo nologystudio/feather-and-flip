@@ -29,8 +29,8 @@
 		@header-height: 90px;
 		@gutter: 10px;
 		
-		@left-panel-width: 640px;
-		@right-panel-width: 420px;
+		@left-panel-width: 520px;
+		@right-panel-width: 520px;
 		
 		@grid-1: @wrapper-width/1;
 		@grid-2: @wrapper-width/2;
@@ -62,7 +62,7 @@
 		@ff-color-6: #708c84;
 		@ff-color-7: #336666;
 		
-		@warning-color: orange;
+		@warning-color: red;
 		@shadow-color: fadeout(#333333,50%);
 		@grey-1:  #333333;
 		@grey-2:  #999999;
@@ -793,14 +793,14 @@
 									
 									&[id="step-1"]
 									{
-										ul
+										& > ul
 										{
-											li
+											& > li
 											{
 												.animate-opacity();
 												.set-opacity(1);
 												
-												button
+												& > button
 												{
 													.reset();
 													.set-size(100%);
@@ -1608,18 +1608,44 @@
 						right: -@right-panel-width;
 						padding: 0;
 						
-						button[rel="close"]
+						& > div.wrapper > button
 						{
 							@s: 50px;
 							
-							.reset();
 							.set-size(@s,@s);
-							.set-bgc(@color-7);
 							.set-pos(absolute);
+							.set-bgc(transparent);
+							#font > .ic(18px,@color-3);
+							border: 0;
 							display: block;
 							right: @content-padding;
 							top: @content-padding;
 							z-index: 1;
+						}
+						
+						div.error
+						{
+							.set-size(100%,auto);
+							.set-pos(absolute);
+							.set-bgc(@warning-color);
+							.set-coord();
+							.set-opacity(0);
+							.animate-all();
+							.performance();
+							padding: @content-padding/2 0;
+							z-index: 2;
+							
+							span
+							{
+								.set-size(100%);
+								#align > .left;
+								#font > .lato(12px,white,400);
+								margin: 0;
+								padding: 0;
+								text-align: center;
+								line-height: 14px;
+								text-transform: uppercase;
+							}
 						}
 						
 						div.wrapper
@@ -1664,13 +1690,13 @@
 										}
 									}
 									
-									ul
+									& > ul
 									{
 										.set-size(100%);
 										#align > .left;
 										border: 0;
 										
-										li
+										& > li
 										{
 											&[id="booking-message"]
 											{
@@ -1726,16 +1752,19 @@
 												.set-size(100%);
 												#align > .left;
 												
-												ul
+												& > ul
 												{
-													li
+													& > li
 													{
 														.set-size(100%);
 														#align > .left;
 														display: block;
+														overflow: hidden;
 														
 														div[id="date-picker"]
 														{
+															.set-size(100%);
+															#align > .left;
 															margin-top: @content-padding/2;
 															
 															button
@@ -1755,6 +1784,15 @@
 																	top: 11px;
 																}
 															}
+														}
+														
+														div[id="calendar"]
+														{
+															.set-size(100%,auto);
+															.ui-calendar();
+															#align > .left;
+															margin-bottom: 0;
+															padding: @content-padding/2 0;
 														}
 														
 														label
@@ -2776,6 +2814,315 @@
 				{
 					margin: 0;
 					padding: 0;
+				}
+			}
+		}
+		
+		/* ------------------------------------------------------------------------------------------------------------- */
+		/* ~ [G] Components ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+		div.call-to-action
+		{
+			.set-size(100%,100%);
+			.set-pos(fixed);
+			.set-coord(0,0);
+			.chrome-fix();
+			.performance();
+			.set-bgc(fadeout(@color-1,80%));
+			.hide();
+			overflow: hidden;
+			z-index: 12;
+			
+			div.content
+			{
+				@w: 850px;
+				@h: 550px;
+				@global-color: @color-5;
+				
+				.set-size(@w,@h);
+				.set-pos(absolute);
+				.set-box-shadow(black,0,0,100px);
+				.set-bgc(@color-1);
+				.performance();
+				.set-bgs(100%,auto);
+				#align > .absolute-center(@h,@w);
+				
+				header
+				{
+					.set-size(100%);
+					.box-sizing();
+					padding: @gutter @content-padding/2;
+					
+					small
+					{
+						.set-size();
+						#align > .left;
+						#font > .lato(14px,white,400);
+						display: block;
+						text-transform: uppercase;
+						margin: @unit;
+					}
+					
+					button
+					{
+						.reset();
+						
+						&[id="sign-in"]
+						{
+							#align > .right;
+							#font > .lato(14px,white,700);
+							text-transform: uppercase;
+							margin-left: @unit;
+							text-decoration: underline;
+							
+							&:hover
+							{
+								text-decoration: none;
+							}
+						}
+						
+						&[rel="close"]
+						{
+							@size: 40px;
+							
+							.set-size(@size,@size);
+							.set-pos(absolute);
+							.set-opacity(1);
+							.animate-opacity();
+							#font > .ic(38px,@global-color);
+							#align > .right;
+							text-align: left;
+							right: -@gutter;
+							top: -8px;
+							overflow: hidden;
+							
+							&:hover
+							{
+								.set-opacity(0.5);
+							}
+							
+							&:before
+							{
+								content: '\4d';
+							}
+						}
+					}
+				}
+				
+				div[id="response-messages"]
+				{
+					.set-size(100%);
+					.box-sizing();
+					#align > .left;
+					padding: @content-padding;
+					
+					h1
+					{
+						.set-size(100%);
+						#align > .left;
+						#font > .lato(32px,@global-color,400);
+						text-transform: uppercase;
+						text-align: center;
+						line-height: 48px;
+						
+						span
+						{
+							.set-size(100%);
+							#align > .left;
+							#font > .gar(18px,@global-color);
+							clear: both;
+							text-align: center;
+							line-height: 22px;
+							text-transform: none;
+						}
+					}
+				}
+				
+				form
+				{
+					@input-width: 94%/3;
+					
+					.set-size(100%);
+					.box-sizing();
+					#align > .left;
+					padding: @content-padding;
+					padding-top: 0;
+					display: block;
+					overflow: hidden;
+					
+					header
+					{
+						.set-size(100%);
+						.box-sizing();
+						#align > .left;
+						padding: 0 2 * @content-padding;
+						padding-bottom: @content-padding;
+						margin-top: @content-padding/2;
+						
+						h1,h2
+						{
+							.set-size(100%);
+							#align > .left;
+						}
+						
+						h1
+						{
+							#font > .lato(32px,@global-color,400);
+							text-transform: uppercase;
+							text-align: center;
+							line-height: 48px;
+						}
+						
+						h2
+						{
+							#font > .gar(18px,@global-color);
+							text-align: center;
+							line-height: 22px;
+						}
+						
+						h3
+						{
+							.set-size(100%);
+							.set-pos(absolute);
+							.box-sizing();
+							#font > .lato(12px,@warning-color,700);
+							bottom: 0px;
+							left: 0px;
+							display: block;
+							text-transform: uppercase;
+							text-align: center;
+							line-height: 18px;
+						}
+					}
+					
+					div.wrapper-to-center
+					{
+						.set-size(100%);
+						.box-sizing();
+						#align > .left;
+						padding: 0 @input-width/2;
+						overflow: hidden;
+						margin-top: @unit;
+						
+						small
+						{
+							.set-size(100%);
+							.set-pos(absolute);
+							#font > .lato(12px,@warning-color,700);
+							text-transform: uppercase;
+							text-align: center;
+							display: block;
+							top: -20px;
+						}
+					}
+					
+					input
+					{
+						.reset();
+						.set-size(@input-width);
+						.box-sizing();
+						#align > .left;
+						margin: 1%;
+						
+						&[type="text"],
+						&[type="email"],
+						&[type="password"]
+						{
+							//#ui-set-input > .input-text(@global-color,16px,@color-1);
+							border: solid 1px @global-color;
+						}
+						
+						&[type="submit"]
+						{
+							//#ui-set-input > .input-submit(@global-color);
+							#align > .center;
+							.set-opacity(1);
+							.animate-opacity();
+							clear: both;
+							overflow: hidden;
+							margin-top: @content-padding/2;
+							
+							&.disabled,
+							&:hover
+							{
+								.set-opacity(0.5);
+							}
+						}
+						
+						&.full
+						{
+							width: 2 * @input-width;
+							float: none;
+							margin: auto;
+						}
+						
+						&.half
+						{
+							width: 48%;
+						}
+						
+						&.ng-invalid.ng-dirty,
+						&.warning
+						{
+							.set-placeholder-style(@warning-color);
+							border-color: @warning-color;
+							color: @warning-color;
+						}
+					}
+					
+					label[for="user-sign-up-newsletter"]
+					{
+						#align > .left;
+						margin-left: @unit;
+						
+						span
+						{
+							#font > .gar(14px,@global-color);
+							#align > .left;
+							display: inline-block;
+							margin-left: 20px;
+						}
+						
+						input[type="checkbox"]
+						{
+							.set-pos(absolute);
+							.set-coord(0,-3px);
+							width: auto;
+						}
+					}
+					
+					footer
+					{
+						.set-size(100%);
+						#align > .left;
+						
+						a,
+						small
+						{
+							.set-size(100%);
+							#font > .gar(14px,@global-color);
+							text-align: center;
+							display: block;
+							cursor: default;
+						}
+						
+						a:hover
+						{
+							text-decoration: underline;
+							cursor: pointer;
+						}
+					}
+					
+					// ---------------------------------------------------------
+					// | i | Specific styling
+					// - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+					
+					&[id="sign-up-form"]
+					{}
+					
+					&[id="sign-in-form"]
+					{}
 				}
 			}
 		}

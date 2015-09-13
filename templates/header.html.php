@@ -18,10 +18,11 @@
 			</div>
 			<div class="wrapper align-right">
 				<?php if (!user_is_logged_in()): ?>
-					<a id="sign-in" href="#/sign-in" data-animate="7">Sign in</a>
-					<a id="sign-up" href="#/sign-up" data-animate="8">Sign up</a>
+					<a id="sign-in" href="/sign-in" data-animate="7">Sign in</a>
+					<a id="sign-up" href="/sign-up" data-animate="8">Sign up</a>
 				<?php else: ?>
-					<a href="/user/logout" data-animate="7">log out</a>
+					<a id="user" href="https://go.passported.com/user/voyages" data-animate="7">user name</a>
+					<a id="sign-out" href="/user/logout" data-animate="8">Sign out</a>
 				<?php endif; ?>
 			</div>
 		</nav>
