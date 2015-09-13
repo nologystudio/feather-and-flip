@@ -518,18 +518,25 @@
 										}
 									}
 									
-									h3
+									a
 									{
-										.set-size(100%);
-										.box-sizing();
-										.animate-all();
-										#font > .lato(14px,white,400);
-										padding: 0 @content-padding/2;
-										margin-top: @content-padding;
-										display: block;
-										text-transform: uppercase;
-										text-align: center;
-										line-height: 22px;
+										margin: 0;
+										padding: 0;
+										text-decoration: none;
+										
+										h3
+										{
+											.set-size(100%);
+											.box-sizing();
+											.animate-all();
+											#font > .lato(14px,white,400);
+											padding: 0 @content-padding/2;
+											margin-top: @content-padding;
+											display: block;
+											text-transform: uppercase;
+											text-align: center;
+											line-height: 22px;
+										}
 									}
 								}
 							}
@@ -1336,6 +1343,7 @@
 																
 																.set-size(@left-panel-width,@h);
 																.set-bgc(white);
+																.set-opacity(0);
 																#align > .left;
 																margin: @content-padding/2 0 @content-padding @left;
 																display: block;
@@ -2101,9 +2109,9 @@
 				{
 					.set-size(540px);
 					#align > .center;
-					overflow: hidden;
+					overflow: visible;
 					
-					header
+					& > header
 					{
 						margin-bottom: 10px;
 						
@@ -2132,12 +2140,12 @@
 					{
 						width: 100%;
 						
-						ul
+						div.select
 						{
 							width: 48%;
 							margin: 0;
 							
-							&:first-child
+							header
 							{
 								margin-right: 4%;
 							}
@@ -2147,7 +2155,10 @@
 					
 					button.go-btn
 					{
-						margin-left: @content-padding/2;
+						.set-pos(absolute);
+						.set-coord(auto,50%);
+						right: -65px;
+						top: 90px;
 						display: block;
 					}
 				}
@@ -2675,7 +2686,7 @@
 								
 								&.passported
 								{
-									.set-bg(transparent,'@{media-url}icons/feather-icon.svg',no-repeat,left,bottom);
+									.set-bg(transparent,'@{media-url}icons/feather-white-icon.svg',no-repeat,left,bottom);
 									.set-bgs(auto,80%);
 								}
 							}

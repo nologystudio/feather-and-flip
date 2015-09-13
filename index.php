@@ -45,8 +45,10 @@
 						<a id="search"      href="#/search"         class="subnav" data-animate="6">search</a>
 					</div>
 					<div class="wrapper align-right">
-						<a id="sign-in" href="/sign-in" data-animate="7">Sign in</a>
-						<a id="sign-up" href="/sign-up" data-animate="8">Sign up</a>
+						<a id="user" href="https://go.passported.com/user/voyages" data-animate="7">user name</a>
+						<a id="sign-out" href="/user/logout" data-animate="8">Sign out</a>
+						<!--<a id="sign-in" href="/sign-in" data-animate="7">Sign in</a>
+						<a id="sign-up" href="/sign-up" data-animate="8">Sign up</a>-->
 					</div>
 				</nav>
 			</header>
@@ -140,7 +142,7 @@
 				</div>
 			</div>
 			
-			<?php $page = 'map'; ?>
+			<?php $page = 'home'; ?>
 			
 			<?php if($page == 'map'): ?>
 			
@@ -188,18 +190,18 @@
 									<button ng-click="filterMap(undefined)" ng-class="{'on':bookFilter == undefined}" class="view-all">View all</button>
 							   		<button rel="print" ng-click="printList()"></button>
 						    	</aside>
-						    	<div class="wrapper">
+						    	<div class="wrapper" ng-if="destinationIsReady">
 							    	<header>
 								    	<figure>
 								    		<img ng-src="{{pick.images[0][0].src}}" class="animated fadeIn"/>
 								    	</figure>
 								    	<h1>{{pick.name}}</h1>
 								    	<nav>
-									    	<a href="" rel="facebook" class="icon-facebook-circle"></a>
-									    	<a href="" rel="twitter" class="icon-twitter-circle"></a>
-									    	<a href="" rel="pinterest" class="icon-pinterest-circle"></a>
-									    	<a href="" rel="instagram" class="icon-instagram-circle"></a>
-									    	<a href="" rel="google-plus" class="icon-google-circle"></a>
+									    	<a pp-social-media-link rel="facebook" class="icon-facebook-circle"></a>
+									    	<a pp-social-media-link rel="twitter" class="icon-twitter-circle"></a>
+									    	<a pp-social-media-link pp-social-media-image="{{pick.images[0][0].src}}" pp-social-media-desc="{{place.description}}" rel="pinterest" class="icon-pinterest-circle"></a>
+									    	<a pp-social-media-link rel="instagram" class="icon-instagram-circle"></a>
+									    	<a pp-social-media-link rel="google-plus" class="icon-google-circle"></a>
 									    </nav>
 							    	</header>
 							    	<ul>
@@ -478,15 +480,15 @@
 						<ul class="align-center">
 							<li ng-click="goTo('plan')">
 								<h2 data-animate="2">Plan</h2>
-								<h3 data-animate="3">We help you find the ideal destination and hotel for your particular FAMILY needs</h3>
+								<a href="/city-guides"><h3 data-animate="3">Find the ideal destination and hotel for your particular FAMILY needs</h3></a>
 							</li>
 							<li ng-click="goTo('explore')">
 								<h2 data-animate="4">Explore</h2>
-								<h3 data-animate="5">We have parent-scouted picks and itineraries that you can customize</h3>
+								<a href="https://go.passported.com"><h3 data-animate="5">Parent-scouted picks and itineraries that you can customize</h3></a>
 							</li>
 							<li ng-click="goTo('book')">
 								<h2 data-animate="6">Book</h2>
-								<h3 data-animate="7">We book your hotel. You can call or e-mail our hotel expert</h3>
+								<a href="/book"><h3 data-animate="7">We book your hotel. You can call or e-mail our hotel expert</h3></a>
 							</li>
 						</ul>
 					</li>
@@ -495,30 +497,27 @@
 			
 			<!-- inspiration -->
 			
-			<section id="inspiration">
+			<section id="inspiration" ng-controller="InspirationController">
 				<div class="wrapper grid-2 align-center">
 					<div id="let-us-inspire" data-animate="1">
 						<header>
 							<h4>Let us Inspire you</h4>
 						</header>
 						<div class="wrapper">
-							<ul class="select">
-								<li>
+							<div pp-inspiration-select id="place-select" class="select" data-options="option 1|option 2|option 3|option 4">
+								<header>
 									<span class="icon-down-circle-full"></span>
-									Pick the type of place
-								</li>
-							</ul>
-							<ul class="select">
-								<li>
+									<h5>Pick the type of place</h5>
+								</header>
+							</div>
+							<div pp-inspiration-select id="season-select" class="select" data-options="option 1|option 2|option 3|option 4">
+								<header>
 									<span class="icon-down-circle-full"></span>
-									Pick a season
-								</li>
-							</ul>
+									<h5>Pick a season</h5>
+								</header>
+							</div>
 						</div>
-						<!-- 
-						<button class="go-btn" ng-click="">Go</button>
-						<button class="clear-btn" ng-click="">Clear</button> 
-						-->
+						<button class="go-btn animated fadeIn" ng-click="submitInspiration()" ng-if="search.season && search.place">Go</button>
 					</div>
 				</div>
 			</section>

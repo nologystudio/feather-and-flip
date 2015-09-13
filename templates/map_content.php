@@ -29,7 +29,7 @@
 			    	<button rel="menu" ng-click="goTo(1)" ng-if="!cityGuideID" class="icon-back"></button>
 					<button ng-repeat="type in selectedDestination.summaries" rel="{{type.name}}" ng-click="filterMap(type.name)" ng-class="{'on':bookFilter == type.name}"></button>
 				</aside>
-		    	<div class="wrapper">
+		    	<div class="wrapper" ng-if="destinationIsReady">
 			    	<header>
 				    	<figure>
 				    		<img ng-src="{{pick.images[0][0].src}}" class="animated fadeIn"/>
@@ -45,11 +45,11 @@
 				    	</li>
 				    	<li id="destination-block">
 							<nav>
-						    	<a href="" rel="facebook" class="icon-facebook-circle"></a>
-						    	<a href="" rel="twitter" class="icon-twitter-circle"></a>
-						    	<a href="" rel="pinterest" class="icon-pinterest-circle"></a>
-						    	<a href="" rel="instagram" class="icon-instagram-circle"></a>
-						    	<a href="" rel="google-plus" class="icon-google-circle"></a>
+						    	<a pp-social-media-link rel="facebook" class="icon-facebook-circle"></a>
+						    	<a pp-social-media-link rel="twitter" class="icon-twitter-circle"></a>
+						    	<a pp-social-media-link pp-social-media-image="{{pick.images[0][0].src}}" pp-social-media-desc="{{place.description}}" rel="pinterest" class="icon-pinterest-circle"></a>
+						    	<a pp-social-media-link rel="instagram" class="icon-instagram-circle"></a>
+						    	<a pp-social-media-link rel="google-plus" class="icon-google-circle"></a>
 						    </nav>
 				    		<h2>{{pick.name}}, {{pick.country}}</h2>
 				    		<small>{{pick.lat}} Lat, {{pick.lon}} Lon</small>

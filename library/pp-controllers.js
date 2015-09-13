@@ -481,7 +481,9 @@
 			//This will return a single itinerary based on id:
 			//GET https://gostage.passported.com/api/v2/itinerary?id=64
 			
+			$scope.itineraryIsReady;
 			$scope.cityGuideID;
+			$scope.inspirationSearch;
 			$scope.step = (_.isUndefined($scope.cityGuideID)) ? 1 : 2;
 			$scope.showAside = true;
 			$scope.pick;
@@ -910,7 +912,16 @@
 			}
 		});
 		
-		ppControllers.controller('InspirationController',function($scope,$log,$http,$timeout){
+		ppControllers.controller('InspirationController',function($scope,$log,$http,$cookies,$timeout){
+			
+			$scope.search = {
+				place: undefined,
+				season: undefined
+			};
+			
+			$scope.submitInspiration = function(){
+				//$cookies.putObject('inspiration','signup',{path:'/'});
+			};
 		});
 		
 		/* Sign Up/In Controller

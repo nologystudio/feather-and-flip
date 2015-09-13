@@ -582,7 +582,7 @@
 							.set-size(700px);
 							#align > .right;
 							
-							header
+							& > header
 							{
 								h4
 								{
@@ -596,10 +596,71 @@
 								.set-size(80%);
 								#align > .left;
 								
-								ul
+								& > div.select
 								{
-									width: 47%;
+									@w: 47%;
+									
 									#align > .left;
+									width: @w;
+									overflow: visible;
+									cursor: pointer;
+									
+									header
+									{
+										.set-size(100%,auto);
+										background-color: none;
+										
+										h5
+										{
+											#align > .left;
+											margin: 0;
+											font-size: 12px;
+											padding: 0;
+										}
+										
+										span
+										{
+											#align > .left;
+											margin-right: 2 * @unit;
+											line-height: 16px;
+										}
+									}
+									
+									ul[id="options"]
+									{
+										.set-size(102%);
+										.box-sizing();
+										.set-pos(absolute);
+										.set-bgc(white);
+										.set-coord(-1%,-@content-padding/2);
+										.animate-all();
+										.performance();
+										.hide();
+										border-radius: @unit;
+										box-shadow: 0 0 @content-padding @color-2;
+										padding: @content-padding/2;
+										
+										li
+										{
+											#font > .lato(12px,@color-3,700);
+											.animate-color();
+											padding: 2 * @unit;
+											margin: 0 @unit;
+											border-bottom: solid 1px @color-7;
+											cursor: pointer;
+											line-height: 18px;
+											
+											&:hover
+											{
+												color: @color-5;
+											}
+											
+											&:last-child
+											{
+												border: 0;
+											}
+										}
+									}
 									
 									&:first-child
 									{

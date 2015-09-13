@@ -5,8 +5,7 @@
 	<header>
 		<a href="/">
 			<figure>
-				<img src="<?php echo drupal_get_path('theme', 'passported'); ?>/media/brand/passported-logo.svg" type="image/svg+xml" alt="Passported, kid friendly travel for grown-ups" data-animate="1"/> 						
-				<figcaption data-animate="2">Kid friendly travel for grown-ups</figcaption>
+				<img src="<?php echo drupal_get_path('theme', 'passported'); ?>/media/brand/passported-logo.svg" type="image/svg+xml" alt="Passported, kid friendly travel for grown-ups" data-animate="1"/> 								<figcaption data-animate="2">Kid friendly travel for grown-ups</figcaption>
 			</figure>
 		</a>
 		<nav>
@@ -70,26 +69,25 @@
 					</ul>
 				</div>
 				<?php if(!drupal_is_front_page()): ?>
-					<div id="let-us-inspire" ng-controller="InspirationController">>
+					<div id="let-us-inspire" data-animate="1">
 						<header>
 							<h4>Let us Inspire you</h4>
 						</header>
 						<div class="wrapper">
-							<ul class="select">
-								<li>
-									<span class="icon">&#xe03a;</span>
-									Pick the type of place
-								</li>
-							</ul>
-							<ul class="select">
-								<li>
-									<span class="icon">&#xe03a;</span>
-									Pick a season
-								</li>
-							</ul>
+							<div pp-inspiration-select id="place-select" class="select" data-options="option 1|option 2|option 3|option 4">
+								<header>
+									<span class="icon-down-circle-full"></span>
+									<h5>Pick the type of place</h5>
+								</header>
+							</div>
+							<div pp-inspiration-select id="season-select" class="select" data-options="option 1|option 2|option 3|option 4">
+								<header>
+									<span class="icon-down-circle-full"></span>
+									<h5>Pick a season</h5>
+								</header>
+							</div>
 						</div>
-						<button class="go-btn" ng-click="" ng-if="">Go</button>
-						<button class="clear-btn" ng-click="" ng-if="">Clear</button>
+						<button class="go-btn animated fadeIn" ng-click="submitInspiration()" ng-if="search.season && search.place">Go</button>
 					</div>
 				<?php endif; ?>
 			</div>
