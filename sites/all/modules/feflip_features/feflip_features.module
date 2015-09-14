@@ -207,6 +207,8 @@ function parse_field_images($images) {
             $json_date = $image->find('div.json_date', 0)->plaintext;
             $items[] = array(
                 'src' => $json_image,
+                'src_400' => image_style_url('thumb_400', $json_image),
+                'src_800' => image_style_url('thumb_800', $json_image),
                 'is_main' => $json_ismain,
                 'caption' => $json_caption,
                 'date' => $json_date,
