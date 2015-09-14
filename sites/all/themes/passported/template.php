@@ -84,7 +84,7 @@ function passported_preprocess_html(&$variables) {
 function passported_process_html(&$variables) {
 
   //Load footer fixed menu
-  $variables['footer_fixed_menu'] = get_footer_fixed_menu();
+  $variables['footer_fixed_menu'] = pp_get_footer_fixed_menu();
   //Load footer destination
   $variables['footer_destinations_menu'] = Destination::GetFooterDestinations();
   //Load footer hotels
@@ -178,7 +178,7 @@ function passported_preprocess_views_view(&$variables) {
 
   // Home View
   if ($view->name == 'home' && $view->current_display == 'page') {
-    preprocessHomePage($variables);
+    pp_preprocessHomePage($variables);
   }
   elseif ($view->name == 'new_home' && $view->current_display == 'page') {
     if (!empty($view->result)) {
@@ -574,7 +574,7 @@ function pp_get_header_main_navigation_menu($destinations = NULL) {
  * Get fixed menu in footer
  * @return string
  */
-function get_footer_fixed_menu() {
+function pp_get_footer_fixed_menu() {
   $f_menu = menu_tree_all_data('menu-footer-right');
   $output = '<ul>';
   $output .= '<li><span class="icon ff"></span>Passported</li>';
@@ -616,7 +616,7 @@ function passported_html_head_alter(&$head_elements) {
 }
 
 // Generate share links
-function getSocialLink($_network, $url, $img = '', $desc = '') {
+function pp_getSocialLink($_network, $url, $img = '', $desc = '') {
   if (strpos($url, 'https://') === FALSE) {
     $url = 'https://' . $_SERVER['HTTP_HOST'] . '/' . $url;
   }
@@ -720,7 +720,7 @@ function passported_metatag_metatags_view_alter(&$output, $instance) {
 }
 
 
-function preprocessHomePage(&$variables) {
+function pp_preprocessHomePage(&$variables) {
   $cacheId = 'passported_template_php::preprocess_home_page';
   $cacheResult = Helpers::getCacheIfNotExpired($cacheId, 'cache_blocks_page');
   if (!$cacheResult) {
