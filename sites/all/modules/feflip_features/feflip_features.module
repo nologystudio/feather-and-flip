@@ -205,10 +205,22 @@ function parse_field_images($images) {
             $json_ismain = (bool)$image->find('div.json_ismain', 0)->plaintext;
             $json_caption = $image->find('div.json_caption', 0)->plaintext;
             $json_date = $image->find('div.json_date', 0)->plaintext;
+
+            $json_image = trim($json_image);
+            $query = new EntityFieldQuery();
+            $result = $query->entityCondition('entity_type', 'file')
+                ->propertyCondition('filename', $json_image)
+                ->execute();
+            // if you are guaranteed there is exactly one result, then:
+            $file_object = reset($result['file']);
+            $fid = $file_object->fid;
+            if (empty($fid) || is_null($fid)) continue;
+            $file = file_load($fid);
+
             $items[] = array(
-                'src' => $json_image,
-                'src_400' => image_style_url('thumb_400', $json_image),
-                'src_800' => image_style_url('thumb_800', $json_image),
+                'src' => file_create_url($file->uri),
+                'src_400' => image_style_url('thumb_400', $file->uri),
+                'src_800' => image_style_url('thumb_800', $file->uri),
                 'is_main' => $json_ismain,
                 'caption' => $json_caption,
                 'date' => $json_date,
