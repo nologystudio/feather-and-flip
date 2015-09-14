@@ -42,7 +42,10 @@
 			<a id="brand" href="/">
 				<img src="<?php echo variable_get('relativePath'); ?>media/brand/passported-black-logo.svg" type="image/svg+xml" alt="Passported, kid friendly travel for grown-ups"/>
 			</a>
-			<?php echo Helpers::GetSocialMediaMenu('black');?>
+			<a href="https://twitter.com/passported" class="icon-twitter" target="_blank" rel="twitter"></a>
+			<a href="https://www.facebook.com/getpassported" class="icon-google" target="_blank" rel="facebook"></a>
+			<a href="http://instagram.com/getpassported" class="icon-instagram" target="_blank" rel="instagram"></a>
+			<a href="http://www.pinterest.com/passported" class="icon-pinterest-2" target="_blank" rel="pinterest"></a>
 			<a id="tzell-brand" href="http://www.tzell.com/tzell/index.htm" target="_blank">
 				<small>Powered by</small>
 				<img src="<?php echo variable_get('relativePath'); ?>media/brand/tzell-logo.png" alt="Powered by Tzell Travel Group"/>

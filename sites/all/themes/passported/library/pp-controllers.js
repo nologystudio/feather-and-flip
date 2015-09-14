@@ -21,12 +21,19 @@
         
         'use strict';
         
-        var formSubmit    = 'https://www.passported.com/api/forms'; //window.location.protocol + '//' + window.location.host + '/api/forms';
+        var formSubmit = 'https://www.passported.com/api/forms'; //window.location.protocol + '//' + window.location.host + '/api/forms';
         var ppControllers = angular.module('ppControllers',[]);
         
-        /* ------------------------------------------------------------------------------------------------------------- */
+        /* Global APP Controller
+        ---------------------------------------------------------------------------------------------------------------- */
         
         ppControllers.controller('AppController',function($scope,$log,$timeout,$location){
+	       
+			$scope.user;
+			$scope.view;
+			$scope.loading = false;
+			$scope.error = false;
+			$scope.resetPassword = false;
 	       
 	    	/* Layout & Tools
 	        - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
@@ -74,7 +81,7 @@
 			        $timeout(function(){_t.find('*[data-animate="1"]').addClass('animated fadeIn')},200);
 					$timeout(function(){_t.find('*[data-animate="2"]').addClass('animated fadeIn')},600);
 					
-		        },{ offset: '75%' });  
+		        },{ offset: '100%' });  
 		        
 		        $('#inspiration').waypoint(function(){
 			        
@@ -107,6 +114,15 @@
 					$timeout(function(){_t.find('*[data-animate="10"]').addClass('animated fadeIn')},2000);
 					
 		        },{ offset: '50%' });  
+		        
+		        $('#newsletter').waypoint(function(){
+			        
+			        var _t = $(this);
+			        
+			        $timeout(function(){_t.find('*[data-animate="1"]').addClass('animated fadeInUp')},200);
+					$timeout(function(){_t.find('*[data-animate="2"]').addClass('animated fadeInUp')},600);
+					
+		        },{ offset: '75%' });  
 		        
 		        $('#map').waypoint(function(){
 			        
@@ -284,13 +300,15 @@
 			},200);
 	    });
 	    
-	    /* ------------------------------------------------------------------------------------------------------------- */
+	    /* City Guide Controller
+        ---------------------------------------------------------------------------------------------------------------- */
 	    
 	    ppControllers.controller('MapController',function($scope,$log,$timeout){
 		    
 		    $scope.map;
 		    $scope.lat = 40.777422;
 		    $scope.lon = -73.968887;
+		    $scope.inspirationSearch;
 		    
 		    var mapID = 'passported';
 		    var setMapHeight = function(){
@@ -384,7 +402,6 @@
 			    
 			    switch(_id){
 				    case 'destinations':
-				    	console.log(_data);
 				    	_.map(_data,function(_d){
 						    var destination = new google.maps.Marker({
 								position: {
@@ -410,8 +427,6 @@
 					    
 				    	_.map(detail,function(_d){
 					    	_.map(_d,function(_p){
-						    	
-						    	console.log(_p);
 						    	
 						    	var pin = new google.maps.Marker({
 									position: {
@@ -453,7 +468,7 @@
 			});
 		});
 		
-		ppControllers.controller('ItineraryController',function($scope,$log,$timeout,$resource,$rootScope){
+		ppControllers.controller('ItineraryController',function($scope,$log,$timeout,$resource,$location,$routeParams,$rootScope){
 			
 			var destSrc  = $resource('https://www.passported.com/api/content/destinations.json');
 			var abookSrc = $resource('https://www.passported.com/api/content/address-books.json');
@@ -466,6 +481,7 @@
 			//This will return a single itinerary based on id:
 			//GET https://gostage.passported.com/api/v2/itinerary?id=64
 			
+			$scope.itineraryIsReady;
 			$scope.cityGuideID;
 			$scope.step = (_.isUndefined($scope.cityGuideID)) ? 1 : 2;
 			$scope.showAside = true;
@@ -518,7 +534,7 @@
 				// 1. Bonvoyaging Itinerary...
 				
 				if(window.location.host == 'stage.passported.com' || window.location.host == 'www.passported.com'){
-					itSrc.query({'name':_d.name.replace(' ','+')},function(_data){
+					itSrc.get({'name':_d.name},function(_data){
 						console.log(_data);
 					});
 				}
@@ -528,27 +544,62 @@
 				abookSrc.query({'destination':_d.id},function(_data){
 					
 					$scope.pick.guide = _data;
-				
+					
+					_.map(_data,function(_a){
+						if(!_.isArray(_a.google_place_id)){
+							
+							var place = new google.maps.places.PlacesService($scope.map);
+							
+							place.getDetails({placeId:_a.google_place_id},function(_place,_status){
+								if(_status == google.maps.places.PlacesServiceStatus.OK){
+									
+									console.log(_a);
+									console.log(_place);
+									
+									_a.title 		= _place.name;
+									_a.lat 			= _place.geometry.location.G;
+									_a.lon 			= _place.geometry.location.K;
+									_a.phone_number = _place.formatted_phone_number;
+									_a.address 		= _place.formatted_address;
+									_a.website 		= _place.website;
+								};
+							});
+						}
+					});
+					
 					// 3. Hotels
 			
 					hotelSrc.query({'destination':_d.id},function(_data){
 						$scope.pick.hotels = _data;
 						$scope.$parent.addMarkers('guide',_d);
-						console.log($scope.pick);
+						//console.log($scope.pick);
 					});
 				});
 				
 				$scope.step = 2;
-				$('#step-2').delay(2000).transition({opacity:1},'slow');
+				
+				$('#step-2').delay(2000).transition({opacity:1},'slow',function(){
+					$scope.itineraryIsReady = true;
+					$scope.$apply();
+				});
 			}
 			
-			if(_.isUndefined($scope.cityGuideID)){
+			if(_.isUndefined($scope.cityGuideID) && _.isUndefined($scope.inspirationSearch)){
 				$scope.destinations = destSrc.query({},function(_data){
 					$scope.$parent.addMarkers('destinations',_data);
 				});
-			}else{
+			}
+			else if(!_.isUndefined($scope.cityGuideID)){
 				$scope.pick = destSrc.query({id:$scope.cityGuideID},function(_data){
 					$scope.displayDestination(_data[0]);
+				});
+			}
+			else if(!_.isUndefined($scope.inspirationSearch)){
+				
+				var _s = $location.search();
+				
+				$scope.destinations = destSrc.query({place_type:_s.place,season:_s.season},function(_data){
+					$scope.$parent.addMarkers('destinations',_data);
 				});
 			}
 			
@@ -563,7 +614,8 @@
 			});
 		});
 		
-		/* ------------------------------------------------------------------------------------------------------------- */
+		/* Booking Controller
+        ---------------------------------------------------------------------------------------------------------------- */
 	    
 	    ppControllers.controller('BookingController',function($scope,$log,$timeout,$http,$rootScope){
 		   
@@ -583,7 +635,9 @@
 			    message: undefined
 		    }
 		    
-		    $scope.showRightAside = false;
+		    $scope.error;
+		    $scope.showCalendar = false;
+		    $scope.showRightAside = true;
 		    $scope.booking = angular.copy(bookingData);
 			
 			$scope.openAside = function(){
@@ -599,7 +653,16 @@
 			$scope.setter = {
 				checkButtons: function(){
 					$('*.budget-check').on('click',function(){
+						$('*.budget-check span').removeClass('on');
 						$(this).find('span').toggleClass('on');
+						return false;
+					});
+				},
+				calendarButtons: function(){
+					$('*.icon-calendar').on('click',function(){
+						$scope.showCalendar = true;
+						$scope.$apply();
+						return false;
 					});
 				},
 				date: function(){
@@ -610,8 +673,6 @@
 			}
 			
 			$scope.submit = function(){
-				
-				console.log($scope.booking);
 				
 				$('aside.right #step-1 ul li').transition({opacity:0},function(){
 					$(this).hide();
@@ -637,15 +698,121 @@
 				$scope.showRightAside = true;
 				$scope.booking.destination = _data[0].destination;
 				$scope.booking.hotel = _data[0].name;
-				console.log(_data[0]);
 			});
+			
+			$scope.$watch('booking',function(_n,_o){
+				if(!_.isEqual(_n,_o)){
+					_.map(_n,function(_value,_key){
+						if(_n[_key] != _o[_key]){
+							
+							$log.info(_key + " has changed");
+							
+							switch(_key){
+								case 'start_date': case 'end_date':
+									if(!_.isUndefined($scope.booking.start_date) && !_.isUndefined($scope.booking.end_date)){
+										if(moment($scope.booking.start_date).isBefore($scope.booking.end_date)) $scope.error = "Please make sure you have selected correct dates";
+									}
+								break;
+								case 'adults':
+								break;
+							}
+						}
+					})
+				}
+			},true);
 			
 			$timeout(function(){
 				$scope.setter.checkButtons();
+				$scope.setter.calendarButtons();
 			},0);
 		});
+	    
+	    ppControllers.controller('CalendarController',function($scope,$log,$timeout){
+		    
+		    var aFrame  = $('#arrival-gallery');
+			var dFrame  = $('#departure-gallery');
+			
+			$scope.year = [];
+			
+			$scope.getMonth = function(_m,_y){
+				
+				var _year     = _y;
+				var start     = new Date(_year,_m,1);
+				var end       = new Date(_year,_m,moment(_year+"-"+(_m+1),"YYYY-MM").daysInMonth());
+				var yearRange = moment().range(start,end);
+				var month     = {
+					start : (start.getDay() == 0) ? 6 : start.getDay()-1,
+					days  : {}
+				};
+				
+				yearRange.by('days',function(_m){
+					month.days[moment(_m._d).format('DD')] = moment(_m._d).format('MM/DD/YYYY');
+				});
+
+				return month;
+			}
+			
+			$scope.buildYear = function(){
+				
+				var year  = moment().get('year');
+				var month = moment().get('month');
+				var start = new Date(year,month,1);
+				var end   = new Date(year+1,month,moment((year+1)+"-"+month,"YYYY-MM").daysInMonth());
+				var range = moment().range(start,end);
+				var theYear = [];
+				
+				range.by('months',function(_m){
+					
+					var _month = moment(_m._d).get('month');
+					var _year  = moment(_m._d).get('year');
+					
+					$scope.year.push({
+						name  : moment(_m._d).format('MMMM') + ' ' + _year,
+						order : $scope.getMonth(_month,_year)
+					});
+				});
+			}
+			
+			$timeout(function(){
+				
+				var setGallery = function(_calendar){
+					_calendar.sly({
+						horizontal     : 1,
+						itemNav        : 'forceCentered',
+						smart          : 1,
+						activateMiddle : 1,
+						mouseDragging  : 1,
+						touchDragging  : 0,
+						releaseSwing   : 1,
+						startAt        : 0,
+						scrollBy       : 1,
+						speed          : 500,
+						elasticBounds  : 1, 
+						prev           : _calendar.find('*[rel="prev"]'),
+						next           : _calendar.find('*[rel="next"]')
+					});
+					
+					_calendar.find('button').on('click',function(){
+						
+						if($(this).hasClass('arrival')) $scope.booking.start_date = $(this).data('date');
+						else $scope.booking.end_date = $(this).data('date');
+						
+						$scope.$apply();
+						
+						return false;
+					})
+				}
+				
+				setGallery(aFrame);
+				setGallery(dFrame);
+				
+			},0);
+			
+			$scope.buildYear();
+		});
 		
-		/* ------------------------------------------------------------------------------------------------------------- */
+		/* Post Controller
+        ---------------------------------------------------------------------------------------------------------------- */
 	    
 	    ppControllers.controller('BlogController',function($scope,$log,$timeout){
 		    
@@ -662,7 +829,8 @@
 	    ppControllers.controller('PromotedController',function($scope,$log,$timeout,$resource){
 		});
 		
-		/* ------------------------------------------------------------------------------------------------------------- */
+		/* Newsletter Controller
+        ---------------------------------------------------------------------------------------------------------------- */	    
 	    
 	    ppControllers.controller('NewsletterController',function($scope,$log,$timeout){
 		    
@@ -715,7 +883,8 @@
 			}
 		});
 	    
-	    /* ------------------------------------------------------------------------------------------------------------- */
+	    /* Search Controller
+        ---------------------------------------------------------------------------------------------------------------- */
 	    
 	    ppControllers.controller('SearchController',function($scope,$log,$http,$timeout){
 		    
@@ -750,22 +919,20 @@
 						transformRequest: angular.identity
 		            }).
 		            success(function(_data){
-			            
-			            console.log(_data);
-			            
-			            /*if(_data.destinations.length > 0 || _data.hotels.length > 0){
+			            if(_data.destinations.length > 0 || _data.hotels.length > 0){
 				            $scope.showResult   = true;
 				            $scope.destinations = _data.destinations;
-				            $scope.hotels       = _data.hotels;
+							$scope.hotels       = _data.hotels;
 				        }
 			            else if($scope.userSearch.split('').length > 0){
 				            $scope.showResult   = true;
 				            $scope.noResult     = true;
 				        }
 			            else{
+				           
 				        	$scope.showResult   = false; 
 							$scope.noResult     = false;
-			            }*/
+			            }
 		            }).
 		            error(function(){
 		            });
@@ -774,16 +941,302 @@
 				if(timer) clearTimeout(timer);
 				
 				timer = setTimeout(function(){
-					if($scope.userSearch != '') searchAction();
-					//else $scope.reset();
+					searchAction();
 				},500); 
 			}
 		});
 		
-		ppControllers.controller('InspirationController',function($scope,$log,$http,$timeout){
+		ppControllers.controller('InspirationController',function($scope,$log,$http,$cookies,$timeout){
+			
+			$scope.search = {
+				place: undefined,
+				season: undefined
+			};
+			
+			$scope.submitInspiration = function(){
+				window.location = window.location.origin + '/inspiration/#/?place=' + $scope.search.place + '&season=' + $scope.search.season;
+			};
 		});
 		
-		/* ------------------------------------------------------------------------------------------------------------- */
+		/* Sign Up/In Controller
+        ---------------------------------------------------------------------------------------------------------------- */
+        
+        ppControllers.controller('CallToActionController',function($scope,$rootScope,$element,$timeout,$cookies){
+			
+			var messageType = ['hidden','signup','loading'];
+			var overlay     = $('.call-to-action');
+			
+			$scope.overlayTpl     = 'library/templates/sign.tpl.html';
+			$scope.isLoggedIn     = $scope.user; 
+			$scope.isLoading      = $scope.loading; 
+			$scope.triggerState   = messageType[0];
+			$scope.isSignPage     = $scope.view;
+			$scope.types   		  = ['sign-up','sign-in','response','reset-password','new-password','change-password']; 
+			$scope.type    	      = $scope.types[0];
+			$scope.display        = false;
+			$scope.resetPassword  = $scope.resetPassword;
+			$scope.changePassword = false;
+			
+			$scope.triggerOverlay = function(){
+				//if($cookies.get('overlay') != 'hidden'){
+					switch($scope.triggerState){
+						case 'hidden':
+							$scope.display = false;
+						break;
+						default:
+							$scope.display = true;
+							$('.call-to-action').show().transition({opacity:1});
+						break;
+					}
+				//}
+			}
+			
+			// Watch user state: This event is linked to $scope.user
+			
+			$scope.$watch('isLoggedIn',function(_v){
+			});
+			
+			$scope.$watch('isSignPage',function(_v){
+				if(_v == 'sign-in' || _v == 'sign-up'){
+					$timeout(function(){
+						$scope.type = _v;
+						$scope.triggerState = messageType[1];
+						$scope.triggerOverlay();
+					},0);
+				}
+			});
+			
+			$scope.$watch('resetPassword',function(_v){
+				if(_v){
+					$scope.triggerState = messageType[1];
+					$scope.triggerOverlay();
+				}
+			});
+			
+			$scope.$watch('changePassword',function(_v){
+				if(_v){
+					$scope.triggerState = messageType[1];
+					$scope.triggerOverlay();
+				}
+			});
+			
+			// Watch loading process...
+			
+			$scope.$watch('isLoading',function(_v){
+				if(_v){
+					$scope.triggerState = messageType[3];
+					$scope.triggerOverlay();
+				}
+			});
+			
+			// Bind cookie event...
+			
+			$rootScope.$on('display-overlay',function(_e,_data){
+				if(!$scope.user){
+					//$cookies.put('overlay','signup',{path:'/'});
+					$scope.triggerState = messageType[1];
+					$scope.triggerOverlay();
+					$('.call-to-action').show().transition({opacity:1});
+				}
+			});
+			
+			// Trigger password request...
+			
+			$('#change-password').on('click',function(_e){
+				$scope.changePassword = true;
+				$scope.$apply();
+				_e.preventDefault();
+			});
+			
+			// Trigger password request...
+			
+			$('#sign-in').on('click',function(_e){
+				$rootScope.$emit('display-overlay','');
+				$scope.type = $scope.types[1];
+				$scope.$apply();
+				_e.preventDefault();
+			});
+			
+			$('#sign-up').on('click',function(_e){
+				$rootScope.$emit('display-overlay','');
+				$scope.type = $scope.types[0];
+				$scope.$apply();
+				_e.preventDefault();
+			});
+		});
+		
+		ppControllers.controller('SignController',function($scope,$http,$cookies){
+			
+			$scope.response		 = ['success','error','error-in-login'];
+			$scope.rMessage 	 = '';
+			$scope.isValid       = true;
+			$scope.signInError   = '';
+			$scope.signUpError   = '';
+			$scope.passwordError = '';
+			$scope.loading       = false;
+			
+			$scope.data = {
+				userName       		: '',
+				userLast       		: '',
+				userEmail      		: '',
+				userPassword   		: '',
+				userRepassword 		: '',
+				subscribeNewsletter : true
+			}
+			
+			// Switch bettwen forms...
+			
+			$scope.switcher = function(_state){
+				$scope.type = _state;
+				$scope.data = {
+					userName            : '',
+					userLast            : '',
+					userEmail           : '',
+					userPassword        : '',
+					userRepassword      : '',
+					subscribeNewsletter : true
+				}
+				$scope.signInError   = '';
+				$scope.signUpError   = '';
+				$scope.passwordError = '';
+				$scope.rMessage 	 = '';
+			}
+			
+			// Close overlay...
+			
+			$scope.closeOverlay = function(){
+				$('.call-to-action').transition({opacity:0},function(){
+					$(this).hide();
+					//$scope.$parent.$parent.$parent.display = false;
+					//$scope.$parent.$parent.$parent.resetPassword = false;
+					//$scope.$parent.$parent.$parent.triggerState = 'hidden';
+					//$scope.$parent.$parent.$parent.$apply();
+					//$cookies.put('overlay','hidden',{path:'/'});
+				});
+			}
+			
+			// Input checker...
+			
+			$scope.checkChangedInput = function(_i){
+				
+				var displayWarning = function(_id,_state){
+					
+					var _t = $('*[name$="-'+_id.split('user')[1].toLowerCase()+'"]');
+					var _c = 'warning';
+					
+					if(_state){
+						_t.addClass(_c);
+						$scope.isValid = false;
+					}
+					else _t.removeClass(_c);
+				}
+				
+				angular.forEach($scope.data,function(_v,_id){
+					displayWarning(_id,angular.isUndefined(_v));
+				});
+				
+				return $scope.isValid;
+			}
+			
+			// Submit form...
+			
+			$scope.regSubmit = function(_id){
+				$http({
+	                method  : 'POST',
+	                url     : formSubmit,
+	                data    : $.param(angular.extend({formID:'sign'+_id},$scope.data)),
+	                headers : { 
+	            		'Content-Type' : 'application/x-www-form-urlencoded'
+					},
+					transformRequest: angular.identity
+	            }).
+	            success(function(_data){
+		            if(_data.result){
+			            
+			            var _rf = $(document)[0].referrer.split('.passported.com');
+			            
+			            $cookies.put('is_signup','true',{path:'/'});
+			            if(_rf.length > 1) window.location = $(document)[0].referrer;
+			            else window.location.reload();
+		            } 
+			        else{
+			            $scope.loading = false;
+			            $scope.signInError = 'The user or password is incorrect';
+			        }
+	            }).
+	            error(function(){});
+			}
+			
+			$scope.changePassword = function(){
+				
+				var _p = $('#password-form input[type="password"]');
+				
+				if($scope.data.userRepassword == $scope.data.userPassword && $scope.data.userPassword != ''){
+					
+					_p.removeClass('warning');
+					
+					$http({
+		                method  : 'POST',
+		                url     : formSubmit,
+		                data    : $.param({formID:'updatePassw','newPassw':$scope.data.userPassword}),
+		                headers : { 
+		            		'Content-Type' : 'application/x-www-form-urlencoded'
+						},
+						transformRequest: angular.identity
+		            }).
+		            success(function(_data){
+			            switch(_data.error){
+				            case '':
+				            	$scope.closeOverlay();
+				            break;
+				            default:
+				            	$scope.passwordError = 'Something went wrong, please try again later';
+				            break;
+			            }
+		            }).
+		            error(function(_data){ });
+				}
+				else _p.addClass('warning');
+			} 
+			
+			$scope.sendPasswordEmail = function(){
+				$http({
+	                method  : 'POST',
+	                url     : formSubmit,
+	                data    : $.param({formID:'resetPassw','userEmail':$scope.data.userEmail}),
+	                headers : { 
+	            		'Content-Type' : 'application/x-www-form-urlencoded'
+					},
+					transformRequest: angular.identity
+	            }).
+	            success(function(_data){
+		        	switch(_data.error){
+			            case '':
+			            	$('#password-form').transition({opacity:0},function(){
+				            	$scope.rMessage = 'reset-password-success'; 
+				            	$scope.$apply();
+			            	});
+			            break;
+			            default:
+			            	$scope.passwordError = 'The email does not exist';
+			            break;
+		            }
+	            }).
+	            error(function(_data){
+		        });
+			}
+			
+			// Triggers for password recovery...
+			
+			if($scope.$parent.changePassword)
+				$scope.switcher('change-password');
+			
+			if($scope.$parent.resetPassword)
+				$scope.switcher('new-password');
+		});
+		
+		/* Contact Controller
+        ---------------------------------------------------------------------------------------------------------------- */
 		
 		ppControllers.controller('ContactController',function($scope,$http){
 			

@@ -28,17 +28,8 @@
 		    	<aside>
 			    	<button rel="menu" ng-click="goTo(1)" ng-if="!cityGuideID" class="icon-back"></button>
 					<button ng-repeat="type in selectedDestination.summaries" rel="{{type.name}}" ng-click="filterMap(type.name)" ng-class="{'on':bookFilter == type.name}"></button>
-					
-					<!--<button rel="hotel" class="icon-hotel-circle"></button>
-					<button rel="eat" class="icon-eat-circle"></button>
-					<button rel="play" class="icon-itinerary-circle"></button>
-					<button rel="shop" class="icon-shopping-circle"></button>
-					<button rel="noteworthy" class="icon-places-circle"></button>
-					<button rel="spot" class="icon-sights-circle"></button>
-					<button ng-click="filterMap(undefined)" ng-class="{'on':bookFilter == undefined}" class="view-all">View all</button>
-			   		<button rel="print" ng-click="printList()"></button>-->
-		    	</aside>
-		    	<div class="wrapper">
+				</aside>
+		    	<div class="wrapper" ng-if="itineraryIsReady">
 			    	<header>
 				    	<figure>
 				    		<img ng-src="{{pick.images[0][0].src}}" class="animated fadeIn"/>
@@ -53,22 +44,12 @@
 				    		</a>
 				    	</li>
 				    	<li id="destination-block">
-<!--
-				    		<button class="circle-outline-icon download-btn">
-				    			<div class="circle icon-email-circle"></div>
-				    			<span>Share url</span>
-				    		</button>
-				    		<button class="circle-outline-icon share-btn">
-				    			<div class="circle icon-download-circle"></div>
-				    			<span>Download</span>
-				    		</button>
--->
 							<nav>
-						    	<a href="" rel="facebook" class="icon-facebook-circle"></a>
-						    	<a href="" rel="twitter" class="icon-twitter-circle"></a>
-						    	<a href="" rel="pinterest" class="icon-pinterest-circle"></a>
-						    	<a href="" rel="instagram" class="icon-instagram-circle"></a>
-						    	<a href="" rel="google-plus" class="icon-google-circle"></a>
+						    	<a pp-social-media-link rel="facebook" class="icon-facebook-circle"></a>
+						    	<a pp-social-media-link rel="twitter" class="icon-twitter-circle"></a>
+						    	<a pp-social-media-link pp-social-media-image="{{pick.images[0][0].src}}" pp-social-media-desc="{{place.description}}" rel="pinterest" class="icon-pinterest-circle"></a>
+						    	<a pp-social-media-link rel="instagram" class="icon-instagram-circle"></a>
+						    	<a pp-social-media-link rel="google-plus" class="icon-google-circle"></a>
 						    </nav>
 				    		<h2>{{pick.name}}, {{pick.country}}</h2>
 				    		<small>{{pick.lat}} Lat, {{pick.lon}} Lon</small>
@@ -149,7 +130,9 @@
 					    			<h5 ng-bind-html="address.short_review"></h5>
 					    			<footer>
 						    			<span class="tel" ng-if="!check.phone(address.phone_number)">{{address.phone_number}}</span>
-						    			<a href="" ng-if="">read more</a>
+						    			<span class="url">
+						    				<a href="{{address.website}}" target="_blank">{{address.website}}</a>
+						    			</span>
 					    			</footer>
 					    		</li>
 				    		</ul>
@@ -169,7 +152,10 @@
 </aside>
 <aside class="right" ng-controller="BookingController" ng-class="{'on':showRightAside}">
 	<div class="wrapper">
-		<button rel="close" ng-click="openAside()"></button>
+		<div class="error" ng-if="error" class="animated fadeInDown">
+			<span>{{error}}</span>
+		</div>
+		<button class="icon-close" ng-click="openAside()"></button>
     	<ul>
 		    <li id="step-1">
 				<header>
@@ -188,32 +174,81 @@
 			    	</li>
 			    	<li id="email-entry">
 			    		Drop us an e-mail or fill out the form below
-			    		<a href="mailto:info@passported.com" class="icon circle-btn icon-email"></a>
+			    		<a href="/contact" class="icon circle-btn icon-email" target="_blank"></a>
 			    	</li>
 			    	<li>
 			    		<form name="bookingForm">
-				    		
 				    		<ul>
 					    		<li>
-					    			<h1></h1>
-					    			<h2></h2>
-					    		</li>
-					    		<li>
 					    			<div id="date-picker">
-						    			<button class="rounded-btn icon-calendar">Start Date</button>
-						    			<button class="rounded-btn icon-calendar">End Date</button>
+						    			<button class="rounded-btn icon-calendar">{{booking.start_date ? booking.start_date : "Start Date"}}</button>
+						    			<button class="rounded-btn icon-calendar">{{booking.end_date ? booking.end_date : "End Date"}}</button>
 					    			</div>
+					    			<div id="calendar" class="animated fadeIn" ng-if="showCalendar" ng-controller="CalendarController">
+										<div id="arrival-gallery" class="gallery-wrapper">
+											<ul id="arrival" class="month-gallery">
+												<li id="month-{{$index}}" class="month-container" ng-repeat="month in year">
+													<header>
+														<div class="month-title">{{month.name}}</div>
+														<small>mon</small>
+														<small>tue</small>
+														<small>wed</small>
+														<small>thu</small>
+														<small>fri</small>
+														<small>sat</small>
+														<small>sun</small>
+													</header>
+													<button ng-if="$index < month.order.start" ng-repeat="day in month.order.days" class="hidden"></button>
+													<button ng-repeat="(key,day) in month.order.days" data-date="{{day}}" class="arrival">{{key}}</button>
+												</li>
+											</ul>
+											<header>
+												<h6>Choose your arrival date</h6>
+												<nav>
+													<button rel="prev" class="icon-left-circle-full"></button>
+													<small></small>
+													<button rel="next" class="icon-right-circle-full"></button>
+												</nav>
+											</header>
+										</div>
+										<div id="departure-gallery" class="gallery-wrapper">
+											<ul id="departure" class="month-gallery">
+												<li id="month-{{$index}}" class="month-container" ng-repeat="month in year">
+													<header>
+														<div class="month-title">{{month.name}}</div>
+														<small>mon</small>
+														<small>tue</small>
+														<small>wed</small>
+														<small>thu</small>
+														<small>fri</small>
+														<small>sat</small>
+														<small>sun</small>
+													</header>
+													<button ng-if="$index < month.order.start" ng-repeat="day in month.order.days" class="hidden"></button>
+													<button ng-repeat="(key,day) in month.order.days" data-date="{{day}}" class="departure">{{key}}</button>
+												</li>
+											</ul>
+											<header>
+												<h6>Choose your departure date</h6>
+												<nav>
+													<button rel="prev" class="icon-left-circle-full"></button>
+													<small></small>
+													<button rel="next" class="icon-right-circle-full"></button>
+												</nav>
+											</header>
+										</div>
+									</div>
 					    		</li>
 					    		<li>
 					    			<label>Number of Adults</label>
 					    			<div class="circle-input-wrapper">
-					    				<input type="text" ng-model="booking.adults" ng-pattern="/^[0-9]+$/" ng-maxlength="1" required/>
+					    				<input type="text" ng-model="booking.adults" ng-pattern="/^[0-9]+$/" maxlength="1" required/>
 					    			</div>
 					    		</li>
 					    		<li>
 					    			<label>Number of Children</label>
 					    			<div class="circle-input-wrapper">
-					    				<input type="text" ng-model="booking.children" ng-pattern="/^[0-9]+$/"/>
+					    				<input type="text" ng-model="booking.children" ng-pattern="/^[0-9]+$/" maxlength="1"/>
 					    			</div>
 					    		</li>
 					    		<li>

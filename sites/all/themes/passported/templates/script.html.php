@@ -4,10 +4,10 @@
 	
 	<script src="<?php echo drupal_get_path('theme', 'passported'); ?>/library/vendors/jquery-2.1.3.min.js"></script>
 	<script src="<?php echo drupal_get_path('theme', 'passported'); ?>/library/vendors/moment.min.js"></script>
+	<script src="<?php echo drupal_get_path('theme', 'passported'); ?>/library/vendors/moment-range.min.js"></script>
 	<script src="<?php echo drupal_get_path('theme', 'passported'); ?>/library/vendors/underscore.min.js"></script>
 	<script src="<?php echo drupal_get_path('theme', 'passported'); ?>/library/vendors/transit.min.js"></script>
 	<script src="<?php echo drupal_get_path('theme', 'passported'); ?>/library/vendors/imagesloaded.min.js"></script>
-	<script src="<?php echo drupal_get_path('theme', 'passported'); ?>/library/vendors/retina.min.js"></script>
 	<script src="<?php echo drupal_get_path('theme', 'passported'); ?>/library/vendors/waypoints.min.js"></script>
 	<script src="<?php echo drupal_get_path('theme', 'passported'); ?>/library/vendors/sly.min.js"></script>
 	<script src="<?php echo drupal_get_path('theme', 'passported'); ?>/library/vendors/shuffle.min.js"></script>

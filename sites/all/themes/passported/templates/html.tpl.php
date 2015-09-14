@@ -23,8 +23,45 @@
 			<!-- Modernizer and IE specyfic files -->  
 			<script src="<?php echo drupal_get_path('theme','passported'); ?>/library/vendors/modernizr.custom.pp.js"></script>
 			<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVp6xJDq_xg96DdjO3S1wmByGNmYoK4XQ"></script>
+            <script>
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+                ga('create', '<?php echo Env::GOOGLE_ANALYTICS_CODE ?>', 'auto');
+                ga('send', 'pageview');
+
+            </script>
+
+            <?php // Facebook pixel control
+            $envcontrol = Env::GOOGLE_ANALYTICS_CODE; ?>
+            <?php if (!empty($envcontrol) && user_is_logged_in() && isset($_COOKIE['is_signup']) && ($_COOKIE['is_signup'] == 'true')) { ?>
+                <script>(function() {
+                        var _fbq = window._fbq || (window._fbq = []);
+                        if (!_fbq.loaded) {
+                            var fbds = document.createElement('script');
+                            fbds.async = true;
+                            fbds.src = '//connect.facebook.net/en_US/fbds.js';
+                            var s = document.getElementsByTagName('script')[0];
+                            s.parentNode.insertBefore(fbds, s);
+                            _fbq.loaded = true;
+                        }
+                    })();
+                    window._fbq = window._fbq || [];
+                    window._fbq.push(['track', '6035954624252', {'value':'0.01','currency':'USD'}]);
+                </script>
+                <noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=6035954624252&amp;cd[value]=0.01&amp;cd[currency]=USD&amp;noscript=1" /></noscript>
+            <?php setcookie('is_signup', 'false'); } ?>
 		</head>
-		<body ng-controller="AppController">
+
+	    <?php   // Set ng-init for reset passw lightbox and views
+            $reset_l = ((AdminForms::userIsLoggedIn() && isset($_GET['pass-reset-token']) && !empty($_GET['pass-reset-token'])) ? 'true' : 'false');
+			$path_args = end(explode('/', request_path()));
+			$jsview = (empty($path_args) ? 'home' : $path_args);
+        ?>
+		
+		<body ng-controller="AppController" ng-init="user = <?php echo AdminForms::userIsLoggedIn();?>; resetPassword = <?php echo $reset_l;?>;view = '<?php echo $jsview;?>'">
 			
 			<?php include 'header.html.php'; ?>
 			<?php echo $page; ?>

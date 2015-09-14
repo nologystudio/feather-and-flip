@@ -9,15 +9,15 @@
 				<ul class="align-center">
 					<li ng-click="goTo('plan')">
 						<h2 data-animate="2">Plan</h2>
-						<h3 data-animate="3">Find the ideal destination and hotel for your particular FAMILY needs</h3>
+						<a href="/city-guides"><h3 data-animate="3">Find the ideal destination and hotel for your particular FAMILY needs</h3></a>
 					</li>
 					<li ng-click="goTo('explore')">
 						<h2 data-animate="4">Explore</h2>
-						<h3 data-animate="5">Parent-scouted picks and itineraries that you can customize</h3>
+						<a href="https://go.passported.com"><h3 data-animate="5">Parent-scouted picks and itineraries that you can customize</h3></a>
 					</li>
 					<li ng-click="goTo('book')">
 						<h2 data-animate="6">Book</h2>
-						<h3 data-animate="7">We book your hotel. You can call or e-mail our hotel expert</h3>
+						<a href="/book"><h3 data-animate="7">We book your hotel. You can call or e-mail our hotel expert</h3></a>
 					</li>
 				</ul>
 			</li>
@@ -28,36 +28,25 @@
 	
 	<section id="inspiration">
 		<div class="wrapper grid-2 align-center">
-			<div id="search-destination" data-animate="1">
-				<header>
-					<h4 class="larger">Search a destination</h4>
-				</header>
-				<div class="wrapper">
-					<form>
-						<input type="text" class="rounded" placeholder="Enter your destination or hotel"/>
-					</form>
-				</div>
-			</div>
-			<div id="let-us-inspire"  data-animate="1">
+			<div id="let-us-inspire" data-animate="1">
 				<header>
 					<h4>Let us Inspire you</h4>
 				</header>
 				<div class="wrapper">
-					<ul class="select">
-						<li>
-							<span class="icon">&#xe03a;</span>
-							Pick the type of place
-						</li>
-					</ul>
-					<ul class="select">
-						<li>
-							<span class="icon">&#xe03a;</span>
-							Pick a season
-						</li>
-					</ul>
+					<div pp-inspiration-select id="place-select" class="select" data-options="adventure|beach|city|countryside|ski">
+						<header>
+							<span class="icon-down-circle-full"></span>
+							<h5>Pick the type of place</h5>
+						</header>
+					</div>
+					<div pp-inspiration-select id="season-select" class="select" data-options="spring|summer|winter|fall">
+						<header>
+							<span class="icon-down-circle-full"></span>
+							<h5>Pick a season</h5>
+						</header>
+					</div>
 				</div>
-				<button class="go-btn" ng-click="">Go</button>
-				<button class="clear-btn" ng-click="">Clear</button>
+				<button class="go-btn animated fadeIn" ng-click="submitInspiration()" ng-if="search.season && search.place">Go</button>
 			</div>
 		</div>
 	</section>
@@ -82,36 +71,6 @@
 			<?php endfor; ?>
 		</div>
 	</section>
-	
-	<!-- Map -->
-	
-	<section id="map" ng-controller="MapController" ng-if="">
-		<div id="google-maps-container" data-animate="1"></div>
-		<aside class="left" ng-class="{'on':showAside}" ng-controller="ItineraryController">
-			<ul>
-				<li></li>
-				<li></li>
-				<li></li>
-			</ul>
-			<button class="aside-trigger" ng-click="openAside()" data-animate="2">
-				<span>&#x23;</span>
-				<svg>
-					<path d="M 0,0 L 50,50 L 0,100 L 0,0"/>
-				</svg>
-			</button>
-		</aside>
-		<aside class="right" ng-class="{'on':showAside}" ng-controller="BookingController">
-			<div class=""
-			<button class="aside-trigger" ng-click="openAside()" data-animate="3">
-				<span>&#x23;</span>
-				<svg>
-					<path d="M 0,0 L 50,50 L 0,100 L 0,0"/>
-				</svg>
-			</button>
-		</aside>
-	</section>
-	
-	
 	
 	<!-- Blog -->
 	

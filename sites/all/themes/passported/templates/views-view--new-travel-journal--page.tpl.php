@@ -24,17 +24,6 @@
                 </div>
             </a>
             <div class="grid-wrapper">
-                <div id="newsletter-signup" class="quick-entry" ng-controller="NewsletterController" data-animate="3">
-                    <h3>Join the adventure</h3>
-                        <hr>
-                    <h4 ng-if="currentStatus == 'still'">Sign up for our newsletter</h4>
-                    <form name="newsletterForm">
-                        <small id="error"   class="animated fadeInUp" ng-if="currentStatus == 'error'">We're sorry,<br>an error has occurred</small>
-                        <small id="success" class="animated fadeInUp" ng-if="currentStatus == 'success'">Thanks!</small>
-                        <input name="user-email" type="email" ng-if="currentStatus == 'still'" placeholder="Your email address" ng-model="signUpData.userEmail" required/>
-                        <input type="submit" ng-if="currentStatus == 'still'" value="submit" ng-class="{disabled:!newsletterForm.$valid}" ng-click="!newsletterForm.$valid || regSubmit()"/>
-                    </form>
-                </div>
                 <?php
                     $i = 4;
                     foreach ($view->result as $post) {
