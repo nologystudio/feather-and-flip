@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="42px" height="44px" viewBox="0 0 42 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.3.2 (12043) - http://www.bohemiancoding.com/sketch -->
+    <title>hotel-pin-icon</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Rectangle-1-+-Star-1" sketch:type="MSLayerGroup" fill="#FFFFFF">
+            <path d="M27.0703888,34 L36.9963439,34 C39.7567461,34 42,31.7620738 42,29.0014519 L42,4.99854806 C42,2.23083496 39.7597868,0 36.9963439,0 L5.00365614,0 C2.24325385,0 0,2.2379262 0,4.99854806 L0,29.0014519 C0,31.769165 2.24021316,34 5.00365614,34 L15.1329824,34 L21.5351562,43.416748 L27.0703888,34 L27.0703888,34 Z M21,23 L13.946577,26.7082039 L15.2936609,18.854102 L9.5873218,13.2917961 L17.4732885,12.145898 L21,5 L24.5267115,12.145898 L32.4126782,13.2917961 L26.7063391,18.854102 L28.053423,26.7082039 L21,23 Z" id="Rectangle-1" sketch:type="MSShapeGroup"></path>
+        </g>
+    </g>
+</svg>

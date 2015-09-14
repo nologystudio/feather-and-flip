@@ -1,0 +1,400 @@
+		
+		
+			
+		/* ----------------------------------------------------------------------------------------------------------------
+		    
+	    * Project     : Passported
+	    * Document    : less/style 
+	    * Created on  : Ago 01, 2.015
+	    * Version     : 1.0 
+	    * Author      : Aday Henriquez
+	    * Description : This less file manages specific guide style classes
+	    
+	    -------------------------------------------------------------------------------------------------------------------
+	       *          This code has been developed by NOLOGY. in the awesome Canaries - www.nologystudio.com           *
+	    -------------------------------------------------------------------------------------------------------------------
+	   
+	    * Log * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+        -------------------------------------------------------------------------------------------------------------------
+        *  
+        ---------------------------------------------------------------------------------------------------------------- */
+		
+		.ui-grid()
+		{
+			.set-grid-width(@n)
+			{
+				width: @wrapper-width/@n;
+			}
+			
+			.grid-1 { .set-grid-width(1);  }
+			.grid-2 { .set-grid-width(2);  }
+			.grid-3 { .set-grid-width(3);  }
+			.grid-4 { .set-grid-width(4);  }
+			.grid-5 { .set-grid-width(5);  }
+			.grid-6 { .set-grid-width(6);  }
+			.grid-8 { .set-grid-width(8);  }
+			.grid-10{ .set-grid-width(10); }
+			.grid-12{ .set-grid-width(12); }
+		}
+		
+		.ui-feed()
+		{
+			*.quick-entry
+			{
+				@block-margin: @content-padding;
+					
+				.set-size(@grid-3);
+				.box-sizing();
+				.set-box-shadow(@shadow-color,0,0,@gutter);
+				.set-bgc(@ff-color-2);
+				.performance();
+				.set-opacity(0);
+				#align > .left;
+				margin: @gutter;
+				overflow: hidden;
+				
+				figure
+				{
+					.reset();
+					.set-size(100%);
+					.set-bg(@ff-color-2);
+					#align > .left;
+					display: block;
+					
+					img
+					{
+						.set-size(100%);
+						#align > .left;
+					}
+				}
+				
+				figure + footer
+				{
+					.set-size(100%);
+					.set-pos(absolute);
+					.set-bgc(fadeout(@ff-color-2,50%));
+					.box-sizing();
+					.performance();
+					.animate-all();
+					bottom: 0;
+					padding: @block-margin/2 @block-margin;
+				}
+				
+				h3,h4,time
+				{
+					.set-size(100%);
+					#align > .left;
+					margin: 0;
+					padding: 0;
+					clear: both;
+					text-align: center;
+				}
+				
+				h3
+				{
+					#font > .lato(24px,white,300);
+					text-transform: uppercase;
+					margin-bottom: @block-margin/2;
+				}
+				
+				h4
+				{
+					#font > .gar(22px,white);
+				}
+				
+				time
+				{
+					#font > .lato(12px,white,400);
+					text-transform: uppercase;
+					font-style: normal;
+					margin-top: @unit;
+				}
+				
+				hr
+				{
+					width: 50%;
+					margin: auto;
+					border: 0;
+					border-top: solid 1px fadeout(white,50%);
+				}
+				
+				hr + h4
+				{
+					margin-top: @block-margin/2;
+				}
+				
+				&:hover
+				{
+					figure + footer
+					{
+						.set-bgc(fadeout(@ff-color-2,15%));
+						padding: @block-margin;
+					}
+				}
+				
+				// Featured article block...
+				
+				&.featured
+				{
+					@m: 1%;
+					
+					#align > .left;
+					width: 100% - 2 * @m;
+					margin-left: @m;
+				}
+				
+				&.review
+				{
+					padding: @block-margin @block-margin/2;
+				}
+				
+				// Newsletter block style...
+				
+				&[id="newsletter-signup"]
+				{
+					padding: @block-margin @block-margin/2;
+					min-height: 290px;
+					
+					form
+					{
+						.set-size(100%);
+						#align > .left;
+						
+						small
+						{
+							#font > .gar(30px,white);
+							width: 100%;
+							display: block;
+							padding: @content-padding 0;
+							text-align: center;
+						}
+						
+						input
+						{
+							.reset();
+							.set-size(100%);
+							#align > .left;
+							
+							&[type="email"],
+							&[type="text"],
+							&[type="password"]
+							{
+								.box-sizing();
+								.set-bgc(@ff-color-4);
+								color: white;
+								margin: @content-padding 0;
+								border: solid 1px @ff-color-4;
+								
+								&.placeholder
+								{
+									color: @ff-color-4;
+								}
+							}
+							
+							&[type="submit"]
+							{
+								#font > .lato(32px,white,300);
+								text-transform: uppercase;
+								
+								&.disabled
+								{
+									.set-opacity(0.5);
+								}
+							}
+							
+							&.ng-invalid.ng-dirty
+							{
+								border-color: @warning-color;
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		.ui-actions()
+		{
+			*.align-center
+			{
+				#align > .center;
+				display: table;
+			}
+			
+			*.align-right
+			{
+				#align > .right;
+			}
+		}
+		
+		.ui-set-circle-mask(@size)
+		{
+			&
+			{
+				.reset();
+				.set-size(@size,@size);
+				border-radius: @size;
+				overflow: hidden;
+				background-color: transparent;
+				
+				// | i | This fix the issue with the mask in Safari
+				//-webkit-mask-image: -webkit-radial-gradient(circle,transparent,transparent);
+				
+				img
+				{
+					.set-size(100%,100%);
+					#align > .left;
+				}
+			}
+		}
+		
+		.ui-components()
+		{
+			.go-btn
+			{
+				@s: 60px;
+				
+				.ui-set-circle-mask(@s);
+				.set-bgc(@color-3);
+				.animate-opacity();
+				.set-opacity(1);
+				.performance();
+				#align > .center;
+				#font > .lato(12px,white,700);
+				display: block;
+				text-transform: uppercase;
+				
+				&:hover
+				{
+					.set-opacity(0.5);
+				}
+			}
+			
+			.select,
+			.style-1-btn
+			{
+				.set-size();
+				.box-sizing();
+				#align > .left;
+				#font > .lato(12px,@color-4,700);
+				line-height: 17px;
+				text-transform: uppercase;
+				padding: @content-padding/1.5;
+				border: solid 2px @color-5;
+				border-radius: @content-padding;
+				text-align: left;
+				overflow: hidden;
+				
+				span.icon
+				{
+					#font > .ic(16px,@color-4);
+					#align > .left;
+					margin-right: @content-padding/2;
+					text-align: center;
+					display: block;
+				}
+			}
+			
+			/*.select
+			{
+				.set-size();
+				.box-sizing();
+				#align > .left;
+				#font > .lato(12px,@color-4,700);
+				text-transform: uppercase;
+				padding: @content-padding/2;
+				border: solid 2px @color-5;
+				border-radius: @content-padding;
+				text-align: left;
+				overflow: hidden;
+				
+				li
+				{
+					&:first-child
+					{
+						span.icon
+						{
+							#font > .ic(16px,@color-4);
+							#align > .left;
+							margin-right: @content-padding/2;
+							text-align: center;
+							display: block;
+						}
+					}
+				}
+			}*/
+		}
+		
+		.ui-set-social-media-nav(@color:white,@btn-size:28px)
+		{
+			& > a
+			{
+				.set-size();
+				.set-opacity(1);
+				.animate-opacity();
+				#font > .ic(@btn-size,@color);
+				#align > .left;
+				display: block;
+				margin: 0 @unit;
+				text-decoration: none;
+				
+				.set-icon(@icon)
+				{
+					&:before
+					{
+						content: '\@{icon}';
+					}
+				}
+				
+				&[rel="facebook"]   { .set-icon('e0aa'); }
+				&[rel="twitter"]    { .set-icon('e0ab'); }
+				&[rel="pinterest"]  { .set-icon('e0ac'); }
+				&[rel="instagram"]  { .set-icon('e0b1'); }
+				&[rel="google-plus"]{ .set-icon('e0ad'); }
+				
+				&:hover
+				{
+					.set-opacity(0.5);
+				}
+			}
+		}
+		
+		.ui-form()
+		{
+			form
+			{
+				input,
+				textarea,
+				label
+				{}
+				
+				input
+				{
+					&[type="text"],
+					&[type="email"],
+					&[type="password"]
+					{
+						@bg-color: orange;
+						@font-size: 16px;
+						@font-color: white;
+						@padding: @content-padding;
+						
+						#font > .lato(@font-size,@font-color,400);
+						.set-placeholder-style(fadeout(@font-color,50%)); 
+						.animate-all();
+						padding: @padding/2 @padding !important;
+						border-radius: @unit;
+						box-shadow: none;
+						
+						&.placeholder
+						{
+							color: fadeout(@font-color,50%);
+						}
+					}
+				}
+			}
+		}
+		
+		
+
+		
+		
