@@ -23,6 +23,7 @@
         
         var formSubmit = 'https://www.passported.com/api/forms'; //window.location.protocol + '//' + window.location.host + '/api/forms';
         var ppControllers = angular.module('ppControllers',[]);
+        var drupalTemplatePath = '/sites/all/themes/passported/';
         
         /* Global APP Controller
         ---------------------------------------------------------------------------------------------------------------- */
@@ -146,13 +147,6 @@
 					
 			    	$timeout(function(){_t.find('*[data-animate="1"]').addClass('animated fadeInUp')},200);
 			    	$timeout(function(){_t.find('*[data-animate="2"]').addClass('animated fadeIn')},400);
-			    	$timeout(function(){_t.find('*[data-animate="3"]').addClass('animated fadeIn')},600);
-			    	$timeout(function(){_t.find('*[data-animate="4"]').addClass('animated fadeIn')},800);
-			    	$timeout(function(){_t.find('*[data-animate="5"]').addClass('animated fadeIn')},1000);
-			    	$timeout(function(){_t.find('*[data-animate="6"]').addClass('animated fadeIn')},1200);
-			    	$timeout(function(){_t.find('*[data-animate="7"]').addClass('animated fadeIn')},1400);
-			    	$timeout(function(){_t.find('*[data-animate="8"]').addClass('animated fadeIn')},1600);
-			    	$timeout(function(){_t.find('*[data-animate="9"]').addClass('animated fadeIn')},1800);
 			    	
 			    },{ offset: '75%' });
 		        
@@ -241,7 +235,7 @@
 						    	}
 						    	// 2. Search
 						    	if(_element == 'search'){ 
-							    	_t.show().transition({height:260 + 'px'});
+							    	_t.show().transition({height:220 + 'px'});
 						    		_s.show().transition({opacity:1});
 						    		_n.hide();
 						    	}
@@ -310,7 +304,7 @@
 		    $scope.lon = -73.968887;
 		    $scope.inspirationSearch;
 		    
-		    var mapID = 'passported';
+			var mapID = 'passported';
 		    var setMapHeight = function(){
 			    $('#map').css({
 				    height: ($(window).height() - 90) + 'px'
@@ -484,8 +478,8 @@
 			$scope.itineraryIsReady;
 			$scope.cityGuideID;
 			$scope.step = (_.isUndefined($scope.cityGuideID)) ? 1 : 2;
-			$scope.showAside = true;
 			$scope.pick;
+			$scope.showAside = true;
 			
 			// Tools
 			
@@ -636,8 +630,8 @@
 		    }
 		    
 		    $scope.error;
+		    $scope.showRightAside = false;
 		    $scope.showCalendar = false;
-		    $scope.showRightAside = true;
 		    $scope.booking = angular.copy(bookingData);
 			
 			$scope.openAside = function(){
@@ -819,10 +813,20 @@
 		    var grid    = $('.grid-wrapper');
 			var entries = $('*.quick-entry').toArray();
 			
+			$scope.expand = 'view all';
+			
+			$scope.viewAll = function(){
+				
+				var config = ($scope.expand == 'view all') ? ['view less','auto'] : ['view all','1400px'];
+				
+				$scope.expand = config[0];
+				$('#travel-journal').css({'height':config[1]});
+			}
+			
 			$timeout(function(){
-				//grid.shuffle({
-				//	itemSelector: '.quick-entry'
-				//});
+				grid.shuffle({
+					itemSelector: '.quick-entry'
+				});
 			},0);
 		});
 	    
@@ -906,9 +910,6 @@
 			$scope.searchSubmit = function(){
 				
 				var searchAction = function(){
-					
-					console.log($scope.userSearch);
-					
 					$http({
 		                method  : 'POST',
 		                url     : formSubmit,
@@ -929,7 +930,6 @@
 				            $scope.noResult     = true;
 				        }
 			            else{
-				           
 				        	$scope.showResult   = false; 
 							$scope.noResult     = false;
 			            }
@@ -966,7 +966,7 @@
 			var messageType = ['hidden','signup','loading'];
 			var overlay     = $('.call-to-action');
 			
-			$scope.overlayTpl     = 'library/templates/sign.tpl.html';
+			$scope.overlayTpl     = drupalTemplatePath + 'library/templates/sign.tpl.html';
 			$scope.isLoggedIn     = $scope.user; 
 			$scope.isLoading      = $scope.loading; 
 			$scope.triggerState   = messageType[0];
@@ -1107,11 +1107,6 @@
 			$scope.closeOverlay = function(){
 				$('.call-to-action').transition({opacity:0},function(){
 					$(this).hide();
-					//$scope.$parent.$parent.$parent.display = false;
-					//$scope.$parent.$parent.$parent.resetPassword = false;
-					//$scope.$parent.$parent.$parent.triggerState = 'hidden';
-					//$scope.$parent.$parent.$parent.$apply();
-					//$cookies.put('overlay','hidden',{path:'/'});
 				});
 			}
 			

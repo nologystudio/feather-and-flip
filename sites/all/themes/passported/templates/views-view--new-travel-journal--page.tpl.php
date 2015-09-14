@@ -25,7 +25,7 @@
             </a>
             <div class="grid-wrapper">
                 <?php
-                    $i = 4;
+                    $i = 3;
                     foreach ($view->result as $post) {
                         $title_slices = explode(':', $post->node_title);
                         if ((count($title_slices) > 1) && (isset($post->field_field_blog_category[0])) && ($post->field_field_blog_category[0]['rendered']['#title'] == 'Hotel Reviews'))
@@ -70,7 +70,7 @@
     </div>
     <footer>
         <button ng-click="viewAll()">
-            <span>view all</span>
+            <span ng-bind-html="expand"></span>
             <svg>
                 <path d="M 0,0 L 100,0 L 50,50 L 0,0"/>
             </svg>

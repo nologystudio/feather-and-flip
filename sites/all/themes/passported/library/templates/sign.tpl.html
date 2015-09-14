@@ -28,9 +28,10 @@
 			<header>
 				<!--<small ng-show="type == 'sign-up'">Already SIGNED UP?<button id="sign-in" ng-click="switcher('sign-in')">sign in now</button></small>
 				<small ng-show="type == 'sign-in'">Back to<button id="sign-in" ng-click="switcher('sign-up')">sign up</button></small>
-				<small ng-show="type == 'reset-password'">Back to<button id="sign-in" ng-click="switcher('sign-in')">sign in</button></small>-->
-				<button ng-if="type == 'change-password'" rel="close" ng-click="closeOverlay()"></button>
-				<button ng-if="type != 'change-password'" rel="close" class="small" ng-click="closeOverlay()">close</button>
+				<small ng-show="type == 'reset-password'">Back to<button id="sign-in" ng-click="switcher('sign-in')">sign in</button></small>
+				<button ng-if="type == 'change-password'" rel="close" class="icon-close" ng-click="closeOverlay()"></button>
+				<button ng-if="type != 'change-password'" rel="close" class="icon-close small" ng-click="closeOverlay()"></button>-->
+				<button rel="close" class="icon-close" ng-click="closeOverlay()"></button>
 			</header>
 			
 			<!-- Callback messages -->
@@ -47,9 +48,9 @@
 					<h2>Our exclusive hotel rates are for members only. Sign up now and join our adventure.</h2>
 					<h3 ng-if="signUpError != ''" class="animated fadeInDown">{{signUpError}}</h3>
 				</header>
-				<input type="email"    name="user-signup-email"    placeholder="Email address"     ng-pattern="/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/" ng-model="data.userEmail" required/>
-				<input type="password" name="user-signup-password" placeholder="Password"          ng-model="data.userPassword" required/>
-				<input type="password" name="check-repassword"     placeholder="Re-enter Password" ng-class="{'warning':data.userPassword != data.userRepassword}" ng-model="data.userRepassword" required/>
+				<input type="email"    class="rounded" name="user-signup-email"    placeholder="Email address"     ng-pattern="/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/" ng-model="data.userEmail" required/>
+				<input type="password" class="rounded" name="user-signup-password" placeholder="Password"          ng-model="data.userPassword" required/>
+				<input type="password" class="rounded" name="check-repassword"     placeholder="Re-enter Password" ng-class="{'warning':data.userPassword != data.userRepassword}" ng-model="data.userRepassword" required/>
 				<label for="user-sign-up-newsletter">
 					<span>I want to join the adventure and sign up for your newsletter</span>
 					<input type="checkbox" name="user-sign-up-newsletter" ng-model="data.subscribeNewsletter"/>
@@ -70,8 +71,8 @@
 				</header>
 				<div class="wrapper-to-center">
 					<small ng-if="signInError">Your email or password are incorrect</small>
-					<input type="text"     class="half" name="user-email"    placeholder="Your email"    ng-pattern="/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/" ng-class="{'warning':signInError}" ng-model="data.userEmail" required/>
-					<input type="password" class="half" name="user-password" placeholder="Your password" ng-class="{'warning':signInError}" ng-model="data.userPassword" required/>
+					<input type="text"     class="half rounded" name="user-email"    placeholder="Your email"    ng-pattern="/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/" ng-class="{'warning':signInError}" ng-model="data.userEmail" required/>
+					<input type="password" class="half rounded" name="user-password" placeholder="Your password" ng-class="{'warning':signInError}" ng-model="data.userPassword" required/>
 				</div>
 				<footer>
 					<input type="submit" value="sign in" ng-class="{disabled:!signInForm.$valid}" ng-click="!signInForm.$valid || regSubmit('in')"/>
@@ -88,7 +89,7 @@
 					<h3 ng-if="passwordError != ''" class="animated fadeInDown">{{passwordError}}</h3>
 				</header>
 				<div class="wrapper-to-center">
-					<input type="email" class="full" name="user-email" placeholder="Email" ng-pattern="/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/" ng-model="data.userEmail" required/>
+					<input type="email" class="full rounded" name="user-email" placeholder="Email" ng-pattern="/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/" ng-model="data.userEmail" required/>
 				</div>
 				<footer>
 					<input type="submit" value="Submit" ng-class="{disabled:!passwordForm.$valid}" ng-click="!passwordForm.$valid || sendPasswordEmail()"/>
@@ -105,8 +106,8 @@
 				</header>
 				<!-- Reset password fields -->
 				<div class="wrapper-to-center">
-					<input type="password" class="half" name="user-signup-password" placeholder="Password"          ng-model="data.userPassword" autocomplete='off' required/>
-					<input type="password" class="half" name="check-repassword"     placeholder="Re-enter Password" ng-model="data.userRepassword" ng-class="{'warning':data.userPassword != data.userRepassword}" autocomplete='off' required/>
+					<input type="password" class="half rounded" name="user-signup-password" placeholder="Password"          ng-model="data.userPassword" autocomplete='off' required/>
+					<input type="password" class="half rounded" name="check-repassword"     placeholder="Re-enter Password" ng-model="data.userRepassword" ng-class="{'warning':data.userPassword != data.userRepassword}" autocomplete='off' required/>
 				</div>
 				<footer>
 					<input type="submit" value="Change now" ng-class="{disabled:!passwordRetypeForm.$valid}" ng-click="!passwordRetypeForm.$valid || changePassword()"/>

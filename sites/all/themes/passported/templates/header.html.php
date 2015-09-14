@@ -40,7 +40,7 @@
 		
 		<?php print_r(pp_get_city_guides_list()); ?>
 		
-		<div id="search-block">
+		<div id="search-block" class="<?php if(drupal_is_front_page()) echo 'single-search' ?>">
 			<div class="wrapper">
 				<div id="search-destination" ng-controller="SearchController">
 					<header>
@@ -71,7 +71,7 @@
 					</ul>
 				</div>
 				<?php if(!drupal_is_front_page()): ?>
-					<div id="let-us-inspire" data-animate="1">
+					<div id="let-us-inspire" data-animate="1" ng-controller="InspirationController">
 						<header>
 							<h4>Let us Inspire you</h4>
 						</header>

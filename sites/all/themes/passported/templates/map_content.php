@@ -38,7 +38,7 @@
 			    	</header>
 			    	<ul>
 				    	<li id="the-trip-block">
-				    		<a href="">
+				    		<a href="https://go.passported.com/user/voyages">
 					    		<div class="circle-outline-icon plan-btn icon-edit"></div>
 					    		Plan your trip
 				    		</a>
@@ -47,8 +47,7 @@
 							<nav>
 						    	<a pp-social-media-link rel="facebook" class="icon-facebook-circle"></a>
 						    	<a pp-social-media-link rel="twitter" class="icon-twitter-circle"></a>
-						    	<a pp-social-media-link pp-social-media-image="{{pick.images[0][0].src}}" pp-social-media-desc="{{place.description}}" rel="pinterest" class="icon-pinterest-circle"></a>
-						    	<a pp-social-media-link rel="instagram" class="icon-instagram-circle"></a>
+						    	<a pp-social-media-link pp-social-media-image="" pp-social-media-desc="" rel="pinterest" class="icon-pinterest-circle"></a>
 						    	<a pp-social-media-link rel="google-plus" class="icon-google-circle"></a>
 						    </nav>
 				    		<h2>{{pick.name}}, {{pick.country}}</h2>
@@ -86,8 +85,8 @@
 											<img ng-src="{{image.src}}" alt=""/>
 										</li>
 					    			</ul>
-					    			<button rel="right" class=""></button>
-					    			<button rel="left" class=""></button>
+					    			<button rel="right" class="icon-right-circle-full"></button>
+					    			<button rel="left" class="icon-left-circle-full"></button>
 				    			</div>
 				    			<div id="curated" ng-repeat="content in hotel.content_blocks[0]">
 					    			<div class="divider {{content.title}}">
@@ -170,7 +169,10 @@
 		    	</header>
 		    	<ul>
 			    	<li id="booking-message">
-			    		<h5>Great! Thank you. One of our trip planners will be in touch soon.</h5>
+			    		<h5>
+				    		Great! Thank you.
+				    		<br>
+				    	One of our trip planners will be in touch soon.</h5>
 			    	</li>
 			    	<li id="email-entry">
 			    		Drop us an e-mail or fill out the form below

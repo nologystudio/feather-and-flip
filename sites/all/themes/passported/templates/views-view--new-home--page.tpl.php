@@ -27,7 +27,7 @@
 	<!-- inspiration -->
 	
 	<section id="inspiration">
-		<div class="wrapper grid-2 align-center">
+		<div class="wrapper grid-2 align-center" ng-controller="InspirationController">
 			<div id="let-us-inspire" data-animate="1">
 				<header>
 					<h4>Let us Inspire you</h4>
@@ -60,19 +60,11 @@
 				<span>On</span>
 			</h4>
 		</header>
-		<div class="promoted-grid align-center">
+		<div class="promoted-grid align-center" ng-controller="PromotedController">
 			<?php $i = 0; ?>
 			<?php if (isset($itineraries) && !empty($itineraries)): ?>
 				<?php foreach ($itineraries as $itinerary) { ?>
-					<a data-id="<?php echo $itinerary; ?>" data-animate="<?php echo $i+2; ?>">
-						<figure>
-	                        <img />
-	                    </figure>
-	                    <footer>
-	                        <h4></h4>
-	                        <time></time>
-	                    </footer>
-					</a>
+					<a pp-promoted-itinerary id="<?php echo $itinerary; ?>" data-animate="<?php echo $i+2; ?>"></a>
 				<?php $i++; } ?>
 			<?php endif; ?>
 			<?php if (isset($destinations) && !empty($destinations)): ?>
