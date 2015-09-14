@@ -480,6 +480,7 @@
 			$scope.step = (_.isUndefined($scope.cityGuideID)) ? 1 : 2;
 			$scope.pick;
 			$scope.showAside = true;
+			$scope.filter = undefined;
 			
 			// Tools
 			
@@ -539,7 +540,18 @@
 					
 					$scope.pick.guide = _data;
 					
+					_.extend($scope.pick,{guide_by_category:{
+						eat: [],
+						do: [],
+						noteworthy: [],
+						shop: []
+					}});
+					
 					_.map(_data,function(_a){
+						
+						if(!_.isUndefined($scope.pick.guide_by_category[_a.assoc_interests.toLowerCase()]))
+							$scope.pick.guide_by_category[_a.assoc_interests.toLowerCase()].push(_a);
+							
 						if(!_.isArray(_a.google_place_id)){
 							
 							var place = new google.maps.places.PlacesService($scope.map);
@@ -595,6 +607,13 @@
 				$scope.destinations = destSrc.query({place_type:_s.place,season:_s.season},function(_data){
 					$scope.$parent.addMarkers('destinations',_data);
 				});
+			}
+			
+			/* Filter
+	        - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+			
+			$scope.filterMap = function(_filter){
+				$scope.filter = _filter;
 			}
 			
 			/* Books
