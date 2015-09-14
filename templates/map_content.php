@@ -13,7 +13,7 @@
 			    	<li ng-repeat="place in destinations">
 			    		<button ng-click="displayDestination(place)" class="animated fadeIn">
 				    		<figure>
-				    			<img ng-src="{{place.images[0][0].src}}" alt="{{place.name}}"/>
+				    			<img ng-src="{{place.images[0][0].src}}" alt="{{place.name}}" class="animated fadeIn"/>
 				    		</figure>
 				    		<div role="figcaption">
 					    		<h2>{{place.name}}</h2>
@@ -27,7 +27,9 @@
 		    <li id="step-2">
 		    	<aside>
 			    	<button rel="menu" ng-click="goTo(1)" ng-if="!cityGuideID" class="icon-back"></button>
-					<button ng-repeat="type in selectedDestination.summaries" rel="{{type.name}}" ng-click="filterMap(type.name)" ng-class="{'on':bookFilter == type.name}"></button>
+			    	<button rel="stay" ng-click="filterMap('stay')" ng-class="{'on':filter == 'stay'}"></button>
+			    	<button ng-repeat="(key,value) in pick.guide_by_category" rel="{{key}}" ng-click="filterMap(key)" ng-class="{'on':filter == key}"></button>
+			    	<button class="view-all" ng-click="filterMap(undefined)">view all</button>
 				</aside>
 		    	<div class="wrapper" ng-if="itineraryIsReady">
 			    	<header>
@@ -38,7 +40,7 @@
 			    	</header>
 			    	<ul>
 				    	<li id="the-trip-block">
-				    		<a href="">
+				    		<a href="https://go.passported.com/user/voyages">
 					    		<div class="circle-outline-icon plan-btn icon-edit"></div>
 					    		Plan your trip
 				    		</a>
@@ -47,15 +49,14 @@
 							<nav>
 						    	<a pp-social-media-link rel="facebook" class="icon-facebook-circle"></a>
 						    	<a pp-social-media-link rel="twitter" class="icon-twitter-circle"></a>
-						    	<a pp-social-media-link pp-social-media-image="{{pick.images[0][0].src}}" pp-social-media-desc="{{place.description}}" rel="pinterest" class="icon-pinterest-circle"></a>
-						    	<a pp-social-media-link rel="instagram" class="icon-instagram-circle"></a>
+						    	<a pp-social-media-link pp-social-media-image="" pp-social-media-desc="" rel="pinterest" class="icon-pinterest-circle"></a>
 						    	<a pp-social-media-link rel="google-plus" class="icon-google-circle"></a>
 						    </nav>
 				    		<h2>{{pick.name}}, {{pick.country}}</h2>
 				    		<small>{{pick.lat}} Lat, {{pick.lon}} Lon</small>
 				    		<h3 ng-bind-html="pick.description"></h3>
 				    	</li>
-				    	<li id="hotel-block">
+				    	<li id="hotel-block" ng-if="pick.hotels.length > 0" ng-show="filter == 'stay' || filter == undefined">
 				    		<header>
 					    		STAY
 					    		<div class="filter-wrapper">
@@ -86,8 +87,8 @@
 											<img ng-src="{{image.src}}" alt=""/>
 										</li>
 					    			</ul>
-					    			<button rel="right" class=""></button>
-					    			<button rel="left" class=""></button>
+					    			<button rel="right" class="icon-right-circle-full"></button>
+					    			<button rel="left" class="icon-left-circle-full"></button>
 				    			</div>
 				    			<div id="curated" ng-repeat="content in hotel.content_blocks[0]">
 					    			<div class="divider {{content.title}}">
@@ -107,43 +108,44 @@
 			    			</article>
 				    	</li>
 				    	<li id="guide">
-							<header>
-					    		Section
-					    		<div class="filter-wrapper">
-						    		<div pp-filter filter-state="true" id="{{type}}" class="filter">
-							    		<button class="radio-btn">
-							    			View all<span></span>
-							    		</button>
+				    		<div id="guide-wrapper" ng-repeat="(key,value) in pick.guide_by_category" ng-if="value.length > 0" ng-show="filter == key || filter == undefined">
+								<header>
+						    		{{key}}
+						    		<div class="filter-wrapper">
+							    		<div pp-filter filter-state="true" id="{{type}}" class="filter">
+								    		<button class="radio-btn">
+								    			View all<span></span>
+								    		</button>
+							    		</div>
+							    		<div pp-filter filter-state="false" id="{{filter}}" class="filter">
+								    		<button class="radio-btn">
+								    			<span></span>
+								    			filter
+								    		</button>
+							    		</div>
 						    		</div>
-						    		<div pp-filter filter-state="false" id="{{filter}}" class="filter">
-							    		<button class="radio-btn">
-							    			<span></span>
-							    			filter
-							    		</button>
-						    		</div>
-					    		</div>
-				    		</header>
-				    		<ul>
-					    		<li ng-repeat="address in pick.guide">
-					    			<div class="icon icon-{{getIcon(address.assoc_interests)}}"></div>
-					    			<h4>{{address.title}}</h4>
-					    			<h5 ng-bind-html="address.short_review"></h5>
-					    			<footer>
-						    			<span class="tel" ng-if="!check.phone(address.phone_number)">{{address.phone_number}}</span>
-						    			<span class="url">
-						    				<a href="{{address.website}}" target="_blank">{{address.website}}</a>
-						    			</span>
-					    			</footer>
-					    		</li>
-				    		</ul>
+					    		</header>
+					    		<ul>
+						    		<li ng-repeat="address in value">
+						    			<div class="icon {{key}}"></div>
+						    			<h4>{{address.title}}</h4>
+						    			<h5 ng-bind-html="address.short_review"></h5>
+						    			<footer>
+							    			<span class="tel" ng-if="!check.phone(address.phone_number)">{{address.phone_number}}</span>
+							    			<span class="url">
+							    				<a href="{{address.website}}" target="_blank">{{address.website}}</a>
+							    			</span>
+						    			</footer>
+						    		</li>
+					    		</ul>
+				    		</div>
 						</li>
 			    	</ul>
 		    	</div>
 		    </li>
     	</ul>
-
     </div>
-	<button class="aside-trigger" ng-click="openAside()" data-animate="2">
+	<button class="aside-trigger" ng-click="openLeftAside()" data-animate="2">
 		<span class="icon-arrow-right"></span>
 		<svg>
 			<path d="M 0,0 L 50,50 L 0,100 L 0,0"/>
@@ -170,7 +172,10 @@
 		    	</header>
 		    	<ul>
 			    	<li id="booking-message">
-			    		<h5>Great! Thank you. One of our trip planners will be in touch soon.</h5>
+			    		<h5>
+				    		Great! Thank you.
+				    		<br>
+				    	One of our trip planners will be in touch soon.</h5>
 			    	</li>
 			    	<li id="email-entry">
 			    		Drop us an e-mail or fill out the form below

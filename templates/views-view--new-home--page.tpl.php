@@ -27,7 +27,7 @@
 	<!-- inspiration -->
 	
 	<section id="inspiration">
-		<div class="wrapper grid-2 align-center">
+		<div class="wrapper grid-2 align-center" ng-controller="InspirationController">
 			<div id="let-us-inspire" data-animate="1">
 				<header>
 					<h4>Let us Inspire you</h4>
@@ -64,18 +64,17 @@
 			<?php $i = 0; ?>
 			<?php if (isset($itineraries) && !empty($itineraries)): ?>
 				<?php foreach ($itineraries as $itinerary) { ?>
-					<a pp-promoted-itinerary id="<?php echo $itinerary; ?>" data-animate="<?php echo $i+2; ?>"></a>
+					<a pp-promoted-itinerary id="<?php echo $itinerary; ?>" class="quick-entry fixed" data-animate="<?php echo $i+2; ?>"></a>
 				<?php $i++; } ?>
 			<?php endif; ?>
 			<?php if (isset($destinations) && !empty($destinations)): ?>
 				<?php foreach ($destinations as $destination) { ?>
-					<a class="quick-entry" href="<?php echo $destination['url']; ?>" data-animate="<?php echo $i+2; ?>">
+					<a href="<?php echo $destination['url']; ?>" class="quick-entry fixed destination" data-animate="<?php echo $i+2; ?>">
 						<figure>
 	                        <img src="<?php echo $destination['image']['url']; ?>" alt="<?php echo $destination['image']['text']; ?>"/>
 	                    </figure>
 	                    <footer>
 	                        <h4><?php echo $destination['title']; ?></h4>
-	                        <time datetime="<?php echo $destination['date_raw']; ?>"><?php echo $destination['date']; ?></time>
 	                    </footer>
 					</a>
 				<?php $i++; } ?>

@@ -23,213 +23,241 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
-.icon-arrow-left:before {
+
+.icon-add-circle-full:before {
 	content: "\e600";
 }
-.icon-arrow-right:before {
+.icon-close-circle-full:before {
 	content: "\e601";
 }
-.icon-back:before {
+.icon-down-circle-full:before {
 	content: "\e602";
 }
-.icon-next:before {
+.icon-up-circle-full:before {
 	content: "\e603";
 }
-.icon-down-circle-full:before {
+.icon-left-circle-full:before {
 	content: "\e604";
 }
-.icon-left-circle-full:before {
+.icon-right-circle-full:before {
 	content: "\e605";
 }
-.icon-right-circle-full:before {
+.icon-arrow-down:before {
 	content: "\e606";
 }
-.icon-up-circle-full:before {
+.icon-arrow-up:before {
 	content: "\e607";
 }
-.icon-bests:before {
+.icon-arrow-left:before {
 	content: "\e608";
 }
-.icon-bests-circle:before {
+.icon-arrow-right:before {
 	content: "\e609";
 }
-.icon-buts:before {
+.icon-download:before {
 	content: "\e60a";
 }
-.icon-buts-circle:before {
+.icon-refresh:before {
 	content: "\e60b";
 }
-.icon-calendar:before {
+.icon-back:before {
 	content: "\e60c";
 }
-.icon-calendar-circle:before {
+.icon-next:before {
 	content: "\e60d";
 }
-.icon-download:before {
+.icon-up:before {
 	content: "\e60e";
 }
-.icon-download-circle:before {
+.icon-down:before {
 	content: "\e60f";
 }
-.icon-eat:before {
+.icon-close:before {
 	content: "\e610";
 }
-.icon-eat-circle:before {
+.icon-reply:before {
 	content: "\e611";
 }
-.icon-edit:before {
+.icon-send:before {
 	content: "\e612";
 }
-.icon-edit-circle:before {
+.icon-basics:before {
 	content: "\e613";
 }
-.icon-edit-image:before {
+.icon-bedtime:before {
 	content: "\e614";
 }
-.icon-edit-image-circle:before {
+.icon-bests:before {
 	content: "\e615";
 }
-.icon-email:before {
+.icon-buts:before {
 	content: "\e616";
 }
-.icon-email-circle:before {
+.icon-itinerary-2:before {
 	content: "\e617";
 }
-.icon-facebook:before {
+.icon-itinerary:before {
 	content: "\e618";
 }
-.icon-facebook-circle:before {
+.icon-places:before {
 	content: "\e619";
 }
-.icon-google:before {
+.icon-settings:before {
 	content: "\e61a";
 }
-.icon-google-circle:before {
+.icon-search:before {
 	content: "\e61b";
 }
-.icon-hotel:before {
+.icon-edit-image:before {
 	content: "\e61c";
 }
-.icon-hotel-circle:before {
+.icon-email:before {
 	content: "\e61d";
 }
-.icon-instagram:before {
+.icon-sights:before {
 	content: "\e61e";
 }
-.icon-instagram-circle:before {
+.icon-calendar:before {
 	content: "\e61f";
 }
-.icon-itinerary-2:before {
+.icon-hotel:before {
 	content: "\e620";
 }
-.icon-itinerary-2-circle:before {
+.icon-shopping:before {
 	content: "\e621";
 }
-.icon-itinerary:before {
+.icon-noteworthy:before {
 	content: "\e622";
 }
-.icon-itinerary-circle:before {
+.icon-eat:before {
 	content: "\e623";
 }
-.icon-noteworthy:before {
+.icon-edit:before {
 	content: "\e624";
 }
-.icon-noteworthy-circle:before {
+.icon-phone:before {
 	content: "\e625";
 }
-.icon-pinterest-2:before {
+.icon-social-btn:before {
 	content: "\e626";
 }
-.icon-pinterest-2-circle:before {
+.icon-facebook:before {
 	content: "\e627";
 }
-.icon-pinterest:before {
+.icon-twitter:before {
 	content: "\e628";
 }
-.icon-pinterest-circle:before {
+.icon-instagram:before {
 	content: "\e629";
 }
-.icon-places:before {
+.icon-google:before {
 	content: "\e62a";
 }
-.icon-places-circle:before {
+.icon-pinterest-2:before {
 	content: "\e62b";
 }
-.icon-refresh:before {
+.icon-pinterest:before {
 	content: "\e62c";
 }
-.icon-refresh-circle:before {
+.icon-youtube:before {
 	content: "\e62d";
 }
-.icon-search:before {
+.icon-weibo:before {
 	content: "\e62e";
 }
-.icon-search-circle:before {
+.icon-bests-circle:before {
 	content: "\e62f";
 }
-.icon-settings:before {
+.icon-buts-circle:before {
 	content: "\e630";
 }
-.icon-settings-circle:before {
+.icon-calendar-circle:before {
 	content: "\e631";
 }
-.icon-shopping:before {
+.icon-download-circle:before {
 	content: "\e632";
 }
-.icon-shopping-circle:before {
+.icon-eat-circle:before {
 	content: "\e633";
 }
-.icon-sights:before {
+.icon-edit-image-circle:before {
 	content: "\e634";
 }
-.icon-sights-circle:before {
+.icon-email-circle:before {
 	content: "\e635";
 }
-.icon-social-btn:before {
+.icon-hotel-circle:before {
 	content: "\e636";
 }
-.icon-social-circle:before {
+.icon-itinerary-2-circle:before {
 	content: "\e637";
 }
-.icon-twitter:before {
+.icon-itinerary-circle:before {
 	content: "\e638";
 }
-.icon-twitter-circle:before {
+.icon-noteworthy-circle:before {
 	content: "\e639";
 }
-.icon-weibo:before {
+.icon-places-circle:before {
 	content: "\e63a";
 }
-.icon-weibo-circle:before {
+.icon-refresh-circle:before {
 	content: "\e63b";
 }
-.icon-youtube:before {
+.icon-search-circle:before {
 	content: "\e63c";
 }
-.icon-youtube-circle:before {
+.icon-settings-circle:before {
 	content: "\e63d";
 }
-.icon-reply:before {
+.icon-shopping-circle:before {
 	content: "\e63e";
 }
-.icon-send:before {
+.icon-sights-circle:before {
 	content: "\e63f";
 }
-.icon-phone:before {
+.icon-edit-circle:before {
 	content: "\e640";
 }
-.icon-feather-reflected:before {
-	content: "\e644";
-}
-.icon-feather:before {
-	content: "\e645";
-}
-.icon-passported-imago:before {
+.icon-social-circle:before {
 	content: "\e641";
 }
-.icon-passported-vertical:before {
+.icon-facebook-circle:before {
 	content: "\e642";
 }
-.icon-passported-horizontal:before {
+.icon-twitter-circle:before {
 	content: "\e643";
+}
+.icon-instagram-circle:before {
+	content: "\e644";
+}
+.icon-google-circle:before {
+	content: "\e645";
+}
+.icon-pinterest-2-circle:before {
+	content: "\e646";
+}
+.icon-pinterest-circle:before {
+	content: "\e647";
+}
+.icon-youtube-circle:before {
+	content: "\e648";
+}
+.icon-weibo-circle:before {
+	content: "\e649";
+}
+.icon-passported-imago:before {
+	content: "\e64a";
+}
+.icon-feather-reflected:before {
+	content: "\e64b";
+}
+.icon-feather:before {
+	content: "\e64c";
+}
+.icon-passported-horizontal:before {
+	content: "\e64d";
+}
+.icon-passported-vertical:before {
+	content: "\e64e";
 }

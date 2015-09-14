@@ -70,7 +70,7 @@
     </div>
     <footer>
         <button ng-click="viewAll()">
-            <span>view all</span>
+            <span ng-bind-html="expand"></span>
             <svg>
                 <path d="M 0,0 L 100,0 L 50,50 L 0,0"/>
             </svg>

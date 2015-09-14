@@ -21,8 +21,9 @@
         
         'use strict';
         
-        var formSubmit = 'https://www.passported.com/api/forms'; //window.location.protocol + '//' + window.location.host + '/api/forms';
+        var formSubmit = window.location.protocol + '//' + window.location.host + '/api/forms'; //https://www.passported.com/api/forms
         var ppControllers = angular.module('ppControllers',[]);
+        var drupalTemplatePath = '/sites/all/themes/passported/';
         
         /* Global APP Controller
         ---------------------------------------------------------------------------------------------------------------- */
@@ -146,13 +147,6 @@
 					
 			    	$timeout(function(){_t.find('*[data-animate="1"]').addClass('animated fadeInUp')},200);
 			    	$timeout(function(){_t.find('*[data-animate="2"]').addClass('animated fadeIn')},400);
-			    	$timeout(function(){_t.find('*[data-animate="3"]').addClass('animated fadeIn')},600);
-			    	$timeout(function(){_t.find('*[data-animate="4"]').addClass('animated fadeIn')},800);
-			    	$timeout(function(){_t.find('*[data-animate="5"]').addClass('animated fadeIn')},1000);
-			    	$timeout(function(){_t.find('*[data-animate="6"]').addClass('animated fadeIn')},1200);
-			    	$timeout(function(){_t.find('*[data-animate="7"]').addClass('animated fadeIn')},1400);
-			    	$timeout(function(){_t.find('*[data-animate="8"]').addClass('animated fadeIn')},1600);
-			    	$timeout(function(){_t.find('*[data-animate="9"]').addClass('animated fadeIn')},1800);
 			    	
 			    },{ offset: '75%' });
 		        
@@ -241,7 +235,7 @@
 						    	}
 						    	// 2. Search
 						    	if(_element == 'search'){ 
-							    	_t.show().transition({height:260 + 'px'});
+							    	_t.show().transition({height:220 + 'px'});
 						    		_s.show().transition({opacity:1});
 						    		_n.hide();
 						    	}
@@ -306,11 +300,11 @@
 	    ppControllers.controller('MapController',function($scope,$log,$timeout){
 		    
 		    $scope.map;
-		    $scope.lat = 40.777422;
-		    $scope.lon = -73.968887;
+		    $scope.lat = 30;
+		    $scope.lon = -30;
 		    $scope.inspirationSearch;
 		    
-		    var mapID = 'passported';
+			var mapID = 'passported';
 		    var setMapHeight = function(){
 			    $('#map').css({
 				    height: ($(window).height() - 90) + 'px'
@@ -320,7 +314,7 @@
 		    var initialize = function(){
 			    
 			    var mapOptions = {
-					zoom: 10,
+					zoom: 3,
 					center: new google.maps.LatLng($scope.lat,$scope.lon),
 					panControl: true,
 					zoomControl: true,
@@ -484,8 +478,9 @@
 			$scope.itineraryIsReady;
 			$scope.cityGuideID;
 			$scope.step = (_.isUndefined($scope.cityGuideID)) ? 1 : 2;
-			$scope.showAside = true;
 			$scope.pick;
+			$scope.showAside = true;
+			$scope.filter = undefined;
 			
 			// Tools
 			
@@ -516,7 +511,7 @@
 			/* Open/Close panel
 	        - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 			
-			$scope.openAside = function(){
+			$scope.openLeftAside = function(){
 				$scope.showAside = !$scope.showAside;	
 			}
 			
@@ -545,7 +540,18 @@
 					
 					$scope.pick.guide = _data;
 					
+					_.extend($scope.pick,{guide_by_category:{
+						eat: [],
+						do: [],
+						noteworthy: [],
+						shop: []
+					}});
+					
 					_.map(_data,function(_a){
+						
+						if(!_.isUndefined($scope.pick.guide_by_category[_a.assoc_interests.toLowerCase()]))
+							$scope.pick.guide_by_category[_a.assoc_interests.toLowerCase()].push(_a);
+							
 						if(!_.isArray(_a.google_place_id)){
 							
 							var place = new google.maps.places.PlacesService($scope.map);
@@ -603,6 +609,13 @@
 				});
 			}
 			
+			/* Filter
+	        - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+			
+			$scope.filterMap = function(_filter){
+				$scope.filter = _filter;
+			}
+			
 			/* Books
 			- - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 			
@@ -636,8 +649,8 @@
 		    }
 		    
 		    $scope.error;
+		    $scope.showRightAside = false;
 		    $scope.showCalendar = false;
-		    $scope.showRightAside = true;
 		    $scope.booking = angular.copy(bookingData);
 			
 			$scope.openAside = function(){
@@ -817,12 +830,22 @@
 	    ppControllers.controller('BlogController',function($scope,$log,$timeout){
 		    
 		    var grid    = $('.grid-wrapper');
-			var entries = $('*.quick-entry').toArray();
+			var entries = $('.grid-wrapper *.quick-entry').toArray();
+			
+			$scope.expand = 'view all';
+			
+			$scope.viewAll = function(){
+				
+				var config = ($scope.expand == 'view all') ? ['view less','auto'] : ['view all','1400px'];
+				
+				$scope.expand = config[0];
+				$('#travel-journal').css({'height':config[1]});
+			}
 			
 			$timeout(function(){
-				//grid.shuffle({
-				//	itemSelector: '.quick-entry'
-				//});
+				grid.shuffle({
+					itemSelector: '.quick-entry'
+				});
 			},0);
 		});
 	    
@@ -906,9 +929,6 @@
 			$scope.searchSubmit = function(){
 				
 				var searchAction = function(){
-					
-					console.log($scope.userSearch);
-					
 					$http({
 		                method  : 'POST',
 		                url     : formSubmit,
@@ -929,7 +949,6 @@
 				            $scope.noResult     = true;
 				        }
 			            else{
-				           
 				        	$scope.showResult   = false; 
 							$scope.noResult     = false;
 			            }
@@ -966,7 +985,7 @@
 			var messageType = ['hidden','signup','loading'];
 			var overlay     = $('.call-to-action');
 			
-			$scope.overlayTpl     = 'library/templates/sign.tpl.html';
+			$scope.overlayTpl     = drupalTemplatePath + 'library/templates/sign.tpl.html';
 			$scope.isLoggedIn     = $scope.user; 
 			$scope.isLoading      = $scope.loading; 
 			$scope.triggerState   = messageType[0];
@@ -978,17 +997,17 @@
 			$scope.changePassword = false;
 			
 			$scope.triggerOverlay = function(){
-				//if($cookies.get('overlay') != 'hidden'){
-					switch($scope.triggerState){
-						case 'hidden':
-							$scope.display = false;
-						break;
-						default:
-							$scope.display = true;
-							$('.call-to-action').show().transition({opacity:1});
-						break;
-					}
-				//}
+				switch($scope.triggerState){
+					case 'hidden':
+						$scope.display = false;
+					break;
+					default:
+						$scope.display = true;
+						$scope.$apply();
+					break;
+				}
+				console.log($scope.display);
+				console.log($('.call-to-action'));
 			}
 			
 			// Watch user state: This event is linked to $scope.user
@@ -997,11 +1016,13 @@
 			});
 			
 			$scope.$watch('isSignPage',function(_v){
+				
 				if(_v == 'sign-in' || _v == 'sign-up'){
 					$timeout(function(){
 						$scope.type = _v;
 						$scope.triggerState = messageType[1];
 						$scope.triggerOverlay();
+						$('.call-to-action').show().transition({opacity:1});
 					},0);
 				}
 			});
@@ -1033,7 +1054,6 @@
 			
 			$rootScope.$on('display-overlay',function(_e,_data){
 				if(!$scope.user){
-					//$cookies.put('overlay','signup',{path:'/'});
 					$scope.triggerState = messageType[1];
 					$scope.triggerOverlay();
 					$('.call-to-action').show().transition({opacity:1});
@@ -1107,11 +1127,6 @@
 			$scope.closeOverlay = function(){
 				$('.call-to-action').transition({opacity:0},function(){
 					$(this).hide();
-					//$scope.$parent.$parent.$parent.display = false;
-					//$scope.$parent.$parent.$parent.resetPassword = false;
-					//$scope.$parent.$parent.$parent.triggerState = 'hidden';
-					//$scope.$parent.$parent.$parent.$apply();
-					//$cookies.put('overlay','hidden',{path:'/'});
 				});
 			}
 			
@@ -1155,7 +1170,6 @@
 			            
 			            var _rf = $(document)[0].referrer.split('.passported.com');
 			            
-			            $cookies.put('is_signup','true',{path:'/'});
 			            if(_rf.length > 1) window.location = $(document)[0].referrer;
 			            else window.location.reload();
 		            } 
