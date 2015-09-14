@@ -38,7 +38,8 @@
 	            },
 				link : function($scope,$element,_attrs){
 					
-					if($scope.state) $element.find('span').addClass('on');
+					if($scope.state) 
+						$element.find('span').addClass('on');
 					
 					$element.on('click',function(){
 						
@@ -54,28 +55,26 @@
 		
 		ppComponents.directive('ppPromotedItinerary',function(){
 			return {
-				restrict : 'E',
+				restrict : 'EA',
 		    	replace : true,
-		    	template : '<a href=""><figure><img /></figure><footer><h4></h4><time></time></footer></a>',
+		    	scope: {
+		            itinerary: '@'
+		        },
+		    	template : '<a href="{{itinerary.url}}"><figure><img ng-src="{{itinerary.primary_image.small_itinerary.url}}"/></figure><footer><h4>{{itinerary.name}}</h4></footer></a>',
 		    	controller: function($scope,$resource){
-			    	
-			    	//$scope.itinerary;
-			    	
-			    	//$scope.getItinerary = function(_id){
+			    	$scope.getItinerary = function(_id){
 				    	
-				    	//var itSrc = $resource('https://gostage.passported.com/api/v2/location');
+				    	var itSrc = $resource('https://gostage.passported.com/api/v2/itinerary');
 				    	
-						/*
-				    	itSrc.get({'name':},function(_data){
-							console.log(_data);
+						itSrc.get({'id':_id},function(_data){
+							if(!_.isNull(_data.itinerary))
+								$scope.itinerary = _data.itinerary;
+							else console.log(_data);
 						});
-						*/
-						
-				    	//console.log(_id);
-			    	//}
+			    	}
 	            },
 				link : function($scope,$element,_attrs){
-					//$scope.getItinerary($element.data('id')):
+					$scope.getItinerary(_attrs.id);
 				}
 			}
 		});
@@ -104,6 +103,7 @@
 								scrollBy      : 1,
 								speed         : 300,
 								elasticBounds : 1,
+								
 								activatePageOn: 'click',
 								prevPage      : lBtn,
 								nextPage      : rBtn

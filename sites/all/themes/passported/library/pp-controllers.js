@@ -21,7 +21,7 @@
         
         'use strict';
         
-        var formSubmit = 'https://www.passported.com/api/forms'; //window.location.protocol + '//' + window.location.host + '/api/forms';
+        var formSubmit = window.location.protocol + '//' + window.location.host + '/api/forms'; //https://www.passported.com/api/forms
         var ppControllers = angular.module('ppControllers',[]);
         var drupalTemplatePath = '/sites/all/themes/passported/';
         
@@ -300,8 +300,8 @@
 	    ppControllers.controller('MapController',function($scope,$log,$timeout){
 		    
 		    $scope.map;
-		    $scope.lat = 40.777422;
-		    $scope.lon = -73.968887;
+		    $scope.lat = 30;
+		    $scope.lon = -30;
 		    $scope.inspirationSearch;
 		    
 			var mapID = 'passported';
@@ -314,7 +314,7 @@
 		    var initialize = function(){
 			    
 			    var mapOptions = {
-					zoom: 10,
+					zoom: 3,
 					center: new google.maps.LatLng($scope.lat,$scope.lon),
 					panControl: true,
 					zoomControl: true,
@@ -510,7 +510,7 @@
 			/* Open/Close panel
 	        - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 			
-			$scope.openAside = function(){
+			$scope.openLeftAside = function(){
 				$scope.showAside = !$scope.showAside;	
 			}
 			
@@ -811,7 +811,7 @@
 	    ppControllers.controller('BlogController',function($scope,$log,$timeout){
 		    
 		    var grid    = $('.grid-wrapper');
-			var entries = $('*.quick-entry').toArray();
+			var entries = $('.grid-wrapper *.quick-entry').toArray();
 			
 			$scope.expand = 'view all';
 			
@@ -978,17 +978,17 @@
 			$scope.changePassword = false;
 			
 			$scope.triggerOverlay = function(){
-				//if($cookies.get('overlay') != 'hidden'){
-					switch($scope.triggerState){
-						case 'hidden':
-							$scope.display = false;
-						break;
-						default:
-							$scope.display = true;
-							$('.call-to-action').show().transition({opacity:1});
-						break;
-					}
-				//}
+				switch($scope.triggerState){
+					case 'hidden':
+						$scope.display = false;
+					break;
+					default:
+						$scope.display = true;
+						$scope.$apply();
+					break;
+				}
+				console.log($scope.display);
+				console.log($('.call-to-action'));
 			}
 			
 			// Watch user state: This event is linked to $scope.user
@@ -997,11 +997,13 @@
 			});
 			
 			$scope.$watch('isSignPage',function(_v){
+				
 				if(_v == 'sign-in' || _v == 'sign-up'){
 					$timeout(function(){
 						$scope.type = _v;
 						$scope.triggerState = messageType[1];
 						$scope.triggerOverlay();
+						$('.call-to-action').show().transition({opacity:1});
 					},0);
 				}
 			});
@@ -1033,7 +1035,6 @@
 			
 			$rootScope.$on('display-overlay',function(_e,_data){
 				if(!$scope.user){
-					//$cookies.put('overlay','signup',{path:'/'});
 					$scope.triggerState = messageType[1];
 					$scope.triggerOverlay();
 					$('.call-to-action').show().transition({opacity:1});
@@ -1150,7 +1151,6 @@
 			            
 			            var _rf = $(document)[0].referrer.split('.passported.com');
 			            
-			            $cookies.put('is_signup','true',{path:'/'});
 			            if(_rf.length > 1) window.location = $(document)[0].referrer;
 			            else window.location.reload();
 		            } 

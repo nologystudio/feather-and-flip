@@ -1,4 +1,4 @@
-<div id="google-maps-container" data-animate="1"></div>
+<div id="google-maps-container" data-animate="1" ng-class="{'on':showAside}"></div>
 <aside class="left" ng-class="{'on':showAside}" ng-controller="ItineraryController">
 	<div class="wrapper">
     	<ul ng-class="{'step-1':step == 1,'step-2':step == 2,'step-3':step == 3}">
@@ -123,7 +123,7 @@
 					    		</div>
 				    		</header>
 				    		<ul>
-					    		<li ng-repeat="address in pick.guide">
+					    		<li ng-repeat="address in pick.guide | orderBy:address.title">
 					    			<div class="icon icon-{{getIcon(address.assoc_interests)}}"></div>
 					    			<h4>{{address.title}}</h4>
 					    			<h5 ng-bind-html="address.short_review"></h5>
@@ -140,9 +140,8 @@
 		    	</div>
 		    </li>
     	</ul>
-
     </div>
-	<button class="aside-trigger" ng-click="openAside()" data-animate="2">
+	<button class="aside-trigger" ng-click="openLeftAside()" data-animate="2">
 		<span class="icon-arrow-right"></span>
 		<svg>
 			<path d="M 0,0 L 50,50 L 0,100 L 0,0"/>

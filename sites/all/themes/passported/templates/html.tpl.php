@@ -56,7 +56,8 @@
 
 	    <?php   // Set ng-init for reset passw lightbox and views
             $reset_l = ((AdminForms::userIsLoggedIn() && isset($_GET['pass-reset-token']) && !empty($_GET['pass-reset-token'])) ? 'true' : 'false');
-			$path_args = end(explode('/', request_path()));
+            $parts = explode('/', request_path());
+			$path_args = end($parts);
 			$jsview = (empty($path_args) ? 'home' : $path_args);
         ?>
 		
