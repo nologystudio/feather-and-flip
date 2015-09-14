@@ -138,7 +138,7 @@ function passported_preprocess_user_profile(&$variables) {
   );
   //getimagesize('http://placehold.it/1280x800'));
   $variables['slideImages'] = $images;
-  $variables['main_navigation'] = get_header_main_navigation_menu();
+  $variables['main_navigation'] = pp_get_header_main_navigation_menu();
 }
 
 /**
@@ -158,7 +158,7 @@ function passported_preprocess_node(&$variables) {
   }
 
   //Load navigation main menu
-  $variables['main_navigation'] = get_header_main_navigation_menu();
+  $variables['main_navigation'] = pp_get_header_main_navigation_menu();
 }
 
 /* Add customized classes by block, view.. */
@@ -246,7 +246,7 @@ function passported_preprocess_views_view(&$variables) {
         );
       }
       $variables['blank'] = TRUE;
-      $variables['main_navigation'] = get_header_main_navigation_menu();
+      $variables['main_navigation'] = pp_get_header_main_navigation_menu();
       $variables['slideImages'] = $images;
     }
   }
@@ -418,7 +418,7 @@ function passported_theme() {
 * @param filter_field
 * @return array()
 */
-function get_home_destinations($filter_field = 'promote') {
+function pp_get_home_destinations($filter_field = 'promote') {
   /*
   * Get destinations promoted to frontpage altering the existing 'start_your_journey' view
   * adding the promoted filter.
@@ -437,7 +437,7 @@ function get_home_destinations($filter_field = 'promote') {
  * Get main navigation menu for header
  * @return string
  */
-function get_header_main_navigation_menu($destinations = NULL) {
+function pp_get_header_main_navigation_menu($destinations = NULL) {
   //TODO Optimize!
   if (!isset($destinations)) {
     $destinations = Destination::GetAllDestination();
@@ -741,7 +741,7 @@ function preprocessHomePage(&$variables) {
   $variables['destinations'] = Destination::GetAllDestination();
 
   //SlideImages - Different for each user
-  $variables['main_navigation'] = get_header_main_navigation_menu($variables['destinations']);
+  $variables['main_navigation'] = pp_get_header_main_navigation_menu($variables['destinations']);
 }
 
 
@@ -800,7 +800,7 @@ function passported_preprocess_node_hotel(&$variables) {
  * Get main navigation menu for header
  * @return string
  */
-function get_city_guides_list($destinations = NULL) {
+function pp_get_city_guides_list($destinations = NULL) {
   //TODO Optimize!
   if (!isset($destinations)) {
     $destinations = Destination::GetAllDestination();

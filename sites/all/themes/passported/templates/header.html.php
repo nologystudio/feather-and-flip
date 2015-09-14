@@ -38,7 +38,7 @@
 			</svg>
 		</div>
 		
-		<?php print_r(get_city_guides_list()); ?>
+		<?php print_r(pp_get_city_guides_list()); ?>
 		
 		<div id="search-block">
 			<div class="wrapper">
