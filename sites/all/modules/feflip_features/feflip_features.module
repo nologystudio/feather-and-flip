@@ -20,6 +20,81 @@ function feflip_features_init() {
 	}
 }
 
+function feflip_features_menu() {
+    $items = array();
+    $items['admin/settings/ffeatures'] = array(
+        'title' => 'Passported tools',
+        'description' => 'Helper functions',
+        'page callback' => 'import_bv_data',
+        'access arguments' => array('import bv data'),
+        'type' => MENU_NORMAL_ITEM,
+    );
+    return $items;
+}
+
+function import_bv_data() {
+    $fform = drupal_get_form('feflip_features_form');
+    $page_content = '';
+    $page_content .= drupal_render($fform);
+    return $page_content;
+}
+
+function feflip_features_form() {
+    $form['upload'] = array(
+        '#type' => 'file',
+    );
+
+    //Submit button:
+    $form['submit_button'] = array(
+        '#type' => 'submit',
+        '#value' => t('Import users'),
+        '#submit' => array('feflip_features_form_submit')
+    );
+    return $form;
+}
+
+function feflip_features_form_submit($form, &$form_state) {
+    global $user;
+    $file = file_save_upload('upload', array(
+        'file_validate_extensions' => array('csv'),
+    ));
+
+    $file_handle = fopen($file->uri, 'r');
+    while (!feof($file_handle) ) {
+        $line_of_text[] = fgetcsv($file_handle, 1024);
+    }
+    fclose($file_handle);
+    file_delete($file);
+
+    $z = 0;
+    foreach ($line_of_text as $i => $bvuser) {
+        if ($i == 0) continue;
+        //check if exists
+        $utmp = user_load_by_mail($bvuser[2]);
+        if (!$utmp){
+            $new_user = array(
+                'name' => $bvuser[2],
+                'mail' => $bvuser[2],
+                'pass' => user_password(8),
+                'status' => 1,
+                'field_first_name' => array(LANGUAGE_NONE => array(array('value' => $bvuser[0]))), // This becomes $account->field_custom_first_name[LANGUAGE_NONE][0]['value']
+                'field_last_name' => array(LANGUAGE_NONE => array(array('value' => $bvuser[1]))),
+                'field_bv_password' => array(LANGUAGE_NONE => array(array('value' => $bvuser[3]))),
+                'access' => REQUEST_TIME,
+                'roles' => array(),
+            );
+            user_save(NULL, $new_user);
+            $z++;
+        }
+        else {
+            watchdog('BV import user', 'User already exists: '. $bvuser[2]);
+        }
+    }
+    drupal_set_message('Total imported users -> ' . $z .'.');
+
+    $form_state['redirect'] = 'admin/settings/ffeatures';
+}
+
 /**
  * Implements hook_admin_paths_alter().
  */
