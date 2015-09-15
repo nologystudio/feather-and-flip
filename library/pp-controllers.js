@@ -540,6 +540,8 @@
 					
 					$scope.pick.guide = _data;
 					
+					// Wrap categories...
+					
 					_.extend($scope.pick,{guide_by_category:{
 						eat: [],
 						do: [],
@@ -578,7 +580,6 @@
 					hotelSrc.query({'destination':_d.id},function(_data){
 						$scope.pick.hotels = _data;
 						$scope.$parent.addMarkers('guide',_d);
-						//console.log($scope.pick);
 					});
 				});
 				
@@ -701,7 +702,6 @@
 					transformRequest: angular.identity
 	            }).
 	            success(function(_data){
-		            console.log(_data);
 		            $('#booking-message').show().transition({opacity:1});
 	            }).
 	            error(function(){});
@@ -723,10 +723,18 @@
 							switch(_key){
 								case 'start_date': case 'end_date':
 									if(!_.isUndefined($scope.booking.start_date) && !_.isUndefined($scope.booking.end_date)){
-										if(moment($scope.booking.start_date).isBefore($scope.booking.end_date)) $scope.error = "Please make sure you have selected correct dates";
+										if(moment($scope.booking.end_date).isBefore($scope.booking.start_date))
+											$scope.error = "Please make sure you have selected correct dates";
+										else 
+											$scope.error = false;
 									}
 								break;
 								case 'adults':
+									if(_.isUndefined($scope.booking.adults) || $scope.booking.adults == 0)
+										$scope.error = "Please make sure you have selected correct adults";
+									else 
+										$scope.error = false;
+										
 								break;
 							}
 						}
@@ -806,10 +814,18 @@
 					});
 					
 					_calendar.find('button').on('click',function(){
+						switch($(this).hasClass('arrival')){
+							case true:
+								$scope.booking.start_date = $(this).data('date');
+								$('#arrival button[data-date]').removeClass('on');
+							break;
+							case false:
+								$scope.booking.end_date = $(this).data('date');
+								$('#departure button[data-date]').removeClass('on');
+							break;
+						}
 						
-						if($(this).hasClass('arrival')) $scope.booking.start_date = $(this).data('date');
-						else $scope.booking.end_date = $(this).data('date');
-						
+						$(this).addClass('on');
 						$scope.$apply();
 						
 						return false;
@@ -818,7 +834,6 @@
 				
 				setGallery(aFrame);
 				setGallery(dFrame);
-				
 			},0);
 			
 			$scope.buildYear();

@@ -1457,17 +1457,25 @@
 																	div.line
 																	{
 																		.set-pos(absolute);
-																		.set-size(80%,1px);
+																		.set-size(70%,1px);
 																		.set-bgc(@color-7);
-																		left: 25%;
+																		left: 30%;
 																		top: 10px;
 																	}
 																	
-																	span
+																	span.icon
 																	{
+																		@s: 20px;
+																		
+																		.set-size(@s,@s);
+																		#font > .ic(18px,@color-3);
 																		#align > .left;
-																		margin-right: 2 * @unit;
-																		padding-top: @unit/2;
+																		margin-right: @unit;
+																		
+																		&.Basics:before { content: "\e613"; }
+																		&.Bedtime:before{ content: "\e614"; }
+																		&.Buts:before   { content: "\e616"; }
+																		&.Bests:before  { content: "\e615"; }
 																	}
 																}
 																
@@ -1483,6 +1491,16 @@
 																		#font > .lato(12px,@color-3,400);
 																		line-height: 18px;
 																		margin: @unit/2 0;
+																		
+																		p
+																		{
+																			display: list-item;
+																			
+																			&:first-child
+																			{
+																				display: block;
+																			}
+																		}
 																	}
 																}
 															}

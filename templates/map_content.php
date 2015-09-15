@@ -28,7 +28,7 @@
 		    	<aside>
 			    	<button rel="menu" ng-click="goTo(1)" ng-if="!cityGuideID" class="icon-back"></button>
 			    	<button rel="stay" ng-click="filterMap('stay')" ng-class="{'on':filter == 'stay'}"></button>
-			    	<button ng-repeat="(key,value) in pick.guide_by_category" rel="{{key}}" ng-click="filterMap(key)" ng-class="{'on':filter == key}"></button>
+			    	<button ng-repeat="(key,value) in pick.guide_by_category" rel="{{key}}" ng-click="filterMap(key)" ng-class="{'on':filter == key}" ng-if="value.length > 0"></button>
 			    	<button class="view-all" ng-click="filterMap(undefined)">view all</button>
 				</aside>
 		    	<div class="wrapper" ng-if="itineraryIsReady">
@@ -91,17 +91,17 @@
 					    			<button rel="left" class="icon-left-circle-full"></button>
 				    			</div>
 				    			<div id="curated" ng-repeat="content in hotel.content_blocks[0]">
-					    			<div class="divider {{content.title}}">
-						    			<span class="icon-{{getIcon(content.title)}}"></span>
+					    			<div class="divider">
+						    			<span class="icon {{content.title}}"></span>
 						    			{{content.title}}
 						    			<div class="line"></div>
 						    		</div>
 									<!-- Rich text -->
-					    			<ul ng-if="check.features(content.description)">
+					    			<ul ng-if="content.features.length == 1" class="clear">
 						    			<li ng-bind-html="content.description"></li>
 						    		</ul>
 									<!-- Plain text -->
-					    			<ul ng-if="!check.features(content.description)">
+					    			<ul ng-if="content.features.length > 1">
 						    			<li ng-repeat="feature in content.features" ng-bind-html="feature"></li>
 					    			</ul>
 				    			</div>
@@ -154,7 +154,7 @@
 </aside>
 <aside class="right" ng-controller="BookingController" ng-class="{'on':showRightAside}">
 	<div class="wrapper">
-		<div class="error" ng-if="error" class="animated fadeInDown">
+		<div class="error animated fadeInDown" ng-if="error">
 			<span>{{error}}</span>
 		</div>
 		<button class="icon-close" ng-click="openAside()"></button>
@@ -247,13 +247,13 @@
 					    		<li>
 					    			<label>Number of Adults</label>
 					    			<div class="circle-input-wrapper">
-					    				<input type="text" ng-model="booking.adults" ng-pattern="/^[0-9]+$/" maxlength="1" required/>
+					    				<input type="text" ng-model="booking.adults" ng-pattern="/^[0-9]+$/" maxlength="1" ng-focus="booking.adults = undefined" required/>
 					    			</div>
 					    		</li>
 					    		<li>
 					    			<label>Number of Children</label>
 					    			<div class="circle-input-wrapper">
-					    				<input type="text" ng-model="booking.children" ng-pattern="/^[0-9]+$/" maxlength="1"/>
+					    				<input type="text" ng-model="booking.children" ng-pattern="/^[0-9]+$/" maxlength="1" ng-focus="booking.children = undefined"/>
 					    			</div>
 					    		</li>
 					    		<li>

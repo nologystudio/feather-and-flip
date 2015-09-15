@@ -38,7 +38,7 @@
 			</svg>
 		</div>
 		
-		<?php print_r(get_city_guides_list()); ?>
+		<?php print_r(pp_get_city_guides_list()); ?>
 		
 		<div id="search-block" class="<?php if(drupal_is_front_page()) echo 'single-search' ?>">
 			<div class="wrapper">
@@ -73,7 +73,7 @@
 				<?php if(!drupal_is_front_page()): ?>
 					<div id="let-us-inspire" data-animate="1" ng-controller="InspirationController">
 						<header>
-							<h4>Let us Inspire you</h4>
+							<h4>Find Your Perfect Trip</h4>
 						</header>
 						<div class="wrapper">
 							<div pp-inspiration-select id="place-select" class="select" data-options="adventure|beach|city|countryside|ski">
