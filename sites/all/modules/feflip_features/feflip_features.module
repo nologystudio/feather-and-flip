@@ -21,6 +21,15 @@ function feflip_features_init() {
 }
 
 /**
+ * Hide hotel categories within hotel nodes edit form
+ */
+function feflip_features_form_alter(&$form, &$form_state, $form_id) {
+    if ($form_id == 'hotel_node_form'){
+        $form['field_hotel_tags']['#access'] = FALSE;
+    }
+}
+
+/**
  * Implements hook_admin_paths_alter().
  */
 function feflip_features_admin_paths_alter(&$paths) {
