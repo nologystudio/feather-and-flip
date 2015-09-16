@@ -60,19 +60,19 @@
 				    		<header>
 					    		STAY
 					    		<div class="filter-wrapper">
-						    		<div pp-filter filter-state="true" id="{{type}}" class="filter">
+						    		<div pp-filter filter-state="false" ng-repeat="hotelFilter in hotelFilters track by $index" id="{{hotelFilter}}" data-filters="hotel {{hotelFilter}}" class="filter hotel">
 							    		<button class="radio-btn">
-							    			View all<span></span>
+							    			{{hotelFilter}}<span></span>
 							    		</button>
 						    		</div>
-						    		<div pp-filter filter-state="false" id="{{type}}" class="filter">
+						    		<div pp-filter filter-state="true" id="all" class="filter hotel" ng-if="">
 							    		<button class="radio-btn">
-							    			Type<span></span>
+							    			view all<span></span>
 							    		</button>
 						    		</div>
 					    		</div>
 				    		</header>
-				    		<article id="hotel" ng-repeat="hotel in pick.hotels" class="{{setClass(hotel.guide_categories)}}">
+				    		<article ng-repeat="hotel in pick.hotels" class="hotel {{setClass(hotel.guide_categories)}}">
 					    		<div class="icon-hotel"></div>
 			    				<header>
 				    				<h4>{{hotel.name}}</h4>
@@ -112,15 +112,15 @@
 								<header>
 						    		{{key}}
 						    		<div class="filter-wrapper">
-							    		<div pp-filter filter-state="true" id="{{type}}" class="filter">
-								    		<button class="radio-btn">
-								    			View all<span></span>
-								    		</button>
-							    		</div>
-							    		<div pp-filter filter-state="false" id="{{filter}}" class="filter">
+							    		<div pp-filter filter-state="false" ng-repeat="addressFilter in addressFilters[key] track by $index" id="{{addressFilter}}" data-filters="{{key}} {{addressFilter}}" class="filter {{key}}">
 								    		<button class="radio-btn">
 								    			<span></span>
-								    			filter
+								    			{{addressFilter}}
+								    		</button>
+							    		</div>
+							    		<div pp-filter filter-state="true" id="all" class="filter {{key}}" ng-if="">
+								    		<button class="radio-btn">
+								    			view all<span></span>
 								    		</button>
 							    		</div>
 						    		</div>
@@ -172,6 +172,42 @@
 					    	<h3>{{booking.destination}}</h3>
 				    		<h4>{{booking.hotel}}</h4>
 				    	</div>
+<!--
+				    	<div class="destination-hotel-wrapper" ng-if="!booking.destination && !booking.hotel">
+					    	<div id="search-destination" ng-controller="SearchController">
+								<div class="wrapper">
+									<form>
+										<span class="icon-search"></span>
+										<input type="text" class="rounded" ng-model="userSearch" ng-change="searchSubmit()" placeholder="Enter your destination"/>
+									</form>
+								</div>
+								<ul id="search-result" ng-if="showResult" class="animated fadeIn">
+									<div class="result-wrapper" ng-if="destinations.length > 0">
+										<li class="title">Destinations</li>
+										<li ng-repeat="destination in destinations">
+											<a href="{{destination.guide_url}}">{{destination.title}}</a>
+										</li>
+									</div>
+								</ul>
+							</div>
+							<div id="search-destination" ng-controller="SearchController">
+								<div class="wrapper">
+									<form>
+										<span class="icon-search"></span>
+										<input type="text" class="rounded" ng-model="userSearch" ng-change="searchSubmit()" placeholder="Enter your hotel"/>
+									</form>
+								</div>
+								<ul id="search-result" ng-if="showResult" class="animated fadeIn">
+									<div class="result-wrapper" ng-if="hotels.length > 0">
+										<li class="title">Hotels</li>
+										<li ng-repeat="hotel in hotels">
+											<a href="{{hotel.guide_url}}">{{hotel.title}}</a>
+										</li>
+									</div>
+								</ul>
+							</div>
+				    	</div>
+-->
 			    	</div>
 		    	</header>
 		    	<ul>

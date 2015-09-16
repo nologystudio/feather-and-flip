@@ -1277,8 +1277,15 @@
 															
 															div.filter-wrapper
 															{
-																.set-size(60%);
+																.set-size(90%);
 																#align > .right;
+																
+																div.filter
+																{
+																	.set-size();
+																	#align > .right;
+																	margin-bottom: @unit;
+																}
 																
 																button.radio-btn
 																{
@@ -1294,7 +1301,7 @@
 																		
 																		.set-circle-btn(@s);
 																		#align > .right;
-																		margin-left: 2 * @unit;
+																		margin-left: @unit;
 																		border-color: @color-2 !important;
 																		
 																		&.on

@@ -481,6 +481,13 @@
 			$scope.pick;
 			$scope.showAside = true;
 			$scope.filter = undefined;
+			$scope.hotelFilters = [];
+			$scope.addressFilters = {
+				eat: [],
+				do: [],
+				noteworthy: [],
+				shop: []
+			}
 			
 			// Tools
 			
@@ -543,12 +550,9 @@
 					
 					// Wrap categories...
 					
-					_.extend($scope.pick,{guide_by_category:{
-						eat: [],
-						do: [],
-						noteworthy: [],
-						shop: []
-					}});
+					_.extend($scope.pick,{
+						guide_by_category : angular.copy($scope.addressFilters)
+					});
 					
 					// Google Place replacement...
 					
@@ -577,14 +581,37 @@
 								};
 							});
 						}
+						
+						// Get hotel filters...
+						
+						_.map(_a.guide_categories,function(_tags,_key){
+							
+							var category = _key.toLowerCase();
+							
+							_.map(_tags,function(_tag){
+								if(_.indexOf($scope.addressFilters[category],_tag.toLowerCase()) == -1) 
+									$scope.addressFilters[category].push(_tag.toLowerCase());
+							});
+						});
 					});
 					
 					// 3. Hotels
 			
 					hotelSrc.query({'destination':_d.id},function(_data){
-						console.log(_data);
+						
 						$scope.pick.hotels = _data;
 						$scope.$parent.addMarkers('guide',_d);
+						
+						// Get hotel filters...
+						
+						_.map($scope.pick.hotels,function(_h){
+							_.map(_h.guide_categories,function(_tags){
+								_.map(_tags,function(_tag){
+									if(_.indexOf($scope.hotelFilters,_tag.toLowerCase()) == -1) 
+										$scope.hotelFilters.push(_tag.toLowerCase());
+								});
+							});
+						});
 					});
 				});
 				
