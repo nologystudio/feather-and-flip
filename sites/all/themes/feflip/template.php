@@ -220,6 +220,10 @@ function feflip_preprocess_views_view(&$variables) {
     $variables['destinationDescription'] = 'Hotel Reviews';
     if (isset($variables['view']->args[0])) {
       $destination = node_load($variables['view']->args[0]);
+      if ($destination->status == 0) {
+          drupal_access_denied();
+          exit();
+      }
       $images = Destination::GetAllImagesDestination($destination, 'hotel reviews');
       $variables['destinationId'] = $destination->nid;
 
