@@ -21,7 +21,7 @@
         
         'use strict';
         
-        var formSubmit = window.location.protocol + '//' + window.location.host + '/api/forms'; //https://www.passported.com/api/forms
+        var formSubmit = "https://www.passported.com/api/forms"; //window.location.protocol + '//' + window.location.host + '/api/forms'; //
         var ppControllers = angular.module('ppControllers',[]);
         var drupalTemplatePath = '/sites/all/themes/passported/';
         
@@ -284,9 +284,8 @@
 	        
 	        $scope.state = $location.path().replace('/','');
 	        
-	        $scope.goTo = function(_l){
-		        $scope.state = _l;
-		        $location.path(_l);
+	        $scope.goToURL = function(_l){
+		        window.location = _l;
 	        }
 	        
 	        $timeout(function(){
@@ -316,7 +315,6 @@
 			    var mapOptions = {
 					zoom: 3,
 					center: new google.maps.LatLng($scope.lat,$scope.lon),
-					panControl: true,
 					zoomControl: true,
 					mapTypeControl: false,
 					scrollwheel: false,
@@ -422,6 +420,8 @@
 				    	_.map(detail,function(_d){
 					    	_.map(_d,function(_p){
 						    	
+						    	var _interest = (!_.isUndefined(_p.assoc_interests)) ? _p.assoc_interests.toLowerCase() : 'map';
+						    	
 						    	var pin = new google.maps.Marker({
 									position: {
 										lat: Number(_p.lat),
@@ -429,11 +429,11 @@
 									},
 									map: $scope.map,
 									title: _p.title,
-									icon: _path + 'map-pin-icon.svg'
+									icon: _path + _interest + '-pin-icon.svg'
 								});
 								
 								var infowindow = new google.maps.InfoWindow({
-									content: '<div class="in-map"><h1>'+_p.title+'</h1><h2>'+_p.short_review+'</h2></div>',
+									content: '<div class="in-map '+_interest+'"><h1>'+_p.title+'</h1><h2>'+_p.short_review+'</h2></div>',
 									maxWidth: 200
 								});
 								
@@ -490,22 +490,23 @@
 				},
 				features: function(_d){
 					return _.isArray(_d);
-				},
-				icon: function(_icon){
-					
-					var _i = _icon.toLowerCase();
-				
-					switch(_i){
-						case 'basics': case'bedtime':
-							_i = 'icon-passported-imago';
-						break;
-						case 'do': case'shop': case 'eat': case 'noteworthy':
-							_i = 'icon-passported-imago';
-						break;
-					}
-					
-					return _i;
 				}
+			}
+			
+			$scope.setClass = function(_tags){
+				
+				var tags = '';
+				
+				_.map(_tags,function(_t){
+					_.each(_t,function(_f,_index){
+						
+						var gap = (_index == (_t.length - 1)) ? '' : ' ';
+						
+						tags += _f.toLowerCase() + gap;
+					});
+				});
+				
+				return tags;
 			}
 			
 			/* Open/Close panel
@@ -530,7 +531,7 @@
 				
 				if(window.location.host == 'stage.passported.com' || window.location.host == 'www.passported.com'){
 					itSrc.get({'name':_d.name},function(_data){
-						console.log(_data);
+						//console.log(_data);
 					});
 				}
 				
@@ -548,6 +549,8 @@
 						noteworthy: [],
 						shop: []
 					}});
+					
+					// Google Place replacement...
 					
 					_.map(_data,function(_a){
 						
@@ -570,6 +573,7 @@
 									_a.phone_number = _place.formatted_phone_number;
 									_a.address 		= _place.formatted_address;
 									_a.website 		= _place.website;
+									_a.hours        = _place.opening_hours.weekday_text;
 								};
 							});
 						}
@@ -578,6 +582,7 @@
 					// 3. Hotels
 			
 					hotelSrc.query({'destination':_d.id},function(_data){
+						console.log(_data);
 						$scope.pick.hotels = _data;
 						$scope.$parent.addMarkers('guide',_d);
 					});
@@ -935,8 +940,6 @@
 			$scope.noResult   = false;
 			
 			$scope.reset = function(){
-				//$scope.result      = {}; 
-				//$scope.noResult    = false;
 				$scope.userSearch = '';
 				$scope.$apply();
 			};
@@ -1021,8 +1024,6 @@
 						$scope.$apply();
 					break;
 				}
-				console.log($scope.display);
-				console.log($('.call-to-action'));
 			}
 			
 			// Watch user state: This event is linked to $scope.user

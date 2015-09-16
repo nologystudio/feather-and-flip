@@ -22,7 +22,7 @@
 			<link rel="stylesheet" href="<?php echo drupal_get_path('theme','passported'); ?>/style/style-nology.css" title="style-nology" type="text/css" media="screen">
 			<!-- Modernizer and IE specyfic files -->  
 			<script src="<?php echo drupal_get_path('theme','passported'); ?>/library/vendors/modernizr.custom.pp.js"></script>
-			<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVp6xJDq_xg96DdjO3S1wmByGNmYoK4XQ"></script>
+			<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVp6xJDq_xg96DdjO3S1wmByGNmYoK4XQ&libraries=places"></script>
             <script>
                 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
                     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

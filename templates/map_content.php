@@ -72,7 +72,7 @@
 						    		</div>
 					    		</div>
 				    		</header>
-				    		<article id="hotel" ng-repeat="hotel in pick.hotels">
+				    		<article id="hotel" ng-repeat="hotel in pick.hotels" class="{{setClass(hotel.guide_categories)}}">
 					    		<div class="icon-hotel"></div>
 			    				<header>
 				    				<h4>{{hotel.name}}</h4>
@@ -134,6 +134,10 @@
 							    			<span class="tel" ng-if="!check.phone(address.phone_number)">{{address.phone_number}}</span>
 							    			<span class="url">
 							    				<a href="{{address.website}}" target="_blank">{{address.website}}</a>
+							    			</span>
+							    			<span class="hours" ng-if="address.hours" ng-click="">
+							    				HOURS
+							    				<ul><li ng-repeat="hour in address.hours">{{hour}}</li></ul>
 							    			</span>
 						    			</footer>
 						    		</li>

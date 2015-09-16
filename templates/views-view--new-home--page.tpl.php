@@ -7,15 +7,15 @@
 			<li>
 				<h1 data-animate="1">Sophisticated family travel simplified</h1>
 				<ul class="align-center">
-					<li ng-click="goTo('plan')">
+					<li ng-click="goToURL('explore')">
+						<h2 data-animate="4">Explore</h2>
+						<a href="https://blog.passported.com"><h3 data-animate="5">Read our travel journal</h3></a>
+					</li>
+					<li ng-click="goToURL('plan')">
 						<h2 data-animate="2">Plan</h2>
 						<a href="https://blog.passported.com"><h3 data-animate="3">Customize your city guide</h3></a>
 					</li>
-					<li ng-click="goTo('explore')">
-						<h2 data-animate="4">Explore</h2>
-						<a href="https://blog.passported.com"><h3 data-animate="5">Find inspiration on the Travel Journal</h3></a>
-					</li>
-					<li ng-click="goTo('book')">
+					<li ng-click="goToURL('book')">
 						<h2 data-animate="6">Book</h2>
 						<a href="/booking"><h3 data-animate="7">Email our hotel expert</h3></a>
 					</li>
@@ -56,8 +56,8 @@
 	<section id="how-it-works">
 		<header>
 			<h4 data-animate="1">
-				Spotlight 
-				<span>On</span>
+				Spotlight On
+				<span>Itineraries & City Guides</span>
 			</h4>
 		</header>
 		<div class="promoted-grid align-center" ng-controller="PromotedController">

@@ -466,7 +466,7 @@
 						.set-bg(@color-7,'@{media-url}backgrounds/passported-main.jpg',no-repeat,center,@header-height);
 						.box-sizing();
 						#align > .left;
-						padding-top: @m/2 - @header-height + 2 * @unit;
+						padding-top: @m/2 - @header-height + 4 * @unit;
 						overflow: hidden;
 						
 						&:first-child
@@ -539,6 +539,8 @@
 									
 									a
 									{
+										.set-size(100%);
+										#align > .left;
 										margin: 0;
 										padding: 0;
 										text-decoration: none;
@@ -548,10 +550,11 @@
 											.set-size(100%);
 											.box-sizing();
 											.animate-all();
+											.performance();
 											#font > .lato(14px,white,400);
 											padding: 0 @content-padding/2;
 											margin-top: @content-padding;
-											display: block;
+											display: inline-block;;
 											text-transform: uppercase;
 											text-align: center;
 											line-height: 22px;
@@ -625,6 +628,7 @@
 				{
 					h4
 					{
+						background-position: 66% top;
 					}
 				}
 				
@@ -1602,7 +1606,9 @@
 																	display: block;
 																	
 																	span.tel,
-																	span.url
+																	span.url,
+																	span.hours,
+																	span a
 																	a
 																	{
 																		#font > .lato(12px,@color-3,700);
@@ -1612,11 +1618,40 @@
 																	
 																	a
 																	{
+																		#font > .lato(12px,@color-3,700);
 																		text-decoration: none;
 																		
 																		&:hover
 																		{
 																			text-decoration: underline;
+																		}
+																	}
+																	
+																	span.hours
+																	{
+																		width: 100%;
+																		margin-top: @unit;
+																		
+																		ul
+																		{
+																			.reset();
+																			.set-size(80%);
+																			#align > .left;
+																			margin-top: @content-padding/2;
+																			
+																			li
+																			{
+																				#align > .left;
+																				#font > .lato(12px,@color-3,400);
+																				padding: @unit;
+																				margin: 0;
+																				min-height: auto;
+																				
+																				&:first-child
+																				{
+																					padding-top: 0;
+																				}
+																			}
 																		}
 																	}
 																}
@@ -2199,7 +2234,14 @@
 						h4
 						{
 							margin: auto;
+							background-position: 275px center;
 							#align > .center;
+							
+							&:before,
+							&:after
+							{
+								width: 60px;
+							}
 						}
 						
 						&:after
@@ -2907,7 +2949,7 @@
 			#align > .left;
 			padding: @content-padding/2 0 0 @content-padding/2;
 			
-			h1,h2
+			h1,h2,a
 			{
 				.set-size(100%);
 				#font > .lato(12px,@color-3,400);
@@ -2927,6 +2969,11 @@
 					margin: 0;
 					padding: 0;
 				}
+			}
+			
+			a
+			{
+				text-decoration: underline;
 			}
 		}
 		
