@@ -32,13 +32,12 @@
 	                state : "=filterState"
 	            },
 	            controller: function($scope,$rootScope){
-		            $scope.filter = function(_filters){
+		            $scope.filter = function(_hotel,_filters){
 			        	
 			        	var _classes = _filters.split(' ');
+			        	var _target  = (_hotel) ? $('#hotel-block article.hotel') : $('#guide li.address-book');
 			        	
-			        	console.log($scope.state);
-			        	
-			        	$('#hotel-block article.hotel').each(function(){
+			        	_target.each(function(){
 				        	
 				        	var _t = $(this);
 				        	var isElement = true;
@@ -47,21 +46,16 @@
 					        	if(isElement) isElement = _t.hasClass(_class);
 				        	});
 				        	
-				        	if(isElement){
-					        	switch($scope.state){
-						        	case true:
-						        		_t.show();
-								        _t.data('filtered',true);
-						        	break;
-						        	case false:
-						        		_t.hide();
-						        		_t.data('filtered',false);
-						        	break;
-								}
+				        	switch($scope.state){
+					        	case true:
+					        		if(!isElement) _t.hide();
+					        		else _t.show();
+					        	break;
+					        	case false:
+					        		_t.show();
+					        	break;
 							}
-				        });
-						
-						//$rootScope.$emit('filter',[_filters]);
+						});
 		            };
 	            },
 				link : function($scope,$element,_attrs){
@@ -73,7 +67,7 @@
 						
 						$(this).find('span').toggleClass('on');
 						$scope.state = !$scope.state;
-						$scope.filter(_attrs.filters);
+						$scope.filter($element.hasClass('hotel'),_attrs.filters);
 					});
 				}
 			}

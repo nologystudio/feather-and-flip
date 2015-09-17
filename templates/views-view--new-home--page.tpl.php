@@ -24,11 +24,11 @@
 				<ul class="align-center">
 					<li ng-click="goToURL('explore')">
 						<h2 data-animate="4">Explore</h2>
-						<a href="https://blog.passported.com"><h3 data-animate="5">Read our travel journal</h3></a>
+						<a href="/city-guides"><h3 data-animate="5">Explore our city guides</h3></a>
 					</li>
 					<li ng-click="goToURL('plan')">
 						<h2 data-animate="2">Plan</h2>
-						<a href="https://blog.passported.com"><h3 data-animate="3">Customize your city guide</h3></a>
+						<a href="https://blog.passported.com"><h3 data-animate="3">Create your itinerary</h3></a>
 					</li>
 					<li ng-click="goToURL('book')">
 						<h2 data-animate="6">Book</h2>

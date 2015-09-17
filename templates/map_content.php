@@ -112,7 +112,7 @@
 								<header>
 						    		{{key}}
 						    		<div class="filter-wrapper">
-							    		<div pp-filter filter-state="false" ng-repeat="addressFilter in addressFilters[key] track by $index" id="{{addressFilter}}" data-filters="{{key}} {{addressFilter}}" class="filter {{key}}">
+							    		<div pp-filter filter-state="false" ng-repeat="addressFilter in addressFilters[key] track by $index" id="{{addressFilter}}" data-filters="address-book {{key}} {{addressFilter}}" class="filter address-book {{key}}">
 								    		<button class="radio-btn">
 								    			<span></span>
 								    			{{addressFilter}}
@@ -126,7 +126,7 @@
 						    		</div>
 					    		</header>
 					    		<ul>
-						    		<li ng-repeat="address in value">
+						    		<li ng-repeat="address in value" class="address-book {{key}} {{setClass(address.guide_categories)}}">
 						    			<div class="icon {{key}}"></div>
 						    			<h4>{{address.title}}</h4>
 						    			<h5 ng-bind-html="address.short_review"></h5>
@@ -172,7 +172,6 @@
 					    	<h3>{{booking.destination}}</h3>
 				    		<h4>{{booking.hotel}}</h4>
 				    	</div>
-<!--
 				    	<div class="destination-hotel-wrapper" ng-if="!booking.destination && !booking.hotel">
 					    	<div id="search-destination" ng-controller="SearchController">
 								<div class="wrapper">
@@ -181,14 +180,15 @@
 										<input type="text" class="rounded" ng-model="userSearch" ng-change="searchSubmit()" placeholder="Enter your destination"/>
 									</form>
 								</div>
+<!--
 								<ul id="search-result" ng-if="showResult" class="animated fadeIn">
 									<div class="result-wrapper" ng-if="destinations.length > 0">
-										<li class="title">Destinations</li>
-										<li ng-repeat="destination in destinations">
-											<a href="{{destination.guide_url}}">{{destination.title}}</a>
+										<li ng-repeat="destination in destinations" ng-click="setter.value(userSearch,destination.title)">
+											{{destination.title}}
 										</li>
 									</div>
 								</ul>
+-->
 							</div>
 							<div id="search-destination" ng-controller="SearchController">
 								<div class="wrapper">
@@ -197,17 +197,17 @@
 										<input type="text" class="rounded" ng-model="userSearch" ng-change="searchSubmit()" placeholder="Enter your hotel"/>
 									</form>
 								</div>
+<!--
 								<ul id="search-result" ng-if="showResult" class="animated fadeIn">
 									<div class="result-wrapper" ng-if="hotels.length > 0">
-										<li class="title">Hotels</li>
-										<li ng-repeat="hotel in hotels">
-											<a href="{{hotel.guide_url}}">{{hotel.title}}</a>
+										<li ng-repeat="hotel in hotels" ng-click="closeResult(userSearch,hotel.title)">
+											{{hotel.title}}
 										</li>
 									</div>
 								</ul>
+-->
 							</div>
 				    	</div>
--->
 			    	</div>
 		    	</header>
 		    	<ul>

@@ -55,8 +55,9 @@
 					$timeout(function(){_t.find('*[data-animate="4"]').addClass('animated fadeInDown')},800);
 					$timeout(function(){_t.find('*[data-animate="5"]').addClass('animated fadeInDown')},1000);
 					$timeout(function(){_t.find('*[data-animate="6"]').addClass('animated fadeInDown')},1200);
-					$timeout(function(){_t.find('*[data-animate="7"]').addClass('animated fadeIn')},1400);
+					$timeout(function(){_t.find('*[data-animate="7"]').addClass('animated fadeInDown')},1400);
 					$timeout(function(){_t.find('*[data-animate="8"]').addClass('animated fadeIn')},1600);
+					$timeout(function(){_t.find('*[data-animate="9"]').addClass('animated fadeIn')},1800);
 					
 		        },{ offset: '0%' }); 
 		        
@@ -207,7 +208,7 @@
 		        $('header > nav a.subnav').on({
 			    	mouseover: function(){
 				    	
-				    	var middlePoint = $(this).offset().left + 30 - 10 + $(this).width()/2;
+				    	var middlePoint = $(this).offset().left + 10 + $(this).width()/2;
 				    	var _element;
 				    	
 				    	userControl = true;

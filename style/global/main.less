@@ -209,6 +209,7 @@
 				{
 					.set-size();
 					overflow: hidden;
+					padding-left: 60px;
 					
 					&.align-right
 					{
@@ -224,7 +225,7 @@
 					.animate-color();
 					#font > .lato(13px,@color-5,400);
 					#align > .left;
-					padding: 0 @content-padding;
+					padding: 0 @content-padding - 2 * @unit;
 					text-transform: uppercase;
 					display: block;
 					text-decoration: none;
@@ -400,14 +401,20 @@
 				& > div.wrapper
 				{
 					#align > .center;
-					width: @grid-1 + 120px;
-					margin-top: @content-padding;
+					width: @grid-1;
+					margin-top: @content-padding - 2 * @unit;
 					
 					& > div
 					{
 						.set-opacity(1);
 						#align > .left;
 						display: block;
+						
+						&[id="search-destination"] + div[id="let-us-inspire"]
+						{
+							#align > .right;
+							margin-left: @content-padding;
+						}
 					}
 				}
 				
@@ -1516,7 +1523,7 @@
 																}
 															}
 															
-															&[id="hotel"]
+															&.hotel
 															{
 																border-bottom: solid 1px @color-7;
 																
@@ -1532,7 +1539,7 @@
 																	}
 																}
 																
-																& + article[id="hotel"]
+																& + article.hotel
 																{
 																	padding-top: @content-padding;
 																}
@@ -1757,12 +1764,12 @@
 							}
 						}
 						
-						div.wrapper
+						& > div.wrapper
 						{
 							padding-right: 0;
 							left: 0;
 							
-							ul
+							& > ul
 							{
 								.set-size(100%,100%);
 								border-bottom: 0;
@@ -1795,6 +1802,87 @@
 											{
 												#font > .lato(14px,@color-3,700);
 												margin-bottom: @unit;
+											}
+											
+											div[id="search-destination"]
+											{
+												.set-size(49%);
+												#align > .left;
+												
+												div.wrapper
+												{
+													background: transparent;
+													border: 0;
+													padding: 0;
+													
+													form
+													{
+														span.icon-search
+														{
+															.set-pos(absolute);
+															top: 20px;
+															left: (@content-padding + @unit)/2;
+															
+															&:before
+															{
+																font-size: 12px;
+																color: @color-3;
+															}
+														}
+														
+														input
+														{
+															font-size: 10px;
+															border-color: @color-7;
+															padding-left: 35px !important;
+															
+															&.ng-dirty.ng-invalid
+															{
+																color: @warning-color;
+																border-color: @warning-color;
+															}
+														}
+													}
+												}
+												
+												ul[id="search-result"]
+												{
+													@m-ref: @content-padding - @unit;
+													
+													.set-size(90%,auto);
+													.box-sizing();
+													.set-bgc(white);
+													.set-pos(absolute);
+													top: 55px;
+													box-shadow: 0 0 @unit fadeout(black,75%);
+													padding: 15px;
+													margin: @unit 0 @m-ref 5%;
+													border-radius: 2 * @unit;
+													overflow-y: scroll;
+													max-height: 400px;
+													z-index: 2;
+													
+													div.result-wrapper
+													{
+														li
+														{
+															.set-size(100%);
+															#font > .lato(12px,@color-3,400);
+															cursor: pointer;
+															text-transform: uppercase;
+															
+															& + li
+															{
+																margin-top: @unit;
+															}
+														}
+													}
+												}
+												
+												&:first-child
+												{
+													margin-right: 2%;
+												}
 											}
 										}
 									}
