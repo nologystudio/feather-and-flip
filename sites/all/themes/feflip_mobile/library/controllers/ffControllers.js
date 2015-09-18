@@ -1805,8 +1805,8 @@
 			
 			$scope.$watch('isLoggedIn',function(_v){
 				if(!_v){
-					$scope.triggerState = messageType[1];
-					$scope.triggerOverlay();
+					//$scope.triggerState = messageType[1];
+					//$scope.triggerOverlay();
 				}
 			});
 			
