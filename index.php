@@ -28,6 +28,17 @@
 		</head>
 		<body ng-controller="AppController" data-state="sign-in" ng-init="user = false;view = ''">
 			
+			<!-- Newsletter Block -->
+			
+			<div id="newsletter-block" ng-controller="NewsletterController">
+				<small>
+					<button ng-click="openOverlay()" data-animate="1">
+						<strong>Join the adventure,</strong> subscribe to our newsletter 
+						<div class="icon-right-circle-full"></div>
+					</button>
+				</small>
+			</div>
+			
 			<!-- Header -->
 			
 			<header>

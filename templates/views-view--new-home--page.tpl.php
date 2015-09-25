@@ -1,20 +1,4 @@
 	
-	
-	<section id="newsletter-skinny" ng-controller="NewsletterController" ng-if="">
-		<div class="wrapper">
-			<!--<header>
-				<h4 data-animate="1">Join the adventure<span>Sign up for our newsletter</span></h4>
-			</header>-->
-			<form name="newsletterForm">
-				<h4>Join the adventure<span>Sign up for our newsletter</span></h4>
-                <small id="error"   class="animated fadeInUp" ng-if="currentStatus == 'error'">We're sorry, an error has occurred</small>
-                <small id="success" class="animated fadeInUp" ng-if="currentStatus == 'success'">Thanks!</small>
-                <input name="user-email" class="rounded" type="email" ng-if="currentStatus == 'still'" placeholder="Your email address" ng-model="signUpData.userEmail" required/>
-                <button class="go-btn" ng-if="currentStatus == 'still'" ng-class="{disabled:!newsletterForm.$valid}" ng-click="!newsletterForm.$valid || regSubmit()">GO</button>
-            </form>
-		</div>
-	</section>
-	
 	<!-- Main Block -->
 		
 	<main id="passported-intro">

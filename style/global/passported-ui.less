@@ -45,13 +45,17 @@
 					
 				.set-size(@grid-3);
 				.box-sizing();
-				.set-box-shadow(@shadow-color,0,0,@gutter);
 				.set-bgc(@ff-color-2);
 				.performance();
 				.set-opacity(0);
 				#align > .left;
 				margin: @gutter;
 				overflow: hidden;
+				
+				&.add-shadow
+				{
+					.set-box-shadow(@shadow-color,0,0,@gutter);
+				}
 				
 				figure
 				{
@@ -178,6 +182,11 @@
 				&.review
 				{
 					padding: @block-margin @block-margin/2;
+				}
+				
+				&.hidden
+				{
+					.hide();
 				}
 				
 				// Newsletter block style...
@@ -677,7 +686,7 @@
 										.animate-all();
 										.performance();
 										.hide();
-										border-radius: @unit;
+										//border-radius: @unit;
 										box-shadow: 0 0 @content-padding @shadow-color;
 										padding: @content-padding/2;
 										

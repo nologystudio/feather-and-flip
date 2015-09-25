@@ -64,7 +64,7 @@
 				</header>
 				<div class="wrapper-to-center">
 					<small ng-if="signInError">Your email or password are incorrect</small>
-					<input type="text"     class="half rounded" name="user-email"    placeholder="Your email"    ng-pattern="/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/" ng-class="{'warning':signInError}" ng-model="data.userEmail" required/>
+					<input type="text" class="half rounded" name="user-email"    placeholder="Your email"    ng-pattern="/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/" ng-class="{'warning':signInError}" ng-model="data.userEmail" required/>
 					<input type="password" class="half rounded" name="user-password" placeholder="Your password" ng-class="{'warning':signInError}" ng-model="data.userPassword" required/>
 				</div>
 				<footer>
@@ -72,6 +72,23 @@
 					<a id="new-password" ng-click="switcher('reset-password')">Forgot password? Reset here</a>
 				</footer>
 			</form>
+			
+			<!-- Newsletter -->
+			
+			<form id="newsletter-form" name="newsletterForm" ng-show="type == 'newsletter'">
+				<header>
+					<h1>JOIN THE ADVENTURE</h1>
+					<h2>Sign up for our newsletter</h2>
+					<h3 ng-if="newsStatus == 'error'" class="animated fadeInDown">We're sorry, an error has occurred</h3>
+					<h3 ng-if="newsStatus == 'success'" class="animated fadeInDown">Thanks!</h3>
+				</header>
+				<div class="wrapper-to-center">
+                	<input name="user-email" class="full rounded" type="email" ng-if="newsStatus == 'still'" placeholder="Your email address" ng-model="data.userEmail" required/>
+				</div>
+                <footer>
+	                <input type="submit" value="go" ng-class="{disabled:!newsletterForm.$valid}" ng-click="!newsletterForm.$valid || regNewsletter('in')"/>
+				</footer>
+            </form>
 			
 			<!-- Reset password -->
 			

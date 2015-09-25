@@ -1,5 +1,19 @@
 	
 	
+	<?php if(drupal_is_front_page()): ?>
+	
+	<!-- Newsletter -->
+	
+	<div id="newsletter-block">
+		<button class="icon-close"></button>
+		<button id="newsletter-trigger" data-animate="1">
+			<strong>Join the adventure,</strong> subscribe to our newsletter 
+			<div class="icon-right-circle-full"></div>
+		</button>
+	</div>
+	
+	<?php endif; ?>
+	
 	<!-- Header -->
 				
 	<header>

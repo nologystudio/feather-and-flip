@@ -45,6 +45,14 @@
 	        
 	        var scrolling = function(){
 		        
+		        $('#newsletter-block').waypoint(function(){
+			        
+			        var _t = $(this);
+			        
+			        $timeout(function(){_t.find('*[data-animate="1"]').addClass('animated fadeInDown')},200);
+					
+		        },{ offset: '0%' }); 
+		        
 		        $('body > header').waypoint(function(){
 			        
 			        var _t = $(this);
@@ -59,7 +67,7 @@
 					$timeout(function(){_t.find('*[data-animate="8"]').addClass('animated fadeIn')},1600);
 					$timeout(function(){_t.find('*[data-animate="9"]').addClass('animated fadeIn')},1800);
 					
-		        },{ offset: '0%' }); 
+		        },{ offset: '10%' }); 
 		        
 
 		        $('#passported-intro').waypoint(function(){
@@ -74,7 +82,7 @@
 					$timeout(function(){_t.find('*[data-animate="6"]').addClass('animated fadeInUp')},1200);
 					$timeout(function(){_t.find('*[data-animate="7"]').addClass('animated fadeInUp')},1400);
 					
-		        },{ offset: '0%' });  
+		        },{ offset: '10%' });  
 		        
 		        $('#inspiration').waypoint(function(){
 			        
@@ -535,15 +543,9 @@
 				
 				$scope.pick = _d;
 				
-				// 1. Bonvoyaging Itinerary...
-				
-				if(window.location.host == 'stage.passported.com' || window.location.host == 'www.passported.com'){
-					itSrc.get({'name':_d.name},function(_data){
-						//console.log(_data);
-					});
-				}
-				
-				// 2. Address Books
+				console.log($scope.pick)
+			
+				// 1. Address Books
 				
 				abookSrc.query({'destination':_d.id},function(_data){
 					
@@ -800,6 +802,7 @@
 				};
 				
 				yearRange.by('days',function(_m){
+					console.log(_m);
 					month.days[moment(_m._d).format('DD')] = moment(_m._d).format('MM/DD/YYYY');
 				});
 
@@ -888,6 +891,9 @@
 				
 				$scope.expand = config[0];
 				$('#travel-journal').css({'height':config[1]});
+				
+				//if(config[0] == 'view all') $('#travel-journal .quick-entry').hide();
+				//else $('#travel-journal .quick-entry').show().transition({opacity:1});
 			}
 			
 			$timeout(function(){
@@ -1036,7 +1042,8 @@
 			$scope.isLoading      = $scope.loading; 
 			$scope.triggerState   = messageType[0];
 			$scope.isSignPage     = $scope.view;
-			$scope.types   		  = ['sign-up','sign-in','response','reset-password','new-password','change-password']; 
+			$scope.types   		  = ['sign-up','sign-in','response','reset-password','new-password','change-password','newsletter']; 
+			$scope.newsStatus     = 'still';
 			$scope.type    	      = $scope.types[0];
 			$scope.display        = false;
 			$scope.resetPassword  = $scope.resetPassword;
@@ -1125,6 +1132,22 @@
 				$rootScope.$emit('display-overlay','');
 				$scope.type = $scope.types[0];
 				$scope.$apply();
+				_e.preventDefault();
+			});
+			
+			$('#newsletter-trigger').on('click',function(_e){
+				$rootScope.$emit('display-overlay','');
+				$scope.type = $scope.types[6];
+				$scope.$apply();
+				_e.preventDefault();
+			});
+			
+			$('#newsletter-block button.icon-close').on('click',function(_e){
+				$(this).parent().transition({top:'-100px'},function(){
+					$(this).remove();
+				});
+				$('body > header').transition({top:'0px'},function(){});
+				$('body > main[id="passported-intro"]').transition({top:'0px'},function(){});
 				_e.preventDefault();
 			});
 		});
@@ -1223,6 +1246,23 @@
 			        }
 	            }).
 	            error(function(){});
+			}
+			
+			$scope.regNewsletter= function(){
+				console.log('entrada');
+				/*$http({
+	                method  : 'POST',
+	                url     : formSubmit,
+	                data    : $.param(angular.extend({formID:'sign'+_id},$scope.data)),
+	                headers : { 
+	            		'Content-Type' : 'application/x-www-form-urlencoded'
+					},
+					transformRequest: angular.identity
+	            }).
+	            success(function(_data){
+		           
+	            }).
+	            error(function(){});*/
 			}
 			
 			$scope.changePassword = function(){

@@ -41,6 +41,11 @@
 		@grid-7: @wrapper-width/7;
 		@grid-8: @wrapper-width/8;
 		
+		@tile: 8px;
+		@tile2x: 16px;
+		@tile3x: 32px;
+		@tile4x: 54px;
+		
 		/* ~ Color ~ */
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 		
@@ -558,7 +563,7 @@
 											.box-sizing();
 											.animate-all();
 											.performance();
-											#font > .lato(14px,white,400);
+											#font > .lato(12px,white,400);
 											padding: 0 @content-padding/2;
 											margin-top: @content-padding;
 											display: inline-block;;
@@ -2220,8 +2225,12 @@
 				#align > .left;
 				overflow: hidden;
 				z-index: 2;
-				box-shadow: 0 0 @content-padding @shadow-color;
 				padding-bottom: 2 * @content-padding;
+				
+				&.add-shadow
+				{
+					box-shadow: 0 0 @content-padding @shadow-color;	
+				}
 				
 				header
 				{
@@ -3354,6 +3363,7 @@
 					{
 						.set-size(100%);
 						#align > .left;
+						margin-top: @content-padding/3;
 						
 						a,
 						small
@@ -3381,6 +3391,93 @@
 					
 					&[id="sign-in-form"]
 					{}
+				}
+			}
+		}
+		
+		div[id="newsletter-block"]
+		{
+			@h: @tile4x;
+			
+			.set-size(100%,@h);
+			.set-bgc(#242525);
+			.set-pos(fixed);
+			.set-coord();
+			.set-opacity(1);
+			.animate-all();
+			display: block;
+			overflow: hidden;
+			z-index: 5;
+			
+			button[id="newsletter-trigger"]
+			{
+				.reset();
+				.set-size(50%,@h);
+				.set-opacity(0);
+				.animate-opacity();
+				.performance();
+				#font > .lato(12px,@color-7,400);
+				#align > .center;
+				padding: 0 @unit;
+				line-height: @h;
+				text-transform: uppercase;
+				display: block;
+				
+				div[class*="icon-"]
+				{
+					.set-pos(absolute);
+					left: 50%;
+					top: 50%;
+					margin-top: -7px;
+					margin-left: 170px;
+				}
+			}
+			
+			& > button.icon-close
+			{
+				@s: @content-padding;
+				
+				.set-size(@s,@s);
+				.set-pos(absolute);
+				.set-bgc(transparent);
+				.set-opacity(0.5);
+				.performance();
+				.animate-opacity();
+				border: 0;
+				right: 2 * @unit;
+				top: 12px;
+				color: white;
+				display: block;
+				
+				&:hover
+				{
+					.set-opacity(1);
+				}
+			}
+			
+			& + header
+			{
+				top: @h;
+			}
+			
+			& + header + div.dropdown-wrapper
+			{
+				top: @header-height + @h;
+			}
+			
+			& + header + div.dropdown-wrapper + main[id="passported-intro"]
+			{
+				top: @h/2;
+			}
+			
+			&.hide
+			{
+				top: -@h;
+				
+				& + header,
+				& + header + div.dropdown-wrapper + main[id="passported-intro"]
+				{
+					top: 0;
 				}
 			}
 		}

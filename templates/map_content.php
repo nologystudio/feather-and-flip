@@ -40,7 +40,7 @@
 			    	</header>
 			    	<ul>
 				    	<li id="the-trip-block">
-				    		<a href="https://go.passported.com/user/voyages">
+				    		<a href="https://go.passported.com/itinerary/clone?destination={{pick.id}}">
 					    		<div class="circle-outline-icon plan-btn icon-edit"></div>
 					    		Plan your trip
 				    		</a>
