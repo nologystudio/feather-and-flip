@@ -1,5 +1,19 @@
 	
 	
+	<?php if(drupal_is_front_page()): ?>
+	
+	<!-- Newsletter -->
+	
+	<div id="newsletter-block">
+		<button class="icon-close"></button>
+		<button id="newsletter-trigger" data-animate="1">
+			<strong>Join the adventure,</strong> subscribe to our newsletter 
+			<div class="icon-right-circle-full"></div>
+		</button>
+	</div>
+	
+	<?php endif; ?>
+	
 	<!-- Header -->
 				
 	<header>
@@ -12,18 +26,19 @@
 		<nav>
 			<div class="wrapper align-center">
 				<a id="city-guides" href="/city-guides"    class="subnav" data-animate="3">city guides</a>
-				<a id="blog"        href="http://blog.passported.com" data-animate="4" target="_blank">travel journal</a>
-				<a id="book-hotels" href="/book-hotels"    data-animate="5">book hotels</a>
-				<a id="search"      class="subnav" ng-click="triggerSearch()" data-animate="6">search</a>
+				<a id="itinerary-planner" href="//go.passported.com" data-animate="4">itinerary planner</a>
+				<a id="blog"        href="http://blog.passported.com" data-animate="5" target="_blank">travel journal</a>
+				<a id="book-hotels" href="/book-hotels" data-animate="6">book hotels</a>
+				<a id="search"      class="subnav" ng-click="triggerSearch()" data-animate="7">search</a>
 			</div>
 			<div class="wrapper align-right">
 				<?php if (!user_is_logged_in()): ?>
-					<a id="sign-in" href="/sign-in" data-animate="7">Sign in</a>
-					<a id="sign-up" href="/sign-up" data-animate="8">Sign up</a>
+					<a id="sign-in" href="/sign-in" data-animate="8">Sign in</a>
+					<a id="sign-up" href="/sign-up" data-animate="9">Sign up</a>
 				<?php else: ?>
 					<?php global $user; ?>
-					<a id="sign-out" href="/user/logout" data-animate="7">Sign out</a>
-					<a id="user" href="https://go.passported.com/user/voyages" data-animate="8"><?php echo $user->name; ?></a>
+					<a id="sign-out" href="/user/logout" data-animate="8">Sign out</a>
+					<a id="user" href="https://go.passported.com/user/voyages" data-animate="9"><?php echo $user->name; ?></a>
 				<?php endif; ?>
 			</div>
 		</nav>
@@ -73,7 +88,7 @@
 				<?php if(!drupal_is_front_page()): ?>
 					<div id="let-us-inspire" data-animate="1" ng-controller="InspirationController">
 						<header>
-							<h4>Let us Inspire you</h4>
+							<h4>Find Your Perfect Trip</h4>
 						</header>
 						<div class="wrapper">
 							<div pp-inspiration-select id="place-select" class="select" data-options="adventure|beach|city|countryside|ski">

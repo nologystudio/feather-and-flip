@@ -8,10 +8,8 @@
             $featured = array_shift($view->result);
             $orig_date = strtotime($featured->field_field_original_pubdate[0]['raw']['safe_value']);
             $img_url = '';
-            if(isset($featured->field_field_image[0]['raw']['fid'])){
-                $file = file_load($featured->field_field_image[0]['raw']['fid']);
-                $img_url = image_style_url('post_image_large', $file->uri);
-            }
+            if(isset($featured->field_field_image[0]['raw']['uri']))
+                $img_url = image_style_url('post_image_large', $featured->field_field_image[0]['raw']['uri']);
             $img_wh = (empty($img_url) ? array('', '') : getimagesize($img_url));
             ?>
             <a class="quick-entry featured" href="<?php echo $featured->field_field_original_url[0]['raw']['safe_value']; ?>" target="_blank" data-animate="2">
@@ -36,10 +34,8 @@
                                 $type = 'entry';
                         $orig_date = strtotime($post->field_field_original_pubdate[0]['raw']['safe_value']);
                         $img_url = '';
-                        if(isset($post->field_field_image[0]['raw']['fid'])) {
-                            $file = file_load($post->field_field_image[0]['raw']['fid']);
-                            $img_url = image_style_url('post_image', $file->uri);
-                        }
+                        if(isset($post->field_field_image[0]['raw']['uri']))
+                            $img_url = image_style_url('post_image', $post->field_field_image[0]['raw']['uri']);
                         $img_wh = (empty($img_url) ? array('', '') : getimagesize($img_url));
 
                         if (!$img_wh){
@@ -54,9 +50,9 @@
                                     <time datetime="<?php echo date('Y-m-d i:s', $orig_date); ?>"><?php echo date('F, Y', $orig_date); ?></time>
                                 </a>
                             <?php break;
-
+                             
                             default: ?>
-                                <a data-animate="<?php echo $i; ?>" class="quick-entry" data-size="<?php echo $img_wh[0].'x'.$img_wh[1]; ?>" target="_blank" href="<?php echo $post->field_field_original_url[0]['raw']['safe_value']; ?>">
+                                <a data-animate="<?php echo $i; ?>" class="quick-entry <?php if($i >= 9) echo 'hidden'; ?>" data-size="<?php echo $img_wh[0].'x'.$img_wh[1]; ?>" target="_blank" href="<?php echo $post->field_field_original_url[0]['raw']['safe_value']; ?>">
                                     <figure>
                                             <img style="width:<?php echo $img_wh[0].'px'; ?>;height:<?php echo $img_wh[1].'px'; ?>" src="<?php echo $img_url; ?>" alt=""/>
                                     </figure>
@@ -67,7 +63,7 @@
                                 </a>
                             <?php break;
                         }
-                        $i++; ?>
+                        $i++; ?>                        
                 <?php } ?>
             </div>
         <?php endif; ?>

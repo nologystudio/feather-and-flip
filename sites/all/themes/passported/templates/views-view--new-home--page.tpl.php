@@ -1,5 +1,4 @@
 	
-	
 	<!-- Main Block -->
 		
 	<main id="passported-intro">
@@ -7,17 +6,17 @@
 			<li>
 				<h1 data-animate="1">Sophisticated family travel simplified</h1>
 				<ul class="align-center">
-					<li ng-click="goTo('plan')">
-						<h2 data-animate="2">Plan</h2>
-						<a href="/city-guides"><h3 data-animate="3">Find the ideal destination and hotel for your particular FAMILY needs</h3></a>
-					</li>
-					<li ng-click="goTo('explore')">
+					<li ng-click="goToURL('explore')">
 						<h2 data-animate="4">Explore</h2>
-						<a href="https://go.passported.com"><h3 data-animate="5">Parent-scouted picks and itineraries that you can customize</h3></a>
+						<a href="/city-guides"><h3 data-animate="5">Explore our city guides</h3></a>
 					</li>
-					<li ng-click="goTo('book')">
+					<li ng-click="goToURL('plan')">
+						<h2 data-animate="2">Plan</h2>
+						<a href="https://blog.passported.com"><h3 data-animate="3">Create your itinerary</h3></a>
+					</li>
+					<li ng-click="goToURL('book')">
 						<h2 data-animate="6">Book</h2>
-						<a href="/book"><h3 data-animate="7">We book your hotel. You can call or e-mail our hotel expert</h3></a>
+						<a href="/booking"><h3 data-animate="7">Email our hotel expert</h3></a>
 					</li>
 				</ul>
 			</li>
@@ -30,7 +29,7 @@
 		<div class="wrapper grid-2 align-center" ng-controller="InspirationController">
 			<div id="let-us-inspire" data-animate="1">
 				<header>
-					<h4>Let us Inspire you</h4>
+					<h4>Find Your Perfect Trip</h4>
 				</header>
 				<div class="wrapper">
 					<div pp-inspiration-select id="place-select" class="select" data-options="adventure|beach|city|countryside|ski">
@@ -56,8 +55,8 @@
 	<section id="how-it-works">
 		<header>
 			<h4 data-animate="1">
-				Spotlight 
-				<span>On</span>
+				Spotlight On
+				<span>Itineraries & City Guides</span>
 			</h4>
 		</header>
 		<div class="promoted-grid align-center" ng-controller="PromotedController">
@@ -83,7 +82,7 @@
 	</section>
 	
 	<!-- newsletter -->
-	
+	<!--
 	<section id="newsletter" ng-controller="NewsletterController">
 		<div class="wrapper">
 			<header>
@@ -97,6 +96,7 @@
             </form>
 		</div>
 	</section>
+	-->
 	
 	<!-- Blog -->
 	
