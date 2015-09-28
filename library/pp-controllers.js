@@ -543,8 +543,6 @@
 				
 				$scope.pick = _d;
 				
-				console.log($scope.pick)
-			
 				// 1. Address Books
 				
 				abookSrc.query({'destination':_d.id},function(_data){
@@ -802,8 +800,7 @@
 				};
 				
 				yearRange.by('days',function(_m){
-					console.log(_m);
-					month.days[moment(_m._d).format('DD')] = moment(_m._d).format('MM/DD/YYYY');
+					month.days[moment(_m._d).format('D')] = moment(_m._d).format('MM/DD/YYYY');
 				});
 
 				return month;

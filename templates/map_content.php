@@ -13,7 +13,7 @@
 			    	<li ng-repeat="place in destinations">
 			    		<button ng-click="displayDestination(place)" class="animated fadeIn">
 				    		<figure>
-				    			<img ng-src="{{place.images[0][0].src}}" alt="{{place.name}}" class="animated fadeIn"/>
+				    			<img ng-src="{{place.images[0][0].src_400}}" alt="{{place.name}}" class="animated fadeIn"/>
 				    		</figure>
 				    		<div role="figcaption">
 					    		<h2>{{place.name}}</h2>
@@ -34,7 +34,7 @@
 		    	<div class="wrapper" ng-if="itineraryIsReady">
 			    	<header>
 				    	<figure>
-				    		<img ng-src="{{pick.images[0][0].src}}" class="animated fadeIn"/>
+				    		<img ng-src="{{pick.images[0][0].src_800}}" class="animated fadeIn"/>
 				    	</figure>
 				    	<h1>{{pick.name}}</h1>
 			    	</header>
