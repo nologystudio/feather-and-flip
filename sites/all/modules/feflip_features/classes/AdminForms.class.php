@@ -827,6 +827,11 @@ class AdminForms
         $wrapper->field_children            = $inputValues['children'];
         $wrapper->field_budget_ratio        = $inputValues['budget'];
         $wrapper->field_contact_message     = $inputValues['message'];
+        $wrapper->field_form_destination    = $inputValues['destination'];
+        $wrapper->field_form_hotel          = $inputValues['hotel'];
+        $wrapper->field_first_name          = $inputValues['name'];
+        $wrapper->field_last_name           = $inputValues['last'];
+        $wrapper->field_specific_budget     = $inputValues['specific_budget'];
 
         //Done!
         $wrapper->save();
