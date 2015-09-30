@@ -56,6 +56,21 @@ class AdminForms
                         user_save($account, array('pass' => $password));
                     }
                 }
+                else {
+                    // Check if the user is an imported user
+                    if (isset($account->field_bv_password) && !empty($account->field_bv_password['und'][0]['value'])) {
+                        // Double check user, check rails encryption
+                        $acpass = $account->field_bv_password['und'][0]['value'];
+                        $salt = substr($acpass, 0, 29);
+                        $is_bvuser =  crypt($password, $salt) == $acpass ? true : false;
+                        if ($is_bvuser){
+                            $account->field_password_rehashed['und'][0]['value'] = 1;
+                            user_save($account, array('pass' => $password));
+                            watchdog('BV user control', 'Rehashed password for '. $name);
+                            $uid = $account->uid;
+                        }
+                    }
+                }
             }
         }
         return $uid;

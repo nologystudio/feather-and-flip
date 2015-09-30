@@ -13,7 +13,7 @@
 			    	<li ng-repeat="place in destinations">
 			    		<button ng-click="displayDestination(place)" class="animated fadeIn">
 				    		<figure>
-				    			<img ng-src="{{place.images[0][0].src}}" alt="{{place.name}}"/>
+				    			<img ng-src="{{place.images[0][0].src_400}}" alt="{{place.name}}" class="animated fadeIn"/>
 				    		</figure>
 				    		<div role="figcaption">
 					    		<h2>{{place.name}}</h2>
@@ -27,20 +27,22 @@
 		    <li id="step-2">
 		    	<aside>
 			    	<button rel="menu" ng-click="goTo(1)" ng-if="!cityGuideID" class="icon-back"></button>
-					<button ng-repeat="type in selectedDestination.summaries" rel="{{type.name}}" ng-click="filterMap(type.name)" ng-class="{'on':bookFilter == type.name}"></button>
+			    	<button rel="stay" ng-click="filterMap('stay')" ng-class="{'on':filter == 'stay'}"></button>
+			    	<button ng-repeat="(key,value) in pick.guide_by_category" rel="{{key}}" ng-click="filterMap(key)" ng-class="{'on':filter == key}" ng-if="value.length > 0"></button>
+			    	<button class="view-all" ng-click="filterMap(undefined)">view all</button>
 				</aside>
 		    	<div class="wrapper" ng-if="itineraryIsReady">
 			    	<header>
 				    	<figure>
-				    		<img ng-src="{{pick.images[0][0].src}}" class="animated fadeIn"/>
+				    		<img ng-src="{{pick.images[0][0].src_800}}" class="animated fadeIn"/>
 				    	</figure>
 				    	<h1>{{pick.name}}</h1>
 			    	</header>
 			    	<ul>
 				    	<li id="the-trip-block">
-				    		<a href="https://go.passported.com/user/voyages">
+				    		<a href="https://go.passported.com/itinerary/clone?destination={{pick.id}}">
 					    		<div class="circle-outline-icon plan-btn icon-edit"></div>
-					    		Plan your trip
+					    		Create An Itinerary
 				    		</a>
 				    	</li>
 				    	<li id="destination-block">
@@ -54,23 +56,23 @@
 				    		<small>{{pick.lat}} Lat, {{pick.lon}} Lon</small>
 				    		<h3 ng-bind-html="pick.description"></h3>
 				    	</li>
-				    	<li id="hotel-block">
+				    	<li id="hotel-block" ng-if="pick.hotels.length > 0" ng-show="filter == 'stay' || filter == undefined">
 				    		<header>
 					    		STAY
 					    		<div class="filter-wrapper">
-						    		<div pp-filter filter-state="true" id="{{type}}" class="filter">
+						    		<div pp-filter filter-state="false" ng-repeat="hotelFilter in hotelFilters track by $index" id="{{hotelFilter}}" data-filters="hotel {{hotelFilter}}" class="filter hotel">
 							    		<button class="radio-btn">
-							    			View all<span></span>
+							    			{{hotelFilter}}<span></span>
 							    		</button>
 						    		</div>
-						    		<div pp-filter filter-state="false" id="{{type}}" class="filter">
+						    		<div pp-filter filter-state="true" id="all" class="filter hotel" ng-if="">
 							    		<button class="radio-btn">
-							    			Type<span></span>
+							    			view all<span></span>
 							    		</button>
 						    		</div>
 					    		</div>
 				    		</header>
-				    		<article id="hotel" ng-repeat="hotel in pick.hotels">
+				    		<article ng-repeat="hotel in pick.hotels" class="hotel {{setClass(hotel.guide_categories)}}">
 					    		<div class="icon-hotel"></div>
 			    				<header>
 				    				<h4>{{hotel.name}}</h4>
@@ -82,67 +84,72 @@
 				    			<div pp-hotel-gallery class="slideshow">
 					    			<ul>
 						    			<li ng-repeat="image in hotel.images[0]">
-											<img ng-src="{{image.src}}" alt=""/>
+											<img ng-src="{{image.src_400}}" alt=""/>
 										</li>
 					    			</ul>
 					    			<button rel="right" class="icon-right-circle-full"></button>
 					    			<button rel="left" class="icon-left-circle-full"></button>
 				    			</div>
 				    			<div id="curated" ng-repeat="content in hotel.content_blocks[0]">
-					    			<div class="divider {{content.title}}">
-						    			<span class="icon-{{getIcon(content.title)}}"></span>
+					    			<div class="divider">
+						    			<span class="icon {{content.title}}"></span>
 						    			{{content.title}}
 						    			<div class="line"></div>
 						    		</div>
 									<!-- Rich text -->
-					    			<ul ng-if="check.features(content.description)">
+					    			<ul ng-if="content.features.length == 1" class="clear">
 						    			<li ng-bind-html="content.description"></li>
 						    		</ul>
 									<!-- Plain text -->
-					    			<ul ng-if="!check.features(content.description)">
+					    			<ul ng-if="content.features.length > 1">
 						    			<li ng-repeat="feature in content.features" ng-bind-html="feature"></li>
 					    			</ul>
 				    			</div>
 			    			</article>
 				    	</li>
 				    	<li id="guide">
-							<header>
-					    		Section
-					    		<div class="filter-wrapper">
-						    		<div pp-filter filter-state="true" id="{{type}}" class="filter">
-							    		<button class="radio-btn">
-							    			View all<span></span>
-							    		</button>
+				    		<div ng-repeat="(key,value) in pick.guide_by_category" id="guide-wrapper" class="{{key}}" ng-if="value.length > 0" ng-show="filter == key || filter == undefined">
+								<header>
+						    		{{key}}
+						    		<div class="filter-wrapper">
+							    		<div pp-filter filter-state="false" ng-repeat="addressFilter in addressFilters[key] track by $index" id="{{addressFilter}}" data-filters="address-book {{key}} {{addressFilter}}" class="filter address-book {{key}}">
+								    		<button class="radio-btn">
+								    			<span></span>
+								    			{{addressFilter}}
+								    		</button>
+							    		</div>
+							    		<div pp-filter filter-state="true" id="all" class="filter {{key}}" ng-if="">
+								    		<button class="radio-btn">
+								    			view all<span></span>
+								    		</button>
+							    		</div>
 						    		</div>
-						    		<div pp-filter filter-state="false" id="{{filter}}" class="filter">
-							    		<button class="radio-btn">
-							    			<span></span>
-							    			filter
-							    		</button>
-						    		</div>
-					    		</div>
-				    		</header>
-				    		<ul>
-					    		<li ng-repeat="address in pick.guide">
-					    			<div class="icon icon-{{getIcon(address.assoc_interests)}}"></div>
-					    			<h4>{{address.title}}</h4>
-					    			<h5 ng-bind-html="address.short_review"></h5>
-					    			<footer>
-						    			<span class="tel" ng-if="!check.phone(address.phone_number)">{{address.phone_number}}</span>
-						    			<span class="url">
-						    				<a href="{{address.website}}" target="_blank">{{address.website}}</a>
-						    			</span>
-					    			</footer>
-					    		</li>
-				    		</ul>
+					    		</header>
+					    		<ul>
+						    		<li ng-repeat="address in value" class="address-book {{key}} {{setClass(address.guide_categories)}}">
+						    			<div class="icon {{key}}"></div>
+						    			<h4>{{address.title}}</h4>
+						    			<h5 ng-bind-html="address.short_review"></h5>
+						    			<footer>
+							    			<span class="tel" ng-if="!check.phone(address.phone_number)">{{address.phone_number}}</span>
+							    			<span class="url">
+							    				<a href="{{address.website}}" target="_blank">WEB</a>
+							    			</span>
+							    			<span class="hours" ng-if="address.hours">
+							    				HOURS
+							    				<ul><li ng-repeat="hour in address.hours">{{hour}}</li></ul>
+							    			</span>
+						    			</footer>
+						    		</li>
+					    		</ul>
+				    		</div>
 						</li>
 			    	</ul>
 		    	</div>
 		    </li>
     	</ul>
-
     </div>
-	<button class="aside-trigger" ng-click="openAside()" data-animate="2">
+	<button class="aside-trigger" ng-click="openLeftAside()" data-animate="2">
 		<span class="icon-arrow-right"></span>
 		<svg>
 			<path d="M 0,0 L 50,50 L 0,100 L 0,0"/>
@@ -151,7 +158,7 @@
 </aside>
 <aside class="right" ng-controller="BookingController" ng-class="{'on':showRightAside}">
 	<div class="wrapper">
-		<div class="error" ng-if="error" class="animated fadeInDown">
+		<div class="error animated fadeInDown" ng-if="error">
 			<span>{{error}}</span>
 		</div>
 		<button class="icon-close" ng-click="openAside()"></button>
@@ -165,6 +172,42 @@
 					    	<h3>{{booking.destination}}</h3>
 				    		<h4>{{booking.hotel}}</h4>
 				    	</div>
+				    	<div class="destination-hotel-wrapper" ng-if="!booking.destination && !booking.hotel">
+					    	<div id="search-destination" ng-controller="SearchController">
+								<div class="wrapper">
+									<form>
+										<span class="icon-search"></span>
+										<input type="text" class="rounded" ng-model="userSearch" ng-change="searchSubmit()" placeholder="Enter your destination"/>
+									</form>
+								</div>
+<!--
+								<ul id="search-result" ng-if="showResult" class="animated fadeIn">
+									<div class="result-wrapper" ng-if="destinations.length > 0">
+										<li ng-repeat="destination in destinations" ng-click="setter.value(userSearch,destination.title)">
+											{{destination.title}}
+										</li>
+									</div>
+								</ul>
+-->
+							</div>
+							<div id="search-destination" ng-controller="SearchController">
+								<div class="wrapper">
+									<form>
+										<span class="icon-search"></span>
+										<input type="text" class="rounded" ng-model="userSearch" ng-change="searchSubmit()" placeholder="Enter your hotel"/>
+									</form>
+								</div>
+<!--
+								<ul id="search-result" ng-if="showResult" class="animated fadeIn">
+									<div class="result-wrapper" ng-if="hotels.length > 0">
+										<li ng-repeat="hotel in hotels" ng-click="closeResult(userSearch,hotel.title)">
+											{{hotel.title}}
+										</li>
+									</div>
+								</ul>
+-->
+							</div>
+				    	</div>
 			    	</div>
 		    	</header>
 		    	<ul>
@@ -176,7 +219,7 @@
 			    	</li>
 			    	<li id="email-entry">
 			    		Drop us an e-mail or fill out the form below
-			    		<a href="/contact" class="icon circle-btn icon-email" target="_blank"></a>
+			    		<a href="mailto:info@passported.com" class="icon circle-btn icon-email" target="_blank"></a>
 			    	</li>
 			    	<li>
 			    		<form name="bookingForm">
@@ -244,27 +287,27 @@
 					    		<li>
 					    			<label>Number of Adults</label>
 					    			<div class="circle-input-wrapper">
-					    				<input type="text" ng-model="booking.adults" ng-pattern="/^[0-9]+$/" maxlength="1" required/>
+					    				<input type="text" ng-model="booking.adults" ng-pattern="/^[0-9]+$/" maxlength="1" ng-focus="booking.adults = undefined" required/>
 					    			</div>
 					    		</li>
 					    		<li>
 					    			<label>Number of Children</label>
 					    			<div class="circle-input-wrapper">
-					    				<input type="text" ng-model="booking.children" ng-pattern="/^[0-9]+$/" maxlength="1"/>
+					    				<input type="text" ng-model="booking.children" ng-pattern="/^[0-9]+$/" maxlength="1" ng-focus="booking.children = undefined"/>
 					    			</div>
 					    		</li>
 					    		<li>
 					    			<label>Budget per Night<label>
 					    			<div class="budget-check" ng-click="setter.budget('400$-800$')">
-						    			400$-800$
+						    			$400-$800
 						    			<span></span>
 					    			</div>
 					    			<div class="budget-check" ng-click="setter.budget('800$-1200$')">
-						    			800$-1200$
+						    			$800-$1200
 						    			<span></span>
 					    			</div>
 					    			<div class="budget-check" ng-click="setter.budget('1200$+')">
-						    			1200$+
+						    			$1200+
 						    			<span></span>
 					    			</div>
 					    			<input type="text" class="rounded" placeholder="other" ng-model="booking.specific_budget"/>

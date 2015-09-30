@@ -28,7 +28,7 @@
 		angular.module('ffApp',[
 			'ngRoute',
 			'ngSanitize',
-            'ngCookies',
+			'ngCookies',
 			'ffControllers'
 		]);
         
