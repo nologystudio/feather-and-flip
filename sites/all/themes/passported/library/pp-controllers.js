@@ -420,7 +420,11 @@
 							});
 							
 							destinationMarkers.push(destination);
-					    });
+							bounds.extend(destination.position);
+						});
+						
+						$scope.map.fitBounds(bounds);
+				    
 				    break;
 				    case 'guide':
 				    
@@ -795,7 +799,6 @@
 										$scope.error = "Please make sure you have selected correct adults";
 									else 
 										$scope.error = false;
-										
 								break;
 							}
 						}
@@ -907,24 +910,37 @@
 		    
 		    var grid    = $('.grid-wrapper');
 			var entries = $('.grid-wrapper *.quick-entry').toArray();
+			var hiddenEntries = $('.grid-wrapper *.hidden').toArray();
+			var _height = $('#travel-journal').height();
 			
 			$scope.expand = 'view all';
 			
 			$scope.viewAll = function(){
 				
-				var config = ($scope.expand == 'view all') ? ['view less','auto'] : ['view all','1400px'];
+				var config = ($scope.expand == 'view all') ? ['view less','auto'] : ['view all',_height+'px'];
 				
 				$scope.expand = config[0];
-				//$('#travel-journal').css({'height':config[1]});
+				$('#travel-journal').css({height:config[1]});
 				
-				//if(config[0] == 'view all') $('#travel-journal .quick-entry').hide();
-				//else $('#travel-journal .quick-entry').show().transition({opacity:1});
+				switch(config[0]){
+					case 'view all':
+						// This case is when the user expands the block
+						$('#travel-journal .hidden').transition({opacity:0},function(){
+							$(this).hide();
+						});
+					break;
+					case 'view less':
+						// This case is when the user collapses the block
+						$('#travel-journal .hidden').show().transition({opacity:1});
+					break;
+				}
 			}
 			
 			$timeout(function(){
 				grid.shuffle({
 					itemSelector: '.quick-entry'
 				});
+				$('.grid-wrapper *.hidden').css({opacity:0});
 			},0);
 		});
 	    
@@ -1173,11 +1189,12 @@
 				});
 				$('body > header').transition({top:'0px'},function(){});
 				$('body > main[id="passported-intro"]').transition({top:'0px'},function(){});
+				$cookies.put('nUser',true);
 				_e.preventDefault();
 			});
 		});
 		
-		ppControllers.controller('SignController',function($scope,$http,$cookies){
+		ppControllers.controller('SignController',function($scope,$http,$timeout,$cookies){
 			
 			$scope.response		 = ['success','error','error-in-login'];
 			$scope.rMessage 	 = '';
@@ -1287,6 +1304,10 @@
 	            }).
 	            success(function(_data){
 		            $scope.newsStatus = 'success';
+		            $timeout(function(){
+			            $scope.closeOverlay();
+			            $('#newsletter-block button.icon-close').trigger('click');
+			        },1000);
 		        }).
 	            error(function(){
 		            $scope.newsStatus = 'error';
