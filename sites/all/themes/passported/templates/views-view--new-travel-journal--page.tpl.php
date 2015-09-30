@@ -52,9 +52,9 @@
                             <?php break;
                              
                             default: ?>
-                                <a data-animate="<?php echo $i; ?>" class="quick-entry <?php if($i >= 9) echo 'hidden'; ?>" data-size="<?php echo $img_wh[0].'x'.$img_wh[1]; ?>" target="_blank" href="<?php echo $post->field_field_original_url[0]['raw']['safe_value']; ?>">
+                                <a <?php if($i < 9) echo 'data-animate="'.$i.'"'; ?> class="quick-entry <?php if($i >= 9) echo 'hidden'; ?>" data-size="<?php echo $img_wh[0].'x'.$img_wh[1]; ?>" target="_blank" href="<?php echo $post->field_field_original_url[0]['raw']['safe_value']; ?>">
                                     <figure>
-                                            <img style="width:<?php echo $img_wh[0].'px'; ?>;height:<?php echo $img_wh[1].'px'; ?>" src="<?php echo $img_url; ?>" alt=""/>
+                                        <img style="width:<?php echo $img_wh[0].'px'; ?>;height:<?php echo $img_wh[1].'px'; ?>" src="<?php echo $img_url; ?>" alt=""/>
                                     </figure>
                                     <footer>
                                             <h4><?php echo $post->node_title; ?></h4>
