@@ -1,6 +1,6 @@
 	
 	
-	<?php if(drupal_is_front_page()): ?>
+	<?php if(drupal_is_front_page() && !user_is_logged_in()): ?>
 	
 	<!-- Newsletter -->
 	

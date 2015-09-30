@@ -27,7 +27,7 @@
 			<ul>
 				<li><span class="icon destinations"></span>destinations</li>
 				<?php foreach ($footer_destinations_menu as $destination){ ?>
-				<li><a href="<?php echo $destination['url'].'/hotel-reviews'; ?>"><?php echo $destination['withcountry']?></a></li>
+				<li><a href="<?php echo $destination['url'].'/city-guide'; ?>"><?php echo $destination['withcountry']?></a></li>
 				<?php } ?>
 			</ul>
 			<ul>

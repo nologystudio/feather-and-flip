@@ -477,7 +477,7 @@
 		    
 		    var refiltering = function(_filter){
 			    _.map(markers,function(_m){
-				    if(_m.type != _filter || !_.isUndefined(_filter)) _m.setMap(null);
+				    if(_m.type != _filter && !_.isUndefined(_filter)) _m.setMap(null);
 				    else _m.setMap($scope.map);
 				});
 		    }
