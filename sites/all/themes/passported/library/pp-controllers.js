@@ -915,7 +915,7 @@
 				var config = ($scope.expand == 'view all') ? ['view less','auto'] : ['view all','1400px'];
 				
 				$scope.expand = config[0];
-				$('#travel-journal').css({'height':config[1]});
+				//$('#travel-journal').css({'height':config[1]});
 				
 				//if(config[0] == 'view all') $('#travel-journal .quick-entry').hide();
 				//else $('#travel-journal .quick-entry').show().transition({opacity:1});
