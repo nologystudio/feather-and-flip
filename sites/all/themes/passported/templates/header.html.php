@@ -20,13 +20,12 @@
 		<a href="/">
 			<figure>
 				<img src="<?php echo drupal_get_path('theme', 'passported'); ?>/media/brand/passported-logo.svg" type="image/svg+xml" alt="Passported, kid friendly travel for grown-ups" data-animate="1"/> 								
-				<figcaption data-animate="2">Kid friendly travel for grown-ups</figcaption>
 			</figure>
 		</a>
 		<nav>
 			<div class="wrapper align-center">
-				<a id="city-guides" href="/city-guides"    class="subnav" data-animate="3">city guides</a>
-				<a id="itinerary-planner" href="//go.passported.com" data-animate="4">itinerary planner</a>
+				<a id="city-guides" href="/city-guides" class="subnav" data-animate="3">city guides</a>
+				<a id="itinerary-planner" href="https//go.passported.com" data-animate="4">itinerary planner</a>
 				<a id="blog"        href="http://blog.passported.com" data-animate="5" target="_blank">travel journal</a>
 				<a id="book-hotels" href="/book-hotels" data-animate="6">book hotels</a>
 				<a id="search"      class="subnav" ng-click="triggerSearch()" data-animate="7">search</a>

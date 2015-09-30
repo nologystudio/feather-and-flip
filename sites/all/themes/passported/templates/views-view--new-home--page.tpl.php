@@ -6,17 +6,17 @@
 			<li>
 				<h1 data-animate="1">Sophisticated family travel simplified</h1>
 				<ul class="align-center">
-					<li ng-click="goToURL('explore')">
+					<li ng-click="goToURL('city-guides')">
 						<h2 data-animate="4">Explore</h2>
 						<a href="/city-guides"><h3 data-animate="5">Explore our city guides</h3></a>
 					</li>
-					<li ng-click="goToURL('plan')">
+					<li ng-click="goToURL('https://blog.passported.com')">
 						<h2 data-animate="2">Plan</h2>
-						<a href="https://blog.passported.com"><h3 data-animate="3">Create your itinerary</h3></a>
+						<a href="http://blog.passported.com"><h3 data-animate="3">Create your itinerary</h3></a>
 					</li>
-					<li ng-click="goToURL('book')">
+					<li ng-click="goToURL('book-hotels')">
 						<h2 data-animate="6">Book</h2>
-						<a href="/booking"><h3 data-animate="7">Email our hotel expert</h3></a>
+						<a href="/book-hotels"><h3 data-animate="7">Email our hotel expert</h3></a>
 					</li>
 				</ul>
 			</li>

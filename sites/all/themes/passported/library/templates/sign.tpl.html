@@ -86,7 +86,7 @@
                 	<input name="user-email" class="full rounded" type="email" ng-if="newsStatus == 'still'" placeholder="Your email address" ng-model="data.userEmail" required/>
 				</div>
                 <footer>
-	                <input type="submit" value="go" ng-class="{disabled:!newsletterForm.$valid}" ng-click="!newsletterForm.$valid || regNewsletter('in')"/>
+	                <input type="submit" value="go" ng-class="{disabled:!newsletterForm.$valid}" ng-click="!newsletterForm.$valid || regNewsletter()"/>
 				</footer>
             </form>
 			

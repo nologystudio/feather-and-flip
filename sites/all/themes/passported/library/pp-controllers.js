@@ -138,8 +138,7 @@
 			        
 			        var _t = $(this);
 			        
-			        $log.info('The map is visible now');
-			        triggerGoogleEvent('map');
+					triggerGoogleEvent('map');
 			        
 			        $timeout(function(){_t.find('*[data-animate="1"]').addClass('animated fadeIn')},200);
 			        $timeout(function(){_t.find('*[data-animate="2"]').addClass('animated fadeInLeft')},400);
@@ -151,8 +150,7 @@
 			        
 			        var _t = $(this);
 			        
-			        $log.info('The blog is visible now');
-					triggerGoogleEvent('travel-journal');
+			        triggerGoogleEvent('travel-journal');
 					
 			    	$timeout(function(){_t.find('*[data-animate="1"]').addClass('animated fadeInUp')},200);
 			    	$timeout(function(){_t.find('*[data-animate="2"]').addClass('animated fadeIn')},400);
@@ -163,8 +161,7 @@
 			        
 			        var _t = $(this);
 			        
-			        $log.info('The press block is visible now');
-					triggerGoogleEvent('press');
+			        triggerGoogleEvent('press');
 					
 			        $timeout(function(){_t.find('*[data-animate="1"]').addClass('animated fadeInDown')},200);
 			        $timeout(function(){_t.find('*[data-animate="2"]').addClass('animated fadeInDown')},400);
@@ -181,7 +178,6 @@
 			        
 			        var _t = $(this);
 			        
-			        $log.info('The footer is visible now');
 			        $timeout(function(){_t.find('*[data-animate="1"]').addClass('animated fadeInDown')},200);
 			        
 		        },{ offset: '75%' });
@@ -305,12 +301,16 @@
 	    /* City Guide Controller
         ---------------------------------------------------------------------------------------------------------------- */
 	    
-	    ppControllers.controller('MapController',function($scope,$log,$timeout){
+	    ppControllers.controller('MapController',function($scope,$rootScope,$log,$timeout){
 		    
 		    $scope.map;
 		    $scope.lat = 30;
 		    $scope.lon = -30;
 		    $scope.inspirationSearch;
+		    
+		    var bounds = new google.maps.LatLngBounds();
+		    var markers = [];
+		    var destinationMarkers = [];
 		    
 			var mapID = 'passported';
 		    var setMapHeight = function(){
@@ -418,6 +418,8 @@
 								$scope.map.setZoom(15);
 								$scope.map.setCenter(destination.getPosition());
 							});
+							
+							destinationMarkers.push(destination);
 					    });
 				    break;
 				    case 'guide':
@@ -425,24 +427,32 @@
 				    	var zoom   = (_data.zoom_level.length == 0) ? 12 : Number(_data.zoom_level);
 						var latLng = (_data.addressbook_reference.length == 0) ? [_data.lat,_data.lon] : [_data.addressbook_reference.lat,_data.addressbook_reference.lon];
 						var detail = [_data.guide,_data.hotels];
+						
+						_.map(destinationMarkers,function(_d){
+							_d.setMap(null);
+							_d = null;
+						});
 					    
 				    	_.map(detail,function(_d){
 					    	_.map(_d,function(_p){
 						    	
-						    	var _interest = (!_.isUndefined(_p.assoc_interests)) ? _p.assoc_interests.toLowerCase() : 'map';
+						    	var _interest = (!_.isUndefined(_p.assoc_interests)) ? _p.assoc_interests.toLowerCase() : 'stay';
+						    	var _title    = (!_.isUndefined(_p.title)) ? _p.title : _p.name;
+						    	var _body     = (!_.isUndefined(_p.short_description)) ? _p.short_description : _p.short_review;
 						    	
 						    	var pin = new google.maps.Marker({
 									position: {
 										lat: Number(_p.lat),
 										lng: Number(_p.lon)
 									},
+									type: _interest,
 									map: $scope.map,
-									title: _p.title,
+									title: _title,
 									icon: _path + _interest + '-pin-icon.svg'
 								});
 								
 								var infowindow = new google.maps.InfoWindow({
-									content: '<div class="in-map '+_interest+'"><h1>'+_p.title+'</h1><h2>'+_p.short_review+'</h2></div>',
+									content: '<div class="in-map '+_interest+'"><h1>'+_title+'</h1><h2>'+_body+'</h2></div>',
 									maxWidth: 200
 								});
 								
@@ -451,14 +461,25 @@
 									$scope.map.setCenter(pin.getPosition());
 									infowindow.open($scope.map,pin);
 								});
+								
+								bounds.extend(pin.position);
+								markers.push(pin);
 							});
 					    });
 						
+						$scope.map.fitBounds(bounds);
 					    $scope.map.setCenter(new google.maps.LatLng(Number(latLng[0]),Number(latLng[1])));
 					    $scope.map.setZoom(zoom);
 					    
 				    break;
 			    }
+		    }
+		    
+		    var refiltering = function(_filter){
+			    _.map(markers,function(_m){
+				    if(_m.type != _filter || !_.isUndefined(_filter)) _m.setMap(null);
+				    else _m.setMap($scope.map);
+				});
 		    }
 		    
 		    $timeout(function(){
@@ -468,6 +489,10 @@
 			
 			$(window).on('resize',function(){
 				setMapHeight();    
+			});
+			
+			$rootScope.$on('filter-map',function(_e,_data){
+				refiltering(_data[0]);
 			});
 		});
 		
@@ -569,8 +594,8 @@
 							place.getDetails({placeId:_a.google_place_id},function(_place,_status){
 								if(_status == google.maps.places.PlacesServiceStatus.OK){
 									
-									console.log(_a);
-									console.log(_place);
+									//console.log(_a);
+									//console.log(_place);
 									
 									_a.title 		= _place.name;
 									_a.lat 			= _place.geometry.location.G;
@@ -578,7 +603,7 @@
 									_a.phone_number = _place.formatted_phone_number;
 									_a.address 		= _place.formatted_address;
 									_a.website 		= _place.website;
-									_a.hours        = _place.opening_hours.weekday_text;
+									_a.hours        = (_.isUndefined(_place.opening_hours)) ? undefined : _place.opening_hours.weekday_text;
 								};
 							});
 						}
@@ -647,7 +672,16 @@
 	        - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 			
 			$scope.filterMap = function(_filter){
+				
 				$scope.filter = _filter;
+				
+				if(!_.isUndefined($('#guide-wrapper.'+_filter))){
+					$('#step-2 div.wrapper').animate({
+						scrollTop: 780
+					},1000);
+				}
+				
+				$rootScope.$emit('filter-map',[_filter]);
 			}
 			
 			/* Books
@@ -656,9 +690,6 @@
 			$scope.book = function(_hotel){
 				$rootScope.$emit('open-booking',[_hotel]);
 			}
-			
-			$rootScope.$on('filter',function(_d){
-			});
 		});
 		
 		/* Booking Controller
@@ -750,9 +781,6 @@
 				if(!_.isEqual(_n,_o)){
 					_.map(_n,function(_value,_key){
 						if(_n[_key] != _o[_key]){
-							
-							$log.info(_key + " has changed");
-							
 							switch(_key){
 								case 'start_date': case 'end_date':
 									if(!_.isUndefined($scope.booking.start_date) && !_.isUndefined($scope.booking.end_date)){
@@ -1157,6 +1185,7 @@
 			$scope.signInError   = '';
 			$scope.signUpError   = '';
 			$scope.passwordError = '';
+			$scope.newsStatus    = '';
 			$scope.loading       = false;
 			
 			$scope.data = {
@@ -1184,6 +1213,7 @@
 				$scope.signUpError   = '';
 				$scope.passwordError = '';
 				$scope.rMessage 	 = '';
+				$scope.newsStatus    = '';
 			}
 			
 			// Close overlay...
@@ -1246,20 +1276,21 @@
 			}
 			
 			$scope.regNewsletter= function(){
-				console.log('entrada');
-				/*$http({
-	                method  : 'POST',
-	                url     : formSubmit,
-	                data    : $.param(angular.extend({formID:'sign'+_id},$scope.data)),
+				$http({
+	                method : 'POST',
+	                url    : formSubmit,
+	                data   : $.param({formID:'newsletterForm','userEmail':$scope.data.userEmail}),
 	                headers : { 
 	            		'Content-Type' : 'application/x-www-form-urlencoded'
 					},
 					transformRequest: angular.identity
 	            }).
 	            success(function(_data){
-		           
-	            }).
-	            error(function(){});*/
+		            $scope.newsStatus = 'success';
+		        }).
+	            error(function(){
+		            $scope.newsStatus = 'error';
+	            });
 			}
 			
 			$scope.changePassword = function(){
@@ -1368,9 +1399,9 @@
 					transformRequest: angular.identity
 	            }).
 	            success(function(_data){
-		           	$('#contact-form').transition({opacity:0},function(){
-			             $scope.success = true;
-			             $scope.$apply();
+		        	$('#contact-form').transition({opacity:0},function(){
+			            $scope.success = true;
+						$scope.$apply();
 		            });
 		        }).
 	            error(function(){

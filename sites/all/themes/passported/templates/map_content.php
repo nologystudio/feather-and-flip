@@ -42,7 +42,7 @@
 				    	<li id="the-trip-block">
 				    		<a href="https://go.passported.com/itinerary/clone?destination={{pick.id}}">
 					    		<div class="circle-outline-icon plan-btn icon-edit"></div>
-					    		Plan your trip
+					    		Create An Itinerary
 				    		</a>
 				    	</li>
 				    	<li id="destination-block">
@@ -84,7 +84,7 @@
 				    			<div pp-hotel-gallery class="slideshow">
 					    			<ul>
 						    			<li ng-repeat="image in hotel.images[0]">
-											<img ng-src="{{image.src}}" alt=""/>
+											<img ng-src="{{image.src_400}}" alt=""/>
 										</li>
 					    			</ul>
 					    			<button rel="right" class="icon-right-circle-full"></button>
@@ -108,7 +108,7 @@
 			    			</article>
 				    	</li>
 				    	<li id="guide">
-				    		<div id="guide-wrapper" ng-repeat="(key,value) in pick.guide_by_category" ng-if="value.length > 0" ng-show="filter == key || filter == undefined">
+				    		<div ng-repeat="(key,value) in pick.guide_by_category" id="guide-wrapper" class="{{key}}" ng-if="value.length > 0" ng-show="filter == key || filter == undefined">
 								<header>
 						    		{{key}}
 						    		<div class="filter-wrapper">
@@ -133,9 +133,9 @@
 						    			<footer>
 							    			<span class="tel" ng-if="!check.phone(address.phone_number)">{{address.phone_number}}</span>
 							    			<span class="url">
-							    				<a href="{{address.website}}" target="_blank">{{address.website}}</a>
+							    				<a href="{{address.website}}" target="_blank">WEB</a>
 							    			</span>
-							    			<span class="hours" ng-if="address.hours" ng-click="">
+							    			<span class="hours" ng-if="address.hours">
 							    				HOURS
 							    				<ul><li ng-repeat="hour in address.hours">{{hour}}</li></ul>
 							    			</span>
@@ -219,7 +219,7 @@
 			    	</li>
 			    	<li id="email-entry">
 			    		Drop us an e-mail or fill out the form below
-			    		<a href="/contact" class="icon circle-btn icon-email" target="_blank"></a>
+			    		<a href="mailto:info@passported.com" class="icon circle-btn icon-email" target="_blank"></a>
 			    	</li>
 			    	<li>
 			    		<form name="bookingForm">
@@ -299,15 +299,15 @@
 					    		<li>
 					    			<label>Budget per Night<label>
 					    			<div class="budget-check" ng-click="setter.budget('400$-800$')">
-						    			400$-800$
+						    			$400-$800
 						    			<span></span>
 					    			</div>
 					    			<div class="budget-check" ng-click="setter.budget('800$-1200$')">
-						    			800$-1200$
+						    			$800-$1200
 						    			<span></span>
 					    			</div>
 					    			<div class="budget-check" ng-click="setter.budget('1200$+')">
-						    			1200$+
+						    			$1200+
 						    			<span></span>
 					    			</div>
 					    			<input type="text" class="rounded" placeholder="other" ng-model="booking.specific_budget"/>
