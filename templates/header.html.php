@@ -1,7 +1,7 @@
 	
 	<?php $nuser = ((isset($_COOKIE['nUser']) && ($_COOKIE['nUser']=='true')) ? true : false); ?>
 	
-	<?php if(drupal_is_front_page() && !user_is_logged_in() && $nuser): ?>
+	<?php if(drupal_is_front_page() && !user_is_logged_in() && !$nuser): ?>
 	
 	<!-- Newsletter -->
 	
