@@ -7,15 +7,15 @@
 			<li>
 				<h1 data-animate="1">Sophisticated family travel simplified</h1>
 				<ul class="align-center">
-					<li ng-click="goTo('plan')">
+					<li ng-click="goToURL('plan')">
 						<h2 data-animate="2">Plan</h2>
 						<a href="/city-guides"><h3 data-animate="3">Find the ideal destination and hotel for your particular FAMILY needs</h3></a>
 					</li>
-					<li ng-click="goTo('explore')">
+					<li ng-click="goToURL('explore')">
 						<h2 data-animate="4">Explore</h2>
 						<a href="https://go.passported.com"><h3 data-animate="5">Parent-scouted picks and itineraries that you can customize</h3></a>
 					</li>
-					<li ng-click="goTo('book')">
+					<li ng-click="goToURL('book')">
 						<h2 data-animate="6">Book</h2>
 						<a href="/book"><h3 data-animate="7">We book your hotel. You can call or e-mail our hotel expert</h3></a>
 					</li>

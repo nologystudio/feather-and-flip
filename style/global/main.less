@@ -188,7 +188,7 @@
 					{
 						#align > .left;
 						width: 230px;
-						margin: 20px 0 0;
+						margin: 25px 0 0;
 					}
 					
 					figcaption
@@ -1102,7 +1102,7 @@
 														{
 															@s: 100px;
 															
-															.set-size(@s + @content-padding,@s + @content-padding);
+															.set-size(@s + 2 * @content-padding,@s + @content-padding);
 															.set-opacity(1);
 															.animate-opacity();
 															.performance();
@@ -1119,7 +1119,7 @@
 															{
 																.set-circle-btn(100px);
 																margin-bottom: 2 * @unit;
-																margin-left: @content-padding/2 - 2px;
+																margin-left: @content-padding;
 																
 																&:before
 																{
@@ -1646,17 +1646,39 @@
 																		}
 																	}
 																	
+																	span.tel,
+																	span.url,
+																	span.hours
+																	{
+																		margin-top: @unit;
+																	}
+																	
+																	span.tel:before
+																	{
+																		#font > .ic(10px,@color-3);
+																		content: "\e625";
+																		margin-right: @unit;
+																	}
+																	
+																	span.url:before
+																	{
+																		#font > .ic(10px,@color-3);
+																		content: "\e605";
+																		margin-right: @unit;
+																	}
+																	
 																	span.hours
 																	{
 																		width: 100%;
-																		margin-top: @unit;
+																		margin-top: 2 * @unit;
+																		float: left;
 																		
 																		ul
 																		{
 																			.reset();
 																			.set-size(80%);
-																			#align > .left;
-																			margin-top: @content-padding/2;
+																			#align > .right;
+																			margin-top: 0;
 																			
 																			li
 																			{
@@ -3275,6 +3297,14 @@
 							text-align: center;
 							display: block;
 							top: -20px;
+						}
+						
+						h3
+						{
+							font-size: 34px;
+							text-align: center;
+							line-height: 180px;
+							color: @color-5;
 						}
 					}
 					

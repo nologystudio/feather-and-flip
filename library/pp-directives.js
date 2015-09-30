@@ -84,7 +84,7 @@
 		    	controller: function($scope,$resource){
 			    	$scope.getItinerary = function(_id){
 				    	
-				    	var itSrc = $resource('https://gostage.passported.com/api/v2/itinerary');
+				    	var itSrc = $resource('https://go.passported.com/api/v2/itinerary');
 				    	
 						itSrc.get({'id':_id},function(_data){
 							if(!_.isNull(_data.itinerary))

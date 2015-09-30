@@ -80,13 +80,13 @@
 					<h1>JOIN THE ADVENTURE</h1>
 					<h2>Sign up for our newsletter</h2>
 					<h3 ng-if="newsStatus == 'error'" class="animated fadeInDown">We're sorry, an error has occurred</h3>
-					<h3 ng-if="newsStatus == 'success'" class="animated fadeInDown">Thanks!</h3>
 				</header>
 				<div class="wrapper-to-center">
-                	<input name="user-email" class="full rounded" type="email" ng-if="newsStatus == 'still'" placeholder="Your email address" ng-model="data.userEmail" required/>
+					<h3 ng-if="newsStatus == 'success'" class="animated fadeInDown">Thanks!</h3>
+                	<input name="user-email" class="full rounded" type="email" ng-if="newsStatus == ''" placeholder="Your email address" ng-model="data.userEmail" required/>
 				</div>
                 <footer>
-	                <input type="submit" value="go" ng-class="{disabled:!newsletterForm.$valid}" ng-click="!newsletterForm.$valid || regNewsletter('in')"/>
+	                <input type="submit" value="go" ng-class="{disabled:!newsletterForm.$valid}" ng-click="!newsletterForm.$valid || regNewsletter()" ng-if="newsStatus == ''"/>
 				</footer>
             </form>
 			
