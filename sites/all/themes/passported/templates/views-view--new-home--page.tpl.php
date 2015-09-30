@@ -10,9 +10,9 @@
 						<h2 data-animate="4">Explore</h2>
 						<a href="/city-guides"><h3 data-animate="5">Explore our city guides</h3></a>
 					</li>
-					<li ng-click="goToURL('https://blog.passported.com')">
+					<li ng-click="goToURL('https://go.passported.com')">
 						<h2 data-animate="2">Plan</h2>
-						<a href="http://blog.passported.com"><h3 data-animate="3">Create your itinerary</h3></a>
+						<a href="https://go.passported.com"><h3 data-animate="3">Create your itinerary</h3></a>
 					</li>
 					<li ng-click="goToURL('book-hotels')">
 						<h2 data-animate="6">Book</h2>
@@ -80,23 +80,6 @@
 			<?php endif; ?>			
 		</div>
 	</section>
-	
-	<!-- newsletter -->
-	<!--
-	<section id="newsletter" ng-controller="NewsletterController">
-		<div class="wrapper">
-			<header>
-				<h4 data-animate="1">Join the adventure<span>Sign up for our newsletter</span></h4>
-			</header>
-			<form name="newsletterForm" data-animate="2">
-                <small id="error"   class="animated fadeInUp" ng-if="currentStatus == 'error'">We're sorry, an error has occurred</small>
-                <small id="success" class="animated fadeInUp" ng-if="currentStatus == 'success'">Thanks!</small>
-                <input name="user-email" class="rounded" type="email" ng-if="currentStatus == 'still'" placeholder="Your email address" ng-model="signUpData.userEmail" required/>
-                <button class="go-btn" ng-if="currentStatus == 'still'" ng-class="{disabled:!newsletterForm.$valid}" ng-click="!newsletterForm.$valid || regSubmit()">GO</button>
-            </form>
-		</div>
-	</section>
-	-->
 	
 	<!-- Blog -->
 	
