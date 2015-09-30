@@ -26,7 +26,7 @@
 			<div class="wrapper align-center">
 				<a id="city-guides" href="/city-guides" class="subnav" data-animate="3">city guides</a>
 				<a id="itinerary-planner" href="//go.passported.com" data-animate="4">itinerary planner</a>
-				<a id="blog"        href="//blog.passported.com" data-animate="5" target="_blank">travel journal</a>
+				<a id="blog"        href="http://blog.passported.com" data-animate="5" target="_blank">travel journal</a>
 				<a id="book-hotels" href="/book-hotels" data-animate="6">book hotels</a>
 				<a id="search"      class="subnav" ng-click="triggerSearch()" data-animate="7">search</a>
 			</div>
