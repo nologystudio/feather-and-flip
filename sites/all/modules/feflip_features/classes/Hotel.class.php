@@ -347,7 +347,8 @@ class Hotel {
           'id' => $node->nid,
           'name' => $wrapper->title->value(),
           'country' => $wrapper->field_destination->field_country->value(),
-          'url' => url('node/' . $node->nid),
+          'url' => url('node/' . $wrapper->field_destination->nid->value()) . '/city-guide?hotel='.$node->nid,
+          //'url' => url('node/' . $node->nid),
         );
       }
     }
