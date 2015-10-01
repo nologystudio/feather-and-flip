@@ -357,8 +357,12 @@ function parse_field_testimonials($testimonials) {
 
 function parse_field_google_place($src) {
     $res = explode(', ', $src);
-    if ($res){
-        return end($res);
+    if ($res && (count($res) >= 2)){
+        $gid = end($res);
+        if (strpos($gid, ' ') === false)
+            return $gid;
+        else
+            return array();
     }
     return array();
 }
