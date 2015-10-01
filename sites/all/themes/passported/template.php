@@ -190,7 +190,7 @@ function passported_preprocess_views_view(&$variables) {
           // prepare destinations data
           $url = drupal_get_path_alias('node/' . $node->nid) . '/city-guide';
           $date = date("F, Y",$node->created);
-          $imageUrl = Helpers::GetMainImageFromFieldCollection($node->field_images, $node->title, 'http://placehold.it/100x100', 'post_image');
+          $imageUrl = Helpers::GetMainImageFromFieldCollection($node->field_images, $node->title, 'http://placehold.it/100x100', 'spotlight_on');
           $dests[] = array(
             'title' => $node->title,
             'url'   => $url,
