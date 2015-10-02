@@ -728,54 +728,9 @@ function pp_preprocessHomePage(&$variables) {
 
 
 function passported_preprocess_node_hotel(&$variables) {
-  $cacheId = "template.php::passported_preprocess_node_hotel_" . $variables['node']->nid;
-  $cacheResult = Helpers::getCacheIfNotExpired($cacheId, 'cache_blocks_page');
-  if (!$cacheResult) {
-    $result = array();
-
-    $result['images'] = Hotel::GetImages($variables['node']);
-    $result['features'] = Hotel::GetContentBlocks($variables['node']);
-    $result['testimonials'] = Hotel::GetTestimonials($variables['node']);
-
-    $urls = Hotel::NextPreviousUrlHotel($variables['node']);
-    $result['next'] = $urls['next'];
-    $result['previous'] = $urls['previous'];
-    $result['hotelreviews'] = url('node/' . $variables['node']->field_destination['und'][0]['entity']->nid) . '/hotel-reviews';
-    $result['slideImages'] = Helpers::GetMainImageFromFieldCollection($variables['node']->field_images, $variables['node']->title, 'http://placehold.it/1280x800', 'headerslideshow');
-    $result['destination'] = $variables['node']->field_destination['und'][0]['entity']->nid;
-    $result['internalId'] = $variables['node']->nid;
-
-    $destination = node_load($variables['node']->field_destination['und'][0]['entity']->nid);
-    $result['destinationText'] = $destination->title . ', ' . $destination->field_country['und'][0]['value'];
-    $result['image'] = Helpers::GetMainImageFromFieldCollection($destination->field_images, $result['destinationText'], 'http://placehold.it/100x100', 'itinerary_route_icon');
-
-    // check if exist term with this destination name
-    $term = taxonomy_get_term_by_name($destination->title);
-    if (!empty($term)) {
-      $cat = array_shift($term);
-      $result['travel_journal'] = views_embed_view('travel_journal_tags', 'page', $cat->tid);
-    }
-    cache_set($cacheId, $result, 'cache_blocks_page', REQUEST_TIME + (3600 * 24 * 30 * 12)); //1 year
-  }
-  else {
-    $result = $cacheResult->data;
-  }
-  //Load data
-  $variables['images'] = $result['images'];
-  $variables['features'] = $result['features'];
-  $variables['testimonials'] = $result['testimonials'];
-  $variables['next'] = $result['next'];
-  $variables['previous'] = $result['previous'];
-  $variables['hotelreviews'] = $result['hotelreviews'];
-  $variables['slideImages'] = $result['slideImages'];
-  $variables['destination'] = $result['destination'];
-  $variables['internalId'] = $result['internalId'];
-  $variables['isSticky'] = TRUE;
-  $variables['destinationText'] = $result['destinationText'];
-  $variables['image'] = $result['image'];
-  if (isset($result['travel_journal'])) {
-    $variables['travel_journal'] = $result['travel_journal'];
-  }
+    $url = url('node/' . $variables['node']->field_destination['und'][0]['entity']->nid) . '/city-guide';
+    $dest = ltrim($url, '/');
+    drupal_goto($dest);
 }
 
 /*
