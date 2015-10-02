@@ -17,12 +17,6 @@ function passported_preprocess_html(&$variables) {
   $error_node = array('html__node__288', 'html__node__332', 'html__node__333');
   $arg = arg();
 
-  // Signup slug and lightbox behaviour
-  if (($_SERVER['REQUEST_URI'] == '/sign-up') && !user_is_logged_in())
-    setcookie('overlay', 'signup');
-  else
-    setcookie('overlay', 'hidden');
-
   variable_set('pageID', 'global');
 
   if (drupal_is_front_page()) {
@@ -649,74 +643,62 @@ function pp_getSocialLink($_network, $url, $img = '', $desc = '') {
  *   An identifier for the current page's page type, typically a combination
  *   of the entity name and bundle name, e.g. "node:story".
  */
-function passported_metatag_metatags_view_alter(&$output, $instance) {
-  if ($instance == 'view:itineraries') {
-    $arg = arg();
-    $nid = $arg[1];
+function passported_metatag_metatags_view_alter(&$output, $instance)
+{
+    if ($instance == 'view:city_guides') {
+        $arg = arg();
+        $nid = $arg[1];
 
-    $query = new EntityFieldQuery;
-    $nodes = $query->entityCondition('entity_type', 'node')
-      ->entityCondition('bundle', 'itinerary')
-      ->propertyCondition('status', 1)
-      ->fieldCondition('field_destination', 'target_id', $nid, '=')
-      ->execute();
+        if (!empty($nid)) {
+            $node = node_load($nid);
+            $wrapper = entity_metadata_wrapper('node', $node);
+            $dsc = $wrapper->field_description->value();
+            $output['description']['#attached']['drupal_add_html_head'][0] = array(
+                array(
+                    '#theme' => 'metatag',
+                    '#tag' => 'meta',
+                    '#id' => 'metatag_description_0',
+                    '#name' => 'description',
+                    '#value' => strip_tags($dsc['safe_value']) . ' ...',
+                ),
+                'metatag_description_0',
+            );
+            $output['og:description']['#attached']['drupal_add_html_head'][0] = array(
+                array(
+                    '#theme' => 'metatag_property',
+                    '#tag' => 'meta',
+                    '#id' => 'metatag_og:description_0',
+                    '#name' => 'og:description',
+                    '#value' => strip_tags($dsc['safe_value']) . ' ...',
+                ),
+                'metatag_og:description_0',
+            );
 
-    if (!empty($nodes) && isset($nodes['node'])) {
-      $src = array_shift($nodes['node']);
-      $node = node_load($src->nid);
-      $wrapper = entity_metadata_wrapper('node', $node);
-
-      foreach ($wrapper->field_route->value() as $route) {
-        if (isset($route->field_description['und'][0]['value'])) {
-          $output['description']['#attached']['drupal_add_html_head'][0] = array(
-            array(
-              '#theme' => 'metatag',
-              '#tag' => 'meta',
-              '#id' => 'metatag_description_0',
-              '#name' => 'description',
-              '#value' => text_summary(strip_tags($route->field_description['und'][0]['value'])) . ' ...',
-            ),
-            'metatag_description_0',
-          );
-          $output['og:description']['#attached']['drupal_add_html_head'][0] = array(
-            array(
-              '#theme' => 'metatag_property',
-              '#tag' => 'meta',
-              '#id' => 'metatag_og:description_0',
-              '#name' => 'og:description',
-              '#value' => text_summary(strip_tags($route->field_description['und'][0]['value'])) . ' ...',
-            ),
-            'metatag_og:description_0',
-          );
-          break;
+            // Destination main image
+            $dest = node_load($nid);
+            $image = '';
+            if (isset($dest->field_images['und']) && count($dest->field_images['und']) > 0) {
+                foreach ($dest->field_images['und'] as $item) {
+                    $imageItems = entity_load('field_collection_item', array($item['value']));
+                    $imageItems = array_shift($imageItems);
+                    if (isset($imageItems->field_mainimage['und']) && count($imageItems->field_mainimage['und']) > 0 && $imageItems->field_main_image['und'][0]['value'] == 1) {
+                        $image = image_style_url('headerslideshow', $imageItems->field_mainimage['und'][0]['uri']);
+                        break;
+                    }
+                }
+            }
+            $output['og:image']['#attached']['drupal_add_html_head'][0] = array(
+                array(
+                    '#theme' => 'metatag_property',
+                    '#tag' => 'meta',
+                    '#id' => 'metatag_og:image_0',
+                    '#name' => 'og:image',
+                    '#value' => $image,
+                ),
+                'metatag_og:image_0',
+            );
         }
-      }
-
-      // Destination main image
-      $dest = node_load($nid);
-      $image = '';
-      if (isset($dest->field_images['und']) && count($dest->field_images['und']) > 0) {
-        foreach ($dest->field_images['und'] as $item) {
-          $imageItems = entity_load('field_collection_item', array($item['value']));
-          $imageItems = array_shift($imageItems);
-          if (isset($imageItems->field_mainimage['und']) && count($imageItems->field_mainimage['und']) > 0 && $imageItems->field_main_image['und'][0]['value'] == 1) {
-            $image = image_style_url('headerslideshow', $imageItems->field_mainimage['und'][0]['uri']);
-            break;
-          }
-        }
-      }
-      $output['og:image']['#attached']['drupal_add_html_head'][0] = array(
-        array(
-          '#theme' => 'metatag_property',
-          '#tag' => 'meta',
-          '#id' => 'metatag_og:image_0',
-          '#name' => 'og:image',
-          '#value' => $image,
-        ),
-        'metatag_og:image_0',
-      );
     }
-  }
 }
 
 

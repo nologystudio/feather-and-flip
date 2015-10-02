@@ -322,6 +322,8 @@ function parse_field_content_blocks($blocks) {
         $html->load($item);
         $items = array();
         foreach ($html->find('div.view-content div') as $block) {
+            $flag = $block->find('div.json_title', 0);
+            if (!$flag) continue;
             $json_title = $block->find('div.json_title', 0)->plaintext;
             if (is_null($json_title)) continue;
             $json_description = $block->find('div.json_description', 0)->innertext;

@@ -1,4 +1,6 @@
+<!-- Google maps starts here -->
 <div id="google-maps-container" data-animate="1"></div>
+<!-- Itinerary aside starts here -->
 <aside class="left" ng-class="{'on':showAside}" ng-controller="ItineraryController">
 	<div class="wrapper">
     	<ul ng-class="{'step-1':step == 1,'step-2':step == 2,'step-3':step == 3}">
@@ -47,10 +49,10 @@
 				    	</li>
 				    	<li id="destination-block">
 							<nav>
-						    	<a pp-social-media-link rel="facebook" class="icon-facebook-circle"></a>
-						    	<a pp-social-media-link rel="twitter" class="icon-twitter-circle"></a>
-						    	<a pp-social-media-link pp-social-media-image="" pp-social-media-desc="" rel="pinterest" class="icon-pinterest-circle"></a>
-						    	<a pp-social-media-link rel="google-plus" class="icon-google-circle"></a>
+						    	<a pp-social-media-link rel="facebook" class="icon-facebook-circle" target="_blank"></a>
+						    	<a pp-social-media-link rel="twitter" class="icon-twitter-circle" target="_blank"></a>
+						    	<a pp-social-media-link pp-social-media-image="" pp-social-media-desc="" rel="pinterest" class="icon-pinterest-circle" target="_blank"></a>
+						    	<a pp-social-media-link rel="google-plus" class="icon-google-circle" target="_blank"></a>
 						    </nav>
 				    		<h2>{{pick.name}}, {{pick.country}}</h2>
 				    		<small>{{pick.lat}} Lat, {{pick.lon}} Lon</small>
@@ -132,12 +134,9 @@
 						    			<h5 ng-bind-html="address.short_review"></h5>
 						    			<footer>
 							    			<span class="tel" ng-if="!check.phone(address.phone_number)">{{address.phone_number}}</span>
-							    			<span class="url">
-							    				<a href="{{address.website}}" target="_blank">WEB</a>
-							    			</span>
-							    			<span class="hours" ng-if="address.hours">
-							    				HOURS
-							    				<ul><li ng-repeat="hour in address.hours">{{hour}}</li></ul>
+							    			<span id="a-{{key}}-{{$index}}" class="hours" ng-if="address.hours" ng-click="openHours(key+'-'+$index)" data-state="false">
+							    				HOURS<small ng-if="address.open">OPEN NOW</small>
+							    				<ul><li ng-repeat="hour in address.hours" ng-class="{'selected':$index == dayOfWeek}">{{hour}}</li></ul>
 							    			</span>
 						    			</footer>
 						    		</li>
@@ -156,6 +155,7 @@
 		</svg>
 	</button>
 </aside>
+<!-- Booking aside starts here -->
 <aside class="right" ng-controller="BookingController" ng-class="{'on':showRightAside}">
 	<div class="wrapper">
 		<div class="error animated fadeInDown" ng-if="error">
