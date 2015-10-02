@@ -296,6 +296,8 @@ function parse_field_images($images) {
                 ->propertyCondition('filename', $json_image)
                 ->execute();
             // if you are guaranteed there is exactly one result, then:
+            $flag = $result['file'];
+            if (!$flag) continue;
             $file_object = reset($result['file']);
             if (!$file_object) continue;
             $fid = $file_object->fid;
