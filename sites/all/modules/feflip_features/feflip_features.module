@@ -297,6 +297,7 @@ function parse_field_images($images) {
                 ->execute();
             // if you are guaranteed there is exactly one result, then:
             $file_object = reset($result['file']);
+            if (!$file_object) continue;
             $fid = $file_object->fid;
             if (empty($fid) || is_null($fid)) continue;
             $file = file_load($fid);
@@ -345,6 +346,8 @@ function parse_field_testimonials($testimonials) {
         $html->load($item);
         $items = array();
         foreach ($html->find('div.view-content div') as $block) {
+            $flag = $block->find('div.json_author', 0);
+            if (!$flag) continue;
             $json_author = $block->find('div.json_author', 0)->plaintext;
             if (is_null($json_author)) continue;
             $json_description = $block->find('div.json_description', 0)->innertext;
@@ -375,6 +378,8 @@ function parse_field_guide_categories($catlist) {
         $html = new simple_html_dom();
         $html->load($item);
         foreach ($html->find('ul.shs-hierarchy') as $cat) {
+            $flag = $cat->find('li.shs-parent', 0);
+            if (!$flag) continue;
             $json_parent = $cat->find('li.shs-parent', 0)->plaintext;
             $json_child = $cat->find('li.shs-term-selected', 0)->plaintext;
             if (empty($json_parent))

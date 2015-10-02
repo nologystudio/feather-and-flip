@@ -234,13 +234,17 @@
 						    	_a.css({left:middlePoint+'px'}).addClass('on');
 						    	// 1. City Guides
 						    	if(_element == 'city-guides'){ 
-							    	_t.show().transition({height:wHeight + 'px'});
+							    	_t.show().transition({height:wHeight + 'px'},function(){
+								    	$(this).css({'overflow':'visible'});
+							    	});
 						    		_n.show().transition({opacity:1});
 						    		_s.hide();
 						    	}
 						    	// 2. Search
 						    	if(_element == 'search'){ 
-							    	_t.show().transition({height:220 + 'px'});
+							    	_t.show().transition({height:220 + 'px'},function(){
+								    	$(this).css({'overflow':'visible'});
+							    	});
 						    		_s.show().transition({opacity:1});
 						    		_n.hide();
 						    	}
@@ -256,6 +260,7 @@
 				    	
 				    	setTimeout(function(){
 					    	if(!userControl){
+						    	_t.css({'overflow':'hidden'});
 						    	_a.removeClass('on');
 						    	// Dropdown...
 						    	_t.transition({height:0},function(){
@@ -621,8 +626,8 @@
 									//console.log(_place);
 									
 									_a.title 		= _place.name;
-									_a.lat 			= _place.geometry.location.G;
-									_a.lon 			= _place.geometry.location.K;
+									_a.lat 			= _place.geometry.location.lat();
+									_a.lon 			= _place.geometry.location.lng();
 									_a.phone_number = _place.formatted_phone_number;
 									_a.address 		= _place.formatted_address;
 									_a.website 		= _place.website;
