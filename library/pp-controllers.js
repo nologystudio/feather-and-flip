@@ -417,6 +417,7 @@
 							destination.addListener('click',function(){
 								$scope.map.setZoom(15);
 								$scope.map.setCenter(destination.getPosition());
+								$rootScope.$emit('display-destination',[_d]);
 							});
 							
 							destinationMarkers.push(destination);
@@ -519,6 +520,7 @@
 			$scope.pick;
 			$scope.showAside = true;
 			$scope.filter = undefined;
+			$scope.dayOfWeek = moment().day() - 1;
 			$scope.hotelFilters = [];
 			$scope.addressFilters = {
 				eat: [],
@@ -559,6 +561,23 @@
 			
 			$scope.openLeftAside = function(){
 				$scope.showAside = !$scope.showAside;	
+				$('#map').toggleClass('full');
+				google.maps.event.trigger($scope.map,'resize');
+			}
+			
+			$scope.openHours = function(_id){
+				
+				var _t = $('#a-'+_id);
+				var _state = Boolean(_t.data('state'));
+				var _options = _t.find('li').toArray();
+				
+				_t.data('state',!_state);
+				_.map(_options,function(_o){
+					if(!$(_o).hasClass('selected')){
+						if(_state) $(_o).show();
+						else $(_o).hide();
+					}
+				});
 			}
 			
 			$scope.goTo = function(_state){
@@ -608,6 +627,7 @@
 									_a.address 		= _place.formatted_address;
 									_a.website 		= _place.website;
 									_a.hours        = (_.isUndefined(_place.opening_hours)) ? undefined : _place.opening_hours.weekday_text;
+									_a.open         = (_.isUndefined(_place.opening_hours)) ? undefined : _place.opening_hours.open_now;
 								};
 							});
 						}
@@ -647,7 +667,7 @@
 				
 				$scope.step = 2;
 				
-				$('#step-2').delay(2000).transition({opacity:1},'slow',function(){
+				$('#step-2').delay(500).transition({opacity:1},'fast',function(){
 					$scope.itineraryIsReady = true;
 					$scope.$apply();
 				});
@@ -687,6 +707,10 @@
 				
 				$rootScope.$emit('filter-map',[_filter]);
 			}
+			
+			$rootScope.$on('display-destination',function(_e,_data){
+				$scope.displayDestination(_data[0]);
+			});
 			
 			/* Books
 			- - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
@@ -1084,8 +1108,8 @@
 			$scope.triggerState   = messageType[0];
 			$scope.isSignPage     = $scope.view;
 			$scope.types   		  = ['sign-up','sign-in','response','reset-password','new-password','change-password','newsletter']; 
-			$scope.newsStatus     = 'still';
 			$scope.type    	      = $scope.types[0];
+			$scope.newsStatus     = 'still';
 			$scope.display        = false;
 			$scope.resetPassword  = $scope.resetPassword;
 			$scope.changePassword = false;
@@ -1108,14 +1132,13 @@
 			});
 			
 			$scope.$watch('isSignPage',function(_v){
-				
 				if(_v == 'sign-in' || _v == 'sign-up'){
 					$timeout(function(){
 						$scope.type = _v;
 						$scope.triggerState = messageType[1];
 						$scope.triggerOverlay();
 						$('.call-to-action').show().transition({opacity:1});
-					},0);
+					},200);
 				}
 			});
 			
@@ -1430,8 +1453,3 @@
 			};
 		});
 		
-		
-		
-		
-	    
-	    
