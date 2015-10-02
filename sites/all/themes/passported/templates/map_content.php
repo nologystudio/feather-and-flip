@@ -128,13 +128,13 @@
 						    		</div>
 					    		</header>
 					    		<ul>
-						    		<li ng-repeat="address in value" class="address-book {{key}} {{setClass(address.guide_categories)}}">
+						    		<li ng-repeat="address in value" class="address-book {{key}} {{setClass(address.guide_categories)}}" ng-if="address.title">
 						    			<div class="icon {{key}}"></div>
 						    			<h4>{{address.title}}</h4>
 						    			<h5 ng-bind-html="address.short_review"></h5>
 						    			<footer>
 							    			<span class="tel" ng-if="!check.phone(address.phone_number)">{{address.phone_number}}</span>
-							    			<span id="a-{{key}}-{{$index}}" class="hours" ng-if="address.hours" ng-click="openHours(key+'-'+$index)" data-state="false">
+							    			<span id="a-{{key}}-{{$index}}" class="hours" ng-if="address.hours" ng-click="openHours(key+'-'+$index)" data-state="true">
 							    				HOURS<small ng-if="address.open">OPEN NOW</small>
 							    				<ul><li ng-repeat="hour in address.hours" ng-class="{'selected':$index == dayOfWeek}">{{hour}}</li></ul>
 							    			</span>
