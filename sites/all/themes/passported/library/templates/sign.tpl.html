@@ -38,7 +38,7 @@
 			<form id="sign-up-form" name="signUpForm" ng-show="type == 'sign-up'">
 				<header>
 					<h1>SIGN UP TO PASSPORTED</h1>
-					<h2>Our exclusive hotel rates are for members only. Sign up now and join our adventure.</h2>
+					<h2>Sign up now and join our adventure.</h2>
 					<h3 ng-if="signUpError != ''" class="animated fadeInDown">{{signUpError}}</h3>
 				</header>
 				<input type="email"    class="rounded" name="user-signup-email"    placeholder="Email address"     ng-pattern="/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/" ng-model="data.userEmail" required/>
@@ -59,7 +59,7 @@
 			<form id="sign-in-form" name="signInForm" ng-show="type == 'sign-in'">
 				<header>
 					<h1>SIGN IN TO PASSPORTED</h1>
-					<h2>Our exclusive hotel rates are for members only. Sign in to continue.</h2>
+					<h2>Sign in to continue.</h2>
 					<h3 ng-if="signInError != ''" class="animated fadeInDown">{{signInError}}</h3>
 				</header>
 				<div class="wrapper-to-center">

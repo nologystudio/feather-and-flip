@@ -36,7 +36,7 @@
 		    	<div class="wrapper" ng-if="itineraryIsReady">
 			    	<header>
 				    	<figure>
-				    		<img ng-src="{{pick.images[0][0].src_800}}" class="animated fadeIn"/>
+				    		<img ng-src="{{pick.images[0][0].src_450}}" class="animated fadeIn"/>
 				    	</figure>
 				    	<h1>{{pick.name}}</h1>
 			    	</header>
@@ -329,7 +329,7 @@
 					    			<textarea placeholder="Prefer connecting rooms or a suite? Any favorite hotels will help us pick your perfect match for this trip. Let us know here." ng-model="booking.message" required/></textarea>
 					    		</li>
 					    		<li>
-					    			<button id="submit" class="rounded-btn" ng-class="{'off':!bookingForm.$valid}" ng-click="submit()">send</button>
+					    			<button id="submit" class="rounded-btn" ng-class="{'off':!bookingForm.$valid}" ng-click="!bookingForm.$valid || submit()">send</button>
 					    		</li>
 				    		</ul>
 			    		</form>
