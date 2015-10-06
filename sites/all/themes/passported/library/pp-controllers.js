@@ -331,6 +331,7 @@
 					center: new google.maps.LatLng($scope.lat,$scope.lon),
 					zoomControl: true,
 					mapTypeControl: false,
+					draggable: true,
 					scrollwheel: false,
 					scaleControl: true,
 					streetViewControl: true,
@@ -456,6 +457,7 @@
 										lng: Number(_p.lon)
 									},
 									type: _interest,
+									id: _p.id,
 									map: $scope.map,
 									title: _title,
 									icon: _path + _interest + '-pin-icon.svg'
@@ -503,6 +505,12 @@
 			
 			$rootScope.$on('filter-map',function(_e,_data){
 				refiltering(_data[0]);
+			});
+			
+			$rootScope.$on('display-pick',function(_e,_data){
+				_.map(markers,function(_m){
+				    if(_m.id == _data[0]) google.maps.event.trigger(_m,'click');
+				});
 			});
 		});
 		
@@ -628,11 +636,12 @@
 									_a.title 		= _place.name;
 									_a.lat 			= _place.geometry.location.lat();
 									_a.lon 			= _place.geometry.location.lng();
-									_a.phone_number = _place.formatted_phone_number;
+									_a.phone_number = _place.international_phone_number;
 									_a.address 		= _place.formatted_address;
 									_a.website 		= _place.website;
 									_a.hours        = (_.isUndefined(_place.opening_hours)) ? undefined : _place.opening_hours.weekday_text;
 									_a.open         = (_.isUndefined(_place.opening_hours)) ? undefined : _place.opening_hours.open_now;
+									
 								};
 							});
 						}
@@ -716,6 +725,10 @@
 			$rootScope.$on('display-destination',function(_e,_data){
 				$scope.displayDestination(_data[0]);
 			});
+			
+			$scope.highlightMarker = function(_id){
+				$rootScope.$emit('display-pick',[_id]);
+			}
 			
 			/* Books
 			- - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
