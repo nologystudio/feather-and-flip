@@ -296,6 +296,7 @@ function parse_field_images($images) {
                 ->propertyCondition('filename', $json_image)
                 ->execute();
             // if you are guaranteed there is exactly one result, then:
+            if (!isset($result['file'])) continue;
             $flag = $result['file'];
             if (!$flag) continue;
             $file_object = reset($result['file']);
@@ -307,6 +308,7 @@ function parse_field_images($images) {
             $items[] = array(
                 'src' => file_create_url($file->uri),
                 'src_400' => image_style_url('thumb_400', $file->uri),
+                'src_450' => image_style_url('destination_main', $file->uri),
                 'src_800' => image_style_url('thumb_800', $file->uri),
                 'is_main' => $json_ismain,
                 'caption' => $json_caption,
