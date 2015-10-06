@@ -523,7 +523,7 @@
 			var api      = window.location.protocol + '//' + window.location.host + '/api/content/';
 			var destSrc  = $resource(api+'destinations.json');
 			var abookSrc = $resource(api+'address-books.json');
-			var hotelSrc = $resource(api+'/hotels.json');
+			var hotelSrc = $resource(api+'hotels.json');
 			var itSrc    = $resource('https://go.passported.com/api/v2/location');
 			
 			//GET https://gostage.passported.com/api/v2/location?name=Paris
