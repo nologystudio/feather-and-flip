@@ -21,7 +21,7 @@
         
         'use strict';
         
-        var formSubmit = "https://www.passported.com/api/forms"; //window.location.protocol + '//' + window.location.host + '/api/forms'; //
+        var formSubmit = window.location.protocol + '//' + window.location.host + '/api/forms'; //"https://www.passported.com/api/forms"; //
         var ppControllers = angular.module('ppControllers',[]);
         var drupalTemplatePath = '/sites/all/themes/passported/';
         
@@ -39,6 +39,8 @@
 	    	/* Layout & Tools
 	        - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 	       
+			var isMobile = (Modernizr.touch && $(window).width() < 800) ? true : false;
+			
 	        var triggerGoogleEvent = function(_s){
 // 				ga('send','event','ux','scroll',_s);
 	        }
@@ -203,87 +205,89 @@
 		        var searchAnimation = function(){
 			    }
 			    
-			    $('div.dropdown-wrapper').on({
-			    	mouseover: function(){
-				    	userControl = true;
-				    }
-				});
-		        
-		        $('header > nav a.subnav').on({
-			    	mouseover: function(){
-				    	
-				    	var middlePoint = $(this).offset().left + 10 + $(this).width()/2;
-				    	var _element;
-				    	
-				    	userControl = true;
-				    	
-				    	switch($(this).attr('id')){
-					    	case 'city-guides':
-					    		_t.removeClass('light');
-					    		_element = 'city-guides';
-					    	break;
-					    	case 'search':
-					    		_t.addClass('light');
-					    		_element = 'search';
-					    	break;
+			    if(!isMobile){
+				    $('div.dropdown-wrapper').on({
+				    	mouseover: function(){
+					    	userControl = true;
+					    }
+					});
+			        
+			        $('header > nav a.subnav').on({
+				    	mouseover: function(){
+					    	
+					    	var middlePoint = $(this).offset().left + 10 + $(this).width()/2;
+					    	var _element;
+					    	
+					    	userControl = true;
+					    	
+					    	switch($(this).attr('id')){
+						    	case 'city-guides':
+						    		_t.removeClass('light');
+						    		_element = 'city-guides';
+						    	break;
+						    	case 'search':
+						    		_t.addClass('light');
+						    		_element = 'search';
+						    	break;
+					    	}
+					    	
+					    	setTimeout(function(){
+						    	if(userControl){
+							    	//_t.show().transition({height:wHeight + 'px'});
+							    	_a.css({left:middlePoint+'px'}).addClass('on');
+							    	// 1. City Guides
+							    	if(_element == 'city-guides'){ 
+								    	_t.show().transition({height:wHeight + 'px'},function(){
+									    	$(this).css({'overflow':'visible'});
+								    	});
+							    		_n.show().transition({opacity:1});
+							    		_s.hide();
+							    	}
+							    	// 2. Search
+							    	if(_element == 'search'){ 
+								    	_t.show().transition({height:220 + 'px'},function(){
+									    	$(this).css({'overflow':'visible'});
+								    	});
+							    		_s.show().transition({opacity:1});
+							    		_n.hide();
+							    	}
+							    }
+					    	},_d);
 				    	}
-				    	
-				    	setTimeout(function(){
-					    	if(userControl){
-						    	//_t.show().transition({height:wHeight + 'px'});
-						    	_a.css({left:middlePoint+'px'}).addClass('on');
-						    	// 1. City Guides
-						    	if(_element == 'city-guides'){ 
-							    	_t.show().transition({height:wHeight + 'px'},function(){
-								    	$(this).css({'overflow':'visible'});
+			        });
+			        
+			        $('header > nav a.subnav, div.dropdown-wrapper').on({
+				    	mouseout: function(){
+					    	
+					    	userControl = false;
+					    	
+					    	setTimeout(function(){
+						    	if(!userControl){
+							    	_t.css({'overflow':'hidden'});
+							    	_a.removeClass('on');
+							    	// Dropdown...
+							    	_t.transition({height:0},function(){
+								    	_t.hide();
 							    	});
-						    		_n.show().transition({opacity:1});
-						    		_s.hide();
-						    	}
-						    	// 2. Search
-						    	if(_element == 'search'){ 
-							    	_t.show().transition({height:220 + 'px'},function(){
-								    	$(this).css({'overflow':'visible'});
+							    	// City Guide...
+							    	_n.transition({opacity:0},function(){
+								    	_n.hide();
 							    	});
-						    		_s.show().transition({opacity:1});
-						    		_n.hide();
-						    	}
-						    }
-				    	},_d);
-			    	}
-		        });
-		        
-		        $('header > nav a.subnav, div.dropdown-wrapper').on({
-			    	mouseout: function(){
-				    	
-				    	userControl = false;
-				    	
-				    	setTimeout(function(){
-					    	if(!userControl){
-						    	_t.css({'overflow':'hidden'});
-						    	_a.removeClass('on');
-						    	// Dropdown...
-						    	_t.transition({height:0},function(){
-							    	_t.hide();
-						    	});
-						    	// City Guide...
-						    	_n.transition({opacity:0},function(){
-							    	_n.hide();
-						    	});
-						    	// Search..
-						    	_s.transition({opacity:0},function(){
-							    	_s.hide();
-						    	});
-						    }
-				    	},_d);
-			    	}
-			    });
+							    	// Search..
+							    	_s.transition({opacity:0},function(){
+								    	_s.hide();
+							    	});
+							    }
+					    	},_d);
+				    	}
+				    });
+				}
 	        }
 	        
 	        var waitForImages = function(){
 		        $('body').imagesLoaded().always(function(_e){
 			        $('body').transit({opacity:1},function(){
-				    	scrolling();
+				    	if(!isMobile) scrolling();
 				    	navManager();	    
 			        });
 				});
@@ -331,7 +335,7 @@
 					center: new google.maps.LatLng($scope.lat,$scope.lon),
 					zoomControl: true,
 					mapTypeControl: false,
-					draggable: true,
+					draggable: !Modernizr.touch,
 					scrollwheel: false,
 					scaleControl: true,
 					streetViewControl: true,
@@ -516,10 +520,11 @@
 		
 		ppControllers.controller('ItineraryController',function($scope,$log,$timeout,$resource,$location,$routeParams,$rootScope){
 			
-			var destSrc  = $resource('https://www.passported.com/api/content/destinations.json');
-			var abookSrc = $resource('https://www.passported.com/api/content/address-books.json');
-			var hotelSrc = $resource('https://www.passported.com/api/content/hotels.json');
-			var itSrc    = $resource('https://gostage.passported.com/api/v2/location');
+			var api      = window.location.protocol + '//' + window.location.host + '/api/content/';
+			var destSrc  = $resource(api+'destinations.json');
+			var abookSrc = $resource(api+'address-books.json');
+			var hotelSrc = $resource(api+'/hotels.json');
+			var itSrc    = $resource('https://go.passported.com/api/v2/location');
 			
 			//GET https://gostage.passported.com/api/v2/location?name=Paris
 			//This will return a list of itineraries for New York:

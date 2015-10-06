@@ -160,14 +160,22 @@ class Helpers
 
                     $fname = urlencode(strtolower(str_replace(' ', '-', $rss_post['title']))) . '.jpg';
                     $fpath = 'public://'.$fname;
-                    $idata = file_get_contents($rss_post['img']);
+                    //$idata = file_get_contents($rss_post['img']);
+
+                    $ch = curl_init();
+                    curl_setopt($ch, CURLOPT_URL, $rss_post['img']);
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                    $idata = curl_exec($ch);
+                    curl_close($ch);
+
                     file_put_contents($fpath, $idata);
 
                     $file = new stdClass;
                     $file->uid = '1';
                     $file->filename = $fname;
                     $file->uri = $fpath;
-                    $file->filemime = mime_content_type($fpath);
+                    $fmime = file_get_mimetype($fpath);
+                    $file->filemime = $fmime;
                     $file->filesize = filesize($fpath);
                     $file->status = 1;
                     $file = file_save($file, FILE_EXISTS_REPLACE);
