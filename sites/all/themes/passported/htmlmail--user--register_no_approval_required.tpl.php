@@ -111,53 +111,36 @@
   <tr style="height: 20px;"></tr>
   <tr align="center">
     <td valign="top" style="padding:0; margin:0">
-      <img style="width:300px; margin: auto;" src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/sites/all/themes/feflip/media/brand/passported-black-logo.png"/>
+      <img style="width:300px; margin: auto;" src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/sites/all/themes/passported/media/brand/passported-black-logo.png"/>
     </td>
   </tr>
   <tr style="height: 20px;"></tr>
-  <tr style="height: 20px; border-top:solid 1px #333333; ">
-    <td style="padding:10px; margin:0; font-size:22px; font-style: italic; color:#333333; font-weight:bold; text-align: center;">
-      Welcome to Passported beta!
-    </td>
-  </tr>
-  <tr>
-    <td style="padding:0px; margin:0px; font-size:18px; color:#333333; font-weight:bold; text-align: left; border-bottom:dotted 1px #333333;"></td>
-  </tr>
   <tr>
     <td style="padding:20px; margin:0; font-family: Arial,sans-serif; font-size:16px; color:#333333; line-height: 22px; text-align: left ">
-      <p>Welcome to the family.<br>
-
-Thank you for creating your account with Passported,  we're so excited to have you as one of our launch members. With your log in details you now have access to:
-      </p>
+      <p>Thank you for creating your account with Passported, we're so excited to have you as one of our launch members. With your login details, you now have access to:</p>
     </td>
   </tr>
   <tr align="center">
     <td style="padding:0 20px 20px 20px; border-bottom:dotted 1px #333333;" align="center">
       <table style="width:600px; margin:auto; font-family: Arial,sans-serif;  font-size:12px; line-height:18px; padding:0; border-collapse:collapse; ">
         <tr>
-          <td style="text-transform: uppercase; font-weight: bold; ">&bull; Exclusive rates and perks at Passported-favorite hotels</td>
+          <td style="text-transform: uppercase; font-weight: bold; ">&bull; FAMILY-FOCUSED AND FULLY CUSTOMIZABLE <b>CITY GUIDES</b></td>
         </tr>
         <tr>
-          <td style="text-transform: uppercase; font-weight: bold;">&bull; Tailored travel advice from our editors</td>
+          <td style="text-transform: uppercase; font-weight: bold;">&bull; OUR COLLABORATIVE <b>ITINERARY PLANNER</b></td>
         </tr>
         <tr>
-          <td style="text-transform: uppercase; font-weight: bold;">&bull; Insider travel content and destination itineraries</td>
+          <td style="text-transform: uppercase; font-weight: bold;">&bull; <b>HOTEL BOOKINGS</b> (AT EXCLUSIVE RATES) BY OUR IN-HOUSE EXPERT</td>
         </tr>
         <tr>
-          <td style="text-transform: uppercase; font-weight: bold;">&bull; Special offers and advance bookings at top hotels</td>
-        </tr>
-        <tr>
-          <td style="text-transform: uppercase; font-weight: bold;">&bull; Family travel recommendations from globetrotting tastemakers</td>
-        </tr>
-        <tr>
-          <td style="text-transform: uppercase; font-weight: bold;">&bull; And more...</td>
+          <td style="text-transform: uppercase; font-weight: bold;">&bull; DESTINATION ADVICE, TASTEMAKER INTERVIEWS AND MORE ON THE <b>TRAVEL JOURNAL</b></td>
         </tr>
       </table>
     </td>
   </tr>
   <tr>
     <td style="padding:20px; margin:0; font-size:16px; border-bottom:dotted 1px #333333; color:#333333; font-family: Times,serif; font-style: italic; line-height: 22px; text-align: left ">
-      <p>Questions? Comments? We'd love to hear from you. Email <a href="mailto:info@passported.com" style="font-weight:bold; color:#333333">info@passported.com</a>, tweet us, Facebook message us, use #passported to share your family travel adventures on Instagram, or send us a postcard: 25 Broadway, 9th Floor, New York NY 10004.
+      <p>Questions? Comments? We'd love to hear from you. Email <a href="mailto:info@passported.com" style="font-weight:bold; color:#333333">info@passported.com</a>, tweet us, Facebook message us, use #getpassported to share your family travel adventures on Instagram, or send us a postcard: 85 Broad Street, 18th Floor, New York NY 10004.
       </p>
     </td>
   </tr>
