@@ -2,8 +2,8 @@
 
 	<section id="contact" class="static" ng-controller="ContactController">
 		<header>
-			<h1>Use your words</h1>
-			<h2>for questions about feather+flip or to reach our editorial or sales team, please fill out our contact form.</h2>
+			<h1>GET IN TOUCH</h1>
+			<h2>We'd love to hear from you. If you have a question, suggestion, or just want to talk travel, send us a note below.</h2>
 		</header>
 		<h4 ng-if="success" class="animated fadeInDown">Thank you for contacting us.</h4>
 		<form id="contact-form" name="contactForm">
