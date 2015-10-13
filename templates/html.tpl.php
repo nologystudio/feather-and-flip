@@ -12,6 +12,7 @@
 			<base href="/">
 			<title><?php echo $head_title; ?></title>
 			<meta name="robots" content="noindex,nofollow">
+			<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no'>
 			<!-- Icons -->
 		    <link rel="icon" type="image/png" href="<?php echo drupal_get_path('theme','passported'); ?>/media/favicons/passported-favicon-64x64.png" sizes="64x64">
 		    <link rel="icon" type="image/png" href="<?php echo drupal_get_path('theme','passported'); ?>/media/favicons/passported-favicon-32x32.png" sizes="32x32">

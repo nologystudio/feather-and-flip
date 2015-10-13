@@ -36,7 +36,7 @@
 		    	<div class="wrapper" ng-if="itineraryIsReady">
 			    	<header>
 				    	<figure>
-				    		<img ng-src="{{pick.images[0][0].src_800}}" class="animated fadeIn"/>
+				    		<img ng-src="{{pick.images[0][0].src_450}}" class="animated fadeIn"/>
 				    	</figure>
 				    	<h1>{{pick.name}}</h1>
 			    	</header>
@@ -128,14 +128,15 @@
 						    		</div>
 					    		</header>
 					    		<ul>
-						    		<li ng-repeat="address in value" class="address-book {{key}} {{setClass(address.guide_categories)}}">
+						    		<li ng-repeat="address in value" class="address-book {{key}} {{setClass(address.guide_categories)}}" ng-if="address.title" ng-click="highlightMarker(address.id)">
 						    			<div class="icon {{key}}"></div>
 						    			<h4>{{address.title}}</h4>
 						    			<h5 ng-bind-html="address.short_review"></h5>
 						    			<footer>
+							    			<h5 ng-bind-html="address.address"></h5>
 							    			<span class="tel" ng-if="!check.phone(address.phone_number)">{{address.phone_number}}</span>
-							    			<span id="a-{{key}}-{{$index}}" class="hours" ng-if="address.hours" ng-click="openHours(key+'-'+$index)" data-state="false">
-							    				HOURS<small ng-if="address.open">OPEN NOW</small>
+							    			<span id="a-{{key}}-{{$index}}" class="hours" ng-if="address.hours" ng-click="openHours(key+'-'+$index)" data-state="true">
+							    				HOURS
 							    				<ul><li ng-repeat="hour in address.hours" ng-class="{'selected':$index == dayOfWeek}">{{hour}}</li></ul>
 							    			</span>
 						    			</footer>
@@ -328,7 +329,7 @@
 					    			<textarea placeholder="Prefer connecting rooms or a suite? Any favorite hotels will help us pick your perfect match for this trip. Let us know here." ng-model="booking.message" required/></textarea>
 					    		</li>
 					    		<li>
-					    			<button id="submit" class="rounded-btn" ng-class="{'off':!bookingForm.$valid}" ng-click="submit()">send</button>
+					    			<button id="submit" class="rounded-btn" ng-class="{'off':!bookingForm.$valid}" ng-click="!bookingForm.$valid || submit()">send</button>
 					    		</li>
 				    		</ul>
 			    		</form>

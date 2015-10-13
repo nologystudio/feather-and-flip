@@ -251,6 +251,7 @@
 					{
 						#font > .gar(15px,@color-5);
 						.animate-all();
+						padding: 0 @content-padding;
 						line-height: @header-height;
 						text-transform: none;
 						
@@ -286,6 +287,7 @@
 			.performance();
 			padding: 0 @content-padding;
 			z-index: 6;
+			overflow: hidden;
 			
 			div.arrow
 			{
@@ -1037,7 +1039,7 @@
 											{
 												figure
 												{
-													.set-size(100%,100%);
+													.set-size(100%,300px);
 													.box-sizing();
 													overflow: hidden;
 													margin: 0;
@@ -1046,7 +1048,9 @@
 													
 													img
 													{
-														.set-size(auto,400px);
+														.set-size(auto,300px);
+														.set-pos(absolute);
+														.set-coord(0,0);
 													}
 												}
 												
@@ -1573,6 +1577,7 @@
 																padding: @content-padding 0;
 																min-height: @p-l + 2 * @content-padding;
 																border-bottom: solid 1px @color-7;
+																cursor: pointer;
 																
 																div.icon
 																{
@@ -1629,6 +1634,12 @@
 																	margin-top: 0;
 																	display: block;
 																	
+																	h5
+																	{
+																		#font > .lato(12px,@color-3,700);
+																		padding-left: 0;
+																	}
+																	
 																	span.tel,
 																	span.url,
 																	span.hours,
@@ -1675,7 +1686,7 @@
 																	span.hours
 																	{
 																		width: 100%;
-																		margin-top: 3 * @unit;
+																		//margin-top: 3 * @unit;
 																		float: left;
 																		cursor: pointer;
 																		display: block;
@@ -2919,8 +2930,7 @@
 				}
 				
 				& + section[id="press"]
-				{
-					
+				{	
 				}
 			}
 			
