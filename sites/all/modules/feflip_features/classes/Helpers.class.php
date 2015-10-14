@@ -5,7 +5,7 @@ class Helpers
   const SECONDS_IN_A_YEAR = 31536000;
 
     // Fixed configuration values
-    const RSS_URL = 'http://blog.passported.com/?format=rss';
+    const RSS_URL = 'http://blog.passported.com/travel-journal/?format=rss';
 
     public static function GetAllImagesFromFieldCollection($fieldCollection, $imageText, $alternativeImage, $style)
     {
