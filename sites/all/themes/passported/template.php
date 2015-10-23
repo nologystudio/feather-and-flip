@@ -208,6 +208,21 @@ function passported_preprocess_views_view(&$variables) {
     $cguide = node_load($nid);
     $variables['lat'] = $cguide->field_latitude['und'][0]['value'];
     $variables['lon'] = $cguide->field_longitude['und'][0]['value'];
+
+    // check if exist term with this destination name
+    $term = taxonomy_get_term_by_name($cguide->title);
+    if (!empty($term)) {
+      $cat = array_shift($term);
+      $tjview = views_get_view('travel_journal_tags');
+      $tjview->set_display('view_block_name');
+      $tjview->set_arguments(array($cat->tid));
+      $tjview->execute();
+      $tjCount = count($tjview->result);
+      if ($tjCount > 0)
+          $variables['travel_journal'] = views_embed_view('travel_journal_tags', 'page', $cat->tid);
+      else
+          $variables['travel_journal'] = '';
+    }
   }
   elseif (($view->name == 'travel_journal' || $view->name == 'travel_journal_tags') && $view->current_display == 'page') {
     //TODO optimize: It's possible cache this content?
