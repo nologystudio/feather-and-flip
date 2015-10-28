@@ -2315,6 +2315,11 @@
 				z-index: 2;
 				padding-bottom: 2 * @content-padding;
 				
+				&.related
+				{
+					height: auto;
+				}
+				
 				&.add-shadow
 				{
 					box-shadow: 0 0 @content-padding @shadow-color;	
@@ -2588,7 +2593,7 @@
 			&[id="press"]
 			{
 				.set-bgc(@color-7);	
-				padding: @content-padding/2 0 1.5 * @content-padding 0;
+				padding: @content-padding + 2 * @unit 0 1.5 * @content-padding 0;
 				z-index: 4;
 				
 				ul.logo-gallery
