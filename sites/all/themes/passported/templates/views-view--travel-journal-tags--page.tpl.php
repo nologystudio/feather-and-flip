@@ -4,7 +4,7 @@
         exit();
     }
     else { ?>
-        <section id="travel-journal" ng-controller="BlogCtrl"<?php echo ((strpos($_SERVER['REQUEST_URI'], '/itinerary') !== false || (strpos($_SERVER['REQUEST_URI'], '/hotel-reviews') !== false)) ? ' class="related"' : ''); ?>>
+        <section id="travel-journal" ng-controller="BlogController" class="related">
             <header>
                 <h4 data-animate="1">TRAVEL<span> journal </span></h4>
             </header>

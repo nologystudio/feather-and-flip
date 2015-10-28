@@ -450,36 +450,38 @@
 					    
 				    	_.map(detail,function(_d){
 					    	_.map(_d,function(_p){
-						    	
-						    	var _interest = (!_.isUndefined(_p.assoc_interests)) ? _p.assoc_interests.toLowerCase() : 'stay';
-						    	var _title    = (!_.isUndefined(_p.title)) ? _p.title : _p.name;
-						    	var _body     = (!_.isUndefined(_p.short_description)) ? _p.short_description : _p.short_review;
-						    	
-						    	var pin = new google.maps.Marker({
-									position: {
-										lat: Number(_p.lat),
-										lng: Number(_p.lon)
-									},
-									type: _interest,
-									id: _p.id,
-									map: $scope.map,
-									title: _title,
-									icon: _path + _interest + '-pin-icon.svg'
-								});
-								
-								var infowindow = new google.maps.InfoWindow({
-									content: '<div class="in-map '+_interest+'"><h1>'+_title+'</h1><h2>'+_body+'</h2></div>',
-									maxWidth: 200
-								});
-								
-								pin.addListener('click',function(){
-									$scope.map.setZoom(16);
-									$scope.map.setCenter(pin.getPosition());
-									infowindow.open($scope.map,pin);
-								});
-								
-								bounds.extend(pin.position);
-								markers.push(pin);
+						    	if(_p.isLoaded){
+							    	console.log(_p.isLoaded);
+							    	var _interest = (!_.isUndefined(_p.assoc_interests)) ? _p.assoc_interests.toLowerCase() : 'stay';
+							    	var _title    = (!_.isUndefined(_p.title)) ? _p.title : _p.name;
+							    	var _body     = (!_.isUndefined(_p.short_description)) ? _p.short_description : _p.short_review;
+							    	
+							    	var pin = new google.maps.Marker({
+										position: {
+											lat: Number(_p.lat),
+											lng: Number(_p.lon)
+										},
+										type: _interest,
+										id: _p.id,
+										map: $scope.map,
+										title: _title,
+										icon: _path + _interest + '-pin-icon.svg'
+									});
+									
+									var infowindow = new google.maps.InfoWindow({
+										content: '<div class="in-map '+_interest+'"><h1>'+_title+'</h1><h2>'+_body+'</h2></div>',
+										maxWidth: 200
+									});
+									
+									pin.addListener('click',function(){
+										$scope.map.setZoom(16);
+										$scope.map.setCenter(pin.getPosition());
+										infowindow.open($scope.map,pin);
+									});
+									
+									bounds.extend(pin.position);
+									markers.push(pin);
+								}
 							});
 					    });
 						
@@ -487,6 +489,40 @@
 					    $scope.map.setCenter(new google.maps.LatLng(Number(latLng[0]),Number(latLng[1])));
 					    $scope.map.setZoom(zoom);
 					    
+				    break;
+				    case 'pick':
+				    	
+				    	var _p        = _data;
+				    	var _interest = (!_.isUndefined(_p.assoc_interests)) ? _p.assoc_interests.toLowerCase() : 'stay';
+				    	var _title    = (!_.isUndefined(_p.title)) ? _p.title : _p.name;
+				    	var _body     = (!_.isUndefined(_p.short_description)) ? _p.short_description : _p.short_review;
+				    	
+				    	var pin = new google.maps.Marker({
+							position: {
+								lat: Number(_p.lat),
+								lng: Number(_p.lon)
+							},
+							type: _interest,
+							id: _p.id,
+							map: $scope.map,
+							title: _title,
+							icon: _path + _interest + '-pin-icon.svg'
+						});
+						
+						var infowindow = new google.maps.InfoWindow({
+							content: '<div class="in-map '+_interest+'"><h1>'+_title+'</h1><h2>'+_body+'</h2></div>',
+							maxWidth: 200
+						});
+						
+						pin.addListener('click',function(){
+							$scope.map.setZoom(16);
+							$scope.map.setCenter(pin.getPosition());
+							infowindow.open($scope.map,pin);
+						});
+						
+						bounds.extend(pin.position);
+						markers.push(pin);
+						
 				    break;
 			    }
 		    }
@@ -520,7 +556,7 @@
 		
 		ppControllers.controller('ItineraryController',function($scope,$log,$timeout,$resource,$location,$routeParams,$rootScope){
 			
-			var api      = window.location.protocol + '//' + window.location.host + '/api/content/';
+			var api      = 'https://www.passported.com/api/content/';//window.location.protocol + '//' + window.location.host + '/api/content/';
 			var destSrc  = $resource(api+'destinations.json');
 			var abookSrc = $resource(api+'address-books.json');
 			var hotelSrc = $resource(api+'hotels.json');
@@ -632,23 +668,41 @@
 							
 							var place = new google.maps.places.PlacesService($scope.map);
 							
-							place.getDetails({placeId:_a.google_place_id},function(_place,_status){
-								if(_status == google.maps.places.PlacesServiceStatus.OK){
+							var puller = function(){
+								place.getDetails({placeId:_a.google_place_id},function(_place,_status){
+									if(_status == google.maps.places.PlacesServiceStatus.OK){
+										
+										//console.log('success:' + _a.title + '|' + _place.name);
+										
+										_a.title 		= _place.name;
+										_a.lat 			= _place.geometry.location.lat();
+										_a.lon 			= _place.geometry.location.lng();
+										_a.phone_number = _place.international_phone_number;
+										_a.address 		= _place.formatted_address;
+										_a.website 		= _place.website;
+										_a.hours        = (_.isUndefined(_place.opening_hours)) ? undefined : _place.opening_hours.weekday_text;
+										_a.open         = (_.isUndefined(_place.opening_hours)) ? undefined : _place.opening_hours.open_now;
+										
+										if(_a.isLoaded === false){
+											$scope.$parent.addMarkers('pick',_a);
+											_a.isLoaded  = true;	
+										}
+									};
 									
-									//console.log(_a);
-									//console.log(_place);
-									
-									_a.title 		= _place.name;
-									_a.lat 			= _place.geometry.location.lat();
-									_a.lon 			= _place.geometry.location.lng();
-									_a.phone_number = _place.international_phone_number;
-									_a.address 		= _place.formatted_address;
-									_a.website 		= _place.website;
-									_a.hours        = (_.isUndefined(_place.opening_hours)) ? undefined : _place.opening_hours.weekday_text;
-									_a.open         = (_.isUndefined(_place.opening_hours)) ? undefined : _place.opening_hours.open_now;
-									
-								};
-							});
+									if(_status == google.maps.places.PlacesServiceStatus.OVER_QUERY_LIMIT){
+										
+										//console.log('fail:' + _a.title);
+										
+										_a.isLoaded = false;
+										
+										setTimeout(function(){
+											puller();
+										},3000);
+									}
+								});
+							}
+							
+							puller();
 						}
 						
 						// Get hotel filters...
@@ -1144,7 +1198,7 @@
 					break;
 					default:
 						$scope.display = true;
-						$scope.$apply();
+						$scope.$digest();
 					break;
 				}
 			}
@@ -1167,8 +1221,11 @@
 			
 			$scope.$watch('resetPassword',function(_v){
 				if(_v){
-					$scope.triggerState = messageType[1];
-					$scope.triggerOverlay();
+					$timeout(function(){
+						$scope.triggerState = messageType[1];
+						$scope.triggerOverlay();
+						$('.call-to-action').show().transition({opacity:1});
+					},200);
 				}
 			});
 			
