@@ -1,7 +1,7 @@
 <!-- Google maps starts here -->
 <div id="google-maps-container" data-animate="1"></div>
 <!-- Itinerary aside starts here -->
-<aside class="left" ng-class="{'on':showAside}" ng-controller="ItineraryController" ng-swipe-left="openLeftAside()" ng-swipe-right="openLeftAside()">
+<aside class="left" ng-class="{'on':showAside}" ng-controller="ItineraryController">
 	<div class="wrapper">
     	<ul ng-class="{'step-1':step == 1,'step-2':step == 2,'step-3':step == 3}">
 		    <li id="step-1">
@@ -157,7 +157,7 @@
 	</button>
 </aside>
 <!-- Booking aside starts here -->
-<aside class="right" ng-controller="BookingController" ng-class="{'on':showRightAside}" ng-swipe-left="openAside()" ng-swipe-right="openAside()">
+<aside class="right" ng-controller="BookingController" ng-class="{'on':showRightAside}">
 	<div class="wrapper">
 		<div class="error animated fadeInDown" ng-if="error">
 			<span>{{error}}</span>

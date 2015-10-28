@@ -1,6 +1,6 @@
 	
 	<?php $nuser = ((isset($_COOKIE['nUser']) && ($_COOKIE['nUser']=='true')) ? true : false); ?>
-	<?php $collapseNav = ($jsview == 'city-guides' || $jsview == 'book-hotels' || $jsview == 'inspiration' || $jsview == 'inspiration') ? true : false; ?>
+	<?php $collapseNav = ($jsview == 'city-guides' || $jsview == 'book-hotels' || $jsview == 'city-guide' || $jsview == 'inspiration') ? true : false; ?>
 	<?php if(drupal_is_front_page() && !user_is_logged_in() && !$nuser): ?>
 	
 	<!-- Newsletter -->
