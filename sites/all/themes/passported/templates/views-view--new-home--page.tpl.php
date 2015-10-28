@@ -4,7 +4,9 @@
 	<main id="passported-intro">
 		<ul>
 			<li>
-				<h1 data-animate="1">Sophisticated family travel simplified</h1>
+				<h1 data-animate="1">
+					Sophisticated family travel simplified</h1>
+				</h1>
 				<ul class="align-center">
 					<li ng-click="goToURL('city-guides')">
 						<h2 data-animate="4">Explore</h2>
