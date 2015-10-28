@@ -450,8 +450,8 @@
 					    
 				    	_.map(detail,function(_d){
 					    	_.map(_d,function(_p){
-						    	if(_p.isLoaded){
-							    	console.log(_p.isLoaded);
+						    	if(_p.isLoaded || _p.isLoaded === undefined){
+							    	
 							    	var _interest = (!_.isUndefined(_p.assoc_interests)) ? _p.assoc_interests.toLowerCase() : 'stay';
 							    	var _title    = (!_.isUndefined(_p.title)) ? _p.title : _p.name;
 							    	var _body     = (!_.isUndefined(_p.short_description)) ? _p.short_description : _p.short_review;
@@ -682,7 +682,7 @@
 										_a.website 		= _place.website;
 										_a.hours        = (_.isUndefined(_place.opening_hours)) ? undefined : _place.opening_hours.weekday_text;
 										_a.open         = (_.isUndefined(_place.opening_hours)) ? undefined : _place.opening_hours.open_now;
-										
+									
 										if(_a.isLoaded === false){
 											$scope.$parent.addMarkers('pick',_a);
 											_a.isLoaded  = true;	
@@ -735,6 +735,18 @@
 								});
 							});
 						});
+						
+						// Rearrange hotels: 1. Identify featured - 2. Remove featured - 3. Reorder the object
+						
+						var featuredHotels = _.filter($scope.pick.hotels,function(_v){ 
+							return _v.featured == "1";
+						});
+						
+						$scope.pick.hotels = _.filter($scope.pick.hotels,function(_v){ 
+							return _v.featured == "0";
+						});
+						
+						_.extend($scope.pick.hotels,featuredHotels);
 					});
 				});
 				

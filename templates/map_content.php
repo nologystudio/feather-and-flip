@@ -75,7 +75,7 @@
 					    		</div>
 				    		</header>
 				    		<article ng-repeat="hotel in pick.hotels" class="hotel {{setClass(hotel.guide_categories)}}">
-					    		<div class="icon-hotel"></div>
+					    		<div class="icon-hotel" ng-class="{'featured': hotel.featured == '1'}"></div>
 			    				<header>
 				    				<h4>{{hotel.name}}</h4>
 					    			<h5>{{hotel.address_1}}</h5>
