@@ -39,10 +39,10 @@
 	    	/* Layout & Tools
 	        - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 	       
-			var isMobile = (Modernizr.touch && $(window).width() < 800) ? true : false;
+			$scope.isMobile = (Modernizr.touch && $(window).width() < 800) ? true : false;
 			
 	        var triggerGoogleEvent = function(_s){
-// 				ga('send','event','ux','scroll',_s);
+				// ga('send','event','ux','scroll',_s);
 	        }
 	        
 	        var scrolling = function(){
@@ -153,9 +153,11 @@
 			        var _t = $(this);
 			        
 			        triggerGoogleEvent('travel-journal');
-					
-			    	$timeout(function(){_t.find('*[data-animate="1"]').addClass('animated fadeInUp')},200);
-			    	$timeout(function(){_t.find('*[data-animate="2"]').addClass('animated fadeIn')},400);
+			        
+			        if(!_t.hasClass('related')){
+			        	$timeout(function(){_t.find('*[data-animate="1"]').addClass('animated fadeInUp')},200);
+						$timeout(function(){_t.find('*[data-animate="2"]').addClass('animated fadeIn')},400);
+					}
 			    	
 			    },{ offset: '75%' });
 		        
@@ -205,7 +207,7 @@
 		        var searchAnimation = function(){
 			    }
 			    
-			    if(!isMobile){
+			    if(!$scope.isMobile){
 				    $('div.dropdown-wrapper').on({
 				    	mouseover: function(){
 					    	userControl = true;
@@ -281,13 +283,17 @@
 					    	},_d);
 				    	}
 				    });
+				}else{
+					$('button.mobile-nav-trigger').on('click',function(){
+						$('header > nav').toggleClass('mobile');
+					});
 				}
 	        }
 	        
 	        var waitForImages = function(){
 		        $('body').imagesLoaded().always(function(_e){
 			        $('body').transit({opacity:1},function(){
-				    	if(!isMobile) scrolling();
+				    	if(!$scope.isMobile) scrolling();
 				    	navManager();	    
 			        });
 				});
@@ -335,7 +341,7 @@
 					center: new google.maps.LatLng($scope.lat,$scope.lon),
 					zoomControl: true,
 					mapTypeControl: false,
-					draggable: !Modernizr.touch,
+					draggable: true,
 					scrollwheel: false,
 					scaleControl: true,
 					streetViewControl: true,
@@ -556,11 +562,13 @@
 		
 		ppControllers.controller('ItineraryController',function($scope,$log,$timeout,$resource,$location,$routeParams,$rootScope){
 			
-			var api      = 'https://www.passported.com/api/content/';//window.location.protocol + '//' + window.location.host + '/api/content/';
+			var api      = window.location.protocol + '//' + window.location.host + '/api/content/';
 			var destSrc  = $resource(api+'destinations.json');
 			var abookSrc = $resource(api+'address-books.json');
 			var hotelSrc = $resource(api+'hotels.json');
 			var itSrc    = $resource('https://go.passported.com/api/v2/location');
+			
+			//'https://www.passported.com/api/content/';
 			
 			//GET https://gostage.passported.com/api/v2/location?name=Paris
 			//This will return a list of itineraries for New York:
@@ -838,6 +846,8 @@
 			$scope.openAside = function(){
 				
 				$scope.showRightAside = !$scope.showRightAside;	
+				$('#map').toggleClass('full');
+				google.maps.event.trigger($scope.map,'resize');
 				
 				// Reset object...
 				
@@ -1050,10 +1060,12 @@
 			}
 			
 			$timeout(function(){
-				grid.shuffle({
-					itemSelector: '.quick-entry'
+				$('#travel-journal').imagesLoaded().always(function(_e){
+			        grid.shuffle({
+						itemSelector: '.quick-entry'
+					});
+					$('.grid-wrapper *.hidden').css({opacity:0});  
 				});
-				$('.grid-wrapper *.hidden').css({opacity:0});
 			},0);
 		});
 	    

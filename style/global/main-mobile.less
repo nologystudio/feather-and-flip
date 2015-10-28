@@ -38,6 +38,7 @@
 		body
 		{
 			-webkit-overflow-scrolling: touch;
+			width: 100%;
 		}
 		
 		*[data-animate]
@@ -81,12 +82,42 @@
 						#align > .center;
 					}
 				}
+				
+				&.collapsed
+				{
+					margin-top: 0;
+					
+					figure
+					{
+						#align > .left;
+						margin-left: 15px;
+					}
+				}
+			}
+			
+			& > button.mobile-nav-trigger
+			{
+				@s: 50px;
+				
+				.set-size(@s,@s);
+				.set-pos(absolute);
+				.set-bg(transparent,'@{media-url}icons/menu-icon.svg');
+				.set-bgs(auto,30%);
+				border: 0;
+				right: 10px;
+				top: 8px;
+				z-index: 2;
 			}
 			
 			nav
 			{
 				.set-size(100%,@header-height);
 				display: block;
+				
+				&.mobile
+				{
+					display: none;
+				}
 				
 				div.wrapper
 				{
@@ -320,7 +351,10 @@
 					.set-size(@left-panel-width,100%);
 					
 					button.aside-trigger
-					{}
+					{
+						.scale(0.5);
+						right: 15px;
+					}
 					
 					&.left,
 					&.right
@@ -349,9 +383,14 @@
 									{
 										div.wrapper
 										{
-											.set-bg(transparent,'@{media-url}icons/feather-grey-icon.svg',no-repeat,center,top);
-											.set-bgs(auto,30px);
-											padding-top: 1.5 * @content-padding;
+											/*
+												.set-bg(transparent,'@{media-url}icons/feather-grey-icon.svg',no-repeat,center,top);
+												.set-bgs(auto,30px);
+												padding-top: 1.5 * @content-padding;
+											*/
+											
+											padding-top: 0;
+											background: none;
 										}
 									}
 									
@@ -369,6 +408,11 @@
 									
 									&[id="step-1"]
 									{
+										& > header
+										{
+											#align > .left;
+										}
+										
 										& > ul
 										{
 											& > li
@@ -749,8 +793,8 @@
 														
 														div.half-wrapper
 														{
-															.set-size(100%);
-															margin: 0;
+															.set-size(48%);
+															margin: 0 1%;
 															
 															label,
 															input
@@ -802,6 +846,16 @@
 						& > div.wrapper
 						{
 							box-shadow: 0 0 @content-padding @shadow-color;
+						}
+						
+						&.on
+						{
+							right: -@right-panel-width;
+							
+							& > div.wrapper
+							{
+								box-shadow: 0 0 @content-padding transparent;
+							}
 						}
 					}
 				}
@@ -875,8 +929,11 @@
 				
 				div.wrapper 
 				{
+					.box-sizing();
+					#align > .left;
 					width: 100%;
 					margin-bottom: 0;
+					display: block;
 					
 					& > div[id="let-us-inspire"]
 					{
@@ -887,6 +944,8 @@
 						{
 							h4
 							{
+								width: 100%;
+								
 								&:before,
 								&:after
 								{
@@ -927,6 +986,7 @@
 			&[id="press"]
 			{
 				padding-top: 1.5 * @content-padding;
+				display: none !important;
 				
 				ul.logo-gallery
 				{

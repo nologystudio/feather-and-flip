@@ -181,15 +181,6 @@
 										<input type="text" class="rounded" ng-model="userSearch" ng-change="searchSubmit()" placeholder="Enter your destination"/>
 									</form>
 								</div>
-<!--
-								<ul id="search-result" ng-if="showResult" class="animated fadeIn">
-									<div class="result-wrapper" ng-if="destinations.length > 0">
-										<li ng-repeat="destination in destinations" ng-click="setter.value(userSearch,destination.title)">
-											{{destination.title}}
-										</li>
-									</div>
-								</ul>
--->
 							</div>
 							<div id="search-destination" ng-controller="SearchController">
 								<div class="wrapper">
@@ -198,15 +189,6 @@
 										<input type="text" class="rounded" ng-model="userSearch" ng-change="searchSubmit()" placeholder="Enter your hotel"/>
 									</form>
 								</div>
-<!--
-								<ul id="search-result" ng-if="showResult" class="animated fadeIn">
-									<div class="result-wrapper" ng-if="hotels.length > 0">
-										<li ng-repeat="hotel in hotels" ng-click="closeResult(userSearch,hotel.title)">
-											{{hotel.title}}
-										</li>
-									</div>
-								</ul>
--->
 							</div>
 				    	</div>
 			    	</div>
@@ -216,7 +198,8 @@
 			    		<h5>
 				    		Great! Thank you.
 				    		<br>
-				    	One of our trip planners will be in touch soon.</h5>
+							One of our trip planners will be in touch soon.
+						</h5>
 			    	</li>
 			    	<li id="email-entry">
 			    		Drop us an e-mail or fill out the form below
@@ -225,7 +208,7 @@
 			    	<li>
 			    		<form name="bookingForm">
 				    		<ul>
-					    		<li>
+					    		<li ng-if="!isMobile">  
 					    			<div id="date-picker">
 						    			<button class="rounded-btn icon-calendar">{{booking.start_date ? booking.start_date : "Start Date"}}</button>
 						    			<button class="rounded-btn icon-calendar">{{booking.end_date ? booking.end_date : "End Date"}}</button>
@@ -285,13 +268,13 @@
 										</div>
 									</div>
 					    		</li>
-					    		<li>
+					    		<li ng-if="!isMobile">
 					    			<label>Number of Adults</label>
 					    			<div class="circle-input-wrapper">
 					    				<input type="text" ng-model="booking.adults" ng-pattern="/^[0-9]+$/" maxlength="1" ng-focus="booking.adults = undefined" required/>
 					    			</div>
 					    		</li>
-					    		<li>
+					    		<li ng-if="!isMobile">
 					    			<label>Number of Children</label>
 					    			<div class="circle-input-wrapper">
 					    				<input type="text" ng-model="booking.children" ng-pattern="/^[0-9]+$/" maxlength="1" ng-focus="booking.children = undefined"/>
