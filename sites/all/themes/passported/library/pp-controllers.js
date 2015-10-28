@@ -153,11 +153,10 @@
 			        var _t = $(this);
 			        
 			        triggerGoogleEvent('travel-journal');
+			        $timeout(function(){_t.find('*[data-animate="1"]').addClass('animated fadeInUp')},200);
 			        
-			        if(!_t.hasClass('related')){
-			        	$timeout(function(){_t.find('*[data-animate="1"]').addClass('animated fadeInUp')},200);
-						$timeout(function(){_t.find('*[data-animate="2"]').addClass('animated fadeIn')},400);
-					}
+			        if(!_t.hasClass('related'))
+			        	$timeout(function(){_t.find('*[data-animate="2"]').addClass('animated fadeIn')},400);
 			    	
 			    },{ offset: '75%' });
 		        
@@ -1413,10 +1412,12 @@
 		            } 
 			        else{
 			            $scope.loading = false;
-			            $scope.signInError = 'The user or password is incorrect';
+			            if(_id == 'up') $scope.signUpError = 'Your user already exists'; 
+			            if(_id == 'in') $scope.signInError = 'The user or password is incorrect';
 			        }
 	            }).
-	            error(function(){});
+	            error(function(_data){
+	            });
 			}
 			
 			$scope.regNewsletter= function(){
