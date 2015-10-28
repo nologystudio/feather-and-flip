@@ -2,36 +2,18 @@
 
 	<section id="contact" class="static" ng-controller="ContactController">
 		<header>
-			<h1>Use your words</h1>
-			<h2>for questions about feather+flip or to reach our editorial or sales team, please fill out our contact form.</h2>
+            <h1>GET IN TOUCH</h1>
+            <h2>We'd love to hear from you. If you have a question, suggestion, or just want to talk travel, send us a note below.</h2>
 		</header>
 		<h4 ng-if="success" class="animated fadeInDown">Thank you for contacting us.</h4>
 		<form id="contact-form" name="contactForm">
-			<label for="user-name" class="half">
+			<label for="user-name">
 				Name*
 				<input type="text" name="user-name" ng-model="data.userName" required/>
-				<small>First name</small>
-			</label>
-			<label for="user-last" class="half no-label">
-				<input type="text" name="user-last" ng-model="data.userLast" required/>
-				<small>Last name</small>
 			</label>
 			<label for="user-email">
 				Email*
 				<input type="email" name="user-email" ng-model="data.userEmail" required/>
-			</label>
-			<label for="user-department">
-				Select the appropriate department*
-				<select ng-model="data.userDepartment">
-					<option value="editorial" selected="selected">Editorial</option>
-					<option value="Advertising">Advertising</option>
-					<option value="Partnership Opportunities">Partnership Opportunities</option>
-					<option value="General Inquiries">General Inquiries</option>
-				</select>
-			</label>
-			<label for="user-subject">
-				Subject*
-				<input type="text" name="user-subject" ng-model="data.userSubject" required/>
 			</label>
 			<label for="user-message">
 				Message*
@@ -87,7 +69,7 @@
 					<figure>
 						<img src="<?php echo drupal_get_path('theme','passported'); ?>/media/about/monique-thofte.jpg" alt="MONIQUE THOFTE, DIRECOTR OF TRAVEL"/>
 					</figure>
-					<h3>MONIQUE THOFTE, DIRECOTR OF TRAVEL</h3>
+					<h3>MONIQUE THOFTE, DIRECTOR OF TRAVEL</h3>
 					<p>Monique Thofte joined the Passported team after honing her travel planning skills at Indagare Travel. Her expertise ranges from Tuscan vineyard resorts to hip beach hideaways and perfect urban retreats. Monique’s favorite destinations include Angra Dos Reis, Stockholm and St. Barth’s, and her next stops are Argentina and Uruguay. A Jersey girl by birth, Monique now lives in Brooklyn with her husband and daughter and studied communications at University of Miami.</p>
 				</li>
 				<li>
