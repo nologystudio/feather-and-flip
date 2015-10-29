@@ -3505,10 +3505,37 @@
 					// - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 					
 					&[id="sign-up-form"]
-					{}
+					{
+						header
+						{
+							h3
+							{
+								top: 77px;
+								font-size: 11px;
+								color: @color-3;
+								
+								a
+								{
+									cursor: pointer;
+								}
+							}
+						}
+					}
 					
 					&[id="sign-in-form"]
 					{}
+					
+					&[name="passwordForm"]
+					{
+						header
+						{
+							h1
+							{
+								.set-bg(transparent,'@{media-url}icons/feather-grey-icon.svg',no-repeat,86%,top);
+								.set-bgs(auto,50px);
+							}
+						}
+					}
 				}
 			}
 		}
