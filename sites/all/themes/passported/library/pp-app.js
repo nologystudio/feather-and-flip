@@ -54,6 +54,7 @@
 		angular.module('ppApp',[
 			'ngRoute',
 			'ngResource',
+			'ngTouch',
 			'ngCookies',
 			'ngSanitize',
 			'ppServices',

@@ -714,10 +714,10 @@ class AdminForms
 
         //Fill fields
         $wrapper->field_contact_first_name            = $inputValues['firstName'];
-        $wrapper->field_contact_last_name             = $inputValues['lastName'];
+        //$wrapper->field_contact_last_name             = $inputValues['lastName'];
         $wrapper->field_contact_email                 = $inputValues['email'];
-        $wrapper->field_contact_department            = $inputValues['department'];
-        $wrapper->field_contact_subject               = $inputValues['subject'];
+        //$wrapper->field_contact_department            = $inputValues['department'];
+        //$wrapper->field_contact_subject               = $inputValues['subject'];
         $wrapper->field_contact_message               = $inputValues['message'];
 
         //Done!
