@@ -39,7 +39,9 @@
 				<header>
 					<h1>SIGN UP TO PASSPORTED</h1>
 					<h2>Sign up now and join our adventure.</h2>
-					<h3 ng-if="signUpError != ''" class="animated fadeInDown">You already have an account, <a ng-click="switcher('sign-in')" style="cursor:pointer">sign in here</a></h3>
+					<h3 ng-if="signUpError != ''" class="animated fadeIn">
+						Oops! This email address is already associated with an account. Please sign in <a ng-click="switcher('sign-in')">here</a> or click <a ng-click="switcher('reset-password')">here</a> to reset your password.
+					</h3>
 				</header>
 				<input type="email"    class="rounded" name="user-signup-email"    placeholder="Email address"     ng-pattern="/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/" ng-model="data.userEmail" required/>
 				<input type="password" class="rounded" name="user-signup-password" placeholder="Password"          ng-model="data.userPassword" required/>
