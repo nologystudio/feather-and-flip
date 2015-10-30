@@ -208,7 +208,7 @@
 			    	<li>
 			    		<form name="bookingForm">
 				    		<ul>
-					    		<li ng-if="!isMobile">  
+					    		<li>  
 					    			<div id="date-picker">
 						    			<button class="rounded-btn icon-calendar">{{booking.start_date ? booking.start_date : "Start Date"}}</button>
 						    			<button class="rounded-btn icon-calendar">{{booking.end_date ? booking.end_date : "End Date"}}</button>
@@ -268,13 +268,13 @@
 										</div>
 									</div>
 					    		</li>
-					    		<li ng-if="!isMobile">
+					    		<li>
 					    			<label>Number of Adults</label>
 					    			<div class="circle-input-wrapper">
 					    				<input type="text" ng-model="booking.adults" ng-pattern="/^[0-9]+$/" maxlength="1" ng-focus="booking.adults = undefined" required/>
 					    			</div>
 					    		</li>
-					    		<li ng-if="!isMobile">
+					    		<li>
 					    			<label>Number of Children</label>
 					    			<div class="circle-input-wrapper">
 					    				<input type="text" ng-model="booking.children" ng-pattern="/^[0-9]+$/" maxlength="1" ng-focus="booking.children = undefined"/>

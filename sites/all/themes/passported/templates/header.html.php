@@ -18,17 +18,15 @@
 	<!-- Header -->
 				
 	<header>
-		<a href="/" class="<?php if($collapseNav) echo 'collapsed'; ?>">
+		<a href="/" class="collapsed">
 			<figure>
 				<img src="<?php echo drupal_get_path('theme', 'passported'); ?>/media/brand/passported-logo.svg" type="image/svg+xml" alt="Passported, kid friendly travel for grown-ups" data-animate="1"/> 								
 			</figure>
 		</a>
 		
-		<?php if($collapseNav): ?>
-			<button class="mobile-nav-trigger"></button>
-		<?php endif; ?>
+		<button class="mobile-nav-trigger"></button>
 		
-		<nav <?php if($collapseNav) echo 'ng-class="{mobile:isMobile}"'; ?>>
+		<nav ng-class="{mobile:isMobile}">
 			<div class="wrapper align-center">
 				<a id="city-guides" href="/city-guides" class="subnav" data-animate="3">city guides</a>
 				<a id="itinerary-planner" href="//go.passported.com" data-animate="4">itinerary planner</a>
