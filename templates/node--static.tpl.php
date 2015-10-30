@@ -69,7 +69,7 @@
 					<figure>
 						<img src="<?php echo drupal_get_path('theme','passported'); ?>/media/about/monique-thofte.jpg" alt="MONIQUE THOFTE, DIRECOTR OF TRAVEL"/>
 					</figure>
-					<h3>MONIQUE THOFTE, DIRECTOR OF TRAVEL</h3>
+					<h3>MONIQUE THOFTE, DIRECOTR OF TRAVEL</h3>
 					<p>Monique Thofte joined the Passported team after honing her travel planning skills at Indagare Travel. Her expertise ranges from Tuscan vineyard resorts to hip beach hideaways and perfect urban retreats. Monique’s favorite destinations include Angra Dos Reis, Stockholm and St. Barth’s, and her next stops are Argentina and Uruguay. A Jersey girl by birth, Monique now lives in Brooklyn with her husband and daughter and studied communications at University of Miami.</p>
 				</li>
 				<li>

@@ -17,6 +17,7 @@
 	<script src="<?php echo drupal_get_path('theme', 'passported'); ?>/library/vendors/angular-sanitize.min.js"></script>
 	<script src="<?php echo drupal_get_path('theme', 'passported'); ?>/library/vendors/angular-route.min.js"></script>
 	<script src="<?php echo drupal_get_path('theme', 'passported'); ?>/library/vendors/angular-resource.min.js"></script>
+	<script src="<?php echo drupal_get_path('theme', 'passported'); ?>/library/vendors/angular-touch.min.js"></script>
 	
 	<script src="<?php echo drupal_get_path('theme', 'passported'); ?>/library/pp-directives.js"></script>
 	<script src="<?php echo drupal_get_path('theme', 'passported'); ?>/library/pp-controllers.js"></script>
