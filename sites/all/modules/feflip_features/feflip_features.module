@@ -40,17 +40,39 @@ function import_bv_data() {
 }
 
 function feflip_features_form() {
-    $form['upload'] = array(
-        '#type' => 'file',
+//    $form['upload'] = array(
+//        '#type' => 'file',
+//    );
+//
+//    //Submit button:
+//    $form['submit_button'] = array(
+//        '#type' => 'submit',
+//        '#value' => t('Import users'),
+//        '#submit' => array('feflip_features_form_submit')
+//    );
+//    return $form;
+    // Custom colors for newsletter bar
+    $form['nw_bar'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Newsletter bar'),
+        '#collapsible' => TRUE,
+        '#collapsed' => FALSE,
     );
-
-    //Submit button:
-    $form['submit_button'] = array(
-        '#type' => 'submit',
-        '#value' => t('Import users'),
-        '#submit' => array('feflip_features_form_submit')
+    $form['nw_bar']['nw_bar_text_color'] = array(
+        '#type'          => 'textfield',
+        '#title'         => t('Text color'),
+        '#default_value' => variable_get('nw_bar_text_color'),
+        '#description'   => t("Hexadecimal notation including # (#000000)."),
+        '#required' => FALSE
     );
-    return $form;
+    $form['nw_bar']['nw_bar_background_color'] = array(
+        '#type'          => 'textfield',
+        '#title'         => t('Background color'),
+        '#default_value' => variable_get('nw_bar_background_color'),
+        '#description'   => t("Hexadecimal notation including # (#000000)."),
+        '#required' => FALSE
+    );
+    return system_settings_form($form);
 }
 
 function feflip_features_form_submit($form, &$form_state) {
