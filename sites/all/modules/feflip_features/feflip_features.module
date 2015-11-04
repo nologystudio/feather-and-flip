@@ -26,10 +26,18 @@ function feflip_features_menu() {
         'title' => 'Passported tools',
         'description' => 'Helper functions',
         'page callback' => 'import_bv_data',
-        'access arguments' => array('import bv data'),
+        'access callback' => 'check_admin_role',
         'type' => MENU_NORMAL_ITEM,
     );
     return $items;
+}
+
+function check_admin_role() {
+    global $user;
+    if (in_array('administrator', $user->roles)) {
+        return TRUE;
+    }
+    return FALSE;
 }
 
 function import_bv_data() {
