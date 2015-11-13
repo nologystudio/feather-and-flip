@@ -5,7 +5,7 @@
 		<ul>
 			<li>
 				<h1 data-animate="1">
-					Sophisticated family travel simplified</h1>
+					travel simplified</h1>
 				</h1>
 				<ul class="align-center">
 					<li ng-click="goToURL('city-guides')">
