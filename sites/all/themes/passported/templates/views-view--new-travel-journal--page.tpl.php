@@ -9,7 +9,7 @@
             $orig_date = strtotime($featured->field_field_original_pubdate[0]['raw']['safe_value']);
             $img_url = '';
             if(isset($featured->field_field_image[0]['raw']['uri']))
-                $img_url = image_style_url('post_image_large', $featured->field_field_image[0]['raw']['uri']);
+                $img_url = image_style_url('tj_main', $featured->field_field_image[0]['raw']['uri']);
             $img_wh = (empty($img_url) ? array('', '') : getimagesize($img_url));
             ?>
             <a class="quick-entry featured" href="<?php echo $featured->field_field_original_url[0]['raw']['safe_value']; ?>" target="_blank" data-animate="2">
