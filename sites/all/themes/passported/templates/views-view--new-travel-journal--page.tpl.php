@@ -17,7 +17,7 @@
                 <figure>
                     <img src="<?php echo $img_url; ?>" alt="<?php echo $featured->node_title; ?>"/>
                 </figure>
-                <p><?php echo $featured->content['body']['#value']; ?></p>
+                <p><?php echo $featured->field_body[0]['raw']['value']; ?></p>
                 <a href="<?php echo $featured->field_field_original_url[0]['raw']['safe_value']; ?>" target="_blank">Read More</a>
             </article>
             <?php foreach ($view->result as $post) {
