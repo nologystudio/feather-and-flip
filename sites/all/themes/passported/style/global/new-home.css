@@ -1,0 +1,817 @@
+/* ----------------------------------------------------------------------------------------------------------------
+	    
+	* Project     : Passported
+	* Document    : less/style 
+	* Created on  : May 9, 2.016
+	* Version     : 1.0 
+	* Author      : Aday Henriquez
+	* Description : This less file manages all the importers for specific devices and resolutions
+	
+	-------------------------------------------------------------------------------------------------------------------
+	   *          This code has been developed by NOLOGY. in the awesome Canaries - www.nologystudio.com           *
+	-------------------------------------------------------------------------------------------------------------------
+	
+	* Log * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	-------------------------------------------------------------------------------------------------------------------
+	*  
+	---------------------------------------------------------------------------------------------------------------- */
+@import '../library/bower_components/normalize-css/normalize.css';
+@import '../library/bower_components/animate.css/animate.min.css';
+/* ----------------------------------------------------------------------------------------------------------------
+	    
+	* Project     : Passported
+	* Document    : less/style 
+	* Created on  : May 9, 2.016
+	* Version     : 1.0 
+	* Author      : Aday Henriquez
+	* Description : Main style
+	
+	-------------------------------------------------------------------------------------------------------------------
+	   *          This code has been developed by NOLOGY. in the awesome Canaries - www.nologystudio.com           *
+	-------------------------------------------------------------------------------------------------------------------
+	
+	* Log * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	-------------------------------------------------------------------------------------------------------------------
+	*  
+	---------------------------------------------------------------------------------------------------------------- */
+/* ~ Importers ~ */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* ----------------------------------------------------------------------------------------------------------------
+	    
+	* Project     : Passported
+	* Document    : less/style 
+	* Created on  : May 9, 2.016
+	* Version     : 1.0 
+	* Author      : Aday Henriquez
+	* Description : Main style
+	
+	-------------------------------------------------------------------------------------------------------------------
+	   *          This code has been developed by NOLOGY. in the awesome Canaries - www.nologystudio.com           *
+	-------------------------------------------------------------------------------------------------------------------
+	
+	* Log * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	-------------------------------------------------------------------------------------------------------------------
+	*  
+	---------------------------------------------------------------------------------------------------------------- */
+/* ----------------------------------------------------------------------------------------------------------------
+		    
+	    * Project     : NOLOGY Internal Tools
+	    * Document    : less/style 
+	    * Created on  : July, 2.013
+	    * Version     : 1.0 
+	    * Author      : Aday Henriquez
+	    * Description : This less file manages global classes and tools
+	    
+	    -------------------------------------------------------------------------------------------------------------------
+	       *          This code has been developed by NOLOGY. in the awesome Canaries - www.nologystudio.com           *
+	    -------------------------------------------------------------------------------------------------------------------
+	   
+	    * Log * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+        -------------------------------------------------------------------------------------------------------------------
+        *  
+        ---------------------------------------------------------------------------------------------------------------- */
+/* ~ Size ~ */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* ------------------------------------------------------------------------------------------------------------- */
+/* ~ Background ~ */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* ------------------------------------------------------------------------------------------------------------- */
+/* ~ Position ~ */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* ------------------------------------------------------------------------------------------------------------- */
+/* ~ Box sizing ~ */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* ------------------------------------------------------------------------------------------------------------- */
+/* ~ Alignment ~ */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+#align .left {
+  position: relative;
+  float: left;
+}
+#align .right {
+  position: relative;
+  float: right;
+}
+#align .center {
+  position: relative;
+  margin: auto;
+  float: none;
+}
+/* ------------------------------------------------------------------------------------------------------------- */
+/* ~ Transitions ~ */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* ------------------------------------------------------------------------------------------------------------- */
+/* ~ Placeholder color ~ */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* ------------------------------------------------------------------------------------------------------------- */
+/* ~ Performance & Browser fixes~ */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* ------------------------------------------------------------------------------------------------------------- */
+/* ~ Global UI ~ */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+a {
+  text-decoration: none;
+  color: #212121;
+}
+button {
+  border: 0;
+  background: transparent;
+  outline: none;
+  padding: 0;
+}
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+figure,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  padding: 0;
+}
+/* ------------------------------------------------------------------------------------------------------------- */
+/* ~ Specific Classes ~ */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+*[data-animate] {
+  opacity: 0;
+}
+*.rounded-btn {
+  font: normal 1em 'Lato', sans-serif;
+  font-weight: 700;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  margin: auto;
+  float: none;
+  display: table;
+  color: #212121;
+  padding: 0 3em;
+  border-radius: 30px;
+  line-height: 3.6em;
+  border: solid 2px #212121;
+  text-transform: uppercase;
+}
+*.rounded-btn.white {
+  border-color: white;
+  color: white;
+}
+div.gallery-wrapper button[rel] {
+  top: 50%;
+  margin-top: -50px;
+  position: absolute;
+  z-index: 5;
+}
+div.gallery-wrapper button[rel] span {
+  width: 20px;
+  height: 20px;
+  top: 50%;
+  margin-top: -10px;
+  position: absolute;
+  z-index: 1;
+}
+div.gallery-wrapper button[rel] svg g path {
+  fill: #212121;
+}
+div.gallery-wrapper button[rel][rel="left"] {
+  left: 0;
+}
+div.gallery-wrapper button[rel][rel="left"] span {
+  background: transparent url('../media/icons/left-arrow-icon.svg') no-repeat center center;
+  background-size: 75% auto;
+  left: 5px;
+}
+div.gallery-wrapper button[rel][rel="right"] {
+  right: 0;
+}
+div.gallery-wrapper button[rel][rel="right"] span {
+  background: transparent url('../media/icons/right-arrow-icon.svg') no-repeat center center;
+  right: 5px;
+  background-size: 75% auto;
+}
+/* ------------------------------------------------------------------------------------------------------------- */
+/* ~ Body ~ */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+body {
+  color: #212121;
+  font-size: 12px;
+}
+/* ------------------------------------------------------------------------------------------------------------- */
+/* ~ Header ~ */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+body > header {
+  width: 100%;
+  height: 90px;
+  background: #212121;
+}
+/* ~ Builder ~ */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+body > main,
+body > section {
+  width: 100%;
+  box-sizing: border-box;
+  position: relative;
+  float: left;
+}
+body > main > div.wrapper,
+body > section > div.wrapper {
+  width: 1060px;
+  max-width: 1060px;
+  padding: 10%;
+  display: block;
+  box-sizing: border-box;
+  position: relative;
+  margin: auto;
+  float: none;
+}
+body > main > div.wrapper > header:first-child,
+body > section > div.wrapper > header:first-child {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 35px 0;
+  letter-spacing: 0.3em;
+}
+body > main > div.wrapper > header:first-child h2,
+body > section > div.wrapper > header:first-child h2,
+body > main > div.wrapper > header:first-child h3,
+body > section > div.wrapper > header:first-child h3 {
+  font: normal 2em 'Lato', sans-serif;
+  font-weight: 700;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  width: 100%;
+  text-align: center;
+  text-transform: uppercase;
+  display: block;
+}
+body > main.full > div.wrapper,
+body > section.full > div.wrapper {
+  width: 100%;
+  max-width: 100%;
+  float: left;
+  padding: 0;
+}
+body > main[id="passported-home"] div.gallery-wrapper,
+body > section[id="passported-home"] div.gallery-wrapper {
+  position: relative;
+  float: left;
+  width: 100%;
+}
+body > main[id="passported-home"] div.gallery-wrapper ul,
+body > section[id="passported-home"] div.gallery-wrapper ul {
+  position: relative;
+  float: left;
+  width: 100%;
+  overflow: hidden;
+}
+body > main[id="passported-home"] div.gallery-wrapper ul li,
+body > section[id="passported-home"] div.gallery-wrapper ul li {
+  position: relative;
+  float: left;
+  padding: 4px 2px 4px 2px;
+  box-sizing: border-box;
+  display: block;
+}
+body > main[id="passported-home"] div.gallery-wrapper ul li a,
+body > section[id="passported-home"] div.gallery-wrapper ul li a {
+  width: 600px;
+  height: 440px;
+  position: relative;
+  float: left;
+  background: grey;
+  display: block;
+}
+body > main[id="passported-home"] div.gallery-wrapper ul li a figure,
+body > section[id="passported-home"] div.gallery-wrapper ul li a figure {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  overflow: hidden;
+}
+body > main[id="passported-home"] div.gallery-wrapper ul li a figure img,
+body > section[id="passported-home"] div.gallery-wrapper ul li a figure img {
+  min-width: 100%;
+  min-height: 100%;
+}
+body > main[id="passported-home"] div.gallery-wrapper ul li a footer,
+body > section[id="passported-home"] div.gallery-wrapper ul li a footer {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 35px 0;
+  position: absolute;
+  bottom: 0;
+  display: block;
+}
+body > main[id="passported-home"] div.gallery-wrapper ul li a footer h2,
+body > section[id="passported-home"] div.gallery-wrapper ul li a footer h2,
+body > main[id="passported-home"] div.gallery-wrapper ul li a footer time,
+body > section[id="passported-home"] div.gallery-wrapper ul li a footer time {
+  color: white;
+  width: 100%;
+  float: left;
+  text-align: center;
+}
+body > main[id="passported-home"] div.gallery-wrapper ul li a footer h2,
+body > section[id="passported-home"] div.gallery-wrapper ul li a footer h2 {
+  font: normal 1.2em 'Lato', sans-serif;
+  font-weight: 700;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-transform: uppercase;
+  line-height: 2em;
+  letter-spacing: 0.1em;
+}
+body > main[id="passported-home"] div.gallery-wrapper ul li a footer time,
+body > section[id="passported-home"] div.gallery-wrapper ul li a footer time {
+  font: normal 1.2em 'garamond-premier-pro-subhead', serif;
+  font-weight: 700;
+  font-style: italic;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+body > main[id="passported-home"] div.gallery-wrapper ul li:first-child,
+body > section[id="passported-home"] div.gallery-wrapper ul li:first-child {
+  padding-left: 4px;
+}
+body > main[id="passported-home"] div.gallery-wrapper ul li:last-child,
+body > section[id="passported-home"] div.gallery-wrapper ul li:last-child {
+  padding-right: 4px;
+}
+body > main[id="search-and-newsletter"],
+body > section[id="search-and-newsletter"] {
+  border-bottom: solid 1px #D7D7D7;
+  padding: 0;
+}
+body > main[id="search-and-newsletter"] div.wrapper div.half,
+body > section[id="search-and-newsletter"] div.wrapper div.half {
+  width: 50%;
+  height: auto;
+  position: relative;
+  float: left;
+  box-sizing: border-box;
+  padding: 30px 60px;
+}
+body > main[id="search-and-newsletter"] div.wrapper div.half header,
+body > section[id="search-and-newsletter"] div.wrapper div.half header {
+  width: 100%;
+  position: relative;
+  float: left;
+}
+body > main[id="search-and-newsletter"] div.wrapper div.half header h4,
+body > section[id="search-and-newsletter"] div.wrapper div.half header h4 {
+  font: normal 1.4em 'garamond-premier-pro-subhead', serif;
+  font-weight: 700;
+  font-style: italic;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  margin: auto;
+  float: none;
+  width: 80%;
+  text-align: center;
+  margin-bottom: 15px;
+  display: block;
+}
+body > main[id="search-and-newsletter"] div.wrapper div.half header h4:before,
+body > section[id="search-and-newsletter"] div.wrapper div.half header h4:before,
+body > main[id="search-and-newsletter"] div.wrapper div.half header h4:after,
+body > section[id="search-and-newsletter"] div.wrapper div.half header h4:after {
+  width: 15%;
+  height: 1px;
+  max-width: 60px;
+  background: #D7D7D7;
+  position: absolute;
+  top: 8px;
+  content: '';
+}
+body > main[id="search-and-newsletter"] div.wrapper div.half header h4:before,
+body > section[id="search-and-newsletter"] div.wrapper div.half header h4:before {
+  left: 0;
+}
+body > main[id="search-and-newsletter"] div.wrapper div.half header h4:after,
+body > section[id="search-and-newsletter"] div.wrapper div.half header h4:after {
+  right: 0;
+}
+body > main[id="search-and-newsletter"] div.wrapper div.half header span,
+body > section[id="search-and-newsletter"] div.wrapper div.half header span {
+  font: normal 0.9em 'Lato', sans-serif;
+  font-weight: 700;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: red;
+  margin-top: -12px;
+  display: none;
+}
+body > main[id="search-and-newsletter"] div.wrapper div.half form div.wrapper,
+body > section[id="search-and-newsletter"] div.wrapper div.half form div.wrapper {
+  width: 100%;
+  margin: 10px 0;
+  position: relative;
+  float: left;
+}
+body > main[id="search-and-newsletter"] div.wrapper div.half form div.wrapper h3,
+body > section[id="search-and-newsletter"] div.wrapper div.half form div.wrapper h3 {
+  font: normal 2em 'Lato', sans-serif;
+  font-weight: 700;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  display: none;
+}
+body > main[id="search-and-newsletter"] div.wrapper div.half form div.wrapper input[type="email"],
+body > section[id="search-and-newsletter"] div.wrapper div.half form div.wrapper input[type="email"] {
+  font: normal 1em 'Lato', sans-serif;
+  font-weight: 700;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  margin: auto;
+  float: none;
+  width: 200px;
+  border: solid 1px #D7D7D7;
+  padding: 15px 30px;
+  border-radius: 30px;
+  text-transform: uppercase;
+  text-align: center;
+  overflow: hidden;
+  clear: both;
+  display: block;
+}
+body > main[id="search-and-newsletter"] div.wrapper div.half form div.wrapper input[type="email"]::-webkit-input-placeholder,
+body > section[id="search-and-newsletter"] div.wrapper div.half form div.wrapper input[type="email"]::-webkit-input-placeholder {
+  color: #D7D7D7;
+}
+body > main[id="search-and-newsletter"] div.wrapper div.half form div.wrapper input[type="email"]:-moz-placeholder,
+body > section[id="search-and-newsletter"] div.wrapper div.half form div.wrapper input[type="email"]:-moz-placeholder {
+  color: #D7D7D7;
+}
+body > main[id="search-and-newsletter"] div.wrapper div.half form div.wrapper input[type="email"]::-moz-placeholder,
+body > section[id="search-and-newsletter"] div.wrapper div.half form div.wrapper input[type="email"]::-moz-placeholder {
+  color: #D7D7D7;
+}
+body > main[id="search-and-newsletter"] div.wrapper div.half form div.wrapper input[type="email"]:-ms-input-placeholder,
+body > section[id="search-and-newsletter"] div.wrapper div.half form div.wrapper input[type="email"]:-ms-input-placeholder {
+  color: #D7D7D7;
+}
+body > main[id="search-and-newsletter"] div.wrapper div.half form input[type="submit"],
+body > section[id="search-and-newsletter"] div.wrapper div.half form input[type="submit"] {
+  font: normal 0.9em 'Lato', sans-serif;
+  font-weight: 700;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  margin: auto;
+  float: none;
+  display: table;
+  color: #212121;
+  text-transform: uppercase;
+  border: 0;
+  text-align: center;
+  padding: 0 15px;
+  background: white;
+}
+body > main[id="search-and-newsletter"] div.wrapper div.half div.select,
+body > section[id="search-and-newsletter"] div.wrapper div.half div.select {
+  display: none;
+}
+body > main[id="search-and-newsletter"] div.wrapper div.vertical-line-divider,
+body > section[id="search-and-newsletter"] div.wrapper div.vertical-line-divider {
+  width: 1px;
+  height: 50%;
+  top: 30%;
+  left: 50%;
+  position: absolute;
+  background: #D7D7D7;
+}
+body > main[id="passported-picks"] > div.wrapper,
+body > section[id="passported-picks"] > div.wrapper {
+  border-bottom: solid 1px #D7D7D7;
+  overflow: hidden;
+  float: none;
+  position: relative;
+  padding: 30px 0 15px 0;
+}
+body > main[id="passported-picks"] > div.wrapper > header h2,
+body > section[id="passported-picks"] > div.wrapper > header h2 {
+  font: normal 2.8em 'Lato', sans-serif;
+  font-weight: 700;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  float: left;
+  display: block;
+  margin-bottom: 30px;
+}
+body > main[id="passported-picks"] > div.wrapper > header h2:after,
+body > section[id="passported-picks"] > div.wrapper > header h2:after {
+  width: 100px;
+  height: 100px;
+  top: 50%;
+  left: 50%;
+  background: transparent url('../media/icons/feather-grey-icon.svg') no-repeat left center;
+  margin-left: 220px;
+  margin-top: -50px;
+  position: absolute;
+  display: block;
+  content: '';
+}
+body > main[id="passported-picks"] > div.wrapper > article,
+body > section[id="passported-picks"] > div.wrapper > article,
+body > main[id="passported-picks"] > div.wrapper > a,
+body > section[id="passported-picks"] > div.wrapper > a {
+  width: 50%;
+  height: auto;
+  position: relative;
+  float: left;
+  display: block;
+  min-height: 350px;
+  margin-bottom: 45px;
+  border: solid 2px white;
+  box-sizing: border-box;
+}
+body > main[id="passported-picks"] > div.wrapper > article h3,
+body > section[id="passported-picks"] > div.wrapper > article h3,
+body > main[id="passported-picks"] > div.wrapper > a h3,
+body > section[id="passported-picks"] > div.wrapper > a h3 {
+  font: normal 1em 'Lato', sans-serif;
+  font-weight: 700;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  text-transform: uppercase;
+  line-height: 1.8em;
+}
+body > main[id="passported-picks"] > div.wrapper > article time,
+body > section[id="passported-picks"] > div.wrapper > article time,
+body > main[id="passported-picks"] > div.wrapper > a time,
+body > section[id="passported-picks"] > div.wrapper > a time {
+  font: normal 1em 'garamond-premier-pro-subhead', serif;
+  font-weight: 700;
+  font-style: italic;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  width: auto;
+  text-align: center;
+  border-bottom: solid 1px #D7D7D7;
+  display: table;
+  margin: 0 auto 5px auto;
+  line-height: 2em;
+  padding: 0 30px;
+}
+body > main[id="passported-picks"] > div.wrapper > article figure,
+body > section[id="passported-picks"] > div.wrapper > article figure,
+body > main[id="passported-picks"] > div.wrapper > a figure,
+body > section[id="passported-picks"] > div.wrapper > a figure {
+  width: 100%;
+  border: solid 2px white;
+  overflow: hidden;
+  max-height: 350px;
+  margin-bottom: 10px;
+}
+body > main[id="passported-picks"] > div.wrapper > article figure img,
+body > section[id="passported-picks"] > div.wrapper > article figure img,
+body > main[id="passported-picks"] > div.wrapper > a figure img,
+body > section[id="passported-picks"] > div.wrapper > a figure img {
+  height: 100%;
+}
+body > main[id="passported-picks"] > div.wrapper > article a,
+body > section[id="passported-picks"] > div.wrapper > article a,
+body > main[id="passported-picks"] > div.wrapper > a a,
+body > section[id="passported-picks"] > div.wrapper > a a {
+  font: normal 1.2em 'garamond-premier-pro-subhead', serif;
+  font-weight: 700;
+  font-style: italic;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  margin: auto;
+  float: none;
+  background: transparent url('../media/icons/read-more-icon.svg') no-repeat right center;
+  padding-right: 20px;
+  background-size: auto 80%;
+  width: auto;
+  text-align: center;
+  display: table;
+}
+body > main[id="passported-picks"] > div.wrapper > article.main,
+body > section[id="passported-picks"] > div.wrapper > article.main,
+body > main[id="passported-picks"] > div.wrapper > a.main,
+body > section[id="passported-picks"] > div.wrapper > a.main {
+  width: 100%;
+  margin-bottom: 15px;
+  padding-bottom: 30px;
+  border: none;
+  border-bottom: solid 1px #D7D7D7;
+}
+body > main[id="passported-picks"] > div.wrapper > article.main figure,
+body > section[id="passported-picks"] > div.wrapper > article.main figure,
+body > main[id="passported-picks"] > div.wrapper > a.main figure,
+body > section[id="passported-picks"] > div.wrapper > a.main figure {
+  margin-bottom: 0;
+  max-height: 700px;
+}
+body > main[id="passported-picks"] > div.wrapper > article.main time,
+body > section[id="passported-picks"] > div.wrapper > article.main time,
+body > main[id="passported-picks"] > div.wrapper > a.main time,
+body > section[id="passported-picks"] > div.wrapper > a.main time {
+  font-size: 1.2em;
+}
+body > main[id="passported-picks"] > div.wrapper > article.main h3,
+body > section[id="passported-picks"] > div.wrapper > article.main h3,
+body > main[id="passported-picks"] > div.wrapper > a.main h3,
+body > section[id="passported-picks"] > div.wrapper > a.main h3 {
+  font-size: 2em;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  margin-bottom: 30px;
+}
+body > main[id="passported-picks"] > div.wrapper > article.main p,
+body > section[id="passported-picks"] > div.wrapper > article.main p,
+body > main[id="passported-picks"] > div.wrapper > a.main p,
+body > section[id="passported-picks"] > div.wrapper > a.main p {
+  font: normal 1.1em 'Lato', sans-serif;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  width: 100%;
+  float: left;
+  line-height: 1.6em;
+  padding: 2% 5%;
+  box-sizing: border-box;
+}
+body > main[id="passported-picks"] > div.wrapper > article.call-to-action,
+body > section[id="passported-picks"] > div.wrapper > article.call-to-action,
+body > main[id="passported-picks"] > div.wrapper > a.call-to-action,
+body > section[id="passported-picks"] > div.wrapper > a.call-to-action {
+  display: table;
+  margin-bottom: 0;
+}
+body > main[id="passported-picks"] > div.wrapper > article.call-to-action div.vertical-wrapper,
+body > section[id="passported-picks"] > div.wrapper > article.call-to-action div.vertical-wrapper,
+body > main[id="passported-picks"] > div.wrapper > a.call-to-action div.vertical-wrapper,
+body > section[id="passported-picks"] > div.wrapper > a.call-to-action div.vertical-wrapper {
+  display: table-cell;
+  vertical-align: middle;
+}
+body > main[id="passported-picks"] > div.wrapper > article.call-to-action div.vertical-wrapper div.icon,
+body > section[id="passported-picks"] > div.wrapper > article.call-to-action div.vertical-wrapper div.icon,
+body > main[id="passported-picks"] > div.wrapper > a.call-to-action div.vertical-wrapper div.icon,
+body > section[id="passported-picks"] > div.wrapper > a.call-to-action div.vertical-wrapper div.icon {
+  width: 85px;
+  height: 85px;
+  position: relative;
+  margin: auto;
+  float: none;
+  display: table;
+}
+body > main[id="passported-picks"] > div.wrapper > article.call-to-action div.vertical-wrapper h3,
+body > section[id="passported-picks"] > div.wrapper > article.call-to-action div.vertical-wrapper h3,
+body > main[id="passported-picks"] > div.wrapper > a.call-to-action div.vertical-wrapper h3,
+body > section[id="passported-picks"] > div.wrapper > a.call-to-action div.vertical-wrapper h3 {
+  padding-top: 0;
+  margin-bottom: 15px;
+  color: white;
+  text-transform: uppercase;
+  font-size: 1.8em;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+body > main[id="passported-picks"] > div.wrapper > article.call-to-action[id="book-a-trip"],
+body > section[id="passported-picks"] > div.wrapper > article.call-to-action[id="book-a-trip"],
+body > main[id="passported-picks"] > div.wrapper > a.call-to-action[id="book-a-trip"],
+body > section[id="passported-picks"] > div.wrapper > a.call-to-action[id="book-a-trip"] {
+  background: transparent url('../media/backgrounds/cloud-texture.jpg') no-repeat center center;
+}
+body > main[id="passported-picks"] > div.wrapper > article.call-to-action[id="book-a-trip"] div.icon,
+body > section[id="passported-picks"] > div.wrapper > article.call-to-action[id="book-a-trip"] div.icon,
+body > main[id="passported-picks"] > div.wrapper > a.call-to-action[id="book-a-trip"] div.icon,
+body > section[id="passported-picks"] > div.wrapper > a.call-to-action[id="book-a-trip"] div.icon {
+  background: transparent url('../media/icons/chat-icon.svg') no-repeat center center;
+  background-size: auto 80%;
+  background-position: center top;
+}
+body > main[id="passported-picks"] > div.wrapper > article.call-to-action[id="explore"],
+body > section[id="passported-picks"] > div.wrapper > article.call-to-action[id="explore"],
+body > main[id="passported-picks"] > div.wrapper > a.call-to-action[id="explore"],
+body > section[id="passported-picks"] > div.wrapper > a.call-to-action[id="explore"] {
+  background: transparent url('../media/backgrounds/cloud-texture-right.jpg') no-repeat center center;
+}
+body > main[id="passported-picks"] > div.wrapper > article.call-to-action[id="explore"] div.icon,
+body > section[id="passported-picks"] > div.wrapper > article.call-to-action[id="explore"] div.icon,
+body > main[id="passported-picks"] > div.wrapper > a.call-to-action[id="explore"] div.icon,
+body > section[id="passported-picks"] > div.wrapper > a.call-to-action[id="explore"] div.icon {
+  background: transparent url('../media/icons/location-icon.svg') no-repeat center center;
+  background-size: auto 80%;
+  background-position: center top;
+}
+body > main[id="instagram-feed"] div.wrapper header h3,
+body > section[id="instagram-feed"] div.wrapper header h3 {
+  font-weight: 400;
+}
+body > main[id="instagram-feed"] div.wrapper div.gallery-wrapper,
+body > section[id="instagram-feed"] div.wrapper div.gallery-wrapper {
+  position: relative;
+  float: left;
+  width: 100%;
+}
+body > main[id="instagram-feed"] div.wrapper div.gallery-wrapper ul,
+body > section[id="instagram-feed"] div.wrapper div.gallery-wrapper ul {
+  width: 100%;
+}
+body > main[id="instagram-feed"] div.wrapper div.gallery-wrapper ul li,
+body > section[id="instagram-feed"] div.wrapper div.gallery-wrapper ul li {
+  position: relative;
+  float: left;
+  padding: 4px 2px;
+  box-sizing: border-box;
+}
+body > main[id="instagram-feed"] div.wrapper div.gallery-wrapper ul li a,
+body > section[id="instagram-feed"] div.wrapper div.gallery-wrapper ul li a {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  float: left;
+  overflow: hidden;
+}
+body > main[id="instagram-feed"] div.wrapper div.gallery-wrapper ul li a img,
+body > section[id="instagram-feed"] div.wrapper div.gallery-wrapper ul li a img {
+  min-height: 100%;
+}
+body > main[id="instagram-feed"] div.wrapper div.gallery-wrapper ul li:first-child,
+body > section[id="instagram-feed"] div.wrapper div.gallery-wrapper ul li:first-child {
+  padding-left: 4px;
+}
+body > main[id="instagram-feed"] div.wrapper div.gallery-wrapper ul li:last-child,
+body > section[id="instagram-feed"] div.wrapper div.gallery-wrapper ul li:last-child {
+  padding-right: 4px;
+}
+body > main[id="instagram-feed"] div.wrapper div[id="plan-banner"],
+body > section[id="instagram-feed"] div.wrapper div[id="plan-banner"] {
+  width: 100%;
+  height: 800px;
+  position: relative;
+  float: left;
+  background: #D7D7D7;
+  box-sizing: border-box;
+  padding: 10%;
+  overflow: hidden;
+  border: solid 4px white;
+  border-top: 0;
+}
+body > main[id="instagram-feed"] div.wrapper div[id="plan-banner"] figure,
+body > section[id="instagram-feed"] div.wrapper div[id="plan-banner"] figure {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  overflow: hidden;
+}
+body > main[id="instagram-feed"] div.wrapper div[id="plan-banner"] figure img,
+body > section[id="instagram-feed"] div.wrapper div[id="plan-banner"] figure img {
+  height: 100%;
+}
+body > main[id="instagram-feed"] div.wrapper div[id="plan-banner"] div.vertical-wrapper,
+body > section[id="instagram-feed"] div.wrapper div[id="plan-banner"] div.vertical-wrapper {
+  width: 100%;
+  height: auto;
+  top: 40%;
+  left: 0;
+  position: absolute;
+}
+body > main[id="instagram-feed"] div.wrapper div[id="plan-banner"] div.vertical-wrapper h4,
+body > section[id="instagram-feed"] div.wrapper div[id="plan-banner"] div.vertical-wrapper h4 {
+  font: normal 4em 'Lato', sans-serif;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  float: left;
+  color: white;
+  letter-spacing: 0.05em;
+  width: 100%;
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 120px;
+  z-index: 1;
+}
+/* ~ Press & Footer ~ */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+body > section[id="press"] {
+  width: 100%;
+  height: 180px;
+  background: #eaeaea;
+}
+body > footer {
+  width: 100%;
+  height: 400px;
+  position: relative;
+  float: left;
+  background: #212121;
+}
+/*# sourceMappingURL=../style/global-passported.css.map */

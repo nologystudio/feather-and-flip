@@ -942,7 +942,7 @@
 				
 				.set-size(100%,@height);
 				.box-sizing();
-				.set-bgc(@color-7);
+				.set-bgc(black);
 				#align > .left;
 				padding: 0 @content-padding;
 				
@@ -965,12 +965,13 @@
 					{
 						right: @content-padding;
 						left: auto;
+						display: none;
 						
 						small
 						{
 							.reset();
 							.set-pos(absolute);
-							#font > .lato(10px,black,400);
+							#font > .lato(10px,white,400);
 							top: @content-padding;
 						}
 						
@@ -985,7 +986,7 @@
 				& > nav[id="social-media"]
 				{
 					.set-size();
-					.ui-set-social-media-nav(black);
+					.ui-set-social-media-nav(white);
 					#align > .center;
 					display: table;
 					margin-top: 52px;
@@ -995,7 +996,7 @@
 				{
 					.set-size(100%);
 					#align > .left;
-					#font > .lato(10px,black,400);
+					#font > .lato(10px,white,400);
 					text-align: center; 
 					padding: @content-padding - @unit 0 0 0;
 				}

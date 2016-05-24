@@ -40,7 +40,7 @@
 		</nav>
 		<div class="fixed-bar">
 			<a id="brand" href="/">
-				<img src="<?php echo variable_get('relativePath'); ?>media/brand/passported-black-logo.svg" type="image/svg+xml" alt="Passported, kid friendly travel for grown-ups"/>
+				<img src="<?php echo variable_get('relativePath'); ?>media/brand/passported-white-logo.svg" type="image/svg+xml" alt="Passported, kid friendly travel for grown-ups"/>
 			</a>
 			<nav id="social-media" class="black">
 				<a href="https://twitter.com/passported" class="icon-twitter" target="_blank" rel="twitter"></a>
