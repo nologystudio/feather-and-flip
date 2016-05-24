@@ -5581,9 +5581,11 @@ body > section[id][id="passported-home"] div.gallery-wrapper {
 }
 body > main[id][id="passported-home"] div.gallery-wrapper ul,
 body > section[id][id="passported-home"] div.gallery-wrapper ul {
-  position: relative;
-  float: left;
   width: 100%;
+  height: 440px;
+  top: 0;
+  left: 0;
+  position: absolute;
   overflow: hidden;
 }
 body > main[id][id="passported-home"] div.gallery-wrapper ul li,
@@ -5714,8 +5716,8 @@ body > main[id][id="search-and-newsletter"] div.wrapper div.half header h4:after
 body > section[id][id="search-and-newsletter"] div.wrapper div.half header h4:after {
   right: 0;
 }
-body > main[id][id="search-and-newsletter"] div.wrapper div.half header span,
-body > section[id][id="search-and-newsletter"] div.wrapper div.half header span {
+body > main[id][id="search-and-newsletter"] div.wrapper div.half form header span,
+body > section[id][id="search-and-newsletter"] div.wrapper div.half form header span {
   font: normal 0.9em 'Lato', sans-serif;
   font-weight: 700;
   color: #212121;
@@ -6175,7 +6177,9 @@ body > main[id][id="instagram-feed"] div.wrapper div.gallery-wrapper ul,
 body > section[id][id="instagram-feed"] div.wrapper div.gallery-wrapper ul {
   width: 100%;
   height: 200px;
-  overflow: hidden;
+  top: 0;
+  left: 0;
+  position: absolute;
 }
 body > main[id][id="instagram-feed"] div.wrapper div.gallery-wrapper ul li,
 body > section[id][id="instagram-feed"] div.wrapper div.gallery-wrapper ul li {

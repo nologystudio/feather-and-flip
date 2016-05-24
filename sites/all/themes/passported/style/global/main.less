@@ -3140,8 +3140,9 @@
 					
 					ul
 					{
-						#align > .left;
-						width: 100%;
+						.set-size(100%,@h);
+						.set-coord();
+						position: absolute;
 						overflow: hidden;
 						
 						li
@@ -3266,19 +3267,22 @@
 									right: 0;
 								}
 							}
-							
-							span
-							{
-								#font > .lato(0.9em,@grey,700);
-								text-align: center;
-								color: @warning-color;
-								margin-top: -12px;
-								display: none;
-							}
 						}
 						
 						form
 						{
+							header
+							{
+								span
+								{
+									#font > .lato(0.9em,@grey,700);
+									text-align: center;
+									color: @warning-color;
+									margin-top: -12px;
+									display: none;
+								}
+							}
+							
 							div.wrapper
 							{
 								width: 100%;
@@ -3662,7 +3666,8 @@
 						ul
 						{
 							.set-size(100%,@h);
-							overflow: hidden;
+							.set-coord();
+							position: absolute;
 							
 							li
 							{
