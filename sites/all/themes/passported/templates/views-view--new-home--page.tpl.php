@@ -53,7 +53,7 @@
             <div class="gallery-wrapper" ui-gallery>
                 <ul>
                     <li ng-repeat="post in instagram">
-                        <a href="{{post.link.url}}" target="_blank">
+                        <a href="{{post.link}}" target="_blank">
                             <img ng-src="{{post.images.standard_resolution.url}}"/>
                         </a>
                     </li>
