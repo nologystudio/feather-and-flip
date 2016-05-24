@@ -819,6 +819,7 @@ body > section[id] {
   position: relative;
   float: left;
   display: block;
+  box-sizing: border-box;
 }
 body > main[id][id="passported-intro"],
 body > section[id][id="passported-intro"] {
