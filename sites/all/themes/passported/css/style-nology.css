@@ -1,0 +1,2252 @@
+/* ----------------------------------------------------------------------------------------------------------------
+		    
+	    * Project     : Passported
+	    * Document    : less/style 
+	    * Created on  : Ago 01, 2.015
+	    * Version     : 1.0 
+	    * Author      : Aday Henriquez
+	    * Description : This less file manages all the importers for specific devices and resolutions
+	    
+	    -------------------------------------------------------------------------------------------------------------------
+	       *          This code has been developed by NOLOGY. in the awesome Canaries - www.nologystudio.com           *
+	    -------------------------------------------------------------------------------------------------------------------
+	   
+	    * Log * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+        -------------------------------------------------------------------------------------------------------------------
+        *  
+        ---------------------------------------------------------------------------------------------------------------- */
+@import 'vendors/normalize.css';
+@import 'vendors/animate.css';
+/* ----------------------------------------------------------------------------------------------------------------
+		    
+	    * Project     : Passported
+	    * Document    : less/style 
+	    * Created on  : Ago 01, 2.015
+	    * Version     : 1.0 
+	    * Author      : Aday Henriquez
+	    * Description : This less file manages the global style
+	    
+	    -------------------------------------------------------------------------------------------------------------------
+	       *          This code has been developed by NOLOGY. in the awesome Canaries - www.nologystudio.com           *
+	    -------------------------------------------------------------------------------------------------------------------
+	   
+	    * Log * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+        -------------------------------------------------------------------------------------------------------------------
+        *  
+        ---------------------------------------------------------------------------------------------------------------- */
+/* ~ Global Variables and Importers ~ */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* ~ Color ~ */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* ~ Importers ~ */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* ----------------------------------------------------------------------------------------------------------------
+		    
+	    * Project     : Passported
+	    * Document    : less/style 
+	    * Created on  : Ago 01, 2.015
+	    * Version     : 1.0 
+	    * Author      : Aday Henriquez
+	    * Description : This less file manages font styles
+	    
+	    -------------------------------------------------------------------------------------------------------------------
+	       *          This code has been developed by NOLOGY. in the awesome Canaries - www.nologystudio.com           *
+	    -------------------------------------------------------------------------------------------------------------------
+	   
+	    * Log * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+        -------------------------------------------------------------------------------------------------------------------
+        *  
+        ---------------------------------------------------------------------------------------------------------------- */
+@font-face {
+  font-family: 'G-italic';
+  src: url('../fonts/garamond-bold-italic.eot');
+  src: url('../fonts/garamond-bold-italic.eot?#iefix') format('embedded-opentype'), url('../fonts/garamond-bold-italic.woff') format('woff'), url('../fonts/garamond-bold-italic.ttf') format('truetype'), url('../fonts/garamond-bold-italic.svg#G-italic') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'icons';
+  src: url('../fonts/icon-webfont.eot');
+  src: url('../fonts/icon-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/icon-webfont.woff') format('woff'), url('../fonts/icon-webfont.ttf') format('truetype'), url('../fonts/icon-webfont.svg#icons') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+#font {
+  /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+}
+[class^="icon-"],
+[class*="icon-"] {
+  font-family: 'icons';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+}
+/* ----------------------------------------------------------------------------------------------------------------
+		    
+	    * Project     : NEMO
+	    * Document    : less/style 
+	    * Created on  : Jul 22, 2.015
+	    * Version     : 1.0 
+	    * Author      : Aday Henriquez
+	    * Description : This less file manages global classes to speed up dev
+	    
+	    -------------------------------------------------------------------------------------------------------------------
+	       *          This code has been developed by NOLOGY. in the awesome Canaries - www.nologystudio.com           *
+	    -------------------------------------------------------------------------------------------------------------------
+	   
+	    * Log * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+        -------------------------------------------------------------------------------------------------------------------
+        *  
+        ---------------------------------------------------------------------------------------------------------------- */
+/* ~ Size ~ */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* ------------------------------------------------------------------------------------------------------------- */
+/* ~ Background ~ */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* ------------------------------------------------------------------------------------------------------------- */
+/* ~ Set cross browser rgba ~ */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* ------------------------------------------------------------------------------------------------------------- */
+/* ~ Box sizing ~ */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* ------------------------------------------------------------------------------------------------------------- */
+/* ~ Background Gradient ~ */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* ------------------------------------------------------------------------------------------------------------- */
+/* ~ Round corners ~ */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* ------------------------------------------------------------------------------------------------------------- */
+/* ~ Position ~ */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* ------------------------------------------------------------------------------------------------------------- */
+/* ~ Set opacity ~ */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* ------------------------------------------------------------------------------------------------------------- */
+/* ~ Alignment ~ */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+#align .left {
+  position: relative;
+  float: left;
+}
+#align .right {
+  position: relative;
+  float: right;
+}
+#align .center {
+  position: relative;
+  margin: auto;
+  float: none;
+}
+/* ------------------------------------------------------------------------------------------------------------- */
+/* ~ Box Shadow ~ */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* ------------------------------------------------------------------------------------------------------------- */
+/* ~ Resets ~ */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* ------------------------------------------------------------------------------------------------------------- */
+/* ~ Hide/Show ~ */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* ------------------------------------------------------------------------------------------------------------- */
+/* ~ Scale ~ */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* ------------------------------------------------------------------------------------------------------------- */
+/* ~ Transitions ~ */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* ------------------------------------------------------------------------------------------------------------- */
+/* ~ Columns ~ */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* ------------------------------------------------------------------------------------------------------------- */
+/* ~ Development tools ~ */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* ------------------------------------------------------------------------------------------------------------- */
+/* ~ Placeholder color ~ */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* ------------------------------------------------------------------------------------------------------------- */
+/* ~ Specific styling ~ */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* ----------------------------------------------------------------------------------------------------------------
+		    
+	    * Project     : Passported
+	    * Document    : less/style 
+	    * Created on  : Ago 01, 2.015
+	    * Version     : 1.0 
+	    * Author      : Aday Henriquez
+	    * Description : This less file manages specific guide style classes
+	    
+	    -------------------------------------------------------------------------------------------------------------------
+	       *          This code has been developed by NOLOGY. in the awesome Canaries - www.nologystudio.com           *
+	    -------------------------------------------------------------------------------------------------------------------
+	   
+	    * Log * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+        -------------------------------------------------------------------------------------------------------------------
+        *  
+        ---------------------------------------------------------------------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------------------------- */
+/* ~ UI ~ */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* ------------------------------------------------------------------------------------------------------------- */
+/* ~ Main style ~ */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+body {
+  background-color: white;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+  font: normal 12px 'Lato', sans-serif;
+  font-weight: 100;
+  color: #333333;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+/* ------------------------------------------------------------------------------------------------------------- */
+/* ~ Reset ~ */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+* {
+  outline: none;
+}
+*[data-animate] {
+  opacity: 0;
+  filter: alpha(opacity=0);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+/* ------------------------------------------------------------------------------------------------------------- */
+/* ~ UI ~ */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+.grid-1 {
+  width: 1040px;
+}
+.grid-2 {
+  width: 520px;
+}
+.grid-3 {
+  width: 346.66666667px;
+}
+.grid-4 {
+  width: 260px;
+}
+.grid-5 {
+  width: 208px;
+}
+.grid-6 {
+  width: 173.33333333px;
+}
+.grid-8 {
+  width: 130px;
+}
+.grid-10 {
+  width: 104px;
+}
+.grid-12 {
+  width: 86.66666667px;
+}
+*.align-center {
+  position: relative;
+  margin: auto;
+  float: none;
+  display: table;
+}
+*.align-right {
+  position: relative;
+  float: right;
+}
+.go-btn {
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  color: black;
+  width: 60px;
+  height: 60px;
+  border-radius: 60px;
+  overflow: hidden;
+  background-color: transparent;
+  background-color: #576468;
+  -webkit-transition: opacity 0.2s ease-in-out;
+  -moz-transition: opacity 0.2s ease-in-out;
+  -o-transition: opacity 0.2s ease-in-out;
+  transition: opacity 0.2s ease-in-out;
+  opacity: 1;
+  filter: alpha(opacity=100);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  position: relative;
+  margin: auto;
+  float: none;
+  font: normal 12px 'Lato', sans-serif;
+  font-weight: 700;
+  color: white;
+  -webkit-backface-visibility: hidden;
+  display: block;
+  text-transform: uppercase;
+}
+.go-btn img {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  float: left;
+}
+.go-btn:hover {
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
+}
+.select,
+.style-1-btn {
+  width: auto;
+  height: auto;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  position: relative;
+  float: left;
+  font: normal 12px 'Lato', sans-serif;
+  font-weight: 700;
+  color: #3e474a;
+  -webkit-backface-visibility: hidden;
+  line-height: 17px;
+  text-transform: uppercase;
+  padding: 20px;
+  border: solid 2px #7795a0;
+  border-radius: 30px;
+  text-align: left;
+  overflow: hidden;
+}
+.select span.icon,
+.style-1-btn span.icon {
+  font: normal 16px 'icons';
+  color: #3e474a;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  -webkit-backface-visibility: hidden;
+  position: relative;
+  float: left;
+  margin-right: 15px;
+  text-align: center;
+  display: block;
+}
+/*.select
+			{
+				.set-size();
+				.box-sizing();
+				#align > .left;
+				#font > .lato(12px,@color-4,700);
+				text-transform: uppercase;
+				padding: @content-padding/2;
+				border: solid 2px @color-5;
+				border-radius: @content-padding;
+				text-align: left;
+				overflow: hidden;
+				
+				li
+				{
+					&:first-child
+					{
+						span.icon
+						{
+							#font > .ic(16px,@color-4);
+							#align > .left;
+							margin-right: @content-padding/2;
+							text-align: center;
+							display: block;
+						}
+					}
+				}
+			}*/
+form input[type="text"],
+form input[type="email"],
+form input[type="password"] {
+  font: normal 16px 'Lato', sans-serif;
+  font-weight: 400;
+  color: white;
+  -webkit-backface-visibility: hidden;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  padding: 15px 30px !important;
+  border-radius: 5px;
+  box-shadow: none;
+}
+form input[type="text"]::-webkit-input-placeholder,
+form input[type="email"]::-webkit-input-placeholder,
+form input[type="password"]::-webkit-input-placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+form input[type="text"]:-moz-placeholder,
+form input[type="email"]:-moz-placeholder,
+form input[type="password"]:-moz-placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+form input[type="text"]::-moz-placeholder,
+form input[type="email"]::-moz-placeholder,
+form input[type="password"]::-moz-placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+form input[type="text"]:-ms-input-placeholder,
+form input[type="email"]:-ms-input-placeholder,
+form input[type="password"]:-ms-input-placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+form input[type="text"].placeholder,
+form input[type="email"].placeholder,
+form input[type="password"].placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+*.quick-entry {
+  width: 346.66666667px;
+  height: auto;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  box-shadow: 0 0 10px #cccccc;
+  background-color: #9cb1ad;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  opacity: 0;
+  filter: alpha(opacity=0);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+  position: relative;
+  float: left;
+  margin: 10px;
+  overflow: hidden;
+}
+*.quick-entry figure {
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  color: black;
+  width: 100%;
+  height: auto;
+  background: #9cb1ad url('') no-repeat center center;
+  position: relative;
+  float: left;
+  display: block;
+}
+*.quick-entry figure img {
+  width: 100%;
+  height: auto;
+  position: relative;
+  float: left;
+}
+*.quick-entry figure + footer {
+  width: 100%;
+  height: auto;
+  position: absolute;
+  background-color: rgba(156, 177, 173, 0.5);
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  bottom: 0;
+  padding: 15px 30px;
+}
+*.quick-entry h3,
+*.quick-entry h4,
+*.quick-entry time {
+  width: 100%;
+  height: auto;
+  position: relative;
+  float: left;
+  margin: 0;
+  padding: 0;
+  clear: both;
+  text-align: center;
+}
+*.quick-entry h3 {
+  font: normal 24px 'Lato', sans-serif;
+  font-weight: 300;
+  color: white;
+  -webkit-backface-visibility: hidden;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+}
+*.quick-entry h4 {
+  font: normal 22px 'G-italic', serif;
+  color: white;
+  font-style: italic;
+  -webkit-backface-visibility: hidden;
+}
+*.quick-entry time {
+  font: normal 12px 'Lato', sans-serif;
+  font-weight: 400;
+  color: white;
+  -webkit-backface-visibility: hidden;
+  text-transform: uppercase;
+  font-style: normal;
+  margin-top: 5px;
+}
+*.quick-entry hr {
+  width: 50%;
+  margin: auto;
+  border: 0;
+  border-top: solid 1px rgba(255, 255, 255, 0.5);
+}
+*.quick-entry hr + h4 {
+  margin-top: 15px;
+}
+*.quick-entry:hover figure + footer {
+  background-color: rgba(156, 177, 173, 0.85);
+  padding: 30px;
+}
+*.quick-entry.featured {
+  position: relative;
+  float: left;
+  width: 98%;
+  margin-left: 1%;
+}
+*.quick-entry.review {
+  padding: 30px 15px;
+}
+*.quick-entry[id="newsletter-signup"] {
+  padding: 30px 15px;
+  min-height: 290px;
+}
+*.quick-entry[id="newsletter-signup"] form {
+  width: 100%;
+  height: auto;
+  position: relative;
+  float: left;
+}
+*.quick-entry[id="newsletter-signup"] form small {
+  font: normal 30px 'G-italic', serif;
+  color: white;
+  font-style: italic;
+  -webkit-backface-visibility: hidden;
+  width: 100%;
+  display: block;
+  padding: 30px 0;
+  text-align: center;
+}
+*.quick-entry[id="newsletter-signup"] form input {
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  color: black;
+  display: block;
+  width: 100%;
+  height: auto;
+  position: relative;
+  float: left;
+}
+*.quick-entry[id="newsletter-signup"] form input[type="email"],
+*.quick-entry[id="newsletter-signup"] form input[type="text"],
+*.quick-entry[id="newsletter-signup"] form input[type="password"] {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  background-color: #7b8c88;
+  color: white;
+  margin: 30px 0;
+  border: solid 1px #7b8c88;
+}
+*.quick-entry[id="newsletter-signup"] form input[type="email"].placeholder,
+*.quick-entry[id="newsletter-signup"] form input[type="text"].placeholder,
+*.quick-entry[id="newsletter-signup"] form input[type="password"].placeholder {
+  color: #7b8c88;
+}
+*.quick-entry[id="newsletter-signup"] form input[type="submit"] {
+  font: normal 32px 'Lato', sans-serif;
+  font-weight: 300;
+  color: white;
+  -webkit-backface-visibility: hidden;
+  text-transform: uppercase;
+}
+*.quick-entry[id="newsletter-signup"] form input[type="submit"].disabled {
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
+}
+*.quick-entry[id="newsletter-signup"] form input.ng-invalid.ng-dirty {
+  border-color: orange;
+}
+/* ------------------------------------------------------------------------------------------------------------- */
+/* ~ Header & Navigation ~ */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+body > header {
+  width: 100%;
+  height: 90px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #202121;
+  overflow: hidden;
+  z-index: 5;
+}
+body > header > a:first-child {
+  width: 270px;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 30px;
+  opacity: 1;
+  filter: alpha(opacity=100);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+  -webkit-transition: opacity 0.2s ease-in-out;
+  -moz-transition: opacity 0.2s ease-in-out;
+  -o-transition: opacity 0.2s ease-in-out;
+  transition: opacity 0.2s ease-in-out;
+  text-decoration: none;
+}
+body > header > a:first-child figure {
+  width: auto;
+  height: auto;
+  position: relative;
+  float: left;
+  margin: 0;
+  padding: 0 0 0 15px;
+}
+body > header > a:first-child figure img,
+body > header > a:first-child figure object {
+  position: relative;
+  float: left;
+  width: 230px;
+  margin: 20px 0 0;
+}
+body > header > a:first-child figure figcaption {
+  position: relative;
+  float: right;
+  font: normal 12px 'G-italic', serif;
+  color: white;
+  font-style: italic;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin-top: -5px;
+}
+body > header > a:first-child:hover {
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
+}
+body > header nav {
+  width: 100%;
+  height: 90px;
+  display: block;
+}
+body > header nav div.wrapper {
+  width: auto;
+  height: auto;
+  overflow: hidden;
+}
+body > header nav div.wrapper.align-right {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+body > header nav a {
+  width: auto;
+  height: 90px;
+  -webkit-transition: color 0.1s ease-in-out;
+  -moz-transition: color 0.1s ease-in-out;
+  -o-transition: color 0.1s ease-in-out;
+  transition: color 0.1s ease-in-out;
+  font: normal 13px 'Lato', sans-serif;
+  font-weight: 400;
+  color: #7795a0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  float: left;
+  padding: 0 30px;
+  text-transform: uppercase;
+  display: block;
+  text-decoration: none;
+  line-height: 90px;
+  overflow: hidden;
+}
+body > header nav a.feather-icon {
+  background: transparent url('../media/icons/feather-white-icon.svg') no-repeat right center;
+  background-size: auto 50%;
+}
+body > header nav a[id^="sign-"] {
+  font: normal 15px 'G-italic', serif;
+  color: #7795a0;
+  font-style: italic;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  line-height: 90px;
+  text-transform: none;
+}
+body > header nav a[id^="sign-"][id*='up'] {
+  background-color: black;
+  color: white;
+}
+body > header nav a[id^="sign-"]:hover {
+  transform: rotate(-360deg);
+}
+body > header nav a:hover {
+  color: white;
+}
+body > div.dropdown-wrapper {
+  width: 100%;
+  height: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  position: fixed;
+  top: 90px;
+  left: 0;
+  background-color: #576468;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  padding: 0 30px;
+  z-index: 6;
+}
+body > div.dropdown-wrapper div.arrow {
+  width: 20px;
+  height: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 1;
+  filter: alpha(opacity=100);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  overflow: hidden;
+}
+body > div.dropdown-wrapper div.arrow svg {
+  width: 20px;
+  height: 20px;
+  position: relative;
+  float: left;
+}
+body > div.dropdown-wrapper div.arrow svg path {
+  fill: #576468;
+}
+body > div.dropdown-wrapper div.arrow.on {
+  height: 20px;
+  top: -20px;
+}
+body > div.dropdown-wrapper.light {
+  background-color: white;
+}
+body > div.dropdown-wrapper.light div.arrow svg path {
+  fill: white;
+}
+body > div.dropdown-wrapper > nav[id="city-guides-list"] {
+  width: 1040px;
+  height: auto;
+  background-color: red;
+  position: relative;
+  margin: auto;
+  float: none;
+}
+/* ------------------------------------------------------------------------------------------------------------- */
+/* ~ Sections ~ */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+body > main[id],
+body > section[id] {
+  width: 100%;
+  height: auto;
+  position: relative;
+  float: left;
+  display: block;
+}
+body > main[id][id="passported-intro"],
+body > section[id][id="passported-intro"] {
+  background-size: auto 100%;
+  position: fixed;
+  height: 760px;
+  overflow: hidden;
+  z-index: 1;
+}
+body > main[id][id="passported-intro"] > ul,
+body > section[id][id="passported-intro"] > ul {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  float: left;
+  overflow: hidden;
+}
+body > main[id][id="passported-intro"] > ul > li,
+body > section[id][id="passported-intro"] > ul > li {
+  width: 100%;
+  height: 100%;
+  background: #dee4e3 url('../media/backgrounds/passported-main.jpg') no-repeat center bottom;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  position: relative;
+  float: left;
+  padding-top: 150px;
+  overflow: hidden;
+}
+body > main[id][id="passported-intro"] > ul > li:first-child h1,
+body > section[id][id="passported-intro"] > ul > li:first-child h1 {
+  width: 100%;
+  height: auto;
+  font: normal 42px 'Lato', sans-serif;
+  font-weight: 300;
+  color: white;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  float: left;
+  text-transform: uppercase;
+  text-align: center;
+  display: block;
+  margin-bottom: 45px;
+}
+body > main[id][id="passported-intro"] > ul > li:first-child ul,
+body > section[id][id="passported-intro"] > ul > li:first-child ul {
+  width: auto;
+  height: auto;
+}
+body > main[id][id="passported-intro"] > ul > li:first-child ul li,
+body > section[id][id="passported-intro"] > ul > li:first-child ul li {
+  width: 280px;
+  height: auto;
+  position: relative;
+  float: left;
+  margin: 0 30px;
+  overflow: hidden;
+}
+body > main[id][id="passported-intro"] > ul > li:first-child ul li h2,
+body > section[id][id="passported-intro"] > ul > li:first-child ul li h2 {
+  width: 160px;
+  height: 160px;
+  background-color: rgba(62, 71, 74, 0.9);
+  font: normal 30px 'G-italic', serif;
+  color: white;
+  font-style: italic;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  margin: auto;
+  float: none;
+  overflow: hidden;
+  cursor: pointer;
+  border-radius: 160px;
+  line-height: 160px;
+  text-align: center;
+}
+body > main[id][id="passported-intro"] > ul > li:first-child ul li h2:after,
+body > section[id][id="passported-intro"] > ul > li:first-child ul li h2:after {
+  width: 160px;
+  height: 160px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #7795a0 url('../media/icons/feather-grey-icon.svg') no-repeat center center;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  z-index: 0;
+  content: '';
+  display: block;
+  overflow: hidden;
+}
+body > main[id][id="passported-intro"] > ul > li:first-child ul li h2:hover:after,
+body > section[id][id="passported-intro"] > ul > li:first-child ul li h2:hover:after {
+  opacity: 0.75;
+  filter: alpha(opacity=75);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=75)";
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=75);
+  transform: scale(1.5);
+}
+body > main[id][id="passported-intro"] > ul > li:first-child ul li h3,
+body > section[id][id="passported-intro"] > ul > li:first-child ul li h3 {
+  width: 100%;
+  height: auto;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  font: normal 14px 'Lato', sans-serif;
+  font-weight: 400;
+  color: white;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding: 0 15px;
+  margin-top: 30px;
+  display: block;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 22px;
+}
+body > main[id][id="passported-intro"] + *,
+body > section[id][id="passported-intro"] + * {
+  margin-top: 760px;
+  z-index: 2;
+}
+body > main[id][id="how-it-works"] header,
+body > section[id][id="how-it-works"] header,
+body > main[id][id="travel-journal"] header,
+body > section[id][id="travel-journal"] header {
+  width: 100%;
+  height: auto;
+  position: relative;
+  margin: auto;
+  float: none;
+  clear: both;
+  overflow: visible;
+  margin-bottom: 60px;
+}
+body > main[id][id="how-it-works"] header h4,
+body > section[id][id="how-it-works"] header h4,
+body > main[id][id="travel-journal"] header h4,
+body > section[id][id="travel-journal"] header h4 {
+  width: 100%;
+  height: auto;
+  background: transparent url('../media/icons/feather-grey-icon.svg') no-repeat 60% top;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+  font: normal 36px 'Lato', sans-serif;
+  font-weight: 700;
+  color: #333333;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  text-transform: uppercase;
+  padding-top: 15px;
+  line-height: auto;
+  margin-bottom: 15px;
+  display: block;
+  overflow: hidden;
+}
+body > main[id][id="how-it-works"] header h4 span,
+body > section[id][id="how-it-works"] header h4 span,
+body > main[id][id="travel-journal"] header h4 span,
+body > section[id][id="travel-journal"] header h4 span {
+  font: normal 18px 'G-italic', serif;
+  color: #333333;
+  font-style: italic;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  clear: both;
+  display: block;
+  text-transform: none;
+}
+body > main[id][id="how-it-works"],
+body > section[id][id="how-it-works"] {
+  background-color: white;
+  padding-bottom: 90px;
+  height: auto;
+}
+body > main[id][id="how-it-works"] div.promoted-grid,
+body > section[id][id="how-it-works"] div.promoted-grid {
+  width: 1120px;
+  height: auto;
+  position: relative;
+  margin: auto;
+  float: none;
+  display: block;
+  overflow: hidden;
+}
+body > main[id][id="map"],
+body > section[id][id="map"] {
+  background-color: white;
+  box-shadow: 0 0 30px #333333;
+  height: 600px;
+  overflow: hidden;
+}
+body > main[id][id="map"] header,
+body > section[id][id="map"] header,
+body > main[id][id="map"] footer,
+body > section[id][id="map"] footer {
+  width: 100%;
+  height: 100px;
+  position: absolute;
+}
+body > main[id][id="map"] aside,
+body > section[id][id="map"] aside {
+  width: 50%;
+  height: 100%;
+  background-color: white;
+  position: absolute;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  overflow: hidden;
+}
+body > main[id][id="map"] aside button.aside-trigger,
+body > section[id][id="map"] aside button.aside-trigger {
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  color: black;
+  display: block;
+  width: 50px;
+  height: 100px;
+  position: absolute;
+}
+body > main[id][id="map"] aside button.aside-trigger span,
+body > section[id][id="map"] aside button.aside-trigger span {
+  width: 75%;
+  height: 100%;
+  position: absolute;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  font: normal 18px 'icons';
+  color: white;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 98px;
+  transform-origin: center center;
+}
+body > main[id][id="map"] aside button.aside-trigger svg,
+body > section[id][id="map"] aside button.aside-trigger svg {
+  width: 50px;
+  height: 100px;
+}
+body > main[id][id="map"] aside button.aside-trigger svg path,
+body > section[id][id="map"] aside button.aside-trigger svg path {
+  fill: #333333;
+}
+body > main[id][id="map"] aside button.aside-trigger:hover span,
+body > section[id][id="map"] aside button.aside-trigger:hover span {
+  transform: rotate(0deg);
+}
+body > main[id][id="map"] aside.left,
+body > section[id][id="map"] aside.left {
+  left: -50%;
+  padding-right: 50px;
+}
+body > main[id][id="map"] aside.left button,
+body > section[id][id="map"] aside.left button {
+  right: 0;
+  top: 50%;
+  margin-top: -50px;
+}
+body > main[id][id="map"] aside.left button span,
+body > section[id][id="map"] aside.left button span {
+  transform: rotate(180deg);
+}
+body > main[id][id="map"] aside.left ul,
+body > section[id][id="map"] aside.left ul {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  position: relative;
+  float: left;
+  margin: 0;
+  overflow: hidden;
+  display: block;
+}
+body > main[id][id="map"] aside.left.on,
+body > section[id][id="map"] aside.left.on {
+  left: 0;
+}
+body > main[id][id="map"] aside.left.on button span,
+body > section[id][id="map"] aside.left.on button span {
+  transform: rotate(0deg);
+}
+body > main[id][id="map"] aside.left.on button:hover span,
+body > section[id][id="map"] aside.left.on button:hover span {
+  transform: rotate(180deg);
+}
+body > main[id][id="map"] aside.left.on ul,
+body > section[id][id="map"] aside.left.on ul {
+  box-shadow: 0 0 30px #cccccc;
+}
+body > main[id][id="map"] aside.right,
+body > section[id][id="map"] aside.right {
+  right: -50%;
+  padding-left: 50px;
+}
+body > main[id][id="map"] aside.right button,
+body > section[id][id="map"] aside.right button {
+  left: 0;
+}
+body > main[id][id="map"] aside.right.on,
+body > section[id][id="map"] aside.right.on {
+  right: 0;
+}
+body > main[id][id="map"] footer,
+body > section[id][id="map"] footer {
+  bottom: 0;
+  display: none;
+}
+body > main[id][id="map"] div[id="google-maps-container"],
+body > section[id][id="map"] div[id="google-maps-container"] {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  float: left;
+  display: block;
+  overflow: hidden;
+}
+body > main[id][id="travel-journal"],
+body > section[id][id="travel-journal"] {
+  width: 100%;
+  height: auto;
+  background-color: #f0f2f2;
+  position: relative;
+  float: left;
+  overflow: hidden;
+  z-index: 2;
+  box-shadow: 0 0 30px #cccccc;
+}
+body > main[id][id="travel-journal"] div[id="feed"],
+body > section[id][id="travel-journal"] div[id="feed"] {
+  width: 1120px;
+  height: auto;
+  padding: 0 30px;
+  overflow: visible;
+}
+body > main[id][id="travel-journal"] div[id="feed"] div.grid-wrapper,
+body > section[id][id="travel-journal"] div[id="feed"] div.grid-wrapper {
+  width: 100%;
+  height: auto;
+  position: relative;
+  float: left;
+  overflow: hidden;
+  margin-top: 5px;
+}
+body > main[id][id="travel-journal"] > footer,
+body > section[id][id="travel-journal"] > footer {
+  width: 100%;
+  height: 50px;
+  background-color: #dee4e3;
+  position: absolute;
+  bottom: 0;
+}
+body > main[id][id="travel-journal"] > footer button,
+body > section[id][id="travel-journal"] > footer button {
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  color: black;
+  display: block;
+  width: 100px;
+  height: 50px;
+  position: absolute;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  position: relative;
+  margin: auto;
+  float: none;
+  bottom: 0;
+}
+body > main[id][id="travel-journal"] > footer button span,
+body > section[id][id="travel-journal"] > footer button span {
+  width: 100%;
+  height: auto;
+  position: absolute;
+  font: normal 10px 'Lato', sans-serif;
+  font-weight: 400;
+  color: #576468;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-transform: uppercase;
+  line-height: 25px;
+  text-align: center;
+}
+body > main[id][id="travel-journal"] > footer button svg path,
+body > section[id][id="travel-journal"] > footer button svg path {
+  fill: #f0f2f2;
+}
+body > main[id][id="inspiration"],
+body > section[id][id="inspiration"] {
+  background-color: #f0f2f2;
+  z-index: 2;
+  padding: 30px;
+}
+body > main[id][id="inspiration"] header,
+body > section[id][id="inspiration"] header {
+  width: 100%;
+  height: 100px;
+  position: relative;
+  float: left;
+}
+body > main[id][id="inspiration"] header h4,
+body > section[id][id="inspiration"] header h4 {
+  width: 360px;
+  height: auto;
+  background: transparent url('../media/icons/feather-grey-icon.svg') no-repeat 72% center;
+  background-size: auto 40px;
+  font: normal 18px 'G-italic', serif;
+  color: #333333;
+  font-style: italic;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  margin: auto;
+  float: none;
+  text-align: center;
+  display: block;
+  overflow: hidden;
+  padding: 30px 0;
+}
+body > main[id][id="inspiration"] header h4:before,
+body > section[id][id="inspiration"] header h4:before {
+  width: 80px;
+  height: 1px;
+  background-color: #CCCCCC;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  content: '';
+  display: block;
+}
+body > main[id][id="inspiration"] header h4:after,
+body > section[id][id="inspiration"] header h4:after {
+  width: 80px;
+  height: 1px;
+  background-color: #CCCCCC;
+  position: absolute;
+  top: 50%;
+  left: auto;
+  content: '';
+  right: 0;
+  display: block;
+}
+body > main[id][id="inspiration"] div.wrapper,
+body > section[id][id="inspiration"] div.wrapper {
+  width: 100%;
+  height: auto;
+  position: relative;
+  float: left;
+  margin-bottom: 30px;
+}
+body > main[id][id="inspiration"] div.wrapper ul,
+body > section[id][id="inspiration"] div.wrapper ul {
+  width: 47%;
+}
+body > main[id][id="inspiration"] div.wrapper ul:last-child,
+body > section[id][id="inspiration"] div.wrapper ul:last-child {
+  float: right;
+}
+body > main[id][id="inspiration"] button.go-btn,
+body > section[id][id="inspiration"] button.go-btn {
+  margin: 30px auto;
+}
+body > main[id][id="press"],
+body > section[id][id="press"] {
+  background-color: #dee4e3;
+  padding: 60px;
+  z-index: 4;
+}
+body > main[id][id="press"] ul.logo-gallery,
+body > section[id][id="press"] ul.logo-gallery {
+  width: auto;
+  height: auto;
+  position: relative;
+  margin: auto;
+  float: none;
+  display: table;
+  overflow: hidden;
+}
+body > main[id][id="press"] ul.logo-gallery li,
+body > section[id][id="press"] ul.logo-gallery li {
+  width: auto;
+  height: auto;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  position: relative;
+  float: left;
+  padding: 15px;
+}
+body > main[id][id="press"] ul.logo-gallery li a,
+body > section[id][id="press"] ul.logo-gallery li a,
+body > main[id][id="press"] ul.logo-gallery li figure,
+body > section[id][id="press"] ul.logo-gallery li figure {
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  color: black;
+  display: block;
+  width: 100%;
+  height: 24px;
+  position: relative;
+  float: left;
+}
+body > main[id][id="press"] ul.logo-gallery li a img,
+body > section[id][id="press"] ul.logo-gallery li a img,
+body > main[id][id="press"] ul.logo-gallery li figure img,
+body > section[id][id="press"] ul.logo-gallery li figure img {
+  width: auto;
+  height: 24px;
+  position: relative;
+  float: left;
+}
+body > main[id] *[data-animate],
+body > section[id] *[data-animate] {
+  opacity: 0;
+}
+body > main[id] *.rounded-btn,
+body > section[id] *.rounded-btn {
+  font: normal 1em 'Lato', sans-serif;
+  font-weight: 700;
+  color: #212121;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  margin: auto;
+  float: none;
+  display: table;
+  padding: 0 3em;
+  border-radius: 30px;
+  line-height: 3.6em;
+  border: solid 2px #212121;
+  text-transform: uppercase;
+}
+body > main[id] *.rounded-btn.white,
+body > section[id] *.rounded-btn.white {
+  border-color: white;
+  color: white;
+}
+body > main[id] div.gallery-wrapper button[rel],
+body > section[id] div.gallery-wrapper button[rel] {
+  top: 50%;
+  margin-top: -50px;
+  position: absolute;
+  z-index: 5;
+}
+body > main[id] div.gallery-wrapper button[rel] span,
+body > section[id] div.gallery-wrapper button[rel] span {
+  width: 20px;
+  height: 20px;
+  top: 50%;
+  margin-top: -10px;
+  position: absolute;
+  z-index: 1;
+}
+body > main[id] div.gallery-wrapper button[rel] svg g path,
+body > section[id] div.gallery-wrapper button[rel] svg g path {
+  fill: #212121;
+}
+body > main[id] div.gallery-wrapper button[rel][rel="left"],
+body > section[id] div.gallery-wrapper button[rel][rel="left"] {
+  left: 0;
+}
+body > main[id] div.gallery-wrapper button[rel][rel="left"] span,
+body > section[id] div.gallery-wrapper button[rel][rel="left"] span {
+  background: transparent url('../media/icons/left-arrow-icon.svg') no-repeat center center;
+  background-size: 75% auto;
+  left: 5px;
+}
+body > main[id] div.gallery-wrapper button[rel][rel="right"],
+body > section[id] div.gallery-wrapper button[rel][rel="right"] {
+  right: 0;
+}
+body > main[id] div.gallery-wrapper button[rel][rel="right"] span,
+body > section[id] div.gallery-wrapper button[rel][rel="right"] span {
+  background: transparent url('../media/icons/right-arrow-icon.svg') no-repeat center center;
+  right: 5px;
+  background-size: 75% auto;
+}
+body > main[id] > div.wrapper,
+body > section[id] > div.wrapper {
+  width: 1060px;
+  max-width: 1060px;
+  padding: 10%;
+  display: block;
+  box-sizing: border-box;
+  position: relative;
+  margin: auto;
+  float: none;
+}
+body > main[id] > div.wrapper > header:first-child,
+body > section[id] > div.wrapper > header:first-child {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 35px 0;
+  letter-spacing: 0.3em;
+}
+body > main[id] > div.wrapper > header:first-child h2,
+body > section[id] > div.wrapper > header:first-child h2,
+body > main[id] > div.wrapper > header:first-child h3,
+body > section[id] > div.wrapper > header:first-child h3 {
+  font: normal 2em 'Lato', sans-serif;
+  font-weight: 700;
+  color: #212121;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  width: 100%;
+  text-align: center;
+  text-transform: uppercase;
+  display: block;
+}
+body > main[id].full > div.wrapper,
+body > section[id].full > div.wrapper {
+  width: 100%;
+  max-width: 100%;
+  float: left;
+  padding: 0;
+}
+body > main[id][id="passported-home"],
+body > section[id][id="passported-home"] {
+  margin-top: 100px;
+}
+body > main[id][id="passported-home"] div.gallery-wrapper,
+body > section[id][id="passported-home"] div.gallery-wrapper {
+  position: relative;
+  float: left;
+  width: 100%;
+}
+body > main[id][id="passported-home"] div.gallery-wrapper ul,
+body > section[id][id="passported-home"] div.gallery-wrapper ul {
+  position: relative;
+  float: left;
+  width: 100%;
+  overflow: hidden;
+}
+body > main[id][id="passported-home"] div.gallery-wrapper ul li,
+body > section[id][id="passported-home"] div.gallery-wrapper ul li {
+  position: relative;
+  float: left;
+  padding: 4px 2px 4px 2px;
+  box-sizing: border-box;
+  display: block;
+}
+body > main[id][id="passported-home"] div.gallery-wrapper ul li a,
+body > section[id][id="passported-home"] div.gallery-wrapper ul li a {
+  width: 600px;
+  height: 440px;
+  position: relative;
+  float: left;
+  display: block;
+}
+body > main[id][id="passported-home"] div.gallery-wrapper ul li a figure,
+body > section[id][id="passported-home"] div.gallery-wrapper ul li a figure {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  overflow: hidden;
+}
+body > main[id][id="passported-home"] div.gallery-wrapper ul li a figure img,
+body > section[id][id="passported-home"] div.gallery-wrapper ul li a figure img {
+  min-width: 100%;
+  min-height: 100%;
+}
+body > main[id][id="passported-home"] div.gallery-wrapper ul li a footer,
+body > section[id][id="passported-home"] div.gallery-wrapper ul li a footer {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 35px 0;
+  position: absolute;
+  bottom: 0;
+  display: block;
+}
+body > main[id][id="passported-home"] div.gallery-wrapper ul li a footer h2,
+body > section[id][id="passported-home"] div.gallery-wrapper ul li a footer h2,
+body > main[id][id="passported-home"] div.gallery-wrapper ul li a footer time,
+body > section[id][id="passported-home"] div.gallery-wrapper ul li a footer time {
+  color: white;
+  width: 100%;
+  float: left;
+  text-align: center;
+}
+body > main[id][id="passported-home"] div.gallery-wrapper ul li a footer h2,
+body > section[id][id="passported-home"] div.gallery-wrapper ul li a footer h2 {
+  font: normal 1.2em 'Lato', sans-serif;
+  font-weight: 700;
+  color: white;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-transform: uppercase;
+  line-height: 2em;
+  letter-spacing: 0.1em;
+}
+body > main[id][id="passported-home"] div.gallery-wrapper ul li a footer time,
+body > section[id][id="passported-home"] div.gallery-wrapper ul li a footer time {
+  font: normal 1.2em 'G-italic', serif;
+  color: white;
+  font-style: italic;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+body > main[id][id="passported-home"] div.gallery-wrapper ul li:first-child,
+body > section[id][id="passported-home"] div.gallery-wrapper ul li:first-child {
+  padding-left: 4px;
+}
+body > main[id][id="passported-home"] div.gallery-wrapper ul li:last-child,
+body > section[id][id="passported-home"] div.gallery-wrapper ul li:last-child {
+  padding-right: 4px;
+}
+body > main[id][id="search-and-newsletter"],
+body > section[id][id="search-and-newsletter"] {
+  border-bottom: solid 1px #D7D7D7;
+  padding: 0;
+}
+body > main[id][id="search-and-newsletter"] div.wrapper div.half,
+body > section[id][id="search-and-newsletter"] div.wrapper div.half {
+  width: 50%;
+  height: auto;
+  position: relative;
+  float: left;
+  box-sizing: border-box;
+  padding: 30px 60px;
+}
+body > main[id][id="search-and-newsletter"] div.wrapper div.half header,
+body > section[id][id="search-and-newsletter"] div.wrapper div.half header {
+  width: 100%;
+  position: relative;
+  float: left;
+}
+body > main[id][id="search-and-newsletter"] div.wrapper div.half header h4,
+body > section[id][id="search-and-newsletter"] div.wrapper div.half header h4 {
+  font: normal 1.4em 'G-italic', serif;
+  color: #212121;
+  font-style: italic;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  margin: auto;
+  float: none;
+  width: 80%;
+  text-align: center;
+  margin-bottom: 15px;
+  display: block;
+}
+body > main[id][id="search-and-newsletter"] div.wrapper div.half header h4:before,
+body > section[id][id="search-and-newsletter"] div.wrapper div.half header h4:before,
+body > main[id][id="search-and-newsletter"] div.wrapper div.half header h4:after,
+body > section[id][id="search-and-newsletter"] div.wrapper div.half header h4:after {
+  width: 15%;
+  height: 1px;
+  max-width: 60px;
+  background: #D7D7D7;
+  position: absolute;
+  top: 8px;
+  content: '';
+}
+body > main[id][id="search-and-newsletter"] div.wrapper div.half header h4:before,
+body > section[id][id="search-and-newsletter"] div.wrapper div.half header h4:before {
+  left: 0;
+}
+body > main[id][id="search-and-newsletter"] div.wrapper div.half header h4:after,
+body > section[id][id="search-and-newsletter"] div.wrapper div.half header h4:after {
+  right: 0;
+}
+body > main[id][id="search-and-newsletter"] div.wrapper div.half header span,
+body > section[id][id="search-and-newsletter"] div.wrapper div.half header span {
+  font: normal 0.9em 'Lato', sans-serif;
+  font-weight: 700;
+  color: #212121;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: red;
+  margin-top: -12px;
+  display: none;
+}
+body > main[id][id="search-and-newsletter"] div.wrapper div.half form div.wrapper,
+body > section[id][id="search-and-newsletter"] div.wrapper div.half form div.wrapper {
+  width: 100%;
+  margin: 10px 0;
+  position: relative;
+  float: left;
+}
+body > main[id][id="search-and-newsletter"] div.wrapper div.half form div.wrapper h3,
+body > section[id][id="search-and-newsletter"] div.wrapper div.half form div.wrapper h3 {
+  font: normal 2em 'Lato', sans-serif;
+  font-weight: 700;
+  color: #212121;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  display: none;
+}
+body > main[id][id="search-and-newsletter"] div.wrapper div.half form div.wrapper input[type="email"],
+body > section[id][id="search-and-newsletter"] div.wrapper div.half form div.wrapper input[type="email"] {
+  font: normal 1em 'Lato', sans-serif;
+  font-weight: 700;
+  color: #212121;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  margin: auto;
+  float: none;
+  width: 200px;
+  border: solid 1px #D7D7D7;
+  padding: 15px 30px;
+  border-radius: 30px;
+  text-transform: uppercase;
+  text-align: center;
+  overflow: hidden;
+  clear: both;
+  display: block;
+}
+body > main[id][id="search-and-newsletter"] div.wrapper div.half form div.wrapper input[type="email"]::-webkit-input-placeholder,
+body > section[id][id="search-and-newsletter"] div.wrapper div.half form div.wrapper input[type="email"]::-webkit-input-placeholder {
+  color: #D7D7D7;
+}
+body > main[id][id="search-and-newsletter"] div.wrapper div.half form div.wrapper input[type="email"]:-moz-placeholder,
+body > section[id][id="search-and-newsletter"] div.wrapper div.half form div.wrapper input[type="email"]:-moz-placeholder {
+  color: #D7D7D7;
+}
+body > main[id][id="search-and-newsletter"] div.wrapper div.half form div.wrapper input[type="email"]::-moz-placeholder,
+body > section[id][id="search-and-newsletter"] div.wrapper div.half form div.wrapper input[type="email"]::-moz-placeholder {
+  color: #D7D7D7;
+}
+body > main[id][id="search-and-newsletter"] div.wrapper div.half form div.wrapper input[type="email"]:-ms-input-placeholder,
+body > section[id][id="search-and-newsletter"] div.wrapper div.half form div.wrapper input[type="email"]:-ms-input-placeholder {
+  color: #D7D7D7;
+}
+body > main[id][id="search-and-newsletter"] div.wrapper div.half form input[type="submit"],
+body > section[id][id="search-and-newsletter"] div.wrapper div.half form input[type="submit"] {
+  font: normal 0.9em 'Lato', sans-serif;
+  font-weight: 700;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  margin: auto;
+  float: none;
+  display: table;
+  color: #212121;
+  text-transform: uppercase;
+  border: 0;
+  text-align: center;
+  padding: 0 15px;
+  background: white;
+}
+body > main[id][id="search-and-newsletter"] div.wrapper div.half div.select,
+body > section[id][id="search-and-newsletter"] div.wrapper div.half div.select {
+  display: none;
+}
+body > main[id][id="search-and-newsletter"] div.wrapper div.vertical-line-divider,
+body > section[id][id="search-and-newsletter"] div.wrapper div.vertical-line-divider {
+  width: 1px;
+  height: 50%;
+  top: 30%;
+  left: 50%;
+  position: absolute;
+  background: #D7D7D7;
+}
+body > main[id][id="passported-picks"] > div.wrapper,
+body > section[id][id="passported-picks"] > div.wrapper {
+  border-bottom: solid 1px #D7D7D7;
+  overflow: hidden;
+  float: none;
+  position: relative;
+  padding: 30px 0 15px 0;
+}
+body > main[id][id="passported-picks"] > div.wrapper > header h2,
+body > section[id][id="passported-picks"] > div.wrapper > header h2 {
+  font: normal 2.8em 'Lato', sans-serif;
+  font-weight: 700;
+  color: #212121;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  float: left;
+  display: block;
+  margin-bottom: 30px;
+}
+body > main[id][id="passported-picks"] > div.wrapper > header h2:after,
+body > section[id][id="passported-picks"] > div.wrapper > header h2:after {
+  width: 100px;
+  height: 100px;
+  top: 50%;
+  left: 50%;
+  background: transparent url('../media/icons/feather-grey-icon.svg') no-repeat left center;
+  margin-left: 220px;
+  margin-top: -50px;
+  position: absolute;
+  display: block;
+  content: '';
+}
+body > main[id][id="passported-picks"] > div.wrapper > article,
+body > section[id][id="passported-picks"] > div.wrapper > article,
+body > main[id][id="passported-picks"] > div.wrapper > a,
+body > section[id][id="passported-picks"] > div.wrapper > a {
+  width: 50%;
+  height: auto;
+  position: relative;
+  float: left;
+  display: block;
+  min-height: 350px;
+  margin-bottom: 45px;
+  border: solid 2px white;
+  box-sizing: border-box;
+}
+body > main[id][id="passported-picks"] > div.wrapper > article h3,
+body > section[id][id="passported-picks"] > div.wrapper > article h3,
+body > main[id][id="passported-picks"] > div.wrapper > a h3,
+body > section[id][id="passported-picks"] > div.wrapper > a h3 {
+  font: normal 1em 'Lato', sans-serif;
+  font-weight: 700;
+  color: #212121;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  text-transform: uppercase;
+  line-height: 1.8em;
+}
+body > main[id][id="passported-picks"] > div.wrapper > article time,
+body > section[id][id="passported-picks"] > div.wrapper > article time,
+body > main[id][id="passported-picks"] > div.wrapper > a time,
+body > section[id][id="passported-picks"] > div.wrapper > a time {
+  font: normal 1em 'G-italic', serif;
+  color: #212121;
+  font-style: italic;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  width: auto;
+  text-align: center;
+  border-bottom: solid 1px #D7D7D7;
+  display: table;
+  margin: 0 auto 5px auto;
+  line-height: 2em;
+  padding: 0 30px;
+}
+body > main[id][id="passported-picks"] > div.wrapper > article figure,
+body > section[id][id="passported-picks"] > div.wrapper > article figure,
+body > main[id][id="passported-picks"] > div.wrapper > a figure,
+body > section[id][id="passported-picks"] > div.wrapper > a figure {
+  width: 100%;
+  border: solid 2px white;
+  overflow: hidden;
+  max-height: 350px;
+  margin-bottom: 10px;
+}
+body > main[id][id="passported-picks"] > div.wrapper > article figure img,
+body > section[id][id="passported-picks"] > div.wrapper > article figure img,
+body > main[id][id="passported-picks"] > div.wrapper > a figure img,
+body > section[id][id="passported-picks"] > div.wrapper > a figure img {
+  height: 100%;
+}
+body > main[id][id="passported-picks"] > div.wrapper > article a,
+body > section[id][id="passported-picks"] > div.wrapper > article a,
+body > main[id][id="passported-picks"] > div.wrapper > a a,
+body > section[id][id="passported-picks"] > div.wrapper > a a {
+  font: normal 1.2em 'G-italic', serif;
+  color: #212121;
+  font-style: italic;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  margin: auto;
+  float: none;
+  background: transparent url('../media/icons/read-more-icon.svg') no-repeat right center;
+  padding-right: 20px;
+  background-size: auto 80%;
+  width: auto;
+  text-align: center;
+  display: table;
+}
+body > main[id][id="passported-picks"] > div.wrapper > article.main,
+body > section[id][id="passported-picks"] > div.wrapper > article.main,
+body > main[id][id="passported-picks"] > div.wrapper > a.main,
+body > section[id][id="passported-picks"] > div.wrapper > a.main {
+  width: 100%;
+  margin-bottom: 15px;
+  padding-bottom: 30px;
+  border: none;
+  border-bottom: solid 1px #D7D7D7;
+}
+body > main[id][id="passported-picks"] > div.wrapper > article.main figure,
+body > section[id][id="passported-picks"] > div.wrapper > article.main figure,
+body > main[id][id="passported-picks"] > div.wrapper > a.main figure,
+body > section[id][id="passported-picks"] > div.wrapper > a.main figure {
+  margin-bottom: 0;
+  max-height: 700px;
+}
+body > main[id][id="passported-picks"] > div.wrapper > article.main time,
+body > section[id][id="passported-picks"] > div.wrapper > article.main time,
+body > main[id][id="passported-picks"] > div.wrapper > a.main time,
+body > section[id][id="passported-picks"] > div.wrapper > a.main time {
+  font-size: 1.2em;
+}
+body > main[id][id="passported-picks"] > div.wrapper > article.main h3,
+body > section[id][id="passported-picks"] > div.wrapper > article.main h3,
+body > main[id][id="passported-picks"] > div.wrapper > a.main h3,
+body > section[id][id="passported-picks"] > div.wrapper > a.main h3 {
+  font-size: 2em;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  margin-bottom: 30px;
+}
+body > main[id][id="passported-picks"] > div.wrapper > article.main p,
+body > section[id][id="passported-picks"] > div.wrapper > article.main p,
+body > main[id][id="passported-picks"] > div.wrapper > a.main p,
+body > section[id][id="passported-picks"] > div.wrapper > a.main p {
+  font: normal 1.1em 'Lato', sans-serif;
+  font-weight: 300;
+  color: #212121;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  width: 100%;
+  float: left;
+  line-height: 1.6em;
+  padding: 2% 5%;
+  box-sizing: border-box;
+}
+body > main[id][id="passported-picks"] > div.wrapper > article.call-to-action,
+body > section[id][id="passported-picks"] > div.wrapper > article.call-to-action,
+body > main[id][id="passported-picks"] > div.wrapper > a.call-to-action,
+body > section[id][id="passported-picks"] > div.wrapper > a.call-to-action {
+  display: table;
+  margin-bottom: 0;
+}
+body > main[id][id="passported-picks"] > div.wrapper > article.call-to-action div.vertical-wrapper,
+body > section[id][id="passported-picks"] > div.wrapper > article.call-to-action div.vertical-wrapper,
+body > main[id][id="passported-picks"] > div.wrapper > a.call-to-action div.vertical-wrapper,
+body > section[id][id="passported-picks"] > div.wrapper > a.call-to-action div.vertical-wrapper {
+  display: table-cell;
+  vertical-align: middle;
+}
+body > main[id][id="passported-picks"] > div.wrapper > article.call-to-action div.vertical-wrapper div.icon,
+body > section[id][id="passported-picks"] > div.wrapper > article.call-to-action div.vertical-wrapper div.icon,
+body > main[id][id="passported-picks"] > div.wrapper > a.call-to-action div.vertical-wrapper div.icon,
+body > section[id][id="passported-picks"] > div.wrapper > a.call-to-action div.vertical-wrapper div.icon {
+  width: 85px;
+  height: 85px;
+  position: relative;
+  margin: auto;
+  float: none;
+  display: table;
+}
+body > main[id][id="passported-picks"] > div.wrapper > article.call-to-action div.vertical-wrapper h3,
+body > section[id][id="passported-picks"] > div.wrapper > article.call-to-action div.vertical-wrapper h3,
+body > main[id][id="passported-picks"] > div.wrapper > a.call-to-action div.vertical-wrapper h3,
+body > section[id][id="passported-picks"] > div.wrapper > a.call-to-action div.vertical-wrapper h3 {
+  padding-top: 0;
+  margin-bottom: 15px;
+  color: white;
+  text-transform: uppercase;
+  font-size: 1.8em;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+body > main[id][id="passported-picks"] > div.wrapper > article.call-to-action[id="book-a-trip"],
+body > section[id][id="passported-picks"] > div.wrapper > article.call-to-action[id="book-a-trip"],
+body > main[id][id="passported-picks"] > div.wrapper > a.call-to-action[id="book-a-trip"],
+body > section[id][id="passported-picks"] > div.wrapper > a.call-to-action[id="book-a-trip"] {
+  background: transparent url('../media/backgrounds/cloud-texture.jpg') no-repeat center center;
+}
+body > main[id][id="passported-picks"] > div.wrapper > article.call-to-action[id="book-a-trip"] div.icon,
+body > section[id][id="passported-picks"] > div.wrapper > article.call-to-action[id="book-a-trip"] div.icon,
+body > main[id][id="passported-picks"] > div.wrapper > a.call-to-action[id="book-a-trip"] div.icon,
+body > section[id][id="passported-picks"] > div.wrapper > a.call-to-action[id="book-a-trip"] div.icon {
+  background: transparent url('../media/icons/chat-icon.svg') no-repeat center center;
+  background-size: auto 80%;
+  background-position: center top;
+}
+body > main[id][id="passported-picks"] > div.wrapper > article.call-to-action[id="explore"],
+body > section[id][id="passported-picks"] > div.wrapper > article.call-to-action[id="explore"],
+body > main[id][id="passported-picks"] > div.wrapper > a.call-to-action[id="explore"],
+body > section[id][id="passported-picks"] > div.wrapper > a.call-to-action[id="explore"] {
+  background: transparent url('../media/backgrounds/cloud-texture-right.jpg') no-repeat center center;
+}
+body > main[id][id="passported-picks"] > div.wrapper > article.call-to-action[id="explore"] div.icon,
+body > section[id][id="passported-picks"] > div.wrapper > article.call-to-action[id="explore"] div.icon,
+body > main[id][id="passported-picks"] > div.wrapper > a.call-to-action[id="explore"] div.icon,
+body > section[id][id="passported-picks"] > div.wrapper > a.call-to-action[id="explore"] div.icon {
+  background: transparent url('../media/icons/location-icon.svg') no-repeat center center;
+  background-size: auto 80%;
+  background-position: center top;
+}
+body > main[id][id="instagram-feed"] div.wrapper header h3,
+body > section[id][id="instagram-feed"] div.wrapper header h3 {
+  font-weight: 400;
+}
+body > main[id][id="instagram-feed"] div.wrapper div.gallery-wrapper,
+body > section[id][id="instagram-feed"] div.wrapper div.gallery-wrapper {
+  position: relative;
+  float: left;
+  width: 100%;
+}
+body > main[id][id="instagram-feed"] div.wrapper div.gallery-wrapper ul,
+body > section[id][id="instagram-feed"] div.wrapper div.gallery-wrapper ul {
+  width: 100%;
+}
+body > main[id][id="instagram-feed"] div.wrapper div.gallery-wrapper ul li,
+body > section[id][id="instagram-feed"] div.wrapper div.gallery-wrapper ul li {
+  position: relative;
+  float: left;
+  padding: 4px 2px;
+  box-sizing: border-box;
+}
+body > main[id][id="instagram-feed"] div.wrapper div.gallery-wrapper ul li a,
+body > section[id][id="instagram-feed"] div.wrapper div.gallery-wrapper ul li a {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  float: left;
+  overflow: hidden;
+}
+body > main[id][id="instagram-feed"] div.wrapper div.gallery-wrapper ul li a img,
+body > section[id][id="instagram-feed"] div.wrapper div.gallery-wrapper ul li a img {
+  min-height: 100%;
+}
+body > main[id][id="instagram-feed"] div.wrapper div.gallery-wrapper ul li:first-child,
+body > section[id][id="instagram-feed"] div.wrapper div.gallery-wrapper ul li:first-child {
+  padding-left: 4px;
+}
+body > main[id][id="instagram-feed"] div.wrapper div.gallery-wrapper ul li:last-child,
+body > section[id][id="instagram-feed"] div.wrapper div.gallery-wrapper ul li:last-child {
+  padding-right: 4px;
+}
+body > main[id][id="instagram-feed"] div.wrapper div[id="plan-banner"],
+body > section[id][id="instagram-feed"] div.wrapper div[id="plan-banner"] {
+  width: 100%;
+  height: 800px;
+  position: relative;
+  float: left;
+  background: #D7D7D7;
+  box-sizing: border-box;
+  padding: 10%;
+  overflow: hidden;
+  border: solid 4px white;
+  border-top: 0;
+}
+body > main[id][id="instagram-feed"] div.wrapper div[id="plan-banner"] figure,
+body > section[id][id="instagram-feed"] div.wrapper div[id="plan-banner"] figure {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  overflow: hidden;
+}
+body > main[id][id="instagram-feed"] div.wrapper div[id="plan-banner"] figure img,
+body > section[id][id="instagram-feed"] div.wrapper div[id="plan-banner"] figure img {
+  height: 100%;
+}
+body > main[id][id="instagram-feed"] div.wrapper div[id="plan-banner"] div.vertical-wrapper,
+body > section[id][id="instagram-feed"] div.wrapper div[id="plan-banner"] div.vertical-wrapper {
+  width: 100%;
+  height: auto;
+  top: 40%;
+  left: 0;
+  position: absolute;
+}
+body > main[id][id="instagram-feed"] div.wrapper div[id="plan-banner"] div.vertical-wrapper h4,
+body > section[id][id="instagram-feed"] div.wrapper div[id="plan-banner"] div.vertical-wrapper h4 {
+  font: normal 4em 'Lato', sans-serif;
+  font-weight: 400;
+  color: white;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  float: left;
+  letter-spacing: 0.05em;
+  width: 100%;
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 120px;
+  z-index: 1;
+}
+/* ------------------------------------------------------------------------------------------------------------- */
+/* ~ Footer ~ */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+body > footer {
+  width: 100%;
+  height: auto;
+  background-color: #212121;
+  position: relative;
+  float: left;
+  overflow: hidden;
+  z-index: 4;
+}
+body > footer > nav {
+  width: 1040px;
+  height: auto;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  position: relative;
+  margin: auto;
+  float: none;
+  display: block;
+  padding: 30px 0 60px 0;
+  overflow: hidden;
+}
+body > footer > nav ul {
+  width: 346.66666667px;
+  height: auto;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  position: relative;
+  float: left;
+  padding: 15px;
+  overflow: hidden;
+}
+body > footer > nav ul li {
+  width: 100%;
+  height: auto;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  position: relative;
+  float: left;
+  padding-top: 10px;
+  overflow: hidden;
+}
+body > footer > nav ul li:first-child {
+  font: normal 24px 'Lato', sans-serif;
+  font-weight: 300;
+  color: #cdd3d2;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #212121;
+  text-transform: uppercase;
+  border-bottom: solid 1px rgba(205, 211, 210, 0.5);
+  padding: 60px 0 10px 50px;
+  margin-bottom: 10px;
+}
+body > footer > nav ul li:first-child span {
+  width: 50px;
+  height: 100px;
+  position: absolute;
+  bottom: 10px;
+  left: 5px;
+}
+body > footer > nav ul li:first-child span.popular {
+  background: transparent url('../media/icons/hotel-pin-icon.svg') no-repeat left bottom;
+  background-size: 30px auto;
+}
+body > footer > nav ul li:first-child span.destinations {
+  background: transparent url('../media/icons/destination-pin-icon.svg') no-repeat left bottom;
+  background-size: 30px auto;
+}
+body > footer > nav ul li:first-child span.passported {
+  background: transparent url('../media/icons/feather-icon.svg') no-repeat left bottom;
+  background-size: auto 80%;
+}
+body > footer > nav ul li a {
+  width: 100%;
+  height: auto;
+  opacity: 1;
+  filter: alpha(opacity=100);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+  -webkit-transition: opacity 0.2s ease-in-out;
+  -moz-transition: opacity 0.2s ease-in-out;
+  -o-transition: opacity 0.2s ease-in-out;
+  transition: opacity 0.2s ease-in-out;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  font: normal 12px 'Lato', sans-serif;
+  font-weight: 300;
+  color: #cdd3d2;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-transform: uppercase;
+  padding-left: 10px;
+}
+body > footer > nav ul li a:hover {
+  opacity: 0.75;
+  filter: alpha(opacity=75);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=75)";
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=75);
+}
+body > footer > div.fixed-bar {
+  width: 100%;
+  height: 130px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  background-color: black;
+  position: relative;
+  float: left;
+  padding: 0 30px;
+}
+body > footer > div.fixed-bar a[id$="brand"] {
+  width: auto;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 30px;
+}
+body > footer > div.fixed-bar a[id$="brand"] img,
+body > footer > div.fixed-bar a[id$="brand"] object {
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  color: black;
+  display: block;
+  width: 225px;
+  height: auto;
+  margin-top: 20%;
+  margin-left: 30px;
+}
+body > footer > div.fixed-bar a[id$="brand"][id="tzell-brand"] {
+  right: 30px;
+  left: auto;
+  display: none;
+}
+body > footer > div.fixed-bar a[id$="brand"][id="tzell-brand"] small {
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  color: black;
+  display: block;
+  position: absolute;
+  font: normal 10px 'Lato', sans-serif;
+  font-weight: 400;
+  color: white;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  top: 30px;
+}
+body > footer > div.fixed-bar a[id$="brand"][id="tzell-brand"] img {
+  height: 35%;
+  margin-top: 35%;
+}
+body > footer > div.fixed-bar > nav[id="social-media"] {
+  width: auto;
+  height: auto;
+  position: relative;
+  margin: auto;
+  float: none;
+  display: table;
+  margin-top: 52px;
+}
+body > footer > div.fixed-bar > nav[id="social-media"] > a {
+  width: auto;
+  height: auto;
+  opacity: 1;
+  filter: alpha(opacity=100);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+  -webkit-transition: opacity 0.2s ease-in-out;
+  -moz-transition: opacity 0.2s ease-in-out;
+  -o-transition: opacity 0.2s ease-in-out;
+  transition: opacity 0.2s ease-in-out;
+  font: normal 28px 'icons';
+  color: white;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  float: left;
+  display: block;
+  margin: 0 5px;
+  text-decoration: none;
+}
+body > footer > div.fixed-bar > nav[id="social-media"] > a[rel="facebook"]:before {
+  content: '\e0aa';
+}
+body > footer > div.fixed-bar > nav[id="social-media"] > a[rel="twitter"]:before {
+  content: '\e0ab';
+}
+body > footer > div.fixed-bar > nav[id="social-media"] > a[rel="pinterest"]:before {
+  content: '\e0ac';
+}
+body > footer > div.fixed-bar > nav[id="social-media"] > a[rel="instagram"]:before {
+  content: '\e0b1';
+}
+body > footer > div.fixed-bar > nav[id="social-media"] > a[rel="google-plus"]:before {
+  content: '\e0ad';
+}
+body > footer > div.fixed-bar > nav[id="social-media"] > a:hover {
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
+}
+body > footer > div.fixed-bar > small {
+  width: 100%;
+  height: auto;
+  position: relative;
+  float: left;
+  font: normal 10px 'Lato', sans-serif;
+  font-weight: 400;
+  color: white;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  padding: 25px 0 0 0;
+}

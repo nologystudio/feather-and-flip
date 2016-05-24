@@ -49,9 +49,9 @@
             </header>
             <div class="gallery-wrapper">
                 <ul>
-                    <li >
-                        <a href="">
-                            <img src=""/>
+                    <li ng-repeat="post in instagram">
+                        <a href="{{post.link}}" target="_blank">
+                            <img src="{{post.images.standard_resolution}}"/>
                         </a>
                     </li>
                 </ul>

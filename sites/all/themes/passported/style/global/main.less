@@ -840,6 +840,7 @@
 			}
 			
 			// New Home Layout
+			// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 			
 			@content-padding: 30px;
 			@global-width: 100%;
@@ -854,6 +855,116 @@
 			@press-grey: #eaeaea;
 			@warning-color: red;
 			@b-size: 4px;
+			
+			*[data-animate]
+			{
+				opacity: 0;
+			}
+			
+			*.rounded-btn
+			{
+				#font > .lato(1em,@grey,700);
+				#align > .center;
+				display: table;
+				padding: 0 3em;
+				border-radius: @content-padding;
+				line-height: 3.6em;
+				border: solid 2px @grey;
+				text-transform: uppercase;
+				
+				&.white
+				{
+					border-color: white;
+					color: white;
+				}
+			}
+			
+			div.gallery-wrapper
+			{
+				button[rel]
+				{
+					top: 50%;
+					margin-top: -50px;
+					position: absolute;
+					z-index: 5;
+					
+					span
+					{
+						@s: 20px;
+						
+						.set-size(@s,@s);
+						top: 50%;
+						margin-top: -@s/2;
+						position: absolute;
+						z-index: 1;
+						
+						&:before
+						{}
+					}
+					
+					svg
+					{
+						g
+						{
+							path
+							{
+								fill: @grey;
+							}
+						}
+					}
+					
+					&[rel="left"]
+					{
+						left: 0;
+						
+						span
+						{
+							.set-bg(transparent,'@{media-url}icons/left-arrow-icon.svg');
+							background-size: 75% auto;
+							left: 5px;
+						}
+					}
+					
+					&[rel="right"]
+					{
+						right: 0;
+						
+						span
+						{
+							.set-bg(transparent,'@{media-url}icons/right-arrow-icon.svg');
+							right: 5px;
+							background-size: 75% auto;
+						}
+					}
+				}
+			}
+			
+			& > div.wrapper
+			{
+				width: @wrapper-width;
+				max-width: @wrapper-max-width;
+				padding: 10%;
+				display: block;
+				box-sizing: border-box;
+				#align > .center;
+				
+				& > header:first-child
+				{
+					width: 100%;
+					box-sizing: border-box;
+					padding: 35px 0;
+					letter-spacing: 0.3em;
+					
+					h2,h3
+					{
+						#font > .lato(2em,@grey,700);
+						width: 100%;
+						text-align: center;
+						text-transform: uppercase;
+						display: block;
+					}
+				}
+			}
 			
 			&.full
 			{

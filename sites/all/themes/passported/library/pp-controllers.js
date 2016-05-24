@@ -1573,6 +1573,7 @@
 				
 				$http.jsonp(endPoint).success(function(_data){
 					console.log(_data);
+					$scope.instagram = _data.data;
 				});
             };
             
