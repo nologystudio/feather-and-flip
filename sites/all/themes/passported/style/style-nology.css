@@ -5838,6 +5838,10 @@ body > section[id][id="search-and-newsletter"] div.wrapper div.half div.select-w
   margin-left: 5px;
   line-height: 16px;
 }
+body > main[id][id="search-and-newsletter"] div.wrapper div.half div.select-wrapper div.select header span:before,
+body > section[id][id="search-and-newsletter"] div.wrapper div.half div.select-wrapper div.select header span:before {
+  color: #6c9c9c;
+}
 body > main[id][id="search-and-newsletter"] div.wrapper div.half div.select-wrapper div.select ul[id="options"],
 body > section[id][id="search-and-newsletter"] div.wrapper div.half div.select-wrapper div.select ul[id="options"] {
   width: 102%;
@@ -6474,6 +6478,7 @@ body > footer > div.fixed-bar > nav[id="social-media"] a {
   height: 40px;
   background-color: white;
   border-radius: 30px;
+  color: black;
 }
 body > footer > div.fixed-bar > nav[id="social-media"] a:before {
   width: 100%;
