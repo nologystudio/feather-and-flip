@@ -6415,7 +6415,6 @@ body > footer > div.fixed-bar a[id$="brand"] object {
 body > footer > div.fixed-bar a[id$="brand"][id="tzell-brand"] {
   right: 30px;
   left: auto;
-  display: none;
 }
 body > footer > div.fixed-bar a[id$="brand"][id="tzell-brand"] small {
   border: none;
