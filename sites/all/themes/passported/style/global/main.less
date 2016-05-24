@@ -271,7 +271,7 @@
 					&[id^="sign-"],
 					&[id="user"]
 					{
-						#font > .gar(15px,@color-5);
+						#font > .gar(15px,white);
 						.animate-all();
 						padding: 0 @content-padding;
 						line-height: @header-height;
@@ -3135,7 +3135,8 @@
 					@h: 440px;
 					
 					#align > .left;
-					width: 100%;
+					.set-size(100%,@h);
+					overflow: hidden;
 					
 					ul
 					{
@@ -3450,6 +3451,12 @@
 							{
 								margin-bottom: 0;
 								max-height: 2 * @m-height;
+								
+								img
+								{
+									width: 100%;
+									#align > .left;
+								}
 							}
 							
 							time
@@ -3550,7 +3557,8 @@
 						@h: 200px;
 						
 						#align > .left;
-						width: 100%;
+						.set-size(100%,@h);
+						overflow: hidden;
 						
 						ul
 						{
@@ -3568,10 +3576,12 @@
 									.set-size(@h,@h);
 									#align > .left;
 									overflow: hidden;
+									display: block;
 								
 									img
 									{
-										min-height: 100%;
+										.set-size(@h,@h);
+										#align > .left;
 									}
 								}
 								
@@ -3766,12 +3776,13 @@
 					{
 						right: @content-padding;
 						left: auto;
+						display: none;
 						
 						small
 						{
 							.reset();
 							.set-pos(absolute);
-							#font > .lato(10px,black,400);
+							#font > .lato(10px,white,400);
 							top: @content-padding;
 						}
 						
@@ -3797,7 +3808,7 @@
 						@s: 40px;
 						
 						.set-size(@s,@s);
-						.set-bgc(black);
+						.set-bgc(white);
 						border-radius: @content-padding;
 						
 						&:before
@@ -3815,7 +3826,7 @@
 				{
 					.set-size(100%);
 					#align > .left;
-					#font > .lato(10px,black,400);
+					#font > .lato(10px,white,400);
 					text-align: center; 
 					padding: @content-padding - @unit 0 0 0;
 				}

@@ -811,7 +811,7 @@ body > header nav a.feather-icon {
 body > header nav a[id^="sign-"],
 body > header nav a[id="user"] {
   font: normal 15px 'G-italic', serif;
-  color: #7795a0;
+  color: white;
   font-style: italic;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -5575,6 +5575,8 @@ body > section[id][id="passported-home"] div.gallery-wrapper {
   position: relative;
   float: left;
   width: 100%;
+  height: 440px;
+  overflow: hidden;
 }
 body > main[id][id="passported-home"] div.gallery-wrapper ul,
 body > section[id][id="passported-home"] div.gallery-wrapper ul {
@@ -5935,6 +5937,14 @@ body > section[id][id="passported-picks"] > div.wrapper > a.main figure {
   margin-bottom: 0;
   max-height: 700px;
 }
+body > main[id][id="passported-picks"] > div.wrapper > article.main figure img,
+body > section[id][id="passported-picks"] > div.wrapper > article.main figure img,
+body > main[id][id="passported-picks"] > div.wrapper > a.main figure img,
+body > section[id][id="passported-picks"] > div.wrapper > a.main figure img {
+  width: 100%;
+  position: relative;
+  float: left;
+}
 body > main[id][id="passported-picks"] > div.wrapper > article.main time,
 body > section[id][id="passported-picks"] > div.wrapper > article.main time,
 body > main[id][id="passported-picks"] > div.wrapper > a.main time,
@@ -6039,6 +6049,8 @@ body > section[id][id="instagram-feed"] div.wrapper div.gallery-wrapper {
   position: relative;
   float: left;
   width: 100%;
+  height: 200px;
+  overflow: hidden;
 }
 body > main[id][id="instagram-feed"] div.wrapper div.gallery-wrapper ul,
 body > section[id][id="instagram-feed"] div.wrapper div.gallery-wrapper ul {
@@ -6060,10 +6072,14 @@ body > section[id][id="instagram-feed"] div.wrapper div.gallery-wrapper ul li a 
   position: relative;
   float: left;
   overflow: hidden;
+  display: block;
 }
 body > main[id][id="instagram-feed"] div.wrapper div.gallery-wrapper ul li a img,
 body > section[id][id="instagram-feed"] div.wrapper div.gallery-wrapper ul li a img {
-  min-height: 100%;
+  width: 200px;
+  height: 200px;
+  position: relative;
+  float: left;
 }
 body > main[id][id="instagram-feed"] div.wrapper div.gallery-wrapper ul li:first-child,
 body > section[id][id="instagram-feed"] div.wrapper div.gallery-wrapper ul li:first-child {
@@ -6266,6 +6282,7 @@ body > footer > div.fixed-bar a[id$="brand"] object {
 body > footer > div.fixed-bar a[id$="brand"][id="tzell-brand"] {
   right: 30px;
   left: auto;
+  display: none;
 }
 body > footer > div.fixed-bar a[id$="brand"][id="tzell-brand"] small {
   border: none;
@@ -6273,11 +6290,12 @@ body > footer > div.fixed-bar a[id$="brand"][id="tzell-brand"] small {
   padding: 0;
   margin: 0;
   text-decoration: none;
+  color: black;
   display: block;
   position: absolute;
   font: normal 10px 'Lato', sans-serif;
   font-weight: 400;
-  color: black;
+  color: white;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   top: 30px;
@@ -6331,7 +6349,7 @@ body > footer > div.fixed-bar > nav[id="social-media"] > a:hover {
 body > footer > div.fixed-bar > nav[id="social-media"] a {
   width: 40px;
   height: 40px;
-  background-color: black;
+  background-color: white;
   border-radius: 30px;
 }
 body > footer > div.fixed-bar > nav[id="social-media"] a:before {
@@ -6348,7 +6366,7 @@ body > footer > div.fixed-bar > small {
   float: left;
   font: normal 10px 'Lato', sans-serif;
   font-weight: 400;
-  color: black;
+  color: white;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
