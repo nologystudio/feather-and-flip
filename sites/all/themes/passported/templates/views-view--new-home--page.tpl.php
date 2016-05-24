@@ -25,7 +25,7 @@
             </div>
             <div class="vertical-line-divider"></div>
             <div id="newsletter-cta" class="half">
-                <form id="newsletter-form" name="newsletterForm" ng-show="type == 'newsletter'">
+                <form id="newsletter-form" name="newsletterForm">
                     <header>
                         <h4>Sign Up to Our Newsletter</h4>
                         <span ng-if="newsStatus == 'error'" class="animated fadeInDown">We're sorry, an error has occurred</span>
