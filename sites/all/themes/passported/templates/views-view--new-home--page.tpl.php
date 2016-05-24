@@ -10,17 +10,20 @@
                 <header>
                     <h4>We'll Plan Your Perfect Trip</h4>
                 </header>
-                <div pp-inspiration-select id="place-select" class="select" data-options="adventure|beach|city|countryside|ski">
-                    <header>
-                        <span class="icon-down-circle-full"></span>
-                        <h5>Type of place</h5>
-                    </header>
-                </div>
-                <div pp-inspiration-select id="season-select" class="select" data-options="spring|summer|winter|fall">
-                    <header>
-                        <span class="icon-down-circle-full"></span>
-                        <h5>Season</h5>
-                    </header>
+                <div class="select-wrapper">
+	                <div pp-inspiration-select id="place-select" class="select" data-options="adventure|beach|city|countryside|ski">
+	                    <header>
+	                        <span class="icon-down-circle-full"></span>
+	                        <h5>Type of place</h5>
+	                    </header>
+	                </div>
+	                <div pp-inspiration-select id="season-select" class="select" data-options="spring|summer|winter|fall">
+	                    <header>
+	                        <span class="icon-down-circle-full"></span>
+	                        <h5>Season</h5>
+	                    </header>
+	                </div>
+	                <button class="go-btn animated fadeIn" ng-click="submitInspiration()" ng-if="search.season && search.place">Go</button>
                 </div>
             </div>
             <div class="vertical-line-divider"></div>
@@ -47,7 +50,7 @@
             <header>
                 <h3>#getpassported</h3>
             </header>
-            <div class="gallery-wrapper">
+            <div class="gallery-wrapper" ui-gallery>
                 <ul>
                     <li ng-repeat="post in instagram">
                         <a href="{{post.link.url}}" target="_blank">

@@ -282,8 +282,8 @@ h6 {
   position: relative;
   float: right;
 }
-.go-btn,
-.clear-btn {
+*.go-btn,
+*.clear-btn {
   border: none;
   background: none;
   padding: 0;
@@ -318,21 +318,21 @@ h6 {
   display: block;
   text-transform: uppercase;
 }
-.go-btn img,
-.clear-btn img {
+*.go-btn img,
+*.clear-btn img {
   width: 100%;
   height: 100%;
   position: relative;
   float: left;
 }
-.go-btn:hover,
-.clear-btn:hover {
+*.go-btn:hover,
+*.clear-btn:hover {
   opacity: 0.5;
   filter: alpha(opacity=50);
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
 }
-.circle-btn {
+*.circle-btn {
   width: 60px;
   height: 60px;
   position: relative;
@@ -341,11 +341,11 @@ h6 {
   border: solid 1px #576468;
   overflow: hidden;
 }
-.clear-btn {
+*.clear-btn {
   background-color: #cdd3d2;
 }
-.select,
-.style-1-btn {
+*.select,
+*.style-1-btn {
   width: auto;
   height: auto;
   -webkit-box-sizing: border-box;
@@ -365,8 +365,8 @@ h6 {
   text-align: left;
   overflow: hidden;
 }
-.select li:first-child span[class^="icon-"],
-.style-1-btn li:first-child span[class^="icon-"] {
+*.select li:first-child span[class^="icon-"],
+*.style-1-btn li:first-child span[class^="icon-"] {
   -webkit-transform: translate3d(0, 0, 0);
   -moz-transform: translate3d(0, 0, 0);
   -ms-transform: translate3d(0, 0, 0);
@@ -5796,6 +5796,109 @@ body > section[id][id="search-and-newsletter"] div.wrapper div.half form input[t
   padding: 0 15px;
   background: white;
 }
+body > main[id][id="search-and-newsletter"] div.wrapper div.half div.select-wrapper,
+body > section[id][id="search-and-newsletter"] div.wrapper div.half div.select-wrapper {
+  width: auto;
+  display: table;
+  position: relative;
+  margin: auto;
+  float: none;
+}
+body > main[id][id="search-and-newsletter"] div.wrapper div.half div.select-wrapper div.select,
+body > section[id][id="search-and-newsletter"] div.wrapper div.half div.select-wrapper div.select {
+  position: relative;
+  float: left;
+  width: 48%;
+  overflow: visible;
+  cursor: pointer;
+  border: solid 1px #D7D7D7;
+  color: #212121;
+}
+body > main[id][id="search-and-newsletter"] div.wrapper div.half div.select-wrapper div.select header,
+body > section[id][id="search-and-newsletter"] div.wrapper div.half div.select-wrapper div.select header {
+  width: 100%;
+  height: auto;
+  background-color: none;
+}
+body > main[id][id="search-and-newsletter"] div.wrapper div.half div.select-wrapper div.select header h5,
+body > section[id][id="search-and-newsletter"] div.wrapper div.half div.select-wrapper div.select header h5 {
+  position: relative;
+  float: left;
+  margin: 0;
+  font-size: 1em;
+  padding: 0;
+}
+body > main[id][id="search-and-newsletter"] div.wrapper div.half div.select-wrapper div.select header span,
+body > section[id][id="search-and-newsletter"] div.wrapper div.half div.select-wrapper div.select header span {
+  position: relative;
+  float: left;
+  font-size: 16px;
+  margin-right: 10px;
+  margin-left: 5px;
+  line-height: 16px;
+}
+body > main[id][id="search-and-newsletter"] div.wrapper div.half div.select-wrapper div.select ul[id="options"],
+body > section[id][id="search-and-newsletter"] div.wrapper div.half div.select-wrapper div.select ul[id="options"] {
+  width: 102%;
+  height: auto;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  position: absolute;
+  background-color: white;
+  top: -15px;
+  left: -1%;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  display: none;
+  opacity: 0;
+  box-shadow: 0 0 30px rgba(51, 51, 51, 0.5);
+  padding: 15px;
+}
+body > main[id][id="search-and-newsletter"] div.wrapper div.half div.select-wrapper div.select ul[id="options"] li,
+body > section[id][id="search-and-newsletter"] div.wrapper div.half div.select-wrapper div.select ul[id="options"] li {
+  font: normal 12px 'Lato', sans-serif;
+  font-weight: 700;
+  color: #576468;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-transition: color 0.1s ease-in-out;
+  -moz-transition: color 0.1s ease-in-out;
+  -o-transition: color 0.1s ease-in-out;
+  transition: color 0.1s ease-in-out;
+  padding: 10px;
+  margin: 0 5px;
+  border-bottom: solid 1px #dee4e3;
+  cursor: pointer;
+  line-height: 18px;
+}
+body > main[id][id="search-and-newsletter"] div.wrapper div.half div.select-wrapper div.select ul[id="options"] li:hover,
+body > section[id][id="search-and-newsletter"] div.wrapper div.half div.select-wrapper div.select ul[id="options"] li:hover {
+  color: #7795a0;
+}
+body > main[id][id="search-and-newsletter"] div.wrapper div.half div.select-wrapper div.select ul[id="options"] li:last-child,
+body > section[id][id="search-and-newsletter"] div.wrapper div.half div.select-wrapper div.select ul[id="options"] li:last-child {
+  border: 0;
+}
+body > main[id][id="search-and-newsletter"] div.wrapper div.half div.select-wrapper div.select:first-child,
+body > section[id][id="search-and-newsletter"] div.wrapper div.half div.select-wrapper div.select:first-child {
+  margin-right: 15px;
+}
+body > main[id][id="search-and-newsletter"] div.wrapper div.half div.select-wrapper button.go-btn,
+body > section[id][id="search-and-newsletter"] div.wrapper div.half div.select-wrapper button.go-btn {
+  position: absolute;
+  top: 50%;
+  left: auto;
+  right: -65px;
+  top: 90px;
+  display: block;
+}
 body > main[id][id="search-and-newsletter"] div.wrapper div.vertical-line-divider,
 body > section[id][id="search-and-newsletter"] div.wrapper div.vertical-line-divider {
   width: 1px;
@@ -6185,12 +6288,12 @@ body > footer > nav ul li {
 body > footer > nav ul li:first-child {
   font: normal 24px 'Lato', sans-serif;
   font-weight: 300;
-  color: #cdd3d2;
+  color: #777777;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #212121;
   text-transform: uppercase;
-  border-bottom: solid 1px rgba(205, 211, 210, 0.5);
+  border-bottom: solid 1px rgba(119, 119, 119, 0.5);
   padding: 60px 0 10px 50px;
   margin-bottom: 10px;
 }
@@ -6200,6 +6303,7 @@ body > footer > nav ul li:first-child span {
   position: absolute;
   bottom: 10px;
   left: 5px;
+  opacity: 0.3;
 }
 body > footer > nav ul li:first-child span.popular {
   background: transparent url('../media/icons/hotel-pin-icon.svg') no-repeat left bottom;
@@ -6230,7 +6334,7 @@ body > footer > nav ul li a {
   box-sizing: border-box;
   font: normal 12px 'Lato', sans-serif;
   font-weight: 400;
-  color: #cdd3d2;
+  color: #777777;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-transform: uppercase;
@@ -6362,7 +6466,7 @@ body > footer > div.fixed-bar > small {
   float: left;
   font: normal 10px 'Lato', sans-serif;
   font-weight: 400;
-  color: white;
+  color: #595858;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

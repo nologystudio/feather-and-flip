@@ -1572,7 +1572,6 @@
 				var endPoint = "https://api.instagram.com/v1/users/"+theID+"/media/recent?access_token="+token+"&callback=JSON_CALLBACK";
 				
 				$http.jsonp(endPoint).success(function(_data){
-					console.log(_data);
 					$scope.instagram = _data.data;
 				});
             };

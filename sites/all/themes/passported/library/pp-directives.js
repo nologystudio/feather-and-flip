@@ -244,6 +244,52 @@
 			}
 		});
 		
+		ppComponents.directive('uiGallery',function(){
+			return {
+				restrict : 'EA',
+				replace  : false,
+			    controller : function($scope){
+				},
+				link : function($scope,$element,_attrs){
+					
+					var isLoaded = false;
+					
+					$scope.$watch(function(){
+						if($element.find('ul:first-child li').size() > 0 && !isLoaded){
+							
+							var _l = $element.find('*[rel="left"]');
+							var _r = $element.find('*[rel="right"]');
+							
+							isLoaded = true;
+							
+							$element.imagesLoaded().always(function(_e){
+								$element.sly({
+									horizontal     : 1,
+									itemNav        : 'basic',
+									smart          : 1,
+									activateMiddle : 1,
+									mouseDragging  : 1,
+									touchDragging  : 1,
+									releaseSwing   : 1,
+									startAt        : 0,
+									scrollBy       : 1,
+									speed          : 500,
+									elasticBounds  : 1,
+									activatePageOn : 'click',
+									prevPage       : _l,
+									nextPage       : _r
+								});
+							});
+							
+							$(window).on('resize',function(){
+								$element.sly('reload');
+							});
+						}
+					})
+				}
+			}
+		});
+		
 		
 		
 		
