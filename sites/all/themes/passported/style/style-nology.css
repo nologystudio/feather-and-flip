@@ -5481,6 +5481,7 @@ body > section[id] *.rounded-btn {
   line-height: 3.6em;
   border: solid 2px #212121;
   text-transform: uppercase;
+  max-width: 300px;
 }
 body > main[id] *.rounded-btn.white,
 body > section[id] *.rounded-btn.white {
@@ -5568,7 +5569,7 @@ body > section[id].full > div.wrapper {
 }
 body > main[id][id="passported-home"],
 body > section[id][id="passported-home"] {
-  margin-top: 100px;
+  margin-top: 90px;
 }
 body > main[id][id="passported-home"] div.gallery-wrapper,
 body > section[id][id="passported-home"] div.gallery-wrapper {
@@ -5794,10 +5795,6 @@ body > section[id][id="search-and-newsletter"] div.wrapper div.half form input[t
   text-align: center;
   padding: 0 15px;
   background: white;
-}
-body > main[id][id="search-and-newsletter"] div.wrapper div.half div.select,
-body > section[id][id="search-and-newsletter"] div.wrapper div.half div.select {
-  display: none;
 }
 body > main[id][id="search-and-newsletter"] div.wrapper div.vertical-line-divider,
 body > section[id][id="search-and-newsletter"] div.wrapper div.vertical-line-divider {
@@ -6100,7 +6097,6 @@ body > section[id][id="instagram-feed"] div.wrapper div[id="plan-banner"] {
   padding: 10%;
   overflow: hidden;
   border: solid 4px white;
-  border-top: 0;
 }
 body > main[id][id="instagram-feed"] div.wrapper div[id="plan-banner"] figure,
 body > section[id][id="instagram-feed"] div.wrapper div[id="plan-banner"] figure {
