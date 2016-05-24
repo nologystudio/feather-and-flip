@@ -9,7 +9,7 @@
             $orig_date = strtotime($featured->field_field_original_pubdate[0]['raw']['safe_value']);
             $img_url = '';
             if(isset($featured->field_field_image[0]['raw']['uri']))
-            $img_url = image_style_url('tj_main', $featured->field_field_image[0]['raw']['uri']);
+            $img_url = image_style_url('tj_main_bottom', $featured->field_field_image[0]['raw']['uri']);
             ?>
             <article id="article-<?php echo $featured->nid; ?>" class="main">
                 <time><?php echo date('F, Y', $orig_date); ?></time>
@@ -23,7 +23,7 @@
             <?php foreach ($view->result as $post) {
                 $img_url = '';
                 if(isset($post->field_field_image[0]['raw']['uri']))
-                    $img_url = image_style_url('post_image', $post->field_field_image[0]['raw']['uri']);
+                    $img_url = image_style_url('post_bottom', $post->field_field_image[0]['raw']['uri']);
                 $orig_date = strtotime($post->field_field_original_pubdate[0]['raw']['safe_value']); ?>
                 <a id="article-<?php echo $post->nid; ?>">
                     <figure>
