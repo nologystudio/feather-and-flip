@@ -6,7 +6,7 @@
 	<!-- Search & Newsletter -->
     <section id="search-and-newsletter" class="full">
         <div class="wrapper">
-            <div id="find-your-trip" class="half">
+            <div id="find-your-trip" class="half" ng-controller="InspirationController">
                 <header>
                     <h4>We'll Plan Your Perfect Trip</h4>
                 </header>

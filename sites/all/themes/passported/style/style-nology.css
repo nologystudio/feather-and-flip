@@ -5665,6 +5665,7 @@ body > main[id][id="search-and-newsletter"],
 body > section[id][id="search-and-newsletter"] {
   border-bottom: solid 1px #D7D7D7;
   padding: 0;
+  z-index: 2;
 }
 body > main[id][id="search-and-newsletter"] div.wrapper div.half,
 body > section[id][id="search-and-newsletter"] div.wrapper div.half {
@@ -5731,7 +5732,7 @@ body > section[id][id="search-and-newsletter"] div.wrapper div.half form header 
 body > main[id][id="search-and-newsletter"] div.wrapper div.half form div.wrapper,
 body > section[id][id="search-and-newsletter"] div.wrapper div.half form div.wrapper {
   width: 100%;
-  margin: 10px 0;
+  margin: 0 0 10px 0;
   position: relative;
   float: left;
 }
@@ -5755,7 +5756,7 @@ body > section[id][id="search-and-newsletter"] div.wrapper div.half form div.wra
   position: relative;
   margin: auto;
   float: none;
-  width: 200px;
+  width: 250px;
   border: solid 1px #D7D7D7;
   padding: 15px 30px;
   border-radius: 30px;
@@ -5810,6 +5811,7 @@ body > section[id][id="search-and-newsletter"] div.wrapper div.half div.select-w
   position: relative;
   float: left;
   width: 48%;
+  max-width: 250px;
   overflow: visible;
   cursor: pointer;
   border: solid 1px #D7D7D7;
@@ -5932,6 +5934,10 @@ body > section[id][id="search-and-newsletter"] div.wrapper div.vertical-line-div
   left: 50%;
   position: absolute;
   background: #D7D7D7;
+}
+body > main[id][id="passported-picks"],
+body > section[id][id="passported-picks"] {
+  z-index: 1;
 }
 body > main[id][id="passported-picks"] > div.wrapper,
 body > section[id][id="passported-picks"] > div.wrapper {

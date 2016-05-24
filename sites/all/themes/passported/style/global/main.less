@@ -3222,6 +3222,7 @@
 			{
 				border-bottom: solid 1px @light-grey;
 				padding: 0;
+				z-index: 2;
 				
 				div.wrapper
 				{
@@ -3286,7 +3287,7 @@
 							div.wrapper
 							{
 								width: 100%;
-								margin: @content-padding/3 0;
+								margin: 0 0 @content-padding/3 0;
 								#align > .left;
 								
 								h3
@@ -3301,7 +3302,7 @@
 									#font > .lato(1em,@grey,700);
 									#align > .center;
 									.set-placeholder-style(@light-grey);
-									width: 200px;
+									width: 250px;
 									border: solid 1px @light-grey;
 									padding: @content-padding/2 @content-padding;
 									border-radius: @content-padding;
@@ -3339,6 +3340,7 @@
 								
 								#align > .left;
 								width: @w;
+								max-width: 250px;
 								overflow: visible;
 								cursor: pointer;
 								border: solid 1px @light-grey;
@@ -3449,6 +3451,8 @@
 			
 			&[id="passported-picks"]
 			{
+				z-index: 1;
+				
 				& > div.wrapper
 				{
 					border-bottom: solid 1px @light-grey;
