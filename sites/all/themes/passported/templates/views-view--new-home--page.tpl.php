@@ -23,7 +23,7 @@
 	                        <h5>Season</h5>
 	                    </header>
 	                </div>
-	                <button class="go-btn animated fadeIn" ng-click="submitInspiration()" ng-if="search.season && search.place">Go</button>
+	                <!--<button class="go-btn animated fadeIn" ng-click="submitInspiration()" ng-if="search.season && search.place">Go</button>-->
                 </div>
             </div>
             <div class="vertical-line-divider"></div>

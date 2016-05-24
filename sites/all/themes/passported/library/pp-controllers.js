@@ -1190,8 +1190,13 @@
 			};
 			
 			$scope.submitInspiration = function(){
-				window.location = window.location.origin + '/inspiration/#/?place=' + $scope.search.place + '&season=' + $scope.search.season;
+				if($scope.search.place && $scope.search.season)
+					window.location = window.location.origin + '/inspiration/#/?place=' + $scope.search.place + '&season=' + $scope.search.season;
 			};
+			
+			$scope.$watch(function(){
+				$scope.submitInspiration();
+			});
 		});
 		
 		/* Sign Up/In Controller
