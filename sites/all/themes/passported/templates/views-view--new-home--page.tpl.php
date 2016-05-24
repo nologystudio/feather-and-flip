@@ -1,11 +1,9 @@
 	
 	<!-- Main Block -->
-		
 	<main id="passported-home" class="full">
         <?php if (isset($top_gallery)) echo $top_gallery; ?>
 	</main>
-
-    <!-- Search & Newsletter -->
+	<!-- Search & Newsletter -->
     <section id="search-and-newsletter" class="full">
         <div class="wrapper">
             <div id="find-your-trip" class="half">
@@ -44,16 +42,16 @@
 	<!-- Blog -->
 	<?php if (isset($new_travel_journal)) echo $new_travel_journal; ?>
     <!-- Instagram -->
-    <section id="instagram-feed" class="full">
+    <section id="instagram-feed" class="full" ng-controller="SocialFeedController">
         <div class="wrapper">
             <header>
                 <h3>#getpassported</h3>
             </header>
             <div class="gallery-wrapper">
                 <ul>
-                    <li>
+                    <li >
                         <a href="">
-                            <img src="" alt=""/>
+                            <img src=""/>
                         </a>
                     </li>
                 </ul>

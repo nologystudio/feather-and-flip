@@ -9,6 +9,7 @@
     <?php $nw_text_color = (empty($nw_text_color) ? '#dee4e3' : $nw_text_color); ?>
     <?php $nw_back_color = (empty($nw_back_color) ? '#242525' : $nw_back_color); ?>
 	
+	<!--
 	<div id="newsletter-block" style="background: <?php echo $nw_back_color; ?>;">
 		<button class="icon-close"></button>
 		<button id="newsletter-trigger" data-animate="1" style="color: <?php echo $nw_text_color; ?>;">
@@ -16,6 +17,7 @@
 			<div class="icon-right-circle-full"></div>
 		</button>
 	</div>
+	-->
 	
 	<?php endif; ?>
 	

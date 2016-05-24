@@ -290,11 +290,11 @@
 	        }
 	        
 	        var waitForImages = function(){
+		        $('body').transit({opacity:1},function(){
+			    	if(!$scope.isMobile) scrolling();
+			    	navManager();	    
+		        });
 		        $('body').imagesLoaded().always(function(_e){
-			        $('body').transit({opacity:1},function(){
-				    	if(!$scope.isMobile) scrolling();
-				    	navManager();	    
-			        });
 				});
 	        }
 	        
@@ -1556,5 +1556,27 @@
 	            error(function(){
 	            });
 			};
+		});
+		
+		/* Instagram
+        ---------------------------------------------------------------------------------------------------------------- */
+		
+		ppControllers.controller('SocialFeedController',function($scope,$rootScope,$location,$timeout,$http){
+		    
+		    $scope.instagram;
+		    
+		    $scope.loadInstagram = function(){
+				
+				var theID    = "";
+				var token    = "1447456174.1677ed0.38a554ee737a4ff89b2c62517d45ba5d";
+				var endPoint = "https://api.instagram.com/v1/users/"+theID+"/media/recent?access_token="+token+"&callback=JSON_CALLBACK";
+				
+				$http.jsonp(endPoint).success(function(_data){
+					console.log(_data);
+				});
+            };
+            
+            $scope.loadInstagram();
+            
 		});
 		
