@@ -1,4 +1,4 @@
-<div class="gallery-wrapper">
+<div class="gallery-wrapper" ui-gallery>
     <?php if (isset($view->result) && !empty($view->result)): ?>
         <ul>
             <?php foreach ($view->result as $post) {

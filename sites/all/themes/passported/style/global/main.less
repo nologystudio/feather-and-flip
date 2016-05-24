@@ -3325,9 +3325,9 @@
 						
 						div.select-wrapper
 						{
-							width: auto;
-							display: table;
-							#align > .center;
+							width: 100%;
+							display: block;
+							#align > .left;
 							
 							div.select
 							{
@@ -3394,6 +3394,19 @@
 										&:last-child
 										{
 											border: 0;
+										}
+										
+										&:first-child
+										{
+											span[class^="icon-"]
+											{
+												.performance();
+												#font > .ic(14px,@color-3);
+												#align > .left;
+												margin-right: @content-padding/2;
+												line-height: 16px;
+												display: block;
+											}
 										}
 									}
 								}

@@ -5798,11 +5798,10 @@ body > section[id][id="search-and-newsletter"] div.wrapper div.half form input[t
 }
 body > main[id][id="search-and-newsletter"] div.wrapper div.half div.select-wrapper,
 body > section[id][id="search-and-newsletter"] div.wrapper div.half div.select-wrapper {
-  width: auto;
-  display: table;
+  width: 100%;
+  display: block;
   position: relative;
-  margin: auto;
-  float: none;
+  float: left;
 }
 body > main[id][id="search-and-newsletter"] div.wrapper div.half div.select-wrapper div.select,
 body > section[id][id="search-and-newsletter"] div.wrapper div.half div.select-wrapper div.select {
@@ -5885,6 +5884,26 @@ body > section[id][id="search-and-newsletter"] div.wrapper div.half div.select-w
 body > main[id][id="search-and-newsletter"] div.wrapper div.half div.select-wrapper div.select ul[id="options"] li:last-child,
 body > section[id][id="search-and-newsletter"] div.wrapper div.half div.select-wrapper div.select ul[id="options"] li:last-child {
   border: 0;
+}
+body > main[id][id="search-and-newsletter"] div.wrapper div.half div.select-wrapper div.select ul[id="options"] li:first-child span[class^="icon-"],
+body > section[id][id="search-and-newsletter"] div.wrapper div.half div.select-wrapper div.select ul[id="options"] li:first-child span[class^="icon-"] {
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  font: normal 14px 'passported-icons';
+  color: #576468;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  float: left;
+  margin-right: 15px;
+  line-height: 16px;
+  display: block;
 }
 body > main[id][id="search-and-newsletter"] div.wrapper div.half div.select-wrapper div.select:first-child,
 body > section[id][id="search-and-newsletter"] div.wrapper div.half div.select-wrapper div.select:first-child {
