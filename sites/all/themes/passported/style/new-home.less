@@ -1,0 +1,1805 @@
+		
+		
+			
+		/* ----------------------------------------------------------------------------------------------------------------
+		    
+	    * Project     : Passported
+	    * Document    : less/style 
+	    * Created on  : Ago 01, 2.015
+	    * Version     : 1.0 
+	    * Author      : Aday Henriquez
+	    * Description : This less file manages the global style
+	    
+	    -------------------------------------------------------------------------------------------------------------------
+	       *          This code has been developed by NOLOGY. in the awesome Canaries - www.nologystudio.com           *
+	    -------------------------------------------------------------------------------------------------------------------
+	   
+	    * Log * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+        -------------------------------------------------------------------------------------------------------------------
+        *  
+        ---------------------------------------------------------------------------------------------------------------- */
+		/* ~ Global Variables and Importers ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */	
+		
+		@media-url: '../media/';
+		@unit: 5px;
+		@content-padding: 30px;
+		@global-width: 100%;
+		@wrapper-width: 1040px;
+		@header-height: 90px;
+		@gutter: 10px;
+		
+		@grid-1: @wrapper-width/1;
+		@grid-2: @wrapper-width/2;
+		@grid-3: @wrapper-width/3;
+		@grid-4: @wrapper-width/4;
+		@grid-5: @wrapper-width/5;
+		@grid-6: @wrapper-width/6;
+		@grid-7: @wrapper-width/7;
+		@grid-8: @wrapper-width/8;
+		
+		/* ~ Color ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+		
+		@color-1: #333333;
+		@color-2: #cdd3d2;
+		@color-3: #576468;
+		@color-4: #3e474a;
+		@color-5: #7795a0;
+		@color-6: #f0f2f2;
+		@color-7: #dee4e3;
+		@color-8: #202121;  
+		
+		@ff-color-0: #f5f6f6;
+		@ff-color-1: #d9dfdE;
+		@ff-color-2: #9cb1ad;
+		@ff-color-3: #96a8a4;
+		@ff-color-4: #7b8c88;
+		@ff-color-5: #545958;
+		@ff-color-6: #708c84;
+		@ff-color-7: #336666;
+		
+		@warning-color: orange;
+		@shadow-color: #cccccc;
+		@grey-1:  #333333;
+		@grey-2:  #999999;
+		@grey-3:  #666666;
+		@grey-4:  #CCCCCC;
+		
+		@grey: #212121;
+		
+		/* ~ Importers ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+		
+		@import 'fonts';
+		@import 'tools';
+		@import 'passported-ui';
+		
+		/* ------------------------------------------------------------------------------------------------------------- */
+		/* ~ UI ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+		
+		/* ------------------------------------------------------------------------------------------------------------- */
+		/* ~ Main style ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+		
+		html, 
+		body
+		{
+		}
+		
+		html
+		{}
+		
+		body
+		{
+			.set-bgc(white);
+			.set-opacity(0);
+			#font > .lato(12px,@color-1,100);
+			overflow-x: hidden;
+		}
+		
+		body
+		{
+			& > header,
+			& > nav,
+			& > aside,
+			& > main,
+			& > section,
+			& > footer
+			{}
+		}
+		
+		/* ------------------------------------------------------------------------------------------------------------- */
+		/* ~ Reset ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+		
+		*
+		{
+			outline: none;
+		}
+		
+		*[data-animate]
+		{
+			.set-opacity(0);
+			.performance();
+		}
+		
+		ul
+		{
+			list-style: none;
+			margin: 0;
+			padding: 0;
+		}
+		
+		a
+		{
+			text-decoration: none;
+			color: @grey;
+		}
+		
+		button
+		{
+			border: 0;
+			background: transparent;
+			outline: none;
+			padding: 0;
+		}
+		
+		ul
+		{
+			list-style: none;
+			padding: 0;
+			margin: 0;
+		}
+		
+		figure,
+		h1,h2,h3,h4,h5,h6
+		{
+			margin: 0;
+			padding: 0;
+		}
+		
+		/* ------------------------------------------------------------------------------------------------------------- */
+		/* ~ UI ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+		
+		.ui-grid();
+		.ui-actions();
+		.ui-components();
+		.ui-form();
+		.ui-feed();
+		
+		/* ------------------------------------------------------------------------------------------------------------- */
+		/* ~ Header & Navigation ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+		
+		body > header
+		{
+			.set-size(100%,@header-height);
+			.set-pos(fixed);
+			.set-coord(0,0);
+			.set-bgc(@color-8);
+			overflow: hidden;
+			z-index: 5;
+			
+			& > a:first-child
+			{
+				.set-size(270px,100%);
+				.set-pos(absolute);
+				.set-coord(@content-padding,0);
+				.set-opacity(1);
+				.animate-opacity();
+				text-decoration: none;
+				
+				figure
+				{
+					.set-size();
+					#align > .left;
+					margin: 0;
+					padding: 0 0 0 @content-padding/2;
+				
+					img,
+					object
+					{
+						#align > .left;
+						width: 230px;
+						margin: 25px 0 0;
+					}
+					
+					figcaption
+					{
+						#align > .right;
+						#font > .gar(12px,white);
+						margin-top: -@unit;
+					}
+				}
+				
+				&:hover
+				{
+					.set-opacity(0.5);
+				}
+			}
+			
+			& > button.mobile-nav-trigger
+			{
+				display: none;
+			}
+			
+			nav
+			{
+				.set-size(100%,@header-height);
+				display: block;
+				
+				div.wrapper
+				{
+					.set-size();
+					overflow: hidden;
+					padding-left: 60px;
+					
+					&.align-right
+					{
+						.set-pos(absolute);
+						top: 0;
+						right: 0;
+					}
+				}
+				
+				a
+				{
+					.set-size(auto,@header-height);
+					.animate-color();
+					#font > .lato(13px,white,400);
+					#align > .left;
+					padding: 0 @content-padding/2;
+					text-transform: uppercase;
+					display: block;
+					text-decoration: none;
+					line-height: @header-height;
+					overflow: hidden;
+					cursor: pointer;
+					
+					&.feather-icon
+					{
+						.set-bg(transparent,'@{media-url}icons/feather-white-icon.svg',no-repeat,right,center);
+						.set-bgs(auto,50%);
+					}
+					
+					&[id^="sign-"],
+					&[id="user"]
+					{
+						#font > .gar(15px,@color-5);
+						.animate-all();
+						padding: 0 @content-padding;
+						line-height: @header-height;
+						text-transform: none;
+						
+						&[id*='up']
+						{
+							.set-bgc(black);
+							color: white;	
+						}
+					}
+					
+					&[id="user"]
+					{
+						.set-bgc(black);
+						color: white;
+					}
+					
+					&:hover
+					{
+						color: white;
+					}
+				}
+			}
+		}
+		
+		body > div.dropdown-wrapper
+		{
+			.set-size(100%,0);
+			.box-sizing();
+			.set-pos(fixed);
+			.set-coord(0,@header-height);
+			.set-bgc(@color-5);
+			.animate-all();
+			.performance();
+			padding: 0 @content-padding;
+			z-index: 6;
+			overflow: hidden;
+			
+			div.arrow
+			{
+				@s: 20px;
+				
+				.set-size(@s,0);
+				.set-pos(absolute);
+				.set-coord(0,0);
+				.set-opacity(1);
+				.animate-all();
+				overflow: hidden;
+				
+				svg
+				{
+					.set-size(@s,@s);
+					#align > .left;
+					
+					path
+					{
+						fill: @color-5;
+					}
+				}
+				
+				&.on
+				{
+					height: @s;
+					top: -@s;
+				}
+			}
+			
+			&.light
+			{
+				.set-bgc(white);
+				
+				div.arrow svg path
+				{
+					fill: white;
+				}
+			}
+			
+			& > nav[id="city-guides-list"]
+			{
+				.set-size(@grid-1);
+				.hide();
+				.performance();
+				.animate-opacity();
+				#align > .center;
+				margin-top: @content-padding;
+				overflow: hidden;
+				
+				&.on
+				{
+					.set-opacity(1);
+				}
+				
+				ul
+				{
+					.set-size(100%/4);
+					.box-sizing();
+					#align > .left;
+					overflow: hidden;
+					margin: 0;
+					padding: 0 @unit;
+					list-style: none;
+					
+					li
+					{
+						padding: 0;
+						background: none;
+						
+						a
+						{
+							.set-size(100%);
+							.animate-color();
+							#font > .lato(13px,@grey-1,400);
+							#align > .left;
+							text-decoration: none;
+							padding: @unit 0;
+							border-bottom: solid 1px fadeout(white,75%);
+							
+							&:hover
+							{
+								color: white;
+							}
+						}
+						
+						&:first-child
+						{
+							#font > .lato(16px,@grey-1,700);
+							.set-bg(transparent,'@{media-url}icons/destination-pin-icon.svg',no-repeat,@unit,top);
+							.set-bgs(auto,20px);
+							text-transform: uppercase;
+							border-bottom: solid 1px fadeout(white,50%);
+							padding-bottom: 2 * @unit;
+							padding-left: 30px;
+							margin-bottom: 2 * @unit;
+							cursor: default;
+						}
+						
+						&:last-child
+						{
+							a
+							{
+								border-bottom: 0;
+							}
+						}
+					}
+				}
+			}
+			
+			& > div[id="search-block"]
+			{
+				.set-size(100%);
+				.hide();
+				.performance();
+				.ui-search();
+				#align > .left;
+				display: none;
+				
+				& > div.wrapper
+				{
+					#align > .center;
+					width: @grid-1;
+					margin-top: @content-padding - 2 * @unit;
+					
+					& > div
+					{
+						.set-opacity(1);
+						#align > .left;
+						display: block;
+						
+						&[id="search-destination"] + div[id="let-us-inspire"]
+						{
+							#align > .right;
+							margin-left: @content-padding;
+						}
+					}
+				}
+				
+				&.on
+				{
+					.set-opacity(1);
+				}
+				
+				&.single-search
+				{
+					& > div.wrapper
+					{
+						width: 400px;
+						overflow: visible;
+						
+						div[id="search-destination"]
+						{
+							width: 100%;
+						}
+					}
+				}
+			}
+		}
+		
+		/* ------------------------------------------------------------------------------------------------------------- */
+		/* ~ Sections ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+		
+		body > main[id],
+		body > section[id]
+		{
+			@m: 600px;
+			@main-height: @m + @header-height + 2 * @content-padding;
+			
+			.set-size(100%);
+			#align > .left;
+			display: block;
+			box-sizing: border-box;
+			
+			&[id="passported-intro"]
+			{
+				.set-bgs(auto,100%);
+				.set-pos(fixed);
+				height: @main-height;
+				overflow: hidden;
+				z-index: 1;
+				
+				& > ul
+				{
+					.set-size(100%,100%);
+					#align > .left;
+					overflow: hidden;
+					
+					& > li
+					{
+						.set-size(100%,100%);
+						.set-bg(@color-7,'@{media-url}backgrounds/passported-main.jpg',no-repeat,center,bottom);
+						.box-sizing();
+						#align > .left;
+						padding-top: 1.5 * @header-height;
+						overflow: hidden;
+						
+						&:first-child
+						{
+							h1
+							{
+								.set-size(100%);
+								#font > .lato(42px,white,300);
+								#align > .left;
+								text-transform: uppercase;
+								text-align: center;
+								display: block;
+								margin-bottom: 1.5 * @content-padding;
+							}
+							
+							ul
+							{
+								.set-size();
+								
+								li
+								{
+									@s: 160px;
+									
+									.set-size(@s + 4 * @content-padding);
+									#align > .left;
+									margin: 0 @content-padding;
+									overflow: hidden;
+									
+									h2
+									{
+										
+										.set-size(@s,@s);
+										.set-bgc(fadeout(@color-4,10%));
+										#font > .gar(30px,white);
+										#align > .center;
+										overflow: hidden;
+										cursor: pointer;
+										border-radius: @s;
+										line-height: @s;
+										text-align: center;
+										
+										&:after
+										{
+											.set-size(@s,@s);
+											.set-pos(absolute);
+											.set-coord(0,0);
+											.set-bg(@color-5,'@{media-url}icons/feather-grey-icon.svg');
+											.set-opacity(0);
+											.animate-all();
+											.performance();
+											z-index: 0;
+											content: '';
+											display: block;
+											overflow: hidden;
+										}
+										
+										&:hover
+										{
+											&:after
+											{
+												.set-opacity(0.75);
+												transform: scale(1.5);
+											}
+											
+											& + h3
+											{}
+										}
+									}
+									
+									h3
+									{
+										.set-size(100%);
+										.box-sizing();
+										.animate-all();
+										#font > .lato(14px,white,400);
+										padding: 0 @content-padding/2;
+										margin-top: @content-padding;
+										display: block;
+										text-transform: uppercase;
+										text-align: center;
+										line-height: 22px;
+									}
+								}
+							}
+						}
+					}
+				}
+				
+				& + *
+				{
+					margin-top: @main-height;
+					z-index: 2;
+				}
+			}
+			
+			&[id="how-it-works"],
+			&[id="travel-journal"]
+			{
+				header
+				{
+					.set-size(100%);
+					#align > .center;
+					clear: both;
+					overflow: visible;
+					margin-bottom: 2 * @content-padding;
+					
+					h4
+					{
+						.set-size(100%);
+						.set-bg(transparent,'@{media-url}icons/feather-grey-icon.svg',no-repeat,60%,top);
+						.set-opacity(0);
+						#font > .lato(36px,@color-1,700);
+						text-align: center;
+						text-transform: uppercase;
+						padding-top: @content-padding/2;
+						line-height: auto;
+						margin-bottom: @content-padding/2;
+						display: block;
+						overflow: hidden;
+						
+						span
+						{
+							#font > .gar(18px,@color-1);
+							clear: both;
+							display: block;
+							text-transform: none;
+						}
+					}
+				}
+			}
+			
+			&[id="how-it-works"]
+			{
+				.set-bgc(white);
+				padding-bottom: 3 * @content-padding;
+				height: auto;
+				
+				header
+				{
+					h4
+					{
+					}
+				}
+				
+				div.promoted-grid 
+				{
+					.set-size(3 * (@grid-3 + 20px));
+					#align > .center;
+					display: block;
+					overflow: hidden;
+				}
+			}
+			
+			&[id="map"]
+			{
+				.set-bgc(white);
+				box-shadow: 0 0 @content-padding @color-1;
+				height: @m;
+				overflow: hidden;
+				
+				header,
+				footer
+				{
+					.set-size(100%,100px);
+					.set-pos(absolute);
+				}
+				
+				aside
+				{
+					@btn-w: 50px;
+					@btn-h: 100px;
+					
+					.set-size(50%,100%);
+					.set-bgc(white);
+					.set-pos(absolute);
+					.animate-all();
+					.performance();
+					overflow: hidden;
+					
+					button.aside-trigger
+					{
+						.reset();
+						.set-size(@btn-w,@btn-h);
+						.set-pos(absolute);
+						
+						span
+						{
+							.set-size(75%,100%);
+							.set-pos(absolute);
+							.animate-all();
+							.performance();
+							#font > .ic(18px,white);
+							line-height: @btn-h - 2px;
+							transform-origin: center center;
+						}
+						
+						svg
+						{
+							.set-size(@btn-w,@btn-h);
+							
+							path
+							{
+								fill: @color-1;
+							}
+						}
+						
+						&:hover
+						{
+							span
+							{
+								transform: rotate(0deg);
+							}
+						}
+					}
+					
+					&.left
+					{
+						left: -50%;
+						padding-right: @btn-w;
+						
+						button
+						{
+							right: 0;
+							top: 50%;
+							margin-top: -@btn-h/2;
+							
+							span
+							{
+								transform: rotate(180deg);
+							}
+						}
+						
+						ul
+						{
+							.set-size(100%,100%);
+							.set-bgc(white);
+							.animate-all();
+							#align > .left;
+							margin: 0;
+							overflow: hidden;
+							display: block;
+						}
+						
+						&.on
+						{
+							left: 0;
+							
+							button
+							{
+								span
+								{
+									transform: rotate(0deg);
+								}
+								
+								&:hover
+								{
+									span
+									{
+										transform: rotate(180deg);
+									}
+								}
+							}
+							
+							ul
+							{
+								box-shadow: 0 0 @content-padding @shadow-color;
+							}
+						}
+					}
+					
+					&.right
+					{
+						right: -50%;
+						padding-left: @btn-w;
+						
+						button
+						{
+							left: 0;
+						}
+						
+						&.on
+						{
+							right: 0;
+						}
+					}
+					
+				}
+				
+				footer
+				{
+					bottom: 0;
+					display: none;
+				}
+				
+				div[id="google-maps-container"]
+				{
+					.set-size(100%,100%);
+					#align > .left;
+					display: block;
+					overflow: hidden;
+				}			
+			}
+			
+			&[id="travel-journal"]
+			{
+				.set-size(100%);
+				.set-bgc(@color-6);
+				#align > .left;
+				overflow: hidden;
+				z-index: 2;
+				box-shadow: 0 0 @content-padding @shadow-color;
+				
+				header
+				{
+					h4
+					{
+					}
+				}
+				
+				div[id="feed"]
+				{
+					.set-size(3 * (@grid-3 + 20px));
+					padding: 0 @content-padding;
+					overflow: visible;
+					
+					div.grid-wrapper
+					{
+						.set-size(100%);
+						#align > .left;
+						overflow: hidden;
+						margin-top: 5px;
+					}
+				}
+				
+				& > footer
+				{
+					@h: 50px;
+					
+					.set-size(100%,@h);
+					.set-bgc(@color-7);
+					.set-pos(absolute);
+					bottom: 0;
+					
+					button
+					{
+						.reset();
+						.set-size(100px,@h);
+						.set-pos(absolute);
+						.animate-all();
+						.performance();
+						#align > .center;
+						bottom: 0;
+						
+						span
+						{
+							.set-size(100%);
+							.set-pos(absolute);
+							#font > .lato(10px,@color-3,400);
+							text-transform: uppercase;
+							line-height: @h/2;
+							text-align: center;
+						}
+						
+						svg
+						{
+							path
+							{
+								fill: @color-6;
+							}
+						}
+					}
+				}
+			}
+			
+			&[id="inspiration"]
+			{
+				.set-bgc(@color-6);
+				z-index: 2;
+				padding: @content-padding;
+				
+				header
+				{
+					.set-size(100%,@header-height);
+					#align > .left;
+					
+					h4
+					{
+						@ornament-width: 80px;
+						
+						.set-size(360px);
+						.set-bg(transparent,'@{media-url}icons/feather-grey-icon.svg',no-repeat,72%,center);
+						.set-bgs(auto,40px);
+						#font > .gar(18px,@color-1);
+						#align > .center;
+						text-align: center;
+						display: block;
+						overflow: hidden;
+						padding: @content-padding 0;
+						
+						&:before
+						{
+							.set-size(@ornament-width,1px);
+							.set-bgc(@grey-4);
+							.set-pos(absolute);
+							.set-coord(0,50%);
+							content: '';
+							display: block;
+						}
+						
+						&:after
+						{
+							.set-size(@ornament-width,1px);
+							.set-bgc(@grey-4);
+							.set-pos(absolute);
+							.set-coord(auto,50%);
+							content: '';
+							right: 0;
+							display: block;
+						}
+					}
+				}
+				
+				div.wrapper
+				{
+					.set-size(100%);
+					#align > .left;
+					margin-bottom: @content-padding;
+					
+					ul
+					{
+						width: 47%;
+						
+						&:last-child
+						{
+							float: right;
+						}
+					}
+					
+				}
+				
+				button.go-btn
+				{
+					margin: @content-padding auto;
+				}
+			}
+			
+			&[id="press"]
+			{
+				.set-bgc(@color-7);	
+				padding: 2 * @content-padding;
+				z-index: 4;
+				
+				ul.logo-gallery
+				{
+					.set-size();
+					#align > .center;
+					display: table;
+					overflow: hidden;
+					
+					li
+					{
+						.set-size(auto);
+						.box-sizing();
+						#align > .left;
+						padding: @content-padding/2;
+						
+						a,
+						figure
+						{
+							@h: 24px;
+							
+							.reset();
+							.set-size(100%,@h);
+							#align > .left;
+							
+							img
+							{
+								.set-size(auto,@h);
+								#align > .left;
+							}
+						}
+					}
+				}
+			}
+			
+			// New Home Layout
+			// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+			
+			@content-padding: 30px;
+			@global-width: 100%;
+			@wrapper-width: 1060px;
+			@wrapper-max-width: 1060px;
+			@header-height: 100px;
+			@footer-height: auto;
+			@module-size: 60px;
+			
+			@grey: #212121;
+			@light-grey: #D7D7D7;
+			@press-grey: #eaeaea;
+			@warning-color: red;
+			@b-size: 4px;
+			
+			*[data-animate]
+			{
+				opacity: 0;
+			}
+			
+			*.rounded-btn
+			{
+				#font > .lato(1em,@grey,700);
+				#align > .center;
+				display: table;
+				padding: 0 3em;
+				border-radius: @content-padding;
+				line-height: 3.6em;
+				border: solid 2px @grey;
+				text-transform: uppercase;
+				
+				&.white
+				{
+					border-color: white;
+					color: white;
+				}
+			}
+			
+			div.gallery-wrapper
+			{
+				button[rel]
+				{
+					top: 50%;
+					margin-top: -50px;
+					position: absolute;
+					z-index: 5;
+					
+					span
+					{
+						@s: 20px;
+						
+						.set-size(@s,@s);
+						top: 50%;
+						margin-top: -@s/2;
+						position: absolute;
+						z-index: 1;
+						
+						&:before
+						{}
+					}
+					
+					svg
+					{
+						g
+						{
+							path
+							{
+								fill: @grey;
+							}
+						}
+					}
+					
+					&[rel="left"]
+					{
+						left: 0;
+						
+						span
+						{
+							.set-bg(transparent,'@{media-url}icons/left-arrow-icon.svg');
+							background-size: 75% auto;
+							left: 5px;
+						}
+					}
+					
+					&[rel="right"]
+					{
+						right: 0;
+						
+						span
+						{
+							.set-bg(transparent,'@{media-url}icons/right-arrow-icon.svg');
+							right: 5px;
+							background-size: 75% auto;
+						}
+					}
+				}
+			}
+			
+			& > div.wrapper
+			{
+				width: @wrapper-width;
+				max-width: @wrapper-max-width;
+				padding: 10%;
+				display: block;
+				box-sizing: border-box;
+				#align > .center;
+				
+				& > header:first-child
+				{
+					width: 100%;
+					box-sizing: border-box;
+					padding: 35px 0;
+					letter-spacing: 0.3em;
+					
+					h2,h3
+					{
+						#font > .lato(2em,@grey,700);
+						width: 100%;
+						text-align: center;
+						text-transform: uppercase;
+						display: block;
+					}
+				}
+			}
+			
+			&.full
+			{
+				& > div.wrapper
+				{
+					width: 100%;
+					max-width: 100%;
+					float: left;
+					padding: 0;
+				}
+			}
+			
+			&[id="passported-home"]
+			{
+				margin-top: @header-height;
+				
+				div.gallery-wrapper
+				{
+					@w: 600px;
+					@h: 440px;
+					
+					#align > .left;
+					width: 100%;
+					
+					ul
+					{
+						#align > .left;
+						width: 100%;
+						overflow: hidden;
+						
+						li
+						{
+							#align > .left;
+							padding: @b-size @b-size/2 @b-size @b-size/2;
+							box-sizing: border-box;
+							display: block;
+							
+							a
+							{
+								.set-size(@w,@h);
+								#align > .left;
+								display: block;
+								
+								figure
+								{
+									.set-size(100%,100%);
+									position: absolute;
+									overflow: hidden;
+									
+									img
+									{
+										min-width: 100%;
+										min-height: 100%;
+									}
+								}
+								
+								footer
+								{
+									width: 100%;
+									background: fadeout(black,50%);
+									padding: 35px 0;
+									position: absolute;
+									bottom: 0;
+									display: block;
+									
+									h2,
+									time
+									{
+										color: white;
+										width: 100%;
+										float: left;
+										text-align: center;
+									}
+									
+									h2
+									{
+										#font > .lato(1.2em,white,700);
+										text-transform: uppercase;
+										line-height: 2em;
+										letter-spacing: 0.1em;
+									}
+									
+									time
+									{
+										#font > .gar(1.2em,white);
+									}
+								}
+							}
+							
+							&:first-child
+							{
+								padding-left: @b-size;	
+							}
+							
+							&:last-child
+							{
+								padding-right: @b-size;
+							}
+						}
+					}
+				}
+			}
+			
+			&[id="search-and-newsletter"]
+			{
+				border-bottom: solid 1px @light-grey;
+				padding: 0;
+				
+				div.wrapper
+				{
+					div.half
+					{
+						.set-size(50%);
+						#align > .left;
+						box-sizing: border-box;
+						padding: @content-padding 2 * @content-padding;
+						
+						header
+						{
+							width: 100%;
+							#align > .left;
+							
+							h4
+							{
+								#font > .gar(1.4em,@grey);
+								#align > .center;
+								width: 80%;
+								text-align: center;
+								margin-bottom: @content-padding/2;
+								display: block;
+								
+								&:before,
+								&:after
+								{
+									.set-size(15%,1px);
+									max-width: 60px;
+									background: @light-grey;
+									position: absolute;
+									top: 8px;
+									content: '';
+								}
+								
+								&:before
+								{
+									left: 0;
+								}
+								
+								&:after
+								{
+									right: 0;
+								}
+							}
+							
+							span
+							{
+								#font > .lato(0.9em,@grey,700);
+								text-align: center;
+								color: @warning-color;
+								margin-top: -12px;
+								display: none;
+							}
+						}
+						
+						form
+						{
+							div.wrapper
+							{
+								width: 100%;
+								margin: @content-padding/3 0;
+								#align > .left;
+								
+								h3
+								{
+									#font > .lato(2em,@grey,700);
+									text-align: center;
+									display: none;
+								}
+								
+								input[type="email"]
+								{
+									#font > .lato(1em,@grey,700);
+									#align > .center;
+									.set-placeholder-style(@light-grey);
+									width: 200px;
+									border: solid 1px @light-grey;
+									padding: @content-padding/2 @content-padding;
+									border-radius: @content-padding;
+									text-transform: uppercase;
+									text-align: center;
+									overflow: hidden;
+									clear: both;
+									display: block;
+								}
+							}
+							
+							input[type="submit"]
+							{
+								#font > .lato(0.9em,@grey,700);
+								#align > .center;
+								display: table;
+								color: @grey;
+								text-transform: uppercase;
+								border: 0;
+								text-align: center;
+								padding: 0 @content-padding/2;
+								background: white;
+							}
+						}
+						
+						div.select
+						{
+							display: none;
+						}
+					}
+					
+					div.vertical-line-divider
+					{
+						.set-size(1px,50%);
+						.set-coord(50%,30%);
+						position: absolute;
+						background: @light-grey;
+					}
+				}
+			}
+			
+			&[id="passported-picks"]
+			{
+				& > div.wrapper
+				{
+					border-bottom: solid 1px @light-grey;
+					overflow: hidden;
+					float: none;
+					position: relative;
+					padding: @content-padding 0 @content-padding/2 0;
+									 
+					& > header
+					{
+						h2
+						{
+							#font > .lato(2.8em,@grey,700);
+							#align > .left;
+							display: block;
+							margin-bottom: @content-padding;
+							
+							&:after
+							{
+								@s: 100px;
+								
+								.set-size(@s,@s);
+								.set-coord(50%,50%);
+								.set-bg(transparent,'@{media-url}icons/feather-grey-icon.svg',no-repeat,left,center);
+								margin-left: 220px;
+								margin-top: -@s/2;
+								position: absolute;
+								display: block;
+								content: '';
+							}
+						}
+					}
+					
+					& > article,
+					& > a
+					{
+						@m-height: 350px;
+						
+						.set-size(100%/2);
+						#align > .left;
+						display: block;
+						min-height: 350px;
+						margin-bottom: 1.5 * @content-padding;
+						border: solid @b-size/2 white;
+						box-sizing: border-box;
+						
+						h3
+						{
+							#font > .lato(1em,@grey,700);
+							text-align: center;
+							text-transform: uppercase;
+							line-height: 1.8em;
+						}
+						
+						time
+						{
+							#font > .gar(1em,@grey);
+							width: auto;
+							text-align: center;
+							border-bottom: solid 1px @light-grey;
+							display: table;
+							margin: 0 auto 5px auto;
+							line-height: 2em;
+							padding: 0 @content-padding;
+						}
+						
+						figure
+						{
+							width: 100%;
+							border: solid 2px white;
+							overflow: hidden;
+							max-height: @m-height;
+							margin-bottom: @content-padding/3;
+							
+							img
+							{
+								height: 100%;
+							}
+						}
+						
+						a
+						{
+							#font > .gar(1.2em,@grey);
+							#align > .center;
+							.set-bg(transparent,'@{media-url}icons/read-more-icon.svg',no-repeat,right,center);
+							padding-right: 20px;
+							background-size: auto 80%;
+							width: auto;
+							text-align: center;
+							display: table;
+							
+						}
+						
+						button
+						{}
+						
+						// Types of entries...
+						
+						&.main
+						{
+							width: 100%;
+							margin-bottom: @content-padding/2;
+							padding-bottom: @content-padding;
+							border: none;
+							border-bottom: solid 1px @light-grey;
+							
+							figure
+							{
+								margin-bottom: 0;
+								max-height: 2 * @m-height;
+							}
+							
+							time
+							{
+								font-size: 1.2em;
+							}
+							
+							h3
+							{
+								font-size: 2em;
+								font-weight: 400;
+								letter-spacing: 0.1em;
+								margin-bottom: @content-padding;
+							}
+							
+							p
+							{
+								#font > .lato(1.1em,@grey,300);
+								width: 100%;
+								float: left;
+								line-height: 1.6em;
+								padding: 2% 5%;
+								box-sizing: border-box;
+							}
+						}
+						
+						&.call-to-action
+						{
+							display: table;
+							margin-bottom: 0;
+							
+							div.vertical-wrapper
+							{
+								display: table-cell;
+								vertical-align: middle;
+								
+								div.icon
+								{
+									.set-size(85px,85px);
+									#align > .center;
+									display: table;
+								}
+								
+								h3
+								{
+									padding-top: 0;
+									margin-bottom: @content-padding/2;
+									color: white;
+									text-transform: uppercase;
+									font-size: 1.8em;
+									font-weight: 700;
+									letter-spacing: 0.02em;
+								}
+							}
+							
+							&[id="book-a-trip"]
+							{
+								.set-bg(transparent,'@{media-url}backgrounds/cloud-texture.jpg');
+								
+								div.icon
+								{
+									.set-bg(transparent,'@{media-url}icons/chat-icon.svg');
+									background-size: auto 80%;
+									background-position: center top;
+								}
+							}
+							
+							&[id="explore"]
+							{
+								.set-bg(transparent,'@{media-url}backgrounds/cloud-texture-right.jpg');
+								
+								div.icon
+								{
+									.set-bg(transparent,'@{media-url}icons/location-icon.svg');
+									background-size: auto 80%;
+									background-position: center top;	
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			&[id="instagram-feed"]
+			{
+				div.wrapper
+				{
+					header
+					{
+						h3
+						{
+							font-weight: 400;
+						}
+					}
+					
+					div.gallery-wrapper
+					{
+						@h: 200px;
+						
+						#align > .left;
+						width: 100%;
+						
+						ul
+						{
+							.set-size(100%,@h);
+							overflow: hidden;
+							
+							li
+							{
+								#align > .left;
+								padding: @b-size @b-size/2;
+								box-sizing: border-box;
+								
+								a
+								{
+									.set-size(@h,@h);
+									#align > .left;
+									overflow: hidden;
+								
+									img
+									{
+										min-height: 100%;
+									}
+								}
+								
+								&:first-child
+								{
+									padding-left: @b-size;	
+								}
+								
+								&:last-child
+								{
+									padding-right: @b-size;
+								}
+							}
+						}					
+					}
+					
+					div[id="plan-banner"]
+					{
+						.set-size(100%,800px);
+						#align > .left;
+						background: @light-grey;
+						box-sizing: border-box;
+						padding: 10%;
+						overflow: hidden;
+						border: solid @b-size white;
+						border-top: 0;
+						
+						figure
+						{
+							.set-size(100%,100%);
+							.set-coord(0,0);
+							position: absolute;
+							overflow: hidden;
+						
+							img
+							{
+								height: 100%;
+							}
+						}
+						
+						div.vertical-wrapper
+						{
+							.set-size(100%);
+							.set-coord(0,40%);
+							position: absolute;
+							
+							h4
+							{
+								#font > .lato(4em,white,400);
+								#align > .left;
+								letter-spacing: 0.05em;
+								width: 100%;
+								text-align: center;
+								text-transform: uppercase;
+								margin-bottom: 4 * @content-padding;
+								z-index: 1;
+							}
+							
+							a
+							{}
+						}
+					}
+				}
+			}
+		}
+		
+		/* ------------------------------------------------------------------------------------------------------------- */
+		/* ~ Footer ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+		
+		body > footer
+		{
+			.set-size(100%);
+			.set-bgc(@grey);
+			#align > .left;
+			overflow: hidden;
+			z-index: 4;
+			
+			& > nav
+			{
+				@vertical-padding: 2 * @content-padding;
+				
+				.set-size(@wrapper-width);
+				.box-sizing();
+				#align > .center;
+				display: block;
+				padding: @content-padding 0 @vertical-padding 0;
+				overflow: hidden;
+				
+				ul
+				{
+					.set-size(@grid-3);
+					.box-sizing();
+					#align > .left;
+					padding: @content-padding/2;
+					overflow: hidden;
+					
+					li
+					{
+						.set-size(100%);
+						.box-sizing();
+						#align > .left;
+						padding-top: @gutter;
+						overflow: hidden;
+						
+						&:first-child
+						{
+							#font > .lato(24px,@color-2,300);
+							.set-bgc(@grey);
+							text-transform: uppercase;
+							border-bottom: solid 1px fadeout(@color-2,50%);
+							padding: 60px 0 10px 50px;
+							margin-bottom: 10px;
+							
+							span
+							{
+								@size: 100px; 
+								@bg-size: 30px;
+								
+								.set-size(@size/2,@size);
+								.set-pos(absolute);
+								bottom: @gutter;
+								left: @unit;
+								
+								&.popular
+								{
+									.set-bg(transparent,'@{media-url}icons/hotel-pin-icon.svg',no-repeat,left,bottom);
+									.set-bgs(@bg-size);
+								}
+								
+								&.destinations
+								{
+									.set-bg(transparent,'@{media-url}icons/destination-pin-icon.svg',no-repeat,left,bottom);
+									.set-bgs(@bg-size);
+								}
+								
+								&.passported
+								{
+									.set-bg(transparent,'@{media-url}icons/feather-icon.svg',no-repeat,left,bottom);
+									.set-bgs(auto,80%);
+								}
+							}
+						}
+												
+						a
+						{
+							.set-size(100%);
+							.set-opacity(1);
+							.animate-opacity();
+							.box-sizing();
+							#font > .lato(12px,@color-2,300);
+							text-transform: uppercase;
+							padding-left: @gutter; 
+							
+							&:hover
+							{
+								.set-opacity(0.75);
+							}
+						}
+					}
+				}
+			}
+			
+			& > div.fixed-bar
+			{
+				@height: 130px;
+				
+				.set-size(100%,@height);
+				.box-sizing();
+				.set-bgc(black);
+				#align > .left;
+				padding: 0 @content-padding;
+				
+				a[id$="brand"]
+				{
+					.set-size(auto,100%);
+					.set-pos(absolute);
+					.set-coord(@content-padding,0);
+					
+					img,
+					object
+					{
+						.reset();
+						.set-size(225px);
+						margin-top: 20%;
+						margin-left: @content-padding;
+					}
+					
+					&[id="tzell-brand"]
+					{
+						right: @content-padding;
+						left: auto;
+						display: none;
+						
+						small
+						{
+							.reset();
+							.set-pos(absolute);
+							#font > .lato(10px,white,400);
+							top: @content-padding;
+						}
+						
+						img
+						{
+							height: 35%;
+							margin-top: 35%;
+						}
+					}
+				}
+				
+				& > nav[id="social-media"]
+				{
+					.set-size();
+					.ui-set-social-media-nav(white);
+					#align > .center;
+					display: table;
+					margin-top: 52px;
+				}
+				
+				& > small
+				{
+					.set-size(100%);
+					#align > .left;
+					#font > .lato(10px,white,400);
+					text-align: center; 
+					padding: @content-padding - @unit 0 0 0;
+				}
+			}
+		}
+		

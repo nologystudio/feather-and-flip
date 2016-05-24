@@ -51,7 +51,7 @@
                 <ul>
                     <li ng-repeat="post in instagram">
                         <a href="{{post.link.url}}" target="_blank">
-                            <img src="{{post.images.standard_resolution}}"/>
+                            <img src="{{post.images.standard_resolution.url}}"/>
                         </a>
                     </li>
                 </ul>

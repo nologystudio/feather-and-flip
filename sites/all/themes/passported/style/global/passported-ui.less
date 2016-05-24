@@ -45,13 +45,17 @@
 					
 				.set-size(@grid-3);
 				.box-sizing();
-				.set-box-shadow(@shadow-color,0,0,@gutter);
 				.set-bgc(@ff-color-2);
 				.performance();
 				.set-opacity(0);
 				#align > .left;
 				margin: @gutter;
 				overflow: hidden;
+				
+				&.add-shadow
+				{
+					.set-box-shadow(@shadow-color,0,0,@gutter);
+				}
 				
 				figure
 				{
@@ -77,7 +81,7 @@
 					.performance();
 					.animate-all();
 					bottom: 0;
-					padding: @block-margin/2 @block-margin;
+					padding: @block-margin/2 @block-margin + 1px;
 				}
 				
 				h3,h4,time
@@ -123,6 +127,38 @@
 					margin-top: @block-margin/2;
 				}
 				
+				&.fixed
+				{
+					.set-size(@grid-3,2 * @grid-3/3);
+					overflow: hidden;
+					
+					figure
+					{
+						height: 100%;
+						
+						img
+						{
+							.set-size(@grid-3);
+							.set-pos(absolute);
+							left: 50%;
+							margin-left: -@grid-3/2;
+							top: 0;
+						}
+					}
+					
+					&.destination
+					{
+						figure
+						{
+							img
+							{
+								width: auto;
+								height: 100% !important;
+							}
+						}
+					}
+				}
+				
 				&:hover
 				{
 					figure + footer
@@ -146,6 +182,11 @@
 				&.review
 				{
 					padding: @block-margin @block-margin/2;
+				}
+				
+				&.hidden
+				{
+					.set-opacity(0);
 				}
 				
 				// Newsletter block style...
@@ -236,9 +277,6 @@
 				overflow: hidden;
 				background-color: transparent;
 				
-				// | i | This fix the issue with the mask in Safari
-				//-webkit-mask-image: -webkit-radial-gradient(circle,transparent,transparent);
-				
 				img
 				{
 					.set-size(100%,100%);
@@ -249,17 +287,18 @@
 		
 		.ui-components()
 		{
-			.go-btn
+			.go-btn,
+			.clear-btn
 			{
-				@s: 60px;
+				@s: 50px;
 				
 				.ui-set-circle-mask(@s);
-				.set-bgc(@color-3);
+				.set-bgc(@color-5);
 				.animate-opacity();
 				.set-opacity(1);
 				.performance();
 				#align > .center;
-				#font > .lato(12px,white,700);
+				#font > .lato(11px,white,700);
 				display: block;
 				text-transform: uppercase;
 				
@@ -267,6 +306,22 @@
 				{
 					.set-opacity(0.5);
 				}
+			}
+			
+			.circle-btn
+			{
+				@s: 60px;
+				
+				.set-size(@s,@s);
+				#align > .left;
+				border-radius: @s;
+				border: solid 1px @color-3;
+				overflow: hidden;
+			}
+			
+			.clear-btn
+			{
+				.set-bgc(@color-2);
 			}
 			
 			.select,
@@ -278,29 +333,6 @@
 				#font > .lato(12px,@color-4,700);
 				line-height: 17px;
 				text-transform: uppercase;
-				padding: @content-padding/1.5;
-				border: solid 2px @color-5;
-				border-radius: @content-padding;
-				text-align: left;
-				overflow: hidden;
-				
-				span.icon
-				{
-					#font > .ic(16px,@color-4);
-					#align > .left;
-					margin-right: @content-padding/2;
-					text-align: center;
-					display: block;
-				}
-			}
-			
-			/*.select
-			{
-				.set-size();
-				.box-sizing();
-				#align > .left;
-				#font > .lato(12px,@color-4,700);
-				text-transform: uppercase;
 				padding: @content-padding/2;
 				border: solid 2px @color-5;
 				border-radius: @content-padding;
@@ -311,17 +343,35 @@
 				{
 					&:first-child
 					{
-						span.icon
+						span[class^="icon-"]
 						{
-							#font > .ic(16px,@color-4);
+							.performance();
+							#font > .ic(14px,@color-3);
 							#align > .left;
 							margin-right: @content-padding/2;
-							text-align: center;
+							line-height: 16px;
 							display: block;
 						}
 					}
 				}
-			}*/
+			}
+			
+			&.rounded-btn
+			{
+				.set-size(100%);
+				.box-sizing();
+				.set-placeholder-style(@color-4);
+				#align > .left;
+				#font > .lato(12px,@color-4,700);
+				background-color: transparent;
+				line-height: 17px;
+				text-transform: uppercase;
+				padding: @content-padding/2;
+				border: solid 2px @color-2;
+				border-radius: @content-padding;
+				text-align: center;
+				overflow: hidden;
+			}
 		}
 		
 		.ui-set-social-media-nav(@color:white,@btn-size:28px)
@@ -336,20 +386,6 @@
 				display: block;
 				margin: 0 @unit;
 				text-decoration: none;
-				
-				.set-icon(@icon)
-				{
-					&:before
-					{
-						content: '\@{icon}';
-					}
-				}
-				
-				&[rel="facebook"]   { .set-icon('e0aa'); }
-				&[rel="twitter"]    { .set-icon('e0ab'); }
-				&[rel="pinterest"]  { .set-icon('e0ac'); }
-				&[rel="instagram"]  { .set-icon('e0b1'); }
-				&[rel="google-plus"]{ .set-icon('e0ad'); }
 				
 				&:hover
 				{
@@ -388,6 +424,494 @@
 						&.placeholder
 						{
 							color: fadeout(@font-color,50%);
+						}
+					}
+					
+					&.rounded
+					{
+						.set-size(100%);
+						.box-sizing();
+						.set-placeholder-style(@color-4);
+						#align > .left;
+						#font > .lato(12px,@color-4,700);
+						background-color: transparent;
+						line-height: 17px;
+						text-transform: uppercase;
+						padding: @content-padding/2;
+						border: solid 2px @color-5;
+						border-radius: @content-padding;
+						text-align: left;
+						overflow: hidden;
+					}
+				}
+				
+				textarea
+				{
+					resize: none;
+				}
+			}
+		}
+		
+		.ui-search()
+		{
+			&
+			{
+				& > div.wrapper
+				{
+					.set-size(@grid-1 + 120px);
+					#align > .center;
+					margin-bottom: @content-padding;
+					overflow: visible;
+					
+					header
+					{
+						.set-size(100%,@header-height - @content-padding/3);
+						#align > .left;
+						
+						h4
+						{
+							@ornament-width: 80px;
+							
+							.set-size(360px);
+							.set-bg(transparent,'@{media-url}icons/feather-grey-icon.svg',no-repeat,72%,center);
+							.set-bgs(auto,40px);
+							#font > .gar(18px,@color-1);
+							#align > .center;
+							text-align: center;
+							display: block;
+							overflow: hidden;
+							padding: @content-padding 0;
+							
+							&:before
+							{
+								.set-size(@ornament-width,1px);
+								.set-bgc(@grey-4);
+								.set-pos(absolute);
+								.set-coord(0,50%);
+								content: '';
+								display: block;
+							}
+							
+							&:after
+							{
+								.set-size(@ornament-width,1px);
+								.set-bgc(@grey-4);
+								.set-pos(absolute);
+								.set-coord(auto,50%);
+								content: '';
+								right: 0;
+								display: block;
+							}
+							
+							&.larger
+							{
+								background-position: 74% center;
+							}
+						}
+					}
+					
+					& > div
+					{
+						.set-opacity(0);
+						#align > .left;
+						display: block;
+						
+						&[id="search-destination"]
+						{
+							@m: 20px;
+							
+							.set-size(100%/3);
+							
+							form
+							{
+								input
+								{
+									padding-left: @content-padding + @m !important;	
+								}
+								
+								span.icon-search
+								{
+									.set-pos(absolute);
+									top: 96px;
+									left: @m;
+									
+									&:before
+									{
+										font-size: 18px;
+										color: @color-3;
+									}
+								}
+							}
+							
+							ul[id="search-result"]
+							{
+								@m-ref: @content-padding - @unit;
+								
+								.set-size(90%,auto);
+								.box-sizing();
+								.set-bgc(white);
+								.set-pos(absolute);
+								top: 130px;
+								box-shadow: 0 0 @m-ref @shadow-color;
+								padding: @m-ref;
+								margin: @unit 0 @m-ref 5%;
+								border-radius: 2 * @unit;
+								overflow-y: scroll;
+								max-height: 400px;
+								
+								li
+								{
+									.set-size(100%);
+									#font > .lato(14px,@color-3,700);
+									padding: @unit 0;
+									
+									&.title
+									{
+										#font > .gar(14px,@color-1);
+										padding-top: @content-padding/2;
+										border-bottom: solid 1px @color-7;
+										
+										& + li
+										{
+											margin-top: 7px;
+										}
+										
+										&[id="contact-us"]
+										{
+											padding-top: 0 !important;
+											border: 0;
+											padding-bottom: @content-padding/3;
+											
+											a
+											{
+												span
+												{
+													.set-pos(absolute);
+													right: @m-ref;
+													top: @m-ref;
+													
+													&:before
+													{
+														font-size: 18px;
+													}
+												}
+											}
+											
+											&:only-child
+											{
+												padding-bottom: 0;
+											}
+										}
+									}
+									
+									a
+									{
+										#font > .lato(14px,@color-3,400);
+										text-decoration: none;
+										
+										&:hover
+										{
+											.set-opacity(0.5);
+										}
+									}
+								}
+							}
+						}
+						
+						&[id="let-us-inspire"]
+						{
+							.set-size(650px);
+							#align > .center;
+							
+							& > header
+							{
+								h4
+								{
+									#align > .left;
+									margin-left: 95px;
+									background-position: 275px center;
+									
+									&:before,
+									&:after
+									{
+										width: 60px;
+									}
+								}
+							}
+							
+							div.wrapper
+							{
+								.set-size(90%);
+								#align > .left;
+								
+								& > div.select
+								{
+									@w: 47%;
+									
+									#align > .left;
+									width: @w;
+									overflow: visible;
+									cursor: pointer;
+									
+									header
+									{
+										.set-size(100%,auto);
+										background-color: none;
+										
+										h5
+										{
+											#align > .left;
+											margin: 0;
+											font-size: 12px;
+											padding: 0;
+										}
+										
+										span
+										{
+											#align > .left;
+											font-size: 16px;
+											margin-right: 2 * @unit;
+											margin-left: @unit;
+											line-height: 16px;
+										}
+									}
+									
+									ul[id="options"]
+									{
+										.set-size(102%);
+										.box-sizing();
+										.set-pos(absolute);
+										.set-bgc(white);
+										.set-coord(-1%,-@content-padding/2);
+										.animate-all();
+										.performance();
+										.hide();
+										//border-radius: @unit;
+										box-shadow: 0 0 @content-padding @shadow-color;
+										padding: @content-padding/2;
+										
+										li
+										{
+											#font > .lato(12px,@color-3,700);
+											.animate-color();
+											padding: 2 * @unit;
+											margin: 0 @unit;
+											border-bottom: solid 1px @color-7;
+											cursor: pointer;
+											line-height: 18px;
+											
+											&:hover
+											{
+												color: @color-5;
+											}
+											
+											&:last-child
+											{
+												border: 0;
+											}
+										}
+									}
+									
+									&:first-child
+									{
+										margin-right: @content-padding/2;
+									}
+								}
+							}
+							
+							button
+							{
+								#align > .left;
+								margin: 0 @content-padding/3;
+								
+								&:last-child
+								{
+									margin-left: 0;
+								}
+							}
+						}
+					}
+				}
+				
+				button
+				{
+					#align > .right;
+					
+					&.go-btn
+					{
+						margin: @content-padding auto;
+					}
+					
+					&.clear-btn
+					{
+						margin: @content-padding auto;
+					}
+				}
+			}
+		}
+		
+		.ui-calendar()
+		{
+			@day-size: 27px;
+			@day-m: 2px;
+			@w: 7 * (@day-size + 2 * @day-m);
+				
+			div.gallery-wrapper
+			{
+				.set-size(@w,auto);
+				.set-bgc(transparent);
+				#align > .left;
+				overflow: hidden;
+				padding: 0;
+				margin: 0 @unit;
+				
+				& > header
+				{
+					.set-size(100%);
+					.set-pos(absolute);
+					top: 0;
+					background-color: transparent !important;
+					
+					h6
+					{
+						.set-size(100%);
+						.set-bgc(transparent);
+						#font > .lato(12px,@color-3,400);
+						text-align: center;
+						text-transform: uppercase;
+						display: none;
+					}
+					
+					nav
+					{
+						.set-size(auto);
+						#align > .center;
+						padding: 2 * @unit 0;
+						display: table;
+						overflow: hidden;
+						
+						small
+						{
+							.set-size(100px,30px);
+							#font > .lato(16px,@color-3,400);
+							#align > .left;
+							margin: 0 @content-padding;
+							text-align: center;
+							text-transform: uppercase;
+						}
+						
+						button[rel]
+						{
+							@s: 20px;
+							
+							.reset();
+							.animate-color();
+							.set-size(@s,@s);
+							#align > .left;
+							color: @color-3;
+							
+							&:hover
+							{
+								color: @color-4;
+							}
+						}
+					}
+				}
+				
+				ul.month-gallery
+				{
+					.reset();
+					.set-size(@w,175px);
+					#align > .left;
+					padding: 0;
+					margin: 0;
+					display: block;
+					overflow: hidden;
+					padding-top: 40px;
+					
+					li[id].month-container
+					{
+						.set-size(@w);
+						#align > .left;
+						display: block;
+						margin: 0;
+						padding: 0;
+						
+						& > header
+						{
+							.set-size(100%);
+							#align > .left;
+							background-color: transparent;
+							margin-bottom: @unit;
+							
+							div.month-title
+							{
+								.set-size(100%);
+								.set-pos(absolute);
+								#font > .lato(16px,@color-3,400);
+								text-align: center;
+								top: -30px;
+								text-transform: capitalize;
+								display: block;
+							}
+							
+							small
+							{
+								.set-size(@day-size + 2 * @day-m);
+								#font > .lato(10px,@color-3,700);
+								#align > .left;
+								text-align: center;
+								margin-bottom: @unit;
+								text-transform: uppercase;
+							}
+						}
+						
+						button
+						{
+							.set-circle-btn(@s,@fs,@bc,@brc:@color-7,@fc:@color-3)
+							{
+								.set-size(@s,@s);
+								.set-bgc(@bc);
+								#align > .left;
+								overflow: hidden;
+								border: solid 2px @brc;
+								border-radius: @s;
+								color: @fc;
+								font-size: @fs;
+							}
+							
+							.animate-all();
+							.performance();
+							.set-circle-btn(@day-size,18px,transparent,@color-7,@color-3);
+							#font > .lato(12px,@color-3,400);
+							#align > .left;
+							margin: @day-m;
+							border-width: 1px;
+							
+							&[id="sat"],
+							&[id="sun"]
+							{
+								.set-bgc(fadeout(@color-2,75%));
+							}
+							
+							&.hidden
+							{
+								visibility: hidden;
+							}
+							
+							&:hover,
+							&.on
+							{
+								.set-bgc(@color-5);
+								color: white;
+							}
+							
+							&.warning
+							{
+								.set-bgc(fadeout(@warning-color,80%));
+								border-color: @warning-color;
+								color: @warning-color;
+							}
 						}
 					}
 				}
