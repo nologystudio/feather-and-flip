@@ -24,6 +24,30 @@
 		@import 'vendors/icons.css';
 		@import 'global/main';
 		
+		@media only screen and (min-width: 1500px)
+		{
+			body > main[id],
+			body > section[id]
+			{
+				&[id="instagram-feed"]
+				{
+					div.wrapper
+					{
+						div[id="plan-banner"]
+						{
+							figure
+							{
+								img
+								{
+									.set-size(100%,auto);
+								}
+							}
+						}
+					}
+				}
+			}
+		}	
+		
 		@media only screen and (min-width: 800px) and (max-width: 1040px)
 		{
 			body > header

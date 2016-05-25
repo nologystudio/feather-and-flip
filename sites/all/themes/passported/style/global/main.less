@@ -3003,11 +3003,6 @@
 			@warning-color: red;
 			@b-size: 4px;
 			
-			*[data-animate]
-			{
-				opacity: 0;
-			}
-			
 			*.rounded-btn
 			{
 				#font > .lato(1em,@grey,700);
@@ -3332,7 +3327,8 @@
 						{
 							width: 100%;
 							display: block;
-							#align > .left;
+							max-width: 500px;
+							#align > .center;
 							
 							div.select
 							{
@@ -3448,7 +3444,7 @@
 					}
 				}
 			}
-			
+			 
 			&[id="passported-picks"]
 			{
 				z-index: 1;
