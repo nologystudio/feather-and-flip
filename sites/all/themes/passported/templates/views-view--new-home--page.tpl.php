@@ -23,7 +23,6 @@
 	                        <h5>Season</h5>
 	                    </header>
 	                </div>
-	                <!--<button class="go-btn animated fadeIn" ng-click="submitInspiration()" ng-if="search.season && search.place">Go</button>-->
                 </div>
             </div>
             <div class="vertical-line-divider"></div>
@@ -37,7 +36,7 @@
                         <h3 ng-if="newsStatus == 'success'" class="animated fadeInDown">Thanks!</h3>
                         <input name="user-email" class="full rounded" type="email" ng-if="newsStatus != 'success'" placeholder="Your email address" ng-model="data.userEmail" required/>
                     </div>
-                    <input type="submit" value="submit" ng-class="{disabled:!newsletterForm.$valid}" ng-click="!newsletterForm.$valid || regNewsletter()" ng-if="newsStatus == '' || newStatus == 'error'"/>
+                    <input type="submit" value="submit" ng-class="{disabled:!newsletterForm.$valid}" ng-click="!newsletterForm.$valid || regNewsletter()" ng-if="newsStatus != 'success'"/>
                 </form>
             </div>
         </div>

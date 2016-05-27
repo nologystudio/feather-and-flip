@@ -3306,6 +3306,14 @@
 									overflow: hidden;
 									clear: both;
 									display: block;
+									
+									&.ng-invalid.ng-dirty,
+									&.warning
+									{
+										.set-placeholder-style(@warning-color);
+										border-color: @warning-color;
+										color: @warning-color;
+									}
 								}
 							}
 							
@@ -3320,6 +3328,12 @@
 								text-align: center;
 								padding: 0 @content-padding/2;
 								background: white;
+								opacity: 0.5;
+								
+								&.disabled
+								{
+									opacity: 1;
+								}
 							}
 						}
 						
