@@ -1134,6 +1134,60 @@
 					padding-top: @content-padding + 2 * @unit;
 				}
 			}
+			
+			&[id="search-and-newsletter"]
+			{
+				div.wrapper
+				{
+					div.half
+					{
+						width: 100%;
+					}
+					
+					div.vertical-line-divider
+					{
+						display: none;
+					}
+				}
+			}
+			
+			&[id="passported-picks"]
+			{
+				& > div.wrapper
+				{
+					@wrapper-width: 100%;
+					@wrapper-max-width: 100%;
+					
+					width: @wrapper-width;
+					max-width: @wrapper-max-width;
+					
+					& > article,
+					& > a
+					{
+						#align > .left;
+						width: 100% !important;
+						clear: both;
+					}
+				}
+			}
+			
+			&[id="instagram-feed"]
+			{
+				& > div.wrapper
+				{
+					div[id="plan-panner"]
+					{
+						div.vertical-wrapper
+						{
+							h4
+							{
+								box-sizing: border-box;
+								padding: 0 10%;
+							}
+						}
+					}
+				}
+			}
 		}
 		
 		/* ------------------------------------------------------------------------------------------------------------- */
