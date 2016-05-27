@@ -89,6 +89,25 @@
 					}
 				}
 			}
+			
+			body > main[id],
+			body > section[id]
+			{
+				&[id="passported-picks"]
+				{
+					& > div.wrapper
+					{
+						@wrapper-width: 100%;
+						@wrapper-max-width: 960px;
+						
+						width: @wrapper-width;
+						max-width: @wrapper-max-width;
+					}
+				}
+				
+				&[id="instagram-feed"]
+				{}
+			}
 		}
 		
 		@media only screen and (max-width: 800px)
