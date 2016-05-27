@@ -3492,7 +3492,7 @@
 						display: block;
 						min-height: 350px;
 						margin-bottom: 1.5 * @content-padding;
-						border: solid @b-size/2 white;
+						//border: solid @b-size/2 white;
 						box-sizing: border-box;
 						
 						h3
@@ -3589,6 +3589,11 @@
 								padding: 2% 5%;
 								box-sizing: border-box;
 							}
+							
+							& + a
+							{
+								border-right: solid @b-size white;
+							}
 						}
 						
 						&.call-to-action
@@ -3623,6 +3628,7 @@
 							&[id="book-a-trip"]
 							{
 								.set-bg(transparent,'@{media-url}backgrounds/cloud-texture.jpg');
+								border-right: solid @b-size white;
 								
 								div.icon
 								{
@@ -3643,6 +3649,16 @@
 									background-position: center top;	
 								}
 							}
+						}
+						
+						&.add-left-border
+						{
+							border-left: solid @b-size/2 white;
+						}
+						
+						&.add-right-border
+						{
+							border-right: solid @b-size/2 white;
 						}
 					}
 				}
