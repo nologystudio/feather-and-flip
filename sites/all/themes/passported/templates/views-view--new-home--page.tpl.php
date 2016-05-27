@@ -34,9 +34,9 @@
                     </header>
                     <div class="wrapper">
                         <h3 ng-if="newsStatus == 'success'" class="animated fadeInDown">Thanks!</h3>
-                        <input name="user-email" class="full rounded" type="email" ng-if="newsStatus != 'success'" placeholder="Your email address" ng-model="data.userEmail" required/>
+                        <input name="user-email" class="full rounded" type="email" ng-if="newsStatus != 'success'" ng-pattern="/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/" placeholder="Your email address" ng-model="signUpData.userEmail" required/>
                     </div>
-                    <input type="submit" value="submit" ng-class="{disabled:!newsletterForm.$valid}" ng-click="!newsletterForm.$valid || regNewsletter()" ng-if="newsStatus != 'success'"/>
+                    <input type="submit" value="submit" ng-class="{disabled:!newsletterForm.$valid}" ng-click="!newsletterForm.$valid || regNewsletter()" ng-if="newsletterForm.$valid"/>
                 </form>
             </div>
         </div>

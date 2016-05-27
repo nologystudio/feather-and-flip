@@ -1081,7 +1081,7 @@
 			
 			$scope.currentStatus = status[0];
 			$scope.signUpData    = {
-				userEmail : ''
+				userEmail : undefined
 			}
 			
 			// Input checker...
@@ -1105,7 +1105,7 @@
 			// Submit form...
 			
 			$scope.regSubmit = function(){
-				if($scope.signUpData.userEmail != ''){
+				if($scope.signUpData.userEmail != '' && !_.isUndefined($scope.signUpData.userEmail != '')){
 					$http({
 		                method : 'POST',
 		                url    : formSubmit,
