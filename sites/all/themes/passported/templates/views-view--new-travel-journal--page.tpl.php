@@ -25,7 +25,7 @@
                 if(isset($post->field_field_image[0]['raw']['uri']))
                     $img_url = image_style_url('post_bottom', $post->field_field_image[0]['raw']['uri']);
                 $orig_date = strtotime($post->field_field_original_pubdate[0]['raw']['safe_value']); ?>
-                <a id="article-<?php echo $post->nid; ?>">
+                <a id="article-<?php echo $post->nid; ?>" href="<?php echo $post->field_field_original_url[0]['raw']['safe_value']; ?>">
                     <figure>
                         <img src="<?php echo $img_url; ?>" alt="<?php echo $post->node_title; ?>"/>
                     </figure>
