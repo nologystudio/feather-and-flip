@@ -3602,6 +3602,11 @@
 								line-height: 1.6em;
 								padding: 2% 5%;
 								box-sizing: border-box;
+								
+								&:empty
+								{
+									display: none;
+								}
 							}
 							
 							& + a
@@ -3684,9 +3689,13 @@
 				{
 					header
 					{
+						margin-bottom: 30px;
+						
 						h3
 						{
 							font-weight: 400;
+							width: 100%;
+							float: left;
 							
 							a
 							{
