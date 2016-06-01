@@ -12,7 +12,7 @@
             $img_url = image_style_url('tj_main_bottom', $featured->field_field_image[0]['raw']['uri']);
             ?>
             <article id="article-<?php echo $featured->nid; ?>" class="main">
-                <time><?php echo date('F, Y', $orig_date); ?></time>
+                <time><?php echo date('F j, Y', $orig_date); ?></time>
                 <h3><?php echo $featured->node_title; ?></h3>
                 <figure>
                     <img src="<?php echo $img_url; ?>" alt="<?php echo $featured->node_title; ?>"/>
@@ -29,7 +29,7 @@
                     <figure>
                         <img src="<?php echo $img_url; ?>" alt="<?php echo $post->node_title; ?>"/>
                     </figure>
-                    <time><?php echo date('F, Y', $orig_date); ?></time>
+                    <time><?php echo date('F j, Y', $orig_date); ?></time>
                     <h3><?php echo $post->node_title; ?></h3>
                 </a>
             <?php } ?>
@@ -38,7 +38,7 @@
             <div class="vertical-wrapper">
                 <div class="icon"></div>
                 <h3>Need to book a trip</h3>
-                <button class="rounded-btn white">Contact our hotel expert</button>
+                <button class="rounded-btn white">Contact our hotel experts</button>
             </div>
         </a>
         <a id="explore" href="/city-guides" class="call-to-action">

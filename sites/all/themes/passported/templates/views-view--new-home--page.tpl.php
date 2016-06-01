@@ -29,7 +29,7 @@
             <div id="newsletter-cta" class="half" ng-controller="NewsletterController">
                 <form id="newsletter-form" name="newsletterForm">
                     <header>
-                        <h4>Sign Up to Our Newsletter</h4>
+                        <h4>Sign Up For Our Newsletter</h4>
                         <span ng-if="newsStatus == 'error'" class="animated fadeInDown">We're sorry, an error has occurred</span>
                     </header>
                     <div class="wrapper">
@@ -47,7 +47,7 @@
     <section id="instagram-feed" class="full" ng-controller="SocialFeedController">
         <div class="wrapper">
             <header>
-                <h3>#getpassported</h3>
+                <h3><a href="https://www.instagram.com/getpassported/" target="_blank">#getpassported</a></h3>
             </header>
             <div class="gallery-wrapper" ui-gallery>
                 <ul>

@@ -8,9 +8,9 @@
                 $img_url = image_style_url('home_top_gallery', $post->field_field_image[0]['raw']['uri']);
 
                 if ($post->node_title == 'Travel made transparent')
-                    $pdate = 'Find out';
+                    $pdate = 'Find Out More';
                 else
-                    $pdate = date('F, Y', $orig_date);
+                    $pdate = date('F j, Y', $orig_date);
 
                 $out = '<li><a href="'.$post_url.'" target="_blank" class="blog-entry">';
                 $out .= '<figure><img src="'.$img_url.'" alt="'.$post->node_title.'"/></figure>';
