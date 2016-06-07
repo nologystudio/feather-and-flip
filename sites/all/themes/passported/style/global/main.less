@@ -290,6 +290,21 @@
 						color: white;
 					}
 					
+					&[id="book-hotels"]
+					{
+						&:before
+						{
+							@h: 25px;
+							
+							.set-size(100%,@h);
+							position: absolute;
+							top: 50%;
+							margin-top: -@h/2;
+							background-color: @color-5;
+							border-radius: @h;
+						}
+					}
+					
 					&:hover
 					{
 						color: white;

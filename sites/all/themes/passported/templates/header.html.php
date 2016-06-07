@@ -26,7 +26,7 @@
 	<header>
 		<a href="/" class="collapsed">
 			<figure>
-				<img src="<?php echo drupal_get_path('theme', 'passported'); ?>/media/brand/passported-logo.svg" type="image/svg+xml" alt="Passported, kid friendly travel for grown-ups" data-animate="1"/> 								
+				<img src="<?php echo drupal_get_path('theme', 'passported'); ?>/media/brand/passported-white-logo-claim.svg" type="image/svg+xml" alt="Passported, kid friendly travel for grown-ups" data-animate="1"/> 								
 			</figure>
 		</a>
 		
