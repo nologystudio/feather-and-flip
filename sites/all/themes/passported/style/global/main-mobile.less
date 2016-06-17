@@ -154,6 +154,14 @@
 						margin-top: @content-padding/2;
 					}
 					
+					&[id="book-hotels"]
+					{
+						&:before
+						{
+							display: none;
+						}
+					}
+					
 					&.feather-icon
 					{
 						.set-bg(transparent,'@{media-url}icons/feather-white-icon.svg',no-repeat,right,center);
@@ -1179,6 +1187,10 @@
 							div.select
 							{
 								width: 100%;
+								margin-bottom: 10px;
+								max-width: 100%;
+								margin-right: 0;
+								z-index: 1;
 								
 								ul[id="options"]
 								{
