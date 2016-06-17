@@ -1138,6 +1138,27 @@
 			&[id="passported-home"]
 			{
 				margin-top: 0;
+				
+				div.gallery-wrapper
+				{
+					@w: 100%;
+					@h: auto;
+					
+					.set-size(100%,@h);
+					
+					ul
+					{
+						.set-size(100%,@h);
+						
+						li
+						{
+							a
+							{
+								.set-size(100%,@h);
+							}
+						}
+					}
+				}
 			}
 			
 			&[id="search-and-newsletter"]
@@ -1151,6 +1172,19 @@
 						div[id="find-your-trip"]
 						{
 							padding-bottom: 0;
+						}
+						
+						div.select-wrapper
+						{
+							div.select
+							{
+								width: 100%;
+								
+								ul[id="options"]
+								{
+									width: 100%;
+								}
+							}
 						}
 					}
 					
@@ -1182,6 +1216,11 @@
 						border: 0 !important;
 						margin-bottom: 4px;
 						clear: both;
+						
+						&.call-to-action
+						{
+							margin-bottom: 4px;
+						}
 					}
 				}
 			}
@@ -1190,14 +1229,38 @@
 			{
 				& > div.wrapper
 				{
+					div.gallery-wrapper
+					{
+						@h: 100px;
+						
+						height: @h;
+						
+						ul
+						{
+							height: @h;
+							
+							li
+							{
+								a
+								{
+									height: @h;
+								}
+							}
+						}
+					}
+					
 					div[id="plan-panner"]
 					{
+						height: 400px;
+						
 						div.vertical-wrapper
 						{
 							h4
 							{
+								#font > .lato(2em,white,400);
 								box-sizing: border-box;
 								padding: 0 10%;
+								line-height: 2em;
 							}
 						}
 					}

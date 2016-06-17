@@ -217,11 +217,6 @@
 						margin-top: -@unit;
 					}
 				}
-				
-				&:hover
-				{
-					.set-opacity(0.5);
-				}
 			}
 			
 			& > button.mobile-nav-trigger
@@ -3253,6 +3248,8 @@
 							
 							h4
 							{
+								@d-width: 30px;
+								
 								#font > .gar(1.4em,@grey);
 								#align > .center;
 								width: 80%;
@@ -3263,7 +3260,7 @@
 								&:before,
 								&:after
 								{
-									.set-size(15%,1px);
+									.set-size(@d-width,1px);
 									max-width: 60px;
 									background: @light-grey;
 									position: absolute;
@@ -3273,12 +3270,14 @@
 								
 								&:before
 								{
-									left: 0;
+									left: 50%;
+									margin-left: -@d-width/2
 								}
 								
 								&:after
 								{
-									right: 0;
+									right: 50%;
+									margin-left: @d-width/2;
 								}
 							}
 						}
@@ -3637,6 +3636,7 @@
 						{
 							display: table;
 							margin-bottom: 0;
+							min-height: 350px;
 							
 							div.vertical-wrapper
 							{
