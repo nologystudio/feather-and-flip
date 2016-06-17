@@ -1105,24 +1105,22 @@
 			// Submit form...
 			
 			$scope.regSubmit = function(){
-				if($scope.signUpData.userEmail != '' && !_.isUndefined($scope.signUpData.userEmail != '')){
-					$http({
-		                method : 'POST',
-		                url    : formSubmit,
-		                data   : $.param({formID:'newsletterForm','userEmail':$scope.signUpData.userEmail}),
-		                headers : { 
-		            		'Content-Type' : 'application/x-www-form-urlencoded'
-						},
-						transformRequest: angular.identity
-		            }).
-		            success(function(_data){
-			        	$scope.currentStatus = status[1];
-			        	console.log(_data);
-		            }).
-		            error(function(){
-			        	$scope.currentStatus = status[2];
-		            });
-				}
+				$http({
+	                method : 'POST',
+	                url    : formSubmit,
+	                data   : $.param({formID:'newsletterForm','userEmail':$scope.signUpData.userEmail}),
+	                headers : { 
+	            		'Content-Type' : 'application/x-www-form-urlencoded'
+					},
+					transformRequest: angular.identity
+	            }).
+	            success(function(_data){
+		        	$scope.currentStatus = status[1];
+		        	console.log(_data);
+	            }).
+	            error(function(){
+		        	$scope.currentStatus = status[2];
+	            });
 			}
 		});
 	    
