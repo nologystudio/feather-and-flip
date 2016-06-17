@@ -1218,6 +1218,20 @@
 					max-width: @wrapper-max-width;
 					padding: 4px;
 					
+					header
+					{
+						h2
+						{
+							font-size: 1.8em;
+							
+							&:after
+							{
+								.set-bg(transparent,'@{media-url}icons/feather-grey-icon.svg',no-repeat,left,center);
+								margin-left: 160px;
+							}
+						}
+					}
+					
 					& > article,
 					& > a
 					{
