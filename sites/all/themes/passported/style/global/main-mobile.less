@@ -1149,8 +1149,8 @@
 				
 				div.gallery-wrapper
 				{
-					@w: 100%;
-					@h: 300px;
+					@w: 300px;
+					@h: 220px;
 					
 					.set-size(100%,@h);
 					
@@ -1162,7 +1162,7 @@
 						{
 							a
 							{
-								.set-size(auto,@h);
+								.set-size(@w,@h);
 							}
 						}
 					}
@@ -1177,12 +1177,12 @@
 					{
 						width: 100%;
 						
-						div[id="find-your-trip"]
+						&[id="find-your-trip"]
 						{
 							padding-bottom: 0;
 						}
 						
-						div[id="newsletter-cta"]
+						&[id="newsletter-cta"]
 						{
 							border-top: solid 1px @light-grey;
 						}
@@ -1280,7 +1280,7 @@
 						}
 					}
 					
-					div[id="plan-panner"]
+					div[id="plan-banner"]
 					{
 						height: 400px;
 						
