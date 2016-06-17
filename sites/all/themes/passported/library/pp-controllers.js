@@ -1074,7 +1074,7 @@
 		/* Newsletter Controller
         ---------------------------------------------------------------------------------------------------------------- */	    
 	    
-	    ppControllers.controller('NewsletterController',function($scope,$log,$timeout){
+	    ppControllers.controller('NewsletterController',function($scope,$log,$http,$timeout){
 		    
 		    var mcService = '';
 			var status    = ['still','success','error'];
