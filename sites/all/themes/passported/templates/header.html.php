@@ -9,6 +9,7 @@
     <?php $nw_text_color = (empty($nw_text_color) ? '#dee4e3' : $nw_text_color); ?>
     <?php $nw_back_color = (empty($nw_back_color) ? '#242525' : $nw_back_color); ?>
 	
+	<!--
 	<div id="newsletter-block" style="background: <?php echo $nw_back_color; ?>;">
 		<button class="icon-close"></button>
 		<button id="newsletter-trigger" data-animate="1" style="color: <?php echo $nw_text_color; ?>;">
@@ -16,6 +17,7 @@
 			<div class="icon-right-circle-full"></div>
 		</button>
 	</div>
+	-->
 	
 	<?php endif; ?>
 	
@@ -24,7 +26,7 @@
 	<header>
 		<a href="/" class="collapsed">
 			<figure>
-				<img src="<?php echo drupal_get_path('theme', 'passported'); ?>/media/brand/passported-logo.svg" type="image/svg+xml" alt="Passported, kid friendly travel for grown-ups" data-animate="1"/> 								
+				<img src="<?php echo drupal_get_path('theme', 'passported'); ?>/media/brand/passported-white-logo-claim.svg" type="image/svg+xml" alt="Passported, kid friendly travel for grown-ups" data-animate="1"/> 								
 			</figure>
 		</a>
 		
@@ -34,7 +36,7 @@
 			<div class="wrapper align-center">
 				<a id="city-guides" href="/city-guides" class="subnav" data-animate="3">city guides</a>
 				<a id="itinerary-planner" href="//go.passported.com" data-animate="4">itinerary planner</a>
-				<a id="blog"        href="http://blog.passported.com" data-animate="5" target="_blank">travel journal</a>
+				<a id="blog"        href="http://blog.passported.com" data-animate="5" target="_blank">magazine</a>
 				<a id="book-hotels" href="/book-hotels" data-animate="6">book hotels</a>
 				<a id="search"      class="subnav" ng-click="triggerSearch()" data-animate="7">search</a>
 			</div>

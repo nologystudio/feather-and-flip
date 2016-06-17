@@ -290,11 +290,11 @@
 	        }
 	        
 	        var waitForImages = function(){
+		        $('body').transit({opacity:1},function(){
+			    	if(!$scope.isMobile) scrolling();
+			    	navManager();	    
+		        });
 		        $('body').imagesLoaded().always(function(_e){
-			        $('body').transit({opacity:1},function(){
-				    	if(!$scope.isMobile) scrolling();
-				    	navManager();	    
-			        });
 				});
 	        }
 	        
@@ -1081,7 +1081,7 @@
 			
 			$scope.currentStatus = status[0];
 			$scope.signUpData    = {
-				userEmail : ''
+				userEmail : undefined
 			}
 			
 			// Input checker...
@@ -1105,7 +1105,7 @@
 			// Submit form...
 			
 			$scope.regSubmit = function(){
-				if($scope.signUpData.userEmail != ''){
+				if($scope.signUpData.userEmail != '' && !_.isUndefined($scope.signUpData.userEmail != '')){
 					$http({
 		                method : 'POST',
 		                url    : formSubmit,
@@ -1190,8 +1190,13 @@
 			};
 			
 			$scope.submitInspiration = function(){
-				window.location = window.location.origin + '/inspiration/#/?place=' + $scope.search.place + '&season=' + $scope.search.season;
+				if($scope.search.place && $scope.search.season)
+					window.location = window.location.origin + '/inspiration/#/?place=' + $scope.search.place + '&season=' + $scope.search.season;
 			};
+			
+			$scope.$watch(function(){
+				$scope.submitInspiration();
+			});
 		});
 		
 		/* Sign Up/In Controller
@@ -1556,5 +1561,27 @@
 	            error(function(){
 	            });
 			};
+		});
+		
+		/* Instagram
+        ---------------------------------------------------------------------------------------------------------------- */
+		
+		ppControllers.controller('SocialFeedController',function($scope,$rootScope,$location,$timeout,$http){
+		    
+		    $scope.instagram;
+		    
+		    $scope.loadInstagram = function(){
+				
+				var theID    = "1058347608";
+				var token    = "1447456174.ad8f2bc.adb781078ab4489693d368bf1837b4c1";
+				var endPoint = "https://api.instagram.com/v1/users/"+theID+"/media/recent?access_token="+token+"&callback=JSON_CALLBACK";
+				
+				$http.jsonp(endPoint).success(function(_data){
+					$scope.instagram = _data.data;
+				});
+            };
+            
+            $scope.loadInstagram();
+            
 		});
 		

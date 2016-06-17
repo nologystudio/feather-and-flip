@@ -1,0 +1,1616 @@
+		
+		
+			
+		/* ----------------------------------------------------------------------------------------------------------------
+		    
+	    * Project     : Passported
+	    * Document    : less/style 
+	    * Created on  : Ago 01, 2.015
+	    * Version     : 1.0 
+	    * Author      : Aday Henriquez
+	    * Description : This less file manages the global style
+	    
+	    -------------------------------------------------------------------------------------------------------------------
+	       *          This code has been developed by NOLOGY. in the awesome Canaries - www.nologystudio.com           *
+	    -------------------------------------------------------------------------------------------------------------------
+	   
+	    * Log * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+        -------------------------------------------------------------------------------------------------------------------
+        *  
+        ---------------------------------------------------------------------------------------------------------------- */
+		/* ~ Global Variables and Importers ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */	
+		
+		@content-padding: 30px;
+		@global-width: 100%;
+		@wrapper-width: 100%;
+		@header-height: 90px;
+		@gutter: 10px;
+		
+		@left-panel-width: 300px;
+		@right-panel-width: 300px;
+		
+		/* ------------------------------------------------------------------------------------------------------------- */
+		/* ~ Header & Navigation ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+		
+		html,
+		body
+		{
+			-webkit-overflow-scrolling: touch;
+			width: 100%;
+		}
+		
+		*[data-animate]
+		{
+			opacity: 1 !important;
+		}
+		
+		*
+		{
+			outline: none;
+			-webkit-appearance: none !important;
+		}
+		
+		body > header
+		{
+			.set-size(100%);
+			.set-coord(auto,auto);
+			#align > .left;
+			
+			& > a:first-child
+			{
+				.set-size(100%,100%);
+				.set-coord(auto,auto);
+				#align > .left;
+				margin-top: @content-padding/2;
+				
+				figure
+				{
+					@w: 230px;
+					
+					.set-size(@w);
+					#align > .center;
+					display: block;
+					margin: 0 auto;
+					padding: @content-padding/2 0;
+				
+					img,
+					object
+					{
+						width: @w;
+						#align > .center;
+					}
+				}
+				
+				&.collapsed
+				{
+					margin-top: 0;
+					
+					figure
+					{
+						#align > .left;
+						margin-left: 15px;
+					}
+				}
+			}
+			
+			& > button.mobile-nav-trigger
+			{
+				@s: 50px;
+				
+				.set-size(@s,@s);
+				.set-pos(absolute);
+				.set-bg(transparent,'@{media-url}icons/menu-icon.svg');
+				.set-bgs(auto,30%);
+				display: block;
+				border: 0;
+				right: 10px;
+				top: 8px;
+				z-index: 2;
+			}
+			
+			nav
+			{
+				.set-size(100%,@header-height);
+				display: block;
+				
+				&.mobile
+				{
+					display: none;
+				}
+				
+				div.wrapper
+				{
+					.set-size(100%);
+					#align > .left;
+					padding-left: 0;
+					
+					&.align-right
+					{
+						.set-pos(relative);
+						top: auto;
+						right: auto;
+					}
+				}
+				
+				a
+				{
+					.set-size(100%);
+					text-align: center;
+					line-height: @header-height/2;
+					padding: 0;
+					
+					&[id="search"]
+					{
+						display: none;
+					}
+					
+					&[id^="sign-"],
+					&[id="user"]
+					{
+						width: 50%;
+						padding: 0;
+						margin-top: @content-padding/2;
+					}
+					
+					&[id="book-hotels"]
+					{
+						&:before
+						{
+							display: none;
+						}
+					}
+					
+					&.feather-icon
+					{
+						.set-bg(transparent,'@{media-url}icons/feather-white-icon.svg',no-repeat,right,center);
+						.set-bgs(auto,50%);
+					}
+				}
+			}
+		}
+		
+		body > div.dropdown-wrapper
+		{
+			.set-size(100%,0);
+			.set-coord(auto,auto);
+			#align  > .left;
+			display: none;
+			
+			div.arrow
+			{
+				.set-coord(50%,0);
+			}
+			
+			& > nav[id="city-guides-list"]
+			{
+				.set-size(100%);
+			}
+			
+			& > div[id="search-block"]
+			{
+				& > div.wrapper
+				{
+					#align > .left;
+					width: 100%;
+					margin-top: @content-padding;
+					
+					& > div
+					{
+						&[id="search-destination"] + div[id="let-us-inspire"]
+						{
+							#align > .left;
+							margin-left: 0;
+						}
+					}
+				}
+				
+				&.single-search
+				{
+					& > div.wrapper
+					{
+						width: 100%;
+					}
+				}
+			}
+		}
+		
+		/* ------------------------------------------------------------------------------------------------------------- */
+		/* ~ Sections ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+		
+		body > main[id],
+		body > section[id]
+		{
+			@m: 0;
+			@main-height: auto;
+			
+			.set-size(100%);
+			#align > .left;
+			
+			&[id="passported-intro"]
+			{
+				.set-bgs(100%,auto);
+				.set-pos(relative);
+				height: auto;
+				display: block;
+				
+				& > ul
+				{
+					.set-size(100%);
+					#align > .left;
+					
+					& > li
+					{
+						.set-size(100%,auto);
+						.set-bg(@color-7,'@{media-url}backgrounds/passported-main.jpg',no-repeat,center,top);
+						.set-bgs(auto,100%);
+						padding-top: 2 * @content-padding;
+						
+						&:first-child
+						{
+							ul
+							{
+								li
+								{
+									.set-size(100%);
+									margin: 0 0 @content-padding 0;
+								}
+							}
+						}
+					}
+				}
+				
+				& + *
+				{
+					margin-top: 0;
+				}
+			}	
+			
+			&[id="how-it-works"],
+			&[id="travel-journal"],
+			&[id="newsletter"]
+			{
+				display: block;
+				
+				header
+				{
+					#align > .left;
+					
+					h4
+					{
+						.set-size(100%);
+						.set-bg(transparent,'@{media-url}icons/feather-grey-icon.svg',no-repeat,center,top);
+						.set-bgs(auto,2 * @content-padding - @unit);
+						padding-top: 2 * @content-padding;
+					}
+				}
+			}
+			
+			&[id="how-it-works"]
+			{
+				padding-bottom: @content-padding/2;
+				
+				div.promoted-grid 
+				{
+					.set-size(100%);
+					.box-sizing();
+					#align > .left;
+					padding: 0 @content-padding/2;
+					
+					*.quick-entry
+					{
+						margin: 0;
+						
+						figure
+						{
+							#align > .left;
+							width: 100%;
+							height: auto;
+							overflow: hidden;
+							padding: 0;
+							margin: 0;
+							
+							img
+							{
+								#align > .left;
+								width: 100% !important;
+								height: auto !important;
+								margin-left: 0;
+								left: auto;
+								top: auto;
+							}
+						}
+						
+						&.fixed
+						{
+							width: 100%;
+						}
+						
+						& + *.quick-entry
+						{
+							margin-top: 2 * @unit;
+						}
+					}
+				}
+			}
+			
+			&[id="map"]
+			{
+				.set-bgc(white);
+				.box-sizing();
+				padding-left: 0;
+				margin-top: 0;
+				box-shadow: 0 0 @content-padding @color-1;
+				height: 400px;
+				
+				header,
+				footer
+				{
+					.set-size(100%,100px);
+					.set-pos(absolute);
+				}
+				
+				aside
+				{
+					@btn-w: 50px;
+					@btn-h: 100px;
+					
+					.set-size(@left-panel-width,100%);
+					
+					button.aside-trigger
+					{
+						.scale(0.5);
+						right: 15px;
+					}
+					
+					&.left,
+					&.right
+					{
+						& > div.wrapper
+						{
+							.set-coord(-@btn-w,0);
+							
+							& > ul
+							{
+								@width: @left-panel-width;
+								
+								.set-size(3 * @width,100%);
+								.set-coord(0,0);
+								
+								&.step-1{ left: @btn-w; 			 }
+								&.step-2{ left: -@width + @btn-w; }
+								&.step-3{ left: -2 * @width; }
+								
+								& > li
+								{
+									width: @width;
+									padding: @content-padding 0;
+									
+									& > header
+									{
+										div.wrapper
+										{
+											/*
+												.set-bg(transparent,'@{media-url}icons/feather-grey-icon.svg',no-repeat,center,top);
+												.set-bgs(auto,30px);
+												padding-top: 1.5 * @content-padding;
+											*/
+											
+											padding-top: 0;
+											background: none;
+										}
+									}
+									
+									& > ul
+									{
+										padding: 0 @content-padding;
+									}
+									
+									&:first-child
+									{
+										.box-sizing();
+										//padding-left: @btn-w;
+										margin-left: 0;
+									}
+									
+									&[id="step-1"]
+									{
+										& > header
+										{
+											#align > .left;
+										}
+										
+										& > ul
+										{
+											& > li
+											{
+												& > button
+												{
+													padding: @content-padding/2 0 0 0;
+													
+													figure
+													{
+														.ui-set-circle-mask(75px);
+														.mask-fix();
+													}
+													
+													div[role="figcaption"]
+													{
+														.set-size(60%);
+														#align > .left;
+														padding: 0;
+														margin-left: @content-padding/2;
+													}
+													
+													div.right-arrow
+													{
+														top: 20px;
+														right: 0;
+														margin-top: 0;
+													}
+												}
+											}
+										}
+									}
+									
+									&[id="step-2"]
+									{
+										@aside-width: 70px;
+										
+										width: @left-panel-width;
+										
+										div.wrapper
+										{
+											& > header
+											{
+												h1
+												{
+													font-size: 32px;
+												}
+												
+												nav
+												{
+													.ui-set-social-media-nav(white,32px);
+												}
+											}
+											
+											& > ul
+											{
+												list-style: none;
+												padding: 0 @content-padding;
+												
+												& > li
+												{
+													.set-circle-btn(@s)
+													{
+														.set-size(@s,@s);
+														#align > .left;
+														border-radius: @s;
+														border: solid 1px @color-3;
+														overflow: hidden;
+													}
+													
+													&[id="the-trip-block"]
+													{
+														a
+														{
+															@s: 100px;
+															
+															.set-size(@s + 2 * @content-padding,auto);
+															
+															div.circle-outline-icon
+															{
+																.set-circle-btn(50px);
+																#align > .center;
+																margin-left: auto;
+																margin-bottom: 15px;
+																
+																&:before
+																{
+																	font-size: 20px;
+																	line-height: 50px;
+																}
+															}
+														}
+													}
+													
+													&[id="destination-block"]
+													{
+														@m: @content-padding/2;
+														
+														padding: @content-padding 0;
+														
+														button
+														{
+															@s: 40px;
+															
+															.reset();
+															.set-size(3 * @s,@s);
+															.set-pos(absolute);
+															top: @content-padding;
+															
+															div.circle
+															{
+																.set-circle-btn(@s);
+																#align > .left;
+																border: 0;
+																margin: 0;
+																
+																&:before
+																{
+																	font-size: 32px;
+																	color: @color-3;
+																}
+															}
+														}
+														
+														nav
+														{
+															.ui-set-social-media-nav(@color-3,24px);
+															.set-size(136px);
+														}
+														
+														h2
+														{
+															#font > .lato(16px,@color-3,400);
+														}
+														
+														h3
+														{
+															#font > .lato(12px,@color-1,300);
+														}
+														
+														small
+														{
+															&:before,
+															&:after
+															{
+																display: none;
+															}
+														}
+													}
+													
+													&[id="hotel-block"],
+													&[id="guide"]
+													{
+														margin-bottom: 2 * @content-padding;
+														border-bottom: solid 1px @color-7;
+														
+														header,
+														article,
+														article > *,
+														div.slideshow
+														{
+															.set-size(100%);
+															#align > .left;
+														}
+														
+														div[id="guide-wrapper"] header,
+														& > header
+														{
+															div.filter-wrapper
+															{
+																width: 100%;
+																margin-top: @content-padding/2;
+																 
+																div.filter
+																{
+																	#align > .left;
+																}
+																
+																button.radio-btn
+																{
+																	#align > .left;
+																}
+															}
+														}
+														
+														& > article
+														{
+															padding-left: 0;
+															
+															header
+															{
+																button
+																{
+																		#align > .left;
+																	margin-top: @content-padding/2;
+																	right: auto;
+																	top: auto;
+																}
+															}
+															
+															& + article
+															{
+																padding-top: 0;
+															}
+															
+															div.slideshow
+															{
+																@h: 150px;
+																
+																margin-left: -@content-padding;
+																height: @h !important;
+																
+																button
+																{
+																	display: none;
+																}
+																
+																ul
+																{
+																	li
+																	{
+																		.set-size(auto,@h);
+																		
+																		img
+																		{
+																			height: @h;
+																		}
+																	}
+																}
+															}
+															
+															& > div[id="curated"]
+															{
+																div.divider
+																{
+																	div.line
+																	{
+																		.set-size(30%,1px);
+																		left: 70%;
+																	}
+																}
+															}
+															
+															&.hotel
+															{
+																div.icon-hotel
+																{
+																	display: none;
+																}
+															}
+														}
+													}
+													
+													&[id="guide"]
+													{
+														ul
+														{
+															li
+															{
+																@p-l: @content-padding;
+																
+																min-height: @p-l + 2 * @content-padding;
+																
+																div.icon
+																{
+																	.set-size(@p-l,@p-l);
+																	
+																	&:before
+																	{
+																		#font > .ic(18px,@color-3);
+																	}
+																}
+																
+																h4,
+																h5,
+																footer
+																{
+																	padding-left: @p-l;
+																}
+																
+																footer
+																{
+																	span.hours
+																	{
+																		ul
+																		{
+																			.set-size(100%);
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+					
+					&.left
+					{
+						width: @left-panel-width;
+						left: -@left-panel-width;
+					}
+					
+					&.right
+					{
+						width: @right-panel-width;
+						right: -@right-panel-width;
+						
+						& > div.wrapper
+						{
+							padding-right: 0;
+							left: 0;
+							
+							& > ul
+							{
+								.set-size(100%,100%);
+								border-bottom: 0;
+								overflow: auto;
+								left: 0;
+								
+								li[id="step-1"]
+								{
+									header
+									{
+										div.destination-hotel-wrapper
+										{
+											div[id="search-destination"]
+											{
+												.set-size(98%);
+												#align > .left;
+												margin-bottom: @content-padding/2;
+												
+												&:last-child
+												{
+													margin-bottom: 0;
+												}
+											}
+										}
+									}
+									
+									& > ul
+									{
+										& > li
+										{
+											&[id="email-entry"]
+											{
+												padding: @content-padding 0 !important;
+											}
+											
+											form
+											{
+												& > ul
+												{
+													& > li
+													{
+														.set-size(100%);
+														#align > .left;
+														display: block;
+														overflow: hidden;
+														
+														div[id="date-picker"]
+														{
+															.set-size(100%);
+															#align > .left;
+															margin-top: @content-padding/2;
+															
+															button
+															{
+																.set-size(98%);
+																margin-bottom: @content-padding/2;
+															}
+														}
+														
+														div.half-wrapper
+														{
+															.set-size(48%);
+															margin: 0 1%;
+															
+															label,
+															input
+															{
+																width: 100%;
+															}
+														}
+													}
+												}
+											}
+										}
+									}	
+								}
+							}
+						}
+					}
+				}
+				
+				div[id="google-maps-container"]
+				{
+					.set-opacity(1);
+					display: block;
+				}	
+				
+				// Specific styling...
+				// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+				
+				&.city-guides
+				{}
+				
+				&.inspiration
+				{}
+				
+				&.booking
+				{
+					padding-left: 0;
+					padding-right: @right-panel-width;
+					
+					aside.left
+					{
+						display: none;
+						left: -@left-panel-width;
+					}
+					
+					aside.right
+					{
+						right: 0;
+						
+						& > div.wrapper
+						{
+							box-shadow: 0 0 @content-padding @shadow-color;
+						}
+						
+						&.on
+						{
+							right: -@right-panel-width;
+							
+							& > div.wrapper
+							{
+								box-shadow: 0 0 @content-padding transparent;
+							}
+						}
+					}
+				}
+				
+				&.full
+				{
+					padding: 0;
+				}
+				
+				&.single-destination
+				{}
+			}
+			
+			&[id="travel-journal"]
+			{
+				height: auto;
+				padding-bottom: @content-padding/2;
+				
+				div[id="feed"]
+				{
+					.set-size(100%);
+					.box-sizing();
+					padding: 0 @content-padding/2;
+					overflow: visible;
+					
+					*.quick-entry
+					{
+						width: 100%;
+						margin: 0;
+						overflow: hidden;
+						
+						figure
+						{
+							width: 100%;
+							overflow: hidden;
+							background-color: red;
+							float: left;
+							padding: 0;
+							margin: 0;
+							
+							img
+							{
+								width: 100% !important;
+								height: auto !important;
+							}
+						}
+						
+						&.hidden
+						{
+							display: none !important;
+						}
+						
+						& + *.quick-entry
+						{
+							margin-top: 2 * @unit;
+						}
+					}
+				}
+				
+				& > footer
+				{
+					display: none;
+				}
+			}
+			
+			&[id="inspiration"]
+			{
+				.set-size(100%,auto);
+				.box-sizing();
+				padding: @content-padding/2 0;
+				
+				div.wrapper 
+				{
+					.box-sizing();
+					#align > .left;
+					width: 100%;
+					margin-bottom: 0;
+					display: block;
+					
+					& > div[id="let-us-inspire"]
+					{
+						.set-size(100%);
+						#align > .left;
+						
+						& > header
+						{
+							h4
+							{
+								width: 100%;
+								
+								&:before,
+								&:after
+								{
+									display: none;
+								}
+							}
+						}
+						
+						div.wrapper
+						{
+							width: 100%;
+							
+							div.select
+							{
+								width: 90%;
+								margin: 0 5% @content-padding/2 5%;
+								z-index: 1;
+								
+								&:first-child
+								{
+									z-index: 2;
+								}
+							}
+						}
+						
+						button.go-btn
+						{
+							.set-coord(auto,auto);
+							#align > .center;
+							display: table;
+							right: auto;
+							margin: @content-padding auto;
+						}
+					}
+				}
+			}
+			
+			&[id="press"]
+			{
+				padding-top: 1.5 * @content-padding;
+				display: none !important;
+				
+				ul.logo-gallery
+				{
+					.set-size(100%);
+					#align > .left;
+					display: block;
+					
+					li
+					{
+						.set-size(100%);
+						
+						a,
+						figure
+						{
+							img
+							{
+								.set-size(auto,@content-padding);
+								#align > .center;
+								display: table;
+							}
+						}
+					}
+				}
+			}
+			
+			&.static
+			{
+				.set-bgc(white);
+				.box-sizing();
+				padding: 1.5 * @content-padding @content-padding;
+				
+				& > article
+				{
+					.set-size(100%);
+					#align > .left;
+					
+					h1
+					{
+						margin-bottom: @content-padding;
+					}
+					
+					&[id="who-we-are"]
+					{
+						ul
+						{
+							@s: 200px;
+							
+							margin-left: 0;
+							
+							li
+							{
+								.box-sizing();
+								#align > .left;
+								padding-left: 0;
+								padding-top: 0;
+								margin-bottom: 0;
+								
+								*
+								{
+									#align > .left;
+								}
+								
+								figure
+								{
+									.ui-set-circle-mask(@s);
+									#align > .center;
+									top: auto;
+									left: auto;
+									margin: @content-padding auto;
+								}
+								
+								h3
+								{
+									margin-bottom: 0;
+								}
+							}
+						}
+					}
+					
+					& + article
+					{
+						@m: @content-padding;
+						
+						margin-top: @m;
+						padding-top: @m;
+					}
+				}
+				
+				&[id="contact"]
+				{
+					padding-bottom: 1.5 * @content-padding;
+					
+					& > header
+					{
+						.set-size(100%);
+						#align > .left;
+					}
+					
+					& > form
+					{
+						.set-size(100%);
+						#align > .left;
+						
+						label
+						{
+							margin-top: 0;
+							
+							select
+							{
+								width: 100%;
+								margin: @content-padding/2 0;
+							}
+								
+							&.half
+							{
+								width: 100%;
+								#align > .left;
+							}
+							
+							&.no-label
+							{
+								padding-top: 0;
+								float: left;
+							}
+						}
+						
+						input[type="submit"]
+						{
+							.set-size(100%);
+							font-size: 24px;
+						}
+					}
+				}
+			}
+			
+			&[id="map"],
+			&.static
+			{
+				// Press tweaking...
+				// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+				
+				& + section[id="press"]
+				{
+					padding-top: @content-padding + 2 * @unit;
+				}
+			}
+			
+			&[id="passported-home"]
+			{
+				margin-top: 0;
+				
+				div.gallery-wrapper
+				{
+					@w: 300px;
+					@h: 220px;
+					
+					.set-size(100%,@h);
+					
+					ul
+					{
+						.set-size(100%,@h);
+						
+						li	
+						{
+							a
+							{
+								.set-size(@w,@h);
+								
+								figure
+								{
+									img
+									{
+										width: 100%;
+									}
+								}
+								
+								footer
+								{
+									
+									h2
+									{
+										#font > .lato(1.2em,white,700);
+										font-size: 1em;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			&[id="search-and-newsletter"]
+			{
+				div.wrapper
+				{
+					div.half
+					{
+						width: 100%;
+						
+						&[id="find-your-trip"]
+						{}
+						
+						&[id="newsletter-cta"]
+						{
+							border-top: solid 1px @light-grey;
+							
+							div.wrapper
+							{
+								form
+								{
+									input
+									{
+										width: 100%;
+									}
+								}
+							}
+						}
+						
+						div.select-wrapper
+						{
+							div.select
+							{
+								width: 100%;
+								margin-bottom: 10px;
+								max-width: 100%;
+								margin-right: 0;
+								z-index: 1;
+								
+								ul[id="options"]
+								{
+									width: 100%;
+									left: 0;
+								}
+								
+								&:first-child
+								{
+									z-index: 2;
+								}
+							}
+						}
+					}
+					
+					div.vertical-line-divider
+					{
+						display: none;
+					}
+				}
+			}
+			
+			&[id="passported-picks"]
+			{
+				& > div.wrapper
+				{
+					@wrapper-width: 100%;
+					@wrapper-max-width: 100%;
+					
+					width: @wrapper-width;
+					max-width: @wrapper-max-width;
+					padding: 4px;
+					
+					header
+					{
+						h2
+						{
+							font-size: 1.8em;
+							
+							&:after
+							{
+								.set-bg(transparent,'@{media-url}icons/feather-grey-icon.svg',no-repeat,left,center);
+								margin-left: 145px;
+								background-size: auto 50%;
+							}
+						}
+					}
+					
+					& > article,
+					& > a
+					{
+						#align > .left;
+						width: 100%;
+						display: block;
+						max-width: 100%;
+						border: 0 !important;
+						margin-bottom: 4px;
+						clear: both;
+						max-height: 1000px;
+						
+						figure
+						{
+							max-height: 600px;
+							
+							img
+							{
+								width: 100%;
+								height: auto;
+							}
+						}
+						
+						&.call-to-action
+						{
+							margin-bottom: 0;
+							margin-top: 4px;
+							
+							&[id="book-a-trip"]
+							{
+								.set-bg(transparent,'@{media-url}backgrounds/cloud-texture.jpg');
+								background-size: 100% auto;
+							}
+							
+							&[id="explore"]
+							{
+								.set-bg(transparent,'@{media-url}backgrounds/cloud-texture-right.jpg');
+								background-size: 100% auto;
+							}	
+						}
+					}
+				}
+			}
+			
+			&[id="instagram-feed"]
+			{
+				margin-top: @content-padding;
+				
+				& > div.wrapper
+				{
+					div.gallery-wrapper
+					{
+						@h: 100px;
+						
+						height: @h;
+						
+						ul
+						{
+							height: @h;
+							
+							li
+							{
+								a
+								{
+									height: @h;
+								}
+							}
+						}
+					}
+					
+					div[id="plan-banner"]
+					{
+						height: 400px;
+						
+						div.vertical-wrapper
+						{
+							h4
+							{
+								#font > .lato(2em,white,400);
+								box-sizing: border-box;
+								padding: 0 10%;
+								line-height: 1.2em;
+								margin-bottom: 30px;
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		/* ------------------------------------------------------------------------------------------------------------- */
+		/* ~ Footer ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+		
+		body > footer
+		{
+			.set-size(100%);
+			.set-bgc(@grey);
+			#align > .left;
+			overflow: hidden;
+			z-index: 4;
+			
+			& > nav
+			{
+				.set-size(100%);
+				#align > .left;
+				padding: 0 0 @content-padding/2 0;
+				
+				ul
+				{
+					.set-size(100%);
+					padding: @content-padding;
+					
+					li
+					{
+						.set-size(100%);
+						
+						&:first-child
+						{
+							padding: 0px 0 10px 40px;
+							font-size: 20px;
+							
+							span
+							{
+								@bg-size: 25px;
+								
+								&.popular
+								{
+									.set-bg(transparent,'@{media-url}icons/hotel-pin-icon.svg',no-repeat,left,bottom);
+									.set-bgs(auto,@bg-size);
+								}
+								
+								&.destinations
+								{
+									.set-bg(transparent,'@{media-url}icons/destination-pin-icon.svg',no-repeat,left,bottom);
+									.set-bgs(auto,@bg-size);
+								}
+								
+								&.passported,
+								&.ff
+								{
+									.set-bg(transparent,'@{media-url}icons/feather-white-icon.svg',no-repeat,10px,bottom);
+									.set-bgs(auto,@bg-size);
+								}
+							}
+						}
+												
+						a
+						{}
+					}
+					
+					& + ul
+					{
+						padding-top: 0;
+					}
+				}
+			}
+			
+			& > div.fixed-bar
+			{
+				.set-size(100%,auto);
+				#align > .left;
+				
+				a[id$="brand"]
+				{
+					.set-size(100%,auto);
+					.set-coord(auto,auto);
+					#align > .left;
+					
+					img,
+					object
+					{
+						.set-size(230px);
+						#align > .center;
+						margin: @content-padding auto;
+					}
+					
+					&[id="tzell-brand"]
+					{
+						display: none;
+					}
+				}
+				
+				& > small
+				{
+					padding: @content-padding/2 0 @content-padding 0;
+				}
+			}
+		}
+		
+		/* ------------------------------------------------------------------------------------------------------------- */
+		/* ~ [G] Components ~ */
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+		div.call-to-action
+		{
+			div.content
+			{
+				@w: 100%;
+				@h: 100%;
+				
+				.set-size(@w,@h);
+				.set-box-shadow(@color-1,0,0,0);
+				.set-coord(0,0);
+				margin: 0;
+				
+				& > header,
+				& > div[id="response-messages"]
+				{
+				}
+				
+				form
+				{
+					@input-width: 100%;
+					
+					padding: 0 @content-padding @content-padding @content-padding;
+					
+					header
+					{
+						margin-top: 0;
+						padding: 0;
+						
+						h1
+						{
+							.set-bg(transparent,'@{media-url}icons/feather-grey-icon.svg',no-repeat,center,top);
+							.set-bgs(auto,50px);
+							line-height: 38px;
+							padding-top: 50px;
+							margin-bottom: @unit;
+						}
+						
+						h2
+						{
+							margin-bottom: @content-padding;
+						}
+					}
+					
+					div.wrapper-to-center
+					{
+						.set-size(100%);
+						#align > .left;
+						padding: 0;
+						margin-top: @unit;
+						
+						small
+						{
+							.set-size(100%);
+							.set-pos(absolute);
+							text-transform: uppercase;
+							text-align: center;
+							display: block;
+							top: -20px;
+						}
+						
+						h3
+						{
+							font-size: 34px;
+							text-align: center;
+							line-height: 180px;
+							color: @color-5;
+						}
+					}
+					
+					input
+					{
+						.set-size(@input-width);
+						
+						&.full
+						{
+							width: @input-width;
+						}
+						
+						&.half
+						{
+							width: 99%;
+						}
+					}
+					
+					label[for="user-sign-up-newsletter"]
+					{
+						margin-top: @unit;
+					}
+				}
+			}
+		}
+		
+		div[id="newsletter-block"]
+		{
+			@h: @tile4x;
+			
+			.set-pos(relative);
+			.set-coord(auto,auto);
+			#align > .left;
+			
+			button[id="newsletter-trigger"]
+			{
+				.set-size(100%,@h);
+				#align > .left;
+				font-size: 10px;
+				
+				div[class*="icon-"]
+				{
+					display: none;
+				}
+			}
+			
+			& > button.icon-close
+			{}
+			
+			& + header,
+			& + header + div.dropdown-wrapper,
+			& + header + div.dropdown-wrapper + main[id="passported-intro"],
+			&.hide
+			{
+				top: auto;
+			}
+			
+			&.hide
+			{
+				& + header,
+				& + header + div.dropdown-wrapper + main[id="passported-intro"]
+				{
+					top: auto;
+				}
+			}
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
