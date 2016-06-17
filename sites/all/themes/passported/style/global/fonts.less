@@ -33,7 +33,7 @@
 		    font-style: normal;
 		}
 		
-		@font-face
+		/*@font-face
 		{
 			font-family: 'icons';
 		    src: url('@{path}icon-webfont.eot');
@@ -43,7 +43,7 @@
 		         url('@{path}icon-webfont.svg#icons') format('svg');
 		    font-weight: normal;
 		    font-style: normal;
-		}
+		}*/
 		
 		#font
 		{
@@ -81,7 +81,7 @@
 			
 			.ic(@size,@color)
 			{
-				font: normal @size 'icons';
+				font: normal @size 'passported-icons';
 				color: @color;
 				font-style: normal;
 				font-weight: normal;
@@ -90,17 +90,3 @@
 				.browser-fixes();
 			}
 		}
-		
-		[class^="icon-"],[class*="icon-"]
-		{
-			font-family: 'icons';
-			speak: none;
-			font-style: normal;
-			font-weight: normal;
-			font-variant: normal;
-			text-transform: none;
-			line-height: 1;
-		}
-		
-				
-		

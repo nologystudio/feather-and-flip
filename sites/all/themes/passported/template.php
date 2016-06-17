@@ -201,6 +201,7 @@ function passported_preprocess_views_view(&$variables) {
       $variables['destinations'] = $dests;
       $variables['itineraries']  = $bviti;
       $variables['new_travel_journal'] = views_embed_view('new_travel_journal', 'page');
+      $variables['top_gallery'] = views_embed_view('home_top_gallery', 'default');
     }
   }
   elseif ($view->name == 'city_guides' && $view->current_display == 'page') {

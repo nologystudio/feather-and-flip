@@ -21,12 +21,119 @@
 		
 		@import 'vendors/normalize.css';
 		@import 'vendors/animate.css';
+		@import 'vendors/icons.css';
 		@import 'global/main';
 		
-		@media (min-device-width: 800px) and (max-device-width: 1280px)
+		@media only screen and (min-width: 1500px)
 		{
+			body > main[id],
+			body > section[id]
+			{
+				&[id="instagram-feed"]
+				{
+					div.wrapper
+					{
+						div[id="plan-banner"]
+						{
+							figure
+							{
+								img
+								{
+									.set-size(100%,auto);
+								}
+							}
+						}
+					}
+				}
+			}
+		}	
+		
+		@media only screen and (min-width: 800px) and (max-width: 1040px)
+		{
+			body > header
+			{
+				& > a:first-child
+				{
+					@w: 150px;
+					
+					width: @w;
+					
+					figure
+					{
+						img,
+						object
+						{
+							width: @w;
+							margin: @content-padding 0 0;
+						}
+					}
+				}
+				
+				nav
+				{
+					a
+					{
+						@lh: @header-height - 8px;
+						
+						font-size: 12px;
+						padding: 0 @content-padding/2;
+						line-height: @lh;
+						
+						&[id^="sign-"],
+						&[id="user"]
+						{
+							font-size: 13px;
+							padding: 0 @content-padding - 2 * @unit;
+							line-height: @lh;
+						}
+						
+						&[id="book-hotels"]
+						{
+							&:before
+							{
+								margin-top: -17px;
+							}
+						}
+					}
+				}
+			}
+			
+			body > main[id],
+			body > section[id]
+			{
+				&[id="passported-picks"]
+				{
+					& > div.wrapper
+					{
+						@wrapper-width: 100%;
+						@wrapper-max-width: 960px;
+						
+						width: @wrapper-width;
+						max-width: @wrapper-max-width;
+					}
+				}
+				
+				&[id="instagram-feed"]
+				{
+					& > div.wrapper
+					{
+						div[id="plan-panner"]
+						{
+							div.vertical-wrapper
+							{
+								h4
+								{
+									box-sizing: border-box;
+									padding: 0 10%;
+								}
+							}
+						}
+					}
+				}
+			}
 		}
 		
-		@media only screen and (max-device-width: 800px)
-		{ 
+		@media only screen and (max-width: 800px)
+		{
+			@import 'global/main-mobile';
 		}
