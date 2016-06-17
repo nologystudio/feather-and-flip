@@ -1150,7 +1150,7 @@
 				div.gallery-wrapper
 				{
 					@w: 100%;
-					@h: auto;
+					@h: 200px;
 					
 					.set-size(100%,@h);
 					
@@ -1162,7 +1162,7 @@
 						{
 							a
 							{
-								.set-size(100%,@h);
+								.set-size(auto,@h);
 							}
 						}
 					}
@@ -1180,6 +1180,11 @@
 						div[id="find-your-trip"]
 						{
 							padding-bottom: 0;
+						}
+						
+						div[id="newsletter-cta"]
+						{
+							border-top: solid 1px @light-grey;
 						}
 						
 						div.select-wrapper

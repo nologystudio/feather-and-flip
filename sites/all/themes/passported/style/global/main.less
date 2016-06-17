@@ -73,7 +73,7 @@
 		@grey-2:  #999999;
 		@grey-3:  #666666;
 		@grey-4:  #CCCCCC;
-		
+		@light-grey: #D7D7D7;
 		@grey: #212121;
 		
 		/* ~ Importers ~ */
@@ -3249,6 +3249,7 @@
 							h4
 							{
 								@d-width: 30px;
+								@line-margin: 150px;
 								
 								#font > .gar(1.4em,@grey);
 								#align > .center;
@@ -3271,13 +3272,13 @@
 								&:before
 								{
 									left: 50%;
-									margin-left: -@d-width/2
+									margin-left: -@line-margin;
 								}
 								
 								&:after
 								{
 									left: 50%;
-									margin-left: @d-width/2;
+									margin-left: @line-margin;
 								}
 							}
 						}
