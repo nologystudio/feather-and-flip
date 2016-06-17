@@ -1245,7 +1245,8 @@
 							&:after
 							{
 								.set-bg(transparent,'@{media-url}icons/feather-grey-icon.svg',no-repeat,left,center);
-								margin-left: 160px;
+								margin-left: 145px;
+								background-size: auto 50%;
 							}
 						}
 					}
@@ -1275,9 +1276,20 @@
 						
 						&.call-to-action
 						{
-							background-size: 100% auto !important;
 							margin-bottom: 4px;
 							margin-top: 4px;
+							
+							&[id="book-a-trip"]
+							{
+								.set-bg(transparent,'@{media-url}backgrounds/cloud-texture.jpg');
+								background-size: 100% auto;
+							}
+							
+							&[id="explore"]
+							{
+								.set-bg(transparent,'@{media-url}backgrounds/cloud-texture-right.jpg');
+								background-size: 100% auto;
+							}	
 						}
 					}
 				}
