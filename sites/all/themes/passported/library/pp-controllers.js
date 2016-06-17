@@ -1116,7 +1116,6 @@
 	            }).
 	            success(function(_data){
 		        	$scope.currentStatus = status[1];
-		        	console.log(_data);
 	            }).
 	            error(function(){
 		        	$scope.currentStatus = status[2];
