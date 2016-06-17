@@ -1158,7 +1158,7 @@
 					{
 						.set-size(100%,@h);
 						
-						li
+						li	
 						{
 							a
 							{
@@ -1178,9 +1178,7 @@
 						width: 100%;
 						
 						&[id="find-your-trip"]
-						{
-							padding-bottom: 0;
-						}
+						{}
 						
 						&[id="newsletter-cta"]
 						{
@@ -1247,10 +1245,23 @@
 						border: 0 !important;
 						margin-bottom: 4px;
 						clear: both;
+						max-height: auto;
+						
+						figure
+						{
+							max-height: auto;
+							
+							img
+							{
+								width: 100%;
+							}
+						}
 						
 						&.call-to-action
 						{
+							background-size: 100% auto;
 							margin-bottom: 4px;
+							margin-top: 4px;
 						}
 					}
 				}
@@ -1258,6 +1269,8 @@
 			
 			&[id="instagram-feed"]
 			{
+				margin-top: @content-padding;
+				
 				& > div.wrapper
 				{
 					div.gallery-wrapper
