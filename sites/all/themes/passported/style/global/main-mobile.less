@@ -1194,6 +1194,28 @@
 					div.half
 					{
 						width: 100%;
+						padding: @content-padding;
+						
+						header
+						{
+							width: 100%;
+							#align > .left;
+							
+							h4
+							{
+								@line-margin: 130px;
+								
+								&:before
+								{
+									margin-left: -@line-margin;
+								}
+								
+								&:after
+								{
+									margin-left: @line-margin - 25px;
+								}
+							}
+						}
 						
 						&[id="find-your-trip"]
 						{}
@@ -1260,12 +1282,12 @@
 					{
 						h2
 						{
-							font-size: 1.8em;
+							font-size: 1.6em;
 							
 							&:after
 							{
 								.set-bg(transparent,'@{media-url}icons/feather-grey-icon.svg',no-repeat,left,center);
-								margin-left: 145px;
+								margin-left: 135px;
 								background-size: auto 50%;
 							}
 						}
@@ -1282,6 +1304,7 @@
 						margin-bottom: 4px;
 						clear: both;
 						max-height: 1000px;
+						min-height: 0;
 						
 						figure
 						{
@@ -1294,21 +1317,42 @@
 							}
 						}
 						
+						&.main
+						{
+							h3
+							{
+								line-height: 1.4em;
+							}
+						}
+						
 						&.call-to-action
 						{
 							margin-bottom: 0;
 							margin-top: 4px;
 							
+							div.vertical-wrapper
+							{
+								h3
+								{
+									font-size: 1.4em;
+								}
+							}
+							
 							&[id="book-a-trip"]
 							{
 								.set-bg(transparent,'@{media-url}backgrounds/cloud-texture.jpg');
-								background-size: 100% auto;
+								background-size: auto 100%;
 							}
 							
 							&[id="explore"]
 							{
 								.set-bg(transparent,'@{media-url}backgrounds/cloud-texture-right.jpg');
-								background-size: 100% auto;
+								background-size: auto 100%;
+							}
+							
+							button.rounded-btn
+							{
+								max-width: 260px;
 							}	
 						}
 					}
@@ -1317,8 +1361,6 @@
 			
 			&[id="instagram-feed"]
 			{
-				margin-top: @content-padding;
-				
 				& > div.wrapper
 				{
 					div.gallery-wrapper
