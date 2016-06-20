@@ -6,6 +6,11 @@ class AdminForms
     const APIKEY = 'dced674ea5511297bee26bcfc6cead3b-us8';//'eae1d5448b1a2cb751661162fd5011fd-us8';
     const LISTID = '9539518750';//'487e37ac3f';
 
+    const API_ID = '82c1af9c7a362d1715d64219a53ed5cc';
+    const API_KEY = 'fa95f96b3d44754f3beb4e';
+    const ROBLY_LIST = '186769';
+    const ROBLY_URL = 'https://api.robly.com/api/v1/sign_up/generate';
+
 
     private static function encrypt_decrypt($action, $string) {
         $output = false;
@@ -94,39 +99,22 @@ class AdminForms
 
         try
         {
+            $url = self::ROBLY_URL.'?api_id='.self::API_ID.'&api_key='.self::API_KEY.'&email='.$custom_data['userEmail'].'&sub_lists[]='.self::ROBLY_LIST.'&welcome_email=true';
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            $response  = curl_exec($ch);
+            curl_close($ch);
+            $json = json_decode($response, true);
 
-            $mailchimp = new Mailchimp(self::APIKEY);
-
-            $values =array();
-            //$values['FNAME']    = $custom_data['user_name'];
-            $values['EMAIL']    = $custom_data['userEmail'];
-
-            $resultado = $mailchimp->lists->subscribe(
-                        self::LISTID,
-                        array('email' => $values['EMAIL']),
-                        $values
-                        );
-
-            if (isset($resultado['email']))
-            {
+            if ($json['successful']) {
                 return true;
-            }
-            elseif (isset($result['status']) && $result['status'] === 'error')
-            {
-                if (isset($resultado['code']))
-                    $errorMsg .= 'Code: ' . $resultado['code'] . ' ';
-                if (isset($resultado['name']))
-                    $errorMsg .= 'Name: ' . $resultado['name'] . ' ';
-                if (isset($resultado['error']))
-                    $errorMsg .= 'Error: ' . $resultado['error'];
-
+            } else {
+                $errorMsg .= 'Error: '.$json['message'];
                 return false;
             }
-            else
-            {
-                $errorMsg = "Unknow error.";
-                return false;
-            }  
         }  
         catch (Exception $e)
         {
