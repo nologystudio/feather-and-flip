@@ -42,21 +42,14 @@
 						<img src="<?php echo drupal_get_path('theme','passported'); ?>/media/about/henley-vazquez.jpg" alt="HENLEY VAZQUEZ, CEO/CO-FOUNDER"/>
 					</figure>
 					<h3>HENLEY VAZQUEZ, CEO/CO-FOUNDER</h3>
-					<p>Henley’s decade of experience in the travel industry includes Town & Country Travel, National Geographic Traveler, Departures, Ultratravel and Indagare. Before settling down in New York with her husband and two children, Henley lived in Madrid and Tokyo. Her favorite destinations include Ibiza and Cartagena, and her next stops are the South of France and Jackson Hole. Henley is originally from Virginia and graduated from Princeton University.</p>
+					<p>Henley’s decade of experience in the travel industry includes Town & Country Travel, National Geographic Traveler, Departures, Ultratravel and Indagare. Before settling down in New York with her husband and two children, Henley lived in Madrid and Tokyo. Her favorite destinations include Ibiza and Cartagena. Henley is originally from Virginia and graduated from Princeton University.</p>
 				</li>
-                <li>
-                	<figure>
-						<img src="<?php echo drupal_get_path('theme','passported'); ?>/media/about/nikki-ridgway.jpg" alt="NIKKI RIDGWAY, EDITOR/CO-FOUNDER"/>
-					</figure>
-                    <h3>NIKKI RIDGWAY, EDITOR/CO-FOUNDER</h3>
-                    <p>An English girl in New York, Nikki moved to New York in 2009 after stints at travel magazines in Kuala Lumpur and London. She was associate editor at Indagare and senior editor at Jetsetter.com. She has traveled to over 40 countries, and her favorite destinations are Istanbul and Panama, with next stops in Palm Springs and Los Angeles. Nikki lives in Brooklyn with her husband and son. Nikki studied English Literature at University of Sussex.</p>
-                </li>
 				<li>
 					<figure>
 						<img src="<?php echo drupal_get_path('theme','passported'); ?>/media/about/nicole-rubin.jpg" alt="NICOLE RUBIN, HEAD OF PRODUCT/CO-FOUNDER"/>
 					</figure>
 					<h3>NICOLE RUBIN, HEAD OF PRODUCT/CO-FOUNDER</h3>
-					<p>A New York native, Nicole has lived in Paris and Copenhagen but now calls Brooklyn home with her husband. Before joining the Passported team, she founded the itinerary planning platform Bon Voyaging and previously worked at Pace Gallery. Her favorite destination is Jaipur, India, and her next trips include Iceland and Tulum. Nicole graduated from Washington University and is completing an MBA at NYU’s Stern School of Business.</p>
+					<p>A New York native, Nicole has spent time in Paris and Copenhagen but calls Brooklyn home with her husband. Before joining the Passported team, she founded the itinerary planning platform Bon Voyaging and previously worked at Pace Gallery. Her favorite destinations include Jaipur, India and Jose Ignacio, Uruguay. Nicole graduated from Washington University and has an MBA from NYU’s Stern School of Business.</p>
 				</li>
 				<li>
 					<figure>
@@ -70,14 +63,7 @@
 						<img src="<?php echo drupal_get_path('theme','passported'); ?>/media/about/monique-thofte.jpg" alt="MONIQUE THOFTE, DIRECOTR OF TRAVEL"/>
 					</figure>
 					<h3>MONIQUE THOFTE, DIRECTOR OF TRAVEL</h3>
-					<p>Monique Thofte joined the Passported team after honing her travel planning skills at Indagare Travel. Her expertise ranges from Tuscan vineyard resorts to hip beach hideaways and perfect urban retreats. Monique’s favorite destinations include Angra Dos Reis, Stockholm and St. Barth’s, and her next stops are Argentina and Uruguay. A Jersey girl by birth, Monique now lives in Brooklyn with her husband and daughter and studied communications at University of Miami.</p>
-				</li>
-				<li>
-					<figure>
-						<img src="<?php echo drupal_get_path('theme','passported'); ?>/media/about/claude-davies.jpg" alt="CLAUDE DAVIES, DIRECTOR OF MARKETING AND COMMUNITY"/>
-					</figure>
-					<h3>CLAUDE DAVIES, DIRECTOR OF MARKETING AND COMMUNITY</h3>
-					<p>Claude Davies is a born and bred New Yorker.  After more than a decade working as a producer of documentary film and television at A&E, Oxygen, Embassy Row, and with Barbara Kopple, she has journeyed to the world of travel at Passported. Claude holds the Swedish archipelago and the Hamptons’ beaches as her happy places, and recently added St. Barth’s to that list.  Next up: Jose Ignacio and Paris. Claude graduated from Harvard University.</p>
+					<p>Monique Thofte joined the Passported team after honing her travel planning skills at Indagare Travel. Her expertise ranges from Tuscan vineyard resorts to hip beach hideaways and perfect urban retreats. Monique’s favorite destinations include Angra Dos Reis, Stockholm and St. Barth’s. A Jersey girl by birth, Monique now lives in Brooklyn with her husband and daughter and studied communications at University of Miami.</p>
 				</li>
 			</ul>
 		</article>
