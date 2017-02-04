@@ -291,88 +291,94 @@
 		});
 
         ppComponents.directive('ppNewsletter',function(){
-            restrict  : 'EA',
-            replace   : true,
-            templateUrl : drupalTemplatePath + 'library/templates/sign-overlay.tpl.html',
-            controller: function($scope,$cookies){
+            return{
+                restrict  : 'EA',
+                replace   : true,
+                templateUrl : drupalTemplatePath + 'library/templates/sign-overlay.tpl.html',
+                controller: function($scope,$cookies,$timeout,$element){
 
-                $scope.alert = {
-                    on: false,
-                    message: undefined
-                }
+                    $scope.alert = {
+                        on: false,
+                        message: undefined
+                    }
 
-                $scope.user = {
-                    name: undefined,
-                    email: undefined
-                }
+                    $scope.user = {
+                        name: undefined,
+                        email: undefined
+                    }
 
-                $scope.actions = {
-                    alert: function(_message){
-                        $scope.alert.message = _message;
-                        $scope.alert.on = true;
-                    },
-                    submit: function(){
-                        $http({
-        	                method : 'POST',
-        	                url    : formSubmit,
-        	                data   : $.param({formID:'newsletterForm','userName':$scope.user.name,'userEmail':$scope.user.email}),
-        	                headers : {
-        	            		'Content-Type' : 'application/x-www-form-urlencoded'
-        					},
-        					transformRequest: angular.identity
-        	            }).
-        	            success(function(_data){
-                            $scope.actions.alert();
-        	            }).
-        	            error(function(){
-        		        	$scope.actions.alert();
-        	            });
-                    },
-                    transitioner = {
-                        open: function(){
-                            $($element[0]).show().transition({opacity:1,duration:300});
+                    $scope.actions = {
+                        alert: function(_message){
+                            $scope.alert.message = _message;
+                            $scope.alert.on = true;
                         },
-                        close: function(){
-                            $($element[0]).transition({opacity:0,duration:300},function(){
-                                $($element[0]).hide();
-                                processor.reset();
-                            });
-                        }
-                    },
-                    cookie: {
-                        set: function(){
-                            $cookies.put('pp-nlck',{
-                                expiration: moment().add(2,'weeks');
+                        submit: function(){
+                            $http({
+                                method : 'POST',
+                                url    : formSubmit,
+                                data   : $.param({formID:'newsletterForm','userName':$scope.user.name,'userEmail':$scope.user.email}),
+                                headers : {
+                                    'Content-Type' : 'application/x-www-form-urlencoded'
+                                },
+                                transformRequest: angular.identity
+                            }).
+                            success(function(_data){
+                                $scope.actions.alert();
+                            }).
+                            error(function(){
+                                $scope.actions.alert();
                             });
                         },
-                        check: function(){
-                            if(moment().isAfter($cookies.get('pp-nlck').expiration)){
-                                $scope.actions.transitioner.open();
-                                $scope.actions.cookie.set();
+                        transitioner: {
+                            open: function(){
+                                $($element[0]).show().transition({opacity:1,duration:300});
+                            },
+                            close: function(){
+                                $($element[0]).transition({opacity:0,duration:300},function(){
+                                    $($element[0]).hide();
+                                    processor.reset();
+                                });
+                            }
+                        },
+                        cookie: {
+                            set: function(){
+                                $cookies.putObject('pp-nlck',{
+                                    expiration: moment().add(2,'weeks')
+                                });
+                            },
+                            check: function(){
+                                if(_.isUndefined($cookies.getObject('pp-nlck')) || moment().isAfter($cookies.getObject('pp-nlck').expiration)){
+                                    $scope.actions.transitioner.open();
+                                    $scope.actions.cookie.set();
+                                }
+                                else console.log('Cookie is set for this user and will expire on: ' + $cookies.getObject('pp-nlck').expiration);
+                            }
+                        },
+                        reset: function(){
+
+                            $scope.user = {
+                                name: undefined,
+                                email: undefined
+                            }
+
+                            $scope.alert = {
+                                on: false,
+                                message: undefined
                             }
                         }
-                    },
-                    reset: function(){
-
-                        $scope.user = {
-                            name: undefined,
-                            email: undefined
-                        }
-
-                        $scope.alert = {
-                            on: false,
-                            message: undefined
-                        }
                     }
-                }
 
-                var skyAnimator = function(){
-                }
+                    var skyAnimator = function(){
+                        for(var i=0;i<3;i++)
+                            $('#cloud-wrapper').append('<div id="cloud-'+i+'" class="cloud"></div>');
+                    }
 
-                $timeout(function(){
-                    $scope.actions.cookie.check();
-                });
-            },
-            link : function($scope,$element,_attrs){
+                    $timeout(function(){
+                        $scope.actions.cookie.check();
+                        skyAnimator();
+                    });
+                },
+                link : function($scope,$element,_attrs){
+                }
             }
         });
