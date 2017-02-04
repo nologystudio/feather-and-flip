@@ -1,11 +1,11 @@
-	
+
 	<!-- Press -->
-			
+
 	<section id="press">
 		<?php if(isset($press)){ ?>
         <ul class="logo-gallery">
 	        <?php $counter = 1; ?>
-            <?php foreach ($press as $nid => $press_node){ 
+            <?php foreach ($press as $nid => $press_node){
                 $press_wrapper = entity_metadata_wrapper('node', $press_node);
                 $press_id = str_replace(' ', '-', strtolower($press_wrapper->title->value()));
                 $press_src = file_create_url($press_wrapper->field_image->file->value()->uri);
@@ -19,9 +19,9 @@
         </ul>
 		<?php } ?>
     </section>
-	
+
 	<!-- Footer -->
-				
+
 	<footer>
 		<nav>
 			<ul>
@@ -47,15 +47,16 @@
 				<a href="https://www.facebook.com/getpassported" class="icon-facebook" target="_blank" rel="facebook"></a>
 				<a href="http://instagram.com/getpassported" class="icon-instagram" target="_blank" rel="instagram"></a>
 				<a href="http://www.pinterest.com/passported" class="icon-pinterest-2" target="_blank" rel="pinterest"></a>
-			</nav>	
+			</nav>
 			<small><?php echo date("Y"); ?> PASSPORTED ALL RIGHTS RESERVED</small>
 			<a id="tzell-brand" href="http://www.tzell.com/tzell/index.htm" target="_blank">
 				<small>Powered by</small>
 				<img src="<?php echo variable_get('relativePath'); ?>media/brand/tzell-logo.png" alt="Powered by Tzell Travel Group"/>
-			</a>	
+			</a>
 		</div>
 	</footer>
-	
+
 	<!-- Call To Action -->
-	
 	<div class="call-to-action" ng-controller="CallToActionController" ng-include="overlayTpl" ng-show="display"></div>
+	<!-- Overlay -->
+	<pp-newsletter></pp-newsletter>

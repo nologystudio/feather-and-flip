@@ -1,0 +1,22 @@
+<div id="newsletter-overlay">
+	<div class="wrapper">
+		<div id="cloud-wrapper"></div>
+		<!-- Close button -->
+		<button rel="close" ng-click="actions.close();"></button>
+		<!-- Title -->
+		<h3>You need a vacation. Join our newsletter for special offers, travel tips and never ever any spam.</h3>
+		<!-- Form -->
+		<form name="newsletterForm">
+			<!-- Messages -->
+			<strong class="animated fadeInUp" ng-if="alert.on">[[ alert.message ]]</strong>
+			<!-- Fields -->
+			<fieldset ng-if="!alert.on'">
+				<input name="user-name" type="text" placeholder="Name" ng-model="overlay.user.name" required/>
+				<input name="user-email" type="email" placeholder="Email" ng-model="overlay.user.email" required/>
+				<input type="submit" value="GO" ng-class="{ 'disabled': !newsletterForm.$valid }" ng-click="!newsletterForm.$valid || actions.submit()"/>
+			</fieldset>
+			<!-- Claim -->
+			<small>We respect your privacy</small>
+		</form>
+	</div>
+</div>

@@ -1,26 +1,26 @@
-		
-		
-			
+
+
+
 		/* ----------------------------------------------------------------------------------------------------------------
-		    
+
 	    * Project     : Passported
-	    * Document    : less/style 
+	    * Document    : less/style
 	    * Created on  : Ago 01, 2.015
-	    * Version     : 1.0 
+	    * Version     : 1.0
 	    * Author      : Aday Henriquez
 	    * Description : This less file manages the global style
-	    
+
 	    -------------------------------------------------------------------------------------------------------------------
 	       *          This code has been developed by NOLOGY. in the awesome Canaries - www.nologystudio.com           *
 	    -------------------------------------------------------------------------------------------------------------------
-	   
+
 	    * Log * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
         -------------------------------------------------------------------------------------------------------------------
-        *  
+        *
         ---------------------------------------------------------------------------------------------------------------- */
 		/* ~ Global Variables and Importers ~ */
-		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */	
-		
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
 		@media-url: '../media/';
 		@unit: 5px;
 		@content-padding: 30px;
@@ -28,7 +28,7 @@
 		@wrapper-width: 1040px;
 		@header-height: 90px;
 		@gutter: 10px;
-		
+
 		@grid-1: @wrapper-width/1;
 		@grid-2: @wrapper-width/2;
 		@grid-3: @wrapper-width/3;
@@ -37,10 +37,10 @@
 		@grid-6: @wrapper-width/6;
 		@grid-7: @wrapper-width/7;
 		@grid-8: @wrapper-width/8;
-		
+
 		/* ~ Color ~ */
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-		
+
 		@color-1: #333333;
 		@color-2: #cdd3d2;
 		@color-3: #576468;
@@ -48,8 +48,8 @@
 		@color-5: #7795a0;
 		@color-6: #f0f2f2;
 		@color-7: #dee4e3;
-		@color-8: #202121;  
-		
+		@color-8: #202121;
+
 		@ff-color-0: #f5f6f6;
 		@ff-color-1: #d9dfdE;
 		@ff-color-2: #9cb1ad;
@@ -58,39 +58,39 @@
 		@ff-color-5: #545958;
 		@ff-color-6: #708c84;
 		@ff-color-7: #336666;
-		
+
 		@warning-color: orange;
 		@shadow-color: #cccccc;
 		@grey-1:  #333333;
 		@grey-2:  #999999;
 		@grey-3:  #666666;
 		@grey-4:  #CCCCCC;
-		
+
 		@grey: #212121;
-		
+
 		/* ~ Importers ~ */
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-		
+
 		@import 'fonts';
 		@import 'tools';
 		@import 'passported-ui';
-		
+
 		/* ------------------------------------------------------------------------------------------------------------- */
 		/* ~ UI ~ */
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-		
+
 		/* ------------------------------------------------------------------------------------------------------------- */
 		/* ~ Main style ~ */
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-		
-		html, 
+
+		html,
 		body
 		{
 		}
-		
+
 		html
 		{}
-		
+
 		body
 		{
 			.set-bgc(white);
@@ -98,7 +98,7 @@
 			#font > .lato(12px,@color-1,100);
 			overflow-x: hidden;
 		}
-		
+
 		body
 		{
 			& > header,
@@ -109,35 +109,35 @@
 			& > footer
 			{}
 		}
-		
+
 		/* ------------------------------------------------------------------------------------------------------------- */
 		/* ~ Reset ~ */
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-		
+
 		*
 		{
 			outline: none;
 		}
-		
+
 		*[data-animate]
 		{
 			.set-opacity(0);
 			.performance();
 		}
-		
+
 		ul
 		{
 			list-style: none;
 			margin: 0;
 			padding: 0;
 		}
-		
+
 		a
 		{
 			text-decoration: none;
 			color: @grey;
 		}
-		
+
 		button
 		{
 			border: 0;
@@ -145,35 +145,35 @@
 			outline: none;
 			padding: 0;
 		}
-		
+
 		ul
 		{
 			list-style: none;
 			padding: 0;
 			margin: 0;
 		}
-		
+
 		figure,
 		h1,h2,h3,h4,h5,h6
 		{
 			margin: 0;
 			padding: 0;
 		}
-		
+
 		/* ------------------------------------------------------------------------------------------------------------- */
 		/* ~ UI ~ */
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-		
+
 		.ui-grid();
 		.ui-actions();
 		.ui-components();
 		.ui-form();
 		.ui-feed();
-		
+
 		/* ------------------------------------------------------------------------------------------------------------- */
 		/* ~ Header & Navigation ~ */
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-		
+
 		body > header
 		{
 			.set-size(100%,@header-height);
@@ -182,7 +182,7 @@
 			.set-bgc(@color-8);
 			overflow: hidden;
 			z-index: 5;
-			
+
 			& > a:first-child
 			{
 				.set-size(270px,100%);
@@ -191,14 +191,14 @@
 				.set-opacity(1);
 				.animate-opacity();
 				text-decoration: none;
-				
+
 				figure
 				{
 					.set-size();
 					#align > .left;
 					margin: 0;
 					padding: 0 0 0 @content-padding/2;
-				
+
 					img,
 					object
 					{
@@ -206,7 +206,7 @@
 						width: 230px;
 						margin: 25px 0 0;
 					}
-					
+
 					figcaption
 					{
 						#align > .right;
@@ -214,29 +214,29 @@
 						margin-top: -@unit;
 					}
 				}
-				
+
 				&:hover
 				{
 					.set-opacity(0.5);
 				}
 			}
-			
+
 			& > button.mobile-nav-trigger
 			{
 				display: none;
 			}
-			
+
 			nav
 			{
 				.set-size(100%,@header-height);
 				display: block;
-				
+
 				div.wrapper
 				{
 					.set-size();
 					overflow: hidden;
 					padding-left: 60px;
-					
+
 					&.align-right
 					{
 						.set-pos(absolute);
@@ -244,7 +244,7 @@
 						right: 0;
 					}
 				}
-				
+
 				a
 				{
 					.set-size(auto,@header-height);
@@ -258,13 +258,13 @@
 					line-height: @header-height;
 					overflow: hidden;
 					cursor: pointer;
-					
+
 					&.feather-icon
 					{
 						.set-bg(transparent,'@{media-url}icons/feather-white-icon.svg',no-repeat,right,center);
 						.set-bgs(auto,50%);
 					}
-					
+
 					&[id^="sign-"],
 					&[id="user"]
 					{
@@ -273,20 +273,20 @@
 						padding: 0 @content-padding;
 						line-height: @header-height;
 						text-transform: none;
-						
+
 						&[id*='up']
 						{
 							.set-bgc(black);
-							color: white;	
+							color: white;
 						}
 					}
-					
+
 					&[id="user"]
 					{
 						.set-bgc(black);
 						color: white;
 					}
-					
+
 					&:hover
 					{
 						color: white;
@@ -294,7 +294,7 @@
 				}
 			}
 		}
-		
+
 		body > div.dropdown-wrapper
 		{
 			.set-size(100%,0);
@@ -307,46 +307,46 @@
 			padding: 0 @content-padding;
 			z-index: 6;
 			overflow: hidden;
-			
+
 			div.arrow
 			{
 				@s: 20px;
-				
+
 				.set-size(@s,0);
 				.set-pos(absolute);
 				.set-coord(0,0);
 				.set-opacity(1);
 				.animate-all();
 				overflow: hidden;
-				
+
 				svg
 				{
 					.set-size(@s,@s);
 					#align > .left;
-					
+
 					path
 					{
 						fill: @color-5;
 					}
 				}
-				
+
 				&.on
 				{
 					height: @s;
 					top: -@s;
 				}
 			}
-			
+
 			&.light
 			{
 				.set-bgc(white);
-				
+
 				div.arrow svg path
 				{
 					fill: white;
 				}
 			}
-			
+
 			& > nav[id="city-guides-list"]
 			{
 				.set-size(@grid-1);
@@ -356,12 +356,12 @@
 				#align > .center;
 				margin-top: @content-padding;
 				overflow: hidden;
-				
+
 				&.on
 				{
 					.set-opacity(1);
 				}
-				
+
 				ul
 				{
 					.set-size(100%/4);
@@ -371,12 +371,12 @@
 					margin: 0;
 					padding: 0 @unit;
 					list-style: none;
-					
+
 					li
 					{
 						padding: 0;
 						background: none;
-						
+
 						a
 						{
 							.set-size(100%);
@@ -386,13 +386,13 @@
 							text-decoration: none;
 							padding: @unit 0;
 							border-bottom: solid 1px fadeout(white,75%);
-							
+
 							&:hover
 							{
 								color: white;
 							}
 						}
-						
+
 						&:first-child
 						{
 							#font > .lato(16px,@grey-1,700);
@@ -405,7 +405,7 @@
 							margin-bottom: 2 * @unit;
 							cursor: default;
 						}
-						
+
 						&:last-child
 						{
 							a
@@ -416,7 +416,7 @@
 					}
 				}
 			}
-			
+
 			& > div[id="search-block"]
 			{
 				.set-size(100%);
@@ -425,19 +425,19 @@
 				.ui-search();
 				#align > .left;
 				display: none;
-				
+
 				& > div.wrapper
 				{
 					#align > .center;
 					width: @grid-1;
 					margin-top: @content-padding - 2 * @unit;
-					
+
 					& > div
 					{
 						.set-opacity(1);
 						#align > .left;
 						display: block;
-						
+
 						&[id="search-destination"] + div[id="let-us-inspire"]
 						{
 							#align > .right;
@@ -445,19 +445,19 @@
 						}
 					}
 				}
-				
+
 				&.on
 				{
 					.set-opacity(1);
 				}
-				
+
 				&.single-search
 				{
 					& > div.wrapper
 					{
 						width: 400px;
 						overflow: visible;
-						
+
 						div[id="search-destination"]
 						{
 							width: 100%;
@@ -466,22 +466,22 @@
 				}
 			}
 		}
-		
+
 		/* ------------------------------------------------------------------------------------------------------------- */
 		/* ~ Sections ~ */
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-		
+
 		body > main[id],
 		body > section[id]
 		{
 			@m: 600px;
 			@main-height: @m + @header-height + 2 * @content-padding;
-			
+
 			.set-size(100%);
 			#align > .left;
 			display: block;
 			box-sizing: border-box;
-			
+
 			&[id="passported-intro"]
 			{
 				.set-bgs(auto,100%);
@@ -489,13 +489,13 @@
 				height: @main-height;
 				overflow: hidden;
 				z-index: 1;
-				
+
 				& > ul
 				{
 					.set-size(100%,100%);
 					#align > .left;
 					overflow: hidden;
-					
+
 					& > li
 					{
 						.set-size(100%,100%);
@@ -504,7 +504,7 @@
 						#align > .left;
 						padding-top: 1.5 * @header-height;
 						overflow: hidden;
-						
+
 						&:first-child
 						{
 							h1
@@ -517,23 +517,23 @@
 								display: block;
 								margin-bottom: 1.5 * @content-padding;
 							}
-							
+
 							ul
 							{
 								.set-size();
-								
+
 								li
 								{
 									@s: 160px;
-									
+
 									.set-size(@s + 4 * @content-padding);
 									#align > .left;
 									margin: 0 @content-padding;
 									overflow: hidden;
-									
+
 									h2
 									{
-										
+
 										.set-size(@s,@s);
 										.set-bgc(fadeout(@color-4,10%));
 										#font > .gar(30px,white);
@@ -543,7 +543,7 @@
 										border-radius: @s;
 										line-height: @s;
 										text-align: center;
-										
+
 										&:after
 										{
 											.set-size(@s,@s);
@@ -558,7 +558,7 @@
 											display: block;
 											overflow: hidden;
 										}
-										
+
 										&:hover
 										{
 											&:after
@@ -566,12 +566,12 @@
 												.set-opacity(0.75);
 												transform: scale(1.5);
 											}
-											
+
 											& + h3
 											{}
 										}
 									}
-									
+
 									h3
 									{
 										.set-size(100%);
@@ -590,14 +590,14 @@
 						}
 					}
 				}
-				
+
 				& + *
 				{
 					margin-top: @main-height;
 					z-index: 2;
 				}
 			}
-			
+
 			&[id="how-it-works"],
 			&[id="travel-journal"]
 			{
@@ -608,7 +608,7 @@
 					clear: both;
 					overflow: visible;
 					margin-bottom: 2 * @content-padding;
-					
+
 					h4
 					{
 						.set-size(100%);
@@ -622,7 +622,7 @@
 						margin-bottom: @content-padding/2;
 						display: block;
 						overflow: hidden;
-						
+
 						span
 						{
 							#font > .gar(18px,@color-1);
@@ -633,21 +633,21 @@
 					}
 				}
 			}
-			
+
 			&[id="how-it-works"]
 			{
 				.set-bgc(white);
 				padding-bottom: 3 * @content-padding;
 				height: auto;
-				
+
 				header
 				{
 					h4
 					{
 					}
 				}
-				
-				div.promoted-grid 
+
+				div.promoted-grid
 				{
 					.set-size(3 * (@grid-3 + 20px));
 					#align > .center;
@@ -655,39 +655,39 @@
 					overflow: hidden;
 				}
 			}
-			
+
 			&[id="map"]
 			{
 				.set-bgc(white);
 				box-shadow: 0 0 @content-padding @color-1;
 				height: @m;
 				overflow: hidden;
-				
+
 				header,
 				footer
 				{
 					.set-size(100%,100px);
 					.set-pos(absolute);
 				}
-				
+
 				aside
 				{
 					@btn-w: 50px;
 					@btn-h: 100px;
-					
+
 					.set-size(50%,100%);
 					.set-bgc(white);
 					.set-pos(absolute);
 					.animate-all();
 					.performance();
 					overflow: hidden;
-					
+
 					button.aside-trigger
 					{
 						.reset();
 						.set-size(@btn-w,@btn-h);
 						.set-pos(absolute);
-						
+
 						span
 						{
 							.set-size(75%,100%);
@@ -698,17 +698,17 @@
 							line-height: @btn-h - 2px;
 							transform-origin: center center;
 						}
-						
+
 						svg
 						{
 							.set-size(@btn-w,@btn-h);
-							
+
 							path
 							{
 								fill: @color-1;
 							}
 						}
-						
+
 						&:hover
 						{
 							span
@@ -717,24 +717,24 @@
 							}
 						}
 					}
-					
+
 					&.left
 					{
 						left: -50%;
 						padding-right: @btn-w;
-						
+
 						button
 						{
 							right: 0;
 							top: 50%;
 							margin-top: -@btn-h/2;
-							
+
 							span
 							{
 								transform: rotate(180deg);
 							}
 						}
-						
+
 						ul
 						{
 							.set-size(100%,100%);
@@ -745,18 +745,18 @@
 							overflow: hidden;
 							display: block;
 						}
-						
+
 						&.on
 						{
 							left: 0;
-							
+
 							button
 							{
 								span
 								{
 									transform: rotate(0deg);
 								}
-								
+
 								&:hover
 								{
 									span
@@ -765,47 +765,47 @@
 									}
 								}
 							}
-							
+
 							ul
 							{
 								box-shadow: 0 0 @content-padding @shadow-color;
 							}
 						}
 					}
-					
+
 					&.right
 					{
 						right: -50%;
 						padding-left: @btn-w;
-						
+
 						button
 						{
 							left: 0;
 						}
-						
+
 						&.on
 						{
 							right: 0;
 						}
 					}
-					
+
 				}
-				
+
 				footer
 				{
 					bottom: 0;
 					display: none;
 				}
-				
+
 				div[id="google-maps-container"]
 				{
 					.set-size(100%,100%);
 					#align > .left;
 					display: block;
 					overflow: hidden;
-				}			
+				}
 			}
-			
+
 			&[id="travel-journal"]
 			{
 				.set-size(100%);
@@ -814,20 +814,20 @@
 				overflow: hidden;
 				z-index: 2;
 				box-shadow: 0 0 @content-padding @shadow-color;
-				
+
 				header
 				{
 					h4
 					{
 					}
 				}
-				
+
 				div[id="feed"]
 				{
 					.set-size(3 * (@grid-3 + 20px));
 					padding: 0 @content-padding;
 					overflow: visible;
-					
+
 					div.grid-wrapper
 					{
 						.set-size(100%);
@@ -836,16 +836,16 @@
 						margin-top: 5px;
 					}
 				}
-				
+
 				& > footer
 				{
 					@h: 50px;
-					
+
 					.set-size(100%,@h);
 					.set-bgc(@color-7);
 					.set-pos(absolute);
 					bottom: 0;
-					
+
 					button
 					{
 						.reset();
@@ -855,7 +855,7 @@
 						.performance();
 						#align > .center;
 						bottom: 0;
-						
+
 						span
 						{
 							.set-size(100%);
@@ -865,7 +865,7 @@
 							line-height: @h/2;
 							text-align: center;
 						}
-						
+
 						svg
 						{
 							path
@@ -876,22 +876,22 @@
 					}
 				}
 			}
-			
+
 			&[id="inspiration"]
 			{
 				.set-bgc(@color-6);
 				z-index: 2;
 				padding: @content-padding;
-				
+
 				header
 				{
 					.set-size(100%,@header-height);
 					#align > .left;
-					
+
 					h4
 					{
 						@ornament-width: 80px;
-						
+
 						.set-size(360px);
 						.set-bg(transparent,'@{media-url}icons/feather-grey-icon.svg',no-repeat,72%,center);
 						.set-bgs(auto,40px);
@@ -901,7 +901,7 @@
 						display: block;
 						overflow: hidden;
 						padding: @content-padding 0;
-						
+
 						&:before
 						{
 							.set-size(@ornament-width,1px);
@@ -911,7 +911,7 @@
 							content: '';
 							display: block;
 						}
-						
+
 						&:after
 						{
 							.set-size(@ornament-width,1px);
@@ -924,60 +924,60 @@
 						}
 					}
 				}
-				
+
 				div.wrapper
 				{
 					.set-size(100%);
 					#align > .left;
 					margin-bottom: @content-padding;
-					
+
 					ul
 					{
 						width: 47%;
-						
+
 						&:last-child
 						{
 							float: right;
 						}
 					}
-					
+
 				}
-				
+
 				button.go-btn
 				{
 					margin: @content-padding auto;
 				}
 			}
-			
+
 			&[id="press"]
 			{
-				.set-bgc(@color-7);	
+				.set-bgc(@color-7);
 				padding: 2 * @content-padding;
 				z-index: 4;
-				
+
 				ul.logo-gallery
 				{
 					.set-size();
 					#align > .center;
 					display: table;
 					overflow: hidden;
-					
+
 					li
 					{
 						.set-size(auto);
 						.box-sizing();
 						#align > .left;
 						padding: @content-padding/2;
-						
+
 						a,
 						figure
 						{
 							@h: 24px;
-							
+
 							.reset();
 							.set-size(100%,@h);
 							#align > .left;
-							
+
 							img
 							{
 								.set-size(auto,@h);
@@ -987,10 +987,10 @@
 					}
 				}
 			}
-			
+
 			// New Home Layout
 			// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-			
+
 			@content-padding: 30px;
 			@global-width: 100%;
 			@wrapper-width: 1060px;
@@ -998,18 +998,18 @@
 			@header-height: 100px;
 			@footer-height: auto;
 			@module-size: 60px;
-			
+
 			@grey: #212121;
 			@light-grey: #D7D7D7;
 			@press-grey: #eaeaea;
 			@warning-color: red;
 			@b-size: 4px;
-			
+
 			*[data-animate]
 			{
 				opacity: 0;
 			}
-			
+
 			*.rounded-btn
 			{
 				#font > .lato(1em,@grey,700);
@@ -1020,14 +1020,14 @@
 				line-height: 3.6em;
 				border: solid 2px @grey;
 				text-transform: uppercase;
-				
+
 				&.white
 				{
 					border-color: white;
 					color: white;
 				}
 			}
-			
+
 			div.gallery-wrapper
 			{
 				button[rel]
@@ -1036,21 +1036,21 @@
 					margin-top: -50px;
 					position: absolute;
 					z-index: 5;
-					
+
 					span
 					{
 						@s: 20px;
-						
+
 						.set-size(@s,@s);
 						top: 50%;
 						margin-top: -@s/2;
 						position: absolute;
 						z-index: 1;
-						
+
 						&:before
 						{}
 					}
-					
+
 					svg
 					{
 						g
@@ -1061,11 +1061,11 @@
 							}
 						}
 					}
-					
+
 					&[rel="left"]
 					{
 						left: 0;
-						
+
 						span
 						{
 							.set-bg(transparent,'@{media-url}icons/left-arrow-icon.svg');
@@ -1073,11 +1073,11 @@
 							left: 5px;
 						}
 					}
-					
+
 					&[rel="right"]
 					{
 						right: 0;
-						
+
 						span
 						{
 							.set-bg(transparent,'@{media-url}icons/right-arrow-icon.svg');
@@ -1087,7 +1087,7 @@
 					}
 				}
 			}
-			
+
 			& > div.wrapper
 			{
 				width: @wrapper-width;
@@ -1096,14 +1096,14 @@
 				display: block;
 				box-sizing: border-box;
 				#align > .center;
-				
+
 				& > header:first-child
 				{
 					width: 100%;
 					box-sizing: border-box;
 					padding: 35px 0;
 					letter-spacing: 0.3em;
-					
+
 					h2,h3
 					{
 						#font > .lato(2em,@grey,700);
@@ -1114,7 +1114,7 @@
 					}
 				}
 			}
-			
+
 			&.full
 			{
 				& > div.wrapper
@@ -1125,51 +1125,51 @@
 					padding: 0;
 				}
 			}
-			
+
 			&[id="passported-home"]
 			{
 				margin-top: @header-height;
-				
+
 				div.gallery-wrapper
 				{
 					@w: 600px;
 					@h: 440px;
-					
+
 					#align > .left;
 					width: 100%;
-					
+
 					ul
 					{
 						#align > .left;
 						width: 100%;
 						overflow: hidden;
-						
+
 						li
 						{
 							#align > .left;
 							padding: @b-size @b-size/2 @b-size @b-size/2;
 							box-sizing: border-box;
 							display: block;
-							
+
 							a
 							{
 								.set-size(@w,@h);
 								#align > .left;
 								display: block;
-								
+
 								figure
 								{
 									.set-size(100%,100%);
 									position: absolute;
 									overflow: hidden;
-									
+
 									img
 									{
 										min-width: 100%;
 										min-height: 100%;
 									}
 								}
-								
+
 								footer
 								{
 									width: 100%;
@@ -1178,7 +1178,7 @@
 									position: absolute;
 									bottom: 0;
 									display: block;
-									
+
 									h2,
 									time
 									{
@@ -1187,7 +1187,7 @@
 										float: left;
 										text-align: center;
 									}
-									
+
 									h2
 									{
 										#font > .lato(1.2em,white,700);
@@ -1195,19 +1195,19 @@
 										line-height: 2em;
 										letter-spacing: 0.1em;
 									}
-									
+
 									time
 									{
 										#font > .gar(1.2em,white);
 									}
 								}
 							}
-							
+
 							&:first-child
 							{
-								padding-left: @b-size;	
+								padding-left: @b-size;
 							}
-							
+
 							&:last-child
 							{
 								padding-right: @b-size;
@@ -1216,12 +1216,12 @@
 					}
 				}
 			}
-			
+
 			&[id="search-and-newsletter"]
 			{
 				border-bottom: solid 1px @light-grey;
 				padding: 0;
-				
+
 				div.wrapper
 				{
 					div.half
@@ -1230,12 +1230,12 @@
 						#align > .left;
 						box-sizing: border-box;
 						padding: @content-padding 2 * @content-padding;
-						
+
 						header
 						{
 							width: 100%;
 							#align > .left;
-							
+
 							h4
 							{
 								#font > .gar(1.4em,@grey);
@@ -1244,7 +1244,7 @@
 								text-align: center;
 								margin-bottom: @content-padding/2;
 								display: block;
-								
+
 								&:before,
 								&:after
 								{
@@ -1255,18 +1255,18 @@
 									top: 8px;
 									content: '';
 								}
-								
+
 								&:before
 								{
 									left: 0;
 								}
-								
+
 								&:after
 								{
 									right: 0;
 								}
 							}
-							
+
 							span
 							{
 								#font > .lato(0.9em,@grey,700);
@@ -1276,7 +1276,7 @@
 								display: none;
 							}
 						}
-						
+
 						form
 						{
 							div.wrapper
@@ -1284,14 +1284,14 @@
 								width: 100%;
 								margin: @content-padding/3 0;
 								#align > .left;
-								
+
 								h3
 								{
 									#font > .lato(2em,@grey,700);
 									text-align: center;
 									display: none;
 								}
-								
+
 								input[type="email"]
 								{
 									#font > .lato(1em,@grey,700);
@@ -1308,7 +1308,7 @@
 									display: block;
 								}
 							}
-							
+
 							input[type="submit"]
 							{
 								#font > .lato(0.9em,@grey,700);
@@ -1322,13 +1322,13 @@
 								background: white;
 							}
 						}
-						
+
 						div.select
 						{
 							display: none;
 						}
 					}
-					
+
 					div.vertical-line-divider
 					{
 						.set-size(1px,50%);
@@ -1338,7 +1338,7 @@
 					}
 				}
 			}
-			
+
 			&[id="passported-picks"]
 			{
 				& > div.wrapper
@@ -1348,7 +1348,7 @@
 					float: none;
 					position: relative;
 					padding: @content-padding 0 @content-padding/2 0;
-									 
+
 					& > header
 					{
 						h2
@@ -1357,11 +1357,11 @@
 							#align > .left;
 							display: block;
 							margin-bottom: @content-padding;
-							
+
 							&:after
 							{
 								@s: 100px;
-								
+
 								.set-size(@s,@s);
 								.set-coord(50%,50%);
 								.set-bg(transparent,'@{media-url}icons/feather-grey-icon.svg',no-repeat,left,center);
@@ -1373,12 +1373,12 @@
 							}
 						}
 					}
-					
+
 					& > article,
 					& > a
 					{
 						@m-height: 350px;
-						
+
 						.set-size(100%/2);
 						#align > .left;
 						display: block;
@@ -1386,7 +1386,7 @@
 						margin-bottom: 1.5 * @content-padding;
 						border: solid @b-size/2 white;
 						box-sizing: border-box;
-						
+
 						h3
 						{
 							#font > .lato(1em,@grey,700);
@@ -1394,7 +1394,7 @@
 							text-transform: uppercase;
 							line-height: 1.8em;
 						}
-						
+
 						time
 						{
 							#font > .gar(1em,@grey);
@@ -1406,7 +1406,7 @@
 							line-height: 2em;
 							padding: 0 @content-padding;
 						}
-						
+
 						figure
 						{
 							width: 100%;
@@ -1414,13 +1414,13 @@
 							overflow: hidden;
 							max-height: @m-height;
 							margin-bottom: @content-padding/3;
-							
+
 							img
 							{
 								height: 100%;
 							}
 						}
-						
+
 						a
 						{
 							#font > .gar(1.2em,@grey);
@@ -1431,14 +1431,14 @@
 							width: auto;
 							text-align: center;
 							display: table;
-							
+
 						}
-						
+
 						button
 						{}
-						
+
 						// Types of entries...
-						
+
 						&.main
 						{
 							width: 100%;
@@ -1446,18 +1446,18 @@
 							padding-bottom: @content-padding;
 							border: none;
 							border-bottom: solid 1px @light-grey;
-							
+
 							figure
 							{
 								margin-bottom: 0;
 								max-height: 2 * @m-height;
 							}
-							
+
 							time
 							{
 								font-size: 1.2em;
 							}
-							
+
 							h3
 							{
 								font-size: 2em;
@@ -1465,7 +1465,7 @@
 								letter-spacing: 0.1em;
 								margin-bottom: @content-padding;
 							}
-							
+
 							p
 							{
 								#font > .lato(1.1em,@grey,300);
@@ -1476,24 +1476,24 @@
 								box-sizing: border-box;
 							}
 						}
-						
+
 						&.call-to-action
 						{
 							display: table;
 							margin-bottom: 0;
-							
+
 							div.vertical-wrapper
 							{
 								display: table-cell;
 								vertical-align: middle;
-								
+
 								div.icon
 								{
 									.set-size(85px,85px);
 									#align > .center;
 									display: table;
 								}
-								
+
 								h3
 								{
 									padding-top: 0;
@@ -1505,11 +1505,11 @@
 									letter-spacing: 0.02em;
 								}
 							}
-							
+
 							&[id="book-a-trip"]
 							{
 								.set-bg(transparent,'@{media-url}backgrounds/cloud-texture.jpg');
-								
+
 								div.icon
 								{
 									.set-bg(transparent,'@{media-url}icons/chat-icon.svg');
@@ -1517,23 +1517,23 @@
 									background-position: center top;
 								}
 							}
-							
+
 							&[id="explore"]
 							{
 								.set-bg(transparent,'@{media-url}backgrounds/cloud-texture-right.jpg');
-								
+
 								div.icon
 								{
 									.set-bg(transparent,'@{media-url}icons/location-icon.svg');
 									background-size: auto 80%;
-									background-position: center top;	
+									background-position: center top;
 								}
 							}
 						}
 					}
 				}
 			}
-			
+
 			&[id="instagram-feed"]
 			{
 				div.wrapper
@@ -1545,50 +1545,50 @@
 							font-weight: 400;
 						}
 					}
-					
+
 					div.gallery-wrapper
 					{
 						@h: 200px;
-						
+
 						#align > .left;
 						width: 100%;
-						
+
 						ul
 						{
 							.set-size(100%,@h);
 							overflow: hidden;
-							
+
 							li
 							{
 								#align > .left;
 								padding: @b-size @b-size/2;
 								box-sizing: border-box;
-								
+
 								a
 								{
 									.set-size(@h,@h);
 									#align > .left;
 									overflow: hidden;
-								
+
 									img
 									{
 										min-height: 100%;
 									}
 								}
-								
+
 								&:first-child
 								{
-									padding-left: @b-size;	
+									padding-left: @b-size;
 								}
-								
+
 								&:last-child
 								{
 									padding-right: @b-size;
 								}
 							}
-						}					
+						}
 					}
-					
+
 					div[id="plan-banner"]
 					{
 						.set-size(100%,800px);
@@ -1599,26 +1599,26 @@
 						overflow: hidden;
 						border: solid @b-size white;
 						border-top: 0;
-						
+
 						figure
 						{
 							.set-size(100%,100%);
 							.set-coord(0,0);
 							position: absolute;
 							overflow: hidden;
-						
+
 							img
 							{
 								height: 100%;
 							}
 						}
-						
+
 						div.vertical-wrapper
 						{
 							.set-size(100%);
 							.set-coord(0,40%);
 							position: absolute;
-							
+
 							h4
 							{
 								#font > .lato(4em,white,400);
@@ -1630,7 +1630,7 @@
 								margin-bottom: 4 * @content-padding;
 								z-index: 1;
 							}
-							
+
 							a
 							{}
 						}
@@ -1638,11 +1638,11 @@
 				}
 			}
 		}
-		
+
 		/* ------------------------------------------------------------------------------------------------------------- */
 		/* ~ Footer ~ */
 		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-		
+
 		body > footer
 		{
 			.set-size(100%);
@@ -1650,18 +1650,18 @@
 			#align > .left;
 			overflow: hidden;
 			z-index: 4;
-			
+
 			& > nav
 			{
 				@vertical-padding: 2 * @content-padding;
-				
+
 				.set-size(@wrapper-width);
 				.box-sizing();
 				#align > .center;
 				display: block;
 				padding: @content-padding 0 @vertical-padding 0;
 				overflow: hidden;
-				
+
 				ul
 				{
 					.set-size(@grid-3);
@@ -1669,7 +1669,7 @@
 					#align > .left;
 					padding: @content-padding/2;
 					overflow: hidden;
-					
+
 					li
 					{
 						.set-size(100%);
@@ -1677,7 +1677,7 @@
 						#align > .left;
 						padding-top: @gutter;
 						overflow: hidden;
-						
+
 						&:first-child
 						{
 							#font > .lato(24px,@color-2,300);
@@ -1686,29 +1686,29 @@
 							border-bottom: solid 1px fadeout(@color-2,50%);
 							padding: 60px 0 10px 50px;
 							margin-bottom: 10px;
-							
+
 							span
 							{
-								@size: 100px; 
+								@size: 100px;
 								@bg-size: 30px;
-								
+
 								.set-size(@size/2,@size);
 								.set-pos(absolute);
 								bottom: @gutter;
 								left: @unit;
-								
+
 								&.popular
 								{
 									.set-bg(transparent,'@{media-url}icons/hotel-pin-icon.svg',no-repeat,left,bottom);
 									.set-bgs(@bg-size);
 								}
-								
+
 								&.destinations
 								{
 									.set-bg(transparent,'@{media-url}icons/destination-pin-icon.svg',no-repeat,left,bottom);
 									.set-bgs(@bg-size);
 								}
-								
+
 								&.passported
 								{
 									.set-bg(transparent,'@{media-url}icons/feather-icon.svg',no-repeat,left,bottom);
@@ -1716,7 +1716,7 @@
 								}
 							}
 						}
-												
+
 						a
 						{
 							.set-size(100%);
@@ -1725,8 +1725,8 @@
 							.box-sizing();
 							#font > .lato(12px,@color-2,300);
 							text-transform: uppercase;
-							padding-left: @gutter; 
-							
+							padding-left: @gutter;
+
 							&:hover
 							{
 								.set-opacity(0.75);
@@ -1735,23 +1735,23 @@
 					}
 				}
 			}
-			
+
 			& > div.fixed-bar
 			{
 				@height: 130px;
-				
+
 				.set-size(100%,@height);
 				.box-sizing();
 				.set-bgc(black);
 				#align > .left;
 				padding: 0 @content-padding;
-				
+
 				a[id$="brand"]
 				{
 					.set-size(auto,100%);
 					.set-pos(absolute);
 					.set-coord(@content-padding,0);
-					
+
 					img,
 					object
 					{
@@ -1760,13 +1760,13 @@
 						margin-top: 20%;
 						margin-left: @content-padding;
 					}
-					
+
 					&[id="tzell-brand"]
 					{
 						right: @content-padding;
 						left: auto;
 						display: none;
-						
+
 						small
 						{
 							.reset();
@@ -1774,7 +1774,7 @@
 							#font > .lato(10px,white,400);
 							top: @content-padding;
 						}
-						
+
 						img
 						{
 							height: 35%;
@@ -1782,7 +1782,7 @@
 						}
 					}
 				}
-				
+
 				& > nav[id="social-media"]
 				{
 					.set-size();
@@ -1791,15 +1791,14 @@
 					display: table;
 					margin-top: 52px;
 				}
-				
+
 				& > small
 				{
 					.set-size(100%);
 					#align > .left;
 					#font > .lato(10px,white,400);
-					text-align: center; 
+					text-align: center;
 					padding: @content-padding - @unit 0 0 0;
 				}
 			}
 		}
-		
