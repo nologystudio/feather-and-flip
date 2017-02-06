@@ -371,7 +371,7 @@
                     var skyAnimator = function(){
 
                         var setAnimation = function(_element){
-                            _element.transition({left:-212},30000,'linear',function(){
+                            _element.transition({left:-212},_.random(30000,60000),'linear',function(){
                                 _element.css({left:'100%'});
                                 setAnimation(_element);
                             });
