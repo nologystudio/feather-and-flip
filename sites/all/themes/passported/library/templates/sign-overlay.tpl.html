@@ -8,7 +8,7 @@
 		<!-- Form -->
 		<form name="newsletterForm">
 			<!-- Messages -->
-			<strong class="animated fadeInUp" ng-if="alert.on">[[ alert.message ]]</strong>
+			<strong class="animated fadeInUp" ng-if="alert.on">{{ alert.message }}</strong>
 			<!-- Fields -->
 			<fieldset ng-if="!alert.on">
 				<input name="user-name" type="text" placeholder="Name" ng-model="user.name" required/>
