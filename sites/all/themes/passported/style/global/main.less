@@ -4509,7 +4509,7 @@
 				margin: auto;
 				top: 50%;
 				transform: translateY(-50%);
-				box-shadow: 0 0 1em fadeout(black,50%);
+				box-shadow: 0 0 5px 1px fadeout(black,50%);
 
 				div[id="cloud-wrapper"]
 				{
@@ -4532,8 +4532,8 @@
 					#font > .ic(20px,white);
 					background: transparent;
 					border: 0;
-					right: 20px;
-					top: 20px;
+					right: 35px;
+					top: 35px;
 					color: white;
 					display: block;
 
@@ -4555,15 +4555,27 @@
 					padding: 70px 20px 20px 20px;
 					text-align: center;
 					box-sizing: border-box;
+					line-height: 22px;
 				}
 
+				small
+				{
+					#font > .lato(10px,white,700);
+					position: absolute;
+					bottom: 30px;
+					width: 100%;
+					text-align: center;
+					text-transform: uppercase;
+					display: block;
+				}
+				
 				form
 				{
 					width: 100%;
 					float: left;
 					position: relative;
 					display: block;
-					margin-top: 30px;
+					margin-top: 10px;
 
 					strong
 					{
@@ -4588,8 +4600,8 @@
 						&[type="email"]
 						{
 							#font > .lato(16px,white,700);
+							.set-placeholder-style(white);
 							width: 50%;
-							float: left;
 							border: solid 1px fadeout(white,50%);
 							padding: 10px 40px;
 							text-align: center;
@@ -4597,6 +4609,7 @@
 							background: transparent;
 							clear: both;
 							margin: 0 auto 20px auto;
+							display: block;
 
 							&.ng-dirty.ng-invalid
 							{
@@ -4615,6 +4628,7 @@
 							opacity: 1;
 							background: transparent;
 							border: 0;
+							margin-top: 20px;
 
 							&.disabled
 							{
@@ -4623,16 +4637,6 @@
 						}
 					}
 
-					small
-					{
-						#font > .lato(10px,white,700);
-						position: absolute;
-						bottom: 30px;
-						width: 100%;
-						text-align: center;
-						text-transform: uppercase;
-						display: block;
-					}
 				}
 			}
 		}
