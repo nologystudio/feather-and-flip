@@ -295,7 +295,7 @@
                 restrict  : 'EA',
                 replace   : true,
                 templateUrl : drupalTemplatePath + 'library/templates/sign-overlay.tpl.html',
-                controller: function($scope,$cookies,$timeout,$element){
+                controller: function($scope,$cookies,$timeout,$element,$http){
 
                     $scope.alert = {
                         on: false,
