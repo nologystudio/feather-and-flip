@@ -336,7 +336,7 @@
                             close: function(){
                                 $($element[0]).transition({opacity:0,duration:300},function(){
                                     $($element[0]).hide();
-                                    actions.reset();
+                                    $scope.actions.reset();
                                 });
                             }
                         },
@@ -371,7 +371,7 @@
                     var skyAnimator = function(){
 
                         var setAnimation = function(_element,_speed){
-                            _element.transition({left:-212,},(_speed * 20000),'linear',function(){
+                            _element.transition({left:-212},(_speed * 30000),'linear',function(){
                                 _element.css({left:'100%'});
                                 setAnimation(_element,_speed);
                             });
@@ -379,7 +379,7 @@
 
                         for(var i=0;i<3;i++){
                             $('#cloud-wrapper').append('<div id="cloud-'+i+'" class="cloud"></div>');
-                            setAnimation($('#cloud-'+i),(i+1));
+                            setAnimation($('#cloud-'+i),i);
                         }
                     }
 
