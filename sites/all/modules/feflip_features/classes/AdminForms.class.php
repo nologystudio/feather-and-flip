@@ -100,6 +100,10 @@ class AdminForms
         try
         {
             $url = self::ROBLY_URL.'?api_id='.self::API_ID.'&api_key='.self::API_KEY.'&email='.$custom_data['userEmail'].'&sub_lists[]='.self::ROBLY_LIST.'&welcome_email=true';
+            // Add first name if exists
+            if (isset($custom_data['userName']))
+                $url .= '&fname='.$custom_data['userName'];
+
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, $url);
             curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));

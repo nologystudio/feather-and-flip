@@ -323,10 +323,10 @@
                                 transformRequest: angular.identity
                             }).
                             success(function(_data){
-                                $scope.actions.alert();
+                                $scope.actions.alert('Thanks!');
                             }).
                             error(function(){
-                                $scope.actions.alert();
+                                $scope.actions.alert("We're sorry, an error has occurred");
                             });
                         },
                         transitioner: {
