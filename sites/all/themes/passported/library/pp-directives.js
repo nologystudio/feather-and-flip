@@ -370,16 +370,16 @@
 
                     var skyAnimator = function(){
 
-                        var setAnimation = function(_element){
-                            _element.transition({x:-212,duration:10000},function(){
+                        var setAnimation = function(_element,_speed){
+                            _element.transition({left:-212,duration:(_speed * 15000)},function(){
                                 _element.css({left:'100%'});
-                                setAnimation();
+                                setAnimation(_element);
                             });
                         }
 
                         for(var i=0;i<3;i++){
                             $('#cloud-wrapper').append('<div id="cloud-'+i+'" class="cloud"></div>');
-                            setAnimation($('#cloud-1'));
+                            setAnimation($('#cloud-'+i),(i+1));
                         }
                     }
 
