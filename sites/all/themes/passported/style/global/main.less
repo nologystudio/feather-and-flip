@@ -4517,6 +4517,7 @@
 					.set-coord(0,0);
 					position: absolute;
 					display: block;
+					overflow: hidden;
 					z-index: 0;
 
 					div.cloud
@@ -4525,21 +4526,21 @@
 						position: absolute;
 						display: block;
 
+						&[id="cloud-0"]
+						{
+							.set-bg(transparent,'@{media-url}backgrounds/cloud-1.png');
+							.set-coord(-20px,0);
+						}
+
 						&[id="cloud-1"]
 						{
-							.set-bg(white,'@{media-url}backgrounds/cloud-1.png');
-							.set-coord(-20px,0);
+							.set-bg(transparent,'@{media-url}backgrounds/cloud-2.png');
+							.set-coord(490px,20px);
 						}
 
 						&[id="cloud-2"]
 						{
-							.set-bg(white,'@{media-url}backgrounds/cloud-2.png');
-							.set-coord(490px,20px);
-						}
-
-						&[id="cloud-3"]
-						{
-							.set-bg(white,'@{media-url}backgrounds/cloud-3.png');
+							.set-bg(transparent,'@{media-url}backgrounds/cloud-3.png');
 							.set-coord(325px,325px);
 						}
 					}

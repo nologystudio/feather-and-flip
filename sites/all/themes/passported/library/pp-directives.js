@@ -336,7 +336,7 @@
                             close: function(){
                                 $($element[0]).transition({opacity:0,duration:300},function(){
                                     $($element[0]).hide();
-                                    processor.reset();
+                                    actions.reset();
                                 });
                             }
                         },
@@ -369,8 +369,18 @@
                     }
 
                     var skyAnimator = function(){
-                        for(var i=0;i<3;i++)
+
+                        var setAnimation = function(_element){
+                            _element.transition({x:-212,duration:10000},function(){
+                                _element.css({left:'100%'});
+                                setAnimation();
+                            });
+                        }
+
+                        for(var i=0;i<3;i++){
                             $('#cloud-wrapper').append('<div id="cloud-'+i+'" class="cloud"></div>');
+                            setAnimation($('#cloud-1'));
+                        }
                     }
 
                     $timeout(function(){
