@@ -4520,7 +4520,29 @@
 					z-index: 0;
 
 					div.cloud
-					{}
+					{
+						.set-size(212px,178px);
+						position: absolute;
+						display: block;
+
+						&[id="cloud-1"]
+						{
+							.set-bg(white,'@{media-url}backgrounds/cloud-1.png');
+							.set-coord(-20px,0);
+						}
+
+						&[id="cloud-2"]
+						{
+							.set-bg(white,'@{media-url}backgrounds/cloud-2.png');
+							.set-coord(490px,20px);
+						}
+
+						&[id="cloud-3"]
+						{
+							.set-bg(white,'@{media-url}backgrounds/cloud-3.png');
+							.set-coord(325px,325px);
+						}
+					}
 				}
 
 				button[rel="close"]
@@ -4536,6 +4558,7 @@
 					top: 35px;
 					color: white;
 					display: block;
+					z-index: 10;
 
 					&:before
 					{
@@ -4546,13 +4569,13 @@
 				h3
 				{
 					#font > .lato(16px,white,700);
-					.set-bg(transparent,'@{media-url}brand/passported-white-logo.svg',no-repeat,center,top);
+					.set-bg(transparent,'@{media-url}brand/passported-white-logo.svg',no-repeat,center,20px);
 					background-size: 50% auto;
 					width: 100%;
 					float: left;
 					position: relative;
 					text-transform: uppercase;
-					padding: 70px 20px 20px 20px;
+					padding: 100px 20px 20px 20px;
 					text-align: center;
 					box-sizing: border-box;
 					line-height: 22px;
@@ -4562,7 +4585,7 @@
 				{
 					#font > .lato(10px,white,700);
 					position: absolute;
-					bottom: 30px;
+					bottom: 20px;
 					left: 0;
 					width: 100%;
 					text-align: center;
@@ -4617,6 +4640,7 @@
 							{
 								border-color: @warning-color;
 								color: @warning-color;
+								display: block;
 							}
 						}
 
@@ -4630,7 +4654,7 @@
 							opacity: 1;
 							background: transparent;
 							border: 0;
-							margin-top: 20px;
+							margin-top: 5px;
 
 							&.disabled
 							{
@@ -4638,7 +4662,6 @@
 							}
 						}
 					}
-
 				}
 			}
 		}
