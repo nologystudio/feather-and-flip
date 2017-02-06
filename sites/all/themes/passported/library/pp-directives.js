@@ -343,7 +343,7 @@
                         cookie: {
                             set: function(){
                                 $cookies.putObject('pp-nlck',{
-                                    expiration: moment().add(2,'weeks')
+                                    expiration: moment().add(1,'weeks')
                                 });
                             },
                             check: function(){
@@ -384,8 +384,10 @@
                     }
 
                     $timeout(function(){
-                        $scope.actions.cookie.check();
-                        skyAnimator();
+                        if($(window).width() > 800)){
+                            $scope.actions.cookie.check();
+                            skyAnimator();
+                        }
                     });
                 },
                 link : function($scope,$element,_attrs){
