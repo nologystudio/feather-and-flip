@@ -351,7 +351,6 @@
                                     $scope.actions.transitioner.open();
                                     $scope.actions.cookie.set();
                                 }
-                                else console.log('Cookie is set for this user and will expire on: ' + $cookies.getObject('pp-nlck').expiration);
                             }
                         },
                         reset: function(){
