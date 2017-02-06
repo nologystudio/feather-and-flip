@@ -384,7 +384,7 @@
                     }
 
                     $timeout(function(){
-                        if($(window).width() > 800)){
+                        if($(window).width() > 800){
                             $scope.actions.cookie.check();
                             skyAnimator();
                         }
