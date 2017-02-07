@@ -1221,6 +1221,7 @@
 			$scope.changePassword = false;
 
 			$scope.triggerOverlay = function(){
+                console.log($scope.triggerState);
 				switch($scope.triggerState){
 					case 'hidden':
 						$scope.display = false;
@@ -1228,8 +1229,7 @@
 					default:
 						$scope.display = true;
 						$scope.$digest();
-                        console.log($scope.display);
-                        console.log($scope.triggerState);
+                        console.log('entrada en digest');
 					break;
 				}
 			}
