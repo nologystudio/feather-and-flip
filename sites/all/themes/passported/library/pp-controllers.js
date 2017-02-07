@@ -1221,7 +1221,7 @@
 			$scope.changePassword = false;
 
 			$scope.triggerOverlay = function(){
-				switch($scope.triggerState){
+                switch($scope.triggerState){
 					case 'hidden':
 						$scope.display = false;
 					break;
