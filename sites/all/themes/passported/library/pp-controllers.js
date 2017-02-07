@@ -1279,11 +1279,11 @@
 			// Bind cookie event...
 
 			$rootScope.$on('display-overlay',function(_e,_data){
-				if(!$scope.user){
+				//if(!$scope.user){
 					$scope.triggerState = messageType[1];
 					$scope.triggerOverlay();
 					$('.call-to-action').show().transition({opacity:1});
-				}
+				//}
 			});
 
 			// Trigger password request...
