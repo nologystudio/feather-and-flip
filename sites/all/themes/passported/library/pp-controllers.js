@@ -1228,6 +1228,8 @@
 					default:
 						$scope.display = true;
 						$scope.$digest();
+                        console.log($scope.display);
+                        console.log($scope.triggerState);
 					break;
 				}
 			}
@@ -1281,7 +1283,6 @@
 					$scope.triggerState = messageType[1];
 					$scope.triggerOverlay();
 					$('.call-to-action').show().transition({opacity:1});
-                    console.log('entrada evento:'+$scope.triggerState);
 				}
 			});
 
