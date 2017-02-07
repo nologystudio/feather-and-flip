@@ -1295,6 +1295,7 @@
 			// Trigger password request...
 
 			$('#sign-in').on('click',function(_e){
+                console.log('sign-in click');
 				$rootScope.$emit('display-overlay','');
 				$scope.type = $scope.types[1];
 				$scope.$apply();
@@ -1302,6 +1303,7 @@
 			});
 
 			$('#sign-up').on('click',function(_e){
+                console.log('sign-up click');
 				$rootScope.$emit('display-overlay','');
 				$scope.type = $scope.types[0];
 				$scope.$apply();
