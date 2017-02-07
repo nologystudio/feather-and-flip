@@ -302,7 +302,7 @@
                         message: undefined
                     }
 
-                    $scope.user = {
+                    $scope.newsUser = {
                         name: undefined,
                         email: undefined
                     }
@@ -316,7 +316,7 @@
                             $http({
                                 method : 'POST',
                                 url    : formSubmit,
-                                data   : $.param({formID:'newsletterForm','userName':$scope.user.name,'userEmail':$scope.user.email}),
+                                data   : $.param({formID:'newsletterForm','userName':$scope.newsUser.name,'userEmail':$scope.newsUser.email}),
                                 headers : {
                                     'Content-Type' : 'application/x-www-form-urlencoded'
                                 },

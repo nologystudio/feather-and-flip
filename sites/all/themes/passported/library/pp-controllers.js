@@ -1221,15 +1221,13 @@
 			$scope.changePassword = false;
 
 			$scope.triggerOverlay = function(){
-                console.log($scope.triggerState);
-				switch($scope.triggerState){
+                switch($scope.triggerState){
 					case 'hidden':
 						$scope.display = false;
 					break;
 					default:
 						$scope.display = true;
 						$scope.$digest();
-                        console.log('entrada en digest');
 					break;
 				}
 			}
@@ -1279,11 +1277,11 @@
 			// Bind cookie event...
 
 			$rootScope.$on('display-overlay',function(_e,_data){
-				//if(!$scope.user){
+				if(!$scope.user){
 					$scope.triggerState = messageType[1];
 					$scope.triggerOverlay();
 					$('.call-to-action').show().transition({opacity:1});
-				//}
+				}
 			});
 
 			// Trigger password request...
