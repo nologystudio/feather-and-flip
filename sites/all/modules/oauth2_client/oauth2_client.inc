@@ -3,7 +3,7 @@ namespace OAuth2;
 
 /**
  * @file
- * class OAuth2\Client
+ * Class OAuth2\Client
  */
 
 /**
@@ -19,8 +19,11 @@ namespace OAuth2;
  * scope as well.
  */
 class Client {
+
   /**
    * Unique identifier of an OAuth2\Client object.
+   *
+   * @var string
    */
   protected $id = NULL;
 
@@ -40,6 +43,10 @@ class Client {
    *  - scope :: requested scopes, separated by a space
    *  - username :: username of the resource owner
    *  - password :: password of the resource owner
+   *  - skip-ssl-verification :: Skip verification of the SSL connection
+   *       (needed for testing).
+   *
+   * @var array
    */
   protected $params = array(
     'auth_flow' => NULL,
@@ -51,19 +58,29 @@ class Client {
     'scope' => NULL,
     'username' => NULL,
     'password' => NULL,
+    'skip-ssl-verification' => FALSE,
   );
 
   /**
    * Associated array that keeps data about the access token.
+   *
+   * @var array
    */
   protected $token = array(
-    'access_token' => NULL,
-    'expires_in' => NULL,
-    'token_type' => NULL,
-    'scope' => NULL,
-    'refresh_token' => NULL,
-    'expiration_time' => NULL,
-  );
+      'access_token' => NULL,
+      'expires_in' => NULL,
+      'token_type' => NULL,
+      'scope' => NULL,
+      'refresh_token' => NULL,
+      'expiration_time' => NULL,
+    );
+
+  /**
+   * Return the token array.
+   */
+  function token() {
+    return $this->token;
+  }
 
   /**
    * Construct an OAuth2\Client object.
@@ -71,13 +88,14 @@ class Client {
    * @param array $params
    *   Associative array of the parameters that are needed
    *   by the different types of authorization flows.
-   *
    * @param string $id
    *   ID of the client. If not given, it will be generated
    *   from token_endpoint, client_id and auth_flow.
    */
-  public function __construct($params = NULL, $id = NULL) {
-    if ($params) $this->params = $params + $this->params;
+  public function __construct(array $params = NULL, $id = NULL) {
+    if ($params) {
+      $this->params = $params + $this->params;
+    }
 
     if (!$id) {
       $id = md5($this->params['token_endpoint']
@@ -86,21 +104,87 @@ class Client {
     }
     $this->id = $id;
 
-    // Get the token data from the session, if it is stored there.
-    if (isset($_SESSION['oauth2_client']['token'][$this->id])) {
-      $this->token = $_SESSION['oauth2_client']['token'][$this->id] + $this->token;
+    // Get the token data from the storage, if exists.
+    $this->token = static::loadToken($this->id);
+  }
+
+  /**
+   * Clear the token data.
+   */
+  public function clearToken() {
+    static::discardToken($this->id);
+    $this->token = static::loadToken($this->id);
+  }
+
+  /**
+   * Store the token data.
+   *
+   * @param $key
+   *   The token identifier.
+   * @param array $token
+   *   The token data to store.
+   */
+  public static function storeToken($key, array $token) {
+    $_SESSION['oauth2_client']['token'][$key] = $token;
+  }
+
+  /**
+   * Load the token data from the storage.
+   *
+   * @param $key
+   *   The token identifier.
+   * @return array
+   *   The token data stored for the given key,
+   *   or an empty token if such a key does not exist.
+   */
+  public static function loadToken($key) {
+    if (isset($_SESSION['oauth2_client']['token'][$key])) {
+      return $_SESSION['oauth2_client']['token'][$key];
+    }
+    else {
+      return static::emptyToken();
+    }
+  }
+
+  /**
+   * Return an empty token.
+   */
+  protected static function emptyToken() {
+    return array(
+      'access_token' => NULL,
+      'expires_in' => NULL,
+      'token_type' => NULL,
+      'scope' => NULL,
+      'refresh_token' => NULL,
+      'expiration_time' => NULL,
+    );
+  }
+
+  /**
+   * Remove token from storage.
+   *
+   * @param $key
+   *   The token identifier.
+   */
+  protected static function discardToken($key) {
+    if (isset($_SESSION['oauth2_client']['token'][$key])) {
+      unset($_SESSION['oauth2_client']['token'][$key]);
     }
   }
 
   /**
    * Get and return an access token.
    *
-   * If there is an existing token (stored in session),
-   * return that one. But if the existing token is expired,
-   * get a new one from the authorization server.
+   * If there is an existing token (stored in session), return that one. But if
+   * the existing token is expired, get a new one from the authorization server.
+   *
+   * If the refresh_token has also expired and the auth_flow is 'server-side', a
+   * redirection to the oauth2 server will be made, in order to re-authenticate.
+   * However the redirection will be skipped if the parameter $redirect is
+   * FALSE, and NULL will be returned as access_token.
    */
-  public function getAccessToken() {
-    // Check wheather the existing token has expired.
+  public function getAccessToken($redirect = TRUE) {
+    // Check whether the existing token has expired.
     // We take the expiration time to be shorter by 10 sec
     // in order to account for any delays during the request.
     // Usually a token is valid for 1 hour, so making
@@ -137,24 +221,29 @@ class Client {
           break;
 
         case 'server-side':
-          $token = $this->getTokenServerSide();
+          if ($redirect) {
+            $token = $this->getTokenServerSide();
+          }
+          else {
+            $this->clearToken();
+            return NULL;
+          }
           break;
 
         default:
           throw new \Exception(t('Unknown authorization flow "!auth_flow". Suported values for auth_flow are: client-credentials, user-password, server-side.',
               array('!auth_flow' => $this->params['auth_flow'])));
-          break;
       }
     }
     $token['expiration_time'] = REQUEST_TIME + $token['expires_in'];
 
     // Store the token (on session as well).
     $this->token = $token;
-    $_SESSION['oauth2_client']['token'][$this->id] = $token;
+    static::storeToken($this->id, $token);
 
     // Redirect to the original path (if this is a redirection
     // from the server-side flow).
-    self::redirect();
+    static::redirect();
 
     // Return the token.
     return $token['access_token'];
@@ -235,15 +324,25 @@ class Client {
    */
   protected function getTokenServerSide() {
     if (!isset($_GET['code'])) {
-      drupal_goto($this->getAuthenticationUrl());
+      $url = $this->getAuthenticationUrl();
+      header('Location: ' . $url, TRUE, 302);
+      drupal_exit($url);
     }
-    else {
-      return $this->getToken(array(
-          'grant_type' => 'authorization_code',
-          'code' => $_GET['code'],
-          'redirect_uri' => $this->params['redirect_uri'],
-        ));
+
+    // Check the query parameter 'state'.
+    if (
+      !isset($_GET['state']) ||
+      !isset($_SESSION['oauth2_client']['redirect'][$_GET['state']])
+    ) {
+      throw new \Exception(t("Wrong query parameter 'state'."));
     }
+
+    // Get and return a token.
+    return $this->getToken(array(
+        'grant_type' => 'authorization_code',
+        'code' => $_GET['code'],
+        'redirect_uri' => $this->params['redirect_uri'],
+      ));
   }
 
   /**
@@ -253,28 +352,26 @@ class Client {
     $state = md5(uniqid(rand(), TRUE));
     $query_params = array(
       'response_type' => 'code',
-      'client_id'     => $this->params['client_id'],
-      'redirect_uri'  => $this->params['redirect_uri'],
-      'state' => $state
+      'client_id' => $this->params['client_id'],
+      'redirect_uri' => $this->params['redirect_uri'],
+      'state' => $state,
     );
     if ($this->params['scope']) {
       $query_params['scope'] = $this->params['scope'];
     }
     $endpoint = $this->params['authorization_endpoint'];
-    self::setRedirect($state);
+    static::setRedirect($state);
     return $endpoint . '?' . http_build_query($query_params);
   }
 
   /**
    * Save the information needed for redirection after getting the token.
    */
-  public static function setRedirect($state, $redirect =NULL) {
-    if ($redirect == NULL) {
-      $destination = drupal_get_destination();
-      $destination = $destination['destination'];
+  public static function setRedirect($state, $redirect = NULL) {
+    if (is_null($redirect)) {
       $redirect = array(
-        'uri' => $destination,
-        'params' => array(),
+        'uri' => $_GET['q'],
+        'params' => drupal_get_query_parameters(),
         'client' => 'oauth2_client',
       );
     }
@@ -291,17 +388,25 @@ class Client {
    * The redirect contains the url to go to and the parameters
    * to be sent to it.
    */
-  public static function redirect($clean =TRUE) {
-    if (!isset($_REQUEST['state']))  return;
+  public static function redirect($clean = TRUE) {
+    if (!isset($_REQUEST['state'])) {
+      return;
+    }
     $state = $_REQUEST['state'];
 
-    if (!isset($_SESSION['oauth2_client']['redirect'][$state]))  return;
+    if (!isset($_SESSION['oauth2_client']['redirect'][$state])) {
+      return;
+    }
     $redirect = $_SESSION['oauth2_client']['redirect'][$state];
 
-    if ($redirect['client'] != 'oauth2_client') {
+    // We don't expect a 'destination' query argument coming from the oauth2 server.
+    // This would confuse and misguide the function drupal_goto() that is called below.
+    if (isset($_GET['destination'])) {
+      unset($_GET['destination']);
+    }
+
+    if ($redirect['client'] !== 'oauth2_client') {
       unset($_SESSION['oauth2_client']['redirect'][$state]);
-      drupal_goto($redirect['uri'],
-        array('query' => $redirect['params'] + $_REQUEST));
     }
     else {
       if ($clean) {
@@ -309,16 +414,17 @@ class Client {
         unset($_REQUEST['code']);
         unset($_REQUEST['state']);
       }
-      drupal_goto($redirect['uri'],
-        array('query' => $redirect['params'] + $_REQUEST));
     }
+    unset($_REQUEST['q']);
+    drupal_goto($redirect['uri'],
+      array('query' => $redirect['params'] + $_REQUEST));
   }
 
   /**
    * Get and return an access token for the grant_type given in $params.
    */
   protected function getToken($data) {
-    if (isset($data['scope']) and $data['scope'] == NULL) {
+    if (array_key_exists('scope', $data) && is_null($data['scope'])) {
       unset($data['scope']);
     }
 
@@ -334,6 +440,14 @@ class Client {
         'Authorization' => 'Basic ' . base64_encode("$client_id:$client_secret"),
       ),
     );
+    if ($this->params['skip-ssl-verification']) {
+      $options['context'] = stream_context_create(array(
+        'ssl' => array(
+          'verify_peer' => FALSE,
+          'verify_peer_name' => FALSE,
+        ),
+      ));
+    }
     $result = drupal_http_request($token_endpoint, $options);
 
     if ($result->code != 200) {
@@ -346,6 +460,13 @@ class Client {
       );
     }
 
-    return (Array) json_decode($result->data);
+    $token = drupal_json_decode($result->data);
+
+    if (!isset($token['expires_in'])) {
+      $token['expires_in'] = 3600;
+    }
+
+    return $token;
   }
+
 }
