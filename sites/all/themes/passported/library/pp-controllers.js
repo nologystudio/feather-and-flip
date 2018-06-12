@@ -671,7 +671,7 @@
 						if(!_.isUndefined($scope.pick.guide_by_category[_a.assoc_interests.toLowerCase()]))
 							$scope.pick.guide_by_category[_a.assoc_interests.toLowerCase()].push(_a);
 
-						if(!_.isArray(_a.google_place_id)){
+						if(!_.isArray(_a.google_place_id) && _a.google_place_id){
 
 							var place = new google.maps.places.PlacesService($scope.map);
 
@@ -745,15 +745,16 @@
 
 						// Rearrange hotels: 1. Identify featured - 2. Remove featured - 3. Reorder the object
 
-						var featuredHotels = _.filter($scope.pick.hotels,function(_v){
+                        var featuredHotels = _.filter($scope.pick.hotels,function(_v){
 							return _v.featured == "1";
 						});
 
 						$scope.pick.hotels = _.filter($scope.pick.hotels,function(_v){
-							return _v.featured == "0";
+							return (_v.featured == "0" || _.isUndefined(_v.featured));
 						});
 
 						_.extend($scope.pick.hotels,featuredHotels);
+
 					});
 				});
 

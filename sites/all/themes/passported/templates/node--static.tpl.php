@@ -26,14 +26,14 @@
 <?php } else { ?>
 
 	<section id="about" class="static">
-		
+
 		<article id="about">
 			<h1><?php echo $title; ?></h1>
 			<?php echo (isset($body[0]) ? $body[0]['safe_value'] : ''); ?>
 		</article>
-		
+
 		<?php if (strpos(strtoupper($title), 'ABOUT') !== false): ?>
-		
+
 		<article id="who-we-are">
 			<h2>Who we are</h2>
 			<ul>
@@ -43,13 +43,6 @@
 					</figure>
 					<h3>HENLEY VAZQUEZ, CEO/CO-FOUNDER</h3>
 					<p>Henley’s decade of experience in the travel industry includes Town & Country Travel, National Geographic Traveler, Departures, Ultratravel and Indagare. Before settling down in New York with her husband and two children, Henley lived in Madrid and Tokyo. Her favorite destinations include Ibiza and Cartagena. Henley is originally from Virginia and graduated from Princeton University.</p>
-				</li>
-				<li>
-					<figure>
-						<img src="<?php echo drupal_get_path('theme','passported'); ?>/media/about/nicole-rubin.jpg" alt="NICOLE RUBIN, HEAD OF PRODUCT/CO-FOUNDER"/>
-					</figure>
-					<h3>NICOLE RUBIN, HEAD OF PRODUCT/CO-FOUNDER</h3>
-					<p>A New York native, Nicole has spent time in Paris and Copenhagen but calls Brooklyn home with her husband. Before joining the Passported team, she founded the itinerary planning platform Bon Voyaging and previously worked at Pace Gallery. Her favorite destinations include Jaipur, India and Jose Ignacio, Uruguay. Nicole graduated from Washington University and has an MBA from NYU’s Stern School of Business.</p>
 				</li>
 				<li>
 					<figure>
@@ -67,8 +60,8 @@
 				</li>
 			</ul>
 		</article>
-		
+
 		<?php endif; ?>
 	</section>
-	
+
 <?php }?>
