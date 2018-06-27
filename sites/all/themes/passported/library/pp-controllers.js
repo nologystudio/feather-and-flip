@@ -1574,13 +1574,14 @@
 
 		    $scope.loadInstagram = function(){
 
-				// https://www.instagram.com/oauth/authorize?client_id=&redirect_uri=&response_type=code&scope=basic+public_content+follower_list+comments+relationships+likes
+				// https://www.instagram.com/oauth/authorize?client_id=&redirect_uri=https://www.passported.com&response_type=code&scope=basic+public_content+follower_list+comments+relationships+likes
+                // https://www.instagram.com/oauth/authorize?client_id=&redirect_uri=https://www.passported.com&response_type=token
 
-				var theID    = "1058347608";
-				var token    = "1447456174.ad8f2bc.adb781078ab4489693d368bf1837b4c1"; // a0d76fc5a88e42d5bc531ef22d7d0f50
-				var endPoint = "https://api.instagram.com/v1/users/"+theID+"/media/recent?access_token="+token+"&callback=JSON_CALLBACK";
+                var theID = "1058347608";
+				var token = "1058347608.e7fe43b.2cb6e683df8245a7af6a50538ecee938"; // 95513defb5a24f8d8d638c1e650e5920
+				var endPoint = "https://api.instagram.com/v1/users/self/media/recent/?access_token="+token+"&callback=JSON_CALLBACK";
 
-				$http.jsonp(endPoint).success(function(_data){
+                $http.jsonp(endPoint).success(function(_data){
 					$scope.instagram = _data.data;
 				});
             };
