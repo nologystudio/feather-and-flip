@@ -43,7 +43,7 @@
 					</figure>
 					<h3>HENLEY VAZQUEZ, CEO/CO-FOUNDER</h3>
 					<p>
-						Henley’s decade of experience in the travel industry includes Town & Country Travel, National Geographic Traveler, Departures, Ultratravel and Indagare. Before settling down in New York with her husband and three children, Henley lived in Madrid and Tokyo. Her favorite destinations include Cartagena, St. Barth’s, and anywhere in Spain. Henley is originally from Virginia and graduated from Princeton University
+						Henley’s decade of experience in the travel industry includes Town & Country Travel, National Geographic Traveler, Departures, Ultratravel and Indagare. Before settling down in New York with her husband and three children, Henley lived in Madrid and Tokyo. Her favorite destinations include Cartagena, St. Barth’s, and anywhere in Spain. Henley is originally from Virginia and graduated from Princeton University.
 					</p>
 				</li>
 				<li>
@@ -104,7 +104,7 @@
 					</figure>
 					<h3>LESLIE OVERTON, INDEPENDENT TRAVEL CONSULTOR, HEAD OF BOARD AND MAJOR DONOR TRAVEL PROGRAMMING</h3>
 					<p>
-						Leslie worked with Absolute Travel for 23 years, facilitating the company’s growth from a 3-person start-up focused on Southeast Asia to a 30 person, Travel & Leisure World’s Best Tour Operator specializing in luxury travel across seven continents. Leslie also founded Absolute Travel’s philanthropic-focused Awareness division, which has taken her to meetings with Nobel Peace Prize winners in Liberia and led to collaborations with grassroots human rights defenders in Guatemala. She continues to work with philanthropies such as Human Rights Watch, World Wildlife Foundation, and American Jewish World Service on donor engagement trips. Leslie has visited over 65 countries, many with her husband and 3 kids. She is Conde Nast Traveler’s Top Travel Specialist for Family Travel to Exotic Destinations and has a bachelor’s degree in Art History from NYU. 
+						Leslie worked with Absolute Travel for 23 years, facilitating the company’s growth from a 3-person start-up focused on Southeast Asia to a 30 person, Travel & Leisure World’s Best Tour Operator specializing in luxury travel across seven continents. Leslie also founded Absolute Travel’s philanthropic-focused Awareness division, which has taken her to meetings with Nobel Peace Prize winners in Liberia and led to collaborations with grassroots human rights defenders in Guatemala. She continues to work with philanthropies such as Human Rights Watch, World Wildlife Foundation, and American Jewish World Service on donor engagement trips. Leslie has visited over 65 countries, many with her husband and 3 kids. She is Conde Nast Traveler’s Top Travel Specialist for Family Travel to Exotic Destinations and has a bachelor’s degree in Art History from NYU.
 					</p>
 				</li>
 			</ul>
