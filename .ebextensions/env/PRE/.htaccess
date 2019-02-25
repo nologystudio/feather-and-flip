@@ -119,6 +119,7 @@ DirectoryIndex index.php index.html index.htm
 
   # Custom redirects
   RewriteRule ^city-guides http%{ENV:protossl}://%{HTTP_HOST} [L,R=301]
+  RewriteRule ^map-it http%{ENV:protossl}://%{HTTP_HOST} [L,R=301]
 
   # Pass all requests not referring directly to files in the filesystem to
   # index.php. Clean URLs are handled in drupal_environment_initialize().
