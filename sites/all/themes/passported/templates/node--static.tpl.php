@@ -82,27 +82,27 @@
 				</li>
 				<li>
 					<figure>
-						<img src="<?php echo drupal_get_path('theme','passported'); ?>/media/about/elisa-brown.jpg" alt="ELISA BROWN, INDEPENDENT TRAVEL CONSULTOR"/>
+						<img src="<?php echo drupal_get_path('theme','passported'); ?>/media/about/elisa-brown.jpg" alt="ELISA BROWN, INDEPENDENT TRAVEL CONSULTANT"/>
 					</figure>
-					<h3>ELISA BROWN, INDEPENDENT TRAVEL CONSULTOR</h3>
+					<h3>ELISA BROWN, INDEPENDENT TRAVEL CONSULTANT</h3>
 					<p>
 						Elisa Brown aka Passported client, turned Contributor turned Advisor specializes in couples and family with teens travel. Elisa’s favorite destinations include anything Italy, Greece, Morocco and the outer islands of the Bahamas. Born and raised on the Gold Coast of CT, Elisa spent her college years in our nation's capital and ten summers on Martha's Vineyard. Elisa currently resides in Fairfield County, CT with her three children Jack, Finlay and Hadley.
 					</p>
 				</li>
 				<li>
 					<figure>
-						<img src="<?php echo drupal_get_path('theme','passported'); ?>/media/about/dana-farrington.jpg" alt="DANA FARRINGTON, INDEPENDENT TRAVEL CONSULTOR"/>
+						<img src="<?php echo drupal_get_path('theme','passported'); ?>/media/about/dana-farrington.jpg" alt="DANA FARRINGTON, INDEPENDENT TRAVEL CONSULTANT"/>
 					</figure>
-					<h3>DANA FARRINGTON, INDEPENDENT TRAVEL CONSULTOR</h3>
+					<h3>DANA FARRINGTON, INDEPENDENT TRAVEL CONSULTANT</h3>
 					<p>
 						Dana joined the Passported team after years of planning trips for her own friends and family. Ever since an around-the-world voyage in college called “Semester at Sea,” she has been on the move. She has visited 56 countries, but there are many more on her list to discover, with her husband and twin boys in tow. Dana was born and raised in the Bahamas and loves to return home — especially in the winter. She lived in Bermuda and South Africa before settling in New York City. Dana’s favorite destinations include Harbour Island, Botswana, and Paris.
 					</p>
 				</li>
 				<li>
 					<figure>
-						<img src="<?php echo drupal_get_path('theme','passported'); ?>/media/about/leslie-overton.jpg" alt="LESLIE OVERTON, INDEPENDENT TRAVEL CONSULTOR"/>
+						<img src="<?php echo drupal_get_path('theme','passported'); ?>/media/about/leslie-overton.jpg" alt="LESLIE OVERTON, INDEPENDENT TRAVEL CONSULTANT"/>
 					</figure>
-					<h3>LESLIE OVERTON, INDEPENDENT TRAVEL CONSULTOR, HEAD OF BOARD AND MAJOR DONOR TRAVEL PROGRAMMING</h3>
+					<h3>LESLIE OVERTON, INDEPENDENT TRAVEL CONSULTANT, HEAD OF BOARD AND MAJOR DONOR TRAVEL PROGRAMMING</h3>
 					<p>
 						Leslie worked with Absolute Travel for 23 years, facilitating the company’s growth from a 3-person start-up focused on Southeast Asia to a 30 person, Travel & Leisure World’s Best Tour Operator specializing in luxury travel across seven continents. Leslie also founded Absolute Travel’s philanthropic-focused Awareness division, which has taken her to meetings with Nobel Peace Prize winners in Liberia and led to collaborations with grassroots human rights defenders in Guatemala. She continues to work with philanthropies such as Human Rights Watch, World Wildlife Foundation, and American Jewish World Service on donor engagement trips. Leslie has visited over 65 countries, many with her husband and 3 kids. She is Conde Nast Traveler’s Top Travel Specialist for Family Travel to Exotic Destinations and has a bachelor’s degree in Art History from NYU.
 					</p>
