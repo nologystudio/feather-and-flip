@@ -117,9 +117,6 @@ DirectoryIndex index.php index.html index.htm
   # uncomment the following line:
   # RewriteBase /
 
-  # Custom redirects
-  RewriteRule ^city-guides https://%{HTTP_HOST} [L,R=301]
-
   # Pass all requests not referring directly to files in the filesystem to
   # index.php. Clean URLs are handled in drupal_environment_initialize().
   RewriteCond %{REQUEST_FILENAME} !-f
