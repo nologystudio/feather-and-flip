@@ -38,6 +38,20 @@
 			</ul>
 			<?php echo $footer_fixed_menu; ?>
 		</nav>
+		<div class="partners">
+			<a target="_blank">
+				<img src="<?php echo variable_get('relativePath'); ?>media/brand/logo-rosewood.png" alt="Rosewood Elite"/>
+			</a>
+			<a target="_blank">
+				<img src="<?php echo variable_get('relativePath'); ?>media/brand/logo-belmond.png" alt="Belmond"/>
+			</a>
+			<a target="_blank">
+				<img src="<?php echo variable_get('relativePath'); ?>media/brand/logo-virtuoso.png" alt="Virtuoso Member"/>
+			</a>
+			<a target="_blank">
+				<img src="<?php echo variable_get('relativePath'); ?>media/brand/logo-four-seasons.png" alt="Four Seasons"/>
+			</a>
+		</div>
 		<div class="fixed-bar">
 			<a id="brand" href="/">
 				<img src="<?php echo variable_get('relativePath'); ?>media/brand/passported-white-logo.svg" type="image/svg+xml" alt="Passported, kid friendly travel for grown-ups"/>
@@ -49,10 +63,10 @@
 				<a href="http://www.pinterest.com/passported" class="icon-pinterest-2" target="_blank" rel="pinterest"></a>
 			</nav>
 			<small><?php echo date("Y"); ?> PASSPORTED ALL RIGHTS RESERVED</small>
-			<a id="tzell-brand" href="http://www.tzell.com/tzell/index.htm" target="_blank">
+			<!-- <a id="tzell-brand" href="http://www.tzell.com/tzell/index.htm" target="_blank">
 				<small>Powered by</small>
 				<img src="<?php echo variable_get('relativePath'); ?>media/brand/tzell-logo.png" alt="Powered by Tzell Travel Group"/>
-			</a>
+			</a> -->
 		</div>
 	</footer>
 

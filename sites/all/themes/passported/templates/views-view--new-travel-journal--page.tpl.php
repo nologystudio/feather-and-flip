@@ -34,7 +34,7 @@
                 </a>
             <?php } ?>
         <?php endif; ?>
-        <a id="book-a-trip" href="/book-hotels" class="call-to-action">
+        <!-- <a id="book-a-trip" href="/book-hotels" class="call-to-action">
             <div class="vertical-wrapper">
                 <div class="icon"></div>
                 <h3>Need to book a trip</h3>
@@ -47,6 +47,6 @@
                 <h3>Explore our city guides</h3>
                 <button class="rounded-btn white">See more</button>
             </div>
-        </a>
+        </a> -->
     </div>
 </section>
