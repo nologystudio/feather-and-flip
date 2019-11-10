@@ -4016,27 +4016,34 @@
 				}
 			}
 
-			& >  div.partners
+			& > div.partners
 			{
 				@height: 130px;
-
+				
 				.set-size(100%,auto);
 				.box-sizing();
 				.set-bgc(#111111);
 				float: left;
-				padding: 0 @content-padding;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				flex-flow: row nowrap;
+				padding: @content-padding;
+				display: block;;
 
-				a 
+				div.wrapper
 				{
-					flex: 1 auto;
+					width: auto;
+					max-width: 1280px;
+					#align > .center;
 
-					img
+					a 
 					{
-						height: 70px;
+						width: auto;
+						float: left;
+						margin: 0 @content-padding/2;
+						display: inline-block;
+
+						img
+						{
+							height: 60px;
+						}
 					}
 				}
 			}
