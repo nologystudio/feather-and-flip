@@ -41,16 +41,17 @@
 		<div class="partners">
 			<div class="wrapper">
 				<a target="_blank">
-					<img src="<?php echo variable_get('relativePath'); ?>media/brand/logo-rosewood.png" alt="Rosewood Elite"/>
-				</a>
-				<a target="_blank">
-					<img src="<?php echo variable_get('relativePath'); ?>media/brand/logo-belmond.png" alt="Belmond"/>
-				</a>
-				<a target="_blank">
 					<img src="<?php echo variable_get('relativePath'); ?>media/brand/logo-virtuoso.png" alt="Virtuoso Member"/>
 				</a>
 				<a target="_blank">
 					<img src="<?php echo variable_get('relativePath'); ?>media/brand/logo-four-seasons.png" alt="Four Seasons"/>
+					
+				</a>
+				<a target="_blank">
+					<img src="<?php echo variable_get('relativePath'); ?>media/brand/logo-rosewood.png" alt="Rosewood Elite"/>
+				</a>
+				<a target="_blank">
+					<img src="<?php echo variable_get('relativePath'); ?>media/brand/logo-belmond.png" alt="Belmond"/>
 				</a>
 			</div>
 		</div>
