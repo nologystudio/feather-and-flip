@@ -48,27 +48,11 @@
 				</li>
 				<li>
 					<figure>
-						<img src="<?php echo drupal_get_path('theme','passported'); ?>/media/about/jd-boujnah.jpg" alt="JD BOUJNAH, CREATIVE DIRECTOR/CO-FOUNDER"/>
-					</figure>
-					<h3>JD BOUJNAH, CREATIVE DIRECTOR/CO-FOUNDER</h3>
-					<p>JD’s award-winning designs have been featured in The New York Times, Child Magazine, Women’s Wear Daily and numerous design publications, including Tres Logos and Coast to Coast. Prior to founding Calliope Studios, JD was a driving force behind the creation of Pitch TV and the Creative Director for Soundwalk. He also collaborated with powerhouses such as Puma and The Louvre Museum. JD holds a degree in Graphic Design from Rhode Island School of Design and a Masters from Parsons and lives in Greenwich, CT with his wife and three children.</p>
-				</li>
-				<li>
-					<figure>
 						<img src="<?php echo drupal_get_path('theme','passported'); ?>/media/about/monique-thofte.jpg" alt="MONIQUE THOFTE, DIRECTOR OF TRAVEL"/>
 					</figure>
 					<h3>MONIQUE THOFTE, DIRECTOR OF TRAVEL</h3>
 					<p>
 						Monique Thofte joined the Passported team after honing her travel planning skills at Indagare Travel. Her expertise ranges from Tuscan vineyard resorts to hip beach hideaways and perfect urban retreats. Monique’s favorite destinations include Angra Dos Reis, Stockholm and St. Barth’s. A Jersey girl by birth, Monique now lives in Brooklyn with her husband and daughter and studied communications at University of Miami.
-					</p>
-				</li>
-				<li>
-					<figure>
-						<img src="<?php echo drupal_get_path('theme','passported'); ?>/media/about/brandi-wilson.jpg" alt="BRANDI WILSON, TRAVEL ADVISOR"/>
-					</figure>
-					<h3>BRANDI WILSON, TRAVEL ADVISOR</h3>
-					<p>
-						Brandi joined Passported following a decade running the creative advertising headhunting firm she founded to service over 40 of the globe’s top ad agencies. Favorite destinations include Morocco, India, Japan, Tulum, Peru, Vietnam and the Andaman Sea. Recent scouts include Cape Town, St. Barths, Sedona, Seattle (her hometown!) and Nepal with National Geographic Journeys.  She graduated from Bennington College and currently lives in Brooklyn but dreams of renovating a riad in Marrakech and a crumbling mansion in the Garden District of New Orleans.
 					</p>
 				</li>
 				<li>
@@ -105,6 +89,15 @@
 					<h3>LESLIE OVERTON, INDEPENDENT TRAVEL CONSULTANT, HEAD OF BOARD AND MAJOR DONOR TRAVEL PROGRAMMING</h3>
 					<p>
 						Leslie worked with Absolute Travel for 23 years, facilitating the company’s growth from a 3-person start-up focused on Southeast Asia to a 30 person, Travel & Leisure World’s Best Tour Operator specializing in luxury travel across seven continents. Leslie also founded Absolute Travel’s philanthropic-focused Awareness division, which has taken her to meetings with Nobel Peace Prize winners in Liberia and led to collaborations with grassroots human rights defenders in Guatemala. She continues to work with philanthropies such as Human Rights Watch, World Wildlife Foundation, and American Jewish World Service on donor engagement trips. Leslie has visited over 65 countries, many with her husband and 3 kids. She is Conde Nast Traveler’s Top Travel Specialist for Family Travel to Exotic Destinations and has a bachelor’s degree in Art History from NYU.
+					</p>
+				</li>
+				<li>
+					<figure>
+						<img src="<?php echo drupal_get_path('theme','passported'); ?>/media/about/chelsea-farthing.jpg" alt="CHELSEA FARTHING"/>
+					</figure>
+					<h3>CHELSEA FARTHING, TRAVEL ADVISOR</h3>
+					<p>
+						Chelsea’s love of travel and planning brought her to Passported after many years as a professional actor. She loves a good adventure and some of her favorite destinations include Tanzania, Peru, Sri Lanka, London and Hawaii. She graduated with a BFA in Actor Training from The Hartt School, University of Hartford. Chelsea currently lives with her husband in Manhattan. 
 					</p>
 				</li>
 			</ul>

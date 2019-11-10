@@ -3945,6 +3945,7 @@
 					.set-size(auto,100%);
 					.set-pos(absolute);
 					.set-coord(@content-padding,0);
+					height: 35px;
 
 					img,
 					object
@@ -3987,7 +3988,7 @@
 
 					a
 					{
-						@s: 40px;
+						@s: 40px; 
 
 						.set-size(@s,@s);
 						.set-bgc(white);
@@ -4011,7 +4012,32 @@
 					#align > .left;
 					#font > .lato(10px,#595858,400);
 					text-align: center;
-					padding: @content-padding - @unit 0 0 0;
+					padding: @content-padding - @unit 0 15px 0;
+				}
+			}
+
+			& >  div.partners
+			{
+				@height: 130px;
+
+				.set-size(100%,auto);
+				.box-sizing();
+				.set-bgc(#111111);
+				float: left;
+				padding: 0 @content-padding;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				flex-flow: row nowrap;
+
+				a 
+				{
+					flex: 1 auto;
+
+					img
+					{
+						height: 70px;
+					}
 				}
 			}
 		}
