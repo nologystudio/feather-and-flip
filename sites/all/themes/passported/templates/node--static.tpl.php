@@ -66,6 +66,15 @@
 				</li>
 				<li>
 					<figure>
+						<img src="<?php echo drupal_get_path('theme','passported'); ?>/media/about/chelsea-farthing.jpg" alt="CHELSEA FARTHING"/>
+					</figure>
+					<h3>CHELSEA FARTHING, TRAVEL ADVISOR</h3>
+					<p>
+						Chelsea’s love of travel and planning brought her to Passported after many years as a professional actor. She loves a good adventure and some of her favorite destinations include Tanzania, Peru, Sri Lanka, London and Hawaii. She graduated with a BFA in Actor Training from The Hartt School, University of Hartford. Chelsea currently lives with her husband in Manhattan. 
+					</p>
+				</li>
+				<li>
+					<figure>
 						<img src="<?php echo drupal_get_path('theme','passported'); ?>/media/about/elisa-brown.jpg" alt="ELISA BROWN, INDEPENDENT TRAVEL CONSULTANT"/>
 					</figure>
 					<h3>ELISA BROWN, INDEPENDENT TRAVEL CONSULTANT</h3>
