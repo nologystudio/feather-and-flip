@@ -1576,7 +1576,8 @@
 
 				var theID = "1058347608";
 				var token = "1058347608.1677ed0.1e4a8b5d3f4144c8b5f186f6e98c2740";
-				var endPoint = "https://api.instagram.com/v1/users/self/media/recent/?access_token="+token+"&callback=JSON_CALLBACK";
+				//var endPoint = "https://api.instagram.com/v1/users/self/media/recent/?access_token="+token+"&callback=JSON_CALLBACK";
+				var endPoint = "https://api.instagram.com/v1/users/"+theID+"/media/recent?access_token="+token+"&callback=?";
 
                 $http.jsonp(endPoint).success(function(_data){
 					$scope.instagram = _data.data;
