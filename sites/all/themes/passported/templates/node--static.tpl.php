@@ -91,15 +91,6 @@
 						Leslie worked with Absolute Travel for 23 years, facilitating the company’s growth from a 3-person start-up focused on Southeast Asia to a 30 person, Travel & Leisure World’s Best Tour Operator specializing in luxury travel across seven continents. Leslie also founded Absolute Travel’s philanthropic-focused Awareness division, which has taken her to meetings with Nobel Peace Prize winners in Liberia and led to collaborations with grassroots human rights defenders in Guatemala. She continues to work with philanthropies such as Human Rights Watch, World Wildlife Foundation, and American Jewish World Service on donor engagement trips. Leslie has visited over 65 countries, many with her husband and 3 kids. She is Conde Nast Traveler’s Top Travel Specialist for Family Travel to Exotic Destinations and has a bachelor’s degree in Art History from NYU.
 					</p>
 				</li>
-				<li>
-					<figure>
-						<img src="<?php echo drupal_get_path('theme','passported'); ?>/media/about/chelsea-farthing.jpg" alt="CHELSEA FARTHING"/>
-					</figure>
-					<h3>CHELSEA FARTHING, TRAVEL ADVISOR</h3>
-					<p>
-						Chelsea’s love of travel and planning brought her to Passported after many years as a professional actor. She loves a good adventure and some of her favorite destinations include Tanzania, Peru, Sri Lanka, London and Hawaii. She graduated with a BFA in Actor Training from The Hartt School, University of Hartford. Chelsea currently lives with her husband in Manhattan. 
-					</p>
-				</li>
 			</ul>
 		</article>
 
